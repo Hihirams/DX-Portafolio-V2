@@ -1,0 +1,56 @@
+{
+  "projects": [
+    {
+      "id": "proj001",
+      "title": "Quality Clinic Unity",
+      "ownerId": "hiram.gonzalez",
+      "ownerName": "Hiram Gonzalez",
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 60,
+      "icon": "🌐",
+      "updatedAt": "2025-10-30"
+    },
+    {
+      "id": "proj002",
+      "title": "AI Camera System",
+      "ownerId": "hiram.gonzalez",
+      "ownerName": "Hiram Gonzalez",
+      "status": "in-progress",
+      "priority": "medium",
+      "progress": 45,
+      "icon": "🎥",
+      "updatedAt": "2025-10-30"
+    },
+    {
+      "id": "proj003",
+      "title": "MRM Web Forum",
+      "ownerId": "sandra.santos",
+      "ownerName": "Sandra Santos",
+      "status": "discovery",
+      "priority": "low",
+      "progress": 20,
+      "icon": "📋",
+      "updatedAt": "2025-10-30"
+    },
+    {
+      "id": "proj004",
+      "title": "Data Analytics Dashboard",
+      "ownerId": "miguel.coronado",
+      "ownerName": "Miguel Coronado",
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 75,
+      "icon": "📊",
+      "updatedAt": "2025-10-30"
+    }
+  ],
+  "stats": {
+    "total": 4,
+    "inProgress": 3,
+    "discovery": 1,
+    "hold": 0,
+    "completed": 0
+  },
+  "lastUpdated": "2025-10-30T12:00:00Z"
+}

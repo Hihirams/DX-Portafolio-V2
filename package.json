@@ -1,0 +1,54 @@
+{
+  "name": "portfolio-dx",
+  "version": "1.0.0",
+  "description": "Portafolio Web DX - Sistema de gestión de proyectos",
+  "main": "electron-main.js",
+  "scripts": {
+    "start": "electron .",
+    "dev": "electron . --dev",
+    "build:portable": "electron-builder --win portable --x64"
+  },
+  "author": "DX Team",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^28.0.0",
+    "electron-builder": "^24.9.1"
+  },
+  "dependencies": {},
+  "build": {
+    "appId": "com.dx.portfolio",
+    "productName": "PortfolioDX",
+    "directories": {
+      "output": "dist",
+      "buildResources": "assets"
+    },
+    "portable": {
+      "artifactName": "${productName}-Portable.exe"
+    },
+    "win": {
+      "target": "portable",
+      "icon": "assets/icon.ico",
+      "signAndEditExecutable": false
+    },
+    "files": [
+      "**/*",
+      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
+      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
+      "!**/node_modules/*.d.ts",
+      "!**/node_modules/.bin",
+      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
+      "!.editorconfig",
+      "!**/._*",
+      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
+      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
+      "!**/{appveyor.yml,.travis.yml,circle.yml}",
+      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+    ],
+    "extraResources": [
+      { "from": "users", "to": "users", "filter": ["**/*"] },
+      { "from": "data", "to": "data", "filter": ["**/*"] },
+      { "from": ".", "to": ".", "filter": ["projects.json"] },
+      { "from": "assets", "to": "assets", "filter": ["**/*"] }
+    ]
+  }
+}

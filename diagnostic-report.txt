@@ -1,0 +1,28 @@
+═══════════════════════════════════════════════════════════════════════════════
+                    REPORTE DE DIAGNÓSTICO AUTOMÁTICO                         
+═══════════════════════════════════════════════════════════════════════════════
+
+Fecha: 2025-11-04T20:12:20.761Z
+Sistema: win32
+Node: v20.18.0
+Directorio: C:\Documents\ProyectoWeb - Exe\DX-Portafolio-V2-main\DX-Portafolio-V2-main
+
+─────────────────────────────────────────────────────────────────────────────
+RESULTADOS:
+─────────────────────────────────────────────────────────────────────────────
+
+[OK] users → directory
+[OK] data → directory
+[OK] data/users.json → file
+[OK] data/projects.json → file
+[OK] electron-main.js → file
+[PROBLEMA] file-manager.js → missing-file
+[OK] preload.js → file
+
+─────────────────────────────────────────────────────────────────────────────
+PROBLEMAS DETECTADOS:
+─────────────────────────────────────────────────────────────────────────────
+
+1. file-manager.js (missing-file)
+
+═══════════════════════════════════════════════════════════════════════════════

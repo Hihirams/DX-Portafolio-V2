@@ -1,0 +1,79 @@
+{
+  "appName": "Portafolio DX",
+  "version": "1.0.0",
+  "projectStatuses": {
+    "in-progress": {
+      "label": "En Progreso",
+      "badge": "En Progreso",
+      "badgeClass": "badge-in-progress",
+      "color": "#00D9FF",
+      "icon": "â–¶"
+    },
+    "hold": {
+      "label": "Hold",
+      "badge": "Hold",
+      "badgeClass": "badge-hold",
+      "color": "#FF6B00",
+      "icon": "â¸"
+    },
+    "discovery": {
+      "label": "Discovery",
+      "badge": "Discovery",
+      "badgeClass": "badge-discovery",
+      "color": "#9D00FF",
+      "icon": "ðŸ”"
+    },
+    "paused": {
+      "label": "Pausado",
+      "badge": "Pausado",
+      "badgeClass": "badge-paused",
+      "color": "#FFD600",
+      "icon": "â¸"
+    },
+    "completed": {
+      "label": "Completado",
+      "badge": "Completado",
+      "badgeClass": "badge-completed",
+      "color": "#00FF85",
+      "icon": "âœ“"
+    }
+  },
+  "priorities": {
+    "high": {
+      "label": "Alta",
+      "badge": "Alta Prioridad",
+      "badgeClass": "badge-priority-high",
+      "color": "#FF0000"
+    },
+    "medium": {
+      "label": "Media",
+      "badge": "Prioridad Media",
+      "badgeClass": "badge-priority-medium",
+      "color": "#FFA500"
+    },
+    "low": {
+      "label": "Baja",
+      "badge": "Baja Prioridad",
+      "badgeClass": "badge-priority-low",
+      "color": "#00FF00"
+    }
+  },
+  "blockerTypes": {
+    "technical": {
+      "label": "TÃ©cnico",
+      "icon": "âš™ï¸"
+    },
+    "resources": {
+      "label": "Recursos",
+      "icon": "ðŸ‘¥"
+    },
+    "dependencies": {
+      "label": "Dependencias",
+      "icon": "ðŸ”—"
+    },
+    "approval": {
+      "label": "AprobaciÃ³n",
+      "icon": "âœ‹"
+    }
+  }
+}
