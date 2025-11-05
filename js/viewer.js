@@ -7,6 +7,25 @@ let totalSlides = 0;
 let projectsToShow = [];
 let viewingUser = null;
 
+// --- viewer.js ---
+function normalizeProject(p) {
+  const proj = { ...p };
+
+  // Soportar ambos campos del Gantt
+  if (!proj.ganttImage && proj.ganttImagePath) proj.ganttImage = proj.ganttImagePath;
+
+  // Arrays forzados
+  if (!Array.isArray(proj.images)) proj.images = [];
+  if (!Array.isArray(proj.videos)) proj.videos = [];
+
+  // Objetos forzados
+  if (!proj.achievements || typeof proj.achievements !== 'object') proj.achievements = {};
+  if (!proj.nextSteps || typeof proj.nextSteps !== 'object') proj.nextSteps = {};
+  if (!proj.blockers || typeof proj.blockers !== 'object') proj.blockers = { type: 'info', message: '' };
+
+  return proj;
+}
+
 // ==================== INIT ====================
 
 document.addEventListener('dataLoaded', () => {
@@ -24,7 +43,7 @@ async function initViewer() {
         console.log(`📂 Cargando proyecto completo ${viewingProjectId}...`);
         const fullProject = await dataManager.loadFullProject(viewingProjectId);
         if (fullProject) {
-            projectsToShow = [fullProject];
+            projectsToShow = [ normalizeProject(fullProject) ];
             viewingUser = dataManager.getUserById(fullProject.ownerId);
         } else {
             // Fallback: usar índice si falla la carga completa
@@ -45,7 +64,7 @@ async function initViewer() {
         for (const projectIndex of projectsIndex) {
             const fullProject = await dataManager.loadFullProject(projectIndex.id);
             if (fullProject) {
-                projectsToShow.push(fullProject);
+                projectsToShow.push( normalizeProject(fullProject) );
             } else {
                 // Fallback: usar índice si falla
                 projectsToShow.push(projectIndex);
@@ -61,7 +80,7 @@ async function initViewer() {
         for (const projectIndex of projectsIndex) {
             const fullProject = await dataManager.loadFullProject(projectIndex.id);
             if (fullProject) {
-                projectsToShow.push(fullProject);
+                projectsToShow.push( normalizeProject(fullProject) );
             } else {
                 // Fallback: usar índice si falla
                 projectsToShow.push(projectIndex);

@@ -178,221 +178,96 @@ class FileManager {
 }
 
 
-// =============== 2. MÉTODO saveGantt (líneas ~155-166) ===============
-
-async saveGantt(userId, projectId, base64Data) {
-    console.log('\n  🖼️ [saveGantt] Iniciando guardado de Gantt...');
-    console.log('    - userId:', userId);
-    console.log('    - projectId:', projectId);
-    console.log('    - base64Data tipo:', typeof base64Data);
-    console.log('    - base64Data longitud:', base64Data?.length || 0);
-    
-    // ✅ Validar que base64Data sea válido
-    if (!base64Data || typeof base64Data !== 'string') {
-        const error = new Error('❌ Gantt data is invalid (not a string or empty)');
-        console.error('  ' + error.message);
-        throw error;
-    }
-    
-    if (!base64Data.startsWith('data:')) {
-        const error = new Error('❌ Gantt data is not a valid data URI (does not start with "data:")');
-        console.error('  ' + error.message);
-        console.error('    Received:', base64Data.substring(0, 100));
-        throw error;
-    }
-
-    const fileName = `gantt_${Date.now()}.png`;
-    const filePath = `users/${userId}/projects/${projectId}/gantt/${fileName}`;
-    
-    console.log('    - Guardando en:', filePath);
-    console.log('    - Tamaño aproximado:', Math.round(base64Data.length / 1024), 'KB');
-
-    try {
-        const result = await this.api.saveMedia(filePath, base64Data);
-
-        console.log('    - Resultado de saveMedia:', {
-            success: result.success,
-            error: result.error || 'ninguno'
-        });
-
-        if (result.success) {
-            console.log('  ✅ [saveGantt] Gantt guardado exitosamente');
-            console.log('    Path final:', filePath);
-            return filePath;
-        } else {
-            const error = new Error(`Error en saveMedia: ${result.error}`);
-            console.error('  ❌ [saveGantt]', error.message);
-            throw error;
-        }
-    } catch (error) {
-        console.error('  ❌ [saveGantt] Error crítico:', error.message);
-        throw error;
-    }
-}
-
-
-// =============== 3. MÉTODO saveImages (líneas ~180-209) ===============
+// =============== 2. MÉTODO saveImages ===============
 
 async saveImages(userId, projectId, images) {
-    const savedImages = [];
+  const savedImages = [];
+  console.log(`\n  📸 [saveImages] Iniciando guardado de ${images.length} imágenes...`);
 
-    console.log(`\n  📸 [saveImages] Iniciando guardado de ${images.length} imágenes...`);
+  for (let i = 0; i < images.length; i++) {
+    const raw = images[i];
+    const image = (typeof raw === 'string') ? { src: raw, title: `Imagen ${i+1}` } : raw;
 
-    for (let i = 0; i < images.length; i++) {
-        const image = images[i];
-        console.log(`\n  [Imagen ${i + 1}/${images.length}]`);
-        console.log('    - Título:', image.title || 'Sin título');
-        console.log('    - hasSrc:', !!image.src);
-        console.log('    - hasData:', !!image.data);
-        
-        if (image.src) {
-            const srcType = image.src.startsWith('data:') ? 'base64' : 
-                           image.src.startsWith('users/') ? 'path' : 'unknown';
-            console.log('    - srcType:', srcType);
-            console.log('    - srcPreview:', image.src.substring(0, 60) + '...');
-        }
+    const hasPath = typeof image.src === 'string' && image.src.startsWith('users/');
+    const hasBase64Src = typeof image.src === 'string' && image.src.startsWith('data:');
+    const hasBase64Data = typeof image.data === 'string' && image.data.startsWith('data:');
 
-        // Si la imagen ya tiene una ruta guardada (no base64), mantenerla
-        if (image.src && !image.src.startsWith('data:')) {
-            console.log('    ✅ Ya guardada, manteniendo path');
-            savedImages.push(image);
-            continue;
-        }
-
-        // Nueva imagen con src en base64
-        if (image.src && image.src.startsWith('data:')) {
-            console.log('    💾 Guardando imagen con src base64...');
-            const ext = this.getExtensionFromMimeType(image.fileType || image.mimeType || 'image/png');
-            const fileName = `image_${Date.now()}_${i}.${ext}`;
-            const filePath = `users/${userId}/projects/${projectId}/images/${fileName}`;
-            console.log('    - Path destino:', filePath);
-
-            try {
-                const result = await this.api.saveMedia(filePath, image.src);
-
-                if (result.success) {
-                    console.log('    ✅ Imagen guardada exitosamente');
-                    savedImages.push({
-                        src: filePath,
-                        title: image.title || `Imagen ${i + 1}`
-                    });
-                } else {
-                    console.error('    ❌ Error:', result.error);
-                }
-            } catch (error) {
-                console.error('    ❌ Error crítico:', error.message);
-            }
-        }
-        
-        // Nueva imagen con data en base64 (formato antiguo)
-        else if (image.data) {
-            console.log('    💾 Guardando imagen con data base64...');
-            const ext = this.getExtensionFromMimeType(image.fileType || image.mimeType || 'image/png');
-            const fileName = `image_${Date.now()}_${i}.${ext}`;
-            const filePath = `users/${userId}/projects/${projectId}/images/${fileName}`;
-            console.log('    - Path destino:', filePath);
-
-            try {
-                const result = await this.api.saveMedia(filePath, image.data);
-
-                if (result.success) {
-                    console.log('    ✅ Imagen guardada exitosamente');
-                    savedImages.push({
-                        src: filePath,
-                        title: image.title || `Imagen ${i + 1}`
-                    });
-                } else {
-                    console.error('    ❌ Error:', result.error);
-                }
-            } catch (error) {
-                console.error('    ❌ Error crítico:', error.message);
-            }
-        } else {
-            console.warn('    ⚠️ Imagen sin src ni data, omitiendo');
-        }
+    if (hasPath) {
+      // ya guardada
+      savedImages.push({ src: image.src, title: image.title || `Imagen ${i+1}` });
+      continue;
     }
 
-    console.log(`\n  ✅ [saveImages] Total guardadas: ${savedImages.length}/${images.length}`);
-    return savedImages;
+    const base64 = hasBase64Src ? image.src : (hasBase64Data ? image.data : null);
+    if (!base64) {
+      console.warn('    ⚠️ Imagen sin datos válidos, omitiendo');
+      continue;
+    }
+
+    const ext = this.getExtensionFromMimeType(image.fileType || image.mimeType || 'image/png');
+    const fileName = `image_${Date.now()}_${i}.${ext}`;
+    const filePath = `users/${userId}/projects/${projectId}/images/${fileName}`;
+
+    try {
+      const result = await this.api.saveMedia(filePath, base64);
+      if (result.success) {
+        savedImages.push({ src: filePath, title: image.title || `Imagen ${i+1}` });
+      } else {
+        console.error('    ❌ Error guardando imagen:', result.error);
+      }
+    } catch (e) {
+      console.error('    ❌ Error crítico guardando imagen:', e.message);
+    }
+  }
+
+  console.log(`\n  ✅ [saveImages] Total guardadas: ${savedImages.length}/${images.length}`);
+  return savedImages;
 }
 
 
-// =============== 4. MÉTODO saveVideos (líneas ~236-265) ===============
+// =============== 3. MÉTODO saveVideos ===============
 
 async saveVideos(userId, projectId, videos) {
-    const savedVideos = [];
+  const savedVideos = [];
+  console.log(`\n  🎥 [saveVideos] Iniciando guardado de ${videos.length} videos...`);
 
-    console.log(`\n  🎥 [saveVideos] Iniciando guardado de ${videos.length} videos...`);
+  for (let i = 0; i < videos.length; i++) {
+    const raw = videos[i];
+    const video = (typeof raw === 'string') ? { src: raw, title: `Video ${i+1}` } : raw;
 
-    for (let i = 0; i < videos.length; i++) {
-        const video = videos[i];
-        console.log(`\n  [Video ${i + 1}/${videos.length}]`);
-        console.log('    - Título:', video.title || 'Sin título');
-        console.log('    - hasSrc:', !!video.src);
-        console.log('    - hasData:', !!video.data);
+    const hasPath = typeof video.src === 'string' && video.src.startsWith('users/');
+    const hasBase64Src = typeof video.src === 'string' && video.src.startsWith('data:');
+    const hasBase64Data = typeof video.data === 'string' && video.data.startsWith('data:');
 
-        // Si el video ya tiene una ruta guardada, mantenerla
-        if (video.src && !video.src.startsWith('data:')) {
-            console.log('    ✅ Ya guardado, manteniendo path');
-            savedVideos.push(video);
-            continue;
-        }
-
-        // Nuevo video con src en base64
-        if (video.src && video.src.startsWith('data:')) {
-            console.log('    💾 Guardando video con src base64...');
-            const ext = this.getExtensionFromMimeType(video.fileType || video.mimeType || 'video/mp4');
-            const fileName = `video_${Date.now()}_${i}.${ext}`;
-            const filePath = `users/${userId}/projects/${projectId}/videos/${fileName}`;
-            console.log('    - Path destino:', filePath);
-
-            try {
-                const result = await this.api.saveMedia(filePath, video.src);
-
-                if (result.success) {
-                    console.log('    ✅ Video guardado exitosamente');
-                    savedVideos.push({
-                        src: filePath,
-                        title: video.title || `Video ${i + 1}`
-                    });
-                } else {
-                    console.error('    ❌ Error:', result.error);
-                }
-            } catch (error) {
-                console.error('    ❌ Error crítico:', error.message);
-            }
-        }
-        
-        // Nuevo video con data en base64 (formato antiguo)
-        else if (video.data) {
-            console.log('    💾 Guardando video con data base64...');
-            const ext = this.getExtensionFromMimeType(video.fileType || video.mimeType || 'video/mp4');
-            const fileName = `video_${Date.now()}_${i}.${ext}`;
-            const filePath = `users/${userId}/projects/${projectId}/videos/${fileName}`;
-            console.log('    - Path destino:', filePath);
-
-            try {
-                const result = await this.api.saveMedia(filePath, video.data);
-
-                if (result.success) {
-                    console.log('    ✅ Video guardado exitosamente');
-                    savedVideos.push({
-                        src: filePath,
-                        title: video.title || `Video ${i + 1}`
-                    });
-                } else {
-                    console.error('    ❌ Error:', result.error);
-                }
-            } catch (error) {
-                console.error('    ❌ Error crítico:', error.message);
-            }
-        } else {
-            console.warn('    ⚠️ Video sin src ni data, omitiendo');
-        }
+    if (hasPath) {
+      savedVideos.push({ src: video.src, title: video.title || `Video ${i+1}` });
+      continue;
     }
 
-    console.log(`\n  ✅ [saveVideos] Total guardados: ${savedVideos.length}/${videos.length}`);
-    return savedVideos;
+    const base64 = hasBase64Src ? video.src : (hasBase64Data ? video.data : null);
+    if (!base64) {
+      console.warn('    ⚠️ Video sin datos válidos, omitiendo');
+      continue;
+    }
+
+    const ext = this.getExtensionFromMimeType(video.fileType || video.mimeType || 'video/mp4');
+    const fileName = `video_${Date.now()}_${i}.${ext}`;
+    const filePath = `users/${userId}/projects/${projectId}/videos/${fileName}`;
+
+    try {
+      const result = await this.api.saveMedia(filePath, base64);
+      if (result.success) {
+        savedVideos.push({ src: filePath, title: video.title || `Video ${i+1}` });
+      } else {
+        console.error('    ❌ Error guardando video:', result.error);
+      }
+    } catch (e) {
+      console.error('    ❌ Error crítico guardando video:', e.message);
+    }
+  }
+
+  console.log(`\n  ✅ [saveVideos] Total guardados: ${savedVideos.length}/${videos.length}`);
+  return savedVideos;
 }
 
     async loadProject(userId, projectId) {
@@ -520,37 +395,6 @@ async saveVideos(userId, projectId, videos) {
 
     // ==================== IMAGE OPERATIONS ====================
 
-    async saveImages(userId, projectId, images) {
-        const savedImages = [];
-
-        for (let i = 0; i < images.length; i++) {
-            const image = images[i];
-
-            // Si la imagen ya tiene una ruta guardada, mantenerla
-            if (image.src && !image.src.startsWith('data:')) {
-                savedImages.push(image);
-                continue;
-            }
-
-            // Nueva imagen (base64)
-            if (image.data) {
-                const fileName = `image_${Date.now()}_${i}.${this.getExtensionFromMimeType(image.mimeType)}`;
-                const filePath = `users/${userId}/projects/${projectId}/images/${fileName}`;
-
-                const result = await this.api.saveMedia(filePath, image.data);
-
-                if (result.success) {
-                    savedImages.push({
-                        src: filePath,
-                        title: image.title || `Imagen ${i + 1}`
-                    });
-                }
-            }
-        }
-
-        return savedImages;
-    }
-
     async loadImages(userId, projectId, images) {
         const loadedImages = [];
 
@@ -575,37 +419,6 @@ async saveVideos(userId, projectId, videos) {
     }
 
     // ==================== VIDEO OPERATIONS ====================
-
-    async saveVideos(userId, projectId, videos) {
-        const savedVideos = [];
-
-        for (let i = 0; i < videos.length; i++) {
-            const video = videos[i];
-
-            // Si el video ya tiene una ruta guardada, mantenerla
-            if (video.src && !video.src.startsWith('data:')) {
-                savedVideos.push(video);
-                continue;
-            }
-
-            // Nuevo video (base64)
-            if (video.data) {
-                const fileName = `video_${Date.now()}_${i}.${this.getExtensionFromMimeType(video.mimeType)}`;
-                const filePath = `users/${userId}/projects/${projectId}/videos/${fileName}`;
-
-                const result = await this.api.saveMedia(filePath, video.data);
-
-                if (result.success) {
-                    savedVideos.push({
-                        src: filePath,
-                        title: video.title || `Video ${i + 1}`
-                    });
-                }
-            }
-        }
-
-        return savedVideos;
-    }
 
     async loadVideos(userId, projectId, videos) {
         const loadedVideos = [];
