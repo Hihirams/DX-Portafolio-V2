@@ -68,14 +68,24 @@ class DataManager {
         return this.projects.find(p => p.id === projectId) || null;
     }
 
-    // Carga "proyecto completo" (viewer.js lo llama por id)
+    // Carga "proyecto completo" desde /users/<ownerId>/projects/<id>/project.json
     async loadFullProject(projectId) {
-        const project = this.getProjectById(projectId);
-        if (!project) return null;
+        const indexProj = this.getProjectById(projectId);
+        if (!indexProj) return null;
 
-        // Si en el futuro quieres re-hidratar media desde /users/, aquí llamarías a fileManager.
-        // Por ahora ya traemos todo desde data/projects.json, así que regresamos el objeto en memoria.
-        return project;
+        try {
+            const full = await fileManager.loadProject(indexProj.ownerId, projectId);
+            if (!full) return indexProj; // fallback
+
+            // Normaliza alias del gantt
+            if (!full.ganttImage && full.ganttImagePath) full.ganttImage = full.ganttImagePath;
+
+            // Mezcla datos del índice (status/progress/etc.) con el JSON completo (media, descripciones…)
+            return { ...indexProj, ...full };
+        } catch (e) {
+            console.warn('⚠️ loadFullProject: usando índice por fallback', e?.message);
+            return indexProj;
+        }
     }
 
     // ==================== LOAD DATA ====================

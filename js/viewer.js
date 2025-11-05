@@ -448,18 +448,24 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') nextSlide();
 });
 
+function getProjectFromView(projectId) {
+  return projectsToShow.find(p => p.id === projectId) || dataManager.loadFullProject?.(projectId) || dataManager.getProjectById(projectId);
+}
+
 // ==================== MODALS ====================
 
 function openGanttModal(projectId) {
-    const project = dataManager.getProjectById(projectId);
-    if (!project || !project.ganttImage) return;
-    
+    const project = getProjectFromView(projectId);
+    if (!project || !(project.ganttImage || project.ganttImagePath)) return;
+
+    const ganttSrc = project.ganttImage || project.ganttImagePath;
+
     const modal = document.getElementById('ganttModal');
     const title = document.getElementById('modalTitle');
     const img = document.getElementById('ganttImage');
 
     title.textContent = `${project.icon} ${project.title} - Gantt`;
-    img.src = project.ganttImage;
+    img.src = ganttSrc;
     img.alt = `Gantt de ${project.title}`;
 
     modal.classList.add('active');
@@ -473,9 +479,9 @@ function closeGanttModal() {
 }
 
 function openVideoGallery(projectId) {
-    const project = dataManager.getProjectById(projectId);
+    const project = getProjectFromView(projectId);
     if (!project || !project.videos || project.videos.length === 0) return;
-    
+
     const modal = document.getElementById('videoGalleryModal');
     const title = document.getElementById('videoGalleryTitle');
     const grid = document.getElementById('videoGalleryGrid');
@@ -503,9 +509,11 @@ function closeVideoGallery() {
 }
 
 function openVideoPlayer(projectId, index) {
-    const project = dataManager.getProjectById(projectId);
+    const project = getProjectFromView(projectId);
+    if (!project || !project.videos || !project.videos[index]) return;
+
     const video = project.videos[index];
-    
+
     const modal = document.getElementById('videoPlayerModal');
     const title = document.getElementById('videoPlayerTitle');
     const player = document.getElementById('videoPlayer');
@@ -531,9 +539,9 @@ function closeVideoPlayer() {
 }
 
 function openImageGallery(projectId) {
-    const project = dataManager.getProjectById(projectId);
+    const project = getProjectFromView(projectId);
     if (!project || !project.images || project.images.length === 0) return;
-    
+
     const modal = document.getElementById('imageGalleryModal');
     const title = document.getElementById('imageGalleryTitle');
     const grid = document.getElementById('imageGalleryGrid');
@@ -558,9 +566,11 @@ function closeImageGallery() {
 }
 
 function openImageLightbox(projectId, index) {
-    const project = dataManager.getProjectById(projectId);
+    const project = getProjectFromView(projectId);
+    if (!project || !project.images || !project.images[index]) return;
+
     const image = project.images[index];
-    
+
     const modal = document.getElementById('imageLightboxModal');
     const title = document.getElementById('imageLightboxTitle');
     const img = document.getElementById('lightboxImage');
