@@ -9,7 +9,7 @@ const path = require('path');
 const fsSync = require('fs');                 // sync: existsSync, mkdirSync...
 const fs = require('fs').promises;            // promesas: readFile, writeFile...
 
-const IS_DEV = process.argv.includes('--dev') || !app.isPackaged;
+const IS_DEV = process.argv.includes('--dev');
 
 // ✅ Resolver raíz de proyecto priorizando carpeta del .exe si hay datos
 // Reemplaza tu resolveProjectRoot() completo por este
@@ -78,7 +78,6 @@ console.log('  PROJECT_ROOT:', PROJECT_ROOT);
 console.log('  USERS_DIR   :', USERS_DIR);
 console.log('  DATA_DIR    :', DATA_DIR);
 console.log('  IS_DEV      :', IS_DEV);
-console.log('   app.isPackaged:', app.isPackaged);
 console.log('   process.execPath:', process.execPath);
 // ==================== CREAR VENTANA ====================
 

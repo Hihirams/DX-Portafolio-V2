@@ -268,10 +268,57 @@ async function loadProjectsFromUserFolders() {
                     // Leer project.json
                     const projectJsonPath = `users/${userId}/projects/${projectId}/project.json`;
                     const projectData = await window.electronAPI.readJSON(projectJsonPath);
-                    
+
                     if (projectData.success && projectData.data) {
-                        console.log(`    Proyecto cargado: ${projectData.data.title}`);
-                        allProjects.push(projectData.data);
+                        const p = projectData.data;
+                        const baseDir = `users/${userId}/projects/${projectId}`;
+
+                        // Auto-hidratar imágenes si no existen en JSON
+                        if (!Array.isArray(p.images) || p.images.length === 0) {
+                            try {
+                                const imgs = await window.electronAPI.listDir(`${baseDir}/images`);
+                                const imageFiles = (imgs.files || []).filter(f => /\.(png|jpe?g|gif|webp)$/i.test(f));
+                                p.images = imageFiles.map(fn => ({
+                                    src: `${baseDir}/images/${fn}`,
+                                    title: fn.replace(/\.[^.]+$/, '')
+                                }));
+                                console.log(`    Auto-hidratadas ${imageFiles.length} imágenes para ${p.title}`);
+                            } catch (error) {
+                                console.log(`    No se pudieron hidratar imágenes para ${p.title}:`, error.message);
+                            }
+                        }
+
+                        // Auto-hidratar videos si no existen en JSON
+                        if (!Array.isArray(p.videos) || p.videos.length === 0) {
+                            try {
+                                const vids = await window.electronAPI.listDir(`${baseDir}/videos`);
+                                const videoFiles = (vids.files || []).filter(f => /\.(mp4|webm|mov)$/i.test(f));
+                                p.videos = videoFiles.map(fn => ({
+                                    src: `${baseDir}/videos/${fn}`,
+                                    title: fn.replace(/\.[^.]+$/, '')
+                                }));
+                                console.log(`    Auto-hidratados ${videoFiles.length} videos para ${p.title}`);
+                            } catch (error) {
+                                console.log(`    No se pudieron hidratar videos para ${p.title}:`, error.message);
+                            }
+                        }
+
+                        // Auto-hidratar ganttImage si no existe en JSON
+                        if (!(p.ganttImage || p.ganttImagePath)) {
+                            try {
+                                const gantt = await window.electronAPI.listDir(`${baseDir}/gantt`);
+                                const ganttFiles = (gantt.files || []).filter(f => /\.(png|jpe?g|gif|webp)$/i.test(f));
+                                if (ganttFiles[0]) {
+                                    p.ganttImage = `${baseDir}/gantt/${ganttFiles[0]}`;
+                                    console.log(`    Auto-hidratada ganttImage para ${p.title}`);
+                                }
+                            } catch (error) {
+                                console.log(`    No se pudo hidratar ganttImage para ${p.title}:`, error.message);
+                            }
+                        }
+
+                        console.log(`    Proyecto cargado: ${p.title}`);
+                        allProjects.push(p);
                     } else {
                         console.log(`    No se pudo leer project.json de ${projectId}`);
                     }

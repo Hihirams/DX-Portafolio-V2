@@ -24,28 +24,28 @@
         "2025-12": "Piloto con KPIs vivos y tarjetas dinámicas",
         "2026-01": "Documentación y presentación corporativa"
       },
-      "ganttImage": "users/user1/gantt/1.png",
+      "ganttImage": "users/user1/projects/proj001/gantt/gantt.png",
       "videos": [
         {
-          "src": "users/user1/videos/Demo_0.9.5_QCU.mp4",
+          "src": "users/user1/projects/proj001/videos/Demo_0.9.5_QCU.mp4",
           "title": "Demo 0.9.5"
         }
       ],
       "images": [
         {
-          "src": "users/user1/images/QCU1.png",
+          "src": "users/user1/projects/proj001/images/QCU1.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/images/QCU2.png",
+          "src": "users/user1/projects/proj001/images/QCU2.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/images/QCU3.PNG",
+          "src": "users/user1/projects/proj001/images/QCU3.PNG",
           "title": "Vista Cenital"
         },
         {
-          "src": "users/user1/images/QCU4.png",
+          "src": "users/user1/projects/proj001/images/QCU4.png",
           "title": "Datos en vivo API REST"
         }
       ],
@@ -76,24 +76,24 @@
         "2025-12": "Pruebas piloto con múltiples cámaras",
         "2026-01": "Automatización y documentación final"
       },
-      "ganttImage": "users/user1/gantt/2.png",
+      "ganttImage": "users/user1/projects/proj002/gantt/gantt.png",
       "videos": [
         {
-          "src": "users/user1/videos/Demo_v1.0.1_DQITS.mp4",
+          "src": "users/user1/projects/proj002/videos/Demo_v1.0.1_DQITS.mp4",
           "title": "Detección en Acción"
         }
       ],
       "images": [
         {
-          "src": "users/user1/images/DQITS1.png",
+          "src": "users/user1/projects/proj002/images/DQITS1.png",
           "title": "Interfaz Principal"
         },
         {
-          "src": "users/user1/images/DQITS2.png",
+          "src": "users/user1/projects/proj002/images/DQITS2.png",
           "title": "Detección Activa"
         },
         {
-          "src": "users/user1/images/DQITS3.png",
+          "src": "users/user1/projects/proj002/images/DQITS3.png",
           "title": "Respuesta de FASTAPI"
         }
       ],
@@ -123,40 +123,40 @@
         "2025-12": "Interfaz unificada de control y visualización",
         "2026-01": "Optimización para múltiples cámaras"
       },
-      "ganttImage": "users/user1/gantt/4.png",
+      "ganttImage": "users/user1/projects/proj003/gantt/gantt.png",
       "videos": [
         {
-          "src": "users/user1/videos/Demo_v1.1.2_AICAMERA.mp4",
+          "src": "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4",
           "title": "Detección de Movimiento"
         },
         {
-          "src": "users/user1/videos/Demo2_v1.1.2_AICAMERA.mp4",
+          "src": "users/user1/projects/proj003/videos/Demo2_v1.1.2_AICAMERA.mp4",
           "title": "Visión de Operador"
         }
       ],
       "images": [
         {
-          "src": "users/user1/images/AICAMERA1.png",
+          "src": "users/user1/projects/proj003/images/AICAMERA1.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/images/AICAMERA2.png",
+          "src": "users/user1/projects/proj003/images/AICAMERA2.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/images/AICAMERA3.png",
+          "src": "users/user1/projects/proj003/images/AICAMERA3.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/images/AICAMERA4.png",
+          "src": "users/user1/projects/proj003/images/AICAMERA4.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/images/AICAMERA5.png",
+          "src": "users/user1/projects/proj003/images/AICAMERA5.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/images/AICAMERA6.png",
+          "src": "users/user1/projects/proj003/images/AICAMERA6.png",
           "title": "Alerta y detección de objeto"
         }
       ],
@@ -215,24 +215,24 @@
         "2026-01": "Revisión con IT sobre infraestructura",
         "2026-03": "Reactivación estimada si se aprueba despliegue"
       },
-      "ganttImage": "users/user1/gantt/3.png",
+      "ganttImage": "users/user1/projects/proj005/gantt/gantt.png",
       "videos": [
         {
-          "src": "users/user1/videos/Demo_v1.3.0_DENBOT.mp4",
+          "src": "users/user1/projects/proj005/videos/Demo_v1.3.0_DENBOT.mp4",
           "title": "Bot en Acción"
         }
       ],
       "images": [
         {
-          "src": "users/user1/images/DENBOT1.png",
+          "src": "users/user1/projects/proj005/images/DENBOT1.png",
           "title": "Interfaz Bot"
         },
         {
-          "src": "users/user1/images/DENBOT2.png",
+          "src": "users/user1/projects/proj005/images/DENBOT2.png",
           "title": "Reportes"
         },
         {
-          "src": "users/user1/images/DENBOT3.png",
+          "src": "users/user1/projects/proj005/images/DENBOT3.png",
           "title": "Flujo General"
         }
       ],

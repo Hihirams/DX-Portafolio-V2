@@ -11,17 +11,34 @@ let viewingUser = null;
 function normalizeProject(p) {
   const proj = { ...p };
 
-  // Soportar ambos campos del Gantt
+  // Soportar alias del Gantt
   if (!proj.ganttImage && proj.ganttImagePath) proj.ganttImage = proj.ganttImagePath;
 
-  // Arrays forzados
-  if (!Array.isArray(proj.images)) proj.images = [];
-  if (!Array.isArray(proj.videos)) proj.videos = [];
+  // Forzar arrays
+  proj.images = Array.isArray(proj.images) ? proj.images : [];
+  proj.videos = Array.isArray(proj.videos) ? proj.videos : [];
 
-  // Objetos forzados
-  if (!proj.achievements || typeof proj.achievements !== 'object') proj.achievements = {};
-  if (!proj.nextSteps || typeof proj.nextSteps !== 'object') proj.nextSteps = {};
-  if (!proj.blockers || typeof proj.blockers !== 'object') proj.blockers = { type: 'info', message: '' };
+  // ⚙️ Normalizar media: aceptar {path, fileName, ...}
+  proj.images = proj.images.map(img => ({
+    src: img?.src || img?.path || '',
+    title: img?.title || img?.fileName || 'Imagen',
+    fileName: img?.fileName || '',
+    fileType: img?.fileType || 'image/png',
+    fileSize: img?.fileSize || 0
+  }));
+
+  proj.videos = proj.videos.map(v => ({
+    src: v?.src || v?.path || '',
+    title: v?.title || v?.fileName || 'Video',
+    fileName: v?.fileName || '',
+    fileType: v?.fileType || 'video/mp4',
+    fileSize: v?.fileSize || 0
+  }));
+
+  // Objetos mínimos
+  proj.achievements = (proj.achievements && typeof proj.achievements === 'object') ? proj.achievements : {};
+  proj.nextSteps   = (proj.nextSteps   && typeof proj.nextSteps   === 'object') ? proj.nextSteps   : {};
+  proj.blockers    = (proj.blockers    && typeof proj.blockers    === 'object') ? proj.blockers    : { type:'info', message:'' };
 
   return proj;
 }
@@ -197,12 +214,43 @@ function generateCoverSlide() {
 
 // ==================== PROJECT SLIDES ====================
 
+// ==================== PROJECT SLIDES (CORREGIDO) ====================
+
 function generateProjectSlides() {
   const coverSlide = document.getElementById('coverSlide');
 
   const slidesHTML = projectsToShow.map((project) => {
     const statusConfig = dataManager.getStatusConfig(project.status);
     const priorityConfig = dataManager.getPriorityConfig(project.priority);
+
+    // ✅ CORRECCIÓN: Verificar correctamente la existencia de multimedia
+    const hasGantt = Boolean(
+      project.ganttImage || 
+      project.ganttImagePath
+    ) && (
+      (typeof project.ganttImage === 'string' && project.ganttImage.trim().length > 0) ||
+      (typeof project.ganttImagePath === 'string' && project.ganttImagePath.trim().length > 0)
+    );
+
+    const hasVideos = Boolean(
+      project.videos && 
+      Array.isArray(project.videos) && 
+      project.videos.length > 0 &&
+      project.videos.some(v => v && (v.src || v.path) && (v.src || v.path).trim().length > 0)
+    );
+
+    const hasImages = Boolean(
+      project.images && 
+      Array.isArray(project.images) && 
+      project.images.length > 0 &&
+      project.images.some(img => img && (img.src || img.path) && (img.src || img.path).trim().length > 0)
+    );
+
+    // 🐛 DEBUG: Descomentar estas líneas para ver qué detecta
+    console.log(`📊 Proyecto: ${project.title}`);
+    console.log('  - Gantt:', hasGantt, project.ganttImage || project.ganttImagePath);
+    console.log('  - Videos:', hasVideos, project.videos?.length || 0);
+    console.log('  - Images:', hasImages, project.images?.length || 0);
 
     return `
       <div class="slide">
@@ -233,18 +281,18 @@ function generateProjectSlides() {
         ${generateNextStepsSection(project.nextSteps)}
 
         <div style="display:flex; gap:15px; margin-top:20px; flex-wrap:wrap;">
-          ${project.ganttImage ? `
-            <a href="#" class="gantt-link" onclick="openGanttModal('${project.id}'); return false;">
+          ${hasGantt ? `
+            <a href="#" class="gantt-link" onclick="(async () => await openGanttModal('${project.id}'))(); return false;">
               📊 Ver Gantt del Proyecto →
             </a>` : ''}
 
-          ${(project.videos && project.videos.length) ? `
-            <a href="#" class="gantt-link video-link" onclick="openVideoGallery('${project.id}'); return false;">
+          ${hasVideos ? `
+            <a href="#" class="gantt-link video-link" onclick="(async () => await openVideoGallery('${project.id}'))(); return false;">
               🎬 Galería de Videos →
             </a>` : ''}
 
-          ${(project.images && project.images.length) ? `
-            <a href="#" class="gantt-link image-link" onclick="openImageGallery('${project.id}'); return false;">
+          ${hasImages ? `
+            <a href="#" class="gantt-link image-link" onclick="(async () => await openImageGallery('${project.id}'))(); return false;">
               🖼️ Galería de Imágenes →
             </a>` : ''}
         </div>
@@ -448,28 +496,43 @@ document.addEventListener('keydown', (e) => {
     if (e.key === 'ArrowRight') nextSlide();
 });
 
+// --- viewer.js ---
+// Devuelve una URL reproducible: si es 'users/...' la convierte a data:base64
+async function resolveMediaSrc(src) {
+  try {
+    if (typeof src === 'string' && src.startsWith('users/')) {
+      const res = await window.electronAPI.readMedia(src);
+      if (res?.success && res?.data) return res.data;
+    }
+  } catch (e) {
+    console.warn('resolveMediaSrc fallo:', e?.message);
+  }
+  return src || '';
+}
+
 function getProjectFromView(projectId) {
   return projectsToShow.find(p => p.id === projectId) || dataManager.loadFullProject?.(projectId) || dataManager.getProjectById(projectId);
 }
 
 // ==================== MODALS ====================
 
-function openGanttModal(projectId) {
-    const project = getProjectFromView(projectId);
-    if (!project || !(project.ganttImage || project.ganttImagePath)) return;
+async function openGanttModal(projectId) {
+  const project = getProjectFromView(projectId);
+  if (!project || !(project.ganttImage || project.ganttImagePath)) return;
 
-    const ganttSrc = project.ganttImage || project.ganttImagePath;
+  const raw = project.ganttImage || project.ganttImagePath;
+  const ganttSrc = await resolveMediaSrc(raw);
 
-    const modal = document.getElementById('ganttModal');
-    const title = document.getElementById('modalTitle');
-    const img = document.getElementById('ganttImage');
+  const modal = document.getElementById('ganttModal');
+  const title = document.getElementById('modalTitle');
+  const img   = document.getElementById('ganttImage');
 
-    title.textContent = `${project.icon} ${project.title} - Gantt`;
-    img.src = ganttSrc;
-    img.alt = `Gantt de ${project.title}`;
+  title.textContent = `${project.icon} ${project.title} - Gantt`;
+  img.src = ganttSrc;
+  img.alt = `Gantt de ${project.title}`;
 
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeGanttModal() {
@@ -478,28 +541,33 @@ function closeGanttModal() {
     document.body.style.overflow = '';
 }
 
-function openVideoGallery(projectId) {
-    const project = getProjectFromView(projectId);
-    if (!project || !project.videos || project.videos.length === 0) return;
+async function openVideoGallery(projectId) {
+  const project = getProjectFromView(projectId);
+  if (!project || !project.videos || project.videos.length === 0) return;
 
-    const modal = document.getElementById('videoGalleryModal');
-    const title = document.getElementById('videoGalleryTitle');
-    const grid = document.getElementById('videoGalleryGrid');
+  const modal = document.getElementById('videoGalleryModal');
+  const title = document.getElementById('videoGalleryTitle');
+  const grid  = document.getElementById('videoGalleryGrid');
 
-    title.textContent = `${project.icon} ${project.title} - Videos`;
+  title.textContent = `${project.icon} ${project.title} - Videos`;
 
-    grid.innerHTML = project.videos.map((video, index) => `
-        <div class="gallery-item" onclick="openVideoPlayer('${projectId}', ${index})">
-            <div class="video-thumbnail">
-                <div class="play-icon">▶</div>
-                <video src="${video.src}"></video>
-            </div>
-            <div class="gallery-item-title">${video.title}</div>
+  // Resolver todas las rutas a data:base64 para miniaturas reales
+  const items = await Promise.all(project.videos.map(async (v, i) => {
+    const thumbSrc = await resolveMediaSrc(v.src); // lee users/... → data:video/...
+    return `
+      <div class="gallery-item" onclick="openVideoPlayer('${projectId}', ${i})">
+        <div class="video-thumbnail">
+          <video src="${thumbSrc}" muted preload="metadata" playsinline
+                 style="width:100%; height:140px; border-radius:10px; object-fit:cover"></video>
+          <div class="play-icon">▶</div>
+          <div class="video-filename">${v.title}</div>
         </div>
-    `).join('');
+      </div>`;
+  }));
+  grid.innerHTML = items.join('');
 
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeVideoGallery() {
@@ -508,23 +576,25 @@ function closeVideoGallery() {
     document.body.style.overflow = '';
 }
 
-function openVideoPlayer(projectId, index) {
-    const project = getProjectFromView(projectId);
-    if (!project || !project.videos || !project.videos[index]) return;
+async function openVideoPlayer(projectId, index) {
+  const project = getProjectFromView(projectId);
+  if (!project || !project.videos || !project.videos[index]) return;
 
-    const video = project.videos[index];
+  const video = project.videos[index];
 
-    const modal = document.getElementById('videoPlayerModal');
-    const title = document.getElementById('videoPlayerTitle');
-    const player = document.getElementById('videoPlayer');
+  const modal  = document.getElementById('videoPlayerModal');
+  const title  = document.getElementById('videoPlayerTitle');
+  const player = document.getElementById('videoPlayer');
 
-    title.textContent = video.title;
-    player.src = video.src;
-    player.load();
+  title.textContent = video.title || 'Video';
+  const playableSrc = await resolveMediaSrc(video.src);
 
-    closeVideoGallery();
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  closeVideoGallery();
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
+
+  player.src = playableSrc;
+  player.load();
 }
 
 function closeVideoPlayer() {
@@ -538,7 +608,7 @@ function closeVideoPlayer() {
     document.body.style.overflow = '';
 }
 
-function openImageGallery(projectId) {
+async function openImageGallery(projectId) {
     const project = getProjectFromView(projectId);
     if (!project || !project.images || project.images.length === 0) return;
 
@@ -548,7 +618,13 @@ function openImageGallery(projectId) {
 
     title.textContent = `${project.icon} ${project.title} - Imágenes`;
 
-    grid.innerHTML = project.images.map((image, index) => `
+    // Resolver todos los src de imágenes
+    const resolvedImages = await Promise.all(project.images.map(async (image) => ({
+        ...image,
+        src: await resolveMediaSrc(image.src)
+    })));
+
+    grid.innerHTML = resolvedImages.map((image, index) => `
         <div class="gallery-item" onclick="openImageLightbox('${projectId}', ${index})">
             <img src="${image.src}" alt="${image.title}">
             <div class="gallery-item-title">${image.title}</div>
@@ -565,23 +641,23 @@ function closeImageGallery() {
     document.body.style.overflow = '';
 }
 
-function openImageLightbox(projectId, index) {
-    const project = getProjectFromView(projectId);
-    if (!project || !project.images || !project.images[index]) return;
+async function openImageLightbox(projectId, index) {
+  const project = getProjectFromView(projectId);
+  if (!project || !project.images || !project.images[index]) return;
 
-    const image = project.images[index];
+  const image = project.images[index];
 
-    const modal = document.getElementById('imageLightboxModal');
-    const title = document.getElementById('imageLightboxTitle');
-    const img = document.getElementById('lightboxImage');
+  const modal = document.getElementById('imageLightboxModal');
+  const title = document.getElementById('imageLightboxTitle');
+  const img   = document.getElementById('lightboxImage');
 
-    title.textContent = image.title;
-    img.src = image.src;
-    img.alt = image.title;
+  title.textContent = image.title;
+  img.src = await resolveMediaSrc(image.src);
+  img.alt = image.title;
 
-    closeImageGallery();
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  closeImageGallery();
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeImageLightbox() {

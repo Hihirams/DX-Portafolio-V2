@@ -3,8 +3,8 @@
     {
       "id": "proj001",
       "title": "Quality Clinic Unity",
-      "ownerId": "hiram.gonzalez",
-      "ownerName": "Hiram Gonzalez",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "high",
       "progress": 60,
@@ -13,9 +13,20 @@
     },
     {
       "id": "proj002",
-      "title": "AI Camera System",
-      "ownerId": "hiram.gonzalez",
-      "ownerName": "Hiram Gonzalez",
+      "title": "QC ALT / DQITS",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
+      "status": "hold",
+      "priority": "medium",
+      "progress": 55,
+      "icon": "🧪",
+      "updatedAt": "2025-10-30"
+    },
+    {
+      "id": "proj003",
+      "title": "AI Camera",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "medium",
       "progress": 45,
@@ -23,10 +34,10 @@
       "updatedAt": "2025-10-30"
     },
     {
-      "id": "proj003",
+      "id": "proj004",
       "title": "MRM Web Forum",
-      "ownerId": "sandra.santos",
-      "ownerName": "Sandra Santos",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
       "status": "discovery",
       "priority": "low",
       "progress": 20,
@@ -34,23 +45,26 @@
       "updatedAt": "2025-10-30"
     },
     {
-      "id": "proj004",
-      "title": "Data Analytics Dashboard",
-      "ownerId": "miguel.coronado",
-      "ownerName": "Miguel Coronado",
-      "status": "in-progress",
-      "priority": "high",
-      "progress": 75,
-      "icon": "📊",
+      "id": "proj005",
+      "title": "LorenzoBot",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
+      "status": "paused",
+      "priority": "low",
+      "progress": 85,
+      "icon": "🤖",
       "updatedAt": "2025-10-30"
     }
   ],
   "stats": {
-    "total": 4,
-    "inProgress": 3,
-    "discovery": 1,
-    "hold": 0,
-    "completed": 0
+    "totalProjects": 6,
+    "inProgress": 2,
+    "discovery": 2,
+    "hold": 1,
+    "completed": 0,
+    "paused": 1,
+    "totalUsers": 2,
+    "avgProgress": 44
   },
-  "lastUpdated": "2025-10-30T12:00:00Z"
+  "lastUpdated": "2025-11-05T20:02:49.578Z"
 }
