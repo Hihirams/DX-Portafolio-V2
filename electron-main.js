@@ -2,7 +2,7 @@
 // ELECTRON MAIN - Proceso principal
 // ============================================
 
-const { app, BrowserWindow, ipcMain, dialog } = require('electron'); // ← SOLO una vez
+const { app, BrowserWindow, ipcMain, dialog } = require('electron'); // â† SOLO una vez
 const path = require('path');
 
 // fs de dos sabores:
@@ -11,7 +11,7 @@ const fs = require('fs').promises;            // promesas: readFile, writeFile..
 
 const IS_DEV = process.argv.includes('--dev');
 
-// ✅ Resolver raíz de proyecto priorizando carpeta del .exe si hay datos
+// âœ… Resolver raÃ­z de proyecto priorizando carpeta del .exe si hay datos
 // Reemplaza tu resolveProjectRoot() completo por este
 function resolveProjectRoot() {
   const path = require('path');
@@ -23,10 +23,10 @@ function resolveProjectRoot() {
   // 2) "Start in" del acceso directo / cwd
   const startIn = process.cwd();
 
-  // 3) Carpeta del ejecutable que realmente corrió
+  // 3) Carpeta del ejecutable que realmente corriÃ³
   const exeDir = path.dirname(process.execPath);
 
-  // 4) Salir de resources/app.asar → ir a la carpeta que lo contiene
+  // 4) Salir de resources/app.asar â†’ ir a la carpeta que lo contiene
   const resourcesParent = (process.resourcesPath)
     ? path.join(process.resourcesPath, '..')
     : null;
@@ -63,7 +63,7 @@ function resolveProjectRoot() {
     } catch {}
   }
 
-  // Último recurso: exeDir
+  // Ãšltimo recurso: exeDir
   return exeDir;
 }
 
@@ -114,6 +114,22 @@ function createWindow() {
 }
 
 app.whenReady().then(() => {
+    // Interceptar peticiones de assets para servirlos desde PROJECT_ROOT
+    const { protocol } = require('electron');
+    protocol.interceptFileProtocol('file', (request, callback) => {
+        const url = request.url.substr(7); // quitar 'file://'
+        
+        // Si la petición es para assets/, servirlo desde PROJECT_ROOT/assets/
+        if (url.includes('/assets/') || url.includes('\\assets\\')) {
+            const assetPath = url.split(/[\\/]assets[\\/]/).pop();
+            const fullPath = path.join(PROJECT_ROOT, 'assets', assetPath);
+            callback({ path: fullPath });
+        } else {
+            callback({ path: path.normalize(url) });
+        }
+    });
+    
+
     initializeDirectories();
     createWindow();
 
@@ -148,24 +164,24 @@ function initializeDirectories() {
 
 // ==================== IPC HANDLERS ====================
 
-// ✅ FUNCIÓN AUXILIAR: Verificar y limpiar archivos conflictivos
+// âœ… FUNCIÃ“N AUXILIAR: Verificar y limpiar archivos conflictivos
 async function ensureDirectoryPath(dirPath) {
     try {
         const stats = await fs.stat(dirPath);
 
         // Si existe como ARCHIVO, eliminarlo
         if (stats.isFile()) {
-            console.warn(`  ⚠️ ARCHIVO CONFLICTIVO DETECTADO: ${dirPath}`);
+            console.warn(`  âš ï¸ ARCHIVO CONFLICTIVO DETECTADO: ${dirPath}`);
             await fs.unlink(dirPath);
-            console.log(`  ✅ Archivo conflictivo eliminado: ${dirPath}`);
+            console.log(`  âœ… Archivo conflictivo eliminado: ${dirPath}`);
             return false; // No existe como directorio
         }
-        // Si es directorio, está bien
+        // Si es directorio, estÃ¡ bien
         else if (stats.isDirectory()) {
             return true;
         }
     } catch (err) {
-        // No existe, perfecto - se creará después
+        // No existe, perfecto - se crearÃ¡ despuÃ©s
         if (err.code !== 'ENOENT') {
             throw err;
         }
@@ -173,35 +189,35 @@ async function ensureDirectoryPath(dirPath) {
     return false;
 }
 
-// ✅ FUNCIÓN MEJORADA: Limpiar jerarquía completa de directorios
+// âœ… FUNCIÃ“N MEJORADA: Limpiar jerarquÃ­a completa de directorios
 async function cleanDirectoryHierarchy(basePath, relativePaths) {
-    console.log('\n🧹 LIMPIANDO JERARQUÍA DE DIRECTORIOS...');
+    console.log('\nðŸ§¹ LIMPIANDO JERARQUÃA DE DIRECTORIOS...');
 
     for (const relPath of relativePaths) {
         const fullPath = path.join(basePath, relPath);
-        console.log(`  📁 Verificando: ${relPath}`);
+        console.log(`  ðŸ“ Verificando: ${relPath}`);
 
         try {
             const stats = await fs.stat(fullPath);
 
             if (stats.isFile()) {
-                console.warn(`    ⚠️ ARCHIVO CONFLICTIVO: ${relPath} (debería ser directorio)`);
+                console.warn(`    âš ï¸ ARCHIVO CONFLICTIVO: ${relPath} (deberÃ­a ser directorio)`);
                 await fs.unlink(fullPath);
-                console.log(`    ✅ Archivo eliminado: ${relPath}`);
+                console.log(`    âœ… Archivo eliminado: ${relPath}`);
             } else if (stats.isDirectory()) {
-                console.log(`    ✅ Directorio OK: ${relPath}`);
+                console.log(`    âœ… Directorio OK: ${relPath}`);
             }
         } catch (err) {
             if (err.code === 'ENOENT') {
-                console.log(`    ℹ️ No existe (se creará): ${relPath}`);
+                console.log(`    â„¹ï¸ No existe (se crearÃ¡): ${relPath}`);
             } else {
-                console.error(`    ❌ Error verificando ${relPath}:`, err.message);
+                console.error(`    âŒ Error verificando ${relPath}:`, err.message);
                 throw err;
             }
         }
     }
 
-    console.log('✅ Limpieza de jerarquía completada\n');
+    console.log('âœ… Limpieza de jerarquÃ­a completada\n');
 }
 
 // ====== FILE OPERATIONS ======
@@ -322,15 +338,15 @@ ipcMain.handle('file:exists', async (event, filePath) => {
         const fullPath = path.join(PROJECT_ROOT, filePath);
         const exists = fsSync.existsSync(fullPath);
         console.log('='.repeat(60));
-        console.log('🔍 VERIFICANDO EXISTENCIA:');
+        console.log('ðŸ” VERIFICANDO EXISTENCIA:');
         console.log('   Ruta relativa:', filePath);
         console.log('   PROJECT_ROOT:', PROJECT_ROOT);
         console.log('   Ruta completa:', fullPath);
-        console.log('   ¿Existe?:', exists);
+        console.log('   Â¿Existe?:', exists);
         console.log('='.repeat(60));
         return { success: true, exists };
     } catch (error) {
-        console.error('❌ Error verificando existencia:', error);
+        console.error('âŒ Error verificando existencia:', error);
         return { success: false, error: error.message };
     }
 });
@@ -387,9 +403,9 @@ ipcMain.handle('dialog:openFile', async (event, options) => {
 // Crear directorio para nuevo proyecto
 ipcMain.handle('project:createDir', async (event, userId, projectId) => {
     console.log('='.repeat(80));
-    console.log('🚀 PROJECT:CREATE_DIR HANDLER STARTED');
+    console.log('ðŸš€ PROJECT:CREATE_DIR HANDLER STARTED');
     console.log('='.repeat(80));
-    console.log('📝 Parameters:');
+    console.log('ðŸ“ Parameters:');
     console.log('   userId:', userId);
     console.log('   projectId:', projectId);
 
@@ -397,12 +413,12 @@ ipcMain.handle('project:createDir', async (event, userId, projectId) => {
         const projectDir = path.join(USERS_DIR, userId, 'projects', projectId);
         const subdirs = ['images', 'videos', 'gantt'];
 
-        console.log('📂 TARGET PATH:', projectDir);
-        console.log('🔍 BASE PATHS:');
+        console.log('ðŸ“‚ TARGET PATH:', projectDir);
+        console.log('ðŸ” BASE PATHS:');
         console.log('   PROJECT_ROOT:', PROJECT_ROOT);
         console.log('   USERS_DIR:', USERS_DIR);
 
-        // ✅ CRÍTICO: Limpiar TODA la jerarquía antes de crear directorios
+        // âœ… CRÃTICO: Limpiar TODA la jerarquÃ­a antes de crear directorios
         const hierarchyPaths = [
             'users',
             `users/${userId}`,
@@ -413,19 +429,19 @@ ipcMain.handle('project:createDir', async (event, userId, projectId) => {
         await cleanDirectoryHierarchy(PROJECT_ROOT, hierarchyPaths);
 
         // Crear directorio principal del proyecto con mkdir recursive
-        console.log('\n📁 Creando estructura de directorios...');
+        console.log('\nðŸ“ Creando estructura de directorios...');
         try {
             await fs.mkdir(projectDir, { recursive: true });
-            console.log('  ✅ Directorio principal creado');
+            console.log('  âœ… Directorio principal creado');
         } catch (mkdirError) {
-            // Si falla, intentar una vez más después de una limpieza más agresiva
-            console.warn('  ⚠️ mkdir falló, intentando limpieza forzada...');
+            // Si falla, intentar una vez mÃ¡s despuÃ©s de una limpieza mÃ¡s agresiva
+            console.warn('  âš ï¸ mkdir fallÃ³, intentando limpieza forzada...');
             await cleanDirectoryHierarchy(PROJECT_ROOT, hierarchyPaths);
             await fs.mkdir(projectDir, { recursive: true });
-            console.log('  ✅ Directorio principal creado (segundo intento)');
+            console.log('  âœ… Directorio principal creado (segundo intento)');
         }
 
-        // Verificar que se creó correctamente
+        // Verificar que se creÃ³ correctamente
         const finalCheck = fsSync.existsSync(projectDir) && fsSync.statSync(projectDir).isDirectory();
         if (!finalCheck) {
             return {
@@ -441,28 +457,28 @@ ipcMain.handle('project:createDir', async (event, userId, projectId) => {
         }
 
         // Crear subdirectorios
-        console.log('📁 Creando subdirectorios...');
+        console.log('ðŸ“ Creando subdirectorios...');
         for (const subdir of subdirs) {
             const subDirPath = path.join(projectDir, subdir);
             await fs.mkdir(subDirPath, { recursive: true });
-            console.log(`  ✅ ${subdir}/`);
+            console.log(`  âœ… ${subdir}/`);
         }
 
         console.log('\n' + '='.repeat(80));
-        console.log('✅✅✅ ESTRUCTURA DE DIRECTORIOS CREADA EXITOSAMENTE ✅✅✅');
+        console.log('âœ…âœ…âœ… ESTRUCTURA DE DIRECTORIOS CREADA EXITOSAMENTE âœ…âœ…âœ…');
         console.log('='.repeat(80));
         return { success: true, path: projectDir };
 
     } catch (error) {
         console.error('\n' + '='.repeat(80));
-        console.error('❌❌❌ ERROR CRÍTICO EN PROJECT:CREATEDIR ❌❌❌');
+        console.error('âŒâŒâŒ ERROR CRÃTICO EN PROJECT:CREATEDIR âŒâŒâŒ');
         console.error('='.repeat(80));
         console.error('Error:', error.message);
         console.error('Code:', error.code);
         console.error('Stack:', error.stack);
         console.error('='.repeat(80));
 
-        // Información de debug adicional
+        // InformaciÃ³n de debug adicional
         const debugInfo = {
             PROJECT_ROOT,
             USERS_DIR,
@@ -492,7 +508,7 @@ ipcMain.handle('project:save', async (event, userId, projectId, projectData) => 
         console.log('  projectDir:', projectDir);
         console.log('  projectFile:', projectFile);
 
-        // Verificar si existe y qué tipo es
+        // Verificar si existe y quÃ© tipo es
         const exists = fsSync.existsSync(projectDir);
         const isDirectory = exists ? fsSync.statSync(projectDir).isDirectory() : false;
 
