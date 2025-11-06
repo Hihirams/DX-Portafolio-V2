@@ -104,7 +104,7 @@ function showMyProjects() {
     if (myProjects.length === 0) {
         grid.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">??",</div>
+                <div class="empty-state-icon">📂</div>
                 <div class="empty-state-title">No tienes proyectos aun</div>
                 <div class="empty-state-description">
                     Crea tu primer proyecto para empezar
@@ -131,7 +131,7 @@ function renderFeaturedProjects(filter = 'all') {
     if (projects.length === 0) {
         grid.innerHTML = `
             <div class="empty-state">
-                <div class="empty-state-icon">??"?</div>
+                <div class="empty-state-icon">🔍</div>
                 <div class="empty-state-title">No hay proyectos en esta categoria</div>
             </div>
         `;
@@ -155,7 +155,7 @@ function createProjectCard(project, showEditButton = false) {
                 <div style="display: flex; gap: 8px; align-items: center;">
                     ${canEdit ? `
                         <button class="btn-edit-mini" onclick="event.stopPropagation(); editProject('${project.id}')" title="Editar proyecto">
-                            ?oe??,?
+                            ✏️
                         </button>
                     ` : ''}
                     <div class="project-badge ${statusConfig.badgeClass}">${statusConfig.badge}</div>
@@ -250,7 +250,7 @@ function setupSearch() {
         if (projects.length === 0 && users.length === 0) {
             searchResults.innerHTML = `
                 <div class="empty-state">
-                    <div class="empty-state-icon">??"?</div>
+                    <div class="empty-state-icon">🔍</div>
                     <div class="empty-state-title">No se encontraron resultados</div>
                 </div>
             `;
@@ -277,7 +277,7 @@ function setupSearch() {
             users.forEach(user => {
                 html += `
                     <div class="search-result-item" onclick="viewUserPortfolio('${user.id}')">
-                        <div class="search-result-title">??'? ${user.name}</div>
+                        <div class="search-result-title">👤 ${user.name}</div>
                         <div class="search-result-meta">${user.role}</div>
                     </div>
                 `;
@@ -384,14 +384,14 @@ async function handleLogin(event) {
     showMyProjects();
     errorDiv.style.display = 'none';
   } else {
-    errorDiv.textContent = res.message || 'Usuario o contraseña incorrectos';
+    errorDiv.textContent = res.message || 'Usuario o contraseÃ±a incorrectos';
     errorDiv.style.display = 'block';
   }
 }
 
 
 function handleLogout() {
-    if (confirm('??Estas seguro de que quieres cerrar sesion?')) {
+    if (confirm('¿Estas seguro de que quieres cerrar sesion?')) {
         dataManager.logout();
         
         // Actualizar la UI
@@ -411,8 +411,8 @@ function showWelcomeMessage(userName) {
     notification.className = 'welcome-notification';
     notification.innerHTML = `
         <div class="welcome-content">
-            <span class="welcome-icon">??'<</span>
-            <span class="welcome-text">??Bienvenido, ${userName.split(' ')[0]}!</span>
+            <span class="welcome-icon">👋</span>
+            <span class="welcome-text">¡Bienvenido, ${userName.split(' ')[0]}!</span>
         </div>
     `;
     
@@ -470,6 +470,6 @@ console.log('OK Home.js cargado');
 
 // Escuchar cuando se recargan los datos
 window.addEventListener('dataReloaded', () => {
-    console.log('??",, Datos recargados, actualizando UI...');
+    console.log('🔄 Datos recargados, actualizando UI...');
     initHome();
 });
