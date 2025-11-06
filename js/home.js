@@ -162,7 +162,7 @@ function createProjectCard(project, showEditButton = false) {
                 </div>
             </div>
             <h4 class="project-card-title">${project.title}</h4>
-            <p class="project-card-phase">${project.currentPhase}</p>
+            <p class="project-card-phase">${project.currentPhase || 'Sin fase definida'}</p>
             <div class="project-card-footer">
                 <div class="project-progress">
                     <div class="progress-label">${project.progress}% completado</div>

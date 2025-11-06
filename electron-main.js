@@ -9,6 +9,12 @@ const path = require('path');
 const fsSync = require('fs');                 // sync: existsSync, mkdirSync...
 const fs = require('fs').promises;            // promesas: readFile, writeFile...
 
+// âœ… FIX: Check if running in Electron main process
+if (typeof app === 'undefined') {
+    console.error('âŒ This script must be run in Electron main process');
+    process.exit(1);
+}
+
 const IS_DEV = process.argv.includes('--dev');
 
 // âœ… Resolver raÃ­z de proyecto priorizando carpeta del .exe si hay datos
