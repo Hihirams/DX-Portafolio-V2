@@ -32,7 +32,7 @@
             </div>
             
             <div class="editor-actions">
-                <!-- Botón de cambio de tema -->
+                <!-- BotÃ³n de cambio de tema -->
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -64,7 +64,7 @@
     <main class="editor-content">
         <div class="editor-container">
             
-            <!-- Panel de Navegación Lateral -->
+            <!-- Panel de NavegaciÃ³n Lateral -->
             <aside class="editor-sidebar">
                 <h3>📋 Secciones</h3>
                 <nav class="editor-nav">
@@ -89,10 +89,10 @@
                 </nav>
             </aside>
 
-            <!-- Panel de Edición Principal -->
+            <!-- Panel de EdiciÃ³n Principal -->
             <section class="editor-main">
                 
-                <!-- Sección: Información Básica -->
+                <!-- SecciÃ³n: Información Básica -->
                 <div class="editor-section active" id="section-basic">
                     <h2 class="section-title">ℹ️ Información Básica</h2>
                     
@@ -103,13 +103,13 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="projectTitle">Título del Proyecto</label>
+                        <label for="projectTitle">TÃ­tulo del Proyecto</label>
                         <input type="text" id="projectTitle" placeholder="Nombre del proyecto" required>
                     </div>
 
                     <div class="form-group">
-                        <label for="currentPhase">Fase Actual / Descripción</label>
-                        <textarea id="currentPhase" rows="4" placeholder="Describe en qué fase está el proyecto actualmente..." required></textarea>
+                        <label for="currentPhase">Fase Actual / DescripciÃ³n</label>
+                        <textarea id="currentPhase" rows="4" placeholder="Describe en quÃ© fase estÃ¡ el proyecto actualmente..." required></textarea>
                     </div>
 
                     <div class="form-row">
@@ -135,7 +135,7 @@
                     </div>
                 </div>
 
-                <!-- Sección: Progreso y Fechas -->
+                <!-- SecciÃ³n: Progreso y Fechas -->
                 <div class="editor-section" id="section-progress">
                     <h2 class="section-title">📊 Progreso y Fechas</h2>
                     
@@ -156,13 +156,13 @@
                     </div>
                 </div>
 
-                <!-- Sección: Logros Recientes -->
+                <!-- SecciÃ³n: Logros Recientes -->
                 <div class="editor-section" id="section-achievements">
                     <h2 class="section-title">✅ Logros Recientes</h2>
                     <p class="section-description">Agrega los hitos importantes que has alcanzado</p>
                     
                     <div id="achievementsList" class="dynamic-list">
-                        <!-- Se llenarán dinámicamente -->
+                        <!-- Se llenarÃ¡n dinÃ¡micamente -->
                     </div>
                     
                     <button class="btn-add" onclick="addAchievement()">
@@ -170,7 +170,7 @@
                     </button>
                 </div>
 
-                <!-- Sección: Bloqueos -->
+                <!-- SecciÃ³n: Bloqueos -->
                 <div class="editor-section" id="section-blockers">
                     <h2 class="section-title">⚠️ Bloqueos</h2>
                     
@@ -178,8 +178,8 @@
                         <label for="blockerType">Tipo de Bloqueo</label>
                         <select id="blockerType">
                             <option value="info">Información</option>
-                            <option value="warning">Atención</option>
-                            <option value="alert">Bloqueo Crítico</option>
+                            <option value="warning">AtenciÃ³n</option>
+                            <option value="alert">Bloqueo CrÃ­tico</option>
                             <option value="success">Sin Bloqueos</option>
                         </select>
                     </div>
@@ -190,13 +190,13 @@
                     </div>
                 </div>
 
-                <!-- Sección: Próximos Pasos -->
+                <!-- SecciÃ³n: Próximos Pasos -->
                 <div class="editor-section" id="section-nextsteps">
                     <h2 class="section-title">🎯 Próximos Pasos</h2>
                     <p class="section-description">Define los siguientes hitos del proyecto</p>
                     
                     <div id="nextStepsList" class="dynamic-list">
-                        <!-- Se llenarán dinámicamente -->
+                        <!-- Se llenarÃ¡n dinÃ¡micamente -->
                     </div>
                     
                     <button class="btn-add" onclick="addNextStep()">
@@ -204,7 +204,7 @@
                     </button>
                 </div>
 
-                <!-- Sección: Multimedia -->
+                <!-- SecciÃ³n: Multimedia -->
                 <div class="editor-section" id="section-media">
                     <h2 class="section-title">📼️ Multimedia</h2>
                     
@@ -212,29 +212,29 @@
                     <div class="media-subsection">
                         <h3>📊 Diagrama de Gantt</h3>
                         <div id="ganttPreview" class="media-preview">
-                            <!-- Se llenará dinámicamente -->
+                            <!-- Se llenarÃ¡ dinÃ¡micamente -->
                         </div>
                         <button class="btn-add" onclick="uploadGantt()">
                             + Subir Gantt
                         </button>
                     </div>
 
-                    <!-- Galería de Imágenes -->
+                    <!-- GalerÃ­a de ImÃ¡genes -->
                     <div class="media-subsection">
-                        <h3>🖼️ Galería de Imágenes</h3>
+                        <h3>ðŸ–¼ï¸ GalerÃ­a de ImÃ¡genes</h3>
                         <div id="imagesPreview" class="media-preview">
-                            <!-- Se llenará dinámicamente -->
+                            <!-- Se llenarÃ¡ dinÃ¡micamente -->
                         </div>
                         <button class="btn-add" onclick="uploadImages()">
-                            + Agregar Imágenes
+                            + Agregar ImÃ¡genes
                         </button>
                     </div>
 
-                    <!-- Galería de Videos -->
+                    <!-- GalerÃ­a de Videos -->
                     <div class="media-subsection">
-                        <h3>🎬 Galería de Videos</h3>
+                        <h3>ðŸŽ¬ GalerÃ­a de Videos</h3>
                         <div id="videosPreview" class="media-preview">
-                            <!-- Se llenará dinámicamente -->
+                            <!-- Se llenarÃ¡ dinÃ¡micamente -->
                         </div>
                         <button class="btn-add" onclick="uploadVideos()">
                             + Agregar Videos
@@ -255,38 +255,38 @@
                 <button class="modal-close" onclick="closePreviewModal()">×</button>
             </div>
             <div class="modal-body" id="previewContent">
-                <!-- Se generará la vista previa aquí -->
+                <!-- Se generarÃ¡ la vista previa aquÃ­ -->
             </div>
         </div>
     </div>
 
-    <!-- Modal de Confirmación de Eliminación -->
+    <!-- Modal de ConfirmaciÃ³n de EliminaciÃ³n -->
     <div id="deleteModal" class="modal">
         <div class="modal-content modal-delete">
             <div class="modal-header">
-                <h3 class="modal-title">🗑️ Eliminar Proyecto</h3>
+                <h3 class="modal-title">ðŸ—‘ï¸ Eliminar Proyecto</h3>
                 <button class="modal-close" onclick="closeDeleteModal()">×</button>
             </div>
             <div class="modal-body">
                 <div class="delete-warning">
                     <div class="warning-icon">⚠️</div>
                     <div>
-                        <h4>Esta acción no se puede deshacer</h4>
+                        <h4>Esta acciÃ³n no se puede deshacer</h4>
                     </div>
                 </div>
                 
-                <p>Estás a punto de eliminar permanentemente:</p>
+                <p>EstÃ¡s a punto de eliminar permanentemente:</p>
                 
                 <div class="delete-project-info">
                     <strong id="deleteProjectTitle"></strong>
                 </div>
                 
-                <p class="delete-note">Se eliminarán todos los datos del proyecto incluyendo:</p>
+                <p class="delete-note">Se eliminarÃ¡n todos los datos del proyecto incluyendo:</p>
                 <ul class="delete-list">
                     <li>📊 Diagrama de Gantt</li>
-                    <li>🖼️ Galería de imágenes</li>
-                    <li>🎬 Videos</li>
-                    <li>📝 Todo el contenido del proyecto</li>
+                    <li>ðŸ–¼ï¸ GalerÃ­a de imágenes</li>
+                    <li>ðŸŽ¬ Videos</li>
+                    <li>ðŸ“ Todo el contenido del proyecto</li>
                 </ul>
                 
                 <div class="delete-confirm-box">

@@ -1,5 +1,5 @@
 // ============================================
-// EDITOR.JS - LÃ³gica del Editor de Portafolios
+// EDITOR.JS - Lógica del Editor de Portafolios
 // ============================================
 
 let currentProject = null;
@@ -9,43 +9,43 @@ let hasUnsavedChanges = false;
 // ==================== INIT ====================
 
 document.addEventListener('dataLoaded', () => {
-    console.log('âœ… Datos cargados, inicializando Editor...');
+    console.log('✅ Datos cargados, inicializando Editor...');
     initEditor();
 });
 
 function initEditor() {
-    console.log('ðŸ” Verificando sesiÃ³n...');
+    console.log('📋 Verificando sesión...');
     console.log('dataManager disponible:', typeof dataManager !== 'undefined');
     console.log('Usuario actual:', dataManager?.currentUser);
     
     // Verificar que el usuario estÃ© loggeado
     if (!dataManager || !dataManager.isLoggedIn()) {
-        console.error('âŒ No hay sesiÃ³n activa');
-        alert('Debes iniciar sesiÃ³n para acceder al editor');
+        console.error('âŒ No hay sesión activa');
+        alert('Debes iniciar sesión para acceder al editor');
         window.location.href = 'index.html';
         return;
     }
 
-    console.log('âœ… SesiÃ³n verificada:', dataManager.getCurrentUser());
+    console.log('✅ SesiÃ³n verificada:', dataManager.getCurrentUser());
 
     // Determinar el modo del editor
     editorMode = localStorage.getItem('editorMode') || 'edit';
     const projectId = localStorage.getItem('editingProjectId');
 
-    console.log('ðŸ“ Modo del editor:', editorMode);
-    console.log('ðŸ“‚ Project ID:', projectId);
+    console.log('📋 Modo del editor:', editorMode);
+    console.log('📋 Project ID:', projectId);
 
     if (editorMode === 'new') {
         // Modo: Nuevo Proyecto
-        console.log('ðŸ“ Modo: Nuevo Proyecto');
+        console.log('📋 Modo: Nuevo Proyecto');
         createNewProject();
     } else if (editorMode === 'edit' && projectId) {
         // Modo: Editar Proyecto Existente
-        console.log('âœï¸ Modo: Editar Proyecto', projectId);
+        console.log('✅œï¸ Modo: Editar Proyecto', projectId);
         loadProject(projectId);
     } else {
-        console.error('âŒ No se especificÃ³ un proyecto vÃ¡lido');
-        alert('No se especificÃ³ un proyecto para editar');
+        console.error('âŒ No se especificó un proyecto válido');
+        alert('No se especificó un proyecto para editar');
         window.location.href = 'index.html';
         return;
     }
@@ -68,12 +68,12 @@ function createNewProject() {
     
     if (!user) {
         console.error('âŒ No se pudo obtener el usuario actual');
-        alert('Error: Usuario no vÃ¡lido');
+        alert('Error: Usuario no válido');
         window.location.href = 'index.html';
         return;
     }
     
-    console.log('ðŸ‘¤ Creando proyecto para usuario:', user.id);
+    console.log('📋 Creando proyecto para usuario:', user.id);
     
     currentProject = {
         id: `proj${Date.now()}`, // ID temporal
@@ -98,8 +98,8 @@ function createNewProject() {
         updatedAt: new Date().toISOString().split('T')[0]
     };
 
-    console.log('âœ… Proyecto nuevo creado:', currentProject);
-    console.log('ðŸ” ganttImage al crear:', {
+    console.log('✅ Proyecto nuevo creado:', currentProject);
+    console.log('📋 ganttImage al crear:', {
         value: currentProject.ganttImage,
         type: typeof currentProject.ganttImage,
         isNull: currentProject.ganttImage === null
@@ -116,9 +116,9 @@ async function loadProject(projectId) {
     // 1. Intentar obtener el proyecto completo desde el DataManager
     let project = await dataManager.loadFullProject(projectId);
 
-    // 2. Si no lo encuentra completo, usar el Ã­ndice bÃ¡sico
+    // 2. Si no lo encuentra completo, usar el índice básico
     if (!project) {
-        console.warn("âš ï¸ Proyecto completo no encontrado, usando Ã­ndice.");
+        console.warn("âš ï¸ Proyecto completo no encontrado, usando índice.");
         project = dataManager.getProjectById(projectId);
     }
 
@@ -135,7 +135,7 @@ async function loadProject(projectId) {
         return;
     }
 
-    // 4. Normalizar y asegurar campos mÃ­nimos
+    // 4. Normalizar y asegurar campos mínimos
     currentProject = JSON.parse(JSON.stringify(project));
 
     if (!currentProject.images) currentProject.images = [];
@@ -191,7 +191,7 @@ function loadProjectData() {
     document.getElementById('blockerType').value = currentProject.blockers?.type || 'info';
     document.getElementById('blockerMessage').value = currentProject.blockers?.message || '';
 
-    // PrÃ³ximos Pasos
+    // Próximos Pasos
     loadNextSteps();
 
     // Multimedia
@@ -232,7 +232,7 @@ function createAchievementItem(date = '', text = '') {
             <input type="text" class="achievement-date" placeholder="2025-10" value="${date}" pattern="\\d{4}-\\d{2}">
         </div>
         <div class="form-group">
-            <label>DescripciÃ³n del Logro</label>
+            <label>Descripción del Logro</label>
             <textarea class="achievement-text" rows="2" placeholder="Describe el logro...">${text}</textarea>
         </div>
     `;
@@ -272,7 +272,7 @@ function loadNextSteps() {
     const nextSteps = currentProject.nextSteps || {};
     
     if (Object.keys(nextSteps).length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay prÃ³ximos pasos agregados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay próximos pasos agregados</p>';
         return;
     }
 
@@ -295,7 +295,7 @@ function createNextStepItem(date = '', text = '') {
             <input type="text" class="nextstep-date" placeholder="2025-11" value="${date}" pattern="\\d{4}-\\d{2}">
         </div>
         <div class="form-group">
-            <label>DescripciÃ³n</label>
+            <label>Descripción</label>
             <textarea class="nextstep-text" rows="2" placeholder="Describe el prÃ³ximo paso...">${text}</textarea>
         </div>
     `;
@@ -322,7 +322,7 @@ function removeNextStepItem(btn) {
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('nextStepsList');
     if (container.children.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay prÃ³ximos pasos agregados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay próximos pasos agregados</p>';
     }
 }
 
@@ -377,7 +377,7 @@ function loadImages() {
     }
     
     if (!currentProject.images || currentProject.images.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay imÃ¡genes cargadas</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay imágenes cargadas</p>';
         return;
     }
 
@@ -537,12 +537,12 @@ async function saveProject() {
         updatedAt: new Date().toISOString()
     };
     
-    // âœ… DEBUG MEJORADO - Te ayudarÃ¡ a identificar el problema
-    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
-    console.log('ðŸ” DEBUG COMPLETO - Proyecto antes de guardar');
-    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
+    // âœ… DEBUG MEJORADO - Te ayudará a identificar el problema
+    console.log('✅•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
+    console.log('📋 DEBUG COMPLETO - Proyecto antes de guardar');
+    console.log('✅•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
     
-    console.log('ðŸ“Š Basic Info:', {
+    console.log('📋 Basic Info:', {
         id: updatedProject.id,
         title: updatedProject.title,
         ownerId: updatedProject.ownerId,
@@ -563,7 +563,7 @@ async function saveProject() {
         count: updatedProject.images?.length || 0,
         details: updatedProject.images?.map((img, i) => ({
             index: i,
-            title: img.title || 'Sin tÃ­tulo',
+            title: img.title || 'Sin título',
             hasData: !!img.data,
             hasSrc: !!img.src,
             srcType: img.src?.startsWith('data:') ? 'base64' : 
@@ -577,7 +577,7 @@ async function saveProject() {
         count: updatedProject.videos?.length || 0,
         details: updatedProject.videos?.map((v, i) => ({
             index: i,
-            title: v.title || 'Sin tÃ­tulo',
+            title: v.title || 'Sin título',
             hasData: !!v.data,
             hasSrc: !!v.src,
             srcType: v.src?.startsWith('data:') ? 'base64' : 
@@ -586,7 +586,7 @@ async function saveProject() {
         })) || []
     });
 
-    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n');
+    console.log('✅•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n');
 
     // Mostrar feedback
     document.getElementById('editorTitle').textContent = 'ðŸ’¾ Guardando...';
@@ -598,25 +598,25 @@ async function saveProject() {
     try {
         if (editorMode === 'new') {
             // Crear nuevo proyecto
-            console.log('ðŸ“ Modo: Crear nuevo proyecto');
+            console.log('📋 Modo: Crear nuevo proyecto');
             const newProject = await dataManager.createProject(updatedProject);
             success = newProject !== null;
             
             if (success) {
-                console.log('âœ… Nuevo proyecto creado:', newProject.id);
+                console.log('✅ Nuevo proyecto creado:', newProject.id);
             } else {
-                console.error('âŒ createProject retornÃ³ null');
+                console.error('âŒ createProject retornó null');
             }
         } else {
             // Actualizar proyecto existente
-            console.log('âœï¸ Modo: Actualizar proyecto existente');
+            console.log('✅œï¸ Modo: Actualizar proyecto existente');
             const updated = await dataManager.updateProject(currentProject.id, updatedProject);
             success = updated !== null;
             
             if (success) {
-                console.log('âœ… Proyecto actualizado:', updated.id);
+                console.log('✅ Proyecto actualizado:', updated.id);
             } else {
-                console.error('âŒ updateProject retornÃ³ null');
+                console.error('âŒ updateProject retornó null');
             }
         }
     } catch (error) {
@@ -633,13 +633,13 @@ async function saveProject() {
         // Emitir evento para recargar datos en Home
         window.dispatchEvent(new Event('dataReloaded'));
 
-        // Redirigir despuÃ©s de un momento
+        // Redirigir después de un momento
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 1000);
     } else {
         console.error('\nâŒâŒâŒ ERROR AL GUARDAR EL PROYECTO âŒâŒâŒ\n');
-        alert('âŒ Error al guardar el proyecto. Revisa la consola para mÃ¡s detalles.');
+        alert('âŒ Error al guardar el proyecto. Revisa la consola para más detalles.');
         document.getElementById('editorTitle').textContent = `Editando: ${currentProject.title}`;
         document.getElementById('editorStatus').textContent = 'Error';
     }
@@ -751,7 +751,7 @@ function generatePreviewHTML(data) {
 
             ${Object.keys(data.nextSteps).length > 0 ? `
                 <div class="info-section">
-                    <div class="info-title">ðŸŽ¯ PrÃ³ximos Pasos</div>
+                    <div class="info-title">ðŸŽ¯ Próximos Pasos</div>
                     <div class="info-content">
                         ${Object.entries(data.nextSteps).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -771,7 +771,7 @@ function closePreviewModal() {
 
 function cancelEdit() {
     if (hasUnsavedChanges) {
-        if (!confirm('Tienes cambios sin guardar. Â¿EstÃ¡s seguro de que quieres salir?')) {
+        if (!confirm('Tienes cambios sin guardar. ¿Estás seguro de que quieres salir?')) {
             return;
         }
     }
@@ -808,7 +808,7 @@ function deleteProject() {
     document.getElementById('confirmDeleteText').value = '';
     document.getElementById('btnConfirmDelete').disabled = true;
 
-    // ValidaciÃ³n en tiempo real
+    // Validación en tiempo real
     const confirmInput = document.getElementById('confirmDeleteText');
     const confirmBtn = document.getElementById('btnConfirmDelete');
     
@@ -842,11 +842,11 @@ async function confirmDelete() {
     document.getElementById('editorStatus').textContent = 'Procesando';
 
     try {
-        // Llamar a la eliminaciÃ³n real
+        // Llamar a la eliminación real
         const success = await dataManager.deleteProject(currentProject.id);
 
         if (success) {
-            console.log('âœ… Proyecto eliminado correctamente');
+            console.log('✅ Proyecto eliminado correctamente');
             alert('âœ… Proyecto eliminado exitosamente');
             
             // No hay cambios sin guardar
@@ -873,7 +873,7 @@ function updateEditorTitle(title) {
     document.getElementById('editorTitle').textContent = `Editando: ${title}`;
 }
 
-// Agregar mÃ©todo canEditProject a dataManager si no existe
+// Agregar método canEditProject a dataManager si no existe
 if (dataManager && !dataManager.canEditProject) {
     dataManager.canEditProject = function(projectId) {
         const project = this.getProjectById(projectId);
@@ -886,7 +886,7 @@ if (dataManager && !dataManager.canEditProject) {
 // ==================== SWITCH SECTION ====================
 
 function switchSection(sectionName) {
-    console.log('ðŸ“‚ Cambiando a secciÃ³n:', sectionName);
+    console.log('📋 Cambiando a secciÃ³n:', sectionName);
     
     // Ocultar todas las secciones
     document.querySelectorAll('.editor-section').forEach(section => {
@@ -903,7 +903,7 @@ function switchSection(sectionName) {
     if (targetSection) {
         targetSection.classList.add('active');
     } else {
-        console.error('âŒ SecciÃ³n no encontrada:', 'section-' + sectionName);
+        console.error('âŒ Sección no encontrada:', 'section-' + sectionName);
     }
     
     // Activar botÃ³n correspondiente
@@ -913,4 +913,4 @@ function switchSection(sectionName) {
     }
 }
 
-console.log('âœ… Editor.js cargado');
+console.log('✅ Editor.js cargado');

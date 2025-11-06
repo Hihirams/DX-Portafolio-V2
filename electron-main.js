@@ -555,12 +555,31 @@ ipcMain.handle('project:load', async (event, userId, projectId) => {
 // Eliminar proyecto completo
 ipcMain.handle('project:delete', async (event, userId, projectId) => {
     try {
+        // 1. Eliminar la carpeta del proyecto
         const projectDir = path.join(USERS_DIR, userId, 'projects', projectId);
         await fs.rm(projectDir, { recursive: true, force: true });
-        console.log(`Proyecto eliminado: ${projectId}`);
+        console.log(`📁 Carpeta del proyecto eliminada: ${projectId}`);
+        
+        // 2. Actualizar el archivo projects.json en data/
+        const projectsJsonPath = path.join(DATA_DIR, 'projects.json');
+        
+        if (fsSync.existsSync(projectsJsonPath)) {
+            const projectsData = JSON.parse(await fs.readFile(projectsJsonPath, 'utf8'));
+            
+            // Filtrar el proyecto eliminado
+            const originalLength = projectsData.projects.length;
+            projectsData.projects = projectsData.projects.filter(p => p.id !== projectId);
+            
+            // Guardar el archivo actualizado
+            await fs.writeFile(projectsJsonPath, JSON.stringify(projectsData, null, 2), 'utf8');
+            
+            const deletedCount = originalLength - projectsData.projects.length;
+            console.log(`✅ Proyecto ${projectId} eliminado de projects.json (${deletedCount} entrada(s))`);
+        }
+        
         return { success: true };
     } catch (error) {
-        console.error('Error eliminando proyecto:', error);
+        console.error('❌ Error eliminando proyecto:', error);
         return { success: false, error: error.message };
     }
 });
