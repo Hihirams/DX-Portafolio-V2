@@ -6,7 +6,7 @@
   "scripts": {
     "start": "electron .",
     "dev": "electron . --dev",
-    "build:portable": "set ELECTRON_BUILDER_CACHE=./.cache && electron-builder --win portable --x64"
+    "build:portable": "mkdir .cache && set ELECTRON_BUILDER_CACHE=%cd%\\.cache && electron-builder --win portable --x64"
   },
   "author": "DX Team",
   "license": "MIT",
