@@ -18,15 +18,15 @@ function initEditor() {
     console.log('dataManager disponible:', typeof dataManager !== 'undefined');
     console.log('Usuario actual:', dataManager?.currentUser);
     
-    // Verificar que el usuario estÃ© loggeado
+    // Verificar que el usuario esté loggeado
     if (!dataManager || !dataManager.isLoggedIn()) {
-        console.error('âŒ No hay sesión activa');
+        console.error('❌ No hay sesión activa');
         alert('Debes iniciar sesión para acceder al editor');
         window.location.href = 'index.html';
         return;
     }
 
-    console.log('✅ SesiÃ³n verificada:', dataManager.getCurrentUser());
+    console.log('✅ Sesión verificada:', dataManager.getCurrentUser());
 
     // Determinar el modo del editor
     editorMode = localStorage.getItem('editorMode') || 'edit';
@@ -41,10 +41,10 @@ function initEditor() {
         createNewProject();
     } else if (editorMode === 'edit' && projectId) {
         // Modo: Editar Proyecto Existente
-        console.log('✅œï¸ Modo: Editar Proyecto', projectId);
+        console.log('✏️ Modo: Editar Proyecto', projectId);
         loadProject(projectId);
     } else {
-        console.error('âŒ No se especificó un proyecto válido');
+        console.error('❌ No se especificó un proyecto válido');
         alert('No se especificó un proyecto para editar');
         window.location.href = 'index.html';
         return;
@@ -67,7 +67,7 @@ function createNewProject() {
     const user = dataManager.getCurrentUser();
     
     if (!user) {
-        console.error('âŒ No se pudo obtener el usuario actual');
+        console.error('❌ No se pudo obtener el usuario actual');
         alert('Error: Usuario no válido');
         window.location.href = 'index.html';
         return;
@@ -79,7 +79,7 @@ function createNewProject() {
         id: `proj${Date.now()}`, // ID temporal
         ownerId: user.id,
         title: 'Nuevo Proyecto',
-        icon: 'ðŸ“‹',
+        icon: '📋',
         status: 'discovery',
         priority: 'medium',
         progress: 0,
@@ -111,19 +111,19 @@ function createNewProject() {
 // ==================== LOAD PROJECT ====================
 
 async function loadProject(projectId) {
-    console.log(`ðŸ“‚ Cargando proyecto ${projectId}...`);
+    console.log(`📂 Cargando proyecto ${projectId}...`);
 
     // 1. Intentar obtener el proyecto completo desde el DataManager
     let project = await dataManager.loadFullProject(projectId);
 
     // 2. Si no lo encuentra completo, usar el índice básico
     if (!project) {
-        console.warn("âš ï¸ Proyecto completo no encontrado, usando índice.");
+        console.warn("⚠️ Proyecto completo no encontrado, usando índice.");
         project = dataManager.getProjectById(projectId);
     }
 
     if (!project) {
-        alert('âŒ Proyecto no encontrado.');
+        alert('❌ Proyecto no encontrado.');
         window.location.href = 'index.html';
         return;
     }
@@ -144,7 +144,7 @@ async function loadProject(projectId) {
         currentProject.ganttImage = currentProject.ganttImagePath;
     }
 
-    // 5. Normalizar rutas: convertir `path` â†’ `src` para usar en preview
+    // 5. Normalizar rutas: convertir `path` → `src` para usar en preview
     currentProject.images = currentProject.images.map(img => ({
         src: img.src || img.path || '',
         title: img.title || img.fileName || 'Imagen',
@@ -165,14 +165,14 @@ async function loadProject(projectId) {
     loadProjectData();
     updateEditorTitle(currentProject.title);
 
-    console.log("âœ… Proyecto cargado correctamente:", currentProject.title);
+    console.log("✅ Proyecto cargado correctamente:", currentProject.title);
 }
 
 
 // ==================== LOAD PROJECT DATA INTO FORM ====================
 
 function loadProjectData() {
-    // InformaciÃ³n BÃ¡sica
+    // Información Básica
     document.getElementById('projectIcon').value = currentProject.icon || '';
     document.getElementById('projectTitle').value = currentProject.title || '';
     document.getElementById('currentPhase').value = currentProject.currentPhase || '';
@@ -209,7 +209,7 @@ function loadAchievements() {
     const achievements = currentProject.achievements || {};
     
     if (Object.keys(achievements).length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aÃºn</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aún</p>';
         return;
     }
 
@@ -259,7 +259,7 @@ function removeAchievementItem(btn) {
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('achievementsList');
     if (container.children.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aÃºn</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aún</p>';
     }
 }
 
@@ -287,7 +287,7 @@ function createNextStepItem(date = '', text = '') {
     
     item.innerHTML = `
         <div class="dynamic-item-header">
-            <span class="dynamic-item-title">PrÃ³ximo Paso</span>
+            <span class="dynamic-item-title">Próximo Paso</span>
             <button class="btn-remove-item" onclick="removeNextStepItem(this)">×</button>
         </div>
         <div class="form-group">
@@ -296,7 +296,7 @@ function createNextStepItem(date = '', text = '') {
         </div>
         <div class="form-group">
             <label>Descripción</label>
-            <textarea class="nextstep-text" rows="2" placeholder="Describe el prÃ³ximo paso...">${text}</textarea>
+            <textarea class="nextstep-text" rows="2" placeholder="Describe el próximo paso...">${text}</textarea>
         </div>
     `;
     
@@ -332,7 +332,7 @@ function loadGantt() {
     const container = document.getElementById('ganttPreview');
     
     if (!container) {
-        console.error('âŒ Elemento ganttPreview no encontrado');
+        console.error('❌ Elemento ganttPreview no encontrado');
         return;
     }
     
@@ -372,7 +372,7 @@ function loadImages() {
     const container = document.getElementById('imagesPreview');
     
     if (!container) {
-        console.error('âŒ Elemento imagesPreview no encontrado');
+        console.error('❌ Elemento imagesPreview no encontrado');
         return;
     }
     
@@ -431,7 +431,7 @@ function loadVideos() {
     const container = document.getElementById('videosPreview');
     
     if (!container) {
-        console.error('âŒ Elemento videosPreview no encontrado');
+        console.error('❌ Elemento videosPreview no encontrado');
         return;
     }
     
@@ -537,10 +537,10 @@ async function saveProject() {
         updatedAt: new Date().toISOString()
     };
     
-    // âœ… DEBUG MEJORADO - Te ayudará a identificar el problema
-    console.log('✅•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
+    // ✅ DEBUG MEJORADO - Te ayudará a identificar el problema
+    console.log('═══════════════════════════════════════');
     console.log('📋 DEBUG COMPLETO - Proyecto antes de guardar');
-    console.log('✅•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
+    console.log('═══════════════════════════════════════');
     
     console.log('📋 Basic Info:', {
         id: updatedProject.id,
@@ -550,7 +550,7 @@ async function saveProject() {
         progress: updatedProject.progress
     });
 
-    console.log('\nðŸ–¼ï¸ GANTT Image:', {
+    console.log('\n🖼️ GANTT Image:', {
         exists: !!updatedProject.ganttImage,
         isString: typeof updatedProject.ganttImage === 'string',
         length: updatedProject.ganttImage?.length || 0,
@@ -559,7 +559,7 @@ async function saveProject() {
             updatedProject.ganttImage.substring(0, 60) + '...' : 'null'
     });
 
-    console.log('\nðŸ“¸ Images:', {
+    console.log('\n📸 Images:', {
         count: updatedProject.images?.length || 0,
         details: updatedProject.images?.map((img, i) => ({
             index: i,
@@ -573,7 +573,7 @@ async function saveProject() {
         })) || []
     });
 
-    console.log('\nðŸŽ¥ Videos:', {
+    console.log('\n🎥 Videos:', {
         count: updatedProject.videos?.length || 0,
         details: updatedProject.videos?.map((v, i) => ({
             index: i,
@@ -586,10 +586,10 @@ async function saveProject() {
         })) || []
     });
 
-    console.log('✅•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n');
+    console.log('═══════════════════════════════════════\n');
 
     // Mostrar feedback
-    document.getElementById('editorTitle').textContent = 'ðŸ’¾ Guardando...';
+    document.getElementById('editorTitle').textContent = '💾 Guardando...';
     document.getElementById('editorStatus').textContent = 'Procesando';
 
     // Guardar proyecto
@@ -605,30 +605,30 @@ async function saveProject() {
             if (success) {
                 console.log('✅ Nuevo proyecto creado:', newProject.id);
             } else {
-                console.error('âŒ createProject retornó null');
+                console.error('❌ createProject retornó null');
             }
         } else {
             // Actualizar proyecto existente
-            console.log('✅œï¸ Modo: Actualizar proyecto existente');
+            console.log('✏️ Modo: Actualizar proyecto existente');
             const updated = await dataManager.updateProject(currentProject.id, updatedProject);
             success = updated !== null;
             
             if (success) {
                 console.log('✅ Proyecto actualizado:', updated.id);
             } else {
-                console.error('âŒ updateProject retornó null');
+                console.error('❌ updateProject retornó null');
             }
         }
     } catch (error) {
-        console.error('âŒ Error CRÃTICO al guardar:', error);
+        console.error('❌ Error CRÍTICO al guardar:', error);
         console.error('Stack:', error.stack);
         success = false;
     }
 
     if (success) {
-        console.log('\nâœ…âœ…âœ… PROYECTO GUARDADO CORRECTAMENTE âœ…âœ…âœ…\n');
+        console.log('\n✅✅✅ PROYECTO GUARDADO CORRECTAMENTE ✅✅✅\n');
         hasUnsavedChanges = false;
-        document.getElementById('editorStatus').textContent = 'âœ… Guardado';
+        document.getElementById('editorStatus').textContent = '✅ Guardado';
         
         // Emitir evento para recargar datos en Home
         window.dispatchEvent(new Event('dataReloaded'));
@@ -638,8 +638,8 @@ async function saveProject() {
             window.location.href = 'index.html';
         }, 1000);
     } else {
-        console.error('\nâŒâŒâŒ ERROR AL GUARDAR EL PROYECTO âŒâŒâŒ\n');
-        alert('âŒ Error al guardar el proyecto. Revisa la consola para más detalles.');
+        console.error('\n❌❌❌ ERROR AL GUARDAR EL PROYECTO ❌❌❌\n');
+        alert('❌ Error al guardar el proyecto. Revisa la consola para más detalles.');
         document.getElementById('editorTitle').textContent = `Editando: ${currentProject.title}`;
         document.getElementById('editorStatus').textContent = 'Error';
     }
@@ -719,7 +719,7 @@ function generatePreviewHTML(data) {
             <div class="progress-container">
                 <div class="progress-header">
                     <span class="progress-percentage">${data.progress}%</span>
-                    <span class="progress-date">ðŸŽ¯ ${data.targetDate}</span>
+                    <span class="progress-date">🎯 ${data.targetDate}</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: ${data.progress}%"></div>
@@ -727,13 +727,13 @@ function generatePreviewHTML(data) {
             </div>
 
             <div class="info-section">
-                <div class="info-title">ðŸ“‹ Fase Actual</div>
+                <div class="info-title">📋 Fase Actual</div>
                 <div class="info-content">${data.currentPhase}</div>
             </div>
 
             ${Object.keys(data.achievements).length > 0 ? `
                 <div class="info-section success">
-                    <div class="info-title">âœ… Logros Recientes</div>
+                    <div class="info-title">✅ Logros Recientes</div>
                     <div class="info-content">
                         ${Object.entries(data.achievements).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -744,14 +744,14 @@ function generatePreviewHTML(data) {
 
             ${data.blockers.message ? `
                 <div class="info-section ${data.blockers.type}">
-                    <div class="info-title">âš ï¸ ${data.blockers.type === 'alert' ? 'Bloqueo' : 'Estado'}</div>
+                    <div class="info-title">⚠️ ${data.blockers.type === 'alert' ? 'Bloqueo' : 'Estado'}</div>
                     <div class="info-content">${data.blockers.message}</div>
                 </div>
             ` : ''}
 
             ${Object.keys(data.nextSteps).length > 0 ? `
                 <div class="info-section">
-                    <div class="info-title">ðŸŽ¯ Próximos Pasos</div>
+                    <div class="info-title">🎯 Próximos Pasos</div>
                     <div class="info-content">
                         ${Object.entries(data.nextSteps).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -838,7 +838,7 @@ async function confirmDelete() {
 
     // Mostrar feedback
     const originalTitle = document.getElementById('editorTitle').textContent;
-    document.getElementById('editorTitle').textContent = 'ðŸ—‘ï¸ Eliminando proyecto...';
+    document.getElementById('editorTitle').textContent = '🗑️ Eliminando proyecto...';
     document.getElementById('editorStatus').textContent = 'Procesando';
 
     try {
@@ -847,7 +847,7 @@ async function confirmDelete() {
 
         if (success) {
             console.log('✅ Proyecto eliminado correctamente');
-            alert('âœ… Proyecto eliminado exitosamente');
+            alert('✅ Proyecto eliminado exitosamente');
             
             // No hay cambios sin guardar
             hasUnsavedChanges = false;
@@ -860,8 +860,8 @@ async function confirmDelete() {
             throw new Error('Error al eliminar el proyecto');
         }
     } catch (error) {
-        console.error('âŒ Error eliminando proyecto:', error);
-        alert('âŒ Error al eliminar el proyecto. IntÃ©ntalo de nuevo.');
+        console.error('❌ Error eliminando proyecto:', error);
+        alert('❌ Error al eliminar el proyecto. Inténtalo de nuevo.');
         document.getElementById('editorTitle').textContent = originalTitle;
         document.getElementById('editorStatus').textContent = 'Error';
     }
@@ -886,7 +886,7 @@ if (dataManager && !dataManager.canEditProject) {
 // ==================== SWITCH SECTION ====================
 
 function switchSection(sectionName) {
-    console.log('📋 Cambiando a secciÃ³n:', sectionName);
+    console.log('📋 Cambiando a sección:', sectionName);
     
     // Ocultar todas las secciones
     document.querySelectorAll('.editor-section').forEach(section => {
@@ -898,15 +898,15 @@ function switchSection(sectionName) {
         btn.classList.remove('active');
     });
 
-    // Mostrar secciÃ³n seleccionada
+    // Mostrar sección seleccionada
     const targetSection = document.getElementById('section-' + sectionName);
     if (targetSection) {
         targetSection.classList.add('active');
     } else {
-        console.error('âŒ Sección no encontrada:', 'section-' + sectionName);
+        console.error('❌ Sección no encontrada:', 'section-' + sectionName);
     }
     
-    // Activar botÃ³n correspondiente
+    // Activar botón correspondiente
     const targetButton = document.querySelector(`[data-section="${sectionName}"]`);
     if (targetButton) {
         targetButton.classList.add('active');
