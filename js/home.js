@@ -64,27 +64,31 @@ function getInitials(name) {
 // ==================== STATS OVERVIEW ====================
 
 function renderStatsOverview() {
-    const statsOverview = document.getElementById('statsOverview');
-    const stats = dataManager.getStats();
-    
-    statsOverview.innerHTML = `
-        <div class="stat-card">
-            <div class="stat-number">${stats.totalProjects}</div>
-            <div class="stat-label">Proyectos Totales</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">${stats.inProgress}</div>
-            <div class="stat-label">En Progreso</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">${stats.hold}</div>
-            <div class="stat-label">En Hold</div>
-        </div>
-        <div class="stat-card">
-            <div class="stat-number">${stats.discovery}</div>
-            <div class="stat-label">En Discovery</div>
-        </div>
-    `;
+  const statsOverview = document.getElementById('statsOverview');
+  const stats = dataManager.getStats();
+
+  statsOverview.innerHTML = `
+    <div class="stat-card">
+      <div class="stat-number">${stats.totalProjects}</div>
+      <div class="stat-label">Proyectos Totales</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${stats.inProgress}</div>
+      <div class="stat-label">En Progreso</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${stats.hold}</div>
+      <div class="stat-label">En Hold</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${stats.discovery}</div>
+      <div class="stat-label">En Discovery</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-number">${stats.completed}</div>
+      <div class="stat-label">Terminados</div>
+    </div>
+  `;
 }
 
 // ==================== MY PROJECTS ====================
