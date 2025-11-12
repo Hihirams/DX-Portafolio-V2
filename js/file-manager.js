@@ -121,6 +121,24 @@ class FileManager {
             console.log('\nâ„¹ï¸ No hay videos para guardar');
         }
 
+        // ✅ 5. Procesar y guardar archivos extras
+        if (projectData.extraFiles && projectData.extraFiles.length > 0) {
+            console.log(`\n📎 Procesando ${projectData.extraFiles.length} archivos extras...`);
+            
+            try {
+                const extraFilesPaths = await this.saveExtraFiles(userId, projectId, projectData.extraFiles);
+                console.log(`  ✅ ${extraFilesPaths.length}/${projectData.extraFiles.length} archivos guardados`);
+                projectData.extraFiles = extraFilesPaths;
+            } catch (fileError) {
+                console.error('  ❌ ERROR guardando archivos extras:', fileError.message);
+                console.error('  Stack:', fileError.stack);
+                // Mantener los archivos que sí se guardaron
+                console.warn('  ⚠️ Continuando con los archivos guardados hasta ahora...');
+            }
+        } else {
+            console.log('\n❌ No hay archivos extras para guardar');
+        }
+
         // 5. Guardar JSON del proyecto (ligero, sin base64)
         console.log('\nðŸ’¾ Guardando JSON del proyecto...');
         console.log('  ðŸ“Š Resumen del JSON:');
@@ -441,17 +459,45 @@ async saveVideos(userId, projectId, videos) {
 
     getExtensionFromMimeType(mimeType) {
         const mimeMap = {
+            // Imágenes
             'image/png': 'png',
             'image/jpeg': 'jpg',
             'image/jpg': 'jpg',
             'image/gif': 'gif',
             'image/webp': 'webp',
+            // Videos
             'video/mp4': 'mp4',
             'video/webm': 'webm',
-            'video/mov': 'mov'
+            'video/mov': 'mov',
+            'video/quicktime': 'mov',
+            'video/x-msvideo': 'avi',
+            // Documentos
+            'application/pdf': 'pdf',
+            'application/msword': 'doc',
+            'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
+            'text/plain': 'txt',
+            // Hojas de cálculo
+            'application/vnd.ms-excel': 'xls',
+            'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
+            'text/csv': 'csv',
+            // Presentaciones
+            'application/vnd.ms-powerpoint': 'ppt',
+            'application/vnd.openxmlformats-officedocument.presentationml.presentation': 'pptx',
+            // Comprimidos
+            'application/zip': 'zip',
+            'application/x-rar-compressed': 'rar',
+            'application/x-7z-compressed': '7z',
+            // Código
+            'text/javascript': 'js',
+            'application/json': 'json',
+            'text/html': 'html',
+            'text/css': 'css',
+            'text/xml': 'xml',
+            // Otros
+            'application/octet-stream': 'bin'
         };
 
-        return mimeMap[mimeType] || 'png';
+        return mimeMap[mimeType] || 'bin';
     }
 
     // ==================== FILE DIALOG ====================
@@ -653,6 +699,90 @@ async upsertProjectInIndex(projectMeta) {
 
   // Escribir de vuelta con el wrapper { projects: [...] }
   await this.api.writeJSON(INDEX_PATH, { projects: arr });
+}
+
+async saveExtraFiles(userId, projectId, extraFiles) {
+  const savedFiles = [];
+  console.log(`\n  📎 [saveExtraFiles] Iniciando guardado de ${extraFiles.length} archivos...`);
+
+  for (let i = 0; i < extraFiles.length; i++) {
+    const raw = extraFiles[i];
+    const file = (typeof raw === 'string') ? { src: raw, title: `Archivo ${i+1}` } : raw;
+
+    const hasPath = typeof file.src === 'string' && file.src.startsWith('users/');
+    const hasBase64Src = typeof file.src === 'string' && file.src.startsWith('data:');
+    const hasBase64Data = typeof file.data === 'string' && file.data.startsWith('data:');
+
+    if (hasPath) {
+      // Ya guardado físicamente - mantener path
+      console.log(`    ✅ Archivo ${i+1}: Ya existe en ${file.src}`);
+      savedFiles.push({
+        src: file.src,
+        title: file.title || file.fileName || `Archivo ${i+1}`,
+        fileName: file.fileName || 'file',
+        fileType: file.fileType || 'application/octet-stream',
+        fileSize: file.fileSize || 0,
+        extension: file.extension || ''
+      });
+      continue;
+    }
+
+    // Nuevo archivo - guardarlo físicamente
+    const base64 = hasBase64Src ? file.src : (hasBase64Data ? file.data : null);
+
+    if (!base64) {
+      console.warn(`    ⚠️ Archivo ${i+1}: Sin datos base64 válidos`);
+      continue;
+    }
+
+    // Determinar extensión del archivo
+    let extension = file.extension || '';
+    if (!extension && file.fileName) {
+      extension = file.fileName.split('.').pop() || 'bin';
+    }
+    if (!extension) {
+      extension = this.getExtensionFromMimeType(file.fileType || 'application/octet-stream');
+    }
+
+    // Generar nombre de archivo único
+    const timestamp = Date.now();
+    const safeTitle = (file.fileName || file.title || `archivo-${i+1}`)
+      .replace(/\.[^/.]+$/, '') // Quitar extensión si existe
+      .replace(/[^a-zA-Z0-9-_]/g, '_')
+      .substring(0, 30);
+    const fileName = `${safeTitle}_${timestamp}.${extension}`;
+    
+    // Construir path relativo
+    const filePath = `users/${userId}/projects/${projectId}/extra-files/${fileName}`;
+
+    console.log(`    📎 Guardando archivo ${i+1}/${extraFiles.length}: ${fileName}`);
+
+    try {
+      // ✅ USAR saveMedia (igual que images y videos)
+      const result = await this.api.saveMedia(filePath, base64);
+      
+      if (result.success) {
+        console.log(`       ✅ Guardado en: ${filePath}`);
+        
+        savedFiles.push({
+          src: filePath,
+          title: file.title || file.fileName || `Archivo ${i+1}`,
+          fileName: fileName,
+          fileType: file.fileType || 'application/octet-stream',
+          fileSize: file.fileSize || 0,
+          extension: extension
+        });
+      } else {
+        console.error(`       ❌ Error guardando: ${result.error}`);
+      }
+
+    } catch (err) {
+      console.error(`    ❌ Archivo ${i+1}: Error`, err.message);
+    }
+  }
+
+  console.log(`  📎 Total guardados: ${savedFiles.length}/${extraFiles.length}`);
+  return savedFiles;
 }
 
 }

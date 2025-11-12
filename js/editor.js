@@ -94,6 +94,7 @@ function createNewProject() {
         ganttImage: '',
         videos: [],
         images: [],
+        extraFiles: [],
         createdAt: new Date().toISOString().split('T')[0],
         updatedAt: new Date().toISOString().split('T')[0]
     };
@@ -198,6 +199,7 @@ function loadProjectData() {
     loadGantt();
     loadImages();
     loadVideos();
+    loadExtraFiles();
 }
 
 // ==================== ACHIEVEMENTS ====================
@@ -484,6 +486,114 @@ function removeVideo(index) {
     markAsUnsaved();
 }
 
+function getFileIcon(fileName) {
+    if (!fileName) return '📎';
+    
+    const ext = fileName.split('.').pop().toLowerCase();
+    const icons = {
+        // Documentos
+        'pdf': '📄',
+        'doc': '📝', 'docx': '📝',
+        'txt': '📃',
+        // Hojas de cálculo
+        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+        // Presentaciones
+        'ppt': '📊', 'pptx': '📊',
+        // Comprimidos
+        'zip': '📦', 'rar': '📦', '7z': '📦',
+        // Imágenes
+        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+        // Videos
+        'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
+        // Código
+        'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+    };
+    
+    return icons[ext] || '📎';
+}
+
+function loadExtraFiles() {
+    const container = document.getElementById('extraFilesPreview');
+    
+    if (!container) {
+        console.error('❌ Elemento extraFilesPreview no encontrado');
+        return;
+    }
+    
+    // Normalizar extraFiles si no existe
+    if (!currentProject.extraFiles) {
+        currentProject.extraFiles = [];
+    }
+    
+    // Asegurar que sea un array
+    if (!Array.isArray(currentProject.extraFiles)) {
+        currentProject.extraFiles = [];
+    }
+    
+    if (currentProject.extraFiles.length === 0) {
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay archivos extras cargados</p>';
+        return;
+    }
+
+    container.innerHTML = currentProject.extraFiles.map((file, index) => {
+        const icon = getFileIcon(file.fileName);
+        const sizeInKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
+        
+        return `
+            <div class="media-preview-item extra-file-item">
+                <div class="file-icon">${icon}</div>
+                <div class="media-info">
+                    <input type="text" class="media-title" value="${file.title}" 
+                           onchange="updateExtraFileTitle(${index}, this.value)">
+                    <div class="file-meta">
+                        <span class="file-name">${file.fileName}</span>
+                        <span class="file-size">${sizeInKB} KB</span>
+                    </div>
+                </div>
+                <button class="btn-remove-media" onclick="removeExtraFile(${index})">×</button>
+            </div>
+        `;
+    }).join('');
+}
+
+async function uploadExtraFiles() {
+    // No filtrar extensiones - aceptar cualquier tipo de archivo
+    const file = await fileManager.openFile();
+
+    if (file) {
+        // Asegurar que extraFiles existe
+        if (!currentProject.extraFiles) {
+            currentProject.extraFiles = [];
+        }
+        
+        currentProject.extraFiles.push({
+            src: file.data,
+            title: file.fileName,
+            fileName: file.fileName,
+            fileType: file.mimeType || 'application/octet-stream',
+            fileSize: file.size || 0,
+            extension: file.fileName.split('.').pop().toLowerCase()
+        });
+        
+        loadExtraFiles();
+        markAsUnsaved();
+    }
+}
+
+function updateExtraFileTitle(index, newTitle) {
+    if (currentProject.extraFiles && currentProject.extraFiles[index]) {
+        currentProject.extraFiles[index].title = newTitle;
+        markAsUnsaved();
+    }
+}
+
+function removeExtraFile(index) {
+    if (currentProject.extraFiles) {
+        currentProject.extraFiles.splice(index, 1);
+        loadExtraFiles();
+        markAsUnsaved();
+    }
+}
 // ==================== EVENT LISTENERS ====================
 
 function setupEventListeners() {

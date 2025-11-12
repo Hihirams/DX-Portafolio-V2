@@ -417,7 +417,7 @@ ipcMain.handle('project:createDir', async (event, userId, projectId) => {
 
     try {
         const projectDir = path.join(USERS_DIR, userId, 'projects', projectId);
-        const subdirs = ['images', 'videos', 'gantt'];
+        const subdirs = ['images', 'videos', 'gantt', 'extra-files'];
 
         console.log('ðŸ“‚ TARGET PATH:', projectDir);
         console.log('ðŸ” BASE PATHS:');

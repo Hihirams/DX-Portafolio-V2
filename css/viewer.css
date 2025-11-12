@@ -430,3 +430,149 @@ body.light-theme .dx-branding {
         height: 38px;
     }
 }
+
+.btn-extra-files {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 12px;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+}
+
+.btn-extra-files:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.4);
+    background: linear-gradient(135deg, #7C3AED 0%, #6D28D9 100%);
+}
+
+.btn-extra-files:active {
+    transform: translateY(0);
+}
+
+/* Tema claro */
+.light-theme .btn-extra-files {
+    background: linear-gradient(135deg, #8B5CF6 0%, #7C3AED 100%);
+    box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+}
+
+.light-theme .btn-extra-files:hover {
+    box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
+}
+
+/* ==================== MODAL ARCHIVOS EXTRAS ==================== */
+
+.extra-files-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 20px;
+    max-height: 500px;
+    overflow-y: auto;
+}
+
+.extra-file-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.extra-file-row:hover {
+    background: rgba(139, 92, 246, 0.1);
+    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateX(4px);
+}
+
+.file-icon-large {
+    font-size: 32px;
+    min-width: 40px;
+    text-align: center;
+}
+
+.file-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.file-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.file-meta {
+    display: flex;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.file-name {
+    color: var(--text-secondary);
+}
+
+.file-size {
+    color: var(--text-tertiary);
+}
+
+.file-download-icon {
+    width: 24px;
+    height: 24px;
+    color: var(--accent);
+    transition: transform 0.3s ease;
+}
+
+.extra-file-row:hover .file-download-icon {
+    transform: translateY(2px);
+    color: #8B5CF6;
+}
+
+.file-download-icon svg {
+    width: 100%;
+    height: 100%;
+}
+
+/* Tema claro */
+.light-theme .extra-file-row {
+    background: rgba(0, 0, 0, 0.03);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.light-theme .extra-file-row:hover {
+    background: rgba(139, 92, 246, 0.08);
+    border-color: rgba(139, 92, 246, 0.3);
+}
+
+/* Scrollbar para lista de archivos */
+.extra-files-list::-webkit-scrollbar {
+    width: 8px;
+}
+
+.extra-files-list::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 4px;
+}
+
+.extra-files-list::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.5);
+    border-radius: 4px;
+}
+
+.extra-files-list::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.7);
+}

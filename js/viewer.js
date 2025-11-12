@@ -35,6 +35,17 @@ function normalizeProject(p) {
     fileSize: v?.fileSize || 0
   }));
 
+  // Normalizar extra files
+  proj.extraFiles = Array.isArray(proj.extraFiles) ? proj.extraFiles : [];
+  proj.extraFiles = proj.extraFiles.map(f => ({
+    src: f?.src || f?.path || '',
+    title: f?.title || f?.fileName || 'Archivo',
+    fileName: f?.fileName || '',
+    fileType: f?.fileType || 'application/octet-stream',
+    fileSize: f?.fileSize || 0,
+    extension: f?.extension || (f?.fileName ? f.fileName.split('.').pop().toLowerCase() : '')
+  }));
+
   // Objetos mínimos
   proj.achievements = (proj.achievements && typeof proj.achievements === 'object') ? proj.achievements : {};
   proj.nextSteps   = (proj.nextSteps   && typeof proj.nextSteps   === 'object') ? proj.nextSteps   : {};
@@ -239,6 +250,12 @@ function generateProjectSlides() {
       project.videos.some(v => v && (v.src || v.path) && (v.src || v.path).trim().length > 0)
     );
 
+        const hasExtraFiles = Boolean(
+      project.extraFiles && 
+      Array.isArray(project.extraFiles) && 
+      project.extraFiles.length > 0
+    );
+
     const hasImages = Boolean(
       project.images && 
       Array.isArray(project.images) && 
@@ -280,22 +297,27 @@ function generateProjectSlides() {
         ${generateBlockersSection(project.blockers)}
         ${generateNextStepsSection(project.nextSteps)}
 
-        <div style="display:flex; gap:15px; margin-top:20px; flex-wrap:wrap;">
-          ${hasGantt ? `
-            <a href="#" class="gantt-link" onclick="(async () => await openGanttModal('${project.id}'))(); return false;">
-              📊 Ver Gantt del Proyecto →
-            </a>` : ''}
+<div style="display:flex; gap:15px; margin-top:20px; flex-wrap:wrap;">
+  ${hasGantt ? `
+    <a href="#" class="gantt-link" onclick="(async () => await openGanttModal('${project.id}'))(); return false;">
+      📊 Ver Gantt del Proyecto →
+    </a>` : ''}
 
-          ${hasVideos ? `
-            <a href="#" class="gantt-link video-link" onclick="(async () => await openVideoGallery('${project.id}'))(); return false;">
-              🎬 Galería de Videos →
-            </a>` : ''}
+  ${hasVideos ? `
+    <a href="#" class="gantt-link video-link" onclick="(async () => await openVideoGallery('${project.id}'))(); return false;">
+      🎬 Galería de Videos →
+    </a>` : ''}
 
-          ${hasImages ? `
-            <a href="#" class="gantt-link image-link" onclick="(async () => await openImageGallery('${project.id}'))(); return false;">
-              🖼️ Galería de Imágenes →
-            </a>` : ''}
-        </div>
+  ${hasImages ? `
+    <a href="#" class="gantt-link image-link" onclick="(async () => await openImageGallery('${project.id}'))(); return false;">
+      🖼️ Galería de Imágenes →
+    </a>` : ''}
+
+  ${hasExtraFiles ? `
+    <a href="#" class="gantt-link extra-files-link" onclick="openExtraFilesModal('${project.id}'); return false;">
+      📎 Archivos Extras →
+    </a>` : ''}
+</div>
       </div>
     `;
   }).join('');
@@ -712,6 +734,10 @@ document.getElementById('imageLightboxModal').addEventListener('click', function
     if (e.target === this) closeImageLightbox();
 });
 
+document.getElementById('extraFilesModal').addEventListener('click', function(e) {
+    if (e.target === this) closeExtraFilesModal();
+});
+
 // Close modals on ESC
 document.addEventListener('keydown', function(e) {
     if (e.key === 'Escape') {
@@ -720,8 +746,80 @@ document.addEventListener('keydown', function(e) {
         closeImageGallery();
         closeVideoPlayer();
         closeImageLightbox();
+        closeExtraFilesModal();
     }
 });
+
+async function openExtraFilesModal(projectId) {
+    const project = getProjectFromView(projectId);
+    if (!project || !project.extraFiles || project.extraFiles.length === 0) return;
+
+    const modal = document.getElementById('extraFilesModal');
+    const title = document.getElementById('extraFilesTitle');
+    const list = document.getElementById('extraFilesList');
+
+    title.textContent = `${project.icon} ${project.title} - Archivos Extras`;
+
+    // Generar lista de archivos
+    list.innerHTML = project.extraFiles.map((file, index) => {
+        const icon = getFileIcon(file.fileName);
+        const sizeInKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
+        
+        return `
+            <div class="extra-file-row" onclick="downloadExtraFile('${projectId}', ${index})">
+                <div class="file-icon-large">${icon}</div>
+                <div class="file-info">
+                    <div class="file-title">${file.title}</div>
+                    <div class="file-meta">
+                        <span class="file-name">${file.fileName}</span>
+                        <span class="file-size">${sizeInKB} KB</span>
+                    </div>
+                </div>
+                <div class="file-download-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </div>
+            </div>
+        `;
+    }).join('');
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeExtraFilesModal() {
+    const modal = document.getElementById('extraFilesModal');
+    modal.classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+async function downloadExtraFile(projectId, index) {
+    const project = getProjectFromView(projectId);
+    if (!project || !project.extraFiles || !project.extraFiles[index]) return;
+
+    const file = project.extraFiles[index];
+    
+    try {
+        // Resolver el src (puede ser base64 o path)
+        const fileSrc = await resolveMediaSrc(file.src);
+        
+        // Crear link temporal para descarga
+        const link = document.createElement('a');
+        link.href = fileSrc;
+        link.download = file.fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        console.log('✅ Archivo descargado:', file.fileName);
+    } catch (error) {
+        console.error('❌ Error al descargar archivo:', error);
+        alert('Error al descargar el archivo');
+    }
+}
 
 // ==================== HELPERS ====================
 
@@ -803,6 +901,32 @@ function showError(message) {
 
 function goBack() {
     window.location.href = 'index.html';
+}
+
+function getFileIcon(fileName) {
+    if (!fileName) return '📎';
+    
+    const ext = fileName.split('.').pop().toLowerCase();
+    const icons = {
+        // Documentos
+        'pdf': '📄',
+        'doc': '📝', 'docx': '📝',
+        'txt': '📃',
+        // Hojas de cálculo
+        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+        // Presentaciones
+        'ppt': '📊', 'pptx': '📊',
+        // Comprimidos
+        'zip': '📦', 'rar': '📦', '7z': '📦',
+        // Imágenes
+        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+        // Videos
+        'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
+        // Código
+        'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+    };
+    
+    return icons[ext] || '📎';
 }
 
 // ==================== THEME ====================
