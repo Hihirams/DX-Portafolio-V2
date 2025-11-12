@@ -139,28 +139,58 @@ async function loadProject(projectId) {
     // 4. Normalizar y asegurar campos mínimos
     currentProject = JSON.parse(JSON.stringify(project));
 
-    if (!currentProject.images) currentProject.images = [];
+if (!currentProject.images) currentProject.images = [];
     if (!currentProject.videos) currentProject.videos = [];
-    if (!currentProject.ganttImage && currentProject.ganttImagePath) {
+    
+    // ✅ CORREGIDO: Preservar originalGanttPath para evitar duplicación
+    if (currentProject.ganttImagePath && currentProject.ganttImagePath.startsWith('users/')) {
+        // Si ya está guardado, usar el path y preservarlo
+        currentProject.ganttImage = currentProject.ganttImagePath;
+        currentProject.originalGanttPath = currentProject.ganttImagePath; // ✅ Nuevo campo
+    } else if (!currentProject.ganttImage && currentProject.ganttImagePath) {
         currentProject.ganttImage = currentProject.ganttImagePath;
     }
 
-    // 5. Normalizar rutas: convertir `path` → `src` para usar en preview
-    currentProject.images = currentProject.images.map(img => ({
-        src: img.src || img.path || '',
-        title: img.title || img.fileName || 'Imagen',
-        fileName: img.fileName || '',
-        fileType: img.fileType || 'image/png',
-        fileSize: img.fileSize || 0
-    }));
+ // 5. Normalizar rutas: PRESERVAR originalPath para evitar duplicación
+    currentProject.images = currentProject.images.map(img => {
+        const srcPath = img.src || img.path || '';
+        return {
+            src: srcPath,
+            originalPath: srcPath.startsWith('users/') ? srcPath : null, // ✅ Preservar path original
+            title: img.title || img.fileName || 'Imagen',
+            fileName: img.fileName || '',
+            fileType: img.fileType || 'image/png',
+            fileSize: img.fileSize || 0
+        };
+    });
 
-    currentProject.videos = currentProject.videos.map(v => ({
-        src: v.src || v.path || '',
-        title: v.title || v.fileName || 'Video',
-        fileName: v.fileName || '',
-        fileType: v.fileType || 'video/mp4',
-        fileSize: v.fileSize || 0
-    }));
+    currentProject.videos = currentProject.videos.map(v => {
+        const srcPath = v.src || v.path || '';
+        return {
+            src: srcPath,
+            originalPath: srcPath.startsWith('users/') ? srcPath : null, // ✅ Preservar path original
+            title: v.title || v.fileName || 'Video',
+            fileName: v.fileName || '',
+            fileType: v.fileType || 'video/mp4',
+            fileSize: v.fileSize || 0
+        };
+    });
+
+    // ✅ NUEVO: Hacer lo mismo para extraFiles
+    if (currentProject.extraFiles && Array.isArray(currentProject.extraFiles)) {
+        currentProject.extraFiles = currentProject.extraFiles.map(f => {
+            const srcPath = f.src || f.path || '';
+            return {
+                src: srcPath,
+                originalPath: srcPath.startsWith('users/') ? srcPath : null, // ✅ Preservar path original
+                title: f.title || f.fileName || 'Archivo',
+                fileName: f.fileName || '',
+                fileType: f.fileType || 'application/octet-stream',
+                fileSize: f.fileSize || 0,
+                extension: f.extension || ''
+            };
+        });
+    }
 
     // 6. Cargar en formulario
     loadProjectData();

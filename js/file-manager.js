@@ -56,34 +56,51 @@ class FileManager {
         }
         console.log('  âœ… Directorios creados');
 
-        // âœ… 2. Procesar y guardar Gantt (CON MEJOR DEBUG Y ERROR HANDLING)
+ // ✅ 2. Procesar y guardar Gantt (CON DETECCIÓN DE PATH EXISTENTE)
         if (projectData.ganttImage) {
-            console.log('\nðŸ–¼ï¸ Procesando Gantt...');
-            console.log('  ðŸ“Š Detalles:');
-            console.log('    - Tipo:', typeof projectData.ganttImage);
-            console.log('    - Longitud:', projectData.ganttImage.length);
-            console.log('    - Inicia con data:?', projectData.ganttImage.startsWith('data:'));
-            console.log('    - Preview:', projectData.ganttImage.substring(0, 60) + '...');
+            console.log('\n📊️ Procesando Gantt...');
             
-            try {
-                const ganttPath = await this.saveGantt(userId, projectId, projectData.ganttImage);
-                console.log('  âœ… Gantt guardado en:', ganttPath);
-                projectData.ganttImagePath = ganttPath;
+            // ✅ Verificar si ya está guardado (tiene originalGanttPath o es un path)
+            const isExistingPath = (projectData.originalGanttPath && projectData.originalGanttPath.startsWith('users/')) ||
+                                   (typeof projectData.ganttImage === 'string' && projectData.ganttImage.startsWith('users/'));
+            
+            if (isExistingPath) {
+                // Ya guardado - usar el path existente
+                const existingPath = projectData.originalGanttPath || projectData.ganttImage;
+                console.log('  ✅ Gantt ya existe en:', existingPath);
+                projectData.ganttImagePath = existingPath;
+                delete projectData.ganttImage;
+                delete projectData.originalGanttPath; // Limpiar campo temporal
+                console.log('  ✅ Usando Gantt existente (no duplicado)');
+            } else if (projectData.ganttImage.startsWith('data:')) {
+                // Nuevo Gantt en Base64 - guardarlo
+                console.log('  📋 Nuevo Gantt detectado (Base64)');
+                console.log('    - Tipo:', typeof projectData.ganttImage);
+                console.log('    - Longitud:', projectData.ganttImage.length);
+                console.log('    - Preview:', projectData.ganttImage.substring(0, 60) + '...');
                 
-                // Limpiar data URI para ahorrar espacio en JSON
+                try {
+                    const ganttPath = await this.saveGantt(userId, projectId, projectData.ganttImage);
+                    console.log('  ✅ Gantt guardado en:', ganttPath);
+                    projectData.ganttImagePath = ganttPath;
+                    
+                    // Limpiar data URI para ahorrar espacio en JSON
+                    delete projectData.ganttImage;
+                    console.log('  ✅ Data URI limpiado del JSON');
+                } catch (ganttError) {
+                    console.error('  ❌ ERROR guardando Gantt:', ganttError.message);
+                    console.error('  Stack:', ganttError.stack);
+                    delete projectData.ganttImage;
+                    console.warn('  ⚠️ Continuando sin Gantt...');
+                }
+            } else {
+                console.warn('  ⚠️ ganttImage no es Base64 ni path válido');
                 delete projectData.ganttImage;
-                console.log('  âœ… Data URI limpiado del JSON');
-            } catch (ganttError) {
-                console.error('  âŒ ERROR guardando Gantt:', ganttError.message);
-                console.error('  Stack:', ganttError.stack);
-                // âš ï¸ NO fallar todo el guardado por un error en Gantt
-                // Simplemente no lo guardamos y continuamos
-                delete projectData.ganttImage;
-                console.warn('  âš ï¸ Continuando sin Gantt...');
             }
         } else {
-            console.log('\nâ„¹ï¸ No hay Gantt para guardar (ganttImage vacÃ­o o undefined)');
+            console.log('\n❌ No hay Gantt para guardar (ganttImage vacío o undefined)');
         }
+
 
         // âœ… 3. Procesar y guardar imÃ¡genes (CON MEJOR DEBUG)
         if (projectData.images && projectData.images.length > 0) {
@@ -207,13 +224,20 @@ async saveImages(userId, projectId, images) {
     const raw = images[i];
     const image = (typeof raw === 'string') ? { src: raw, title: `Imagen ${i+1}` } : raw;
 
-    const hasPath = typeof image.src === 'string' && image.src.startsWith('users/');
+// ✅ Verificar PRIMERO originalPath (significa que ya está guardado)
+    const hasPath = (typeof image.originalPath === 'string' && image.originalPath.startsWith('users/')) ||
+                    (typeof image.src === 'string' && image.src.startsWith('users/'));
     const hasBase64Src = typeof image.src === 'string' && image.src.startsWith('data:');
     const hasBase64Data = typeof image.data === 'string' && image.data.startsWith('data:');
 
     if (hasPath) {
-      // ya guardada
-      savedImages.push({ src: image.src, title: image.title || `Imagen ${i+1}` });
+      // Ya guardada - usar originalPath o src
+      const existingPath = image.originalPath || image.src;
+      console.log(`    ✅ Imagen ${i+1}: Ya existe en ${existingPath}`);
+      savedImages.push({ 
+        src: existingPath, 
+        title: image.title || `Imagen ${i+1}` 
+      });
       continue;
     }
 
@@ -254,12 +278,20 @@ async saveVideos(userId, projectId, videos) {
     const raw = videos[i];
     const video = (typeof raw === 'string') ? { src: raw, title: `Video ${i+1}` } : raw;
 
-    const hasPath = typeof video.src === 'string' && video.src.startsWith('users/');
+    // ✅ Verificar PRIMERO originalPath (significa que ya está guardado)
+    const hasPath = (typeof video.originalPath === 'string' && video.originalPath.startsWith('users/')) ||
+                    (typeof video.src === 'string' && video.src.startsWith('users/'));
     const hasBase64Src = typeof video.src === 'string' && video.src.startsWith('data:');
     const hasBase64Data = typeof video.data === 'string' && video.data.startsWith('data:');
 
     if (hasPath) {
-      savedVideos.push({ src: video.src, title: video.title || `Video ${i+1}` });
+      // Ya guardado - usar originalPath o src
+      const existingPath = video.originalPath || video.src;
+      console.log(`    ✅ Video ${i+1}: Ya existe en ${existingPath}`);
+      savedVideos.push({ 
+        src: existingPath, 
+        title: video.title || `Video ${i+1}` 
+      });
       continue;
     }
 
@@ -709,15 +741,18 @@ async saveExtraFiles(userId, projectId, extraFiles) {
     const raw = extraFiles[i];
     const file = (typeof raw === 'string') ? { src: raw, title: `Archivo ${i+1}` } : raw;
 
-    const hasPath = typeof file.src === 'string' && file.src.startsWith('users/');
+// ✅ Verificar PRIMERO originalPath (significa que ya está guardado)
+    const hasPath = (typeof file.originalPath === 'string' && file.originalPath.startsWith('users/')) ||
+                    (typeof file.src === 'string' && file.src.startsWith('users/'));
     const hasBase64Src = typeof file.src === 'string' && file.src.startsWith('data:');
     const hasBase64Data = typeof file.data === 'string' && file.data.startsWith('data:');
 
     if (hasPath) {
-      // Ya guardado físicamente - mantener path
-      console.log(`    ✅ Archivo ${i+1}: Ya existe en ${file.src}`);
+      // Ya guardado físicamente - usar originalPath o src
+      const existingPath = file.originalPath || file.src;
+      console.log(`    ✅ Archivo ${i+1}: Ya existe en ${existingPath}`);
       savedFiles.push({
-        src: file.src,
+        src: existingPath,  // ✅ Usar el path original
         title: file.title || file.fileName || `Archivo ${i+1}`,
         fileName: file.fileName || 'file',
         fileType: file.fileType || 'application/octet-stream',
