@@ -1,5 +1,5 @@
 // ============================================
-// EDITOR.JS - Lógica del Editor de Portafolios
+// EDITOR.JS - LÃ³gica del Editor de Portafolios
 // ============================================
 
 let currentProject = null;
@@ -9,43 +9,43 @@ let hasUnsavedChanges = false;
 // ==================== INIT ====================
 
 document.addEventListener('dataLoaded', () => {
-    console.log('✅ Datos cargados, inicializando Editor...');
+    console.log('âœ… Datos cargados, inicializando Editor...');
     initEditor();
 });
 
 function initEditor() {
-    console.log('📋 Verificando sesión...');
+    console.log('ðŸ“‹ Verificando sesiÃ³n...');
     console.log('dataManager disponible:', typeof dataManager !== 'undefined');
     console.log('Usuario actual:', dataManager?.currentUser);
     
-    // Verificar que el usuario esté loggeado
+    // Verificar que el usuario estÃ© loggeado
     if (!dataManager || !dataManager.isLoggedIn()) {
-        console.error('❌ No hay sesión activa');
-        alert('Debes iniciar sesión para acceder al editor');
+        console.error('âŒ No hay sesiÃ³n activa');
+        alert('Debes iniciar sesiÃ³n para acceder al editor');
         window.location.href = 'index.html';
         return;
     }
 
-    console.log('✅ Sesión verificada:', dataManager.getCurrentUser());
+    console.log('âœ… SesiÃ³n verificada:', dataManager.getCurrentUser());
 
     // Determinar el modo del editor
     editorMode = localStorage.getItem('editorMode') || 'edit';
     const projectId = localStorage.getItem('editingProjectId');
 
-    console.log('📋 Modo del editor:', editorMode);
-    console.log('📋 Project ID:', projectId);
+    console.log('ðŸ“‹ Modo del editor:', editorMode);
+    console.log('ðŸ“‹ Project ID:', projectId);
 
     if (editorMode === 'new') {
         // Modo: Nuevo Proyecto
-        console.log('📋 Modo: Nuevo Proyecto');
+        console.log('ðŸ“‹ Modo: Nuevo Proyecto');
         createNewProject();
     } else if (editorMode === 'edit' && projectId) {
         // Modo: Editar Proyecto Existente
-        console.log('✏️ Modo: Editar Proyecto', projectId);
+        console.log('âœï¸ Modo: Editar Proyecto', projectId);
         loadProject(projectId);
     } else {
-        console.error('❌ No se especificó un proyecto válido');
-        alert('No se especificó un proyecto para editar');
+        console.error('âŒ No se especificÃ³ un proyecto vÃ¡lido');
+        alert('No se especificÃ³ un proyecto para editar');
         window.location.href = 'index.html';
         return;
     }
@@ -67,19 +67,19 @@ function createNewProject() {
     const user = dataManager.getCurrentUser();
     
     if (!user) {
-        console.error('❌ No se pudo obtener el usuario actual');
-        alert('Error: Usuario no válido');
+        console.error('âŒ No se pudo obtener el usuario actual');
+        alert('Error: Usuario no vÃ¡lido');
         window.location.href = 'index.html';
         return;
     }
     
-    console.log('📋 Creando proyecto para usuario:', user.id);
+    console.log('ðŸ“‹ Creando proyecto para usuario:', user.id);
     
     currentProject = {
         id: `proj${Date.now()}`, // ID temporal
         ownerId: user.id,
         title: 'Nuevo Proyecto',
-        icon: '📋',
+        icon: 'ðŸ“‹',
         status: 'discovery',
         priority: 'medium',
         progress: 0,
@@ -99,8 +99,8 @@ function createNewProject() {
         updatedAt: new Date().toISOString().split('T')[0]
     };
 
-    console.log('✅ Proyecto nuevo creado:', currentProject);
-    console.log('📋 ganttImage al crear:', {
+    console.log('âœ… Proyecto nuevo creado:', currentProject);
+    console.log('ðŸ“‹ ganttImage al crear:', {
         value: currentProject.ganttImage,
         type: typeof currentProject.ganttImage,
         isNull: currentProject.ganttImage === null
@@ -112,19 +112,19 @@ function createNewProject() {
 // ==================== LOAD PROJECT ====================
 
 async function loadProject(projectId) {
-    console.log(`📂 Cargando proyecto ${projectId}...`);
+    console.log(`ðŸ“‚ Cargando proyecto ${projectId}...`);
 
     // 1. Intentar obtener el proyecto completo desde el DataManager
     let project = await dataManager.loadFullProject(projectId);
 
-    // 2. Si no lo encuentra completo, usar el índice básico
+    // 2. Si no lo encuentra completo, usar el Ã­ndice bÃ¡sico
     if (!project) {
-        console.warn("⚠️ Proyecto completo no encontrado, usando índice.");
+        console.warn("âš ï¸ Proyecto completo no encontrado, usando Ã­ndice.");
         project = dataManager.getProjectById(projectId);
     }
 
     if (!project) {
-        alert('❌ Proyecto no encontrado.');
+        alert('âŒ Proyecto no encontrado.');
         window.location.href = 'index.html';
         return;
     }
@@ -136,27 +136,31 @@ async function loadProject(projectId) {
         return;
     }
 
-    // 4. Normalizar y asegurar campos mínimos
+    // 4. Normalizar y asegurar campos mÃ­nimos
     currentProject = JSON.parse(JSON.stringify(project));
 
 if (!currentProject.images) currentProject.images = [];
     if (!currentProject.videos) currentProject.videos = [];
     
-    // ✅ CORREGIDO: Preservar originalGanttPath para evitar duplicación
+    // âœ… CORREGIDO: Preservar originalGanttPath para evitar duplicaciÃ³n
+    // ✅ CORREGIDO: NO copiar path a ganttImage - evita error de carga
     if (currentProject.ganttImagePath && currentProject.ganttImagePath.startsWith('users/')) {
-        // Si ya está guardado, usar el path y preservarlo
-        currentProject.ganttImage = currentProject.ganttImagePath;
-        currentProject.originalGanttPath = currentProject.ganttImagePath; // ✅ Nuevo campo
+        // Preservar el path original para indicar que ya está guardado
+        currentProject.originalGanttPath = currentProject.ganttImagePath;
+        // NO copiar el path a ganttImage - se cargará dinámicamente
+        // currentProject.ganttImage = '';  // Comentado: loadGantt() lo manejará
     } else if (!currentProject.ganttImage && currentProject.ganttImagePath) {
-        currentProject.ganttImage = currentProject.ganttImagePath;
+        // Si ganttImagePath no es un path válido, limpiar
+        currentProject.originalGanttPath = null;
     }
 
- // 5. Normalizar rutas: PRESERVAR originalPath para evitar duplicación
+
+ // 5. Normalizar rutas: PRESERVAR originalPath para evitar duplicaciÃ³n
     currentProject.images = currentProject.images.map(img => {
         const srcPath = img.src || img.path || '';
         return {
             src: srcPath,
-            originalPath: srcPath.startsWith('users/') ? srcPath : null, // ✅ Preservar path original
+            originalPath: srcPath.startsWith('users/') ? srcPath : null, // âœ… Preservar path original
             title: img.title || img.fileName || 'Imagen',
             fileName: img.fileName || '',
             fileType: img.fileType || 'image/png',
@@ -168,7 +172,7 @@ if (!currentProject.images) currentProject.images = [];
         const srcPath = v.src || v.path || '';
         return {
             src: srcPath,
-            originalPath: srcPath.startsWith('users/') ? srcPath : null, // ✅ Preservar path original
+            originalPath: srcPath.startsWith('users/') ? srcPath : null, // âœ… Preservar path original
             title: v.title || v.fileName || 'Video',
             fileName: v.fileName || '',
             fileType: v.fileType || 'video/mp4',
@@ -176,13 +180,13 @@ if (!currentProject.images) currentProject.images = [];
         };
     });
 
-    // ✅ NUEVO: Hacer lo mismo para extraFiles
+    // âœ… NUEVO: Hacer lo mismo para extraFiles
     if (currentProject.extraFiles && Array.isArray(currentProject.extraFiles)) {
         currentProject.extraFiles = currentProject.extraFiles.map(f => {
             const srcPath = f.src || f.path || '';
             return {
                 src: srcPath,
-                originalPath: srcPath.startsWith('users/') ? srcPath : null, // ✅ Preservar path original
+                originalPath: srcPath.startsWith('users/') ? srcPath : null, // âœ… Preservar path original
                 title: f.title || f.fileName || 'Archivo',
                 fileName: f.fileName || '',
                 fileType: f.fileType || 'application/octet-stream',
@@ -196,14 +200,14 @@ if (!currentProject.images) currentProject.images = [];
     loadProjectData();
     updateEditorTitle(currentProject.title);
 
-    console.log("✅ Proyecto cargado correctamente:", currentProject.title);
+    console.log("âœ… Proyecto cargado correctamente:", currentProject.title);
 }
 
 
 // ==================== LOAD PROJECT DATA INTO FORM ====================
 
 function loadProjectData() {
-    // Información Básica
+    // InformaciÃ³n BÃ¡sica
     document.getElementById('projectIcon').value = currentProject.icon || '';
     document.getElementById('projectTitle').value = currentProject.title || '';
     document.getElementById('currentPhase').value = currentProject.currentPhase || '';
@@ -222,7 +226,7 @@ function loadProjectData() {
     document.getElementById('blockerType').value = currentProject.blockers?.type || 'info';
     document.getElementById('blockerMessage').value = currentProject.blockers?.message || '';
 
-    // Próximos Pasos
+    // PrÃ³ximos Pasos
     loadNextSteps();
 
     // Multimedia
@@ -241,7 +245,7 @@ function loadAchievements() {
     const achievements = currentProject.achievements || {};
     
     if (Object.keys(achievements).length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aún</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aÃºn</p>';
         return;
     }
 
@@ -257,14 +261,14 @@ function createAchievementItem(date = '', text = '') {
     item.innerHTML = `
         <div class="dynamic-item-header">
             <span class="dynamic-item-title">Logro</span>
-            <button class="btn-remove-item" onclick="removeAchievementItem(this)">×</button>
+            <button class="btn-remove-item" onclick="removeAchievementItem(this)">Ã—</button>
         </div>
         <div class="form-group">
             <label>Fecha (YYYY-MM)</label>
             <input type="text" class="achievement-date" placeholder="2025-10" value="${date}" pattern="\\d{4}-\\d{2}">
         </div>
         <div class="form-group">
-            <label>Descripción del Logro</label>
+            <label>DescripciÃ³n del Logro</label>
             <textarea class="achievement-text" rows="2" placeholder="Describe el logro...">${text}</textarea>
         </div>
     `;
@@ -291,7 +295,7 @@ function removeAchievementItem(btn) {
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('achievementsList');
     if (container.children.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aún</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aÃºn</p>';
     }
 }
 
@@ -304,7 +308,7 @@ function loadNextSteps() {
     const nextSteps = currentProject.nextSteps || {};
     
     if (Object.keys(nextSteps).length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay próximos pasos agregados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay prÃ³ximos pasos agregados</p>';
         return;
     }
 
@@ -319,16 +323,16 @@ function createNextStepItem(date = '', text = '') {
     
     item.innerHTML = `
         <div class="dynamic-item-header">
-            <span class="dynamic-item-title">Próximo Paso</span>
-            <button class="btn-remove-item" onclick="removeNextStepItem(this)">×</button>
+            <span class="dynamic-item-title">PrÃ³ximo Paso</span>
+            <button class="btn-remove-item" onclick="removeNextStepItem(this)">Ã—</button>
         </div>
         <div class="form-group">
             <label>Fecha (YYYY-MM)</label>
             <input type="text" class="nextstep-date" placeholder="2025-11" value="${date}" pattern="\\d{4}-\\d{2}">
         </div>
         <div class="form-group">
-            <label>Descripción</label>
-            <textarea class="nextstep-text" rows="2" placeholder="Describe el próximo paso...">${text}</textarea>
+            <label>DescripciÃ³n</label>
+            <textarea class="nextstep-text" rows="2" placeholder="Describe el prÃ³ximo paso...">${text}</textarea>
         </div>
     `;
     
@@ -354,13 +358,13 @@ function removeNextStepItem(btn) {
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('nextStepsList');
     if (container.children.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay próximos pasos agregados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay prÃ³ximos pasos agregados</p>';
     }
 }
 
 // ==================== GANTT ====================
 
-function loadGantt() {
+async function loadGantt() {
     const container = document.getElementById('ganttPreview');
     
     if (!container) {
@@ -368,7 +372,26 @@ function loadGantt() {
         return;
     }
     
-    if (currentProject.ganttImage) {
+    // ✅ CASO 1: Hay originalGanttPath = cargar desde filesystem
+    if (currentProject.originalGanttPath && currentProject.originalGanttPath.startsWith('users/')) {
+        try {
+            const result = await window.electronAPI.readMedia(currentProject.originalGanttPath);
+            if (result.success && result.data) {
+                container.innerHTML = `
+                    <div class="media-preview-item">
+                        <img src="${result.data}" alt="Gantt">
+                        <button class="btn-remove-media" onclick="removeGantt()">×</button>
+                    </div>
+                `;
+                return;
+            }
+        } catch (e) {
+            console.error('❌ Error cargando Gantt desde filesystem:', e.message);
+        }
+    }
+    
+    // ✅ CASO 2: Hay ganttImage en base64 (nuevo upload)
+    if (currentProject.ganttImage && currentProject.ganttImage.startsWith('data:')) {
         container.innerHTML = `
             <div class="media-preview-item">
                 <img src="${currentProject.ganttImage}" alt="Gantt">
@@ -386,17 +409,22 @@ async function uploadGantt() {
     ]);
 
     if (file) {
+        // ✅ NUEVO Gantt subido = reemplazar
         currentProject.ganttImage = file.data;
-        loadGantt();
+        delete currentProject.originalGanttPath; // Limpiar path anterior
+        await loadGantt();
         markAsUnsaved();
     }
 }
 
+
 function removeGantt() {
     currentProject.ganttImage = '';
+    delete currentProject.originalGanttPath; // Limpiar path anterior
     loadGantt();
     markAsUnsaved();
 }
+
 
 // ==================== IMAGES ====================
 
@@ -404,12 +432,12 @@ function loadImages() {
     const container = document.getElementById('imagesPreview');
     
     if (!container) {
-        console.error('❌ Elemento imagesPreview no encontrado');
+        console.error('âŒ Elemento imagesPreview no encontrado');
         return;
     }
     
     if (!currentProject.images || currentProject.images.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay imágenes cargadas</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay imÃ¡genes cargadas</p>';
         return;
     }
 
@@ -420,7 +448,7 @@ function loadImages() {
                 <input type="text" class="media-title" value="${img.title}" 
                        onchange="updateImageTitle(${index}, this.value)">
             </div>
-            <button class="btn-remove-media" onclick="removeImage(${index})">×</button>
+            <button class="btn-remove-media" onclick="removeImage(${index})">Ã—</button>
         </div>
     `).join('');
 }
@@ -463,7 +491,7 @@ function loadVideos() {
     const container = document.getElementById('videosPreview');
     
     if (!container) {
-        console.error('❌ Elemento videosPreview no encontrado');
+        console.error('âŒ Elemento videosPreview no encontrado');
         return;
     }
     
@@ -479,7 +507,7 @@ function loadVideos() {
                 <input type="text" class="media-title" value="${video.title}" 
                        onchange="updateVideoTitle(${index}, this.value)">
             </div>
-            <button class="btn-remove-media" onclick="removeVideo(${index})">×</button>
+            <button class="btn-remove-media" onclick="removeVideo(${index})">Ã—</button>
         </div>
     `).join('');
 }
@@ -517,36 +545,36 @@ function removeVideo(index) {
 }
 
 function getFileIcon(fileName) {
-    if (!fileName) return '📎';
+    if (!fileName) return 'ðŸ“Ž';
     
     const ext = fileName.split('.').pop().toLowerCase();
     const icons = {
         // Documentos
-        'pdf': '📄',
-        'doc': '📝', 'docx': '📝',
-        'txt': '📃',
-        // Hojas de cálculo
-        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+        'pdf': 'ðŸ“„',
+        'doc': 'ðŸ“', 'docx': 'ðŸ“',
+        'txt': 'ðŸ“ƒ',
+        // Hojas de cÃ¡lculo
+        'xls': 'ðŸ“Š', 'xlsx': 'ðŸ“Š', 'csv': 'ðŸ“Š',
         // Presentaciones
-        'ppt': '📊', 'pptx': '📊',
+        'ppt': 'ðŸ“Š', 'pptx': 'ðŸ“Š',
         // Comprimidos
-        'zip': '📦', 'rar': '📦', '7z': '📦',
-        // Imágenes
-        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+        'zip': 'ðŸ“¦', 'rar': 'ðŸ“¦', '7z': 'ðŸ“¦',
+        // ImÃ¡genes
+        'jpg': 'ðŸ–¼ï¸', 'jpeg': 'ðŸ–¼ï¸', 'png': 'ðŸ–¼ï¸', 'gif': 'ðŸ–¼ï¸', 'webp': 'ðŸ–¼ï¸',
         // Videos
-        'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
-        // Código
-        'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+        'mp4': 'ðŸŽ¬', 'avi': 'ðŸŽ¬', 'mov': 'ðŸŽ¬', 'webm': 'ðŸŽ¬',
+        // CÃ³digo
+        'js': 'ðŸ’»', 'py': 'ðŸ’»', 'java': 'ðŸ’»', 'cpp': 'ðŸ’»', 'html': 'ðŸ’»', 'css': 'ðŸ’»'
     };
     
-    return icons[ext] || '📎';
+    return icons[ext] || 'ðŸ“Ž';
 }
 
 function loadExtraFiles() {
     const container = document.getElementById('extraFilesPreview');
     
     if (!container) {
-        console.error('❌ Elemento extraFilesPreview no encontrado');
+        console.error('âŒ Elemento extraFilesPreview no encontrado');
         return;
     }
     
@@ -580,7 +608,7 @@ function loadExtraFiles() {
                         <span class="file-size">${sizeInKB} KB</span>
                     </div>
                 </div>
-                <button class="btn-remove-media" onclick="removeExtraFile(${index})">×</button>
+                <button class="btn-remove-media" onclick="removeExtraFile(${index})">Ã—</button>
             </div>
         `;
     }).join('');
@@ -677,12 +705,12 @@ async function saveProject() {
         updatedAt: new Date().toISOString()
     };
     
-    // ✅ DEBUG MEJORADO - Te ayudará a identificar el problema
-    console.log('═══════════════════════════════════════');
-    console.log('📋 DEBUG COMPLETO - Proyecto antes de guardar');
-    console.log('═══════════════════════════════════════');
+    // âœ… DEBUG MEJORADO - Te ayudarÃ¡ a identificar el problema
+    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
+    console.log('ðŸ“‹ DEBUG COMPLETO - Proyecto antes de guardar');
+    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
     
-    console.log('📋 Basic Info:', {
+    console.log('ðŸ“‹ Basic Info:', {
         id: updatedProject.id,
         title: updatedProject.title,
         ownerId: updatedProject.ownerId,
@@ -690,7 +718,7 @@ async function saveProject() {
         progress: updatedProject.progress
     });
 
-    console.log('\n🖼️ GANTT Image:', {
+    console.log('\nðŸ–¼ï¸ GANTT Image:', {
         exists: !!updatedProject.ganttImage,
         isString: typeof updatedProject.ganttImage === 'string',
         length: updatedProject.ganttImage?.length || 0,
@@ -699,11 +727,11 @@ async function saveProject() {
             updatedProject.ganttImage.substring(0, 60) + '...' : 'null'
     });
 
-    console.log('\n📸 Images:', {
+    console.log('\nðŸ“¸ Images:', {
         count: updatedProject.images?.length || 0,
         details: updatedProject.images?.map((img, i) => ({
             index: i,
-            title: img.title || 'Sin título',
+            title: img.title || 'Sin tÃ­tulo',
             hasData: !!img.data,
             hasSrc: !!img.src,
             srcType: img.src?.startsWith('data:') ? 'base64' : 
@@ -713,11 +741,11 @@ async function saveProject() {
         })) || []
     });
 
-    console.log('\n🎥 Videos:', {
+    console.log('\nðŸŽ¥ Videos:', {
         count: updatedProject.videos?.length || 0,
         details: updatedProject.videos?.map((v, i) => ({
             index: i,
-            title: v.title || 'Sin título',
+            title: v.title || 'Sin tÃ­tulo',
             hasData: !!v.data,
             hasSrc: !!v.src,
             srcType: v.src?.startsWith('data:') ? 'base64' : 
@@ -726,10 +754,10 @@ async function saveProject() {
         })) || []
     });
 
-    console.log('═══════════════════════════════════════\n');
+    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n');
 
     // Mostrar feedback
-    document.getElementById('editorTitle').textContent = '💾 Guardando...';
+    document.getElementById('editorTitle').textContent = 'ðŸ’¾ Guardando...';
     document.getElementById('editorStatus').textContent = 'Procesando';
 
     // Guardar proyecto
@@ -738,48 +766,48 @@ async function saveProject() {
     try {
         if (editorMode === 'new') {
             // Crear nuevo proyecto
-            console.log('📋 Modo: Crear nuevo proyecto');
+            console.log('ðŸ“‹ Modo: Crear nuevo proyecto');
             const newProject = await dataManager.createProject(updatedProject);
             success = newProject !== null;
             
             if (success) {
-                console.log('✅ Nuevo proyecto creado:', newProject.id);
+                console.log('âœ… Nuevo proyecto creado:', newProject.id);
             } else {
-                console.error('❌ createProject retornó null');
+                console.error('âŒ createProject retornÃ³ null');
             }
         } else {
             // Actualizar proyecto existente
-            console.log('✏️ Modo: Actualizar proyecto existente');
+            console.log('âœï¸ Modo: Actualizar proyecto existente');
             const updated = await dataManager.updateProject(currentProject.id, updatedProject);
             success = updated !== null;
             
             if (success) {
-                console.log('✅ Proyecto actualizado:', updated.id);
+                console.log('âœ… Proyecto actualizado:', updated.id);
             } else {
-                console.error('❌ updateProject retornó null');
+                console.error('âŒ updateProject retornÃ³ null');
             }
         }
     } catch (error) {
-        console.error('❌ Error CRÍTICO al guardar:', error);
+        console.error('âŒ Error CRÃTICO al guardar:', error);
         console.error('Stack:', error.stack);
         success = false;
     }
 
     if (success) {
-        console.log('\n✅✅✅ PROYECTO GUARDADO CORRECTAMENTE ✅✅✅\n');
+        console.log('\nâœ…âœ…âœ… PROYECTO GUARDADO CORRECTAMENTE âœ…âœ…âœ…\n');
         hasUnsavedChanges = false;
-        document.getElementById('editorStatus').textContent = '✅ Guardado';
+        document.getElementById('editorStatus').textContent = 'âœ… Guardado';
         
         // Emitir evento para recargar datos en Home
         window.dispatchEvent(new Event('dataReloaded'));
 
-        // Redirigir después de un momento
+        // Redirigir despuÃ©s de un momento
         setTimeout(() => {
             window.location.href = 'index.html';
         }, 1000);
     } else {
-        console.error('\n❌❌❌ ERROR AL GUARDAR EL PROYECTO ❌❌❌\n');
-        alert('❌ Error al guardar el proyecto. Revisa la consola para más detalles.');
+        console.error('\nâŒâŒâŒ ERROR AL GUARDAR EL PROYECTO âŒâŒâŒ\n');
+        alert('âŒ Error al guardar el proyecto. Revisa la consola para mÃ¡s detalles.');
         document.getElementById('editorTitle').textContent = `Editando: ${currentProject.title}`;
         document.getElementById('editorStatus').textContent = 'Error';
     }
@@ -859,7 +887,7 @@ function generatePreviewHTML(data) {
             <div class="progress-container">
                 <div class="progress-header">
                     <span class="progress-percentage">${data.progress}%</span>
-                    <span class="progress-date">🎯 ${data.targetDate}</span>
+                    <span class="progress-date">ðŸŽ¯ ${data.targetDate}</span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" style="width: ${data.progress}%"></div>
@@ -867,13 +895,13 @@ function generatePreviewHTML(data) {
             </div>
 
             <div class="info-section">
-                <div class="info-title">📋 Fase Actual</div>
+                <div class="info-title">ðŸ“‹ Fase Actual</div>
                 <div class="info-content">${data.currentPhase}</div>
             </div>
 
             ${Object.keys(data.achievements).length > 0 ? `
                 <div class="info-section success">
-                    <div class="info-title">✅ Logros Recientes</div>
+                    <div class="info-title">âœ… Logros Recientes</div>
                     <div class="info-content">
                         ${Object.entries(data.achievements).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -884,14 +912,14 @@ function generatePreviewHTML(data) {
 
             ${data.blockers.message ? `
                 <div class="info-section ${data.blockers.type}">
-                    <div class="info-title">⚠️ ${data.blockers.type === 'alert' ? 'Bloqueo' : 'Estado'}</div>
+                    <div class="info-title">âš ï¸ ${data.blockers.type === 'alert' ? 'Bloqueo' : 'Estado'}</div>
                     <div class="info-content">${data.blockers.message}</div>
                 </div>
             ` : ''}
 
             ${Object.keys(data.nextSteps).length > 0 ? `
                 <div class="info-section">
-                    <div class="info-title">🎯 Próximos Pasos</div>
+                    <div class="info-title">ðŸŽ¯ PrÃ³ximos Pasos</div>
                     <div class="info-content">
                         ${Object.entries(data.nextSteps).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -911,7 +939,7 @@ function closePreviewModal() {
 
 function cancelEdit() {
     if (hasUnsavedChanges) {
-        if (!confirm('Tienes cambios sin guardar. ¿Estás seguro de que quieres salir?')) {
+        if (!confirm('Tienes cambios sin guardar. Â¿EstÃ¡s seguro de que quieres salir?')) {
             return;
         }
     }
@@ -948,7 +976,7 @@ function deleteProject() {
     document.getElementById('confirmDeleteText').value = '';
     document.getElementById('btnConfirmDelete').disabled = true;
 
-    // Validación en tiempo real
+    // ValidaciÃ³n en tiempo real
     const confirmInput = document.getElementById('confirmDeleteText');
     const confirmBtn = document.getElementById('btnConfirmDelete');
     
@@ -978,16 +1006,16 @@ async function confirmDelete() {
 
     // Mostrar feedback
     const originalTitle = document.getElementById('editorTitle').textContent;
-    document.getElementById('editorTitle').textContent = '🗑️ Eliminando proyecto...';
+    document.getElementById('editorTitle').textContent = 'ðŸ—‘ï¸ Eliminando proyecto...';
     document.getElementById('editorStatus').textContent = 'Procesando';
 
     try {
-        // Llamar a la eliminación real
+        // Llamar a la eliminaciÃ³n real
         const success = await dataManager.deleteProject(currentProject.id);
 
         if (success) {
-            console.log('✅ Proyecto eliminado correctamente');
-            alert('✅ Proyecto eliminado exitosamente');
+            console.log('âœ… Proyecto eliminado correctamente');
+            alert('âœ… Proyecto eliminado exitosamente');
             
             // No hay cambios sin guardar
             hasUnsavedChanges = false;
@@ -1000,8 +1028,8 @@ async function confirmDelete() {
             throw new Error('Error al eliminar el proyecto');
         }
     } catch (error) {
-        console.error('❌ Error eliminando proyecto:', error);
-        alert('❌ Error al eliminar el proyecto. Inténtalo de nuevo.');
+        console.error('âŒ Error eliminando proyecto:', error);
+        alert('âŒ Error al eliminar el proyecto. IntÃ©ntalo de nuevo.');
         document.getElementById('editorTitle').textContent = originalTitle;
         document.getElementById('editorStatus').textContent = 'Error';
     }
@@ -1013,7 +1041,7 @@ function updateEditorTitle(title) {
     document.getElementById('editorTitle').textContent = `Editando: ${title}`;
 }
 
-// Agregar método canEditProject a dataManager si no existe
+// Agregar mÃ©todo canEditProject a dataManager si no existe
 if (dataManager && !dataManager.canEditProject) {
     dataManager.canEditProject = function(projectId) {
         const project = this.getProjectById(projectId);
@@ -1026,7 +1054,7 @@ if (dataManager && !dataManager.canEditProject) {
 // ==================== SWITCH SECTION ====================
 
 function switchSection(sectionName) {
-    console.log('📋 Cambiando a sección:', sectionName);
+    console.log('ðŸ“‹ Cambiando a secciÃ³n:', sectionName);
     
     // Ocultar todas las secciones
     document.querySelectorAll('.editor-section').forEach(section => {
@@ -1038,19 +1066,19 @@ function switchSection(sectionName) {
         btn.classList.remove('active');
     });
 
-    // Mostrar sección seleccionada
+    // Mostrar secciÃ³n seleccionada
     const targetSection = document.getElementById('section-' + sectionName);
     if (targetSection) {
         targetSection.classList.add('active');
     } else {
-        console.error('❌ Sección no encontrada:', 'section-' + sectionName);
+        console.error('âŒ SecciÃ³n no encontrada:', 'section-' + sectionName);
     }
     
-    // Activar botón correspondiente
+    // Activar botÃ³n correspondiente
     const targetButton = document.querySelector(`[data-section="${sectionName}"]`);
     if (targetButton) {
         targetButton.classList.add('active');
     }
 }
 
-console.log('✅ Editor.js cargado');
+console.log('âœ… Editor.js cargado');

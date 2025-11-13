@@ -1,5 +1,5 @@
 // ============================================
-// VIEWER.JS - Visor dinámico de portafolios
+// VIEWER.JS - Visor dinÃ¡mico de portafolios
 // ============================================
 
 let currentSlide = 1;
@@ -12,13 +12,13 @@ function normalizeProject(p) {
   const proj = { ...p };
 
   // Soportar alias del Gantt
-  if (!proj.ganttImage && proj.ganttImagePath) proj.ganttImage = proj.ganttImagePath;
+  // if (!proj.ganttImage && proj.ganttImagePath) proj.ganttImage = proj.ganttImagePath; // COMENTADO - causa error
 
   // Forzar arrays
   proj.images = Array.isArray(proj.images) ? proj.images : [];
   proj.videos = Array.isArray(proj.videos) ? proj.videos : [];
 
-  // ⚙️ Normalizar media: aceptar {path, fileName, ...}
+  // âš™ï¸ Normalizar media: aceptar {path, fileName, ...}
   proj.images = proj.images.map(img => ({
     src: img?.src || img?.path || '',
     title: img?.title || img?.fileName || 'Imagen',
@@ -46,7 +46,7 @@ function normalizeProject(p) {
     extension: f?.extension || (f?.fileName ? f.fileName.split('.').pop().toLowerCase() : '')
   }));
 
-  // Objetos mínimos
+  // Objetos mÃ­nimos
   proj.achievements = (proj.achievements && typeof proj.achievements === 'object') ? proj.achievements : {};
   proj.nextSteps   = (proj.nextSteps   && typeof proj.nextSteps   === 'object') ? proj.nextSteps   : {};
   proj.blockers    = (proj.blockers    && typeof proj.blockers    === 'object') ? proj.blockers    : { type:'info', message:'' };
@@ -57,24 +57,24 @@ function normalizeProject(p) {
 // ==================== INIT ====================
 
 document.addEventListener('dataLoaded', () => {
-    console.log('✓ Datos cargados, inicializando Viewer...');
+    console.log('âœ“ Datos cargados, inicializando Viewer...');
     initViewer();
 });
 
 async function initViewer() {
-    // Determinar qué mostrar según localStorage
+    // Determinar quÃ© mostrar segÃºn localStorage
     const viewingUserId = localStorage.getItem('viewingUserId');
     const viewingProjectId = localStorage.getItem('viewingProjectId');
     
     if (viewingProjectId) {
-        // Mostrar un proyecto específico - CARGAR PROYECTO COMPLETO
-        console.log(`📂 Cargando proyecto completo ${viewingProjectId}...`);
+        // Mostrar un proyecto especÃ­fico - CARGAR PROYECTO COMPLETO
+        console.log(`ðŸ“‚ Cargando proyecto completo ${viewingProjectId}...`);
         const fullProject = await dataManager.loadFullProject(viewingProjectId);
         if (fullProject) {
             projectsToShow = [ normalizeProject(fullProject) ];
             viewingUser = dataManager.getUserById(fullProject.ownerId);
         } else {
-            // Fallback: usar índice si falla la carga completa
+            // Fallback: usar Ã­ndice si falla la carga completa
             const project = dataManager.getProjectById(viewingProjectId);
             if (project) {
                 projectsToShow = [project];
@@ -85,7 +85,7 @@ async function initViewer() {
         // Mostrar TODOS los proyectos de un usuario - CARGAR PROYECTOS COMPLETOS
         const projectsIndex = dataManager.getProjectsByUserId(viewingUserId);
         viewingUser = dataManager.getUserById(viewingUserId);
-        console.log(`📊 Cargando ${projectsIndex.length} proyectos completos de ${viewingUser?.name || 'usuario'}...`);
+        console.log(`ðŸ“Š Cargando ${projectsIndex.length} proyectos completos de ${viewingUser?.name || 'usuario'}...`);
         
         // Cargar cada proyecto completo
         projectsToShow = [];
@@ -94,14 +94,14 @@ async function initViewer() {
             if (fullProject) {
                 projectsToShow.push( normalizeProject(fullProject) );
             } else {
-                // Fallback: usar índice si falla
+                // Fallback: usar Ã­ndice si falla
                 projectsToShow.push(projectIndex);
             }
         }
     } else {
-        // Sin parámetros, mostrar todos los proyectos del área - CARGAR COMPLETOS
+        // Sin parÃ¡metros, mostrar todos los proyectos del Ã¡rea - CARGAR COMPLETOS
         const projectsIndex = dataManager.getAllProjects();
-        console.log(`📊 Cargando ${projectsIndex.length} proyectos completos totales...`);
+        console.log(`ðŸ“Š Cargando ${projectsIndex.length} proyectos completos totales...`);
         
         // Cargar cada proyecto completo
         projectsToShow = [];
@@ -110,7 +110,7 @@ async function initViewer() {
             if (fullProject) {
                 projectsToShow.push( normalizeProject(fullProject) );
             } else {
-                // Fallback: usar índice si falla
+                // Fallback: usar Ã­ndice si falla
                 projectsToShow.push(projectIndex);
             }
         }
@@ -125,7 +125,7 @@ async function initViewer() {
     // Generar las slides
     generateSlides();
     
-    // Limpiar localStorage después de leer
+    // Limpiar localStorage despuÃ©s de leer
     localStorage.removeItem('viewingUserId');
     localStorage.removeItem('viewingProjectId');
 }
@@ -146,10 +146,10 @@ function generateSlides() {
     // 4. Actualizar contador
     updateSlideCount();
     
-    // 5. Inicializar navegación
+    // 5. Inicializar navegaciÃ³n
     updateSlides();
     
-    console.log(`✓ ${totalSlides} slides generadas`);
+    console.log(`âœ“ ${totalSlides} slides generadas`);
 }
 
 // ==================== COVER SLIDE ====================
@@ -158,14 +158,14 @@ function generateCoverSlide() {
     const coverSlide = document.getElementById('coverSlide');
     
     const title = viewingUser 
-        ? `📊 Portfolio de ${viewingUser.name}`
-        : '📊 Portfolio Q4 2025';
+        ? `ðŸ“Š Portfolio de ${viewingUser.name}`
+        : 'ðŸ“Š Portfolio Q4 2025';
     
     const subtitle = viewingUser
         ? `${viewingUser.role} | ${projectsToShow.length} proyecto(s)`
-        : `Duración: 15 minutos | Enfoque en impacto y próximos pasos`;
+        : `DuraciÃ³n: 15 minutos | Enfoque en impacto y prÃ³ximos pasos`;
     
-    // Calcular estadísticas
+    // Calcular estadÃ­sticas
     const stats = {
         total: projectsToShow.length,
         inProgress: projectsToShow.filter(p => p.status === 'in-progress').length,
@@ -234,7 +234,7 @@ function generateProjectSlides() {
     const statusConfig = dataManager.getStatusConfig(project.status);
     const priorityConfig = dataManager.getPriorityConfig(project.priority);
 
-    // ✅ CORRECCIÓN: Verificar correctamente la existencia de multimedia
+    // âœ… CORRECCIÃ“N: Verificar correctamente la existencia de multimedia
     const hasGantt = Boolean(
       project.ganttImage || 
       project.ganttImagePath
@@ -263,8 +263,8 @@ function generateProjectSlides() {
       project.images.some(img => img && (img.src || img.path) && (img.src || img.path).trim().length > 0)
     );
 
-    // 🐛 DEBUG: Descomentar estas líneas para ver qué detecta
-    console.log(`📊 Proyecto: ${project.title}`);
+    // ðŸ› DEBUG: Descomentar estas lÃ­neas para ver quÃ© detecta
+    console.log(`ðŸ“Š Proyecto: ${project.title}`);
     console.log('  - Gantt:', hasGantt, project.ganttImage || project.ganttImagePath);
     console.log('  - Videos:', hasVideos, project.videos?.length || 0);
     console.log('  - Images:', hasImages, project.images?.length || 0);
@@ -281,7 +281,7 @@ function generateProjectSlides() {
         <div class="progress-container">
           <div class="progress-header">
             <span class="progress-percentage">${project.progress}%</span>
-            <span class="progress-date">🎯 ${formatDate(project.targetDate)}</span>
+            <span class="progress-date">ðŸŽ¯ ${formatDate(project.targetDate)}</span>
           </div>
           <div class="progress-bar">
             <div class="progress-fill" style="width:${project.progress}%;"></div>
@@ -289,7 +289,7 @@ function generateProjectSlides() {
         </div>
 
         <div class="info-section">
-          <div class="info-title">📋 Fase Actual</div>
+          <div class="info-title">ðŸ“‹ Fase Actual</div>
           <div class="info-content">${project.currentPhase || ''}</div>
         </div>
 
@@ -300,22 +300,22 @@ function generateProjectSlides() {
 <div style="display:flex; gap:15px; margin-top:20px; flex-wrap:wrap;">
   ${hasGantt ? `
     <a href="#" class="gantt-link" onclick="(async () => await openGanttModal('${project.id}'))(); return false;">
-      📊 Ver Gantt del Proyecto →
+      ðŸ“Š Ver Gantt del Proyecto â†’
     </a>` : ''}
 
   ${hasVideos ? `
     <a href="#" class="gantt-link video-link" onclick="(async () => await openVideoGallery('${project.id}'))(); return false;">
-      🎬 Galería de Videos →
+      ðŸŽ¬ GalerÃ­a de Videos â†’
     </a>` : ''}
 
   ${hasImages ? `
     <a href="#" class="gantt-link image-link" onclick="(async () => await openImageGallery('${project.id}'))(); return false;">
-      🖼️ Galería de Imágenes →
+      ðŸ–¼ï¸ GalerÃ­a de ImÃ¡genes â†’
     </a>` : ''}
 
   ${hasExtraFiles ? `
     <a href="#" class="gantt-link extra-files-link" onclick="openExtraFilesModal('${project.id}'); return false;">
-      📎 Archivos Extras →
+      ðŸ“Ž Archivos Extras â†’
     </a>` : ''}
 </div>
       </div>
@@ -345,7 +345,7 @@ function generateAchievementsSection(achievements) {
 
   return `
     <div class="info-section success">
-      <div class="info-title">✅ Logros Recientes</div>
+      <div class="info-title">âœ… Logros Recientes</div>
       <div class="info-content">${entries}</div>
     </div>
   `;
@@ -375,7 +375,7 @@ function generateNextStepsSection(nextSteps) {
 
   return `
     <div class="info-section">
-      <div class="info-title">🎯 Próximos Pasos</div>
+      <div class="info-title">ðŸŽ¯ PrÃ³ximos Pasos</div>
       <div class="info-content">${entries}</div>
     </div>
   `;
@@ -408,55 +408,55 @@ function generateSummarySlide() {
   const sortedDates = Object.keys(upcomingMilestones).sort();
 
   summarySlide.innerHTML = `
-    <h2 class="project-title" style="margin-bottom: 40px;">🎬 Resumen Ejecutivo</h2>
+    <h2 class="project-title" style="margin-bottom: 40px;">ðŸŽ¬ Resumen Ejecutivo</h2>
 
     <div class="summary-grid">
       ${stats.inProgress > 0 ? `
         <div class="summary-item" style="border-left-color:#30d158;">
-          <div class="info-title">✅ ${stats.inProgress} proyecto(s) avanzando según plan</div>
+          <div class="info-title">âœ… ${stats.inProgress} proyecto(s) avanzando segÃºn plan</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='in-progress').map(p => `${p.title} (${p.progress}%)`).join(' • ')}
+            ${projectsToShow.filter(p => p.status==='in-progress').map(p => `${p.title} (${p.progress}%)`).join(' â€¢ ')}
           </div>
         </div>` : ''}
 
       ${stats.hold > 0 ? `
         <div class="summary-item" style="border-left-color:#ff9500;">
-          <div class="info-title">⏸ ${stats.hold} proyecto(s) con hold técnico temporal</div>
+          <div class="info-title">â¸ ${stats.hold} proyecto(s) con hold tÃ©cnico temporal</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Desbloqueo en proceso'}`).join(' • ')}
+            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Desbloqueo en proceso'}`).join(' â€¢ ')}
           </div>
         </div>` : ''}
 
       ${stats.paused > 0 ? `
         <div class="summary-item" style="border-left-color:#8e8e93;">
-          <div class="info-title">❄️ ${stats.paused} proyecto(s) pausado(s)</div>
+          <div class="info-title">â„ï¸ ${stats.paused} proyecto(s) pausado(s)</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join(' • ')}
+            ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join(' â€¢ ')}
           </div>
         </div>` : ''}
 
       ${stats.discovery > 0 ? `
         <div class="summary-item" style="border-left-color:#ff9f0a;">
-          <div class="info-title">🔍 ${stats.discovery} proyecto(s) en discovery</div>
+          <div class="info-title">ðŸ” ${stats.discovery} proyecto(s) en discovery</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join(' • ')}
+            ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join(' â€¢ ')}
           </div>
         </div>` : ''}
     </div>
 
     ${sortedDates.length > 0 ? `
       <div class="info-section" style="margin-top:30px;">
-        <div class="info-title">🎯 Próximas Fechas Clave</div>
+        <div class="info-title">ðŸŽ¯ PrÃ³ximas Fechas Clave</div>
         <div class="info-content">
           ${sortedDates.slice(0,5).map(date => `
             <strong>${formatMonth(date)}:</strong><br>
-            ${upcomingMilestones[date].map(step => `• ${step}`).join('<br>')}
+            ${upcomingMilestones[date].map(step => `â€¢ ${step}`).join('<br>')}
           `).join('<br><br>')}
         </div>
       </div>` : ''}
 
     <div class="cta-box">
-      <div class="cta-text">¿Decisiones o recursos necesarios?</div>
+      <div class="cta-text">Â¿Decisiones o recursos necesarios?</div>
       <p style="margin-top:15px; font-size:16px; color:white;">Espacio para preguntas y respuestas</p>
     </div>
   `;
@@ -472,7 +472,7 @@ function updateSlideCount() {
     if (totalElement) {
         totalElement.textContent = totalSlides;
     }
-    console.log(`📊 Total de slides: ${totalSlides}`);
+    console.log(`ðŸ“Š Total de slides: ${totalSlides}`);
 }
 
 function updateSlides() {
@@ -495,7 +495,7 @@ function updateSlides() {
         currentElement.textContent = currentSlide;
     }
     
-    console.log(`📍 Slide actual: ${currentSlide}/${totalSlides}`);
+    console.log(`ðŸ“ Slide actual: ${currentSlide}/${totalSlides}`);
 }
 
 function nextSlide() {
@@ -575,13 +575,13 @@ async function openVideoGallery(projectId) {
 
   // Resolver todas las rutas a data:base64 para miniaturas reales
   const items = await Promise.all(project.videos.map(async (v, i) => {
-    const thumbSrc = await resolveMediaSrc(v.src); // lee users/... → data:video/...
+    const thumbSrc = await resolveMediaSrc(v.src); // lee users/... â†’ data:video/...
     return `
       <div class="gallery-item" onclick="openVideoPlayer('${projectId}', ${i})">
         <div class="video-thumbnail">
           <video src="${thumbSrc}" muted preload="metadata" playsinline
                  style="width:100%; height:140px; border-radius:10px; object-fit:cover"></video>
-          <div class="play-icon">▶</div>
+          <div class="play-icon">â–¶</div>
           <div class="video-filename">${v.title}</div>
         </div>
       </div>`;
@@ -638,9 +638,9 @@ async function openImageGallery(projectId) {
     const title = document.getElementById('imageGalleryTitle');
     const grid = document.getElementById('imageGalleryGrid');
 
-    title.textContent = `${project.icon} ${project.title} - Imágenes`;
+    title.textContent = `${project.icon} ${project.title} - ImÃ¡genes`;
 
-    // Resolver todos los src de imágenes
+    // Resolver todos los src de imÃ¡genes
     const resolvedImages = await Promise.all(project.images.map(async (image) => ({
         ...image,
         src: await resolveMediaSrc(image.src)
@@ -814,9 +814,9 @@ async function downloadExtraFile(projectId, index) {
         link.click();
         document.body.removeChild(link);
         
-        console.log('✅ Archivo descargado:', file.fileName);
+        console.log('âœ… Archivo descargado:', file.fileName);
     } catch (error) {
-        console.error('❌ Error al descargar archivo:', error);
+        console.error('âŒ Error al descargar archivo:', error);
         alert('Error al descargar el archivo');
     }
 }
@@ -830,14 +830,14 @@ function formatDate(dateString) {
 
     const parts = dateString.split('-');
     if (parts.length < 3) {
-        // Si no viene en formato YYYY-MM-DD, la regresamos como está
+        // Si no viene en formato YYYY-MM-DD, la regresamos como estÃ¡
         return dateString;
     }
 
     const [year, month, day] = parts;
     const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
-    // Validar mes numérico
+    // Validar mes numÃ©rico
     const monthIndex = parseInt(month) - 1;
     if (isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) {
         return dateString;
@@ -870,28 +870,28 @@ function formatMonth(dateString) {
 
 function getBlockerIcon(type) {
     const icons = {
-        info: 'ℹ️',
-        warning: '⚠️',
-        alert: '🚫',
-        success: '✅'
+        info: 'â„¹ï¸',
+        warning: 'âš ï¸',
+        alert: 'ðŸš«',
+        success: 'âœ…'
     };
-    return icons[type] || 'ℹ️';
+    return icons[type] || 'â„¹ï¸';
 }
 
 function getBlockerTitle(type) {
     const titles = {
-        info: 'Información',
-        warning: 'Atención',
+        info: 'InformaciÃ³n',
+        warning: 'AtenciÃ³n',
         alert: 'Bloqueo Temporal',
         success: 'Estado'
     };
-    return titles[type] || 'Información';
+    return titles[type] || 'InformaciÃ³n';
 }
 
 function showError(message) {
     document.body.innerHTML = `
         <div class="error-container">
-            <div class="error-icon">⚠️</div>
+            <div class="error-icon">âš ï¸</div>
             <h2 class="error-title">Error al cargar el portafolio</h2>
             <p class="error-description">${message}</p>
             <button class="error-button" onclick="goBack()">Volver al Home</button>
@@ -904,29 +904,29 @@ function goBack() {
 }
 
 function getFileIcon(fileName) {
-    if (!fileName) return '📎';
+    if (!fileName) return 'ðŸ“Ž';
     
     const ext = fileName.split('.').pop().toLowerCase();
     const icons = {
         // Documentos
-        'pdf': '📄',
-        'doc': '📝', 'docx': '📝',
-        'txt': '📃',
-        // Hojas de cálculo
-        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+        'pdf': 'ðŸ“„',
+        'doc': 'ðŸ“', 'docx': 'ðŸ“',
+        'txt': 'ðŸ“ƒ',
+        // Hojas de cÃ¡lculo
+        'xls': 'ðŸ“Š', 'xlsx': 'ðŸ“Š', 'csv': 'ðŸ“Š',
         // Presentaciones
-        'ppt': '📊', 'pptx': '📊',
+        'ppt': 'ðŸ“Š', 'pptx': 'ðŸ“Š',
         // Comprimidos
-        'zip': '📦', 'rar': '📦', '7z': '📦',
-        // Imágenes
-        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+        'zip': 'ðŸ“¦', 'rar': 'ðŸ“¦', '7z': 'ðŸ“¦',
+        // ImÃ¡genes
+        'jpg': 'ðŸ–¼ï¸', 'jpeg': 'ðŸ–¼ï¸', 'png': 'ðŸ–¼ï¸', 'gif': 'ðŸ–¼ï¸', 'webp': 'ðŸ–¼ï¸',
         // Videos
-        'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
-        // Código
-        'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+        'mp4': 'ðŸŽ¬', 'avi': 'ðŸŽ¬', 'mov': 'ðŸŽ¬', 'webm': 'ðŸŽ¬',
+        // CÃ³digo
+        'js': 'ðŸ’»', 'py': 'ðŸ’»', 'java': 'ðŸ’»', 'cpp': 'ðŸ’»', 'html': 'ðŸ’»', 'css': 'ðŸ’»'
     };
     
-    return icons[ext] || '📎';
+    return icons[ext] || 'ðŸ“Ž';
 }
 
 // ==================== THEME ====================
@@ -946,4 +946,4 @@ function loadTheme() {
 
 loadTheme();
 
-console.log('✓ Viewer.js cargado');
+console.log('âœ“ Viewer.js cargado');

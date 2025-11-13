@@ -238,6 +238,126 @@
       ],
       "createdAt": "2025-06-01",
       "updatedAt": "2025-10-30"
+    },
+    {
+      "id": "proj1762463273285",
+      "ownerId": "user2",
+      "title": "YOKADX",
+      "status": "in-progress",
+      "progress": 95,
+      "icon": "📁",
+      "updatedAt": 1762871227497,
+      "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
+    },
+    {
+      "id": "proj1762784041699",
+      "ownerId": "user2",
+      "title": "Quality KPI Dashboard",
+      "status": "in-progress",
+      "progress": 50,
+      "icon": "📊",
+      "currentPhase": "Desarrollo modular de cada apartado del QE Data Center. Cada KPI requiere cumplir con los mismos componentes estructurados. Asi como un apartado en la pantalla principal y su respectivo formulario.\n- Lista SharePoint con datos estructurados.\n- Reporte Power BI conectado a la lista\n- Apartado en la pantalla principal (Power Apps)\n- Pantalla de formulario para actualización \n- (Opcional) Flujos automatizados en Power Automate",
+      "updatedAt": 1762785262325
+    },
+    {
+      "id": "proj1762786312316",
+      "ownerId": "user2",
+      "title": "DX Expenses",
+      "status": "hold",
+      "progress": 50,
+      "icon": "📈",
+      "currentPhase": "Validacion de propuesta de visualización de gastos por departamento en Power BI:\n•\tSe muestran gastos por mes y acumulado.\n•\tFiltros por departamento, cuarto fiscal y unidad de negocio.",
+      "updatedAt": 1762871330112
+    },
+    {
+      "id": "proj1762786524702",
+      "ownerId": "user2",
+      "title": "IATF Dashboard",
+      "status": "discovery",
+      "progress": 0,
+      "icon": "🧾",
+      "currentPhase": "",
+      "updatedAt": 1762787494930
+    },
+    {
+      "id": "proj1762786983969",
+      "ownerId": "user2",
+      "title": "DX Hold (Hold Monitor System) - ME",
+      "status": "completed",
+      "progress": 95,
+      "icon": "📦",
+      "currentPhase": "Unidad Piloto ME\nPruebas finales, validación de usuario y actualización de indicadores (FY25).\nImplementación y despliegue final (Versión FY25).\nCorrecion de errores y mejoras rapidas.\n",
+      "updatedAt": 1762871633978
+    },
+    {
+      "id": "proj1762787282420",
+      "ownerId": "user2",
+      "title": "Jsox Dashboard",
+      "status": "completed",
+      "progress": 100,
+      "icon": "🧾",
+      "currentPhase": "Fases del Proyecto:\n•\tObtener la base de datos de XLS -> XLSX (Proveedor & Interno atreves de DX Team)\n•\tTransformar la DATA para obtener los datos necesarios. \n•\tGenerar La visualización Dashboard (En base a la PPT)\n•\tRealizar Pilots\n•\tEntregar a QDOC Team & mostrar funcionamiento, \n",
+      "updatedAt": 1762787308862
+    },
+    {
+      "id": "proj1762787721514",
+      "ownerId": "user2",
+      "title": "Bot Innovation Zone",
+      "status": "discovery",
+      "progress": 30,
+      "icon": "🧰",
+      "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
+      "updatedAt": 1762873828193
+    },
+    {
+      "id": "proj1762868928286",
+      "ownerId": "user1",
+      "title": "Holo View DX",
+      "status": "discovery",
+      "progress": 10,
+      "icon": "🕶",
+      "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
+      "updatedAt": 1762871122310
+    },
+    {
+      "id": "proj1762869515275",
+      "ownerId": "user1",
+      "title": "QC ALT",
+      "status": "in-progress",
+      "progress": 80,
+      "icon": "📊",
+      "currentPhase": "",
+      "updatedAt": 1762870587096
+    },
+    {
+      "id": "proj1762872345620",
+      "ownerId": "user2",
+      "title": "Don Sillardo",
+      "status": "paused",
+      "progress": 0,
+      "icon": "🪑",
+      "currentPhase": "Se está generando material para una campaña que busca reducir juntas innecesarias y aprovechar mejor el tiempo, fomentando la innovación, la digitalización y el aprendizaje continuo para nutrir nuestra mente.aterial para la generacion de una campaña,que consiste en tratar de no tener tantan juntas sin sentido y aprovechar el  tiempo para poder inovar ,digitalizar y nutrir nuestra mente ",
+      "updatedAt": 1762873058105
+    },
+    {
+      "id": "proj1762875499999",
+      "ownerId": "user2",
+      "title": "Holograma 3D",
+      "status": "discovery",
+      "progress": 0,
+      "icon": "🗾",
+      "currentPhase": "Crear imágenes tridimensionales 3D",
+      "updatedAt": 1762875500483
+    },
+    {
+      "id": "proj1762876915703",
+      "ownerId": "user1",
+      "title": "Portafolio Evidencias DX",
+      "status": "in-progress",
+      "progress": 54,
+      "icon": "🖼",
+      "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
+      "updatedAt": 1763040435658
     }
   ]
 }
