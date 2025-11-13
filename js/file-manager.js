@@ -24,9 +24,9 @@ class FileManager {
 
     try {
         const projectId = projectData.id;
-        console.log('\nÃ¢â€¢â€Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢â€”');
-        console.log(`Ã¢â€¢â€˜  Ã°Å¸â€™Â¾ GUARDANDO PROYECTO ${projectId.substring(0, 15)}...  Ã¢â€¢â€˜`);
-        console.log('Ã¢â€¢Å¡Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â');
+        console.log('\nÃ¢â€¢â€════════════════════════════════════════Ã¢â€¢â€”');
+        console.log(`║  💾 GUARDANDO PROYECTO ${projectId.substring(0, 15)}...  ║`);
+        console.log('Ã¢â€¢Å¡═════════════════════════════════════════');
         console.log(`Ã°Å¸â€˜Â¤ Usuario: ${userId}`);
 
         // 1. Crear estructura de directorios si no existe
@@ -56,49 +56,49 @@ class FileManager {
         }
         console.log('  Ã¢Å“â€¦ Directorios creados');
 
- // âœ… 2. Procesar y guardar Gantt (CON DETECCIÃ“N DE PATH EXISTENTE)
+ // ✅ 2. Procesar y guardar Gantt (CON DETECCIÃ“N DE PATH EXISTENTE)
         if (projectData.ganttImage) {
-            console.log('\nðŸ“Šï¸ Procesando Gantt...');
+            console.log('\n📊ï¸ Procesando Gantt...');
             
-            // âœ… Verificar si ya estÃ¡ guardado (tiene originalGanttPath o es un path)
+            // ✅ Verificar si ya está guardado (tiene originalGanttPath o es un path)
             const isExistingPath = (projectData.originalGanttPath && projectData.originalGanttPath.startsWith('users/')) ||
                                    (typeof projectData.ganttImage === 'string' && projectData.ganttImage.startsWith('users/'));
             
             if (isExistingPath) {
                 // Ya guardado - usar el path existente
                 const existingPath = projectData.originalGanttPath || projectData.ganttImage;
-                console.log('  âœ… Gantt ya existe en:', existingPath);
+                console.log('  ✅ Gantt ya existe en:', existingPath);
                 projectData.ganttImagePath = existingPath;
                 delete projectData.ganttImage;
                 delete projectData.originalGanttPath; // Limpiar campo temporal
-                console.log('  âœ… Usando Gantt existente (no duplicado)');
+                console.log('  ✅ Usando Gantt existente (no duplicado)');
             } else if (projectData.ganttImage.startsWith('data:')) {
                 // Nuevo Gantt en Base64 - guardarlo
-                console.log('  ðŸ“‹ Nuevo Gantt detectado (Base64)');
+                console.log('  📋 Nuevo Gantt detectado (Base64)');
                 console.log('    - Tipo:', typeof projectData.ganttImage);
                 console.log('    - Longitud:', projectData.ganttImage.length);
                 console.log('    - Preview:', projectData.ganttImage.substring(0, 60) + '...');
                 
                 try {
                     const ganttPath = await this.saveGantt(userId, projectId, projectData.ganttImage);
-                    console.log('  âœ… Gantt guardado en:', ganttPath);
+                    console.log('  ✅ Gantt guardado en:', ganttPath);
                     projectData.ganttImagePath = ganttPath;
                     
                     // Limpiar data URI para ahorrar espacio en JSON
                     delete projectData.ganttImage;
-                    console.log('  âœ… Data URI limpiado del JSON');
+                    console.log('  ✅ Data URI limpiado del JSON');
                 } catch (ganttError) {
-                    console.error('  âŒ ERROR guardando Gantt:', ganttError.message);
+                    console.error('  ❌ ERROR guardando Gantt:', ganttError.message);
                     console.error('  Stack:', ganttError.stack);
                     delete projectData.ganttImage;
-                    console.warn('  âš ï¸ Continuando sin Gantt...');
+                    console.warn('  ⚠️ Continuando sin Gantt...');
                 }
             } else {
-                console.warn('  âš ï¸ ganttImage no es Base64 ni path vÃ¡lido');
+                console.warn('  ⚠️ ganttImage no es Base64 ni path válido');
                 delete projectData.ganttImage;
             }
         } else {
-            console.log('\nâŒ No hay Gantt para guardar (ganttImage vacÃ­o o undefined)');
+            console.log('\n❌ No hay Gantt para guardar (ganttImage vacío o undefined)');
         }
 
 
@@ -138,26 +138,26 @@ class FileManager {
             console.log('\nÃ¢â€žÂ¹Ã¯Â¸Â No hay videos para guardar');
         }
 
-        // âœ… 5. Procesar y guardar archivos extras
+        // ✅ 5. Procesar y guardar archivos extras
         if (projectData.extraFiles && projectData.extraFiles.length > 0) {
-            console.log(`\nðŸ“Ž Procesando ${projectData.extraFiles.length} archivos extras...`);
+            console.log(`\n📁Ž Procesando ${projectData.extraFiles.length} archivos extras...`);
             
             try {
                 const extraFilesPaths = await this.saveExtraFiles(userId, projectId, projectData.extraFiles);
-                console.log(`  âœ… ${extraFilesPaths.length}/${projectData.extraFiles.length} archivos guardados`);
+                console.log(`  ✅ ${extraFilesPaths.length}/${projectData.extraFiles.length} archivos guardados`);
                 projectData.extraFiles = extraFilesPaths;
             } catch (fileError) {
-                console.error('  âŒ ERROR guardando archivos extras:', fileError.message);
+                console.error('  ❌ ERROR guardando archivos extras:', fileError.message);
                 console.error('  Stack:', fileError.stack);
-                // Mantener los archivos que sÃ­ se guardaron
-                console.warn('  âš ï¸ Continuando con los archivos guardados hasta ahora...');
+                // Mantener los archivos que sí se guardaron
+                console.warn('  ⚠️ Continuando con los archivos guardados hasta ahora...');
             }
         } else {
-            console.log('\nâŒ No hay archivos extras para guardar');
+            console.log('\n❌ No hay archivos extras para guardar');
         }
 
         // 5. Guardar JSON del proyecto (ligero, sin base64)
-        console.log('\nÃ°Å¸â€™Â¾ Guardando JSON del proyecto...');
+        console.log('\n💾 Guardando JSON del proyecto...');
         console.log('  Ã°Å¸â€œÅ  Resumen del JSON:');
         console.log('    - ID:', projectData.id);
         console.log('    - TÃƒÂ­tulo:', projectData.title);
@@ -176,7 +176,7 @@ class FileManager {
                 status: projectData.status,
                 progress: projectData.progress ?? 0,
                 icon: projectData.icon || 'Ã°Å¸â€œâ€¹',
-                currentPhase: projectData.currentPhase || '',  // âœ… AGREGADO: currentPhase
+                currentPhase: projectData.currentPhase || '',  // ✅ AGREGADO: currentPhase
                 updatedAt: Date.now()
             };
 
@@ -187,26 +187,26 @@ class FileManager {
                 console.warn('Ã¢Å¡Â Ã¯Â¸Â No se pudo actualizar el ÃƒÂ­ndice:', e?.message);
             }
 
-            console.log('\nÃ¢â€¢â€Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢â€”');
-            console.log('Ã¢â€¢â€˜  Ã¢Å“â€¦Ã¢Å“â€¦Ã¢Å“â€¦ PROYECTO GUARDADO EXITOSAMENTE Ã¢Å“â€¦Ã¢Å“â€¦Ã¢Å“â€¦  Ã¢â€¢â€˜');
-            console.log('Ã¢â€¢Å¡Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â\n');
+            console.log('\nÃ¢â€¢â€════════════════════════════════════════Ã¢â€¢â€”');
+            console.log('║  Ã¢Å“â€¦Ã¢Å“â€¦Ã¢Å“â€¦ PROYECTO GUARDADO EXITOSAMENTE Ã¢Å“â€¦Ã¢Å“â€¦Ã¢Å“â€¦  ║');
+            console.log('Ã¢â€¢Å¡═════════════════════════════════════════\n');
 
             // (Opcional) Notificar al Home para refrescar sin recargar
             try { window.electronAPI?.notify?.('dataReloaded'); } catch {}
 
             return true;
         } else {
-            console.error('\nÃ¢â€¢â€Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢â€”');
-            console.error('Ã¢â€¢â€˜  Ã¢ÂÅ’ ERROR GUARDANDO JSON DEL PROYECTO  Ã¢â€¢â€˜');
-            console.error('Ã¢â€¢Å¡Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â');
+            console.error('\nÃ¢â€¢â€════════════════════════════════════════Ã¢â€¢â€”');
+            console.error('║  Ã¢ÂÅ’ ERROR GUARDANDO JSON DEL PROYECTO  ║');
+            console.error('Ã¢â€¢Å¡═════════════════════════════════════════');
             console.error('Error:', result.error);
             return false;
         }
 
     } catch (error) {
-        console.error('\nÃ¢â€¢â€Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢â€”');
-        console.error('Ã¢â€¢â€˜  Ã¢ÂÅ’Ã¢ÂÅ’Ã¢ÂÅ’ ERROR CRÃƒÂTICO EN SAVEPROJECT Ã¢ÂÅ’Ã¢ÂÅ’Ã¢ÂÅ’  Ã¢â€¢â€˜');
-        console.error('Ã¢â€¢Å¡Ã¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢ÂÃ¢â€¢Â');
+        console.error('\nÃ¢â€¢â€════════════════════════════════════════Ã¢â€¢â€”');
+        console.error('║  Ã¢ÂÅ’Ã¢ÂÅ’Ã¢ÂÅ’ ERROR CRÃƒÂTICO EN SAVEPROJECT Ã¢ÂÅ’Ã¢ÂÅ’Ã¢ÂÅ’  ║');
+        console.error('Ã¢â€¢Å¡═════════════════════════════════════════');
         console.error('Error:', error.message);
         console.error('Stack:', error.stack);
         return false;
@@ -224,7 +224,7 @@ async saveImages(userId, projectId, images) {
     const raw = images[i];
     const image = (typeof raw === 'string') ? { src: raw, title: `Imagen ${i+1}` } : raw;
 
-// âœ… Verificar PRIMERO originalPath (significa que ya estÃ¡ guardado)
+// ✅ Verificar PRIMERO originalPath (significa que ya está guardado)
     const hasPath = (typeof image.originalPath === 'string' && image.originalPath.startsWith('users/')) ||
                     (typeof image.src === 'string' && image.src.startsWith('users/'));
     const hasBase64Src = typeof image.src === 'string' && image.src.startsWith('data:');
@@ -233,7 +233,7 @@ async saveImages(userId, projectId, images) {
     if (hasPath) {
       // Ya guardada - usar originalPath o src
       const existingPath = image.originalPath || image.src;
-      console.log(`    âœ… Imagen ${i+1}: Ya existe en ${existingPath}`);
+      console.log(`    ✅ Imagen ${i+1}: Ya existe en ${existingPath}`);
       savedImages.push({ 
         src: existingPath, 
         title: image.title || `Imagen ${i+1}` 
@@ -278,7 +278,7 @@ async saveVideos(userId, projectId, videos) {
     const raw = videos[i];
     const video = (typeof raw === 'string') ? { src: raw, title: `Video ${i+1}` } : raw;
 
-    // âœ… Verificar PRIMERO originalPath (significa que ya estÃ¡ guardado)
+    // ✅ Verificar PRIMERO originalPath (significa que ya está guardado)
     const hasPath = (typeof video.originalPath === 'string' && video.originalPath.startsWith('users/')) ||
                     (typeof video.src === 'string' && video.src.startsWith('users/'));
     const hasBase64Src = typeof video.src === 'string' && video.src.startsWith('data:');
@@ -287,7 +287,7 @@ async saveVideos(userId, projectId, videos) {
     if (hasPath) {
       // Ya guardado - usar originalPath o src
       const existingPath = video.originalPath || video.src;
-      console.log(`    âœ… Video ${i+1}: Ya existe en ${existingPath}`);
+      console.log(`    ✅ Video ${i+1}: Ya existe en ${existingPath}`);
       savedVideos.push({ 
         src: existingPath, 
         title: video.title || `Video ${i+1}` 
@@ -408,7 +408,7 @@ async saveVideos(userId, projectId, videos) {
     // ==================== GANTT OPERATIONS ====================
 
     async saveGantt(userId, projectId, base64Data) {
-        console.log('Ã°Å¸â€™Â¾ saveGantt llamado con:', {
+        console.log('💾 saveGantt llamado con:', {
             userId,
             projectId,
             dataType: typeof base64Data,
@@ -502,7 +502,7 @@ async saveVideos(userId, projectId, videos) {
 
     getExtensionFromMimeType(mimeType) {
         const mimeMap = {
-            // ImÃ¡genes
+            // Imágenes
             'image/png': 'png',
             'image/jpeg': 'jpg',
             'image/jpg': 'jpg',
@@ -519,7 +519,7 @@ async saveVideos(userId, projectId, videos) {
             'application/msword': 'doc',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document': 'docx',
             'text/plain': 'txt',
-            // Hojas de cÃ¡lculo
+            // Hojas de cálculo
             'application/vnd.ms-excel': 'xls',
             'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet': 'xlsx',
             'text/csv': 'csv',
@@ -530,7 +530,7 @@ async saveVideos(userId, projectId, videos) {
             'application/zip': 'zip',
             'application/x-rar-compressed': 'rar',
             'application/x-7z-compressed': '7z',
-            // CÃ³digo
+            // Código
             'text/javascript': 'js',
             'application/json': 'json',
             'text/html': 'html',
@@ -746,24 +746,24 @@ async upsertProjectInIndex(projectMeta) {
 
 async saveExtraFiles(userId, projectId, extraFiles) {
   const savedFiles = [];
-  console.log(`\n  ðŸ“Ž [saveExtraFiles] Iniciando guardado de ${extraFiles.length} archivos...`);
+  console.log(`\n  📁Ž [saveExtraFiles] Iniciando guardado de ${extraFiles.length} archivos...`);
 
   for (let i = 0; i < extraFiles.length; i++) {
     const raw = extraFiles[i];
     const file = (typeof raw === 'string') ? { src: raw, title: `Archivo ${i+1}` } : raw;
 
-// âœ… Verificar PRIMERO originalPath (significa que ya estÃ¡ guardado)
+// ✅ Verificar PRIMERO originalPath (significa que ya está guardado)
     const hasPath = (typeof file.originalPath === 'string' && file.originalPath.startsWith('users/')) ||
                     (typeof file.src === 'string' && file.src.startsWith('users/'));
     const hasBase64Src = typeof file.src === 'string' && file.src.startsWith('data:');
     const hasBase64Data = typeof file.data === 'string' && file.data.startsWith('data:');
 
     if (hasPath) {
-      // Ya guardado fÃ­sicamente - usar originalPath o src
+      // Ya guardado físicamente - usar originalPath o src
       const existingPath = file.originalPath || file.src;
-      console.log(`    âœ… Archivo ${i+1}: Ya existe en ${existingPath}`);
+      console.log(`    ✅ Archivo ${i+1}: Ya existe en ${existingPath}`);
       savedFiles.push({
-        src: existingPath,  // âœ… Usar el path original
+        src: existingPath,  // ✅ Usar el path original
         title: file.title || file.fileName || `Archivo ${i+1}`,
         fileName: file.fileName || 'file',
         fileType: file.fileType || 'application/octet-stream',
@@ -773,15 +773,15 @@ async saveExtraFiles(userId, projectId, extraFiles) {
       continue;
     }
 
-    // Nuevo archivo - guardarlo fÃ­sicamente
+    // Nuevo archivo - guardarlo físicamente
     const base64 = hasBase64Src ? file.src : (hasBase64Data ? file.data : null);
 
     if (!base64) {
-      console.warn(`    âš ï¸ Archivo ${i+1}: Sin datos base64 vÃ¡lidos`);
+      console.warn(`    ⚠️ Archivo ${i+1}: Sin datos base64 válidos`);
       continue;
     }
 
-    // Determinar extensiÃ³n del archivo
+    // Determinar extensión del archivo
     let extension = file.extension || '';
     if (!extension && file.fileName) {
       extension = file.fileName.split('.').pop() || 'bin';
@@ -790,10 +790,10 @@ async saveExtraFiles(userId, projectId, extraFiles) {
       extension = this.getExtensionFromMimeType(file.fileType || 'application/octet-stream');
     }
 
-    // Generar nombre de archivo Ãºnico
+    // Generar nombre de archivo único
     const timestamp = Date.now();
     const safeTitle = (file.fileName || file.title || `archivo-${i+1}`)
-      .replace(/\.[^/.]+$/, '') // Quitar extensiÃ³n si existe
+      .replace(/\.[^/.]+$/, '') // Quitar extensión si existe
       .replace(/[^a-zA-Z0-9-_]/g, '_')
       .substring(0, 30);
     const fileName = `${safeTitle}_${timestamp}.${extension}`;
@@ -801,14 +801,14 @@ async saveExtraFiles(userId, projectId, extraFiles) {
     // Construir path relativo
     const filePath = `users/${userId}/projects/${projectId}/extra-files/${fileName}`;
 
-    console.log(`    ðŸ“Ž Guardando archivo ${i+1}/${extraFiles.length}: ${fileName}`);
+    console.log(`    📁Ž Guardando archivo ${i+1}/${extraFiles.length}: ${fileName}`);
 
     try {
-      // âœ… USAR saveMedia (igual que images y videos)
+      // ✅ USAR saveMedia (igual que images y videos)
       const result = await this.api.saveMedia(filePath, base64);
       
       if (result.success) {
-        console.log(`       âœ… Guardado en: ${filePath}`);
+        console.log(`       ✅ Guardado en: ${filePath}`);
         
         savedFiles.push({
           src: filePath,
@@ -819,15 +819,15 @@ async saveExtraFiles(userId, projectId, extraFiles) {
           extension: extension
         });
       } else {
-        console.error(`       âŒ Error guardando: ${result.error}`);
+        console.error(`       ❌ Error guardando: ${result.error}`);
       }
 
     } catch (err) {
-      console.error(`    âŒ Archivo ${i+1}: Error`, err.message);
+      console.error(`    ❌ Archivo ${i+1}: Error`, err.message);
     }
   }
 
-  console.log(`  ðŸ“Ž Total guardados: ${savedFiles.length}/${extraFiles.length}`);
+  console.log(`  📁Ž Total guardados: ${savedFiles.length}/${extraFiles.length}`);
   return savedFiles;
 }
 
