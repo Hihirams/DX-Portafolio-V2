@@ -261,7 +261,7 @@ function createAchievementItem(date = '', text = '') {
     item.innerHTML = `
         <div class="dynamic-item-header">
             <span class="dynamic-item-title">Logro</span>
-            <button class="btn-remove-item" onclick="removeAchievementItem(this)">Ã—</button>
+            <button class="btn-remove-item" onclick="removeAchievementItem(this)">×</button>
         </div>
         <div class="form-group">
             <label>Fecha (YYYY-MM)</label>
@@ -324,7 +324,7 @@ function createNextStepItem(date = '', text = '') {
     item.innerHTML = `
         <div class="dynamic-item-header">
             <span class="dynamic-item-title">Próximo Paso</span>
-            <button class="btn-remove-item" onclick="removeNextStepItem(this)">Ã—</button>
+            <button class="btn-remove-item" onclick="removeNextStepItem(this)">×</button>
         </div>
         <div class="form-group">
             <label>Fecha (YYYY-MM)</label>
@@ -448,7 +448,7 @@ function loadImages() {
                 <input type="text" class="media-title" value="${img.title}" 
                        onchange="updateImageTitle(${index}, this.value)">
             </div>
-            <button class="btn-remove-media" onclick="removeImage(${index})">Ã—</button>
+            <button class="btn-remove-media" onclick="removeImage(${index})">×</button>
         </div>
     `).join('');
 }
@@ -507,7 +507,7 @@ function loadVideos() {
                 <input type="text" class="media-title" value="${video.title}" 
                        onchange="updateVideoTitle(${index}, this.value)">
             </div>
-            <button class="btn-remove-media" onclick="removeVideo(${index})">Ã—</button>
+            <button class="btn-remove-media" onclick="removeVideo(${index})">×</button>
         </div>
     `).join('');
 }
@@ -547,25 +547,32 @@ function removeVideo(index) {
 function getFileIcon(fileName) {
     if (!fileName) return '📁Ž';
     
-    const ext = fileName.split('.').pop().toLowerCase();
-    const icons = {
-        // Documentos
-        'pdf': '📁„',
-        'doc': '📁', 'docx': '📁',
-        'txt': '📁ƒ',
-        // Hojas de cálculo
-        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
-        // Presentaciones
-        'ppt': '📊', 'pptx': '📊',
-        // Comprimidos
-        'zip': '📁¦', 'rar': '📁¦', '7z': '📁¦',
-        // Imágenes
-        'jpg': 'ðŸ–¼ï¸', 'jpeg': 'ðŸ–¼ï¸', 'png': 'ðŸ–¼ï¸', 'gif': 'ðŸ–¼ï¸', 'webp': 'ðŸ–¼ï¸',
-        // Videos
-        'mp4': 'ðŸŽ¬', 'avi': 'ðŸŽ¬', 'mov': 'ðŸŽ¬', 'webm': 'ðŸŽ¬',
-        // Código
-        'js': 'ðŸ’»', 'py': 'ðŸ’»', 'java': 'ðŸ’»', 'cpp': 'ðŸ’»', 'html': 'ðŸ’»', 'css': 'ðŸ’»'
-    };
+const ext = fileName.split('.').pop().toLowerCase();
+const icons = {
+    // Documentos
+    'pdf': '📄',
+    'doc': '📁', 'docx': '📁',
+    'txt': '📄',
+
+    // Hojas de cálculo
+    'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+
+    // Presentaciones
+    'ppt': '📈', 'pptx': '📈',
+
+    // Comprimidos
+    'zip': '🗜️', 'rar': '🗜️', '7z': '🗜️',
+
+    // Imágenes
+    'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+
+    // Videos
+    'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
+
+    // Código
+    'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+};
+
     
     return icons[ext] || '📁Ž';
 }
@@ -608,7 +615,7 @@ function loadExtraFiles() {
                         <span class="file-size">${sizeInKB} KB</span>
                     </div>
                 </div>
-                <button class="btn-remove-media" onclick="removeExtraFile(${index})">Ã—</button>
+                <button class="btn-remove-media" onclick="removeExtraFile(${index})">×</button>
             </div>
         `;
     }).join('');

@@ -300,22 +300,22 @@ function generateProjectSlides() {
 <div style="display:flex; gap:15px; margin-top:20px; flex-wrap:wrap;">
   ${hasGantt ? `
     <a href="#" class="gantt-link" onclick="(async () => await openGanttModal('${project.id}'))(); return false;">
-      📊 Ver Gantt del Proyecto â†’
+      📊 Ver Gantt del Proyecto
     </a>` : ''}
 
   ${hasVideos ? `
     <a href="#" class="gantt-link video-link" onclick="(async () => await openVideoGallery('${project.id}'))(); return false;">
-      ðŸŽ¬ Galería de Videos â†’
+      🎬 Galería de Videos
     </a>` : ''}
 
   ${hasImages ? `
     <a href="#" class="gantt-link image-link" onclick="(async () => await openImageGallery('${project.id}'))(); return false;">
-      ðŸ–¼ï¸ Galería de Imágenes â†’
+      🖼️ Galería de Imágenes
     </a>` : ''}
 
   ${hasExtraFiles ? `
     <a href="#" class="gantt-link extra-files-link" onclick="openExtraFilesModal('${project.id}'); return false;">
-      📁Ž Archivos Extras â†’
+      📁 Archivos Extras
     </a>` : ''}
 </div>
       </div>
@@ -408,14 +408,14 @@ function generateSummarySlide() {
   const sortedDates = Object.keys(upcomingMilestones).sort();
 
   summarySlide.innerHTML = `
-    <h2 class="project-title" style="margin-bottom: 40px;">ðŸŽ¬ Resumen Ejecutivo</h2>
+    <h2 class="project-title" style="margin-bottom: 40px;">🎬 Resumen Ejecutivo</h2>
 
     <div class="summary-grid">
       ${stats.inProgress > 0 ? `
         <div class="summary-item" style="border-left-color:#30d158;">
           <div class="info-title">✅ ${stats.inProgress} proyecto(s) avanzando según plan</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='in-progress').map(p => `${p.title} (${p.progress}%)`).join(' â€¢ ')}
+            ${projectsToShow.filter(p => p.status==='in-progress').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
         </div>` : ''}
 
@@ -423,7 +423,7 @@ function generateSummarySlide() {
         <div class="summary-item" style="border-left-color:#ff9500;">
           <div class="info-title">â¸ ${stats.hold} proyecto(s) con hold técnico temporal</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Desbloqueo en proceso'}`).join(' â€¢ ')}
+            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Desbloqueo en proceso'}`).join('•')}
           </div>
         </div>` : ''}
 
@@ -431,7 +431,7 @@ function generateSummarySlide() {
         <div class="summary-item" style="border-left-color:#8e8e93;">
           <div class="info-title">â„ï¸ ${stats.paused} proyecto(s) pausado(s)</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join(' â€¢ ')}
+            ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
         </div>` : ''}
 
@@ -439,7 +439,7 @@ function generateSummarySlide() {
         <div class="summary-item" style="border-left-color:#ff9f0a;">
           <div class="info-title">🔍 ${stats.discovery} proyecto(s) en discovery</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join(' â€¢ ')}
+            ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join('•')}
           </div>
         </div>` : ''}
     </div>
@@ -450,13 +450,13 @@ function generateSummarySlide() {
         <div class="info-content">
           ${sortedDates.slice(0,5).map(date => `
             <strong>${formatMonth(date)}:</strong><br>
-            ${upcomingMilestones[date].map(step => `â€¢ ${step}`).join('<br>')}
+            ${upcomingMilestones[date].map(step => `• ${step}`).join('<br>')}
           `).join('<br><br>')}
         </div>
       </div>` : ''}
 
     <div class="cta-box">
-      <div class="cta-text">Â?Decisiones o recursos necesarios?</div>
+      <div class="cta-text">Decisiones o recursos necesarios?</div>
       <p style="margin-top:15px; font-size:16px; color:white;">Espacio para preguntas y respuestas</p>
     </div>
   `;
@@ -581,7 +581,7 @@ async function openVideoGallery(projectId) {
         <div class="video-thumbnail">
           <video src="${thumbSrc}" muted preload="metadata" playsinline
                  style="width:100%; height:140px; border-radius:10px; object-fit:cover"></video>
-          <div class="play-icon">â–¶</div>
+          <div class="play-icon">▶️</div>
           <div class="video-filename">${v.title}</div>
         </div>
       </div>`;
@@ -904,28 +904,33 @@ function goBack() {
 }
 
 function getFileIcon(fileName) {
-    if (!fileName) return '📁Ž';
+    if (!fileName) return '📁';
     
-    const ext = fileName.split('.').pop().toLowerCase();
-    const icons = {
-        // Documentos
-        'pdf': '📁„',
-        'doc': '📁', 'docx': '📁',
-        'txt': '📁ƒ',
-        // Hojas de cálculo
-        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
-        // Presentaciones
-        'ppt': '📊', 'pptx': '📊',
-        // Comprimidos
-        'zip': '📁¦', 'rar': '📁¦', '7z': '📁¦',
-        // Imágenes
-        'jpg': 'ðŸ–¼ï¸', 'jpeg': 'ðŸ–¼ï¸', 'png': 'ðŸ–¼ï¸', 'gif': 'ðŸ–¼ï¸', 'webp': 'ðŸ–¼ï¸',
-        // Videos
-        'mp4': 'ðŸŽ¬', 'avi': 'ðŸŽ¬', 'mov': 'ðŸŽ¬', 'webm': 'ðŸŽ¬',
-        // Código
-        'js': 'ðŸ’»', 'py': 'ðŸ’»', 'java': 'ðŸ’»', 'cpp': 'ðŸ’»', 'html': 'ðŸ’»', 'css': 'ðŸ’»'
-    };
-    
+const ext = fileName.split('.').pop().toLowerCase();
+const icons = {
+    // Documentos
+    'pdf': '📄',
+    'doc': '📁', 'docx': '📁',
+    'txt': '📄',
+
+    // Hojas de cálculo
+    'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+
+    // Presentaciones
+    'ppt': '📈', 'pptx': '📈',
+
+    // Comprimidos
+    'zip': '🗜️', 'rar': '🗜️', '7z': '🗜️',
+
+    // Imágenes
+    'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+
+    // Videos
+    'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
+
+    // Código
+    'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+};
     return icons[ext] || '📁Ž';
 }
 
