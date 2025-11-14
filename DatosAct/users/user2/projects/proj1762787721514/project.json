@@ -1,0 +1,22 @@
+{
+  "id": "proj1762787721514",
+  "ownerId": "user2",
+  "title": "Bot Innovation Zone",
+  "status": "discovery",
+  "progress": 30,
+  "icon": "🧰",
+  "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
+  "updatedAt": "2025-11-11T15:10:28.082Z",
+  "priority": "medium",
+  "targetDate": "2025-11-10",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-10T15:15:21.514Z"
+}
