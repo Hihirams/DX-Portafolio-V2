@@ -421,7 +421,7 @@ function generateSummarySlide() {
 
       ${stats.hold > 0 ? `
         <div class="summary-item" style="border-left-color:#ff9500;">
-          <div class="info-title">â¸ ${stats.hold} proyecto(s) con hold técnico temporal</div>
+          <div class="info-title">🛠️ ${stats.hold} proyecto(s) con hold técnico temporal</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Desbloqueo en proceso'}`).join('•')}
           </div>
@@ -429,7 +429,7 @@ function generateSummarySlide() {
 
       ${stats.paused > 0 ? `
         <div class="summary-item" style="border-left-color:#8e8e93;">
-          <div class="info-title">â„ï¸ ${stats.paused} proyecto(s) pausado(s)</div>
+          <div class="info-title">❄️ ${stats.paused} proyecto(s) pausado(s)</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
@@ -437,7 +437,7 @@ function generateSummarySlide() {
 
       ${stats.discovery > 0 ? `
         <div class="summary-item" style="border-left-color:#ff9f0a;">
-          <div class="info-title">🔍 ${stats.discovery} proyecto(s) en discovery</div>
+          <div class="info-title">🔍 ${stats.discovery} proyecto(s) en discovery</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join('•')}
           </div>
@@ -456,7 +456,7 @@ function generateSummarySlide() {
       </div>` : ''}
 
     <div class="cta-box">
-      <div class="cta-text">Decisiones o recursos necesarios?</div>
+      <div class="cta-text">¿Decisiones o recursos necesarios?</div>
       <p style="margin-top:15px; font-size:16px; color:white;">Espacio para preguntas y respuestas</p>
     </div>
   `;
@@ -870,13 +870,14 @@ function formatMonth(dateString) {
 
 function getBlockerIcon(type) {
     const icons = {
-        info: 'â„¹ï¸',
+        info: 'ℹ️',
         warning: '⚠️',
-        alert: 'ðŸš«',
+        alert: '🚫',
         success: '✅'
     };
-    return icons[type] || 'â„¹ï¸';
+    return icons[type] || 'ℹ️';
 }
+
 
 function getBlockerTitle(type) {
     const titles = {
