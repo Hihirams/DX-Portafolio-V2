@@ -6,6 +6,7 @@
     <title>Portfolio DX - Home</title>
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/carousel-featured.css">
 </head>
 <body>
     <!-- Header -->
@@ -59,6 +60,37 @@
             <!-- Se llenara dinamicamente -->
         </section>
 
+        <!-- Featured Carousel Section -->
+        <section class="featured-carousel-wrapper" id="featuredCarouselWrapper" style="display: none;">
+            <div class="carousel-header">
+                <div class="carousel-title-section">
+                    <span class="star-icon">⭐</span>
+                    <h3>Proyectos Destacados</h3>
+                </div>
+                <div class="carousel-nav-buttons">
+                    <button class="carousel-nav-btn" id="carouselPrevBtn" aria-label="Anterior">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                    <button class="carousel-nav-btn" id="carouselNextBtn" aria-label="Siguiente">
+                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                            <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <div class="featured-carousel-container" id="featuredCarouselContainer">
+                <!-- Featured cards will be generated dynamically -->
+            </div>
+
+            <div class="carousel-indicators-container" id="carouselIndicators">
+                <!-- Indicators will be generated dynamically -->
+            </div>
+        </section>
+
+
         <!-- My Projects Section (Solo si esta loggeado) -->
         <section class="my-projects-section" id="myProjectsSection" style="display: none;">
             <div class="section-header">
@@ -75,7 +107,7 @@
         <!-- Featured Projects -->
         <section class="featured-section">
             <div class="section-header">
-                <h3 class="section-title">⭐ Proyectos Destacados</h3>
+                <h3 class="section-title">Todos los Proyectos</h3>
                 <div class="filter-buttons" id="filterButtons">
                     <button class="filter-btn active" data-filter="all">Todos</button>
                     <button class="filter-btn" data-filter="in-progress">En Progreso</button>
@@ -129,7 +161,7 @@
     <div id="loginModal" class="modal">
         <div class="modal-content login-modal">
             <div class="modal-header">
-                <h3 class="modal-title">🔐 Iniciar Sesion</h3>
+                <h3 class="modal-title">🔐 Iniciar Sesión</h3>
                 <button class="modal-close" onclick="closeLoginModal()">&times;</button>
             </div>
             <form class="login-form" id="loginForm" onsubmit="handleLogin(event)">

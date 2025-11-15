@@ -14,6 +14,7 @@ document.addEventListener('dataLoaded', () => {
 function initHome() {
     updateUserSection();
     renderStatsOverview();
+    initFeaturedCarousel(); // Inicializar carrusel
     renderFeaturedProjects();
     renderTeamGrid();
     setupSearch();
@@ -143,6 +144,211 @@ function renderFeaturedProjects(filter = 'all') {
     }
     
     grid.innerHTML = projects.map(project => createProjectCard(project)).join('');
+}
+
+
+// ==================== FEATURED CAROUSEL ====================
+
+let carouselState = {
+    currentSlide: 0,
+    autoplayInterval: null,
+    autoplayDelay: 5000,
+    featuredProjects: []
+};
+
+function initFeaturedCarousel() {
+    // Obtener proyectos destacados
+    const allProjects = dataManager.getAllProjects();
+    carouselState.featuredProjects = allProjects.filter(p => p.featured === true).slice(0, 5);
+    
+    // Si no hay proyectos destacados, ocultar el carrusel
+    if (carouselState.featuredProjects.length === 0) {
+        document.getElementById('featuredCarouselWrapper').style.display = 'none';
+        return;
+    }
+    
+    // Mostrar el carrusel
+    document.getElementById('featuredCarouselWrapper').style.display = 'block';
+    
+    // Renderizar el carrusel
+    renderCarousel();
+    renderCarouselIndicators();
+    setupCarouselEventListeners();
+    startCarouselAutoplay();
+}
+
+function renderCarousel() {
+    const container = document.getElementById('featuredCarouselContainer');
+    const { featuredProjects } = carouselState;
+    
+    container.innerHTML = featuredProjects.map((project, index) => {
+        const statusConfig = dataManager.getStatusConfig(project.status);
+        const owner = dataManager.getUserById(project.ownerId);
+        const ownerName = owner ? owner.name : 'Desconocido';
+        
+        return `
+            <div class="featured-project-card ${index === 0 ? 'active' : ''}" data-index="${index}">
+                <div class="featured-badge">
+                    <span class="badge-icon">🌟</span>
+                    <span>Proyecto Destacado</span>
+                </div>
+                <div class="featured-status-badge status-${project.status}">
+                    <span class="status-dot"></span>
+                    ${statusConfig.badge}
+                </div>
+                <div class="featured-content">
+                    <div class="featured-project-icon">${project.icon}</div>
+                    <h3 class="featured-project-title">${project.title}</h3>
+                    <p class="featured-project-description">${project.description || project.currentPhase}</p>
+                    <div class="featured-project-meta">
+                        <div class="featured-meta-item">
+                            <span class="featured-meta-label">Fase:</span>
+                            <span class="featured-meta-value">${project.currentPhase || 'N/A'}</span>
+                        </div>
+                        <div class="featured-meta-item">
+                            <span class="featured-meta-label">Líder:</span>
+                            <span class="featured-meta-value">${ownerName}</span>
+                        </div>
+                    </div>
+                    <div class="featured-progress-section">
+                        <div class="featured-progress-header">
+                            <span class="featured-progress-label">Progreso general</span>
+                            <span class="featured-progress-percentage">${project.progress}%</span>
+                        </div>
+                        <div class="featured-progress-bar">
+                            <div class="featured-progress-fill" style="width: ${project.progress}%"></div>
+                        </div>
+                    </div>
+                    <button class="featured-view-btn" onclick="viewProject('${project.id}')">
+                        Ver Detalles
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        `;
+    }).join('');
+    
+    updateCarouselView();
+}
+
+function renderCarouselIndicators() {
+    const container = document.getElementById('carouselIndicators');
+    const { featuredProjects } = carouselState;
+    
+    container.innerHTML = featuredProjects.map((_, index) => `
+        <button class="carousel-indicator ${index === 0 ? 'active' : ''}" 
+                data-index="${index}" 
+                aria-label="Ir a proyecto ${index + 1}">
+        </button>
+    `).join('');
+}
+
+function setupCarouselEventListeners() {
+    // Botones de navegación
+    const prevBtn = document.getElementById('carouselPrevBtn');
+    const nextBtn = document.getElementById('carouselNextBtn');
+    
+    if (prevBtn && nextBtn) {
+        prevBtn.addEventListener('click', () => {
+            carouselPrev();
+            resetCarouselAutoplay();
+        });
+        
+        nextBtn.addEventListener('click', () => {
+            carouselNext();
+            resetCarouselAutoplay();
+        });
+    }
+    
+    // Indicadores
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    indicators.forEach(indicator => {
+        indicator.addEventListener('click', (e) => {
+            const index = parseInt(e.target.dataset.index);
+            goToCarouselSlide(index);
+            resetCarouselAutoplay();
+        });
+    });
+    
+    // Pausar autoplay al pasar el mouse
+    const carouselContainer = document.getElementById('featuredCarouselContainer');
+    if (carouselContainer) {
+        carouselContainer.addEventListener('mouseenter', stopCarouselAutoplay);
+        carouselContainer.addEventListener('mouseleave', startCarouselAutoplay);
+    }
+    
+    // Navegación con teclado
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowLeft') {
+            carouselPrev();
+            resetCarouselAutoplay();
+        } else if (e.key === 'ArrowRight') {
+            carouselNext();
+            resetCarouselAutoplay();
+        }
+    });
+}
+
+function updateCarouselView() {
+    const cards = document.querySelectorAll('.featured-project-card');
+    const indicators = document.querySelectorAll('.carousel-indicator');
+    const { currentSlide, featuredProjects } = carouselState;
+    
+    cards.forEach((card, index) => {
+        card.classList.remove('active', 'prev', 'next');
+        
+        if (index === currentSlide) {
+            card.classList.add('active');
+        } else if (index === (currentSlide - 1 + featuredProjects.length) % featuredProjects.length) {
+            card.classList.add('prev');
+        } else if (index === (currentSlide + 1) % featuredProjects.length) {
+            card.classList.add('next');
+        }
+    });
+    
+    indicators.forEach((indicator, index) => {
+        indicator.classList.toggle('active', index === currentSlide);
+    });
+}
+
+function carouselNext() {
+    const { featuredProjects } = carouselState;
+    carouselState.currentSlide = (carouselState.currentSlide + 1) % featuredProjects.length;
+    updateCarouselView();
+}
+
+function carouselPrev() {
+    const { featuredProjects } = carouselState;
+    carouselState.currentSlide = (carouselState.currentSlide - 1 + featuredProjects.length) % featuredProjects.length;
+    updateCarouselView();
+}
+
+function goToCarouselSlide(index) {
+    carouselState.currentSlide = index;
+    updateCarouselView();
+}
+
+function startCarouselAutoplay() {
+    if (carouselState.featuredProjects.length <= 1) return;
+    
+    stopCarouselAutoplay(); // Limpiar cualquier intervalo existente
+    carouselState.autoplayInterval = setInterval(() => {
+        carouselNext();
+    }, carouselState.autoplayDelay);
+}
+
+function stopCarouselAutoplay() {
+    if (carouselState.autoplayInterval) {
+        clearInterval(carouselState.autoplayInterval);
+        carouselState.autoplayInterval = null;
+    }
+}
+
+function resetCarouselAutoplay() {
+    stopCarouselAutoplay();
+    startCarouselAutoplay();
 }
 
 function createProjectCard(project, showEditButton = false) {
@@ -388,14 +594,14 @@ async function handleLogin(event) {
     showMyProjects();
     errorDiv.style.display = 'none';
   } else {
-    errorDiv.textContent = res.message || 'Usuario o contraseÃ±a incorrectos';
+    errorDiv.textContent = res.message || 'Usuario o contraseña incorrectos';
     errorDiv.style.display = 'block';
   }
 }
 
 
 function handleLogout() {
-    if (confirm('¿Estas seguro de que quieres cerrar sesion?')) {
+    if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
         dataManager.logout();
         
         // Actualizar la UI
