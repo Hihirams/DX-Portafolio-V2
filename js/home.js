@@ -19,6 +19,7 @@ function initHome() {
     renderTeamGrid();
     setupSearch();
     setupFilters();
+    setupAllProjectsCarousel(); // Configurar carrusel de todos los proyectos
     
     // Si esta loggeado, mostrar "Mis Proyectos"
     if (dataManager.isLoggedIn()) {
@@ -122,28 +123,221 @@ function showMyProjects() {
     grid.innerHTML = myProjects.map(project => createProjectCard(project, true)).join('');
 }
 
-// ==================== FEATURED PROJECTS ====================
 
+// ==================== ALL PROJECTS CAROUSEL ====================
+
+// Estado del carrusel de todos los proyectos
+let allProjectsCarouselState = {
+    scrollPosition: 0,
+    scrollStep: 300,
+    currentFilter: 'all'
+};
+
+// Función para randomizar array (Fisher-Yates shuffle)
+function shuffleArray(array) {
+    const shuffled = [...array];
+    for (let i = shuffled.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [shuffled[i], shuffled[j]] = [shuffled[j], shuffled[i]];
+    }
+    return shuffled;
+}
+
+// ALGORITMO INTELIGENTE: Las tarjetas "piensan" y buscan su espacio
+function arrangeProjectCardsIntelligently(projects) {
+    // RANDOMIZAR el orden para tener variedad visual
+    const sortedProjects = shuffleArray(projects);
+    
+    // Grid virtual: 2 filas, columnas infinitas
+    const grid = [];
+    const ROWS = 2;
+    let maxCol = 0;
+    
+    // Inicializar grid con columnas suficientes
+    for (let i = 0; i < 100; i++) {
+        grid[i] = Array(ROWS).fill(0);
+    }
+    
+    const placement = [];
+    
+    sortedProjects.forEach((project, index) => {
+        let cols, rows, size;
+        
+        // Determinar tamaño basado en importancia o alternar
+        // Tarjetas importantes (featured) son más grandes
+        if (project.featured || index % 7 === 0) {
+            size = 'large';
+            cols = 2; rows = 2;
+        } else if (index % 5 === 0) {
+            size = 'tall';
+            cols = 1; rows = 2;
+        } else if (index % 4 === 0) {
+            size = 'wide';
+            cols = 2; rows = 1;
+        } else {
+            size = 'small';
+            cols = 1; rows = 1;
+        }
+        
+        // Buscar primer espacio disponible
+        let placed = false;
+        for (let col = 0; col < 100 && !placed; col++) {
+            for (let row = 0; row <= ROWS - rows && !placed; row++) {
+                // Verificar si cabe aquí
+                let canPlace = true;
+                for (let c = 0; c < cols; c++) {
+                    for (let r = 0; r < rows; r++) {
+                        if (grid[col + c][row + r] !== 0) {
+                            canPlace = false;
+                            break;
+                        }
+                    }
+                    if (!canPlace) break;
+                }
+                
+                if (canPlace) {
+                    // ¡Encontré mi espacio! Me coloco aquí
+                    for (let c = 0; c < cols; c++) {
+                        for (let r = 0; r < rows; r++) {
+                            grid[col + c][row + r] = project.id;
+                        }
+                    }
+                    placement.push({ 
+                        ...project, 
+                        col: col + 1, 
+                        row: row + 1,
+                        size: size,
+                        cols: cols,
+                        rows: rows
+                    });
+                    maxCol = Math.max(maxCol, col + cols);
+                    placed = true;
+                }
+            }
+        }
+    });
+    
+    return placement;
+}
+
+// Función para crear una tarjeta del carrusel
+function createCarouselProjectCard(project) {
+    const statusConfig = dataManager.getStatusConfig(project.status);
+    const owner = dataManager.getUserById(project.ownerId);
+    const ownerName = owner ? owner.name : 'Desconocido';
+    
+    // Color de fondo basado en el status
+    const bgGradient = `linear-gradient(135deg, ${statusConfig.color}20, ${statusConfig.color}40)`;
+    
+    return `
+        <div class="carousel-project-card carousel-card--${project.size}" 
+             style="grid-column: ${project.col} / span ${project.cols}; grid-row: ${project.row} / span ${project.rows};"
+             onclick="viewProject('${project.id}')">
+            <div class="carousel-card__background" style="background: ${bgGradient};"></div>
+            <div class="carousel-card__content">
+                <div class="carousel-card__header">
+                    <div class="carousel-card__icon">${project.icon}</div>
+                    <div class="carousel-card__badge ${statusConfig.badgeClass}">
+                        ${statusConfig.badge}
+                    </div>
+                </div>
+                <h3 class="carousel-card__title">${project.title}</h3>
+                <p class="carousel-card__description">${project.currentPhase || 'Sin fase definida'}</p>
+                <div class="carousel-card__footer">
+                    <div class="carousel-card__progress">
+                        <div class="carousel-progress-header">
+                            <span class="carousel-progress-label">Progreso</span>
+                            <span class="carousel-progress-percentage">${project.progress}%</span>
+                        </div>
+                        <div class="carousel-progress-bar">
+                            <div class="carousel-progress-fill" style="width: ${project.progress}%"></div>
+                        </div>
+                    </div>
+                    <div class="carousel-card__owner">
+                        <div class="carousel-owner-avatar">${getInitials(ownerName)}</div>
+                        <span class="carousel-owner-name">${ownerName}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+// Función principal para renderizar proyectos destacados con carrusel
 function renderFeaturedProjects(filter = 'all') {
-    const grid = document.getElementById('featuredProjectsGrid');
+    allProjectsCarouselState.currentFilter = filter;
     
     let projects = dataManager.getAllProjects();
     
+    // Aplicar filtro
     if (filter !== 'all') {
         projects = projects.filter(p => p.status === filter);
     }
     
+    const track = document.getElementById('allProjectsCarouselTrack');
+    
     if (projects.length === 0) {
-        grid.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-state-icon">🔍</div>
-                <div class="empty-state-title">No hay proyectos en esta categoria</div>
+        track.innerHTML = `
+            <div class="empty-state" style="grid-column: 1; grid-row: 1 / span 2; padding: 40px; text-align: center;">
+                <div class="empty-state-icon">📁</div>
+                <div class="empty-state-title">No hay proyectos en esta categoría</div>
             </div>
         `;
+        updateAllProjectsCarousel();
         return;
     }
     
-    grid.innerHTML = projects.map(project => createProjectCard(project)).join('');
+    // Arranjar las tarjetas inteligentemente
+    const arrangedProjects = arrangeProjectCardsIntelligently(projects);
+    
+    // Renderizar
+    track.innerHTML = arrangedProjects.map(project => createCarouselProjectCard(project)).join('');
+    
+    // Resetear posición y actualizar controles
+    allProjectsCarouselState.scrollPosition = 0;
+    updateAllProjectsCarousel();
+}
+
+// Actualizar el carrusel (scroll y botones)
+function updateAllProjectsCarousel() {
+    const track = document.getElementById('allProjectsCarouselTrack');
+    const viewport = document.querySelector('.all-projects-carousel-viewport');
+    const leftArrow = document.getElementById('allProjectsCarouselLeft');
+    const rightArrow = document.getElementById('allProjectsCarouselRight');
+    
+    if (!track || !viewport) return;
+    
+    const maxScroll = Math.max(0, track.scrollWidth - viewport.offsetWidth);
+    
+    allProjectsCarouselState.scrollPosition = Math.max(0, Math.min(allProjectsCarouselState.scrollPosition, maxScroll));
+    track.style.transform = `translateX(-${allProjectsCarouselState.scrollPosition}px)`;
+    
+    if (leftArrow) leftArrow.disabled = allProjectsCarouselState.scrollPosition <= 0;
+    if (rightArrow) rightArrow.disabled = allProjectsCarouselState.scrollPosition >= maxScroll - 1;
+}
+
+// Configurar eventos del carrusel
+function setupAllProjectsCarousel() {
+    const leftArrow = document.getElementById('allProjectsCarouselLeft');
+    const rightArrow = document.getElementById('allProjectsCarouselRight');
+    
+    if (leftArrow) {
+        leftArrow.addEventListener('click', () => {
+            allProjectsCarouselState.scrollPosition -= allProjectsCarouselState.scrollStep;
+            updateAllProjectsCarousel();
+        });
+    }
+    
+    if (rightArrow) {
+        rightArrow.addEventListener('click', () => {
+            allProjectsCarouselState.scrollPosition += allProjectsCarouselState.scrollStep;
+            updateAllProjectsCarousel();
+        });
+    }
+    
+    window.addEventListener('resize', () => {
+        setTimeout(updateAllProjectsCarousel, 100);
+    });
 }
 
 
@@ -246,18 +440,18 @@ function renderCarouselIndicators() {
 }
 
 function setupCarouselEventListeners() {
-    // Botones de navegación
+    // Botones de navegaciÃ³n
     const prevBtn = document.getElementById('carouselPrevBtn');
     const nextBtn = document.getElementById('carouselNextBtn');
     
     if (prevBtn && nextBtn) {
         prevBtn.addEventListener('click', () => {
-            carouselPrev();
+            carouselNext();
             resetCarouselAutoplay();
         });
         
         nextBtn.addEventListener('click', () => {
-            carouselNext();
+            carouselPrev();
             resetCarouselAutoplay();
         });
     }
@@ -279,7 +473,7 @@ function setupCarouselEventListeners() {
         carouselContainer.addEventListener('mouseleave', startCarouselAutoplay);
     }
     
-    // Navegación con teclado
+    // NavegaciÃ³n con teclado
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
             carouselPrev();
@@ -680,6 +874,6 @@ console.log('OK Home.js cargado');
 
 // Escuchar cuando se recargan los datos
 window.addEventListener('dataReloaded', () => {
-    console.log('🔄 Datos recargados, actualizando UI...');
+    console.log('📤 Datos recargados, actualizando UI...');
     initHome();
 });

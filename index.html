@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/carousel-featured.css">
+    <link rel="stylesheet" href="css/carousel-all-projects.css">
 </head>
 <body>
     <!-- Header -->
@@ -104,8 +105,9 @@
             </div>
         </section>
 
-        <!-- Featured Projects -->
-        <section class="featured-section">
+
+        <!-- Featured Projects / Todos los Proyectos - FULL WIDTH -->
+        <section class="featured-section-full-width">
             <div class="section-header">
                 <h3 class="section-title">Todos los Proyectos</h3>
                 <div class="filter-buttons" id="filterButtons">
@@ -116,11 +118,28 @@
                     <button class="filter-btn" data-filter="completed">Terminados</button>
                 </div>
             </div>
-            <div class="projects-grid" id="featuredProjectsGrid">
-                <!-- Se llenara dinamicamente -->
+            
+            <!-- Carrusel de Proyectos -->
+            <div class="all-projects-carousel-wrapper">
+                <button class="all-projects-carousel-arrow all-projects-carousel-arrow--left" id="allProjectsCarouselLeft" aria-label="Anterior">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                
+                <div class="all-projects-carousel-viewport">
+                    <div class="all-projects-carousel-track" id="allProjectsCarouselTrack">
+                        <!-- Las tarjetas se generan dinámicamente -->
+                    </div>
+                </div>
+                
+                <button class="all-projects-carousel-arrow all-projects-carousel-arrow--right" id="allProjectsCarouselRight" aria-label="Siguiente">
+                    <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+                        <path d="M7.5 5L12.5 10L7.5 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
             </div>
         </section>
-
         <!-- Team Section -->
         <section class="team-section">
             <div class="section-header">
@@ -205,6 +224,7 @@
 
     <!-- Scripts -->
     <!-- Data Loader DEV: Carga datos sin Electron (usar en desarrollo) -->
+    <!-- ⚠️ Hot-reload DESACTIVADO por defecto. Para activarlo, descomenta dataWatcher.start() en js/data-loader-dev.js -->
     <script src="js/data-loader-dev.js"></script>
     
     <script src="js/file-manager.js"></script>
