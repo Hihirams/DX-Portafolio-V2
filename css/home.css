@@ -196,7 +196,7 @@ body {
 
 .stat-card:hover {
     background: var(--bg-card-hover);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .stat-number {
@@ -320,7 +320,7 @@ body {
 
 .project-card:hover {
     background: var(--bg-card-hover);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
 }
 
@@ -509,7 +509,7 @@ body {
 
 .team-card:hover {
     background: var(--bg-card-hover);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05);
 }
 
 .team-avatar {

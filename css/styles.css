@@ -174,7 +174,7 @@ body.light-theme {
         .stat-card:hover {
             background: var(--bg-card-hover);
             border-color: var(--border-color);
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.05);
         }
 
         .stat-number {
