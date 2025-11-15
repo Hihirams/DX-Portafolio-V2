@@ -3,3 +3,11 @@ dist/
 *.log
 .DS_Store
 Thumbs.db
+js/data-loader-dev.js
+test-data-loading.html
+README-DESARROLLO.md
+INICIO-RAPIDO.md
+GUIA-VISUAL.js
+DEV-SETUP.md
+dev-server.js
+dev-server.bat
