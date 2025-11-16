@@ -1,7 +1,12 @@
 // ============================================
-// DATA MANAGER - Sistema de gestiÃ³n de datos con archivos locales (Electron)
-// âœ… VERSIÃ“N CORREGIDA - Con persistencia de sesiÃ³n
+// DATA MANAGER - Sistema de gestión de datos con archivos locales (Electron)
+// ✅ VERSIÓN CORREGIDA - Con persistencia de sesión
 // ============================================
+
+// Declarar variable global en window si no existe
+if (typeof window !== 'undefined' && typeof window.dataManager === 'undefined') {
+    window.dataManager = null;
+}
 
 class DataManager {
     constructor() {
@@ -10,7 +15,7 @@ class DataManager {
         this.config = {};
         this.currentUser = null;
         
-        // âœ… Restaurar sesiÃ³n al inicializar
+        // ✅ Restaurar sesión al inicializar
         this.restoreSession();
     }
 
@@ -74,16 +79,21 @@ class DataManager {
         if (!indexProj) return null;
 
         try {
-            const full = await fileManager.loadProject(indexProj.ownerId, projectId);
+            const fm = typeof window !== 'undefined' ? window.fileManager : null;
+            if (!fm || !fm.isElectron) {
+                return indexProj; // fallback si no hay Electron
+            }
+            
+            const full = await fm.loadProject(indexProj.ownerId, projectId);
             if (!full) return indexProj; // fallback
 
             // Normaliza alias del gantt
             if (!full.ganttImage && full.ganttImagePath) full.ganttImage = full.ganttImagePath;
 
-            // Mezcla datos del Ã­ndice (status/progress/etc.) con el JSON completo (media, descripcionesâ€¦)
+            // Mezcla datos del índice (status/progress/etc.) con el JSON completo (media, descripciones…)
             return { ...indexProj, ...full };
         } catch (e) {
-            console.warn('âš ï¸ loadFullProject: usando Ã­ndice por fallback', e?.message);
+            console.warn('⚠️ loadFullProject: usando índice por fallback', e?.message);
             return indexProj;
         }
     }
@@ -92,31 +102,65 @@ class DataManager {
 
     async loadAllData() {
         try {
+            console.log('🔄 Cargando todos los datos...');
+            
             await Promise.all([
                 this.loadUsers(),
                 this.loadProjects(),
                 this.loadConfig()
             ]);
-            console.log('âœ… Todos los datos cargados correctamente');
             
-            // âœ… Restaurar sesiÃ³n despuÃ©s de cargar datos
+            console.log('✅ Todos los datos cargados correctamente');
+            
+            // ✅ Restaurar sesión después de cargar datos
             this.restoreSession();
             
             return true;
         } catch (error) {
-            console.error('âŒ Error cargando datos:', error);
+            console.error('❌ Error cargando datos:', error);
             return false;
         }
     }
 
     async loadUsers() {
         try {
-            const users = await fileManager.loadUsers();
-            this.users = users;
-            console.log(`âœ… ${this.users.length} usuarios cargados`);
+            // Intentar usar fileManager si está disponible (Electron)
+            const fm = typeof window !== 'undefined' ? window.fileManager : null;
+            if (fm && fm.isElectron) {
+                const users = await fm.loadUsers();
+                this.users = users;
+                console.log(`✅ ${this.users.length} usuarios cargados`);
+                return this.users;
+            } else {
+                // Fallback: cargar desde API REST (desarrollo)
+                console.log('👥 Usando fallback - cargando usuarios desde data/ (no-Electron)');
+                return await this.loadUsersFromFiles();
+            }
+        } catch (error) {
+            console.error('❌ Error cargando usuarios:', error);
+            // Intentar fallback
+            try {
+                return await this.loadUsersFromFiles();
+            } catch (fallbackError) {
+                console.error('❌ Fallback también falló:', fallbackError);
+                this.users = [];
+                return [];
+            }
+        }
+    }
+
+    async loadUsersFromFiles() {
+        try {
+            const response = await fetch('data/users.json');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const data = await response.json();
+            this.users = data.users || [];
+            console.log(`✅ ${this.users.length} usuarios cargados desde archivos`);
             return this.users;
         } catch (error) {
-            console.error('âŒ Error cargando usuarios:', error);
+            console.warn('⚠️ No se pudo cargar users.json:', error);
             this.users = [];
             return [];
         }
@@ -124,13 +168,45 @@ class DataManager {
 
     async loadProjects() {
         try {
-            // Cargar proyectos completos desde data/projects.json
-            const projects = await fileManager.loadAllProjects();
-            this.projects = projects;
-            console.log(`âœ… ${this.projects.length} proyectos cargados`);
+            // Intentar usar fileManager si está disponible (Electron)
+            const fm = typeof window !== 'undefined' ? window.fileManager : null;
+            if (fm && fm.isElectron) {
+                const projects = await fm.loadAllProjects();
+                this.projects = projects;
+                console.log(`✅ ${this.projects.length} proyectos cargados`);
+                return this.projects;
+            } else {
+                // Fallback: cargar desde API REST (desarrollo)
+                console.log('📂 Usando fallback - cargando desde data/ (no-Electron)');
+                return await this.loadProjectsFromFiles();
+            }
+        } catch (error) {
+            console.error('❌ Error cargando proyectos:', error);
+            // Intentar fallback si falla fileManager
+            try {
+                return await this.loadProjectsFromFiles();
+            } catch (fallbackError) {
+                console.error('❌ Fallback también falló:', fallbackError);
+                this.projects = [];
+                return [];
+            }
+        }
+    }
+
+    async loadProjectsFromFiles() {
+        try {
+            // Intentar cargar desde data/projects.json via fetch
+            const response = await fetch('data/projects.json');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const data = await response.json();
+            this.projects = data.projects || [];
+            console.log(`✅ ${this.projects.length} proyectos cargados desde archivos`);
             return this.projects;
         } catch (error) {
-            console.error('âŒ Error cargando proyectos:', error);
+            console.warn('⚠️ No se pudo cargar projects.json:', error);
+            // Retornar array vacío en vez de fallar completamente
             this.projects = [];
             return [];
         }
@@ -138,14 +214,38 @@ class DataManager {
 
     async loadConfig() {
         try {
-            const config = await fileManager.loadConfig();
-            this.config = config;
-            console.log('âœ… ConfiguraciÃ³n cargada');
-            return this.config;
+            // Intentar usar fileManager si está disponible (Electron)
+            const fm = typeof window !== 'undefined' ? window.fileManager : null;
+            if (fm && fm.isElectron) {
+                const config = await fm.loadConfig();
+                this.config = config;
+                console.log('✅ Configuración cargada');
+                return this.config;
+            } else {
+                // Fallback: cargar desde API REST (desarrollo)
+                console.log('⚙️ Usando fallback - cargando config desde data/ (no-Electron)');
+                return await this.loadConfigFromFiles();
+            }
         } catch (error) {
-            console.error('âŒ Error cargando config:', error);
+            console.error('❌ Error cargando config:', error);
+            // Fallback a config por defecto
             this.config = this.getDefaultConfig();
             return this.config;
+        }
+    }
+
+    async loadConfigFromFiles() {
+        try {
+            const response = await fetch('config.json');
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}`);
+            }
+            const config = await response.json();
+            console.log('✅ Configuración cargada desde archivo');
+            return config;
+        } catch (error) {
+            console.warn('⚠️ No se pudo cargar config.json, usando default:', error);
+            return this.getDefaultConfig();
         }
     }
 
@@ -549,7 +649,13 @@ class DataManager {
     }
 }
 
-// Instancia global
-const dataManager = new DataManager();
+// Instancia global - asegurar disponibilidad en window
+if (typeof window !== 'undefined') {
+    window.dataManager = window.dataManager || new DataManager();
+    dataManager = window.dataManager;
+} else {
+    const dataManager = new DataManager();
+}
 
-console.log('âœ… Data Manager (Electron) cargado con persistencia de sesiÃ³n');
+console.log('✅ Data Manager (Electron) cargado con persistencia de sesión');
+console.log('   - Disponible en window.dataManager:', typeof window !== 'undefined' && typeof window.dataManager !== 'undefined');

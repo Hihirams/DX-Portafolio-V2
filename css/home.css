@@ -202,6 +202,27 @@ body.light-theme .search-results-header::-webkit-scrollbar-thumb:hover {
     transform: scale(1.05);
 }
 
+/* ✅ NUEVO: Botón Project Manager */
+.btn-project-manager {
+    padding: 8px 20px;
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-color);
+    border-radius: 20px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.btn-project-manager:hover {
+    background: var(--bg-card);
+    border-color: #34c759;
+    color: #34c759;
+    transform: scale(1.05);
+}
+
 /* ✅ NUEVO: Botón de tema en el header */
 .theme-toggle-header {
     width: 40px;

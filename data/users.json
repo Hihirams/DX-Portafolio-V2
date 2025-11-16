@@ -12,7 +12,7 @@
     },
     {
       "id": "user2",
-    "username": "sandra.santos",
+      "username": "sandra.santos",
       "password": "demo123",
       "name": "Sandra Santos",
       "role": "Project Evaluation",

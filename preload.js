@@ -46,4 +46,7 @@ contextBridge.exposeInMainWorld('electronAPI', {
     createUserDir: (userId) => ipcRenderer.invoke('user:createDir', userId)
 });
 
-console.log('âœ“ Preload script cargado');
+// Exponer información de Electron al window global
+contextBridge.exposeInMainWorld('isElectron', true);
+
+console.log('✓ Preload script cargado');

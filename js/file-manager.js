@@ -2,15 +2,20 @@
 // FILE MANAGER - Sistema de gestion de archivos local (Electron)
 // ============================================
 
+// Declarar variable global en window si no existe
+if (typeof window !== 'undefined' && typeof window.fileManager === 'undefined') {
+    window.fileManager = null;
+}
+
 class FileManager {
     constructor() {
         this.api = window.electronAPI;
         this.isElectron = typeof window.electronAPI !== 'undefined';
         
         if (!this.isElectron) {
-            console.error('ÃƒÂ¢Ã‚ÂÃ…â€™ Electron API no disponible. Esta aplicacion requiere Electron.');
+            console.error('❌ Electron API no disponible. Esta aplicacion requiere Electron.');
         } else {
-            console.log('ÃƒÂ¢Ã…â€œÃ¢â‚¬Â¦ Electron API disponible');
+            console.log('✓ Electron API disponible');
         }
     }
 
@@ -689,7 +694,6 @@ async saveVideos(userId, projectId, videos) {
 
 // file-manager.js -> loadAllProjects()
 async loadAllProjects() {
-  if (!this.isElectron) return [];
 
   try {
     // Si no existe, crÃƒÆ’Ã‚Â©alo vacÃƒÆ’Ã‚Â­o
@@ -833,7 +837,13 @@ async saveExtraFiles(userId, projectId, extraFiles) {
 
 }
 
-// Instancia global
-const fileManager = new FileManager();
+// Instancia global - asegurar disponibilidad en window
+if (typeof window !== 'undefined') {
+    window.fileManager = window.fileManager || new FileManager();
+    fileManager = window.fileManager;
+} else {
+    const fileManager = new FileManager();
+}
 
-console.log('ÃƒÂ¢Ã…â€œÃ¢â‚¬Å“ File Manager (Electron) cargado');
+console.log('✓ File Manager (Electron) cargado');
+console.log('   - Disponible en window.fileManager:', typeof window !== 'undefined' && typeof window.fileManager !== 'undefined');

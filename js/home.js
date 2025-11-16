@@ -69,7 +69,7 @@ function updateUserSection() {
         // No loggeado - ✅ Botón de tema AL FINAL
         userSection.innerHTML = `
             <button class="btn-login" onclick="openLoginModal()">
-                Iniciar Sesión
+                Login
             </button>
             ${themeButton}
         `;
@@ -938,6 +938,15 @@ function openGeneralPortfolio() {
 
     // Redirigir al visor sin parámetros = mostrar todos los proyectos
     window.location.href = 'portfolio-viewer.html';
+}
+
+// ==================== PROJECT MANAGER ====================
+
+function openProjectManager() {
+    console.log('📈 Abriendo Project Manager - Vista ejecutiva');
+    
+    // Redirigir al Project Manager
+    window.location.href = 'project-manager.html';
 }
 
 // Cargar tema al iniciar
