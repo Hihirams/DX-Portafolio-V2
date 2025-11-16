@@ -20,7 +20,29 @@
                     <p class="logo-subtitle">Digital Transformation Team</p>
                 </div>
             </div>
+
+            <!-- ✅ NUEVO: Buscador centrado en el header -->
+            <div class="header-center">
+                <div class="search-container">
+                    <input
+                        type="text"
+                        class="search-input"
+                        id="searchInput"
+                        placeholder="Buscar proyectos o personas..."
+                    >
+                    <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                </div>
+            </div>
+
             <nav class="header-nav">
+                <!-- ✅ NUEVO: Botón Portafolio General -->
+                <button class="btn-portfolio-general" onclick="openGeneralPortfolio()">
+                    Portafolio DX
+                </button>
+
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
                     <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                         <circle cx="12" cy="12" r="5"></circle>
@@ -37,11 +59,16 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                
+
                 <div class="user-section" id="userSection">
-                    <!-- Se llenara dinamicamente -->
+                    <!-- Se llenará dinámicamente -->
                 </div>
             </nav>
+        </div>
+
+        <!-- ✅ Resultados de búsqueda dentro del header -->
+        <div class="search-results-header" id="searchResults" style="display: none;">
+            <!-- Se llenará dinámicamente -->
         </div>
     </header>
 
@@ -150,24 +177,7 @@
             </div>
         </section>
 
-        <!-- Search Section -->
-        <section class="search-section">
-            <div class="search-container">
-                <input 
-                    type="text" 
-                    class="search-input" 
-                    id="searchInput"
-                    placeholder="Buscar proyectos o personas..."
-                >
-                <svg class="search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="11" cy="11" r="8"></circle>
-                    <path d="m21 21-4.35-4.35"></path>
-                </svg>
-            </div>
-            <div class="search-results" id="searchResults" style="display: none;">
-                <!-- Se llenara dinamicamente -->
-            </div>
-        </section>
+
 
     </main>
 

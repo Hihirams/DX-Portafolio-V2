@@ -637,20 +637,25 @@ function setupFilters() {
 function setupSearch() {
     const searchInput = document.getElementById('searchInput');
     const searchResults = document.getElementById('searchResults');
-    
+
+    if (!searchInput || !searchResults) {
+        console.warn('⚠️ Elementos de búsqueda no encontrados');
+        return;
+    }
+
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
-        
+
         if (query.length < 2) {
             searchResults.style.display = 'none';
             return;
         }
-        
+
         const projects = dataManager.searchProjects(query);
-        const users = dataManager.users.filter(user => 
+        const users = dataManager.users.filter(user =>
             user.name.toLowerCase().includes(query.toLowerCase())
         );
-        
+
         if (projects.length === 0 && users.length === 0) {
             searchResults.innerHTML = `
                 <div class="empty-state">
@@ -661,9 +666,9 @@ function setupSearch() {
             searchResults.style.display = 'block';
             return;
         }
-        
+
         let html = '';
-        
+
         if (projects.length > 0) {
             html += '<h4 style="margin-bottom: 15px; color: var(--text-primary);">Proyectos</h4>';
             projects.forEach(project => {
@@ -675,7 +680,7 @@ function setupSearch() {
                 `;
             });
         }
-        
+
         if (users.length > 0) {
             html += '<h4 style="margin: 20px 0 15px; color: var(--text-primary);">Personas</h4>';
             users.forEach(user => {
@@ -687,15 +692,23 @@ function setupSearch() {
                 `;
             });
         }
-        
+
         searchResults.innerHTML = html;
         searchResults.style.display = 'block';
     });
-    
+
     // Cerrar resultados al hacer clic fuera
     document.addEventListener('click', (e) => {
         if (!searchInput.contains(e.target) && !searchResults.contains(e.target)) {
             searchResults.style.display = 'none';
+        }
+    });
+
+    // Cerrar al presionar ESC
+    document.addEventListener('keydown', (e) => {
+        if (e.key === 'Escape') {
+            searchResults.style.display = 'none';
+            searchInput.blur();
         }
     });
 }
@@ -865,6 +878,44 @@ function loadTheme() {
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
     }
+}
+
+// ==================== HEADER AUTO-HIDE ====================
+
+let lastScrollTop = 0;
+const scrollThreshold = 10; // Sensibilidad del scroll
+
+window.addEventListener('scroll', () => {
+    const header = document.querySelector('.main-header');
+    const currentScroll = window.pageYOffset || document.documentElement.scrollTop;
+
+    // Evitar cambios en scrolls pequeños
+    if (Math.abs(currentScroll - lastScrollTop) < scrollThreshold) {
+        return;
+    }
+
+    if (currentScroll > lastScrollTop && currentScroll > 100) {
+        // Scroll hacia abajo - ocultar header
+        header.style.transform = 'translateY(-100%)';
+    } else {
+        // Scroll hacia arriba - mostrar header
+        header.style.transform = 'translateY(0)';
+    }
+
+    lastScrollTop = currentScroll <= 0 ? 0 : currentScroll;
+});
+
+// ==================== PORTAFOLIO GENERAL ====================
+
+function openGeneralPortfolio() {
+    // Limpiar cualquier filtro previo
+    localStorage.removeItem('viewingUserId');
+    localStorage.removeItem('viewingProjectId');
+
+    console.log('📊 Abriendo portafolio general (todos los proyectos)');
+
+    // Redirigir al visor sin parámetros = mostrar todos los proyectos
+    window.location.href = 'portfolio-viewer.html';
 }
 
 // Cargar tema al iniciar
