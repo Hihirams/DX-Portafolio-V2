@@ -1752,3 +1752,54 @@ body.presentation-mode .modal-header .modal-close {
 body.presentation-mode .presentation-btn svg {
     transform: rotate(180deg);
 }
+
+/* ==================== GRADIENT STYLING ==================== */
+
+/* Gradiente para textos grandes (logo principal) */
+.logo-gradient {
+    font-weight: 600;
+    letter-spacing: -2px;
+    background: linear-gradient(90deg,
+        #1d4e89 0%,
+        #2666a8 8%,
+        #6a8eb5 20%,
+        #9d7f4e 40%,
+        #c9a862 65%,
+        #ddb968 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Aplica el gradiente al logo principal */
+.logo {
+    background: linear-gradient(90deg,
+        #1d4e89 0%,
+        #2666a8 8%,
+        #6a8eb5 20%,
+        #9d7f4e 40%,
+        #c9a862 65%,
+        #ddb968 100%
+    ) !important;
+    -webkit-background-clip: text !important;
+    -webkit-text-fill-color: transparent !important;
+    background-clip: text !important;
+}
+
+/* Aplica el gradiente al título "Project Portfolio" */
+.header-title {
+    background: linear-gradient(90deg,
+        #1d4e89 0%,
+        #2666a8 8%,
+        #6a8eb5 20%,
+        #9d7f4e 40%,
+        #c9a862 65%,
+        #ddb968 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}

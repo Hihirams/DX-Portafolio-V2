@@ -13,7 +13,7 @@ body {
     max-width: 1400px;
     margin: 0 auto;
     padding: 20px;
-    padding-top: 90px; /* 🔧 AJUSTABLE según tamaño del header: 70px (pequeño) - 120px (grande) */
+    padding-top: 100px; /* ✅ Aumentado para que no se corte el texto */
 }
 
 /* ==================== HEADER ==================== */
@@ -358,8 +358,8 @@ body.light-theme .theme-toggle-header .moon-icon {
 }
 
 @media (max-width: 768px) {
-    .main-header {
-        padding: 8px 0;
+    .main-content {
+        padding-top: 160px; /* ✅ Más espacio en móvil para el header que hace wrap */
     }
     
     .header-content {
@@ -411,7 +411,7 @@ body.light-theme .theme-toggle-header .moon-icon {
 
 .hero-section {
     text-align: center;
-    padding: 60px 20px;
+    padding: 80px 20px 60px; /* ✅ Más padding arriba */
     margin-bottom: 40px;
 }
 
@@ -421,8 +421,10 @@ body.light-theme .theme-toggle-header .moon-icon {
     background: linear-gradient(90deg, var(--gradient-start), var(--gradient-end));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
-    margin-bottom: 20px;
+    margin-bottom: 45px; /* ✅ AUMENTADO de 30px a 45px */
     letter-spacing: -1.5px;
+    line-height: 1.2; /* ✅ Mejorado de 1.1 a 1.2 para más aire */
+    padding-bottom: 10px; /* ✅ NUEVO: Padding extra para evitar corte del gradiente */
 }
 
 .hero-description {
@@ -430,8 +432,9 @@ body.light-theme .theme-toggle-header .moon-icon {
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0 auto;
+    margin-top: 10px; /* ✅ NUEVO: Margin extra arriba */
+    line-height: 1.6;
 }
-
 /* ==================== STATS OVERVIEW ==================== */
 
 .stats-overview {
@@ -1162,5 +1165,370 @@ body.light-theme .project-icon {
         width: 28px;
         height: 28px;
         font-size: 12px;
+    }
+}
+
+/* ==================== LOGO GRADIENT TEXT STYLES ==================== */
+
+.logo-gradient {
+    font-size: 120px;
+    font-weight: 600;
+    letter-spacing: -3px;
+    background: linear-gradient(135deg,
+        #1d4e89 0%,
+        #2d5a9e 20%,
+        #4a7099 40%,
+        #9d7f4e 65%,
+        #b8975a 85%,
+        #c9a862 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1;
+}
+
+/* Ajustable font-size según necesidad */
+.logo-gradient.h1 { font-size: 120px; }
+.logo-gradient.h2 { font-size: 60px; }
+.logo-gradient.h3 { font-size: 40px; }
+.logo-gradient.h4 { font-size: 30px; }
+.logo-gradient.h5 { font-size: 24px; }
+.logo-gradient.h6 { font-size: 20px; }
+
+/* Ajustable font-weight */
+.logo-gradient.fw-400 { font-weight: 400; }
+.logo-gradient.fw-500 { font-weight: 500; }
+.logo-gradient.fw-600 { font-weight: 600; }
+.logo-gradient.fw-700 { font-weight: 700; }
+
+/* Ajustable letter-spacing */
+.logo-gradient.ls-0 { letter-spacing: 0; }
+.logo-gradient.ls--1 { letter-spacing: -1px; }
+.logo-gradient.ls--2 { letter-spacing: -2px; }
+.logo-gradient.ls--3 { letter-spacing: -3px; }
+.logo-gradient.ls--4 { letter-spacing: -4px; }
+
+/* Gradiente alternativo para fondos oscuros */
+.logo-gradient-dark {
+    background: linear-gradient(135deg,
+        #3d6ba8 0%,
+        #4d7fb8 20%,
+        #6a94c4 40%,
+        #b8945f 65%,
+        #d4ab6e 85%,
+        #e8c078 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+/* ==================== MODAL LOGIN REDISEÑADO ==================== */
+
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.6);
+    backdrop-filter: blur(20px) saturate(180%);
+    -webkit-backdrop-filter: blur(20px) saturate(180%);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    z-index: 10000;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.modal-overlay.active {
+    display: flex;
+    opacity: 1;
+}
+
+body.light-theme .modal-overlay {
+    background: rgba(255, 255, 255, 0.5);
+}
+
+.login-modal {
+    position: relative;
+    background: rgba(28, 28, 30, 0.95);
+    backdrop-filter: blur(40px) saturate(180%);
+    -webkit-backdrop-filter: blur(40px) saturate(180%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 24px;
+    padding: 0;
+    max-width: 440px;
+    width: 90%;
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.5);
+    transform: scale(0.9) translateY(20px);
+    opacity: 0;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    overflow: hidden;
+}
+
+.modal-overlay.active .login-modal {
+    transform: scale(1) translateY(0);
+    opacity: 1;
+}
+
+body.light-theme .login-modal {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 20px 80px rgba(0, 0, 0, 0.15);
+}
+
+/* Header del Modal */
+.login-modal-header {
+    padding: 40px 40px 20px;
+    text-align: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+body.light-theme .login-modal-header {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.login-modal-logo {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 20px;
+    background: linear-gradient(135deg, 
+        #1d4e89 0%,
+        #2666a8 15%,
+        #4a7099 35%,
+        #9d7f4e 60%,
+        #c9a862 85%,
+        #d4b06f 100%
+    );
+    border-radius: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 28px;
+    animation: logoFloat 3s ease-in-out infinite;
+}
+
+@keyframes logoFloat {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+
+.login-modal-title {
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 8px;
+    background: linear-gradient(90deg,
+        #1d4e89 0%,
+        #2666a8 8%,
+        #6a8eb5 20%,
+        #9d7f4e 40%,
+        #c9a862 65%,
+        #ddb968 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.login-modal-subtitle {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+/* Body del Modal */
+.login-modal-body {
+    padding: 30px 40px 40px;
+}
+
+.login-form {
+    padding: 0;
+}
+
+.form-group {
+    margin-bottom: 24px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.form-input-wrapper {
+    position: relative;
+}
+
+.form-input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+    color: var(--text-secondary);
+    pointer-events: none;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    font-size: 15px;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    outline: none;
+    border-color: #0071e3;
+    background: var(--bg-card-hover);
+    box-shadow: 0 0 0 4px rgba(0, 113, 227, 0.1);
+}
+
+.form-group input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.6;
+}
+
+/* Botón Submit */
+.btn-submit {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #0071e3 0%, #0077ed 100%);
+    color: white;
+    border: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 16px rgba(0, 113, 227, 0.3);
+    margin-top: 8px;
+}
+
+.btn-submit:hover {
+    background: linear-gradient(135deg, #0077ed 0%, #0084ff 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 24px rgba(0, 113, 227, 0.4);
+}
+
+.btn-submit:active {
+    transform: translateY(0);
+}
+
+/* Error Message */
+.form-error {
+    background: rgba(255, 69, 58, 0.12);
+    border: 1px solid rgba(255, 69, 58, 0.3);
+    color: #ff453a;
+    padding: 14px 16px;
+    border-radius: 12px;
+    font-size: 13px;
+    margin-bottom: 20px;
+    text-align: left;
+    display: none;
+    align-items: center;
+    gap: 10px;
+    animation: errorShake 0.5s ease;
+}
+
+@keyframes errorShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-10px); }
+    75% { transform: translateX(10px); }
+}
+
+.form-error::before {
+    content: '⚠️';
+    font-size: 16px;
+}
+
+body.light-theme .form-error {
+    background: rgba(255, 69, 58, 0.15);
+    border-color: rgba(255, 69, 58, 0.4);
+    color: #ff3b30;
+}
+
+/* Login Hint */
+.login-hint {
+    margin-top: 24px;
+    padding-top: 24px;
+    border-top: 1px solid var(--border-color);
+    font-size: 12px;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+.login-hint p {
+    margin: 6px 0;
+    padding: 8px 12px;
+    background: var(--bg-card);
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+}
+
+.login-hint strong {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Botón Cerrar */
+.modal-close-btn {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    color: var(--text-primary);
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-close-btn:hover {
+    background: rgba(255, 255, 255, 0.15);
+    transform: scale(1.1) rotate(90deg);
+}
+
+body.light-theme .modal-close-btn {
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .modal-close-btn:hover {
+    background: rgba(0, 0, 0, 0.12);
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .login-modal {
+        width: 95%;
+    }
+    
+    .login-modal-header,
+    .login-modal-body {
+        padding: 30px 24px;
+    }
+    
+    .login-modal-title {
+        font-size: 24px;
     }
 }

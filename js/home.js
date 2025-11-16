@@ -818,44 +818,162 @@ function createNewProject() {
 // ==================== LOGIN/LOGOUT ====================
 
 function openLoginModal() {
-    const modal = document.getElementById('loginModal');
-    modal.classList.add('active');
+    // Crear el modal si no existe
+    let modalOverlay = document.getElementById('loginModalOverlay');
+
+    if (!modalOverlay) {
+        modalOverlay = document.createElement('div');
+        modalOverlay.id = 'loginModalOverlay';
+        modalOverlay.className = 'modal-overlay';
+        modalOverlay.innerHTML = `
+            <div class="login-modal" onclick="event.stopPropagation()">
+                <button class="modal-close-btn" onclick="closeLoginModal()">×</button>
+
+                <div class="login-modal-header">
+                    <h2 class="login-modal-title">Iniciar Sesión</h2>
+                    <p class="login-modal-subtitle">Ingresa tus credenciales para continuar</p>
+                </div>
+
+                <div class="login-modal-body">
+                    <form id="loginForm" onsubmit="handleLogin(event)">
+                        <div id="loginError" class="form-error" style="display: none;"></div>
+
+                        <div class="form-group">
+                            <label for="username">Usuario</label>
+                            <div class="form-input-wrapper">
+                                <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
+                                    <circle cx="12" cy="7" r="4"></circle>
+                                </svg>
+                                <input
+                                    type="text"
+                                    id="username"
+                                    name="username"
+                                    placeholder="Tu usuario"
+                                    required
+                                    autocomplete="username"
+                                >
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="password">Contraseña</label>
+                            <div class="form-input-wrapper">
+                                <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                                </svg>
+                                <input
+                                    type="password"
+                                    id="password"
+                                    name="password"
+                                    placeholder="Tu contraseña"
+                                    required
+                                    autocomplete="current-password"
+                                >
+                            </div>
+                        </div>
+
+                        <button type="submit" class="btn-submit">Iniciar Sesión</button>
+                    </form>
+
+                    <div class="login-hint">
+                        <p><strong>Usuario:</strong> admin</p>
+                        <p><strong>Contraseña:</strong> admin123</p>
+                    </div>
+                </div>
+            </div>
+        `;
+        document.body.appendChild(modalOverlay);
+
+        // Cerrar al hacer click fuera del modal
+        modalOverlay.addEventListener('click', closeLoginModal);
+    }
+
+    // Mostrar modal
+    setTimeout(() => {
+        modalOverlay.classList.add('active');
+    }, 10);
+
     document.body.style.overflow = 'hidden';
-    
+
     // Focus en el input de usuario
     setTimeout(() => {
-        document.getElementById('username').focus();
-    }, 100);
+        const usernameInput = document.getElementById('username');
+        if (usernameInput) usernameInput.focus();
+    }, 400);
 }
 
 function closeLoginModal() {
-    const modal = document.getElementById('loginModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
-    
-    // Limpiar formulario
-    document.getElementById('loginForm').reset();
-    document.getElementById('loginError').style.display = 'none';
+    const modalOverlay = document.getElementById('loginModalOverlay');
+    if (modalOverlay) {
+        modalOverlay.classList.remove('active');
+        document.body.style.overflow = '';
+
+        // Limpiar formulario después de la animación
+        setTimeout(() => {
+            const form = document.getElementById('loginForm');
+            if (form) form.reset();
+            const errorDiv = document.getElementById('loginError');
+            if (errorDiv) errorDiv.style.display = 'none';
+        }, 300);
+    }
 }
 
 async function handleLogin(event) {
-  event.preventDefault();
-  const username = document.getElementById('username').value;
-  const password = document.getElementById('password').value;
-  const errorDiv = document.getElementById('loginError');
-
-  const res = await dataManager.login(username, password);
-  if (res.success) {
-    closeLoginModal();
-    updateUserSection();
-    showMyProjects();
-    errorDiv.style.display = 'none';
-  } else {
-    errorDiv.textContent = res.message || 'Usuario o contraseña incorrectos';
-    errorDiv.style.display = 'block';
-  }
+    event.preventDefault();
+    
+    console.log('🔐 Intentando login...');
+    
+    // Obtener los valores directamente del formulario
+    const form = event.target;
+    const usernameInput = form.querySelector('#username');
+    const passwordInput = form.querySelector('#password');
+    const errorDiv = document.getElementById('loginError');
+    
+    if (!usernameInput || !passwordInput) {
+        console.error('❌ No se encontraron los inputs del formulario');
+        return;
+    }
+    
+    const username = usernameInput.value.trim();
+    const password = passwordInput.value.trim();
+    
+    console.log('📝 Username:', username ? '✓' : '✗');
+    console.log('📝 Password:', password ? '✓' : '✗');
+    
+    if (!username || !password) {
+        errorDiv.textContent = 'Por favor, completa todos los campos';
+        errorDiv.style.display = 'block';
+        return;
+    }
+    
+    try {
+        const res = await dataManager.login(username, password);
+        
+        if (res.success) {
+            console.log('✅ Login exitoso');
+            closeLoginModal();
+            updateUserSection();
+            showMyProjects();
+            errorDiv.style.display = 'none';
+            
+            // Mostrar mensaje de bienvenida
+            const user = dataManager.getCurrentUser();
+            if (user) {
+                showWelcomeMessage(user.name);
+            }
+        } else {
+            console.log('❌ Login fallido:', res.message);
+            errorDiv.textContent = res.message || 'Usuario o contraseña incorrectos';
+            errorDiv.style.display = 'block';
+        }
+    } catch (error) {
+        console.error('❌ Error en login:', error);
+        errorDiv.textContent = 'Error al iniciar sesión. Intenta de nuevo.';
+        errorDiv.style.display = 'block';
+    }
 }
-
 
 function handleLogout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
@@ -900,13 +1018,6 @@ function showWelcomeMessage(userName) {
 }
 
 // ==================== MODAL HELPERS ====================
-
-// Cerrar modal al hacer clic fuera
-document.getElementById('loginModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeLoginModal();
-    }
-});
 
 // Cerrar modal con ESC
 document.addEventListener('keydown', function(e) {

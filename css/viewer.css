@@ -467,6 +467,40 @@ body.light-theme .dx-branding {
     box-shadow: 0 6px 20px rgba(139, 92, 246, 0.35);
 }
 
+.logo-gradient {
+    font-weight: 600;
+    letter-spacing: -2px;
+    background: linear-gradient(135deg,
+        #1d4e89 0%,
+        #2666a8 10%,
+        #4a7099 25%,
+        #9d7f4e 45%,
+        #b8975a 65%,
+        #c9a862 85%,
+        #d4b06f 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin: 0;
+    line-height: 1.2;
+}
+
+/* Gradiente más comprimido para textos pequeños como project-title */
+.project-title.logo-gradient {
+    background: linear-gradient(90deg,
+        #1d4e89 0%,
+        #2666a8 8%,
+        #6a8eb5 20%,
+        #9d7f4e 40%,
+        #c9a862 65%,
+        #ddb968 100%
+    );
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
 /* ==================== MODAL ARCHIVOS EXTRAS ==================== */
 
 .extra-files-list {

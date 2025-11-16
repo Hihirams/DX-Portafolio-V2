@@ -158,8 +158,8 @@ function generateCoverSlide() {
     const coverSlide = document.getElementById('coverSlide');
     
     const title = viewingUser 
-        ? `📊 Portfolio de ${viewingUser.name}`
-        : '📊 Portfolio Q4 2025';
+        ? `Portfolio de ${viewingUser.name}`
+        : `Portfolio Q4 2025`;
     
     const subtitle = viewingUser
         ? `${viewingUser.role} | ${projectsToShow.length} proyecto(s)`
@@ -175,7 +175,7 @@ function generateCoverSlide() {
     };
     
     coverSlide.innerHTML = `
-        <h1 class="slide-title">${title}</h1>
+        <h1 class="slide-title logo-gradient">${title}</h1>
         <p class="slide-subtitle">${subtitle}</p>
         
         <div class="stats-grid">
@@ -408,7 +408,7 @@ function generateSummarySlide() {
   const sortedDates = Object.keys(upcomingMilestones).sort();
 
   summarySlide.innerHTML = `
-    <h2 class="project-title" style="margin-bottom: 40px;">🎬 Resumen Ejecutivo</h2>
+    <h2 class="project-title logo-gradient" style="margin-bottom: 40px;">Resumen Ejecutivo</h2>
 
     <div class="summary-grid">
       ${stats.inProgress > 0 ? `
