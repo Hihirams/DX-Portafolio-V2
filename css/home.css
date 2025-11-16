@@ -202,6 +202,54 @@ body.light-theme .search-results-header::-webkit-scrollbar-thumb:hover {
     transform: scale(1.05);
 }
 
+/* ✅ NUEVO: Botón de tema en el header */
+.theme-toggle-header {
+    width: 40px;
+    height: 40px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    position: relative;
+}
+
+.theme-toggle-header:hover {
+    background: var(--bg-card-hover);
+    transform: scale(1.1);
+}
+
+.theme-toggle-header svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.theme-toggle-header .sun-icon {
+    opacity: 0;
+    transform: rotate(-90deg);
+}
+
+.theme-toggle-header .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+body.light-theme .theme-toggle-header .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg);
+}
+
+body.light-theme .theme-toggle-header .moon-icon {
+    opacity: 0;
+    transform: rotate(90deg);
+}
+
 .user-section {
     display: flex;
     align-items: center;

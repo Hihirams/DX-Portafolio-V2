@@ -21,7 +21,7 @@
                 </div>
             </div>
 
-            <!-- ✅ NUEVO: Buscador centrado en el header -->
+            <!-- Buscador centrado -->
             <div class="header-center">
                 <div class="search-container">
                     <input
@@ -38,35 +38,35 @@
             </div>
 
             <nav class="header-nav">
-                <!-- ✅ NUEVO: Botón Portafolio General -->
+                <!-- Botón Portafolio General -->
                 <button class="btn-portfolio-general" onclick="openGeneralPortfolio()">
                     Portafolio DX
                 </button>
 
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
-                    <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="12" cy="12" r="5"></circle>
-                        <line x1="12" y1="1" x2="12" y2="3"></line>
-                        <line x1="12" y1="21" x2="12" y2="23"></line>
-                        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
-                        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
-                        <line x1="1" y1="12" x2="3" y2="12"></line>
-                        <line x1="21" y1="12" x2="23" y2="12"></line>
-                        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
-                        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
-                    </svg>
-                    <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
-                    </svg>
-                </button>
-
+                <!-- ✅ User Section con botón de tema integrado -->
                 <div class="user-section" id="userSection">
+                    <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
+                        <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
                     <!-- Se llenará dinámicamente -->
                 </div>
             </nav>
         </div>
 
-        <!-- ✅ Resultados de búsqueda dentro del header -->
+        <!-- Resultados de búsqueda -->
         <div class="search-results-header" id="searchResults" style="display: none;">
             <!-- Se llenará dinámicamente -->
         </div>
