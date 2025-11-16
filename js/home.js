@@ -393,6 +393,14 @@ function initFeaturedCarousel() {
     startCarouselAutoplay();
 }
 
+//
+// ==================================================================
+// ==================== ¡AQUÍ ESTÁ LA MODIFICACIÓN! =================
+// ==================================================================
+//
+// He cambiado la estructura HTML que genera esta función
+// para que coincida con lo que pediste en el CSS.
+//
 function renderCarousel() {
     const container = document.getElementById('featuredCarouselContainer');
     const { featuredProjects } = carouselState;
@@ -402,52 +410,72 @@ function renderCarousel() {
         const owner = dataManager.getUserById(project.ownerId);
         const ownerName = owner ? owner.name : 'Desconocido';
         
+        // **** ESTA ES LA ESTRUCTURA HTML MODIFICADA ****
+        // 1. Quité el <div> "featured-content" que envolvía todo.
+        // 2. Agregué el nuevo <div> "featured-title-wrapper".
+        // 3. Moví el título y el estado dentro del "featured-title-wrapper".
+        // 4. Moví el icono para que esté antes del "featured-title-wrapper".
+        // 5. La insignia "featured-badge" se queda, pero el CSS la ocultará.
+        
         return `
             <div class="featured-project-card ${index === 0 ? 'active' : ''}" data-index="${index}">
+                
                 <div class="featured-badge">
                     <span class="badge-icon">🌟</span>
                     <span>Proyecto Destacado</span>
                 </div>
-                <div class="featured-status-badge status-${project.status}">
-                    <span class="status-dot"></span>
-                    ${statusConfig.badge}
-                </div>
-                <div class="featured-content">
-                    <div class="featured-project-icon">${project.icon}</div>
+                
+                <div class="featured-project-icon">${project.icon}</div>
+
+                <div class="featured-title-wrapper">
                     <h3 class="featured-project-title">${project.title}</h3>
-                    <p class="featured-project-description">${project.description || project.currentPhase}</p>
-                    <div class="featured-project-meta">
-                        <div class="featured-meta-item">
-                            <span class="featured-meta-label">Fase:</span>
-                            <span class="featured-meta-value">${project.currentPhase || 'N/A'}</span>
-                        </div>
-                        <div class="featured-meta-item">
-                            <span class="featured-meta-label">Líder:</span>
-                            <span class="featured-meta-value">${ownerName}</span>
-                        </div>
+                    <div class="featured-status-badge status-${project.status}">
+                        <span class="status-dot"></span>
+                        ${statusConfig.badge}
                     </div>
-                    <div class="featured-progress-section">
-                        <div class="featured-progress-header">
-                            <span class="featured-progress-label">Progreso general</span>
-                            <span class="featured-progress-percentage">${project.progress}%</span>
-                        </div>
-                        <div class="featured-progress-bar">
-                            <div class="featured-progress-fill" style="width: ${project.progress}%"></div>
-                        </div>
-                    </div>
-                    <button class="featured-view-btn" onclick="viewProject('${project.id}')">
-                        Ver Detalles
-                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
-                            <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
                 </div>
+
+                <p class="featured-project-description">${project.description || project.currentPhase}</p>
+                
+                <div class="featured-project-meta">
+                    <div class="featured-meta-item">
+                        <span class="featured-meta-label">Fase:</span>
+                        <span class="featured-meta-value">${project.currentPhase || 'N/A'}</span>
+                    </div>
+                    <div class="featured-meta-item">
+                        <span class="featured-meta-label">Líder:</span>
+                        <span class="featured-meta-value">${ownerName}</span>
+                    </div>
+                </div>
+                
+                <div class="featured-progress-section">
+                    <div class="featured-progress-header">
+                        <span class="featured-progress-label">Progreso general</span>
+                        <span class="featured-progress-percentage">${project.progress}%</span>
+                    </div>
+                    <div class="featured-progress-bar">
+                        <div class="featured-progress-fill" style="width: ${project.progress}%"></div>
+                    </div>
+                </div>
+                
+                <button class="featured-view-btn" onclick="viewProject('${project.id}')">
+                    Ver Detalles
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                </button>
+                
             </div>
         `;
     }).join('');
     
     updateCarouselView();
 }
+//
+// ==================================================================
+// ================== ¡FIN DE LA MODIFICACIÓN! ======================
+// ==================================================================
+//
 
 function renderCarouselIndicators() {
     const container = document.getElementById('carouselIndicators');

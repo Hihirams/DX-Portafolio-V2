@@ -1,6 +1,6 @@
 /* ==========================================
    CAROUSEL FEATURED PROJECTS - Portfolio DX
-   Estilos para el carrusel de proyectos destacados
+   (Versión con título y estado alineados)
    ========================================== */
 
 /* Featured Carousel Container */
@@ -24,7 +24,7 @@
 
 .star-icon {
     font-size: 32px;
-    animation: rotate 10s linear infinite;
+    /* animación eliminada */
 }
 
 .carousel-title-section h3 {
@@ -69,7 +69,9 @@
 /* Carousel Container */
 .featured-carousel-container {
     position: relative;
-    height: 400px;
+    /* **** CAMBIO: Aumentada altura mínima **** */
+    min-height: 500px; 
+    height: auto;
     perspective: 1000px;
 }
 
@@ -77,7 +79,8 @@
 .featured-project-card {
     position: absolute;
     width: 100%;
-    max-width: 650px;
+    /* **** CAMBIO: Aumentado tamaño **** */
+    max-width: 720px; 
     left: 50%;
     transform: translateX(-50%) scale(0.9);
     opacity: 0;
@@ -87,7 +90,8 @@
     backdrop-filter: saturate(180%) blur(40px);
     border: 1px solid var(--border-color);
     border-radius: 24px;
-    padding: 32px;
+    /* **** CAMBIO: Aumentado padding **** */
+    padding: 40px;
     box-shadow: 0 16px 48px rgba(0, 0, 0, 0.16);
 }
 
@@ -114,26 +118,23 @@ body.light-theme .featured-project-card {
     z-index: 5;
 }
 
-/* Featured Badge */
+/* **** CAMBIO: Oculta la insignia "Featured" **** */
 .featured-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 6px;
-    padding: 6px 14px;
-    background: linear-gradient(135deg, #FFD60A, #FF9500);
-    border-radius: 16px;
-    font-size: 11px;
-    font-weight: 700;
-    color: white;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    margin-bottom: 12px;
-    box-shadow: 0 4px 12px rgba(255, 149, 0, 0.3);
+    display: none;
 }
 
 .badge-icon {
     font-size: 14px;
-    animation: bounce 2s infinite;
+    /* animación eliminada */
+}
+
+/* ---- NUEVO AGRUPADOR PARA TÍTULO Y ESTADO ---- */
+/* Este es el nuevo estilo para el <div> que agregamos en home.js */
+.featured-title-wrapper {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px; /* Espacio después del grupo */
 }
 
 /* Status Badge */
@@ -147,7 +148,10 @@ body.light-theme .featured-project-card {
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-    margin-bottom: 16px;
+    /* **** CAMBIO: Margen reseteado, lo maneja el wrapper **** */
+    margin-bottom: 0;
+    flex-shrink: 0; /* Evita que la etiqueta se encoja */
+    margin-left: 16px; /* Espacio entre título y etiqueta */
 }
 
 .featured-status-badge.status-in-progress {
@@ -179,7 +183,7 @@ body.light-theme .featured-project-card {
     height: 8px;
     border-radius: 50%;
     background: currentColor;
-    animation: pulse 2s infinite;
+    /* animación eliminada */
 }
 
 /* Project Content */
@@ -187,14 +191,15 @@ body.light-theme .featured-project-card {
     font-size: 48px;
     margin-bottom: 16px;
     display: inline-block;
-    animation: float 3s ease-in-out infinite;
+    /* animación eliminada */
 }
 
 .featured-project-title {
     font-size: 24px;
     font-weight: 700;
     color: var(--text-primary);
-    margin-bottom: 12px;
+    /* **** CAMBIO: Margen reseteado, lo maneja el wrapper **** */
+    margin-bottom: 0;
     letter-spacing: -0.5px;
 }
 
@@ -288,7 +293,7 @@ body.light-theme .featured-progress-bar {
     right: 0;
     bottom: 0;
     background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-    animation: shimmer 2s infinite;
+    /* animación eliminada */
 }
 
 /* View Button */
@@ -348,62 +353,19 @@ body.light-theme .carousel-indicator {
 }
 
 /* Animations */
-@keyframes rotate {
-    from {
-        transform: rotate(0deg);
-    }
-    to {
-        transform: rotate(360deg);
-    }
-}
-
-@keyframes bounce {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-5px);
-    }
-}
-
-@keyframes float {
-    0%, 100% {
-        transform: translateY(0);
-    }
-    50% {
-        transform: translateY(-10px);
-    }
-}
-
-@keyframes pulse {
-    0%, 100% {
-        opacity: 1;
-        transform: scale(1);
-    }
-    50% {
-        opacity: 0.7;
-        transform: scale(1.1);
-    }
-}
-
-@keyframes shimmer {
-    0% {
-        transform: translateX(-100%);
-    }
-    100% {
-        transform: translateX(100%);
-    }
-}
+/* Keyframes eliminados */
 
 /* Responsive */
 @media (max-width: 1024px) {
     .featured-carousel-container {
-        height: 420px;
+        /* **** CAMBIO: Ajuste responsivo **** */
+        min-height: 440px;
     }
 
     .featured-project-card {
-        padding: 28px;
-        max-width: 550px;
+        /* **** CAMBIO: Ajuste responsivo **** */
+        padding: 32px;
+        max-width: 580px;
     }
 
     .featured-project-title {
@@ -423,11 +385,13 @@ body.light-theme .carousel-indicator {
     }
 
     .featured-carousel-container {
-        height: 480px;
+        /* **** CAMBIO: Ajuste responsivo **** */
+        min-height: 500px;
     }
 
     .featured-project-card {
-        padding: 20px;
+        /* **** CAMBIO: Ajuste responsivo **** */
+        padding: 24px;
     }
 
     .featured-project-meta {
@@ -437,6 +401,18 @@ body.light-theme .carousel-indicator {
 
     .featured-project-icon {
         font-size: 40px;
+    }
+
+    /* **** CAMBIO: Ajuste responsivo para el título **** */
+    .featured-title-wrapper {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+        margin-bottom: 16px;
+    }
+    
+    .featured-status-badge {
+        margin-left: 0;
     }
 
     .featured-project-title {
