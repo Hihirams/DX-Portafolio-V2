@@ -7,6 +7,7 @@ let filteredProjects = [];
 let currentPage = 1;
 const itemsPerPage = 10;
 let charts = {};
+let currentResourceProject = null;
 
 // Active filters
 let activeFilters = {
@@ -137,38 +138,75 @@ function normalizeStatus(status) {
     return 'discovery';
 }
 
-let currentResourceProject = null;
-
-// Función para abrir modal de recursos
-function openResourcesModal(projectId) {
+// Reemplazar la función openResourcesModal
+function openResourcesModal(projectId, event) {
     const project = projects.find(p => p.id === projectId);
     if (!project) return;
 
     currentResourceProject = project;
 
     const modal = document.getElementById('resourcesModal');
+    const modalContent = document.getElementById('resourcesModalContent');
     const title = document.getElementById('resourcesModalTitle');
 
-    title.textContent = `${project.name} - Recursos`;
+    title.textContent = 'RECURSOS';
 
     // Verificar disponibilidad de recursos
     const hasGantt = project._original?.ganttImage || project._original?.ganttImagePath;
     const hasImages = project._original?.images && project._original.images.length > 0;
     const hasVideos = project._original?.videos && project._original.videos.length > 0;
-    const hasFiles = project._original?.extraFiles && project._original.extraFiles.length > 0;
+    const hasFiles = true; // Always enable files button, check inside openResourceFiles
 
     document.getElementById('btnGantt').disabled = !hasGantt;
     document.getElementById('btnImages').disabled = !hasImages;
     document.getElementById('btnVideos').disabled = !hasVideos;
     document.getElementById('btnFiles').disabled = !hasFiles;
 
+    // Posicionar el modal cerca del botón
+    const buttonRect = event.currentTarget.getBoundingClientRect();
+    const modalWidth = 420;
+    const modalHeight = 180; // Altura aproximada del modal
+
+    // Calcular posición: arriba del botón, centrado horizontalmente
+    let top = buttonRect.top - modalHeight - 10;
+    let left = buttonRect.left + (buttonRect.width / 2) - (modalWidth / 2);
+
+    // Ajustar si se sale de la pantalla
+    if (top < 10) {
+        top = buttonRect.bottom + 10; // Mostrar abajo si no cabe arriba
+    }
+    if (left < 10) {
+        left = 10;
+    }
+    if (left + modalWidth > window.innerWidth - 10) {
+        left = window.innerWidth - modalWidth - 10;
+    }
+
+    modalContent.style.top = `${top}px`;
+    modalContent.style.left = `${left}px`;
+
     modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+
+    // Cerrar al hacer click fuera
+    setTimeout(() => {
+        document.addEventListener('click', closeResourcesOnOutsideClick);
+    }, 0);
+}
+
+function closeResourcesOnOutsideClick(e) {
+    const modal = document.getElementById('resourcesModal');
+    const modalContent = document.getElementById('resourcesModalContent');
+
+    if (modal.classList.contains('active') &&
+        !modalContent.contains(e.target) &&
+        !e.target.closest('.btn-resources')) {
+        closeResourcesModal();
+    }
 }
 
 function closeResourcesModal() {
     document.getElementById('resourcesModal').classList.remove('active');
-    document.body.style.overflow = '';
+    document.removeEventListener('click', closeResourcesOnOutsideClick);
     currentResourceProject = null;
 }
 
@@ -208,6 +246,7 @@ async function openResourceGantt() {
     }
 }
 
+// Actualizar las funciones de visualización de recursos
 async function openResourceImages() {
     if (!currentResourceProject) return;
 
@@ -221,7 +260,6 @@ async function openResourceImages() {
 
         title.textContent = `${currentResourceProject.name} - Imágenes`;
 
-        // Cargar todas las imágenes
         const imagesHTML = await Promise.all(project.images.map(async (img) => {
             let imgSrc = img.src || img.path;
 
@@ -233,12 +271,9 @@ async function openResourceImages() {
             }
 
             return `
-                <div style="cursor: pointer;" onclick="openImageFullscreen('${imgSrc}', '${img.title || img.fileName}')">
-                    <img src="${imgSrc}" alt="${img.title || img.fileName}"
-                         style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
-                    <p style="margin-top: 8px; font-size: 12px; text-align: center; color: var(--text-secondary);">
-                        ${img.title || img.fileName}
-                    </p>
+                <div class=\"resource-image-item\" onclick=\"openImageFullscreen('${imgSrc}', '${img.title || img.fileName}')\">
+                    <img src=\"${imgSrc}\" alt=\"${img.title || img.fileName}\">
+                    <p class=\"resource-image-title\">${img.title || img.fileName}</p>
                 </div>
             `;
         }));
@@ -267,8 +302,7 @@ async function openResourceVideos() {
 
         title.textContent = `${currentResourceProject.name} - Videos`;
 
-        // Cargar todos los videos
-        const videosHTML = await Promise.all(project.videos.map(async (video, index) => {
+        const videosHTML = await Promise.all(project.videos.map(async (video) => {
             let videoSrc = video.src || video.path;
 
             if (videoSrc && videoSrc.startsWith('users/')) {
@@ -279,13 +313,9 @@ async function openResourceVideos() {
             }
 
             return `
-                <div style="cursor: pointer;" onclick="playVideo('${videoSrc}', '${video.title || video.fileName}')">
-                    <video src="${videoSrc}"
-                           style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; background: #000;"
-                           preload="metadata"></video>
-                    <p style="margin-top: 8px; font-size: 12px; text-align: center; color: var(--text-secondary);">
-                        ${video.title || video.fileName}
-                    </p>
+                <div class=\"resource-video-item\" onclick=\"playVideo('${videoSrc}', '${video.title || video.fileName}')\">
+                    <video src=\"${videoSrc}\" preload=\"metadata\"></video>
+                    <p class=\"resource-video-title\">${video.title || video.fileName}</p>
                 </div>
             `;
         }));
@@ -305,7 +335,11 @@ async function openResourceFiles() {
     if (!currentResourceProject) return;
 
     const project = currentResourceProject._original;
-    if (!project.extraFiles || project.extraFiles.length === 0) return;
+
+    // If extraFiles is empty, try to scan the directory
+    if (!project.extraFiles || project.extraFiles.length === 0) {
+        project.extraFiles = await scanExtraFilesDirectory(currentResourceProject);
+    }
 
     try {
         const modal = document.getElementById('filesViewModal');
@@ -314,26 +348,39 @@ async function openResourceFiles() {
 
         title.textContent = `${currentResourceProject.name} - Archivos`;
 
-        const filesHTML = project.extraFiles.map((file) => {
-            const icon = getFileIcon(file.fileName);
-            const sizeKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
+        let filesHTML = '';
 
-            return `
-                <div style="display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 12px; margin-bottom: 12px; cursor: pointer;"
-                     onclick="downloadFile('${file.src || file.path}', '${file.fileName}')">
-                    <div style="font-size: 32px;">${icon}</div>
-                    <div style="flex: 1;">
-                        <div style="font-weight: 600; color: var(--text-primary);">${file.title}</div>
-                        <div style="font-size: 12px; color: var(--text-secondary);">${file.fileName} · ${sizeKB} KB</div>
-                    </div>
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
-                        <polyline points="7 10 12 15 17 10"></polyline>
-                        <line x1="12" y1="15" x2="12" y2="3"></line>
-                    </svg>
+        if (!project.extraFiles || project.extraFiles.length === 0) {
+            // No files message
+            filesHTML = `
+                <div style="text-align: center; padding: 40px 20px; color: rgba(245, 245, 247, 0.6);">
+                    <div style="font-size: 48px; margin-bottom: 20px;">📂</div>
+                    <h3 style="margin: 0 0 10px 0; color: rgba(245, 245, 247, 0.8); font-size: 18px;">No hay archivos disponibles</h3>
+                    <p style="margin: 0; font-size: 14px;">Este proyecto no tiene archivos extra cargados.</p>
                 </div>
             `;
-        }).join('');
+        } else {
+            // Show files
+            filesHTML = project.extraFiles.map((file) => {
+                const icon = getFileIcon(file.extension || file.fileName);
+                const sizeKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
+
+                return `
+                    <div class=\"resource-file-item\" onclick=\"downloadFile('${file.src || file.path || ''}', '${file.fileName}')\">
+                        <div class=\"resource-file-icon\">${icon}</div>
+                        <div class=\"resource-file-info\">
+                            <div class=\"resource-file-name\">${file.title || file.fileName}</div>
+                            <div class=\"resource-file-meta\">${file.fileName} · ${sizeKB} KB</div>
+                        </div>
+                        <svg class=\"resource-file-download\" viewBox=\"0 0 24 24\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2\">
+                            <path d=\"M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4\"></path>
+                            <polyline points=\"7 10 12 15 17 10\"></polyline>
+                            <line x1=\"12\" y1=\"15\" x2=\"12\" y2=\"3\"></line>
+                        </svg>
+                    </div>
+                `;
+            }).join('');
+        }
 
         list.innerHTML = filesHTML;
 
@@ -346,44 +393,62 @@ async function openResourceFiles() {
     }
 }
 
-// Funciones auxiliares para modales secundarios
+// Cerrar modales de visualización
 function closeGanttViewModal() {
     document.getElementById('ganttViewModal').classList.remove('active');
-    document.body.style.overflow = '';
 }
 
 function closeImagesViewModal() {
     document.getElementById('imagesViewModal').classList.remove('active');
-    document.body.style.overflow = '';
 }
 
 function closeVideosViewModal() {
     document.getElementById('videosViewModal').classList.remove('active');
-    document.body.style.overflow = '';
 }
 
 function closeFilesViewModal() {
     document.getElementById('filesViewModal').classList.remove('active');
-    document.body.style.overflow = '';
 }
+
+// ==================== MEDIA UTILITIES ====================
 
 function openImageFullscreen(src, title) {
     // Crear modal temporal para imagen fullscreen
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.9); z-index: 10001;
+        background: rgba(0,0,0,0.95); z-index: 10001;
         display: flex; align-items: center; justify-content: center;
-        cursor: pointer;
+        flex-direction: column; gap: 20px;
     `;
+
+    const titleEl = document.createElement('h3');
+    titleEl.textContent = title;
+    titleEl.style.cssText = 'color: white; font-size: 20px; font-weight: 600;';
 
     const img = document.createElement('img');
     img.src = src;
     img.alt = title;
-    img.style.cssText = 'max-width: 90%; max-height: 90%; border-radius: 12px;';
+    img.style.cssText = 'max-width: 90%; max-height: 70%; border-radius: 12px;';
 
+    const closeBtn = document.createElement('button');
+    closeBtn.className = 'resource-btn';
+    closeBtn.innerHTML = '✖ Cerrar';
+    closeBtn.style.cssText = `
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #f5f5f7;
+        backdrop-filter: blur(20px);
+    `;
+    closeBtn.onclick = () => overlay.remove();
+
+    overlay.onclick = (e) => {
+        if (e.target === overlay) overlay.remove();
+    };
+
+    overlay.appendChild(titleEl);
     overlay.appendChild(img);
-    overlay.onclick = () => overlay.remove();
+    overlay.appendChild(closeBtn);
     document.body.appendChild(overlay);
 }
 
@@ -392,7 +457,7 @@ function playVideo(src, title) {
     const overlay = document.createElement('div');
     overlay.style.cssText = `
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
-        background: rgba(0,0,0,0.9); z-index: 10001;
+        background: rgba(0,0,0,0.95); z-index: 10001;
         display: flex; align-items: center; justify-content: center;
         flex-direction: column; gap: 20px;
     `;
@@ -407,14 +472,26 @@ function playVideo(src, title) {
     video.autoplay = true;
     video.style.cssText = 'max-width: 90%; max-height: 70%; border-radius: 12px;';
 
+    // Agregar event listener para cerrar al hacer click en el video
+    video.onclick = (e) => {
+        e.stopPropagation(); // Prevenir que el click en el video cierre el modal
+    };
+
     const closeBtn = document.createElement('button');
-    closeBtn.textContent = '× Cerrar';
+    closeBtn.className = 'resource-btn';
+    closeBtn.innerHTML = '✖ Cerrar';
     closeBtn.style.cssText = `
-        padding: 12px 24px; background: white; color: black;
-        border: none; border-radius: 12px; font-size: 16px;
-        font-weight: 600; cursor: pointer;
+        background: rgba(255, 255, 255, 0.08);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        color: #f5f5f7;
+        backdrop-filter: blur(20px);
     `;
     closeBtn.onclick = () => {
+        video.pause();
+        overlay.remove();
+    };
+
+    overlay.onclick = () => {
         video.pause();
         overlay.remove();
     };
@@ -462,6 +539,50 @@ function getFileIcon(fileName) {
         'js': '💻', 'py': '💻', 'java': '💻'
     };
     return icons[ext] || '📎';
+}
+
+// Cerrar con ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeResourcesModal();
+        closeGanttViewModal();
+        closeImagesViewModal();
+        closeVideosViewModal();
+        closeFilesViewModal();
+    }
+});
+
+// ==================== EXTRA FILES UTILITY ====================
+
+async function scanExtraFilesDirectory(project) {
+    try {
+        const extraFilesDir = `users/${project.ownerId}/projects/${project.id}/extra-files/`;
+        const result = await window.electronAPI.listDir(extraFilesDir);
+        if (result.success && result.files) {
+            const files = [];
+            for (const fileName of result.files) {
+                // Skip directories
+                if (fileName.includes('.')) {
+                    const fullPath = `${extraFilesDir}${fileName}`;
+                    const mediaResult = await window.electronAPI.readMedia(fullPath);
+                    if (mediaResult.success) {
+                        files.push({
+                            src: fullPath,
+                            title: fileName,
+                            fileName: fileName,
+                            fileType: mediaResult.mimeType || 'application/octet-stream',
+                            fileSize: 0, // Not available from listDir
+                            extension: fileName.split('.').pop().toLowerCase()
+                        });
+                    }
+                }
+            }
+            return files;
+        }
+    } catch (error) {
+        console.error('Error scanning extra-files directory:', error);
+    }
+    return [];
 }
 
 // ==================== APP INITIALIZATION ====================
@@ -891,7 +1012,7 @@ function renderProjects() {
                     const status = getDeliveryStatus(project.deliveryDate);
                     const icon = getDeliveryIcon(status.icon);
                     return `<span class="delivery-date ${status.class}">${icon}${formatDate(project.deliveryDate)}</span>`;
-                })()}}
+                })()}
             </td>
             <td class="col-responsible">
                 <span class="text-highlight">${project.responsible}</span>
@@ -912,7 +1033,7 @@ function renderProjects() {
                 ` : '<span class="text-secondary">—</span>'}
             </td>
             <td class="col-resources">
-                <button class="btn-resources" onclick="openResourcesModal('${project.id}')">
+                <button class="btn-resources" onclick="openResourcesModal('${project.id}', event)">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
                         <rect x="2" y="3" width="12" height="10" rx="2"/>
                         <path d="M2 6h12M6 3v3"/>
