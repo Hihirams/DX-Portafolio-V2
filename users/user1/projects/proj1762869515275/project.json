@@ -1,0 +1,26 @@
+{
+  "id": "proj1762869515275",
+  "ownerId": "user1",
+  "title": "QC ALT",
+  "status": "in-progress",
+  "progress": 80,
+  "icon": "📊",
+  "currentPhase": "",
+  "updatedAt": "2025-11-11T14:16:26.998Z",
+  "priority": "high",
+  "targetDate": "2025-11-11",
+  "achievements": {
+    "2025-03": "Implementacion Linea P703 (Linea Piloto)",
+    "2025-04": "Implementacion en Linea 920B",
+    "2025-06": "Implementacion en Linea MCV (QC ALT MTS)"
+  },
+  "blockers": {
+    "type": "alert",
+    "message": "Progress is currently on hold due to an active issue with the IoT system. activities will resume once the problem is resolved."
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-11T13:58:35.275Z"
+}

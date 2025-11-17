@@ -1,0 +1,33 @@
+{
+  "id": "proj1762786312316",
+  "ownerId": "user2",
+  "title": "DX Expenses",
+  "status": "hold",
+  "progress": 50,
+  "icon": "📈",
+  "currentPhase": "Validacion de propuesta de visualización de gastos por departamento en Power BI:\n•\tSe muestran gastos por mes y acumulado.\n•\tFiltros por departamento, cuarto fiscal y unidad de negocio.",
+  "updatedAt": "2025-11-11T14:28:49.867Z",
+  "priority": "low",
+  "targetDate": "2025-11-10",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {
+    "2025-11": "Solicitud de mejoras\n•\t🔍 Filtro por Gerente y GM para visualizar todas sus áreas agrupadas.\n       Resp Miguel & Brayan \n•\t🗨️ Agregar comentarios en las gráficas para explicar desviaciones o situaciones especiales."
+  },
+  "ganttImage": "",
+  "videos": [],
+  "images": [
+    {
+      "src": "users/user2/projects/proj1762786312316/images/image_1762871329921_0.png",
+      "title": "Screenshot 2025-11-10 085025.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762786312316/images/image_1762871329997_1.png",
+      "title": "Screenshot 2025-11-10 085033.png"
+    }
+  ],
+  "createdAt": "2025-11-10T14:51:52.316Z"
+}

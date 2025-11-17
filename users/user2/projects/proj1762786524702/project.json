@@ -1,0 +1,22 @@
+{
+  "id": "proj1762786524702",
+  "ownerId": "user2",
+  "title": "IATF Dashboard",
+  "status": "discovery",
+  "progress": 0,
+  "icon": "🧾",
+  "currentPhase": "",
+  "updatedAt": "2025-11-10T15:11:34.842Z",
+  "priority": "low",
+  "targetDate": "2025-11-10",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-10T14:55:24.702Z"
+}

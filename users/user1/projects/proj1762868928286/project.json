@@ -1,0 +1,22 @@
+{
+  "id": "proj1762868928286",
+  "ownerId": "user1",
+  "title": "Holo View DX",
+  "status": "discovery",
+  "progress": 10,
+  "icon": "🕶",
+  "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
+  "updatedAt": "2025-11-11T14:25:22.191Z",
+  "priority": "low",
+  "targetDate": "2025-11-11",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-11T13:48:48.286Z"
+}
