@@ -2133,7 +2133,6 @@ body.light-mode .theme-toggle .moon-icon {
 
 /* ==================== PRESENTATION MODE ==================== */
 body.presentation-mode .sidebar,
-body.presentation-mode .search-bar,
 body.presentation-mode .active-filters-container,
 body.presentation-mode .header-right .clear-btn,
 body.presentation-mode .header-right .theme-btn {
