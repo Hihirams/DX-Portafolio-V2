@@ -137,6 +137,333 @@ function normalizeStatus(status) {
     return 'discovery';
 }
 
+let currentResourceProject = null;
+
+// Función para abrir modal de recursos
+function openResourcesModal(projectId) {
+    const project = projects.find(p => p.id === projectId);
+    if (!project) return;
+
+    currentResourceProject = project;
+
+    const modal = document.getElementById('resourcesModal');
+    const title = document.getElementById('resourcesModalTitle');
+
+    title.textContent = `${project.name} - Recursos`;
+
+    // Verificar disponibilidad de recursos
+    const hasGantt = project._original?.ganttImage || project._original?.ganttImagePath;
+    const hasImages = project._original?.images && project._original.images.length > 0;
+    const hasVideos = project._original?.videos && project._original.videos.length > 0;
+    const hasFiles = project._original?.extraFiles && project._original.extraFiles.length > 0;
+
+    document.getElementById('btnGantt').disabled = !hasGantt;
+    document.getElementById('btnImages').disabled = !hasImages;
+    document.getElementById('btnVideos').disabled = !hasVideos;
+    document.getElementById('btnFiles').disabled = !hasFiles;
+
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeResourcesModal() {
+    document.getElementById('resourcesModal').classList.remove('active');
+    document.body.style.overflow = '';
+    currentResourceProject = null;
+}
+
+// Funciones para abrir recursos específicos
+async function openResourceGantt() {
+    if (!currentResourceProject) return;
+
+    const project = currentResourceProject._original;
+    const ganttPath = project.ganttImage || project.ganttImagePath;
+
+    if (!ganttPath) return;
+
+    try {
+        let ganttSrc = ganttPath;
+
+        // Si es una ruta del filesystem, cargarla
+        if (ganttPath.startsWith('users/')) {
+            const result = await window.electronAPI.readMedia(ganttPath);
+            if (result.success && result.data) {
+                ganttSrc = result.data;
+            }
+        }
+
+        const modal = document.getElementById('ganttViewModal');
+        const title = document.getElementById('ganttViewTitle');
+        const img = document.getElementById('ganttViewImage');
+
+        title.textContent = `${currentResourceProject.name} - Gantt`;
+        img.src = ganttSrc;
+
+        closeResourcesModal();
+        modal.classList.add('active');
+
+    } catch (error) {
+        console.error('Error cargando Gantt:', error);
+        alert('Error al cargar el diagrama de Gantt');
+    }
+}
+
+async function openResourceImages() {
+    if (!currentResourceProject) return;
+
+    const project = currentResourceProject._original;
+    if (!project.images || project.images.length === 0) return;
+
+    try {
+        const modal = document.getElementById('imagesViewModal');
+        const title = document.getElementById('imagesViewTitle');
+        const grid = document.getElementById('imagesViewGrid');
+
+        title.textContent = `${currentResourceProject.name} - Imágenes`;
+
+        // Cargar todas las imágenes
+        const imagesHTML = await Promise.all(project.images.map(async (img) => {
+            let imgSrc = img.src || img.path;
+
+            if (imgSrc && imgSrc.startsWith('users/')) {
+                const result = await window.electronAPI.readMedia(imgSrc);
+                if (result.success && result.data) {
+                    imgSrc = result.data;
+                }
+            }
+
+            return `
+                <div style="cursor: pointer;" onclick="openImageFullscreen('${imgSrc}', '${img.title || img.fileName}')">
+                    <img src="${imgSrc}" alt="${img.title || img.fileName}"
+                         style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px;">
+                    <p style="margin-top: 8px; font-size: 12px; text-align: center; color: var(--text-secondary);">
+                        ${img.title || img.fileName}
+                    </p>
+                </div>
+            `;
+        }));
+
+        grid.innerHTML = imagesHTML.join('');
+
+        closeResourcesModal();
+        modal.classList.add('active');
+
+    } catch (error) {
+        console.error('Error cargando imágenes:', error);
+        alert('Error al cargar las imágenes');
+    }
+}
+
+async function openResourceVideos() {
+    if (!currentResourceProject) return;
+
+    const project = currentResourceProject._original;
+    if (!project.videos || project.videos.length === 0) return;
+
+    try {
+        const modal = document.getElementById('videosViewModal');
+        const title = document.getElementById('videosViewTitle');
+        const grid = document.getElementById('videosViewGrid');
+
+        title.textContent = `${currentResourceProject.name} - Videos`;
+
+        // Cargar todos los videos
+        const videosHTML = await Promise.all(project.videos.map(async (video, index) => {
+            let videoSrc = video.src || video.path;
+
+            if (videoSrc && videoSrc.startsWith('users/')) {
+                const result = await window.electronAPI.readMedia(videoSrc);
+                if (result.success && result.data) {
+                    videoSrc = result.data;
+                }
+            }
+
+            return `
+                <div style="cursor: pointer;" onclick="playVideo('${videoSrc}', '${video.title || video.fileName}')">
+                    <video src="${videoSrc}"
+                           style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; background: #000;"
+                           preload="metadata"></video>
+                    <p style="margin-top: 8px; font-size: 12px; text-align: center; color: var(--text-secondary);">
+                        ${video.title || video.fileName}
+                    </p>
+                </div>
+            `;
+        }));
+
+        grid.innerHTML = videosHTML.join('');
+
+        closeResourcesModal();
+        modal.classList.add('active');
+
+    } catch (error) {
+        console.error('Error cargando videos:', error);
+        alert('Error al cargar los videos');
+    }
+}
+
+async function openResourceFiles() {
+    if (!currentResourceProject) return;
+
+    const project = currentResourceProject._original;
+    if (!project.extraFiles || project.extraFiles.length === 0) return;
+
+    try {
+        const modal = document.getElementById('filesViewModal');
+        const title = document.getElementById('filesViewTitle');
+        const list = document.getElementById('filesViewList');
+
+        title.textContent = `${currentResourceProject.name} - Archivos`;
+
+        const filesHTML = project.extraFiles.map((file) => {
+            const icon = getFileIcon(file.fileName);
+            const sizeKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
+
+            return `
+                <div style="display: flex; align-items: center; gap: 16px; padding: 16px; background: var(--bg-secondary); border-radius: 12px; margin-bottom: 12px; cursor: pointer;"
+                     onclick="downloadFile('${file.src || file.path}', '${file.fileName}')">
+                    <div style="font-size: 32px;">${icon}</div>
+                    <div style="flex: 1;">
+                        <div style="font-weight: 600; color: var(--text-primary);">${file.title}</div>
+                        <div style="font-size: 12px; color: var(--text-secondary);">${file.fileName} · ${sizeKB} KB</div>
+                    </div>
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                        <polyline points="7 10 12 15 17 10"></polyline>
+                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                    </svg>
+                </div>
+            `;
+        }).join('');
+
+        list.innerHTML = filesHTML;
+
+        closeResourcesModal();
+        modal.classList.add('active');
+
+    } catch (error) {
+        console.error('Error cargando archivos:', error);
+        alert('Error al cargar los archivos');
+    }
+}
+
+// Funciones auxiliares para modales secundarios
+function closeGanttViewModal() {
+    document.getElementById('ganttViewModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function closeImagesViewModal() {
+    document.getElementById('imagesViewModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function closeVideosViewModal() {
+    document.getElementById('videosViewModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function closeFilesViewModal() {
+    document.getElementById('filesViewModal').classList.remove('active');
+    document.body.style.overflow = '';
+}
+
+function openImageFullscreen(src, title) {
+    // Crear modal temporal para imagen fullscreen
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.9); z-index: 10001;
+        display: flex; align-items: center; justify-content: center;
+        cursor: pointer;
+    `;
+
+    const img = document.createElement('img');
+    img.src = src;
+    img.alt = title;
+    img.style.cssText = 'max-width: 90%; max-height: 90%; border-radius: 12px;';
+
+    overlay.appendChild(img);
+    overlay.onclick = () => overlay.remove();
+    document.body.appendChild(overlay);
+}
+
+function playVideo(src, title) {
+    // Crear modal temporal para video player
+    const overlay = document.createElement('div');
+    overlay.style.cssText = `
+        position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+        background: rgba(0,0,0,0.9); z-index: 10001;
+        display: flex; align-items: center; justify-content: center;
+        flex-direction: column; gap: 20px;
+    `;
+
+    const titleEl = document.createElement('h3');
+    titleEl.textContent = title;
+    titleEl.style.cssText = 'color: white; font-size: 20px; font-weight: 600;';
+
+    const video = document.createElement('video');
+    video.src = src;
+    video.controls = true;
+    video.autoplay = true;
+    video.style.cssText = 'max-width: 90%; max-height: 70%; border-radius: 12px;';
+
+    const closeBtn = document.createElement('button');
+    closeBtn.textContent = '× Cerrar';
+    closeBtn.style.cssText = `
+        padding: 12px 24px; background: white; color: black;
+        border: none; border-radius: 12px; font-size: 16px;
+        font-weight: 600; cursor: pointer;
+    `;
+    closeBtn.onclick = () => {
+        video.pause();
+        overlay.remove();
+    };
+
+    overlay.appendChild(titleEl);
+    overlay.appendChild(video);
+    overlay.appendChild(closeBtn);
+    document.body.appendChild(overlay);
+}
+
+async function downloadFile(filePath, fileName) {
+    try {
+        let fileSrc = filePath;
+
+        if (filePath.startsWith('users/')) {
+            const result = await window.electronAPI.readMedia(filePath);
+            if (result.success && result.data) {
+                fileSrc = result.data;
+            }
+        }
+
+        const link = document.createElement('a');
+        link.href = fileSrc;
+        link.download = fileName;
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+
+    } catch (error) {
+        console.error('Error descargando archivo:', error);
+        alert('Error al descargar el archivo');
+    }
+}
+
+function getFileIcon(fileName) {
+    if (!fileName) return '📄';
+    const ext = fileName.split('.').pop().toLowerCase();
+    const icons = {
+        'pdf': '📄', 'doc': '📝', 'docx': '📝', 'txt': '📄',
+        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+        'ppt': '📈', 'pptx': '📈',
+        'zip': '🗜️', 'rar': '🗜️', '7z': '🗜️',
+        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️',
+        'mp4': '🎬', 'avi': '🎬', 'mov': '🎬',
+        'js': '💻', 'py': '💻', 'java': '💻'
+    };
+    return icons[ext] || '📎';
+}
+
 // ==================== APP INITIALIZATION ====================
 
 function initializeApp() {
@@ -537,6 +864,9 @@ function renderProjects() {
             <td class="col-name">
                 <div class="project-name">${project.name}</div>
             </td>
+            <td class="col-concept">
+                <div class="project-concept">${project._original?.concept || 'Sin concepto definido'}</div>
+            </td>
             <td class="col-status">
                 <span class="status-badge ${statusMap[project.status]?.class || 'status-discovery'}">
                     ${statusMap[project.status]?.label || project.status}
@@ -561,7 +891,7 @@ function renderProjects() {
                     const status = getDeliveryStatus(project.deliveryDate);
                     const icon = getDeliveryIcon(status.icon);
                     return `<span class="delivery-date ${status.class}">${icon}${formatDate(project.deliveryDate)}</span>`;
-                })()}
+                })()}}
             </td>
             <td class="col-responsible">
                 <span class="text-highlight">${project.responsible}</span>
@@ -580,6 +910,15 @@ function renderProjects() {
                 ${project.blocked ? `
                     <div class="block-responsible">${project.blockResponsible}</div>
                 ` : '<span class="text-secondary">—</span>'}
+            </td>
+            <td class="col-resources">
+                <button class="btn-resources" onclick="openResourcesModal('${project.id}')">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <rect x="2" y="3" width="12" height="10" rx="2"/>
+                        <path d="M2 6h12M6 3v3"/>
+                    </svg>
+                    Ver
+                </button>
             </td>
         </tr>
     `).join('');

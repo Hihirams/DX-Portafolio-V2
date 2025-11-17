@@ -10,7 +10,7 @@
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-11-17T01:53:54.839Z"
+      "updatedAt": "2025-11-17T03:28:57.403Z"
     },
     {
       "id": "proj002",
@@ -22,7 +22,7 @@
       "progress": 55,
       "icon": "🧪",
       "currentPhase": "Integración de detección y enlace IoT QueryLink (CSV automático)",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T02:17:06.999Z"
     },
     {
       "id": "proj003",
@@ -34,7 +34,7 @@
       "progress": 45,
       "icon": "🎥",
       "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T02:17:51.254Z"
     },
     {
       "id": "proj004",
@@ -203,5 +203,5 @@
     "totalUsers": 3,
     "avgProgress": 49
   },
-  "lastUpdated": "2025-11-17T01:53:54.854Z"
+  "lastUpdated": "2025-11-17T03:28:57.448Z"
 }

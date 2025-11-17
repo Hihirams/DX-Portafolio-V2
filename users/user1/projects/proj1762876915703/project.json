@@ -6,7 +6,7 @@
   "progress": 54,
   "icon": "🖼",
   "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-  "updatedAt": "2025-11-14T15:46:43.440Z",
+  "updatedAt": "2025-11-14T23:53:00.444Z",
   "priority": "medium",
   "targetDate": "2026-01-30",
   "achievements": {
@@ -33,5 +33,9 @@
       "fileSize": 0,
       "extension": "pdf"
     }
-  ]
+  ],
+  "featured": true,
+  "previewImage": "",
+  "previewImageFileName": "QCU1.png",
+  "previewImageType": "image/png"
 }

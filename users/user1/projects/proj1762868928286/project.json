@@ -6,7 +6,7 @@
   "progress": 10,
   "icon": "🕶",
   "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-  "updatedAt": "2025-11-11T14:25:22.191Z",
+  "updatedAt": "2025-11-14T23:54:10.243Z",
   "priority": "low",
   "targetDate": "2025-11-11",
   "achievements": {},
@@ -18,5 +18,10 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T13:48:48.286Z"
+  "createdAt": "2025-11-11T13:48:48.286Z",
+  "extraFiles": [],
+  "featured": true,
+  "previewImage": "",
+  "previewImageFileName": "QCU3.png",
+  "previewImageType": "image/png"
 }

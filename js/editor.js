@@ -210,6 +210,7 @@ function loadProjectData() {
     // Información Básica
     document.getElementById('projectIcon').value = currentProject.icon || '';
     document.getElementById('projectTitle').value = currentProject.title || '';
+    document.getElementById('projectConcept').value = currentProject.concept || '';
     document.getElementById('currentPhase').value = currentProject.currentPhase || '';
     document.getElementById('projectStatus').value = currentProject.status || 'discovery';
     document.getElementById('projectPriority').value = currentProject.priority || 'medium';
@@ -698,6 +699,7 @@ async function saveProject() {
         ...currentProject,
         icon: document.getElementById('projectIcon').value,
         title: document.getElementById('projectTitle').value,
+        concept: document.getElementById('projectConcept').value,
         currentPhase: document.getElementById('currentPhase').value,
         status: document.getElementById('projectStatus').value,
         priority: document.getElementById('projectPriority').value,

@@ -469,7 +469,7 @@ class DataManager {
             const saved = await fileManager.saveProject(project.ownerId, this.projects[projectIndex]);
 
             if (saved) {
-                // ✅ NUEVO: Actualizar también el índice data/projects.json con TODOS los campos
+            // ✅ NUEVO: Actualizar también el índice data/projects.json con TODOS los campos
                 const projectMeta = {
                     id: this.projects[projectIndex].id,
                     title: this.projects[projectIndex].title,
@@ -481,6 +481,7 @@ class DataManager {
                     icon: this.projects[projectIndex].icon,
                     currentPhase: this.projects[projectIndex].currentPhase,
                     // ✅ NUEVO: Agregar campos importantes que se editan frecuentemente
+                    concept: this.projects[projectIndex].concept,
                     achievements: this.projects[projectIndex].achievements,
                     blockers: this.projects[projectIndex].blockers,
                     nextSteps: this.projects[projectIndex].nextSteps,

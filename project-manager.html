@@ -164,6 +164,7 @@
                         <thead>
                             <tr>
                                 <th class="col-name">Nombre del Proyecto</th>
+                                <th class="col-concept">Concepto</th>
                                 <th class="col-status">Estado</th>
                                 <th class="col-progress">% Avance</th>
                                 <th class="col-update">Última Actualización</th>
@@ -173,6 +174,7 @@
                                 <th class="col-blocked">Bloqueo</th>
                                 <th class="col-block-desc">Descripción del Bloqueo</th>
                                 <th class="col-block-resp">Responsable del Bloqueo</th>
+                                <th class="col-resources">Recursos</th>
                             </tr>
                         </thead>
                         <tbody id="projectsBody">
@@ -349,6 +351,101 @@
     </div>
 </div>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Recursos -->
+    <div class="resources-modal" id="resourcesModal">
+        <div class="resources-modal-content">
+            <div class="resources-modal-header">
+                <h3 class="resources-modal-title" id="resourcesModalTitle">Recursos del Proyecto</h3>
+                <button class="resources-modal-close" onclick="closeResourcesModal()">×</button>
+            </div>
+            <div class="resources-grid">
+                <button class="resource-btn btn-gantt" id="btnGantt" onclick="openResourceGantt()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"/>
+                        <line x1="9" y1="3" x2="9" y2="21"/>
+                        <line x1="3" y1="9" x2="21" y2="9"/>
+                        <line x1="3" y1="15" x2="21" y2="15"/>
+                    </svg>
+                    Ver Gantt
+                </button>
+                <button class="resource-btn btn-images" id="btnImages" onclick="openResourceImages()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+                        <circle cx="8.5" cy="8.5" r="1.5"/>
+                        <polyline points="21 15 16 10 5 21"/>
+                    </svg>
+                    Galería de Imágenes
+                </button>
+                <button class="resource-btn btn-videos" id="btnVideos" onclick="openResourceVideos()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polygon points="23 7 16 12 23 17 23 7"/>
+                        <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
+                    </svg>
+                    Galería de Videos
+                </button>
+                <button class="resource-btn btn-files" id="btnFiles" onclick="openResourceFiles()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"/>
+                        <polyline points="13 2 13 9 20 9"/>
+                    </svg>
+                    Archivos Extras
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Gantt Modal -->
+    <div class="resources-modal" id="ganttViewModal">
+        <div class="resources-modal-content" style="max-width: 90vw; max-height: 90vh;">
+            <div class="resources-modal-header">
+                <h3 class="resources-modal-title" id="ganttViewTitle">Diagrama de Gantt</h3>
+                <button class="resources-modal-close" onclick="closeGanttViewModal()">×</button>
+            </div>
+            <div style="max-height: 70vh; overflow: auto;">
+                <img id="ganttViewImage" src="" alt="Gantt" style="width: 100%; border-radius: 12px;">
+            </div>
+        </div>
+    </div>
+
+    <!-- Images Gallery Modal -->
+    <div class="resources-modal" id="imagesViewModal">
+        <div class="resources-modal-content" style="max-width: 90vw;">
+            <div class="resources-modal-header">
+                <h3 class="resources-modal-title" id="imagesViewTitle">Galería de Imágenes</h3>
+                <button class="resources-modal-close" onclick="closeImagesViewModal()">×</button>
+            </div>
+            <div id="imagesViewGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 16px; max-height: 70vh; overflow: auto;">
+                <!-- Images will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Videos Gallery Modal -->
+    <div class="resources-modal" id="videosViewModal">
+        <div class="resources-modal-content" style="max-width: 90vw;">
+            <div class="resources-modal-header">
+                <h3 class="resources-modal-title" id="videosViewTitle">Galería de Videos</h3>
+                <button class="resources-modal-close" onclick="closeVideosViewModal()">×</button>
+            </div>
+            <div id="videosViewGrid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 16px; max-height: 70vh; overflow: auto;">
+                <!-- Videos will be inserted here -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Files Modal -->
+    <div class="resources-modal" id="filesViewModal">
+        <div class="resources-modal-content" style="max-width: 600px;">
+            <div class="resources-modal-header">
+                <h3 class="resources-modal-title" id="filesViewTitle">Archivos Extras</h3>
+                <button class="resources-modal-close" onclick="closeFilesViewModal()">×</button>
+            </div>
+            <div id="filesViewList" style="max-height: 70vh; overflow: auto;">
+                <!-- Files will be inserted here -->
             </div>
         </div>
     </div>
