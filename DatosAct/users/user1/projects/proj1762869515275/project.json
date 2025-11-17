@@ -6,7 +6,7 @@
   "progress": 80,
   "icon": "📊",
   "currentPhase": "",
-  "updatedAt": "2025-11-11T14:16:26.998Z",
+  "updatedAt": "2025-11-14T23:53:14.642Z",
   "priority": "high",
   "targetDate": "2025-11-11",
   "achievements": {
@@ -22,5 +22,10 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T13:58:35.275Z"
+  "createdAt": "2025-11-11T13:58:35.275Z",
+  "extraFiles": [],
+  "featured": true,
+  "previewImage": "",
+  "previewImageFileName": "QCU2.png",
+  "previewImageType": "image/png"
 }

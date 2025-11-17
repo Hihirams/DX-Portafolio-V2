@@ -1,82 +1,67 @@
-﻿{
-    "id":  "proj003",
-    "ownerId":  "user1",
-    "title":  "AI Camera",
-    "icon":  "ðŸŽ¥",
-    "status":  "in-progress",
-    "priority":  "medium",
-    "progress":  45,
-    "targetDate":  "2026-10-30",
-    "currentPhase":  "Desarrollo de prototipo de deteccion de movimiento y modelos de reconocimiento",
-    "achievements":  {
-                         "2025-10":  "Fundamentos del sistema y editor desarrollados",
-                         "2025-10-15":  "Prototipo de deteccion de movimiento en ROIs completado"
-                     },
-    "blockers":  {
-                     "type":  "warning",
-                     "message":  "Sin bloqueos formales. Evaluando rendimiento de modelos antes del escalado a multiples camaras."
-                 },
-    "nextSteps":  {
-                      "2025-11":  "Integrar deteccion de personas, manos y rostros",
-                      "2025-12":  "Interfaz unificada de control y visualizacion",
-                      "2026-01":  "Optimizacion para multiples camaras"
-                  },
-    "videos":  [
-                   {
-                       "title":  "Demo_v1.1.2_AICAMERA",
-                       "fileName":  "Demo_v1.1.2_AICAMERA.mp4",
-                       "fileType":  "video/mp4",
-                       "fileSize":  17820721,
-                       "src":  "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4"
-                   }
-               ],
-    "images":  [
-                   {
-                       "title":  "AICAMERA1",
-                       "fileName":  "AICAMERA1.png",
-                       "fileType":  "image/png",
-                       "fileSize":  360157,
-                       "src":  "users/user1/projects/proj003/images/AICAMERA1.png"
-                   },
-                   {
-                       "title":  "AICAMERA2",
-                       "fileName":  "AICAMERA2.png",
-                       "fileType":  "image/png",
-                       "fileSize":  422320,
-                       "src":  "users/user1/projects/proj003/images/AICAMERA2.png"
-                   },
-                   {
-                       "title":  "AICAMERA3",
-                       "fileName":  "AICAMERA3.png",
-                       "fileType":  "image/png",
-                       "fileSize":  222186,
-                       "src":  "users/user1/projects/proj003/images/AICAMERA3.png"
-                   },
-                   {
-                       "title":  "AICAMERA4",
-                       "fileName":  "AICAMERA4.png",
-                       "fileType":  "image/png",
-                       "fileSize":  759079,
-                       "src":  "users/user1/projects/proj003/images/AICAMERA4.png"
-                   },
-                   {
-                       "title":  "AICAMERA5",
-                       "fileName":  "AICAMERA5.png",
-                       "fileType":  "image/png",
-                       "fileSize":  661170,
-                       "src":  "users/user1/projects/proj003/images/AICAMERA5.png"
-                   },
-                   {
-                       "title":  "AICAMERA6",
-                       "fileName":  "AICAMERA6.png",
-                       "fileType":  "image/png",
-                       "fileSize":  651438,
-                       "src":  "users/user1/projects/proj003/images/AICAMERA6.png"
-                   }
-               ],
-    "createdAt":  "2025-10-01",
-    "updatedAt":  "2025-10-31",
-    "ganttImageType":  "image/png",
-    "ganttImageName":  "4.png",
-    "ganttImage":  "users/user1/projects/proj003/gantt/gantt.png"
+{
+  "id": "proj003",
+  "ownerId": "user1",
+  "title": "AI Camera",
+  "icon": "🎥",
+  "status": "in-progress",
+  "featured": true,
+  "priority": "medium",
+  "progress": 45,
+  "targetDate": "2026-10-30",
+  "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
+  "achievements": {
+    "2025-10": "Fundamentos del sistema y editor desarrollados",
+    "2025-10-15": "Prototipo de detección de movimiento en ROIs completado"
+  },
+  "blockers": {
+    "type": "success",
+    "message": ""
+  },
+  "nextSteps": {
+    "2025-11": "Integrar detección de personas, manos y rostros",
+    "2025-12": "Interfaz unificada de control y visualización",
+    "2026-01": "Optimización para múltiples cámaras"
+  },
+  "videos": [
+    {
+      "src": "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4",
+      "title": "Detección de Movimiento"
+    },
+    {
+      "src": "users/user1/projects/proj003/videos/Demo2_v1.1.2_AICAMERA.mp4",
+      "title": "Visión de Operador"
+    }
+  ],
+  "images": [
+    {
+      "src": "users/user1/projects/proj003/images/image_1763397369232_0.png",
+      "title": "Interfaz de programa"
+    },
+    {
+      "src": "users/user1/projects/proj003/images/image_1763397369327_1.png",
+      "title": "Multi Visión"
+    },
+    {
+      "src": "users/user1/projects/proj003/images/image_1763397369412_2.png",
+      "title": "Interfaz de Operador"
+    },
+    {
+      "src": "users/user1/projects/proj003/images/image_1763397369487_3.png",
+      "title": "Editor de RIO"
+    },
+    {
+      "src": "users/user1/projects/proj003/images/image_1763397369598_4.png",
+      "title": "Detección en vivo"
+    },
+    {
+      "src": "users/user1/projects/proj003/images/image_1763397369728_5.png",
+      "title": "Alerta y detección de objeto"
+    }
+  ],
+  "createdAt": "2025-10-01",
+  "updatedAt": "2025-11-17T16:36:08.920Z",
+  "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
+  "extraFiles": [],
+  "ownerName": "Hiram González",
+  "concept": ""
 }

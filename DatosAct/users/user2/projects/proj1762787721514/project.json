@@ -6,17 +6,33 @@
   "progress": 30,
   "icon": "🧰",
   "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-  "updatedAt": "2025-11-11T15:10:28.082Z",
+  "updatedAt": "2025-11-17T16:47:20.501Z",
   "priority": "medium",
-  "targetDate": "2025-11-10",
   "achievements": {},
   "blockers": {
     "type": "info",
     "message": ""
   },
   "nextSteps": {},
-  "ganttImage": "",
+  "targetDate": "2025-11-10",
+  "ganttImagePath": "users/user2/projects/proj1762787721514/gantt/gantt_1763397727269.png",
   "videos": [],
-  "images": [],
-  "createdAt": "2025-11-10T15:15:21.514Z"
+  "images": [
+    {
+      "src": "users/user2/projects/proj1762787721514/images/image_1763398040709_0.png",
+      "title": "RB1.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762787721514/images/image_1763398041062_1.png",
+      "title": "RB2.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762787721514/images/image_1763398041216_2.png",
+      "title": "RB3.png"
+    }
+  ],
+  "extraFiles": [],
+  "createdAt": "2025-11-10T15:15:21.514Z",
+  "ownerName": "Sandra Santos",
+  "concept": ""
 }

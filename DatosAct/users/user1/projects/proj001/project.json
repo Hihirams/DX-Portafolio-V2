@@ -1,69 +1,56 @@
-﻿{
-    "id":  "proj001",
-    "ownerId":  "user1",
-    "title":  "Quality Clinic Unity",
-    "icon":  "ðŸŒ",
-    "status":  "in-progress",
-    "priority":  "high",
-    "progress":  60,
-    "targetDate":  "2026-09-15",
-    "currentPhase":  "Preparacion del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-    "achievements":  {
-                         "2025-08":  "DiseÃ±o conceptual y objetivos visuales definidos",
-                         "2025-09":  "Entorno 3D interactivo de navegacion completado",
-                         "2025-10":  "Escalabilidad validada con multiples zonas"
-                     },
-    "blockers":  {
-                     "type":  "warning",
-                     "message":  "Sin bloqueos criticos. Enlace IoT/MES pendiente de pruebas de red interna"
-                 },
-    "nextSteps":  {
-                      "2025-11":  "Integrar datos en tiempo real desde IoT/MES",
-                      "2025-12":  "Piloto con KPIs vivos y tarjetas dinamicas",
-                      "2026-01":  "Documentacion y presentacion corporativa"
-                  },
-    "videos":  [
-                   {
-                       "title":  "Demo_0.9.5_QCU",
-                       "fileName":  "Demo_0.9.5_QCU.mp4",
-                       "fileType":  "video/mp4",
-                       "fileSize":  43984986,
-                       "src":  "users/user1/projects/proj001/videos/Demo_0.9.5_QCU.mp4"
-                   }
-               ],
-    "images":  [
-                   {
-                       "title":  "QCU1",
-                       "fileName":  "QCU1.png",
-                       "fileType":  "image/png",
-                       "fileSize":  179879,
-                       "src":  "users/user1/projects/proj001/images/QCU1.png"
-                   },
-                   {
-                       "title":  "QCU2",
-                       "fileName":  "QCU2.png",
-                       "fileType":  "image/png",
-                       "fileSize":  518104,
-                       "src":  "users/user1/projects/proj001/images/QCU2.png"
-                   },
-                   {
-                       "title":  "QCU3",
-                       "fileName":  "QCU3.png",
-                       "fileType":  "image/png",
-                       "fileSize":  299774,
-                       "src":  "users/user1/projects/proj001/images/QCU3.png"
-                   },
-                   {
-                       "title":  "QCU4",
-                       "fileName":  "QCU4.png",
-                       "fileType":  "image/png",
-                       "fileSize":  456076,
-                       "src":  "users/user1/projects/proj001/images/QCU4.png"
-                   }
-               ],
-    "createdAt":  "2025-08-01",
-    "updatedAt":  "2025-10-31",
-    "ganttImageType":  "image/png",
-    "ganttImageName":  "1.png",
-    "ganttImage":  "users/user1/projects/proj001/gantt/gantt.png"
+{
+  "id": "proj001",
+  "ownerId": "user1",
+  "title": "Quality Clinic Unity",
+  "icon": "🌐",
+  "status": "in-progress",
+  "featured": true,
+  "priority": "high",
+  "progress": 60,
+  "targetDate": "2026-09-15",
+  "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
+  "achievements": {
+    "2025-08": "Diseño conceptual y objetivos visuales definidos",
+    "2025-09": "Entorno 3D interactivo de navegación completado",
+    "2025-10": "Escalabilidad validada con múltiples zonas"
+  },
+  "blockers": {
+    "type": "success",
+    "message": ""
+  },
+  "nextSteps": {
+    "2025-11": "Integrar datos en tiempo real desde IoT/MES",
+    "2025-12": "Piloto con KPIs vivos y tarjetas dinámicas",
+    "2026-01": "Documentación y presentación corporativa"
+  },
+  "videos": [
+    {
+      "src": "users/user1/projects/proj001/videos/Demo_0.9.5_QCU.mp4",
+      "title": "Demo 0.9.5"
+    }
+  ],
+  "images": [
+    {
+      "src": "users/user1/projects/proj001/images/image_1763397063055_0.png",
+      "title": "Vista inicial Planeta"
+    },
+    {
+      "src": "users/user1/projects/proj001/images/image_1763397063136_1.png",
+      "title": "Vista libre MTS"
+    },
+    {
+      "src": "users/user1/projects/proj001/images/image_1763397063239_2.png",
+      "title": "Vista Cenital"
+    },
+    {
+      "src": "users/user1/projects/proj001/images/image_1763397063323_3.png",
+      "title": "Datos en vivo API REST"
+    }
+  ],
+  "createdAt": "2025-08-01",
+  "updatedAt": "2025-11-17T16:31:02.588Z",
+  "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
+  "extraFiles": [],
+  "ownerName": "Hiram González",
+  "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
 }

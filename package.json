@@ -26,7 +26,7 @@
     },
     "win": {
       "target": "portable",
-      "icon": "assets/icon.ico",
+      "icon": "assets/logo-dx.png",
       "signAndEditExecutable": false
     },
     "files": [

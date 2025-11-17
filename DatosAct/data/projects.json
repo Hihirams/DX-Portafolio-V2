@@ -6,6 +6,7 @@
       "title": "Quality Clinic Unity",
       "icon": "🌐",
       "status": "in-progress",
+      "featured": true,
       "priority": "high",
       "progress": 60,
       "targetDate": "2026-09-15",
@@ -16,15 +17,14 @@
         "2025-10": "Escalabilidad validada con múltiples zonas"
       },
       "blockers": {
-        "type": "warning",
-        "message": "Sin bloqueos críticos. Enlace IoT/MES pendiente de pruebas de red interna"
+        "type": "success",
+        "message": ""
       },
       "nextSteps": {
         "2025-11": "Integrar datos en tiempo real desde IoT/MES",
         "2025-12": "Piloto con KPIs vivos y tarjetas dinámicas",
         "2026-01": "Documentación y presentación corporativa"
       },
-      "ganttImage": "users/user1/projects/proj001/gantt/gantt.png",
       "videos": [
         {
           "src": "users/user1/projects/proj001/videos/Demo_0.9.5_QCU.mp4",
@@ -33,24 +33,28 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj001/images/QCU1.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063055_0.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/projects/proj001/images/QCU2.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063136_1.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/projects/proj001/images/QCU3.PNG",
+          "src": "users/user1/projects/proj001/images/image_1763397063239_2.png",
           "title": "Vista Cenital"
         },
         {
-          "src": "users/user1/projects/proj001/images/QCU4.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063323_3.png",
           "title": "Datos en vivo API REST"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:31:02.588Z",
+      "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
     },
     {
       "id": "proj002",
@@ -58,6 +62,7 @@
       "title": "QC ALT / DQITS",
       "icon": "🧪",
       "status": "hold",
+      "featured": true,
       "priority": "medium",
       "progress": 55,
       "targetDate": "2026-04-15",
@@ -68,7 +73,7 @@
         "2025-10": "Pipeline de video validado + versión portable"
       },
       "blockers": {
-        "type": "alert",
+        "type": "warning",
         "message": "En HOLD por pruebas de compatibilidad del enlace IoT / CSV. Se espera resolución en 1-2 semanas."
       },
       "nextSteps": {
@@ -76,7 +81,6 @@
         "2025-12": "Pruebas piloto con múltiples cámaras",
         "2026-01": "Automatización y documentación final"
       },
-      "ganttImage": "users/user1/projects/proj002/gantt/gantt.png",
       "videos": [
         {
           "src": "users/user1/projects/proj002/videos/Demo_v1.0.1_DQITS.mp4",
@@ -85,20 +89,24 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj002/images/DQITS1.png",
+          "src": "users/user1/projects/proj002/images/image_1763397271985_0.png",
           "title": "Interfaz Principal"
         },
         {
-          "src": "users/user1/projects/proj002/images/DQITS2.png",
+          "src": "users/user1/projects/proj002/images/image_1763397272451_1.png",
           "title": "Detección Activa"
         },
         {
-          "src": "users/user1/projects/proj002/images/DQITS3.png",
+          "src": "users/user1/projects/proj002/images/image_1763397272521_2.png",
           "title": "Respuesta de FASTAPI"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:34:28.821Z",
+      "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj003",
@@ -106,6 +114,7 @@
       "title": "AI Camera",
       "icon": "🎥",
       "status": "in-progress",
+      "featured": true,
       "priority": "medium",
       "progress": 45,
       "targetDate": "2026-10-30",
@@ -115,15 +124,14 @@
         "2025-10-15": "Prototipo de detección de movimiento en ROIs completado"
       },
       "blockers": {
-        "type": "warning",
-        "message": "Sin bloqueos formales. Evaluando rendimiento de modelos antes del escalado a múltiples cámaras."
+        "type": "success",
+        "message": ""
       },
       "nextSteps": {
         "2025-11": "Integrar detección de personas, manos y rostros",
         "2025-12": "Interfaz unificada de control y visualización",
         "2026-01": "Optimización para múltiples cámaras"
       },
-      "ganttImage": "users/user1/projects/proj003/gantt/gantt.png",
       "videos": [
         {
           "src": "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4",
@@ -136,32 +144,36 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/AICAMERA1.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369232_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/AICAMERA2.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369327_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/AICAMERA3.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369412_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/AICAMERA4.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369487_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/AICAMERA5.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369598_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/AICAMERA6.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369728_5.png",
           "title": "Alerta y detección de objeto"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:36:08.920Z",
+      "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj004",
@@ -190,7 +202,10 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-10-15",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T05:43:32.746Z",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj005",
@@ -215,7 +230,6 @@
         "2026-01": "Revisión con IT sobre infraestructura",
         "2026-03": "Reactivación estimada si se aprueba despliegue"
       },
-      "ganttImage": "users/user1/projects/proj005/gantt/gantt.png",
       "videos": [
         {
           "src": "users/user1/projects/proj005/videos/Demo_v1.3.0_DENBOT.mp4",
@@ -237,7 +251,11 @@
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:35:14.364Z",
+      "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj1762463273285",
@@ -307,7 +325,35 @@
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": 1762873828193
+      "updatedAt": "2025-11-17T16:47:20.501Z",
+      "priority": "medium",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-10",
+      "ganttImagePath": "users/user2/projects/proj1762787721514/gantt/gantt_1763397727269.png",
+      "videos": [],
+      "images": [
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763398040709_0.png",
+          "title": "RB1.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763398041062_1.png",
+          "title": "RB2.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763398041216_2.png",
+          "title": "RB3.png"
+        }
+      ],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T15:15:21.514Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762868928286",
@@ -317,7 +363,22 @@
       "progress": 10,
       "icon": "🕶",
       "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-      "updatedAt": 1762871122310
+      "updatedAt": "2025-11-17T05:43:39.447Z",
+      "priority": "low",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-11",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-11T13:48:48.286Z",
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj1762869515275",
@@ -357,7 +418,36 @@
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": 1763135203999
+      "updatedAt": "2025-11-17T16:37:54.523Z",
+      "priority": "medium",
+      "achievements": {
+        "2025-10": "Se logra construir la base home del portafolio donde se muestran proyectos.\nSe implementa página de edición de proeyctos y visualización dinámica de los proyectos del usuario.",
+        "2025-11": "Archivo exe simplificado con acceso multi usuario permitiendo edición de cualquier persona en cualquier momento con un usuario registrado."
+      },
+      "blockers": {
+        "type": "success",
+        "message": ""
+      },
+      "nextSteps": {
+        "2025-11": "Implementar tarjeta de proyectos terminados, filtro de proyectos en etapa terminado y opción en modo edición para poder configurar el proyecto terminado."
+      },
+      "targetDate": "2026-01-30",
+      "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
+      "videos": [],
+      "images": [],
+      "extraFiles": [
+        {
+          "src": "users/user1/projects/proj1762876915703/extra-files/RobotDX-Propuesta_1762983021511.pdf",
+          "title": "RobotDX-Propuesta.pdf",
+          "fileName": "RobotDX-Propuesta_1762983021511.pdf",
+          "fileType": "application/octet-stream",
+          "fileSize": 0,
+          "extension": "pdf"
+        }
+      ],
+      "createdAt": "2025-11-11T16:01:55.703Z",
+      "ownerName": "Hiram González",
+      "concept": ""
     }
   ]
 }

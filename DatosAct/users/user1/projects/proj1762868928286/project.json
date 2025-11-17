@@ -6,17 +6,24 @@
   "progress": 10,
   "icon": "🕶",
   "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-  "updatedAt": "2025-11-11T14:25:22.191Z",
+  "updatedAt": "2025-11-17T05:43:39.447Z",
   "priority": "low",
-  "targetDate": "2025-11-11",
   "achievements": {},
   "blockers": {
     "type": "info",
     "message": ""
   },
   "nextSteps": {},
+  "targetDate": "2025-11-11",
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T13:48:48.286Z"
+  "extraFiles": [],
+  "createdAt": "2025-11-11T13:48:48.286Z",
+  "ownerName": "Hiram González",
+  "concept": "",
+  "featured": true,
+  "previewImage": "",
+  "previewImageFileName": "QCU3.png",
+  "previewImageType": "image/png"
 }

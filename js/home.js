@@ -878,8 +878,8 @@ function openLoginModal() {
                     </form>
 
                     <div class="login-hint">
-                        <p><strong>Usuario:</strong> admin</p>
-                        <p><strong>Contraseña:</strong> admin123</p>
+                        <p><strong>Usuario:</strong> nombre.apellido</p>
+                        <p><strong>Contraseña:</strong> demo123</p>
                     </div>
                 </div>
             </div>

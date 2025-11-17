@@ -10,7 +10,7 @@
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:31:02.588Z"
     },
     {
       "id": "proj002",
@@ -22,7 +22,7 @@
       "progress": 55,
       "icon": "🧪",
       "currentPhase": "Integración de detección y enlace IoT QueryLink (CSV automático)",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:34:28.821Z"
     },
     {
       "id": "proj003",
@@ -34,7 +34,7 @@
       "progress": 45,
       "icon": "🎥",
       "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:36:08.920Z"
     },
     {
       "id": "proj004",
@@ -46,7 +46,7 @@
       "progress": 20,
       "icon": "📋",
       "currentPhase": "Explorar plataforma web interna para gestionar reportes MRM (Monthly Review Meeting) y compartir información entre departamentos",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T05:43:32.746Z"
     },
     {
       "id": "proj005",
@@ -58,7 +58,7 @@
       "progress": 85,
       "icon": "🤖",
       "currentPhase": "Bot operativo en entorno local. Despliegue en HOLD por decisiones de infraestructura IT.",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:35:14.364Z"
     },
     {
       "id": "proj1762463273285",
@@ -132,10 +132,11 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "discovery",
+      "priority": "medium",
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": 1762873828193
+      "updatedAt": "2025-11-17T16:47:20.501Z"
     },
     {
       "id": "proj1762868928286",
@@ -143,10 +144,11 @@
       "ownerId": "user1",
       "ownerName": "Hiram González",
       "status": "discovery",
+      "priority": "low",
       "progress": 10,
       "icon": "🕶",
       "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-      "updatedAt": 1762871122310
+      "updatedAt": "2025-11-17T05:43:39.447Z"
     },
     {
       "id": "proj1762869515275",
@@ -191,7 +193,7 @@
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": "2025-11-14T15:46:43.440Z"
+      "updatedAt": "2025-11-17T16:37:54.523Z"
     }
   ],
   "stats": {
@@ -204,5 +206,5 @@
     "totalUsers": 3,
     "avgProgress": 49
   },
-  "lastUpdated": "2025-11-14T15:46:44.442Z"
+  "lastUpdated": "2025-11-17T16:47:21.759Z"
 }
