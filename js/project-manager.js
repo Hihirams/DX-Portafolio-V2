@@ -1938,13 +1938,21 @@ function initializeCharts() {
             data: {
                 labels: deliveryData.labels,
                 datasets: [{
-                    label: 'Entregas Programadas',
+                    label: 'Proyectos a Entregar',
                     data: deliveryData.values,
                     borderColor: 'rgba(102, 126, 234, 1)',
                     backgroundColor: 'rgba(102, 126, 234, 0.1)',
                     borderWidth: 3,
                     fill: true,
-                    tension: 0.4
+                    tension: 0.4,
+                    pointRadius: 6,
+                    pointHoverRadius: 8,
+                    pointBackgroundColor: 'rgba(102, 126, 234, 1)',
+                    pointBorderColor: '#ffffff',
+                    pointBorderWidth: 2,
+                    pointHoverBackgroundColor: 'rgba(102, 126, 234, 1)',
+                    pointHoverBorderColor: '#ffffff',
+                    pointHoverBorderWidth: 3
                 }]
             },
             options: {
@@ -1952,11 +1960,98 @@ function initializeCharts() {
                 scales: {
                     y: {
                         beginAtZero: true,
-                        ticks: { color: textColor }
+                        ticks: {
+                            color: textColor,
+                            stepSize: 1,
+                            callback: function(value) {
+                                if (Number.isInteger(value)) {
+                                    return value;
+                                }
+                            }
+                        },
+                        grid: {
+                            color: gridColor,
+                            drawBorder: false
+                        },
+                        title: {
+                            display: true,
+                            text: 'Cantidad de Proyectos',
+                            color: textColor,
+                            font: {
+                                size: 12,
+                                weight: '600'
+                            }
+                        }
                     },
                     x: {
-                        ticks: { color: textColor }
+                        ticks: {
+                            color: textColor,
+                            maxRotation: 45,
+                            minRotation: 45
+                        },
+                        grid: {
+                            display: false
+                        }
                     }
+                },
+                plugins: {
+                    ...commonOptions.plugins,
+                    tooltip: {
+                        ...commonOptions.plugins.tooltip,
+                        callbacks: {
+                            title: function(context) {
+                                return context[0].label;
+                            },
+                            label: function(context) {
+                                const count = context.parsed.y;
+                                if (count === 0) {
+                                    return 'Sin entregas programadas';
+                                } else if (count === 1) {
+                                    return '1 proyecto a entregar';
+                                } else {
+                                    return `${count} proyectos a entregar`;
+                                }
+                            },
+                            afterLabel: function(context) {
+                                const monthLabel = context.label;
+                                const count = context.parsed.y;
+
+                                if (count === 0) return '';
+
+                                // Encontrar qué proyectos se entregan en este mes
+                                const monthIndex = deliveryData.labels.indexOf(monthLabel);
+                                if (monthIndex === -1) return '';
+
+                                const monthData = deliveryData.months[monthIndex];
+                                const projectsInMonth = filteredProjects.filter(p => {
+                                    if (!p.deliveryDate) return false;
+                                    const d = new Date(p.deliveryDate);
+                                    return d.getMonth() === monthData.month &&
+                                           d.getFullYear() === monthData.year;
+                                });
+
+                                // Mostrar máximo 3 proyectos en el tooltip
+                                const projectNames = projectsInMonth
+                                    .slice(0, 3)
+                                    .map(p => `• ${p.name}`);
+
+                                if (projectsInMonth.length > 3) {
+                                    projectNames.push(`• ... y ${projectsInMonth.length - 3} más`);
+                                }
+
+                                return ['\\nProyectos:', ...projectNames];
+                            }
+                        },
+                        padding: 12,
+                        displayColors: false
+                    },
+                    legend: {
+                        display: false
+                    }
+                },
+                interaction: {
+                    intersect: false,
+                    mode: 'index'
                 }
             }
         });
@@ -2080,27 +2175,62 @@ function updateKPIs() {
 
 function getDeliveryTimelineData(projectsList = projects) {
     const today = new Date();
-    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun'];
-    const monthlyData = {};
+    const currentMonth = today.getMonth(); // 0-11
+    const currentYear = today.getFullYear();
 
-    projectsList.forEach(project => {
-        const deliveryDate = new Date(project.deliveryDate);
-        if (deliveryDate >= today) {
-            const monthYear = `${months[deliveryDate.getMonth()]} ${deliveryDate.getFullYear()}`;
-            monthlyData[monthYear] = (monthlyData[monthYear] || 0) + 1;
-        }
-    });
+    // Definir el rango: Nov del año actual hasta Mayo del siguiente
+    // Si estamos antes de Noviembre, usar Nov del año anterior
+    let startYear = currentYear;
+    let startMonth = 10; // Noviembre (0-indexed)
 
-    const labels = [];
-    const values = [];
-    for (let i = 0; i < 6; i++) {
-        const date = new Date(today.getFullYear(), today.getMonth() + i, 1);
-        const monthYear = `${months[date.getMonth()]} ${date.getFullYear()}`;
-        labels.push(monthYear);
-        values.push(monthlyData[monthYear] || 0);
+    // Si estamos en los primeros meses del año (Ene-Oct),
+    // el periodo Nov-May abarca del año anterior al actual
+    if (currentMonth < 10) {
+        startYear = currentYear - 1;
     }
 
-    return { labels, values };
+    const months = [];
+    const labels = [];
+    const monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
+                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+
+    // Generar 7 meses: Nov, Dic, Ene, Feb, Mar, Abr, May
+    for (let i = 0; i < 7; i++) {
+        let month = (startMonth + i) % 12;
+        let year = startYear;
+
+        // Si pasamos de Diciembre a Enero, incrementar año
+        if (startMonth + i >= 12) {
+            year = startYear + 1;
+        }
+
+        months.push({ month, year });
+        labels.push(`${monthNames[month]} ${year}`);
+    }
+
+    // Contar entregas por mes
+    const deliveryCounts = new Array(7).fill(0);
+
+    projectsList.forEach(project => {
+        if (!project.deliveryDate) return;
+
+        const deliveryDate = new Date(project.deliveryDate);
+        const deliveryMonth = deliveryDate.getMonth();
+        const deliveryYear = deliveryDate.getFullYear();
+
+        // Buscar en qué mes del rango cae esta entrega
+        months.forEach((monthData, index) => {
+            if (monthData.month === deliveryMonth && monthData.year === deliveryYear) {
+                deliveryCounts[index]++;
+            }
+        });
+    });
+
+    return {
+        labels,
+        values: deliveryCounts,
+        months: months // Útil para debug
+    };
 }
 
 function getBurndownData(projectsList) {

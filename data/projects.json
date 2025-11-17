@@ -50,7 +50,7 @@
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-17T04:46:24.589Z",
+      "updatedAt": "2025-11-17T06:00:14.934Z",
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -200,7 +200,10 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-10-15",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T05:43:32.746Z",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj005",
@@ -327,7 +330,22 @@
       "progress": 10,
       "icon": "🕶",
       "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-      "updatedAt": 1762871122310
+      "updatedAt": "2025-11-17T05:43:39.447Z",
+      "priority": "low",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-11",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-11T13:48:48.286Z",
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj1762869515275",

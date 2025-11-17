@@ -10,7 +10,7 @@
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-11-17T04:46:24.589Z"
+      "updatedAt": "2025-11-17T06:00:14.934Z"
     },
     {
       "id": "proj002",
@@ -46,7 +46,7 @@
       "progress": 20,
       "icon": "📋",
       "currentPhase": "Explorar plataforma web interna para gestionar reportes MRM (Monthly Review Meeting) y compartir información entre departamentos",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T05:43:32.746Z"
     },
     {
       "id": "proj005",
@@ -143,10 +143,11 @@
       "ownerId": "user1",
       "ownerName": "Hiram González",
       "status": "discovery",
+      "priority": "low",
       "progress": 10,
       "icon": "🕶",
       "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-      "updatedAt": 1762871122310
+      "updatedAt": "2025-11-17T05:43:39.447Z"
     },
     {
       "id": "proj1762869515275",
@@ -203,5 +204,5 @@
     "totalUsers": 3,
     "avgProgress": 49
   },
-  "lastUpdated": "2025-11-17T04:46:24.613Z"
+  "lastUpdated": "2025-11-17T06:00:14.954Z"
 }
