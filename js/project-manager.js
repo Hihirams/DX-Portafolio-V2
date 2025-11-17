@@ -65,21 +65,21 @@ const statusMap = {
 // Verificar si dataManager está disponible y tener proyectos
 function startProjectManager() {
     console.log('✓ Iniciando Project Manager...');
-    
+
     // Cargar tema guardado
     loadTheme();
-    
+
     // Verificar que dataManager y proyectos estén disponibles
     if (!window.dataManager) {
         console.error('❌ DataManager no está disponible');
         setTimeout(startProjectManager, 500); // Reintentar en 500ms
         return;
     }
-    
+
     if (!window.dataManager.projects || window.dataManager.projects.length === 0) {
         console.warn('⚠️ DataManager sin proyectos cargados');
     }
-    
+
     loadProjectsFromDataManager();
     initializeApp();
 }
@@ -93,13 +93,13 @@ function loadProjectsFromDataManager() {
     try {
         // Obtener todos los proyectos del dataManager
         projects = dataManager.projects || [];
-        
+
         console.log(`✓ ${projects.length} proyectos cargados del DataManager`);
-        
+
         if (projects.length === 0) {
             console.warn('⚠️ No hay proyectos cargados - mostrando tabla vacía');
         }
-        
+
         // Mapear proyectos al formato esperado por la UI
         projects = projects.map(p => ({
             id: p.id,
@@ -117,9 +117,9 @@ function loadProjectsFromDataManager() {
             // Preservar datos originales
             _original: p
         }));
-        
+
         filteredProjects = [...projects];
-        
+
         return true;
     } catch (error) {
         console.error('❌ Error cargando proyectos:', error);
@@ -155,12 +155,14 @@ function openResourcesModal(projectId, event) {
     const hasGantt = project._original?.ganttImage || project._original?.ganttImagePath;
     const hasImages = project._original?.images && project._original.images.length > 0;
     const hasVideos = project._original?.videos && project._original.videos.length > 0;
-    const hasFiles = true; // Always enable files button, check inside openResourceFiles
+
+    // Inicialmente, habilitar solo si hay archivos en la data
+    const initialHasFiles = project._original?.extraFiles && project._original.extraFiles.length > 0;
 
     document.getElementById('btnGantt').disabled = !hasGantt;
     document.getElementById('btnImages').disabled = !hasImages;
     document.getElementById('btnVideos').disabled = !hasVideos;
-    document.getElementById('btnFiles').disabled = !hasFiles;
+    document.getElementById('btnFiles').disabled = !initialHasFiles;
 
     // Posicionar el modal cerca del botón
     const buttonRect = event.currentTarget.getBoundingClientRect();
@@ -191,6 +193,24 @@ function openResourcesModal(projectId, event) {
     setTimeout(() => {
         document.addEventListener('click', closeResourcesOnOutsideClick);
     }, 0);
+
+    // Si no había archivos inicialmente, verificar el directorio y actualizar el botón
+    if (!initialHasFiles) {
+        checkAndUpdateFilesButton(project);
+    }
+}
+
+async function checkAndUpdateFilesButton(project) {
+    try {
+        const extraFilesDir = `users/${project.ownerId}/projects/${project.id}/extra-files/`;
+        const result = await window.electronAPI.listDir(extraFilesDir);
+        const hasFiles = result.success && result.files && result.files.length > 0;
+        document.getElementById('btnFiles').disabled = !hasFiles;
+    } catch (error) {
+        console.log('Verificación de extra-files directory falló, dejando botón deshabilitado:', error);
+        // Mantener disabled si falla
+        document.getElementById('btnFiles').disabled = true;
+    }
 }
 
 function closeResourcesOnOutsideClick(e) {
@@ -590,17 +610,17 @@ async function scanExtraFilesDirectory(project) {
 function initializeApp() {
     try {
         console.log('🚀 Inicializando aplicación...');
-        
+
         // Renderizar datos iniciales
         renderProjects();
         renderTeamMembers();
         updateBadges();
         updateFilterButtons();
         updateActiveFiltersDisplay();
-        
+
         // Configurar observador para cambios en datos
         setupDataObserver();
-        
+
         console.log('✓ Aplicación inicializada correctamente');
     } catch (error) {
         console.error('❌ Error inicializando aplicación:', error);
@@ -614,14 +634,14 @@ function setupDataObserver() {
     setInterval(() => {
         checkForDataChanges();
     }, 2000);
-    
+
     console.log('👁️ Observador de cambios activado');
 }
 
 function checkForDataChanges() {
     try {
         const newProjects = dataManager.getAllProjects();
-        
+
         // Comparar cantidad de proyectos
         if (newProjects.length !== projects.length) {
             console.log('📊 Cambio detectado en proyectos');
@@ -630,7 +650,7 @@ function checkForDataChanges() {
             updateBadges();
             return;
         }
-        
+
         // Comparar cambios en proyectos existentes
         for (let i = 0; i < newProjects.length; i++) {
             if (JSON.stringify(newProjects[i]) !== JSON.stringify(projects[i]?._original)) {
@@ -665,7 +685,7 @@ function formatDate(dateString) {
 
 function getDeliveryStatus(deliveryDate) {
     if (!deliveryDate) return { class: '', icon: 'calendar' };
-    
+
     const today = new Date();
     today.setHours(0, 0, 0, 0);
 
@@ -747,7 +767,7 @@ function getTeamMembers() {
 function renderTeamMembers() {
     const teamList = document.getElementById('teamList');
     if (!teamList) return;
-    
+
     const members = getTeamMembers();
 
     teamList.innerHTML = members.map(member => `
@@ -818,7 +838,7 @@ function updateFilterButtons() {
 function updateActiveFiltersDisplay() {
     const container = document.getElementById('activeFilters');
     if (!container) return;
-    
+
     const chips = [];
 
     if (activeFilters.status !== 'all') {
@@ -942,7 +962,7 @@ function searchProjects() {
 
 function updateBadges() {
     if (!projects.length) return;
-    
+
     document.getElementById('badge-all').textContent = projects.length;
     document.getElementById('badge-progress').textContent = projects.filter(p => p.status === 'progress').length;
     document.getElementById('badge-hold').textContent = projects.filter(p => p.status === 'hold').length;
@@ -959,7 +979,7 @@ function updateBadges() {
 function renderProjects() {
     const tbody = document.getElementById('projectsBody');
     if (!tbody) return;
-    
+
     const start = (currentPage - 1) * itemsPerPage;
     const end = start + itemsPerPage;
     const projectsToShow = filteredProjects.slice(start, end);
@@ -1134,7 +1154,7 @@ function openAnalytics() {
 function closeAnalytics() {
     const modal = document.getElementById('analyticsModal');
     if (!modal) return;
-    
+
     modal.classList.remove('active');
     document.body.style.overflow = '';
 
@@ -1226,7 +1246,7 @@ function clearAllCrossFilters() {
     updateCrossFilterChips();
     refreshAllChartsWithCrossFilters();
 
-    console.log('🗑️ All cross-filters cleared');
+        console.log('🗑️ All cross-filters cleared');
 }
 
 // Get projects filtered by cross-filters only (ignoring manual filters)
@@ -1932,7 +1952,7 @@ function initializeCharts() {
 
 function updateAllCharts() {
     const filteredProjects = getFilteredAnalyticsProjects();
-    
+
     // Update Portfolio Status
     if (charts.portfolioStatus) {
         const statusCounts = {
