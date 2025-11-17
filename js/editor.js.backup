@@ -42,7 +42,7 @@ function initEditor() {
         createNewProject();
     } else if (editorMode === 'edit' && projectId) {
         // Modo: Editar Proyecto Existente
-        console.log('✏️ Modo: Editar Proyecto', projectId);
+        console.log('âœï¸ Modo: Editar Proyecto', projectId);
         loadProject(projectId);
     } else {
         console.error('❌ No se especificó un proyecto válido');
@@ -113,7 +113,7 @@ function createNewProject() {
 // ==================== LOAD PROJECT ====================
 
 async function loadProject(projectId) {
-    console.log(`📁 Cargando proyecto ${projectId}...`);
+    console.log(`📁‚ Cargando proyecto ${projectId}...`);
 
     // 1. Intentar obtener el proyecto completo desde el DataManager
     let project = await dataManager.loadFullProject(projectId);
@@ -547,7 +547,7 @@ function removeVideo(index) {
 }
 
 function getFileIcon(fileName) {
-    if (!fileName) return '📁';
+    if (!fileName) return '📁Ž';
     
 const ext = fileName.split('.').pop().toLowerCase();
 const icons = {
@@ -576,7 +576,7 @@ const icons = {
 };
 
     
-    return icons[ext] || '📁';
+    return icons[ext] || '📁Ž';
 }
 
 function loadExtraFiles() {
@@ -668,7 +668,6 @@ function removeExtraFile(index) {
         markAsUnsaved();
     }
 }
-
 // ==================== EVENT LISTENERS ====================
 
 function setupEventListeners() {
@@ -723,9 +722,10 @@ async function saveProject() {
         updatedAt: new Date().toISOString()
     };
     
-    console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••');
+    // ✅ DEBUG MEJORADO - Te ayudará a identificar el problema
+    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
     console.log('📋 DEBUG COMPLETO - Proyecto antes de guardar');
-    console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••');
+    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•');
     
     console.log('📋 Basic Info:', {
         id: updatedProject.id,
@@ -735,7 +735,7 @@ async function saveProject() {
         progress: updatedProject.progress
     });
 
-    console.log('\n🖼️ GANTT Image:', {
+    console.log('\nðŸ–¼ï¸ GANTT Image:', {
         exists: !!updatedProject.ganttImage,
         isString: typeof updatedProject.ganttImage === 'string',
         length: updatedProject.ganttImage?.length || 0,
@@ -744,7 +744,7 @@ async function saveProject() {
             updatedProject.ganttImage.substring(0, 60) + '...' : 'null'
     });
 
-    console.log('\n📁 Images:', {
+    console.log('\n📁¸ Images:', {
         count: updatedProject.images?.length || 0,
         details: updatedProject.images?.map((img, i) => ({
             index: i,
@@ -771,13 +771,36 @@ async function saveProject() {
         })) || []
     });
 
-    console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n');
+    console.log('â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•â•\n');
 
     // Mostrar feedback
     document.getElementById('editorTitle').textContent = '💾 Guardando...';
     document.getElementById('editorStatus').textContent = 'Procesando';
 
-    // ✅ Eliminar archivos físicos que fueron eliminados ANTES de guardar el proyecto
+    // Guardar proyecto
+    let success = false;
+    
+    try {
+        if (editorMode === 'new') {
+            // Crear nuevo proyecto
+            console.log('📋 Modo: Crear nuevo proyecto');
+            const newProject = await dataManager.createProject(updatedProject);
+            success = newProject !== null;
+            
+            if (success) {
+                console.log('✅ Nuevo proyecto creado:', newProject.id);
+            } else {
+                console.error('❌ createProject retornó null');
+            }
+        } else {
+            // Actualizar proyecto existente
+                console.log('•••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n');
+
+    // Mostrar feedback
+    document.getElementById('editorTitle').textContent = '💾 Guardando...';
+    document.getElementById('editorStatus').textContent = 'Procesando';
+
+    // ✅ NUEVO: Eliminar archivos físicos que fueron eliminados
     if (deletedExtraFiles.length > 0) {
         console.log(`🗑️ Eliminando ${deletedExtraFiles.length} archivos del filesystem...`);
         for (const filePath of deletedExtraFiles) {
@@ -796,7 +819,7 @@ async function saveProject() {
         deletedExtraFiles = [];
     }
 
-    // Guardar proyecto en la base de datos
+    // Guardar proyecto
     let success = false;
     
     try {
@@ -825,6 +848,19 @@ async function saveProject() {
         }
     } catch (error) {
         console.error('❌ Error CRÍTICO al guardar:', error);
+        console.error('Stack:', error.stack);
+        success = false;
+            const updated = await dataManager.updateProject(currentProject.id, updatedProject);
+            success = updated !== null;
+            
+            if (success) {
+                console.log('✅ Proyecto actualizado:', updated.id);
+            } else {
+                console.error('❌ updateProject retornó null');
+            }
+        }
+    } catch (error) {
+        console.error('❌ Error CRÃTICO al guardar:', error);
         console.error('Stack:', error.stack);
         success = false;
     }
@@ -975,7 +1011,7 @@ function closePreviewModal() {
 
 function cancelEdit() {
     if (hasUnsavedChanges) {
-        if (!confirm('Tienes cambios sin guardar. ¿Estás seguro de que quieres salir?')) {
+        if (!confirm('Tienes cambios sin guardar. Â?Estás seguro de que quieres salir?')) {
             return;
         }
     }
@@ -1042,7 +1078,7 @@ async function confirmDelete() {
 
     // Mostrar feedback
     const originalTitle = document.getElementById('editorTitle').textContent;
-    document.getElementById('editorTitle').textContent = '🗑️ Eliminando proyecto...';
+    document.getElementById('editorTitle').textContent = 'ðŸ—‘ï¸ Eliminando proyecto...';
     document.getElementById('editorStatus').textContent = 'Procesando';
 
     try {

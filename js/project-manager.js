@@ -140,8 +140,16 @@ function normalizeStatus(status) {
 
 // Reemplazar la función openResourcesModal
 function openResourcesModal(projectId, event) {
-    const project = projects.find(p => p.id === projectId);
+    // ✅ ARREGLADO: Cargar datos más recientes del dataManager
+    let project = projects.find(p => p.id === projectId);
     if (!project) return;
+
+    // Actualizar con datos más recientes del dataManager
+    const latestProject = dataManager.getProjectById(projectId);
+    if (latestProject) {
+        // Mezclar datos recientes
+        project._original = latestProject;
+    }
 
     currentResourceProject = project;
 
@@ -151,18 +159,31 @@ function openResourcesModal(projectId, event) {
 
     title.textContent = 'RECURSOS';
 
-    // Verificar disponibilidad de recursos
+    // ✅ MEJORADO: Verificar disponibilidad de recursos con datos actualizados
     const hasGantt = project._original?.ganttImage || project._original?.ganttImagePath;
-    const hasImages = project._original?.images && project._original.images.length > 0;
-    const hasVideos = project._original?.videos && project._original.videos.length > 0;
+    const hasImages = project._original?.images && Array.isArray(project._original.images) && project._original.images.length > 0;
+    const hasVideos = project._original?.videos && Array.isArray(project._original.videos) && project._original.videos.length > 0;
+    const hasFiles = project._original?.extraFiles && Array.isArray(project._original.extraFiles) && project._original.extraFiles.length > 0;
 
-    // Inicialmente, habilitar solo si hay archivos en la data
-    const initialHasFiles = project._original?.extraFiles && project._original.extraFiles.length > 0;
+    // ✅ ARREGLADO: Actualizar estado de todos los botones
+    const btnGantt = document.getElementById('btnGantt');
+    const btnImages = document.getElementById('btnImages');
+    const btnVideos = document.getElementById('btnVideos');
+    const btnFiles = document.getElementById('btnFiles');
 
-    document.getElementById('btnGantt').disabled = !hasGantt;
-    document.getElementById('btnImages').disabled = !hasImages;
-    document.getElementById('btnVideos').disabled = !hasVideos;
-    document.getElementById('btnFiles').disabled = !initialHasFiles;
+    btnGantt.disabled = !hasGantt;
+    btnImages.disabled = !hasImages;
+    btnVideos.disabled = !hasVideos;
+    btnFiles.disabled = !hasFiles;
+
+    // Log para debug
+    console.log('📋 Estado de recursos actualizado:', {
+        proyecto: project.name,
+        gantt: hasGantt,
+        images: hasImages,
+        videos: hasVideos,
+        files: hasFiles
+    });
 
     // Posicionar el modal cerca del botón
     const buttonRect = event.currentTarget.getBoundingClientRect();
@@ -193,11 +214,6 @@ function openResourcesModal(projectId, event) {
     setTimeout(() => {
         document.addEventListener('click', closeResourcesOnOutsideClick);
     }, 0);
-
-    // Si no había archivos inicialmente, verificar el directorio y actualizar el botón
-    if (!initialHasFiles) {
-        checkAndUpdateFilesButton(project);
-    }
 }
 
 async function checkAndUpdateFilesButton(project) {
@@ -237,7 +253,12 @@ async function openResourceGantt() {
     const project = currentResourceProject._original;
     const ganttPath = project.ganttImage || project.ganttImagePath;
 
-    if (!ganttPath) return;
+    // ✅ ARREGLADO: Validar antes de procesar
+    if (!ganttPath) {
+        console.warn('⚠️ Este proyecto no tiene diagrama Gantt');
+        alert('Este proyecto no tiene diagrama Gantt disponible');
+        return;
+    }
 
     try {
         let ganttSrc = ganttPath;
@@ -271,7 +292,13 @@ async function openResourceImages() {
     if (!currentResourceProject) return;
 
     const project = currentResourceProject._original;
-    if (!project.images || project.images.length === 0) return;
+    
+    // ✅ ARREGLADO: Validar antes de procesar
+    if (!project.images || !Array.isArray(project.images) || project.images.length === 0) {
+        console.warn('⚠️ Este proyecto no tiene imágenes');
+        alert('Este proyecto no tiene imágenes disponibles');
+        return;
+    }
 
     try {
         const modal = document.getElementById('imagesViewModal');
@@ -313,7 +340,13 @@ async function openResourceVideos() {
     if (!currentResourceProject) return;
 
     const project = currentResourceProject._original;
-    if (!project.videos || project.videos.length === 0) return;
+    
+    // ✅ ARREGLADO: Validar antes de procesar
+    if (!project.videos || !Array.isArray(project.videos) || project.videos.length === 0) {
+        console.warn('⚠️ Este proyecto no tiene videos');
+        alert('Este proyecto no tiene videos disponibles');
+        return;
+    }
 
     try {
         const modal = document.getElementById('videosViewModal');
@@ -356,10 +389,22 @@ async function openResourceFiles() {
 
     const project = currentResourceProject._original;
 
-    // If extraFiles is empty, try to scan the directory
-    if (!project.extraFiles || project.extraFiles.length === 0) {
-        project.extraFiles = await scanExtraFilesDirectory(currentResourceProject);
+    // ✅ ARREGLADO: Validar antes de procesar
+    if (!project.extraFiles || !Array.isArray(project.extraFiles) || project.extraFiles.length === 0) {
+        console.warn('⚠️ Este proyecto no tiene archivos extras');
+        alert('Este proyecto no tiene archivos disponibles');
+        return;
     }
+
+    // ✅ ARREGLADO: No escanear directorio - confiar SOLO en los datos del proyecto
+    // Si extraFiles está vacío, simplemente mostrar mensaje de "no hay archivos"
+    // Esto evita que se muestren archivos que fueron eliminados del proyecto
+    
+    console.log('📁 Abriendo archivos para proyecto:', {
+        projectId: project.id,
+        extraFilesCount: project.extraFiles?.length || 0,
+        extraFiles: project.extraFiles || []
+    });
 
     try {
         const modal = document.getElementById('filesViewModal');
@@ -379,6 +424,7 @@ async function openResourceFiles() {
                     <p style="margin: 0; font-size: 14px;">Este proyecto no tiene archivos extra cargados.</p>
                 </div>
             `;
+            console.log('✓ Sin archivos a mostrar');
         } else {
             // Show files
             filesHTML = project.extraFiles.map((file) => {
@@ -400,6 +446,7 @@ async function openResourceFiles() {
                     </div>
                 `;
             }).join('');
+            console.log(`✓ Mostrando ${project.extraFiles.length} archivos`);
         }
 
         list.innerHTML = filesHTML;
@@ -634,6 +681,15 @@ function setupDataObserver() {
     setInterval(() => {
         checkForDataChanges();
     }, 2000);
+
+    // Listener for immediate data reload when editor saves changes
+    window.addEventListener('dataReloaded', () => {
+        console.log('📤 Editor saved changes, reloading projects immediately...');
+        loadProjectsFromDataManager();
+        applyFilters();
+        updateBadges();
+        renderProjects();
+    });
 
     console.log('👁️ Observador de cambios activado');
 }
