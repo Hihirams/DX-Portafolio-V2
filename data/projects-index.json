@@ -10,7 +10,7 @@
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-11-17T03:28:57.403Z"
+      "updatedAt": "2025-11-17T04:46:24.589Z"
     },
     {
       "id": "proj002",
@@ -203,5 +203,5 @@
     "totalUsers": 3,
     "avgProgress": 49
   },
-  "lastUpdated": "2025-11-17T03:28:57.448Z"
+  "lastUpdated": "2025-11-17T04:46:24.613Z"
 }

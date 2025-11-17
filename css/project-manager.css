@@ -1011,11 +1011,10 @@ body.light-mode .theme-toggle .moon-icon {
     font-size: 13px;
     color: var(--text-secondary);
     line-height: 1.4;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    hyphens: auto;
+    white-space: normal;
 }
 
 /* Botón de recursos */
