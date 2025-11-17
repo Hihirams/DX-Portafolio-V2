@@ -10,7 +10,7 @@
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T01:53:54.839Z"
     },
     {
       "id": "proj002",
@@ -187,11 +187,10 @@
       "ownerId": "user1",
       "ownerName": "Hiram González",
       "status": "in-progress",
-      "priority": "medium",
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": "2025-11-13T13:27:15.473Z"
+      "updatedAt": 1763040435658
     }
   ],
   "stats": {
@@ -204,5 +203,5 @@
     "totalUsers": 3,
     "avgProgress": 49
   },
-  "lastUpdated": "2025-11-13T13:27:15.859Z"
+  "lastUpdated": "2025-11-17T01:53:54.854Z"
 }

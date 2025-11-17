@@ -469,6 +469,38 @@ class DataManager {
             const saved = await fileManager.saveProject(project.ownerId, this.projects[projectIndex]);
 
             if (saved) {
+                // ✅ NUEVO: Actualizar también el índice data/projects.json con TODOS los campos
+                const projectMeta = {
+                    id: this.projects[projectIndex].id,
+                    title: this.projects[projectIndex].title,
+                    ownerId: this.projects[projectIndex].ownerId,
+                    ownerName: this.getUserById(this.projects[projectIndex].ownerId)?.name || 'Unknown',
+                    status: this.projects[projectIndex].status,
+                    priority: this.projects[projectIndex].priority,
+                    progress: this.projects[projectIndex].progress,
+                    icon: this.projects[projectIndex].icon,
+                    currentPhase: this.projects[projectIndex].currentPhase,
+                    // ✅ NUEVO: Agregar campos importantes que se editan frecuentemente
+                    achievements: this.projects[projectIndex].achievements,
+                    blockers: this.projects[projectIndex].blockers,
+                    nextSteps: this.projects[projectIndex].nextSteps,
+                    targetDate: this.projects[projectIndex].targetDate,
+                    ganttImage: this.projects[projectIndex].ganttImage,
+                    videos: this.projects[projectIndex].videos,
+                    images: this.projects[projectIndex].images,
+                    extraFiles: this.projects[projectIndex].extraFiles,
+                    createdAt: this.projects[projectIndex].createdAt,
+                    updatedAt: this.projects[projectIndex].updatedAt
+                };
+                
+                try {
+                    await fileManager.upsertProjectInIndex(projectMeta);
+                    console.log(`✅ Índice data/projects.json actualizado para ${projectId}`);
+                } catch (indexError) {
+                    console.error('⚠️ Error actualizando índice:', indexError.message);
+                    // No fallar - el proyecto se guardó pero el índice tuvo problemas
+                }
+                
                 await this.updateProjectsIndex();
                 console.log(`âœ… Proyecto ${projectId} actualizado`);
                 return this.projects[projectIndex];

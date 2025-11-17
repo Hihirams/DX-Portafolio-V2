@@ -173,23 +173,35 @@ class FileManager {
         const result = await this.api.saveProject(userId, projectId, projectData);
 
         if (result.success) {
-            // Construye la "ficha" que usa el Home (ajusta campos segÃƒÂºn tu UI)
+            // Construye la "ficha" que usa el Home (ajusta campos según tu UI)
             const meta = {
                 id: projectData.id,
                 ownerId: projectData.ownerId,
                 title: projectData.title,
                 status: projectData.status,
+                priority: projectData.priority,
                 progress: projectData.progress ?? 0,
-                icon: projectData.icon || 'Ã°Å¸â€œâ€¹',
+                icon: projectData.icon || '📋',
                 currentPhase: projectData.currentPhase || '',  // ✅ AGREGADO: currentPhase
-                updatedAt: Date.now()
+                // ✅ NUEVO: Agregar campos adicionales para sincronización completa
+                achievements: projectData.achievements,
+                blockers: projectData.blockers,
+                nextSteps: projectData.nextSteps,
+                targetDate: projectData.targetDate,
+                ganttImage: projectData.ganttImage,
+                ganttImagePath: projectData.ganttImagePath,
+                videos: projectData.videos,
+                images: projectData.images,
+                extraFiles: projectData.extraFiles,
+                createdAt: projectData.createdAt,
+                updatedAt: projectData.updatedAt ?? Date.now()
             };
 
             try {
                 await this.upsertProjectInIndex(meta);
-                console.log('Ã¢Å“â€¦ ÃƒÂndice data/projects.json actualizado');
+                console.log('✅ Índice data/projects.json actualizado con todos los campos');
             } catch (e) {
-                console.warn('Ã¢Å¡Â Ã¯Â¸Â No se pudo actualizar el ÃƒÂ­ndice:', e?.message);
+                console.warn('⚠️ No se pudo actualizar el índice:', e?.message);
             }
 
             console.log('\nÃ¢â€¢â€════════════════════════════════════════Ã¢â€¢â€”');
