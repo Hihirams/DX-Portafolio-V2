@@ -900,73 +900,84 @@ body.light-theme .theme-toggle-header .moon-icon {
     line-height: 1.4;
 }
 
-/* Líneas de conexión mejoradas */
+/* ============================================
+   LÍNEAS DE CONEXIÓN DEL ORGANIGRAMA
+   ============================================ */
 
-/* Línea vertical desde nivel 1 hacia nivel 2 */
+/* Espaciado entre niveles */
+.org-level {
+    margin-top: 50px;
+}
+
+.org-level.level-1 {
+    margin-top: 0;
+}
+
+/* Línea vertical desde nivel 1 (Miguel) hacia abajo */
 .org-level.level-1 .org-node::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 3px;
-    height: 40px;
+    width: 2px;
+    height: 50px;
     background: linear-gradient(to bottom,
         rgba(45, 90, 158, 0.6),
         rgba(157, 127, 78, 0.5)
     );
-    border-radius: 2px;
 }
 
-/* Línea vertical desde nivel 2 hacia nivel 3 */
+/* Línea vertical desde nivel 2 (Sandra) hacia abajo */
 .org-level.level-2 .org-node::after {
     content: '';
     position: absolute;
     top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 3px;
-    height: 40px;
+    width: 2px;
+    height: 30px;
     background: linear-gradient(to bottom,
         rgba(45, 90, 158, 0.6),
         rgba(157, 127, 78, 0.5)
     );
-    border-radius: 2px;
 }
 
-/* Línea horizontal que conecta los nodos del tercer nivel */
+/* Línea horizontal que conecta el nivel 3 (Ingenieros) */
+.org-level.level-3 {
+    position: relative;
+}
+
 .org-level.level-3::before {
     content: '';
     position: absolute;
-    top: 0;
+    top: -30px;
     left: 50%;
-    transform: translate(-50%, -40px);
-    width: 75%;
-    max-width: 700px;
-    height: 3px;
+    transform: translateX(-50%);
+    width: calc(100% - 100px);
+    max-width: 650px;
+    height: 2px;
     background: linear-gradient(to right,
-        rgba(45, 90, 158, 0.2),
-        rgba(157, 127, 78, 0.6),
-        rgba(157, 127, 78, 0.6),
-        rgba(45, 90, 158, 0.2)
+        transparent,
+        rgba(157, 127, 78, 0.5) 20%,
+        rgba(157, 127, 78, 0.5) 80%,
+        transparent
     );
-    border-radius: 2px;
 }
 
-/* Líneas verticales que conectan cada nodo del nivel 3 a la línea horizontal */
+/* Líneas verticales desde cada ingeniero hacia la línea horizontal */
 .org-level.level-3 .org-node::before {
     content: '';
     position: absolute;
     bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 3px;
-    height: 40px;
-    background: linear-gradient(to bottom,
-        rgba(157, 127, 78, 0.5),
-        rgba(45, 90, 158, 0.6)
+    width: 2px;
+    height: 30px;
+    background: linear-gradient(to top,
+        rgba(45, 90, 158, 0.6),
+        rgba(157, 127, 78, 0.5)
     );
-    border-radius: 2px;
 }
 
 /* Cursor pointer para indicar que son clicables */
@@ -1003,7 +1014,9 @@ body.light-theme .theme-toggle-header .moon-icon {
         gap: 20px;
     }
 
-    .org-level.level-3::before {
+    /* Ocultar líneas horizontales y verticales en mobile */
+    .org-level.level-3::before,
+    .org-level.level-3 .org-node::before {
         display: none;
     }
 }

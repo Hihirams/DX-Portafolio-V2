@@ -638,62 +638,44 @@ function renderOrgChart() {
     const orgChart = document.getElementById('orgChart');
     const users = dataManager.users;
 
-    // Organizar usuarios por rol jerárquico
-    const supervisor = users.find(u => u.role === 'Technical Tools Supervisor');
-    const projectEval = users.find(u => u.role === 'Project Evaluation');
-    const engineers = users.filter(u => u.role === 'Software Engineer');
+    // Filtrar solo usuarios con hierarchyLevel definido
+    const hierarchyUsers = users.filter(u => u.hierarchyLevel);
+
+    // Agrupar usuarios por nivel jerárquico
+    const usersByLevel = {};
+    hierarchyUsers.forEach(user => {
+        const level = user.hierarchyLevel;
+        if (!usersByLevel[level]) {
+            usersByLevel[level] = [];
+        }
+        usersByLevel[level].push(user);
+    });
+
+    // Obtener niveles ordenados (1, 2, 3, ...)
+    const levels = Object.keys(usersByLevel).sort((a, b) => a - b);
 
     // Generar HTML del organigrama
     let html = '';
 
-    // Nivel 1: Supervisor
-    if (supervisor) {
-        html += `
-            <div class="org-level level-1">
-                <div class="org-node" onclick="viewUserPortfolio('${supervisor.id}')">
-                    <div class="org-avatar">${getInitials(supervisor.name)}</div>
-                    <div class="org-info">
-                        <div class="org-name">${supervisor.name}</div>
-                        <div class="org-role">${supervisor.role}</div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
+    levels.forEach(level => {
+        const levelUsers = usersByLevel[level];
 
-    // Nivel 2: Project Evaluation
-    if (projectEval) {
-        html += `
-            <div class="org-level level-2">
-                <div class="org-node" onclick="viewUserPortfolio('${projectEval.id}')">
-                    <div class="org-avatar">${getInitials(projectEval.name)}</div>
-                    <div class="org-info">
-                        <div class="org-name">${projectEval.name}</div>
-                        <div class="org-role">${projectEval.role}</div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
+        html += `<div class="org-level level-${level}">`;
 
-    // Nivel 3: Software Engineers
-    if (engineers.length > 0) {
-        html += '<div class="org-level level-3">';
-
-        engineers.forEach(engineer => {
+        levelUsers.forEach(user => {
             html += `
-                <div class="org-node" onclick="viewUserPortfolio('${engineer.id}')">
-                    <div class="org-avatar">${getInitials(engineer.name)}</div>
+                <div class="org-node" onclick="viewUserPortfolio('${user.id}')">
+                    <div class="org-avatar">${getInitials(user.name)}</div>
                     <div class="org-info">
-                        <div class="org-name">${engineer.name}</div>
-                        <div class="org-role">${engineer.role}</div>
+                        <div class="org-name">${user.name}</div>
+                        <div class="org-role">${user.role}</div>
                     </div>
                 </div>
             `;
         });
 
         html += '</div>';
-    }
+    });
 
     orgChart.innerHTML = html;
 }
