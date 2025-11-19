@@ -7,6 +7,7 @@
       "name": "Hiram González",
       "role": "Software Engineer",
       "hierarchyLevel": 3,
+      "role": "Intern. Software Engineer",
       "email": "hiram@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.365Z"
@@ -18,6 +19,7 @@
       "name": "Sandra Santos",
       "role": "Project Evaluation",
       "hierarchyLevel": 2,
+      "role": "Sp. Project Evaluation",
       "email": "sandra@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.368Z"
@@ -29,6 +31,7 @@
       "name": "Miguel Coronado",
       "role": "Technical Tools Supervisor",
       "hierarchyLevel": 1,
+      "role": "Sp.Adv Technical Tools",
       "email": "miguel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
@@ -40,6 +43,7 @@
       "name": "Ivanna Rodríguez",
       "role": "Software Engineer",
       "hierarchyLevel": 3,
+      "role": "Intern. Software Engineer",
       "email": "ivanna@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
@@ -51,6 +55,7 @@
       "name": "Angel Alvarez",
       "role": "Software Engineer",
       "hierarchyLevel": 3,
+      "role": "Intern. Software Engineer",
       "email": "angel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
