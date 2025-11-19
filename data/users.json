@@ -5,7 +5,7 @@
       "username": "hiram.gonzalez",
       "password": "demo123",
       "name": "Hiram González",
-      "role": "Software Engineer",
+      "role": "Intern. Software Engineer",
       "email": "hiram@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.365Z"
@@ -15,7 +15,7 @@
       "username": "sandra.santos",
       "password": "demo123",
       "name": "Sandra Santos",
-      "role": "Project Evaluation",
+      "role": "Sp. Project Evaluation",
       "email": "sandra@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.368Z"
@@ -25,7 +25,7 @@
       "username": "miguel.coronado",
       "password": "demo123",
       "name": "Miguel Coronado",
-      "role": "Technical Tools Supervisor",
+      "role": "Sp.Adv Technical Tools",
       "email": "miguel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
@@ -35,7 +35,7 @@
       "username": "ivanna.rodriguez",
       "password": "demo123",
       "name": "Ivanna Rodríguez",
-      "role": "Software Engineer",
+      "role": "Intern. Software Engineer",
       "email": "ivanna@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
@@ -45,7 +45,7 @@
       "username": "angel.alvarez",
       "password": "demo123",
       "name": "Angel Alvarez",
-      "role": "Software Engineer",
+      "role": "Intern. Software Engineer",
       "email": "angel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
