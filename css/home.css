@@ -900,55 +900,78 @@ body.light-theme .theme-toggle-header .moon-icon {
     line-height: 1.4;
 }
 
-/* Líneas de conexión */
-.org-connector {
-    position: relative;
-}
+/* Líneas de conexión mejoradas */
 
-.org-connector::before {
+/* Línea vertical desde nivel 1 hacia nivel 2 */
+.org-level.level-1 .org-node::after {
     content: '';
     position: absolute;
-    top: -20px;
+    top: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: 20px;
+    width: 3px;
+    height: 40px;
     background: linear-gradient(to bottom,
-        rgba(29, 78, 137, 0.4),
-        rgba(157, 127, 78, 0.4)
+        rgba(45, 90, 158, 0.6),
+        rgba(157, 127, 78, 0.5)
     );
+    border-radius: 2px;
+}
+
+/* Línea vertical desde nivel 2 hacia nivel 3 */
+.org-level.level-2 .org-node::after {
+    content: '';
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 40px;
+    background: linear-gradient(to bottom,
+        rgba(45, 90, 158, 0.6),
+        rgba(157, 127, 78, 0.5)
+    );
+    border-radius: 2px;
 }
 
 /* Línea horizontal que conecta los nodos del tercer nivel */
 .org-level.level-3::before {
     content: '';
     position: absolute;
-    top: -20px;
+    top: 0;
     left: 50%;
-    transform: translateX(-50%);
-    width: 70%;
-    max-width: 600px;
-    height: 2px;
+    transform: translate(-50%, -40px);
+    width: 75%;
+    max-width: 700px;
+    height: 3px;
     background: linear-gradient(to right,
-        rgba(29, 78, 137, 0.3),
-        rgba(157, 127, 78, 0.4),
-        rgba(29, 78, 137, 0.3)
+        rgba(45, 90, 158, 0.2),
+        rgba(157, 127, 78, 0.6),
+        rgba(157, 127, 78, 0.6),
+        rgba(45, 90, 158, 0.2)
     );
+    border-radius: 2px;
 }
 
-/* Línea vertical desde el segundo nivel */
-.org-level.level-2 .org-node::after {
+/* Líneas verticales que conectan cada nodo del nivel 3 a la línea horizontal */
+.org-level.level-3 .org-node::before {
     content: '';
     position: absolute;
-    bottom: -20px;
+    bottom: 100%;
     left: 50%;
     transform: translateX(-50%);
-    width: 2px;
-    height: 20px;
+    width: 3px;
+    height: 40px;
     background: linear-gradient(to bottom,
-        rgba(29, 78, 137, 0.4),
-        rgba(157, 127, 78, 0.4)
+        rgba(157, 127, 78, 0.5),
+        rgba(45, 90, 158, 0.6)
     );
+    border-radius: 2px;
+}
+
+/* Cursor pointer para indicar que son clicables */
+.org-avatar {
+    cursor: pointer;
 }
 
 /* Responsividad */
