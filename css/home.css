@@ -821,6 +821,186 @@ body.light-theme .theme-toggle-header .moon-icon {
 }
 
 
+/* ==================== ORGANIGRAMA ==================== */
+
+.org-chart-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 40px auto 60px;
+    max-width: 1200px;
+    padding: 40px 20px;
+    background: var(--bg-card);
+    border: 1px solid var(--border-color);
+    border-radius: 24px;
+}
+
+.org-level {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 20px 0;
+    position: relative;
+    width: 100%;
+}
+
+.org-node {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 15px;
+    position: relative;
+}
+
+.org-avatar {
+    width: 90px;
+    height: 90px;
+    border-radius: 50%;
+    background: linear-gradient(135deg,
+        #1d4e89 0%,
+        #2d5a9e 20%,
+        #4a7099 40%,
+        #9d7f4e 65%,
+        #b8975a 85%,
+        #c9a862 100%
+    );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 28px;
+    margin-bottom: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    border: 3px solid var(--bg-primary);
+}
+
+.org-avatar:hover {
+    transform: scale(1.1);
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.25);
+}
+
+.org-info {
+    text-align: center;
+    max-width: 140px;
+}
+
+.org-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 4px;
+    line-height: 1.3;
+}
+
+.org-role {
+    font-size: 12px;
+    color: var(--text-secondary);
+    line-height: 1.4;
+}
+
+/* Líneas de conexión */
+.org-connector {
+    position: relative;
+}
+
+.org-connector::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom,
+        rgba(29, 78, 137, 0.4),
+        rgba(157, 127, 78, 0.4)
+    );
+}
+
+/* Línea horizontal que conecta los nodos del tercer nivel */
+.org-level.level-3::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    max-width: 600px;
+    height: 2px;
+    background: linear-gradient(to right,
+        rgba(29, 78, 137, 0.3),
+        rgba(157, 127, 78, 0.4),
+        rgba(29, 78, 137, 0.3)
+    );
+}
+
+/* Línea vertical desde el segundo nivel */
+.org-level.level-2 .org-node::after {
+    content: '';
+    position: absolute;
+    bottom: -20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 2px;
+    height: 20px;
+    background: linear-gradient(to bottom,
+        rgba(29, 78, 137, 0.4),
+        rgba(157, 127, 78, 0.4)
+    );
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .org-chart-container {
+        padding: 30px 15px;
+    }
+
+    .org-avatar {
+        width: 70px;
+        height: 70px;
+        font-size: 22px;
+    }
+
+    .org-name {
+        font-size: 14px;
+    }
+
+    .org-role {
+        font-size: 11px;
+    }
+
+    .org-node {
+        margin: 0 10px;
+    }
+
+    .org-level.level-3 {
+        flex-wrap: wrap;
+        gap: 20px;
+    }
+
+    .org-level.level-3::before {
+        display: none;
+    }
+}
+
+@media (max-width: 480px) {
+    .org-avatar {
+        width: 60px;
+        height: 60px;
+        font-size: 18px;
+    }
+
+    .org-name {
+        font-size: 13px;
+    }
+
+    .org-info {
+        max-width: 120px;
+    }
+}
+
 
 /* ==================== LOGIN MODAL ==================== */
 
