@@ -31,21 +31,22 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj002/images/image_1763345827001_0.png",
+      "src": "users/user1/projects/proj002/images/image_1763397271985_0.png",
       "title": "Interfaz Principal"
     },
     {
-      "src": "users/user1/projects/proj002/images/image_1763345827004_1.png",
+      "src": "users/user1/projects/proj002/images/image_1763397272451_1.png",
       "title": "Detección Activa"
     },
     {
-      "src": "users/user1/projects/proj002/images/image_1763345827008_2.png",
+      "src": "users/user1/projects/proj002/images/image_1763397272521_2.png",
       "title": "Respuesta de FASTAPI"
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-11-17T02:17:06.999Z",
-  "ganttImagePath": "users/user1/projects/proj002/gantt/gantt.png",
+  "updatedAt": "2025-11-17T16:34:28.821Z",
+  "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
   "extraFiles": [],
-  "ownerName": "Hiram González"
+  "ownerName": "Hiram González",
+  "concept": ""
 }

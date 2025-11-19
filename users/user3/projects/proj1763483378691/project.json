@@ -1,0 +1,22 @@
+{
+  "id": "proj1763483378691",
+  "ownerId": "user3",
+  "title": "CSR DX",
+  "icon": "📋",
+  "status": "discovery",
+  "priority": "medium",
+  "progress": 0,
+  "targetDate": "2025-11-18",
+  "currentPhase": "",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-18T16:29:38.691Z",
+  "updatedAt": "2025-11-18T16:29:38.691Z"
+}

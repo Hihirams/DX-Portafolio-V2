@@ -10,7 +10,7 @@
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-11-17T06:00:14.934Z"
+      "updatedAt": "2025-11-17T16:31:02.588Z"
     },
     {
       "id": "proj002",
@@ -22,7 +22,7 @@
       "progress": 55,
       "icon": "🧪",
       "currentPhase": "Integración de detección y enlace IoT QueryLink (CSV automático)",
-      "updatedAt": "2025-11-17T02:17:06.999Z"
+      "updatedAt": "2025-11-17T16:34:28.821Z"
     },
     {
       "id": "proj003",
@@ -34,7 +34,7 @@
       "progress": 45,
       "icon": "🎥",
       "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
-      "updatedAt": "2025-11-17T02:17:51.254Z"
+      "updatedAt": "2025-11-17T16:36:08.920Z"
     },
     {
       "id": "proj004",
@@ -58,7 +58,7 @@
       "progress": 85,
       "icon": "🤖",
       "currentPhase": "Bot operativo en entorno local. Despliegue en HOLD por decisiones de infraestructura IT.",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:35:14.364Z"
     },
     {
       "id": "proj1762463273285",
@@ -66,10 +66,11 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "in-progress",
-      "progress": 95,
+      "priority": "high",
+      "progress": 100,
       "icon": "📁",
       "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
-      "updatedAt": 1762871227497
+      "updatedAt": "2025-11-18T15:20:03.775Z"
     },
     {
       "id": "proj1762784041699",
@@ -128,14 +129,15 @@
     },
     {
       "id": "proj1762787721514",
-      "title": "Bot Innovation Zone",
+      "title": "RoBot Innovation Zone",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "discovery",
+      "priority": "medium",
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": 1762873828193
+      "updatedAt": "2025-11-18T15:36:29.169Z"
     },
     {
       "id": "proj1762868928286",
@@ -188,21 +190,130 @@
       "ownerId": "user1",
       "ownerName": "Hiram González",
       "status": "in-progress",
+      "priority": "medium",
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": 1763040435658
+      "updatedAt": "2025-11-17T16:37:54.523Z"
+    },
+    {
+      "id": "proj1763483352243",
+      "title": "CR PDCA",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:29:12.243Z"
+    },
+    {
+      "id": "proj1763483378691",
+      "title": "CSR DX",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:29:38.691Z"
+    },
+    {
+      "id": "proj1763483412529",
+      "title": "ESC DX",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:30:12.529Z"
+    },
+    {
+      "id": "proj1763483430619",
+      "title": "MeetMind",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:30:30.619Z"
+    },
+    {
+      "id": "proj1763483450152",
+      "title": "QC ALT + Maper",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:30:50.152Z"
+    },
+    {
+      "id": "proj1763483501019",
+      "title": "Trace Link 360",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 40,
+      "icon": "🔗",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:35:27.097Z"
+    },
+    {
+      "id": "proj1763483513611",
+      "title": "MRM",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:31:53.611Z"
+    },
+    {
+      "id": "proj1763483529675",
+      "title": "Whyzer",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:32:09.675Z"
+    },
+    {
+      "id": "proj1763484801399",
+      "title": "Videos Creation",
+      "ownerId": "user2",
+      "ownerName": "Sandra Santos",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 62,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:53:21.399Z"
     }
   ],
   "stats": {
-    "totalProjects": 17,
+    "totalProjects": 26,
     "inProgress": 6,
-    "discovery": 5,
+    "discovery": 14,
     "hold": 2,
     "completed": 2,
     "paused": 2,
     "totalUsers": 3,
-    "avgProgress": 49
+    "avgProgress": 36
   },
-  "lastUpdated": "2025-11-17T06:00:14.954Z"
+  "lastUpdated": "2025-11-18T16:53:22.252Z"
 }

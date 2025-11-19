@@ -1,0 +1,22 @@
+{
+  "id": "proj1763483529675",
+  "ownerId": "user3",
+  "title": "Whyzer",
+  "icon": "📋",
+  "status": "discovery",
+  "priority": "medium",
+  "progress": 0,
+  "targetDate": "2025-11-18",
+  "currentPhase": "",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-18T16:32:09.675Z",
+  "updatedAt": "2025-11-18T16:32:09.675Z"
+}

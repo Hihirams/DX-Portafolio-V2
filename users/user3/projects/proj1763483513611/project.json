@@ -1,0 +1,22 @@
+{
+  "id": "proj1763483513611",
+  "ownerId": "user3",
+  "title": "MRM",
+  "icon": "📋",
+  "status": "discovery",
+  "priority": "medium",
+  "progress": 0,
+  "targetDate": "2025-11-18",
+  "currentPhase": "",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-18T16:31:53.611Z",
+  "updatedAt": "2025-11-18T16:31:53.611Z"
+}

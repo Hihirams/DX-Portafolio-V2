@@ -33,25 +33,25 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj001/images/image_1763350137412_0.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063055_0.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1763350137415_1.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063136_1.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1763350137419_2.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063239_2.png",
           "title": "Vista Cenital"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1763350137422_3.png",
+          "src": "users/user1/projects/proj001/images/image_1763397063323_3.png",
           "title": "Datos en vivo API REST"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-17T06:00:14.934Z",
-      "ganttImagePath": "users/user1/projects/proj001/gantt/gantt.png",
+      "updatedAt": "2025-11-17T16:31:02.588Z",
+      "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
@@ -89,23 +89,24 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj002/images/image_1763345827001_0.png",
+          "src": "users/user1/projects/proj002/images/image_1763397271985_0.png",
           "title": "Interfaz Principal"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1763345827004_1.png",
+          "src": "users/user1/projects/proj002/images/image_1763397272451_1.png",
           "title": "Detección Activa"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1763345827008_2.png",
+          "src": "users/user1/projects/proj002/images/image_1763397272521_2.png",
           "title": "Respuesta de FASTAPI"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-17T02:17:06.999Z",
-      "ganttImagePath": "users/user1/projects/proj002/gantt/gantt.png",
+      "updatedAt": "2025-11-17T16:34:28.821Z",
+      "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
       "extraFiles": [],
-      "ownerName": "Hiram González"
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj003",
@@ -143,35 +144,36 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/image_1763345871262_0.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369232_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763345871264_1.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369327_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763345871268_2.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369412_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763345871271_3.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369487_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763345871281_4.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369598_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763345871287_5.png",
+          "src": "users/user1/projects/proj003/images/image_1763397369728_5.png",
           "title": "Alerta y detección de objeto"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-11-17T02:17:51.254Z",
-      "ganttImagePath": "users/user1/projects/proj003/gantt/gantt.png",
+      "updatedAt": "2025-11-17T16:36:08.920Z",
+      "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
       "extraFiles": [],
-      "ownerName": "Hiram González"
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj004",
@@ -228,7 +230,6 @@
         "2026-01": "Revisión con IT sobre infraestructura",
         "2026-03": "Reactivación estimada si se aprueba despliegue"
       },
-      "ganttImage": "users/user1/projects/proj005/gantt/gantt.png",
       "videos": [
         {
           "src": "users/user1/projects/proj005/videos/Demo_v1.3.0_DENBOT.mp4",
@@ -250,17 +251,40 @@
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-10-30"
+      "updatedAt": "2025-11-17T16:35:14.364Z",
+      "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "concept": ""
     },
     {
       "id": "proj1762463273285",
       "ownerId": "user2",
       "title": "YOKADX",
       "status": "in-progress",
-      "progress": 95,
+      "progress": 100,
       "icon": "📁",
-      "updatedAt": 1762871227497,
-      "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
+      "updatedAt": "2025-11-18T15:20:03.775Z",
+      "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
+      "priority": "high",
+      "achievements": {
+        "2025-11": "Se estan realizando cambios en los aprobadores a si como  tambien coachando a los usuarios finales "
+      },
+      "blockers": {
+        "type": "success",
+        "message": "Sin bloqueos actuales."
+      },
+      "nextSteps": {
+        "2025-11": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
+      },
+      "targetDate": "2026-06-22",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-06T21:07:53.285Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762784041699",
@@ -315,12 +339,40 @@
     {
       "id": "proj1762787721514",
       "ownerId": "user2",
-      "title": "Bot Innovation Zone",
+      "title": "RoBot Innovation Zone",
       "status": "discovery",
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": 1762873828193
+      "updatedAt": "2025-11-18T15:36:29.169Z",
+      "priority": "medium",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-10",
+      "ganttImagePath": "users/user2/projects/proj1762787721514/gantt/gantt_1763397727269.png",
+      "videos": [],
+      "images": [
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763480189303_0.png",
+          "title": "RB1.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763480189371_1.png",
+          "title": "RB2.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763480189432_2.png",
+          "title": "RB3.png"
+        }
+      ],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T15:15:21.514Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762868928286",
@@ -385,7 +437,239 @@
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": 1763040435658
+      "updatedAt": "2025-11-17T16:37:54.523Z",
+      "priority": "medium",
+      "achievements": {
+        "2025-10": "Se logra construir la base home del portafolio donde se muestran proyectos.\nSe implementa página de edición de proeyctos y visualización dinámica de los proyectos del usuario.",
+        "2025-11": "Archivo exe simplificado con acceso multi usuario permitiendo edición de cualquier persona en cualquier momento con un usuario registrado."
+      },
+      "blockers": {
+        "type": "success",
+        "message": ""
+      },
+      "nextSteps": {
+        "2025-11": "Implementar tarjeta de proyectos terminados, filtro de proyectos en etapa terminado y opción en modo edición para poder configurar el proyecto terminado."
+      },
+      "targetDate": "2026-01-30",
+      "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
+      "videos": [],
+      "images": [],
+      "extraFiles": [
+        {
+          "src": "users/user1/projects/proj1762876915703/extra-files/RobotDX-Propuesta_1762983021511.pdf",
+          "title": "RobotDX-Propuesta.pdf",
+          "fileName": "RobotDX-Propuesta_1762983021511.pdf",
+          "fileType": "application/octet-stream",
+          "fileSize": 0,
+          "extension": "pdf"
+        }
+      ],
+      "createdAt": "2025-11-11T16:01:55.703Z",
+      "ownerName": "Hiram González",
+      "concept": ""
+    },
+    {
+      "id": "proj1763483352243",
+      "ownerId": "user3",
+      "title": "CR PDCA",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:29:12.243Z",
+      "updatedAt": "2025-11-18T16:29:12.243Z"
+    },
+    {
+      "id": "proj1763483378691",
+      "ownerId": "user3",
+      "title": "CSR DX",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:29:38.691Z",
+      "updatedAt": "2025-11-18T16:29:38.691Z"
+    },
+    {
+      "id": "proj1763483412529",
+      "ownerId": "user3",
+      "title": "ESC DX",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:30:12.529Z",
+      "updatedAt": "2025-11-18T16:30:12.529Z"
+    },
+    {
+      "id": "proj1763483430619",
+      "ownerId": "user3",
+      "title": "MeetMind",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:30:30.619Z",
+      "updatedAt": "2025-11-18T16:30:30.619Z"
+    },
+    {
+      "id": "proj1763483450152",
+      "ownerId": "user3",
+      "title": "QC ALT + Maper",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:30:50.152Z",
+      "updatedAt": "2025-11-18T16:30:50.152Z"
+    },
+    {
+      "id": "proj1763483501019",
+      "ownerId": "user3",
+      "title": "Trace Link 360",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 40,
+      "icon": "🔗",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2026-03-31",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:31:41.019Z",
+      "updatedAt": "2025-11-18T16:35:27.097Z",
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
+    },
+    {
+      "id": "proj1763483513611",
+      "ownerId": "user3",
+      "title": "MRM",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:31:53.611Z",
+      "updatedAt": "2025-11-18T16:31:53.611Z"
+    },
+    {
+      "id": "proj1763483529675",
+      "ownerId": "user3",
+      "title": "Whyzer",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-18",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:32:09.675Z",
+      "updatedAt": "2025-11-18T16:32:09.675Z"
+    },
+    {
+      "id": "proj1763484801399",
+      "ownerId": "user2",
+      "title": "Videos Creation",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 62,
+      "icon": "📋",
+      "currentPhase": "",
+      "achievements": {
+        "2025-10": "Se realizaron videos \"Norma\""
+      },
+      "blockers": {
+        "type": "success",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2026-03-31",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-11-18T16:53:21.399Z",
+      "updatedAt": "2025-11-18T16:53:21.399Z"
     }
   ]
 }

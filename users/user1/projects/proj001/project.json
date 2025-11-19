@@ -31,25 +31,25 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj001/images/image_1763350137412_0.png",
+      "src": "users/user1/projects/proj001/images/image_1763397063055_0.png",
       "title": "Vista inicial Planeta"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1763350137415_1.png",
+      "src": "users/user1/projects/proj001/images/image_1763397063136_1.png",
       "title": "Vista libre MTS"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1763350137419_2.png",
+      "src": "users/user1/projects/proj001/images/image_1763397063239_2.png",
       "title": "Vista Cenital"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1763350137422_3.png",
+      "src": "users/user1/projects/proj001/images/image_1763397063323_3.png",
       "title": "Datos en vivo API REST"
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-11-17T06:00:14.934Z",
-  "ganttImagePath": "users/user1/projects/proj001/gantt/gantt.png",
+  "updatedAt": "2025-11-17T16:31:02.588Z",
+  "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
   "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."

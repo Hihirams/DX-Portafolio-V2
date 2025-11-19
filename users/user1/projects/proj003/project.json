@@ -34,32 +34,34 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj003/images/image_1763345871262_0.png",
+      "src": "users/user1/projects/proj003/images/image_1763397369232_0.png",
       "title": "Interfaz de programa"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763345871264_1.png",
+      "src": "users/user1/projects/proj003/images/image_1763397369327_1.png",
       "title": "Multi Visión"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763345871268_2.png",
+      "src": "users/user1/projects/proj003/images/image_1763397369412_2.png",
       "title": "Interfaz de Operador"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763345871271_3.png",
+      "src": "users/user1/projects/proj003/images/image_1763397369487_3.png",
       "title": "Editor de RIO"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763345871281_4.png",
+      "src": "users/user1/projects/proj003/images/image_1763397369598_4.png",
       "title": "Detección en vivo"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763345871287_5.png",
+      "src": "users/user1/projects/proj003/images/image_1763397369728_5.png",
       "title": "Alerta y detección de objeto"
     }
   ],
   "createdAt": "2025-10-01",
-  "updatedAt": "2025-11-17T02:17:51.254Z",
+  "updatedAt": "2025-11-17T16:36:08.920Z",
+  "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
   "extraFiles": [],
-  "ganttImagePath": "users/user1/projects/proj003/gantt/gantt.png"
+  "ownerName": "Hiram González",
+  "concept": ""
 }
