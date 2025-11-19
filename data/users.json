@@ -29,6 +29,26 @@
       "email": "miguel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
+    },
+        {
+      "id": "user4",
+      "username": "ivanna.rodriguez",
+      "password": "demo123",
+      "name": "Ivanna Rodríguez",
+      "role": "Software Engineer",
+      "email": "ivanna@dx.com",
+      "avatar": null,
+      "createdAt": "2025-10-31T21:23:03.370Z"
+    },
+        {
+      "id": "user5",
+      "username": "angel.alvarez",
+      "password": "demo123",
+      "name": "Angel Alvarez",
+      "role": "Software Engineer",
+      "email": "angel@dx.com",
+      "avatar": null,
+      "createdAt": "2025-10-31T21:23:03.370Z"
     }
   ]
 }
