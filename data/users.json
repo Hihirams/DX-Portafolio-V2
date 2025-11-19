@@ -6,6 +6,7 @@
       "password": "demo123",
       "name": "Hiram González",
       "role": "Software Engineer",
+      "hierarchyLevel": 3,
       "email": "hiram@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.365Z"
@@ -16,6 +17,7 @@
       "password": "demo123",
       "name": "Sandra Santos",
       "role": "Project Evaluation",
+      "hierarchyLevel": 2,
       "email": "sandra@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.368Z"
@@ -26,26 +28,29 @@
       "password": "demo123",
       "name": "Miguel Coronado",
       "role": "Technical Tools Supervisor",
+      "hierarchyLevel": 1,
       "email": "miguel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
     },
-        {
+    {
       "id": "user4",
       "username": "ivanna.rodriguez",
       "password": "demo123",
       "name": "Ivanna Rodríguez",
       "role": "Software Engineer",
+      "hierarchyLevel": 3,
       "email": "ivanna@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
     },
-        {
+    {
       "id": "user5",
       "username": "angel.alvarez",
       "password": "demo123",
       "name": "Angel Alvarez",
       "role": "Software Engineer",
+      "hierarchyLevel": 3,
       "email": "angel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
