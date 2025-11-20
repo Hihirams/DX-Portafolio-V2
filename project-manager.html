@@ -25,21 +25,25 @@
                         <span class="filter-label">Todos los Estados</span>
                         <span class="filter-badge" id="badge-all">30</span>
                     </button>
-                    <button class="filter-btn" data-filter="status" data-value="progress" onclick="toggleFilter('status', 'progress')">
-                        <span class="filter-label">En Progreso</span>
-                        <span class="filter-badge" id="badge-progress">0</span>
-                    </button>
-                    <button class="filter-btn" data-filter="status" data-value="hold" onclick="toggleFilter('status', 'hold')">
-                        <span class="filter-label">En Hold</span>
-                        <span class="filter-badge" id="badge-hold">0</span>
-                    </button>
                     <button class="filter-btn" data-filter="status" data-value="discovery" onclick="toggleFilter('status', 'discovery')">
                         <span class="filter-label">Discovery</span>
                         <span class="filter-badge" id="badge-discovery">0</span>
                     </button>
-                    <button class="filter-btn" data-filter="status" data-value="completed" onclick="toggleFilter('status', 'completed')">
-                        <span class="filter-label">Completados</span>
-                        <span class="filter-badge" id="badge-completed">0</span>
+                    <button class="filter-btn" data-filter="status" data-value="decision" onclick="toggleFilter('status', 'decision')">
+                        <span class="filter-label">Decision</span>
+                        <span class="filter-badge" id="badge-decision">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="develop" onclick="toggleFilter('status', 'develop')">
+                        <span class="filter-label">Develop</span>
+                        <span class="filter-badge" id="badge-develop">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="pilot" onclick="toggleFilter('status', 'pilot')">
+                        <span class="filter-label">Pilot</span>
+                        <span class="filter-badge" id="badge-pilot">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="yoko-tenkai" onclick="toggleFilter('status', 'yoko-tenkai')">
+                        <span class="filter-label">Yoko Tenkai</span>
+                        <span class="filter-badge" id="badge-yoko-tenkai">0</span>
                     </button>
                 </div>
             </div>
@@ -99,12 +103,12 @@
                     </button>
                     <button class="action-btn clear-btn" onclick="clearAllFilters()">Limpiar Filtros</button>
                     <button class="action-btn presentation-btn" onclick="togglePresentationMode()">
-    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 6px;">
-        <rect x="2" y="3" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-        <path d="M2 6h12M5 3v3M11 3v3" stroke="currentColor" stroke-width="1.5"/>
-    </svg>
-    <span id="presentationBtnText">Modo Presentación</span>
-</button>
+                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 6px;">
+                            <rect x="2" y="3" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
+                            <path d="M2 6h12M5 3v3M11 3v3" stroke="currentColor" stroke-width="1.5"/>
+                        </svg>
+                        <span id="presentationBtnText">Modo Presentación</span>
+                    </button>
                     <button class="theme-toggle" onclick="toggleTheme()" aria-label="Cambiar tema">
                         <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="12" cy="12" r="5"></circle>
@@ -152,32 +156,36 @@
                 </div>
             </div>
 
-            <!-- Active Filters -->
-            <div class="active-filters-container" id="activeFiltersContainer">
-                <div class="active-filters" id="activeFilters"></div>
-            </div>
-
-            <!-- Table Container -->
+            <!-- Projects Table Wrapper with Horizontal Scroll -->
             <div class="table-wrapper">
                 <div class="table-container">
                     <table class="projects-table">
                         <thead>
                             <tr>
-                                <th class="col-name">Nombre del Proyecto</th>
-                                <th class="col-concept">Concepto</th>
-                                <th class="col-status">Estado</th>
-                                <th class="col-progress">% Avance</th>
-                                <th class="col-update">Última Actualización</th>
-                                <th class="col-next">Próximo Paso</th>
-                                <th class="col-delivery">Fecha de Entrega</th>
-                                <th class="col-responsible">Responsable</th>
-                                <th class="col-blocked">Bloqueo</th>
-                                <th class="col-block-desc">Descripción del Bloqueo</th>
-                                <th class="col-block-resp">Responsable del Bloqueo</th>
-                                <th class="col-resources">Recursos</th>
+                                <th class="col-priority">Prior.</th>
+                                <th class="col-project-name">Name of Project</th>
+                                <th class="col-detail">Detail of the Project</th>
+                                <th class="col-type">Type of Project</th>
+                                <th class="col-task">Task</th>
+                                <th class="col-status">Status</th>
+                                <th class="col-percentage">%</th>
+                                <th class="col-owner">Project Owner</th>
+                                <th class="col-complexity">Complexity</th>
+                                <th class="col-scope">Scope</th>
+                                <th class="col-recovery">Recovery</th>
+                                <th class="col-phase">Phase Discovery</th>
+                                <th class="col-phase">Phase Decision</th>
+                                <th class="col-phase">Phase Develop</th>
+                                <th class="col-phase">Phase Pilot</th>
+                                <th class="col-phase">Phase Yoko Tenkai</th>
+                                <th class="col-percentage">Percentage2</th>
+                                <th class="col-date">Start Process</th>
+                                <th class="col-date">End Process</th>
+                                <th class="col-next-steps">Next Steps</th>
+                                <th class="col-actions">Recursos</th>
                             </tr>
                         </thead>
-                        <tbody id="projectsBody">
+                        <tbody id="projectsTableBody">
                             <!-- Projects will be rendered here -->
                         </tbody>
                     </table>
@@ -186,229 +194,119 @@
 
             <!-- Pagination -->
             <div class="pagination">
-                <div class="pagination-info">
-                    <span id="pageInfo">Mostrando 1-10 de 30 proyectos</span>
-                </div>
-                <div class="pagination-controls">
-                    <button class="page-btn" id="prevBtn" onclick="previousPage()">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M12 15L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                    <div class="page-number">
-                        <span id="currentPage">1</span>
-                        <span class="page-separator">/</span>
-                        <span id="totalPages">3</span>
-                    </div>
-                    <button class="page-btn" id="nextBtn" onclick="nextPage()">
-                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                        </svg>
-                    </button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Analytics Modal -->
-    <div class="analytics-modal" id="analyticsModal">
-        <div class="modal-overlay" onclick="closeAnalytics()"></div>
-        <div class="modal-content">
-            <div class="modal-header">
-                <div class="modal-title-section">
-                    <h2 class="modal-title">Portfolio Analytics</h2>
-                    <p class="modal-subtitle">Vista Ejecutiva de Métricas Clave · Interactivo</p>
-                </div>
-                <button class="modal-close" onclick="closeAnalytics()">
-                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <button class="pagination-btn" id="prevPage" onclick="prevPage()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Anterior
+                </button>
+                <div class="pagination-info" id="paginationInfo">Página 1 de 3</div>
+                <button class="pagination-btn" id="nextPage" onclick="nextPage()">
+                    Siguiente
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                        <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
                 </button>
             </div>
-
-            <div class="modal-body">
-                <!-- Interactive Filters -->
-                <div class="analytics-filters" id="analyticsFilters">
-                    <!-- Filters will be generated dynamically -->
-                </div>
-
-                <!-- KPI Cards -->
-                <div class="kpi-grid">
-                    <div class="kpi-card">
-                        <div class="kpi-icon" style="background: rgba(52, 199, 89, 0.15);">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#34c759" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="kpi-content">
-                            <div class="kpi-label">Proyectos Activos</div>
-                            <div class="kpi-value" id="kpi-active">16</div>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-icon" style="background: rgba(255, 159, 10, 0.15);">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ff9f0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="kpi-content">
-                            <div class="kpi-label">En Riesgo</div>
-                            <div class="kpi-value" id="kpi-risk">8</div>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-icon" style="background: rgba(255, 69, 58, 0.15);">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 9V13M12 17H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ff453a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="kpi-content">
-                            <div class="kpi-label">Bloqueados</div>
-                            <div class="kpi-value" id="kpi-blocked">8</div>
-                        </div>
-                    </div>
-
-                    <div class="kpi-card">
-                        <div class="kpi-icon" style="background: rgba(48, 209, 88, 0.15);">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                            </svg>
-                        </div>
-                        <div class="kpi-content">
-                            <div class="kpi-label">Completados</div>
-                            <div class="kpi-value" id="kpi-completed">4</div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Charts Grid -->
-                <div class="charts-grid">
-                    <!-- Portfolio Status -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Estado del Portafolio</h3>
-                            <span class="chart-subtitle">Distribución por estado · Click para filtrar</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="portfolioStatusChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Team Workload -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Carga de Trabajo</h3>
-                            <span class="chart-subtitle">Proyectos por responsable · Click para filtrar</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="teamWorkloadChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Progress Overview -->
-                    <div class="chart-card chart-card-wide">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Progreso General</h3>
-                            <span class="chart-subtitle">% de avance por proyecto (Top 10 en progreso) · Click para filtrar</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="progressOverviewChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Blockers Analysis -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Análisis de Bloqueos</h3>
-                            <span class="chart-subtitle">Proyectos bloqueados vs activos · Click para filtrar</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="blockersChart"></canvas>
-                        </div>
-                    </div>
-
-                    <!-- Delivery Timeline -->
-                    <div class="chart-card">
-                        <div class="chart-header">
-                            <h3 class="chart-title">Timeline de Entregas FY25</h3>
-                            <span class="chart-subtitle">Noviembre 2024 - Mayo 2025 • Proyectos programados</span>
-                        </div>
-                        <div class="chart-container">
-                            <canvas id="deliveryTimelineChart"></canvas>
-                        </div>
-                    </div>
-
-<!-- Burndown Chart - NUEVO -->
-<div class="chart-card chart-card-wide">
-    <div class="chart-header">
-        <h3 class="chart-title">Burndown de Proyectos</h3>
-        <span class="chart-subtitle">Completados vs objetivo mensual</span>
+        </div>
     </div>
-    <div class="chart-container">
-        <canvas id="burndownChart"></canvas>
+
+<!-- Modal para recursos (Gantt, Imágenes, Videos, Archivos) -->
+<div class="resource-modal" id="resourcesModal">
+    <div class="resource-modal-content" id="resourcesModalContent">
+        <div class="resource-modal-header">
+            <h3 id="resourcesModalTitle">RECURSOS</h3>
+            <button class="resource-modal-close" onclick="closeResourcesModal()">×</button>
+        </div>
+        <div class="resource-modal-body">
+            <div class="resource-grid">
+                <button id="btnGantt" class="resource-item" onclick="viewGantt()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                        <line x1="9" y1="3" x2="9" y2="21"></line>
+                        <line x1="3" y1="9" x2="21" y2="9"></line>
+                        <line x1="3" y1="15" x2="21" y2="15"></line>
+                    </svg>
+                    <span>Ver Gantt</span>
+                </button>
+                <button id="btnImages" class="resource-item" onclick="viewImages()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="18" height="18" rx="2"></rect>
+                        <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                        <path d="M21 15l-5-5L5 21"></path>
+                    </svg>
+                    <span>Galería de Imágenes</span>
+                </button>
+                <button id="btnVideos" class="resource-item" onclick="viewVideos()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="6" width="20" height="12" rx="2"></rect>
+                        <polygon points="10,9 10,15 15,12"></polygon>
+                    </svg>
+                    <span>Galería de Videos</span>
+                </button>
+                <button id="btnFiles" class="resource-item" onclick="viewFiles()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+                        <polyline points="13 2 13 9 20 9"></polyline>
+                    </svg>
+                    <span>Archivos Extras</span>
+                </button>
+            </div>
+        </div>
     </div>
 </div>
+
+<!-- Modal de Analytics -->
+<div class="analytics-modal" id="analyticsModal">
+    <div class="analytics-modal-content">
+        <div class="analytics-modal-header">
+            <h2>Portfolio Analytics</h2>
+            <div class="analytics-controls">
+                <button class="reset-filters-btn" onclick="resetAnalyticsFilters()">
+                    <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M14 6l-6 6-6-6" stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                    Reset Filters
+                </button>
+                <button class="close-modal-btn" onclick="closeAnalytics()">×</button>
+            </div>
+        </div>
+        <div class="analytics-modal-body">
+            <div class="charts-grid">
+                <div class="chart-container">
+                    <h3 class="chart-title">Portfolio Status</h3>
+                    <canvas id="portfolioStatusChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Team Workload</h3>
+                    <canvas id="teamWorkloadChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Blockers Overview</h3>
+                    <canvas id="blockersChart"></canvas>
+                </div>
+                <div class="chart-container">
+                    <h3 class="chart-title">Progress Overview</h3>
+                    <canvas id="progressChart"></canvas>
+                </div>
+                <div class="chart-container full-width">
+                    <h3 class="chart-title">Delivery Timeline</h3>
+                    <canvas id="deliveryTimelineChart"></canvas>
                 </div>
             </div>
         </div>
     </div>
-
-<!-- Reemplazar el Modal de Recursos completo -->
-
-<!-- Modal de Recursos (Dropdown compacto) -->
-<div class="resources-modal" id="resourcesModal">
-    <div class="resources-modal-content" id="resourcesModalContent">
-        <div class="resources-modal-header">
-            <h3 class="resources-modal-title" id="resourcesModalTitle">Recursos</h3>
-            <button class="resources-modal-close" onclick="closeResourcesModal()">×</button>
-        </div>
-        <div class="resources-grid">
-            <button class="resource-btn" id="btnGantt" onclick="openResourceGantt()">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="2" width="12" height="12" rx="1.5"/>
-                    <line x1="6" y1="2" x2="6" y2="14"/>
-                    <line x1="2" y1="6" x2="14" y2="6"/>
-                    <line x1="2" y1="10" x2="14" y2="10"/>
-                </svg>
-                Gantt
-            </button>
-            <button class="resource-btn" id="btnImages" onclick="openResourceImages()">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="2" y="2" width="12" height="12" rx="1.5"/>
-                    <circle cx="5.5" cy="5.5" r="1"/>
-                    <polyline points="14 11 10 7 2 14"/>
-                </svg>
-                Imágenes
-            </button>
-            <button class="resource-btn" id="btnVideos" onclick="openResourceVideos()">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <rect x="1" y="3" width="10" height="10" rx="1.5"/>
-                    <polygon points="15 8 11 6 11 10 15 8"/>
-                </svg>
-                Videos
-            </button>
-            <button class="resource-btn" id="btnFiles" onclick="openResourceFiles()">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                    <path d="M9 2H4a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 4 14h8a1.5 1.5 0 0 0 1.5-1.5V6L9 2z"/>
-                    <polyline points="9 2 9 6 13 6"/>
-                </svg>
-                Archivos
-            </button>
-        </div>
-    </div>
 </div>
 
-<!-- Modal de Vista de Gantt -->
+<!-- Modal de vista de Gantt -->
 <div class="resource-view-modal" id="ganttViewModal">
-    <div class="resource-view-content" style="max-width: 90vw;">
+    <div class="resource-view-content" style="max-width: 95vw;">
         <div class="resource-view-header">
-            <h3 class="resource-view-title" id="ganttViewTitle">Diagrama de Gantt</h3>
+            <h3 class="resource-view-title" id="ganttViewTitle">Gantt Chart</h3>
             <button class="resource-view-close" onclick="closeGanttViewModal()">×</button>
         </div>
         <div class="resource-view-body">
-            <img id="ganttViewImage" src="" alt="Gantt">
+            <img id="ganttViewImage" src="" alt="Gantt Chart" style="width: 100%; height: auto; display: block;">
         </div>
     </div>
 </div>
@@ -452,6 +350,17 @@
     </div>
 </div>
 
+<!-- Modal de detalles de texto -->
+<div class="text-detail-modal" id="textDetailModal" style="display: none;">
+    <div class="text-detail-content">
+        <div class="text-detail-header">
+            <h4 id="textDetailTitle">Detalles</h4>
+            <button class="text-detail-close" onclick="closeTextDetail()">×</button>
+        </div>
+        <div class="text-detail-body" id="textDetailBody"></div>
+    </div>
+</div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="js/file-manager.js"></script>
     <script src="js/data-manager.js"></script>
@@ -467,12 +376,10 @@
             console.log(message);
         }
 
-        // Función para detectar si es Electron
         function checkIsElectron() {
             return typeof window.isElectron !== 'undefined' || typeof window.electronAPI !== 'undefined';
         }
 
-        // Esperar a que todos los managers estén disponibles
         function waitForManagers(timeout = 5000) {
             return new Promise((resolve, reject) => {
                 const startTime = Date.now();
@@ -490,7 +397,6 @@
             });
         }
 
-        // Esperar a que dataManager esté listo
         (async function() {
             try {
                 updateLoadingStatus('🔄 Inicializando DataManager desde Project Manager...');
@@ -500,11 +406,9 @@
                 console.log('   - FileManager definido:', typeof window.fileManager !== 'undefined');
                 console.log('   - DataManager definido:', typeof window.dataManager !== 'undefined');
                 
-                // Esperar a que los managers estén disponibles
                 console.log('⏳ Esperando que los managers se carguen...');
                 await waitForManagers(5000);
                 
-                // Validaciones finales
                 if (typeof window.fileManager === 'undefined') {
                     throw new Error('FileManager no está definido después de cargar');
                 }
@@ -521,7 +425,6 @@
                     proyectos: window.dataManager.projects ? window.dataManager.projects.length : 0
                 });
                 
-                // Cargar datos si no están cargados
                 if (!window.dataManager.projects || window.dataManager.projects.length === 0) {
                     updateLoadingStatus('📥 Cargando proyectos...');
                     console.log('🔄 Iniciando loadAllData()...');
@@ -531,7 +434,6 @@
                 updateLoadingStatus(`✅ ${window.dataManager.projects.length} proyectos cargados`);
                 console.log('✅ DataManager listo con', window.dataManager.projects.length, 'proyectos');
                 
-                // Inicializar Project Manager
                 if (typeof startProjectManager === 'function') {
                     updateLoadingStatus('🚀 Inicializando interfaz...');
                     console.log('✨ Llamando startProjectManager()...');
@@ -540,7 +442,6 @@
                     throw new Error('startProjectManager no está definida');
                 }
                 
-                // Ocultar loader después de un breve delay
                 setTimeout(() => {
                     const loadingOverlay = document.getElementById('loadingOverlay');
                     if (loadingOverlay) {

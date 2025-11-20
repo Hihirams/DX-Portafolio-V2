@@ -10,7 +10,7 @@ async function initializeData() {
         
         // 1. Verificar si users.json existe
         const usersExist = await window.electronAPI.fileExists('data/users.json');
-        console.log('📁 users.json existe?', usersExist.exists);
+        console.log('📄 users.json existe?', usersExist.exists);
         
         if (!usersExist.exists) {
             console.log('⚠️ users.json NO existe, creando estructura inicial...');
@@ -23,7 +23,7 @@ async function initializeData() {
         
         // 2. Intentar cargar proyectos desde data/projects.json
         const projectsExist = await window.electronAPI.fileExists('data/projects.json');
-        console.log('📁 projects.json existe?', projectsExist.exists);
+        console.log('📄 projects.json existe?', projectsExist.exists);
         
         if (projectsExist.exists) {
             // Verificar si el archivo tiene proyectos
@@ -47,8 +47,8 @@ async function initializeData() {
         console.log('🔄 Recargando datos en dataManager...');
         await dataManager.loadAllData();
 
-        // 🔔 Notificar que ya hay datos listos (Home, Viewer, Editor escuchan esto)
-document.dispatchEvent(new Event('dataLoaded'));
+        // 📢 Notificar que ya hay datos listos (Home, Viewer, Editor escuchan esto)
+        document.dispatchEvent(new Event('dataLoaded'));
 
         
         return true;
@@ -120,20 +120,6 @@ async function createInitialStructure() {
             appName: "Portafolio DX",
             version: "1.0.0",
             projectStatuses: {
-                "in-progress": {
-                    label: "En Progreso",
-                    badge: "En Progreso",
-                    badgeClass: "badge-in-progress",
-                    color: "#00D9FF",
-                    icon: "▶"
-                },
-                "hold": {
-                    label: "Hold",
-                    badge: "Hold",
-                    badgeClass: "badge-hold",
-                    color: "#FF6B00",
-                    icon: "⏸"
-                },
                 "discovery": {
                     label: "Discovery",
                     badge: "Discovery",
@@ -141,17 +127,31 @@ async function createInitialStructure() {
                     color: "#9D00FF",
                     icon: "🔍"
                 },
-                "paused": {
-                    label: "Pausado",
-                    badge: "Pausado",
-                    badgeClass: "badge-paused",
-                    color: "#FFD600",
-                    icon: "⏸"
+                "decision": {
+                    label: "Decision",
+                    badge: "Decision",
+                    badgeClass: "badge-decision",
+                    color: "#00D9FF",
+                    icon: "✓"
                 },
-                "completed": {
-                    label: "Completado",
-                    badge: "Completado",
-                    badgeClass: "badge-completed",
+                "develop": {
+                    label: "Develop",
+                    badge: "Develop",
+                    badgeClass: "badge-develop",
+                    color: "#FF6B00",
+                    icon: "⚙"
+                },
+                "pilot": {
+                    label: "Pilot",
+                    badge: "Pilot",
+                    badgeClass: "badge-pilot",
+                    color: "#FFD600",
+                    icon: "🚀"
+                },
+                "yoko-tenkai": {
+                    label: "Yoko Tenkai",
+                    badge: "Yoko Tenkai",
+                    badgeClass: "badge-yoko-tenkai",
                     color: "#00FF85",
                     icon: "✓"
                 }
@@ -342,17 +342,18 @@ async function loadProjectsFromUserFolders() {
                     ownerId: p.ownerId,
                     status: p.status,
                     priority: p.priority,
+                    priorityOrder: p.priorityOrder || 999,
                     progress: p.progress,
                     icon: p.icon,
                     updatedAt: p.updatedAt
                 })),
                 stats: {
                     total: allProjects.length,
-                    inProgress: allProjects.filter(p => p.status === 'in-progress').length,
                     discovery: allProjects.filter(p => p.status === 'discovery').length,
-                    hold: allProjects.filter(p => p.status === 'hold').length,
-                    completed: allProjects.filter(p => p.status === 'completed').length,
-                    paused: allProjects.filter(p => p.status === 'paused').length
+                    decision: allProjects.filter(p => p.status === 'decision').length,
+                    develop: allProjects.filter(p => p.status === 'develop').length,
+                    pilot: allProjects.filter(p => p.status === 'pilot').length,
+                    yokoTenkai: allProjects.filter(p => p.status === 'yoko-tenkai').length
                 },
                 lastUpdated: new Date().toISOString()
             };

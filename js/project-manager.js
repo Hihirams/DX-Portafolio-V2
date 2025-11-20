@@ -2288,3 +2288,421 @@ function goToHome() {
 }
 
 console.log('✓ Project Manager Script Cargado');
+
+// ==================== STATUS MAPPING ACTUALIZADO ====================
+
+const statusMapUpdated = {
+    'discovery': { label: 'Discovery', class: 'phase-discovery' },
+    'decision': { label: 'Decision', class: 'phase-decision' },
+    'develop': { label: 'Develop', class: 'phase-develop' },
+    'pilot': { label: 'Pilot', class: 'phase-pilot' },
+    'yoko-tenkai': { label: 'Yoko Tenkai', class: 'phase-yoko-tenkai' },
+    'yokotenkai': { label: 'Yoko Tenkai', class: 'phase-yoko-tenkai' }
+};
+
+// ==================== FUNCIÓN DE RENDERIZADO MEJORADA ====================
+
+function renderProjectsTable() {
+    const tbody = document.getElementById('projectsTableBody');
+    if (!tbody) return;
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = startIndex + itemsPerPage;
+    const projectsToShow = filteredProjects.slice(startIndex, endIndex);
+
+    if (projectsToShow.length === 0) {
+        tbody.innerHTML = `
+            <tr>
+                <td colspan="21" style="text-align: center; padding: 40px;">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📂</div>
+                        <div class="empty-state-title">No se encontraron proyectos</div>
+                        <div class="empty-state-message">Intenta ajustar los filtros de búsqueda</div>
+                    </div>
+                </td>
+            </tr>
+        `;
+        return;
+    }
+
+    tbody.innerHTML = projectsToShow.map(project => {
+        const statusInfo = statusMapUpdated[project.status] || { label: project.status, class: 'phase-discovery' };
+        const priorityClass = project.priorityOrder ? `priority-${project.priorityOrder}` : 'priority-default';
+        
+        // Obtener datos del proyecto original
+        const originalProject = project._original || {};
+        
+        return `
+            <tr data-project-id="${project.id}">
+                <!-- Prioridad -->
+                <td class="col-priority">
+                    <div class="priority-badge ${priorityClass}">
+                        ${project.priorityOrder || '—'}
+                    </div>
+                </td>
+                
+                <!-- Name of Project -->
+                <td class="col-project-name">
+                    <strong>${truncateText(project.name, 25)}</strong>
+                </td>
+                
+                <!-- Detail of the Project -->
+                <td class="col-detail">
+                    ${renderTextCell(originalProject.description || 'Sin descripción', 'Detalle del Proyecto')}
+                </td>
+                
+                <!-- Type of Project -->
+                <td class="col-type">
+                    ${originalProject.projectType || 'General'}
+                </td>
+                
+                <!-- Task -->
+                <td class="col-task">
+                    ${originalProject.currentTask || project.nextStep || 'Por definir'}
+                </td>
+                
+                <!-- Status -->
+                <td class="col-status">
+                    <span class="phase-badge ${statusInfo.class}">
+                        ${statusInfo.label}
+                    </span>
+                </td>
+                
+                <!-- Porcentaje -->
+                <td class="col-percentage">
+                    <strong>${project.progress}%</strong>
+                </td>
+                
+                <!-- Project Owner -->
+                <td class="col-owner">
+                    ${project.responsible}
+                </td>
+                
+                <!-- Complexity -->
+                <td class="col-complexity">
+                    ${originalProject.complexity || 'Media'}
+                </td>
+                
+                <!-- Scope -->
+                <td class="col-scope">
+                    ${originalProject.scope || 'L4 Region'}
+                </td>
+                
+                <!-- Recovery -->
+                <td class="col-recovery">
+                    ${originalProject.recovery || 'JV'}
+                </td>
+                
+                <!-- Phase Discovery -->
+                <td class="col-phase">
+                    ${renderPhaseStatus(originalProject.phaseDiscovery || 'Not Started')}
+                </td>
+                
+                <!-- Phase Decision -->
+                <td class="col-phase">
+                    ${renderPhaseStatus(originalProject.phaseDecision || 'Not Started')}
+                </td>
+                
+                <!-- Phase Develop -->
+                <td class="col-phase">
+                    ${renderPhaseStatus(originalProject.phaseDevelop || 'Not Started')}
+                </td>
+                
+                <!-- Phase Pilot -->
+                <td class="col-phase">
+                    ${renderPhaseStatus(originalProject.phasePilot || 'Not Started')}
+                </td>
+                
+                <!-- Phase Yoko Tenkai -->
+                <td class="col-phase">
+                    ${renderPhaseStatus(originalProject.phaseYokoTenkai || 'Not Started')}
+                </td>
+                
+                <!-- Percentage2 -->
+                <td class="col-percentage">
+                    <strong>${originalProject.percentage2 || project.progress}%</strong>
+                </td>
+                
+                <!-- Start Process -->
+                <td class="col-date">
+                    ${formatDate(originalProject.startDate || originalProject.createdAt)}
+                </td>
+                
+                <!-- End Process -->
+                <td class="col-date">
+                    ${formatDate(originalProject.targetDate || originalProject.endDate)}
+                </td>
+                
+                <!-- Next Steps -->
+                <td class="col-next-steps">
+                    ${renderTextCell(originalProject.nextSteps || project.nextStep || 'Por definir', 'Próximos Pasos')}
+                </td>
+                
+                <!-- Recursos -->
+                <td class="col-actions">
+                    <button class="action-icon-btn" onclick="openResourcesModal('${project.id}', event)" title="Ver recursos">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="3"></circle>
+                            <path d="M12 1v6M12 17v6M4.22 4.22l4.24 4.24M15.54 15.54l4.24 4.24M1 12h6M17 12h6M4.22 19.78l4.24-4.24M15.54 8.46l4.24-4.24"></path>
+                        </svg>
+                    </button>
+                </td>
+            </tr>
+        `;
+    }).join('');
+
+    updatePaginationInfo();
+}
+
+// ==================== FUNCIONES AUXILIARES ====================
+
+function truncateText(text, maxLength) {
+    if (!text) return '—';
+    if (text.length <= maxLength) return text;
+    return text.substring(0, maxLength) + '...';
+}
+
+function renderTextCell(text, title) {
+    if (!text || text === '—') return '—';
+    
+    const textLength = text.length;
+    
+    // Texto corto: mostrar completo
+    if (textLength <= 30) {
+        return `<span class="cell-truncated">${text}</span>`;
+    }
+    
+    // Texto mediano: truncar con tooltip
+    if (textLength <= 80) {
+        return `
+            <span class="text-with-tooltip cell-truncated" data-tooltip="${escapeHtml(text)}">
+                ${truncateText(text, 30)}
+            </span>
+        `;
+    }
+    
+    // Texto largo: botón "Ver"
+    return `
+        <div style="display: flex; align-items: center; gap: 8px;">
+            <span class="cell-truncated">${truncateText(text, 15)}</span>
+            <button class="view-detail-btn" onclick='showTextDetail("${escapeHtml(title)}", ${JSON.stringify(escapeHtml(text))})'>
+                Ver
+            </button>
+        </div>
+    `;
+}
+
+function renderPhaseStatus(status) {
+    const statusLower = String(status).toLowerCase();
+    
+    if (statusLower.includes('done') || statusLower === '100%') {
+        return '<span class="phase-badge phase-done">Done</span>';
+    }
+    if (statusLower.includes('ongoing') || statusLower.includes('progress')) {
+        return '<span class="phase-badge phase-ongoing">On Going</span>';
+    }
+    if (statusLower.includes('not') || statusLower === '0%') {
+        return '<span class="phase-badge phase-not-started">Not Started</span>';
+    }
+    
+    return `<span class="phase-badge phase-not-started">${status}</span>`;
+}
+
+function formatDate(dateString) {
+    if (!dateString) return '—';
+    
+    try {
+        const date = new Date(dateString);
+        if (isNaN(date.getTime())) return dateString;
+        
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const year = date.getFullYear();
+        
+        return `${month}/${day}/${year}`;
+    } catch (error) {
+        return dateString;
+    }
+}
+
+function escapeHtml(text) {
+    if (!text) return '';
+    return String(text)
+        .replace(/&/g, '&amp;')
+        .replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;')
+        .replace(/"/g, '&quot;')
+        .replace(/'/g, '&#039;');
+}
+
+// ==================== MODAL DE DETALLES DE TEXTO ====================
+
+function showTextDetail(title, content) {
+    const modal = document.getElementById('textDetailModal');
+    const titleEl = document.getElementById('textDetailTitle');
+    const bodyEl = document.getElementById('textDetailBody');
+    
+    if (!modal || !titleEl || !bodyEl) return;
+    
+    titleEl.textContent = title;
+    bodyEl.innerHTML = `<p>${content}</p>`;
+    
+    modal.style.display = 'flex';
+    setTimeout(() => modal.classList.add('active'), 10);
+}
+
+function closeTextDetail() {
+    const modal = document.getElementById('textDetailModal');
+    if (!modal) return;
+    
+    modal.classList.remove('active');
+    setTimeout(() => modal.style.display = 'none', 300);
+}
+
+// Cerrar modal al hacer clic fuera
+document.addEventListener('click', function(event) {
+    const modal = document.getElementById('textDetailModal');
+    if (event.target === modal) {
+        closeTextDetail();
+    }
+});
+
+// Cerrar modal con tecla Escape
+document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape') {
+        closeTextDetail();
+    }
+});
+
+// ==================== ACTUALIZAR FUNCIÓN loadProjectsFromDataManager ====================
+
+function loadProjectsFromDataManagerEnhanced() {
+    try {
+        // Obtener todos los proyectos del dataManager
+        projects = dataManager.projects || [];
+
+        console.log(`✓ ${projects.length} proyectos cargados del DataManager`);
+
+        if (projects.length === 0) {
+            console.warn('⚠️ No hay proyectos cargados - mostrando tabla vacía');
+        }
+
+        // Mapear proyectos al formato esperado por la UI
+        projects = projects.map(p => ({
+            id: p.id,
+            name: p.title,
+            status: normalizeStatusEnhanced(p.status),
+            progress: p.progress || 0,
+            lastUpdate: p.updatedAt || new Date().toISOString(),
+            nextStep: p.currentPhase || 'Por definir',
+            deliveryDate: p.targetDate || new Date().toISOString(),
+            responsible: dataManager.getUserById(p.ownerId)?.name || 'Sin asignar',
+            ownerId: p.ownerId,
+            priorityOrder: p.priorityOrder || 999,
+            blocked: p.blockers?.type === 'warning' || p.blockers?.type === 'error' ? true : false,
+            blockReason: p.blockers?.message || 'Sin bloqueos',
+            blockResponsible: 'Sistema',
+            // Preservar datos originales
+            _original: p
+        }));
+
+        // Ordenar por prioridad
+        projects.sort((a, b) => {
+            const priorityA = a.priorityOrder || 999;
+            const priorityB = b.priorityOrder || 999;
+            return priorityA - priorityB;
+        });
+
+        filteredProjects = [...projects];
+
+        return true;
+    } catch (error) {
+        console.error('❌ Error cargando proyectos:', error);
+        projects = [];
+        filteredProjects = [];
+        return false;
+    }
+}
+
+function normalizeStatusEnhanced(status) {
+    const statusLower = String(status).toLowerCase().replace(/[\s-_]/g, '');
+    
+    if (statusLower.includes('discovery')) return 'discovery';
+    if (statusLower.includes('decision')) return 'decision';
+    if (statusLower.includes('develop')) return 'develop';
+    if (statusLower.includes('pilot')) return 'pilot';
+    if (statusLower.includes('yoko') || statusLower.includes('tenkai')) return 'yoko-tenkai';
+    
+    return 'discovery';
+}
+
+// ==================== ACTUALIZAR BADGES DE FILTRO ====================
+
+function updateFilterBadgesEnhanced() {
+    const statusCounts = {
+        all: projects.length,
+        discovery: projects.filter(p => p.status === 'discovery').length,
+        decision: projects.filter(p => p.status === 'decision').length,
+        develop: projects.filter(p => p.status === 'develop').length,
+        pilot: projects.filter(p => p.status === 'pilot').length,
+        'yoko-tenkai': projects.filter(p => p.status === 'yoko-tenkai').length
+    };
+
+    const blockCounts = {
+        all: projects.length,
+        blocked: projects.filter(p => p.blocked).length,
+        unblocked: projects.filter(p => !p.blocked).length
+    };
+
+    // Actualizar badges de estado
+    document.getElementById('badge-all').textContent = statusCounts.all;
+    document.getElementById('badge-discovery').textContent = statusCounts.discovery;
+    document.getElementById('badge-decision').textContent = statusCounts.decision;
+    document.getElementById('badge-develop').textContent = statusCounts.develop;
+    document.getElementById('badge-pilot').textContent = statusCounts.pilot;
+    document.getElementById('badge-yoko-tenkai').textContent = statusCounts['yoko-tenkai'];
+
+    // Actualizar badges de bloqueos
+    document.getElementById('badge-block-all').textContent = blockCounts.all;
+    document.getElementById('badge-blocked').textContent = blockCounts.blocked;
+    document.getElementById('badge-unblocked').textContent = blockCounts.unblocked;
+}
+
+// ==================== INICIALIZACIÓN MEJORADA ====================
+
+function initializeAppEnhanced() {
+    console.log('✨ Inicializando aplicación mejorada...');
+    
+    // Cargar proyectos con nuevo formato
+    if (typeof loadProjectsFromDataManagerEnhanced === 'function') {
+        loadProjectsFromDataManagerEnhanced();
+    }
+    
+    // Actualizar badges
+    if (typeof updateFilterBadgesEnhanced === 'function') {
+        updateFilterBadgesEnhanced();
+    }
+    
+    // Renderizar equipo
+    if (typeof renderTeamMembers === 'function') {
+        renderTeamMembers();
+    }
+    
+    // Renderizar tabla
+    if (typeof renderProjectsTable === 'function') {
+        renderProjectsTable();
+    }
+    
+    console.log('✅ Aplicación inicializada correctamente');
+}
+
+// Reemplazar la función initializeApp existente
+if (typeof initializeApp !== 'undefined') {
+    // Guardar referencia a la función original
+    window._originalInitializeApp = initializeApp;
+}
+
+// Exportar la nueva función
+window.initializeApp = initializeAppEnhanced;
+
+console.log('✅ Funciones mejoradas de Project Manager cargadas');

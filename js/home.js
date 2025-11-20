@@ -94,23 +94,23 @@ function renderStatsOverview() {
   statsOverview.innerHTML = `
     <div class="stat-card">
       <div class="stat-number">${stats.totalProjects}</div>
-      <div class="stat-label">Proyectos Totales</div>
+      <div class="stat-label">Total Projects</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.inProgress}</div>
-      <div class="stat-label">En Progreso</div>
+      <div class="stat-label">In Progress</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.hold}</div>
-      <div class="stat-label">En Hold</div>
+      <div class="stat-label">On Hold</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.discovery}</div>
-      <div class="stat-label">En Discovery</div>
+      <div class="stat-label">In Discovery</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.completed}</div>
-      <div class="stat-label">Terminados</div>
+      <div class="stat-label">Completed</div>
     </div>
   `;
 }
@@ -439,18 +439,18 @@ function renderCarousel() {
                 
                 <div class="featured-project-meta">
                     <div class="featured-meta-item">
-                        <span class="featured-meta-label">Fase:</span>
+                        <span class="featured-meta-label">Phase:</span>
                         <span class="featured-meta-value">${project.currentPhase || 'N/A'}</span>
                     </div>
                     <div class="featured-meta-item">
-                        <span class="featured-meta-label">Líder:</span>
+                        <span class="featured-meta-label">Leader:</span>
                         <span class="featured-meta-value">${ownerName}</span>
                     </div>
                 </div>
                 
                 <div class="featured-progress-section">
                     <div class="featured-progress-header">
-                        <span class="featured-progress-label">Progreso general</span>
+                        <span class="featured-progress-label">Overall Progress</span>
                         <span class="featured-progress-percentage">${project.progress}%</span>
                     </div>
                     <div class="featured-progress-bar">
@@ -459,7 +459,7 @@ function renderCarousel() {
                 </div>
                 
                 <button class="featured-view-btn" onclick="viewProject('${project.id}')">
-                    Ver Detalles
+                    View Details
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
