@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Executive Dashboard - Portfolio DX</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #000000;
+            --bg-secondary: rgba(28, 28, 30, 0.9);
+            --bg-card: rgba(255, 255, 255, 0.04);
+            --bg-card-hover: rgba(255, 255, 255, 0.07);
+            --text-primary: #f5f5f7;
+            --text-secondary: rgba(255, 255, 255, 0.6);
+            --text-tertiary: rgba(255, 255, 255, 0.4);
+            --border-color: rgba(255, 255, 255, 0.1);
+            --gradient-start: #f5f5f7;
+            --gradient-end: #86868b;
+            
+            /* Status Colors */
+            --status-green: #30d158;
+            --status-yellow: #ffd60a;
+            --status-red: #ff453a;
+            --status-blue: #0a84ff;
+            --status-purple: #bf5af2;
+            --status-orange: #ff9f0a;
+            --status-teal: #64d2ff;
+        }
+
+        body.light-theme {
+            --bg-primary: #f5f5f7;
+            --bg-secondary: rgba(255, 255, 255, 0.95);
+            --bg-card: rgba(0, 0, 0, 0.04);
+            --bg-card-hover: rgba(0, 0, 0, 0.07);
+            --text-primary: #1d1d1f;
+            --text-secondary: rgba(0, 0, 0, 0.6);
+            --text-tertiary: rgba(0, 0, 0, 0.4);
+            --border-color: rgba(0, 0, 0, 0.1);
+            --gradient-start: #1d1d1f;
+            --gradient-end: #515154;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text', 'Helvetica Neue', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            -webkit-font-smoothing: antialiased;
+            min-height: 100vh;
+            transition: all 0.3s ease;
+            line-height: 1.5;
+        }
+
+        /* ==================== TOP NAV ==================== */
+        .top-nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: var(--bg-secondary);
+            backdrop-filter: saturate(180%) blur(40px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 0 30px;
+            height: 56px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .nav-logo {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .nav-breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: var(--text-tertiary);
+        }
+
+        .nav-breadcrumb a {
+            color: var(--status-blue);
+            text-decoration: none;
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .nav-btn {
+            padding: 6px 14px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .nav-btn:hover {
+            background: var(--bg-card-hover);
+        }
+
+        .nav-btn svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* ==================== MAIN CONTENT ==================== */
+        .dashboard-container {
+            max-width: 1500px;
+            margin: 0 auto;
+            padding: 76px 30px 50px;
+        }
+
+        /* ==================== EXECUTIVE SUMMARY (THE LEAD) ==================== */
+        .executive-summary {
+            background: linear-gradient(135deg, rgba(10, 132, 255, 0.1), rgba(191, 90, 242, 0.1));
+            border: 1px solid var(--border-color);
+            border-radius: 24px;
+            padding: 35px;
+            margin-bottom: 30px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .executive-summary::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--status-blue), var(--status-purple));
+        }
+
+        .summary-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 25px;
+        }
+
+        .summary-title-section {
+            flex: 1;
+        }
+
+        .summary-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--status-blue);
+            margin-bottom: 8px;
+        }
+
+        .summary-project-name {
+            font-size: 32px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 8px;
+        }
+
+        .summary-description {
+            font-size: 15px;
+            color: var(--text-secondary);
+            max-width: 600px;
+        }
+
+        .summary-health {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .health-indicator {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            position: relative;
+        }
+
+        .health-indicator.green { background: var(--status-green); }
+        .health-indicator.yellow { background: var(--status-yellow); color: #1d1d1f; }
+        .health-indicator.red { background: var(--status-red); }
+
+        .health-indicator::after {
+            content: '';
+            position: absolute;
+            inset: -4px;
+            border-radius: 50%;
+            border: 2px solid currentColor;
+            opacity: 0.3;
+        }
+
+        .health-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* RAG Status Grid */
+        .rag-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+        }
+
+        .rag-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 15px 20px;
+            background: var(--bg-card);
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        .rag-dot {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .rag-dot.green { background: var(--status-green); box-shadow: 0 0 10px var(--status-green); }
+        .rag-dot.yellow { background: var(--status-yellow); box-shadow: 0 0 10px var(--status-yellow); }
+        .rag-dot.red { background: var(--status-red); box-shadow: 0 0 10px var(--status-red); }
+
+        .rag-content {
+            flex: 1;
+        }
+
+        .rag-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 2px;
+        }
+
+        .rag-value {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        /* ==================== MAIN GRID ==================== */
+        .dashboard-grid {
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            padding: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            background: var(--bg-card-hover);
+        }
+
+        /* Card Sizes */
+        .col-3 { grid-column: span 3; }
+        .col-4 { grid-column: span 4; }
+        .col-6 { grid-column: span 6; }
+        .col-8 { grid-column: span 8; }
+        .col-12 { grid-column: span 12; }
+
+        .card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        .card-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--text-primary);
+        }
+
+        .card-subtitle {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-top: 4px;
+        }
+
+        .card-badge {
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .badge-green { background: rgba(48, 209, 88, 0.2); color: var(--status-green); }
+        .badge-yellow { background: rgba(255, 214, 10, 0.2); color: var(--status-yellow); }
+        .badge-red { background: rgba(255, 69, 58, 0.2); color: var(--status-red); }
+        .badge-blue { background: rgba(10, 132, 255, 0.2); color: var(--status-blue); }
+
+        /* ==================== BUDGET VS ACTUAL ==================== */
+        .budget-comparison {
+            display: flex;
+            gap: 30px;
+            margin-bottom: 20px;
+        }
+
+        .budget-item {
+            flex: 1;
+        }
+
+        .budget-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+            margin-bottom: 6px;
+        }
+
+        .budget-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .budget-bar-container {
+            margin-top: 15px;
+        }
+
+        .budget-bar-labels {
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            color: var(--text-tertiary);
+            margin-bottom: 8px;
+        }
+
+        .budget-bar {
+            height: 12px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        body.light-theme .budget-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .budget-bar-fill {
+            height: 100%;
+            border-radius: 6px;
+            transition: width 1s ease;
+        }
+
+        .budget-bar-fill.under { background: var(--status-green); }
+        .budget-bar-fill.warning { background: var(--status-yellow); }
+        .budget-bar-fill.over { background: var(--status-red); }
+
+        .budget-bar-marker {
+            position: absolute;
+            top: -4px;
+            bottom: -4px;
+            width: 3px;
+            background: var(--text-primary);
+            border-radius: 2px;
+        }
+
+        .variance-indicator {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 12px;
+            font-size: 13px;
+        }
+
+        .variance-indicator.positive { color: var(--status-green); }
+        .variance-indicator.negative { color: var(--status-red); }
+
+        /* ==================== EARNED VALUE METRICS ==================== */
+        .ev-metrics {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+        }
+
+        .ev-metric {
+            text-align: center;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+        }
+
+        body.light-theme .ev-metric {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .ev-value {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 4px;
+        }
+
+        .ev-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .ev-status {
+            font-size: 11px;
+            margin-top: 6px;
+            padding: 3px 8px;
+            border-radius: 4px;
+            display: inline-block;
+        }
+
+        /* ==================== MILESTONES ==================== */
+        .milestone-timeline {
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .milestone-timeline::before {
+            content: '';
+            position: absolute;
+            left: 6px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--border-color);
+        }
+
+        .milestone-item {
+            position: relative;
+            padding: 12px 0 12px 20px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .milestone-item:last-child {
+            border-bottom: none;
+        }
+
+        .milestone-dot {
+            position: absolute;
+            left: -14px;
+            top: 16px;
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+            border: 3px solid var(--bg-primary);
+        }
+
+        body.light-theme .milestone-dot {
+            border-color: var(--bg-primary);
+        }
+
+        .milestone-dot.completed { background: var(--status-green); }
+        .milestone-dot.current { background: var(--status-blue); box-shadow: 0 0 0 4px rgba(10, 132, 255, 0.3); }
+        .milestone-dot.upcoming { background: var(--text-tertiary); }
+        .milestone-dot.delayed { background: var(--status-red); }
+
+        .milestone-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .milestone-name {
+            font-size: 14px;
+            color: var(--text-primary);
+        }
+
+        .milestone-name.completed {
+            text-decoration: line-through;
+            color: var(--text-tertiary);
+        }
+
+        .milestone-date {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .milestone-date.delayed {
+            color: var(--status-red);
+        }
+
+        /* ==================== RISKS & ISSUES ==================== */
+        .risk-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .risk-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 14px 16px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 12px;
+            border-left: 4px solid;
+        }
+
+        body.light-theme .risk-item {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .risk-item.high { border-left-color: var(--status-red); }
+        .risk-item.medium { border-left-color: var(--status-yellow); }
+        .risk-item.low { border-left-color: var(--status-green); }
+
+        .risk-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .risk-item.high .risk-icon { background: rgba(255, 69, 58, 0.2); }
+        .risk-item.medium .risk-icon { background: rgba(255, 214, 10, 0.2); }
+        .risk-item.low .risk-icon { background: rgba(48, 209, 88, 0.2); }
+
+        .risk-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+
+        .risk-item.high .risk-icon svg { fill: var(--status-red); }
+        .risk-item.medium .risk-icon svg { fill: var(--status-yellow); }
+        .risk-item.low .risk-icon svg { fill: var(--status-green); }
+
+        .risk-content {
+            flex: 1;
+        }
+
+        .risk-title {
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-bottom: 2px;
+        }
+
+        .risk-mitigation {
+            font-size: 11px;
+            color: var(--text-tertiary);
+        }
+
+        .risk-severity {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .risk-item.high .risk-severity { background: rgba(255, 69, 58, 0.2); color: var(--status-red); }
+        .risk-item.medium .risk-severity { background: rgba(255, 214, 10, 0.2); color: var(--status-yellow); }
+        .risk-item.low .risk-severity { background: rgba(48, 209, 88, 0.2); color: var(--status-green); }
+
+        /* ==================== RESOURCE UTILIZATION ==================== */
+        .resource-bars {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .resource-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .resource-avatar {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--status-blue), var(--status-purple));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: 600;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .resource-info {
+            flex: 1;
+        }
+
+        .resource-name {
+            font-size: 13px;
+            color: var(--text-primary);
+            margin-bottom: 6px;
+        }
+
+        .resource-bar {
+            height: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        body.light-theme .resource-bar {
+            background: rgba(0, 0, 0, 0.1);
+        }
+
+        .resource-bar-fill {
+            height: 100%;
+            border-radius: 4px;
+            transition: width 1s ease;
+        }
+
+        .resource-percent {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-primary);
+            min-width: 45px;
+            text-align: right;
+        }
+
+        /* ==================== VALUE DELIVERED ==================== */
+        .value-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .value-card {
+            padding: 18px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 14px;
+            border: 1px solid var(--border-color);
+        }
+
+        body.light-theme .value-card {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .value-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 12px;
+        }
+
+        .value-icon svg {
+            width: 22px;
+            height: 22px;
+            fill: white;
+        }
+
+        .value-icon.time { background: linear-gradient(135deg, var(--status-blue), var(--status-teal)); }
+        .value-icon.cost { background: linear-gradient(135deg, var(--status-green), #34c759); }
+        .value-icon.quality { background: linear-gradient(135deg, var(--status-purple), #da5ff0); }
+        .value-icon.adoption { background: linear-gradient(135deg, var(--status-orange), #ffb340); }
+
+        .value-number {
+            font-size: 26px;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 4px;
+        }
+
+        .value-label {
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .value-trend {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            margin-top: 8px;
+        }
+
+        .value-trend.up { color: var(--status-green); }
+        .value-trend.down { color: var(--status-red); }
+
+        /* ==================== SCHEDULE VARIANCE ==================== */
+        .schedule-visual {
+            margin-top: 15px;
+        }
+
+        .schedule-row {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 10px 0;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .schedule-row:last-child {
+            border-bottom: none;
+        }
+
+        .schedule-label {
+            width: 80px;
+            font-size: 12px;
+            color: var(--text-tertiary);
+        }
+
+        .schedule-bar-container {
+            flex: 1;
+            position: relative;
+            height: 24px;
+        }
+
+        .schedule-bar {
+            position: absolute;
+            height: 10px;
+            border-radius: 5px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .schedule-bar.planned {
+            background: var(--status-blue);
+            opacity: 0.4;
+        }
+
+        .schedule-bar.actual {
+            background: var(--status-green);
+        }
+
+        .schedule-bar.over {
+            background: var(--status-red);
+        }
+
+        .schedule-dates {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            min-width: 100px;
+            text-align: right;
+        }
+
+        /* ==================== TEAM AREAS IMPACTED ==================== */
+        .areas-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 15px;
+        }
+
+        .area-chip {
+            padding: 10px 16px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+            font-size: 13px;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .area-chip:hover {
+            background: var(--bg-card-hover);
+            border-color: var(--status-blue);
+        }
+
+        .area-chip-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: var(--status-blue);
+        }
+
+        /* ==================== ACTION ITEMS ==================== */
+        .action-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .action-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 10px;
+            transition: all 0.2s ease;
+        }
+
+        body.light-theme .action-item {
+            background: rgba(0, 0, 0, 0.03);
+        }
+
+        .action-item:hover {
+            background: rgba(255, 255, 255, 0.06);
+        }
+
+        body.light-theme .action-item:hover {
+            background: rgba(0, 0, 0, 0.06);
+        }
+
+        .action-priority {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            flex-shrink: 0;
+        }
+
+        .action-priority.critical { background: var(--status-red); }
+        .action-priority.high { background: var(--status-orange); }
+        .action-priority.medium { background: var(--status-yellow); }
+
+        .action-text {
+            flex: 1;
+            font-size: 13px;
+            color: var(--text-primary);
+        }
+
+        .action-owner {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            padding: 4px 10px;
+            background: var(--bg-card);
+            border-radius: 10px;
+        }
+
+        /* ==================== FOOTER STATS ==================== */
+        .footer-stats {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 20px;
+            margin-top: 30px;
+            padding: 25px 30px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 20px;
+        }
+
+        .footer-stat {
+            text-align: center;
+        }
+
+        .footer-stat-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: var(--text-primary);
+        }
+
+        .footer-stat-label {
+            font-size: 11px;
+            color: var(--text-tertiary);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-top: 4px;
+        }
+
+        /* ==================== RESPONSIVE ==================== */
+        @media (max-width: 1200px) {
+            .col-3 { grid-column: span 6; }
+            .col-4 { grid-column: span 6; }
+            .col-6 { grid-column: span 12; }
+            .col-8 { grid-column: span 12; }
+            
+            .rag-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .footer-stats {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        @media (max-width: 768px) {
+            .dashboard-container {
+                padding: 70px 15px 30px;
+            }
+
+            .col-3, .col-4, .col-6, .col-8, .col-12 {
+                grid-column: span 12;
+            }
+
+            .summary-header {
+                flex-direction: column;
+                gap: 20px;
+            }
+
+            .summary-health {
+                align-self: flex-start;
+            }
+
+            .rag-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .budget-comparison {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .ev-metrics {
+                grid-template-columns: 1fr;
+            }
+
+            .value-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-stats {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- TOP NAV -->
+    <nav class="top-nav">
+        <div class="nav-left">
+            <div class="nav-logo">Portfolio DX</div>
+            <div class="nav-breadcrumb">
+                <span>›</span>
+                <a href="#">Proyectos</a>
+                <span>›</span>
+                <span>AI Camera Project</span>
+            </div>
+        </div>
+        <div class="nav-right">
+            <button class="nav-btn">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"/>
+                </svg>
+                Exportar PDF
+            </button>
+            <button class="nav-btn" onclick="toggleTheme()">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/>
+                </svg>
+            </button>
+        </div>
+    </nav>
+
+    <!-- MAIN DASHBOARD -->
+    <main class="dashboard-container">
+        
+        <!-- EXECUTIVE SUMMARY - THE LEAD -->
+        <section class="executive-summary">
+            <div class="summary-header">
+                <div class="summary-title-section">
+                    <div class="summary-label">Executive Summary • Actualizado: 20 Nov 2025</div>
+                    <h1 class="summary-project-name">AI Camera Project</h1>
+                    <p class="summary-description">Sistema de inspección visual inteligente para detección automática de defectos en línea de producción. Fase actual: Optimización de algoritmo.</p>
+                </div>
+                <div class="summary-health">
+                    <div class="health-indicator green">A</div>
+                    <span class="health-label">Project Health</span>
+                </div>
+            </div>
+
+            <!-- RAG Status -->
+            <div class="rag-grid">
+                <div class="rag-item">
+                    <div class="rag-dot green"></div>
+                    <div class="rag-content">
+                        <div class="rag-label">Scope</div>
+                        <div class="rag-value">On Track</div>
+                    </div>
+                </div>
+                <div class="rag-item">
+                    <div class="rag-dot green"></div>
+                    <div class="rag-content">
+                        <div class="rag-label">Schedule</div>
+                        <div class="rag-value">+2 días adelantado</div>
+                    </div>
+                </div>
+                <div class="rag-item">
+                    <div class="rag-dot yellow"></div>
+                    <div class="rag-content">
+                        <div class="rag-label">Budget</div>
+                        <div class="rag-value">92% consumido</div>
+                    </div>
+                </div>
+                <div class="rag-item">
+                    <div class="rag-dot green"></div>
+                    <div class="rag-content">
+                        <div class="rag-label">Quality</div>
+                        <div class="rag-value">98.5% precisión</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- MAIN DASHBOARD GRID -->
+        <div class="dashboard-grid">
+
+            <!-- BUDGET VS ACTUAL -->
+            <div class="card col-6">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">💰 Budget vs Actual</div>
+                        <div class="card-subtitle">Comparación de costos planeados vs reales</div>
+                    </div>
+                    <span class="card-badge badge-yellow">92% usado</span>
+                </div>
+                
+                <div class="budget-comparison">
+                    <div class="budget-item">
+                        <div class="budget-label">Presupuesto Aprobado</div>
+                        <div class="budget-value">$45,000</div>
+                    </div>
+                    <div class="budget-item">
+                        <div class="budget-label">Costo Actual</div>
+                        <div class="budget-value">$41,400</div>
+                    </div>
+                    <div class="budget-item">
+                        <div class="budget-label">Restante</div>
+                        <div class="budget-value" style="color: var(--status-green);">$3,600</div>
+                    </div>
+                </div>
+
+                <div class="budget-bar-container">
+                    <div class="budget-bar-labels">
+                        <span>$0</span>
+                        <span>$22,500</span>
+                        <span>$45,000</span>
+                    </div>
+                    <div class="budget-bar">
+                        <div class="budget-bar-fill warning" style="width: 92%;"></div>
+                        <div class="budget-bar-marker" style="left: 78%;"></div>
+                    </div>
+                </div>
+
+                <div class="variance-indicator positive">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M7 14l5-5 5 5H7z"/>
+                    </svg>
+                    Cost Variance: +$3,600 (bajo presupuesto)
+                </div>
+            </div>
+
+            <!-- EARNED VALUE METRICS -->
+            <div class="card col-6">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">📊 Earned Value Metrics</div>
+                        <div class="card-subtitle">Indicadores de rendimiento del proyecto</div>
+                    </div>
+                </div>
+
+                <div class="ev-metrics">
+                    <div class="ev-metric">
+                        <div class="ev-value" style="color: var(--status-green);">1.09</div>
+                        <div class="ev-label">CPI</div>
+                        <div class="ev-status badge-green">Bajo presupuesto</div>
+                    </div>
+                    <div class="ev-metric">
+                        <div class="ev-value" style="color: var(--status-green);">1.03</div>
+                        <div class="ev-label">SPI</div>
+                        <div class="ev-status badge-green">Adelantado</div>
+                    </div>
+                    <div class="ev-metric">
+                        <div class="ev-value" style="color: var(--status-blue);">78%</div>
+                        <div class="ev-label">% Complete</div>
+                        <div class="ev-status badge-blue">En progreso</div>
+                    </div>
+                </div>
+
+                <div style="margin-top: 20px; padding: 15px; background: rgba(48, 209, 88, 0.1); border-radius: 12px; border-left: 4px solid var(--status-green);">
+                    <div style="font-size: 12px; color: var(--status-green); font-weight: 600; margin-bottom: 4px;">📈 Proyección EAC</div>
+                    <div style="font-size: 14px; color: var(--text-primary);">Estimado al completar: <strong>$41,284</strong> (-8.3% vs budget)</div>
+                </div>
+            </div>
+
+            <!-- MILESTONES -->
+            <div class="card col-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">🎯 Milestones</div>
+                        <div class="card-subtitle">Hitos del proyecto</div>
+                    </div>
+                    <span class="card-badge badge-green">4/6 completados</span>
+                </div>
+
+                <div class="milestone-timeline">
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <span class="milestone-name completed">✓ Kick-off & Planning</span>
+                            <span class="milestone-date">Oct 15</span>
+                        </div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <span class="milestone-name completed">✓ Algoritmo base</span>
+                            <span class="milestone-date">Nov 1</span>
+                        </div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <span class="milestone-name completed">✓ Pruebas piloto</span>
+                            <span class="milestone-date">Nov 10</span>
+                        </div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-dot completed"></div>
+                        <div class="milestone-content">
+                            <span class="milestone-name completed">✓ Validación QA</span>
+                            <span class="milestone-date">Nov 18</span>
+                        </div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-dot current"></div>
+                        <div class="milestone-content">
+                            <span class="milestone-name">Integración MES</span>
+                            <span class="milestone-date">Dic 5</span>
+                        </div>
+                    </div>
+                    <div class="milestone-item">
+                        <div class="milestone-dot upcoming"></div>
+                        <div class="milestone-content">
+                            <span class="milestone-name">Go-Live Producción</span>
+                            <span class="milestone-date">Ene 15</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RISKS & ISSUES -->
+            <div class="card col-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">⚠️ Risks & Issues</div>
+                        <div class="card-subtitle">Riesgos activos y mitigación</div>
+                    </div>
+                    <span class="card-badge badge-yellow">3 activos</span>
+                </div>
+
+                <div class="risk-list">
+                    <div class="risk-item high">
+                        <div class="risk-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+                            </svg>
+                        </div>
+                        <div class="risk-content">
+                            <div class="risk-title">Falsos positivos en detección</div>
+                            <div class="risk-mitigation">Mitigación: Ajuste de threshold</div>
+                        </div>
+                        <span class="risk-severity">Alta</span>
+                    </div>
+                    <div class="risk-item medium">
+                        <div class="risk-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+                            </svg>
+                        </div>
+                        <div class="risk-content">
+                            <div class="risk-title">Retraso proveedor hardware</div>
+                            <div class="risk-mitigation">Mitigación: Proveedor alterno</div>
+                        </div>
+                        <span class="risk-severity">Media</span>
+                    </div>
+                    <div class="risk-item low">
+                        <div class="risk-icon">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z"/>
+                            </svg>
+                        </div>
+                        <div class="risk-content">
+                            <div class="risk-title">Capacitación operadores</div>
+                            <div class="risk-mitigation">Mitigación: Sesiones grabadas</div>
+                        </div>
+                        <span class="risk-severity">Baja</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESOURCE UTILIZATION -->
+            <div class="card col-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">👥 Resource Utilization</div>
+                        <div class="card-subtitle">Uso de recursos del equipo</div>
+                    </div>
+                    <span class="card-badge badge-blue">Avg: 78%</span>
+                </div>
+
+                <div class="resource-bars">
+                    <div class="resource-item">
+                        <div class="resource-avatar">IM</div>
+                        <div class="resource-info">
+                            <div class="resource-name">Israel M. - Tech Lead</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill" style="width: 92%; background: var(--status-orange);"></div>
+                            </div>
+                        </div>
+                        <div class="resource-percent">92%</div>
+                    </div>
+                    <div class="resource-item">
+                        <div class="resource-avatar">HG</div>
+                        <div class="resource-info">
+                            <div class="resource-name">Hiram G. - Developer</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill" style="width: 78%; background: var(--status-green);"></div>
+                            </div>
+                        </div>
+                        <div class="resource-percent">78%</div>
+                    </div>
+                    <div class="resource-item">
+                        <div class="resource-avatar">SR</div>
+                        <div class="resource-info">
+                            <div class="resource-name">Sandra R. - QA</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill" style="width: 65%; background: var(--status-green);"></div>
+                            </div>
+                        </div>
+                        <div class="resource-percent">65%</div>
+                    </div>
+                    <div class="resource-item">
+                        <div class="resource-avatar">MV</div>
+                        <div class="resource-info">
+                            <div class="resource-name">Miguel V. - Integration</div>
+                            <div class="resource-bar">
+                                <div class="resource-bar-fill" style="width: 85%; background: var(--status-blue);"></div>
+                            </div>
+                        </div>
+                        <div class="resource-percent">85%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VALUE DELIVERED -->
+            <div class="card col-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">💎 Value Delivered</div>
+                        <div class="card-subtitle">Beneficios realizados vs planeados</div>
+                    </div>
+                </div>
+
+                <div class="value-grid">
+                    <div class="value-card">
+                        <div class="value-icon time">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 6v6h4.5m4.5 0a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="value-number">12.5h</div>
+                        <div class="value-label">Ahorro semanal</div>
+                        <div class="value-trend up">↑ 45% vs baseline</div>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon cost">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M12 6v12m-3-2.818l.879.659c1.171.879 3.07.879 4.242 0 1.172-.879 1.172-2.303 0-3.182C13.536 12.219 12.768 12 12 12c-.725 0-1.45-.22-2.003-.659-1.106-.879-1.106-2.303 0-3.182s2.9-.879 4.006 0l.415.33M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="value-number">$18.2K</div>
+                        <div class="value-label">Cost Avoidance</div>
+                        <div class="value-trend up">↑ Q4 target</div>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon quality">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M9 12.75L11.25 15 15 9.75M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div class="value-number">98.5%</div>
+                        <div class="value-label">Precisión detección</div>
+                        <div class="value-trend up">↑ Meta: 95%</div>
+                    </div>
+                    <div class="value-card">
+                        <div class="value-icon adoption">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                                <path d="M18 18.72a9.094 9.094 0 003.741-.479 3 3 0 00-4.682-2.72m.94 3.198l.001.031c0 .225-.012.447-.037.666A11.944 11.944 0 0112 21c-2.17 0-4.207-.576-5.963-1.584A6.062 6.062 0 016 18.719m12 0a5.971 5.971 0 00-.941-3.197m0 0A5.995 5.995 0 0012 12.75a5.995 5.995 0 00-5.058 2.772m0 0a3 3 0 00-4.681 2.72 8.986 8.986 0 003.74.477m.94-3.197a5.971 5.971 0 00-.94 3.197M15 6.75a3 3 0 11-6 0 3 3 0 016 0zm6 3a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0zm-13.5 0a2.25 2.25 0 11-4.5 0 2.25 2.25 0 014.5 0z"/>
+                            </svg>
+                        </div>
+                        <div class="value-number">89%</div>
+                        <div class="value-label">Tasa adopción</div>
+                        <div class="value-trend up">↑ 2.3x growth</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- ACTION ITEMS / DECISIONS NEEDED -->
+            <div class="card col-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">🚨 Action Items</div>
+                        <div class="card-subtitle">Decisiones y acciones requeridas</div>
+                    </div>
+                    <span class="card-badge badge-red">2 críticos</span>
+                </div>
+
+                <div class="action-list">
+                    <div class="action-item">
+                        <div class="action-priority critical"></div>
+                        <div class="action-text">Aprobar cambio de proveedor cámaras</div>
+                        <div class="action-owner">Steering</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-priority critical"></div>
+                        <div class="action-text">Definir fecha go-live con Producción</div>
+                        <div class="action-owner">PM + Ops</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-priority high"></div>
+                        <div class="action-text">Revisar plan de capacitación</div>
+                        <div class="action-owner">HR + DX</div>
+                    </div>
+                    <div class="action-item">
+                        <div class="action-priority medium"></div>
+                        <div class="action-text">Actualizar documentación técnica</div>
+                        <div class="action-owner">Tech Lead</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- AREAS IMPACTED -->
+            <div class="card col-4">
+                <div class="card-header">
+                    <div>
+                        <div class="card-title">🏢 Areas Impacted</div>
+                        <div class="card-subtitle">Departamentos beneficiados</div>
+                    </div>
+                </div>
+
+                <div style="font-size: 42px; font-weight: 700; color: var(--text-primary); margin-bottom: 5px;">6</div>
+                <div style="font-size: 14px; color: var(--text-secondary); margin-bottom: 15px;">áreas directamente impactadas</div>
+
+                <div class="areas-chips">
+                    <div class="area-chip">
+                        <div class="area-chip-dot"></div>
+                        Quality Control
+                    </div>
+                    <div class="area-chip">
+                        <div class="area-chip-dot" style="background: var(--status-green);"></div>
+                        Production
+                    </div>
+                    <div class="area-chip">
+                        <div class="area-chip-dot" style="background: var(--status-purple);"></div>
+                        Maintenance
+                    </div>
+                    <div class="area-chip">
+                        <div class="area-chip-dot" style="background: var(--status-orange);"></div>
+                        Engineering
+                    </div>
+                    <div class="area-chip">
+                        <div class="area-chip-dot" style="background: var(--status-teal);"></div>
+                        Planning
+                    </div>
+                    <div class="area-chip">
+                        <div class="area-chip-dot" style="background: var(--status-yellow);"></div>
+                        IT/Systems
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- FOOTER QUICK STATS -->
+        <div class="footer-stats">
+            <div class="footer-stat">
+                <div class="footer-stat-value">156</div>
+                <div class="footer-stat-label">Usuarios Activos</div>
+            </div>
+            <div class="footer-stat">
+                <div class="footer-stat-value">32</div>
+                <div class="footer-stat-label">Tareas Completadas</div>
+            </div>
+            <div class="footer-stat">
+                <div class="footer-stat-value">8</div>
+                <div class="footer-stat-label">Pendientes</div>
+            </div>
+            <div class="footer-stat">
+                <div class="footer-stat-value">96%</div>
+                <div class="footer-stat-label">On-Time Delivery</div>
+            </div>
+            <div class="footer-stat">
+                <div class="footer-stat-value">4.2x</div>
+                <div class="footer-stat-label">Escalabilidad</div>
+            </div>
+            <div class="footer-stat">
+                <div class="footer-stat-value">Q1 2025</div>
+                <div class="footer-stat-label">Target Go-Live</div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        function toggleTheme() {
+            document.body.classList.toggle('light-theme');
+            localStorage.setItem('theme', document.body.classList.contains('light-theme') ? 'light' : 'dark');
+        }
+
+        window.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme');
+            if (savedTheme === 'light') {
+                document.body.classList.add('light-theme');
+            }
+        });
+    </script>
+</body>
+</html>
