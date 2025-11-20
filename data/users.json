@@ -8,7 +8,8 @@
       "role": "Software Engineer",
       "email": "hiram@dx.com",
       "avatar": null,
-      "createdAt": "2025-10-31T21:23:03.365Z"
+      "createdAt": "2025-10-31T21:23:03.365Z",
+      "hierarchyLevel": 2
     },
     {
       "id": "user2",
@@ -18,7 +19,8 @@
       "role": "Project Evaluation",
       "email": "sandra@dx.com",
       "avatar": null,
-      "createdAt": "2025-10-31T21:23:03.368Z"
+      "createdAt": "2025-10-31T21:23:03.368Z",
+      "hierarchyLevel": 2
     },
     {
       "id": "user3",
@@ -28,7 +30,8 @@
       "role": "Technical Tools Supervisor",
       "email": "miguel@dx.com",
       "avatar": null,
-      "createdAt": "2025-10-31T21:23:03.370Z"
+      "createdAt": "2025-10-31T21:23:03.370Z",
+      "hierarchyLevel": 1
     }
   ]
 }
