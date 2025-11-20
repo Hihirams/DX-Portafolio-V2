@@ -163,7 +163,7 @@ function generateCoverSlide() {
     
     const subtitle = viewingUser
         ? `${viewingUser.role} | ${projectsToShow.length} proyecto(s)`
-        : `Duración: 15 minutos | Enfoque en impacto y próximos pasos`;
+        : `Duration: 15 minutes | Focus on Impact and Next Steps`;
     
     // Calcular estadísticas
     const stats = {
@@ -181,26 +181,26 @@ function generateCoverSlide() {
         <div class="stats-grid">
             <div class="stat-card">
                 <div class="stat-number">${stats.total}</div>
-                <div class="stat-label">Proyectos Totales</div>
+                <div class="stat-label">Total Projects</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">${stats.inProgress}</div>
-                <div class="stat-label">En Progreso Activo</div>
+                <div class="stat-label">Active In Progress</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">${stats.discovery}</div>
-                <div class="stat-label">En Discovery</div>
+                <div class="stat-label">In Discovery</div>
             </div>
             <div class="stat-card">
                 <div class="stat-number">${stats.hold + stats.paused}</div>
-                <div class="stat-label">En Hold</div>
+                <div class="stat-label">On Hold</div>
             </div>
         </div>
 
         <div class="timeline">
             <div class="timeline-item">
                 <div class="timeline-time">1 min</div>
-                <div class="timeline-section">Contexto General</div>
+                <div class="timeline-section">General Context</div>
             </div>
             ${projectsToShow.slice(0, 4).map((project, index) => `
                 <div class="timeline-item">
@@ -211,12 +211,12 @@ function generateCoverSlide() {
             ${projectsToShow.length > 4 ? `
                 <div class="timeline-item">
                     <div class="timeline-time">2 min</div>
-                    <div class="timeline-section">Otros Proyectos + Resumen</div>
+                    <div class="timeline-section">Other Projects + Summary</div>
                 </div>
             ` : `
                 <div class="timeline-item">
                     <div class="timeline-time">2 min</div>
-                    <div class="timeline-section">Resumen Ejecutivo</div>
+                    <div class="timeline-section">Executive Summary</div>
                 </div>
             `}
         </div>
@@ -289,7 +289,7 @@ function generateProjectSlides() {
         </div>
 
         <div class="info-section">
-          <div class="info-title">📋 Fase Actual</div>
+          <div class="info-title">📋 Current Phase</div>
           <div class="info-content">${project.currentPhase || ''}</div>
         </div>
 
@@ -300,22 +300,22 @@ function generateProjectSlides() {
 <div style="display:flex; gap:15px; margin-top:20px; flex-wrap:wrap;">
   ${hasGantt ? `
     <a href="#" class="gantt-link" onclick="(async () => await openGanttModal('${project.id}'))(); return false;">
-      📊 Ver Gantt del Proyecto
+      📊 View Project Gantt
     </a>` : ''}
 
   ${hasVideos ? `
     <a href="#" class="gantt-link video-link" onclick="(async () => await openVideoGallery('${project.id}'))(); return false;">
-      🎬 Galería de Videos
+      🎬 Video Gallery
     </a>` : ''}
 
   ${hasImages ? `
     <a href="#" class="gantt-link image-link" onclick="(async () => await openImageGallery('${project.id}'))(); return false;">
-      🖼️ Galería de Imágenes
+      🖼️ Image Gallery
     </a>` : ''}
 
   ${hasExtraFiles ? `
     <a href="#" class="gantt-link extra-files-link" onclick="openExtraFilesModal('${project.id}'); return false;">
-      📁 Archivos Extras
+      📁 Extra Files
     </a>` : ''}
 </div>
       </div>
@@ -345,7 +345,7 @@ function generateAchievementsSection(achievements) {
 
   return `
     <div class="info-section success">
-      <div class="info-title">✅ Logros Recientes</div>
+      <div class="info-title">✅ Recent Achievements</div>
       <div class="info-content">${entries}</div>
     </div>
   `;
@@ -375,7 +375,7 @@ function generateNextStepsSection(nextSteps) {
 
   return `
     <div class="info-section">
-      <div class="info-title">🎯 Próximos Pasos</div>
+      <div class="info-title">🎯 Next Steps</div>
       <div class="info-content">${entries}</div>
     </div>
   `;
@@ -395,7 +395,7 @@ function generateSummarySlide() {
     paused:     projectsToShow.filter(p => p.status === 'paused').length
   };
 
-  // Fechas clave
+  // Key dates
   let upcomingMilestones = {};
   projectsToShow.forEach(project => {
     if (project.nextSteps) {
@@ -408,12 +408,12 @@ function generateSummarySlide() {
   const sortedDates = Object.keys(upcomingMilestones).sort();
 
   summarySlide.innerHTML = `
-    <h2 class="project-title logo-gradient" style="margin-bottom: 40px;">Resumen Ejecutivo</h2>
+    <h2 class="project-title logo-gradient" style="margin-bottom: 40px;">Executive Summary</h2>
 
     <div class="summary-grid">
       ${stats.inProgress > 0 ? `
         <div class="summary-item" style="border-left-color:#30d158;">
-          <div class="info-title">✅ ${stats.inProgress} proyecto(s) avanzando según plan</div>
+          <div class="info-title">✅ ${stats.inProgress} project(s) progressing as planned</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='in-progress').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
@@ -421,15 +421,15 @@ function generateSummarySlide() {
 
       ${stats.hold > 0 ? `
         <div class="summary-item" style="border-left-color:#ff9500;">
-          <div class="info-title">🛠️ ${stats.hold} proyecto(s) con hold técnico temporal</div>
+          <div class="info-title">🛠️ ${stats.hold} project(s) on temporary technical hold</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Desbloqueo en proceso'}`).join('•')}
+            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Unblocking in progress'}`).join('•')}
           </div>
         </div>` : ''}
 
       ${stats.paused > 0 ? `
         <div class="summary-item" style="border-left-color:#8e8e93;">
-          <div class="info-title">❄️ ${stats.paused} proyecto(s) pausado(s)</div>
+          <div class="info-title">❄️ ${stats.paused} paused project(s)</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
@@ -437,7 +437,7 @@ function generateSummarySlide() {
 
       ${stats.discovery > 0 ? `
         <div class="summary-item" style="border-left-color:#ff9f0a;">
-          <div class="info-title">🔍 ${stats.discovery} proyecto(s) en discovery</div>
+          <div class="info-title">🔍 ${stats.discovery} project(s) in discovery</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join('•')}
           </div>
@@ -446,7 +446,7 @@ function generateSummarySlide() {
 
     ${sortedDates.length > 0 ? `
       <div class="info-section" style="margin-top:30px;">
-        <div class="info-title">🎯 Próximas Fechas Clave</div>
+        <div class="info-title">🎯 Upcoming Key Dates</div>
         <div class="info-content">
           ${sortedDates.slice(0,5).map(date => `
             <strong>${formatMonth(date)}:</strong><br>
@@ -456,13 +456,11 @@ function generateSummarySlide() {
       </div>` : ''}
 
     <div class="cta-box">
-      <div class="cta-text">¿Decisiones o recursos necesarios?</div>
-      <p style="margin-top:15px; font-size:16px; color:white;">Espacio para preguntas y respuestas</p>
+      <div class="cta-text">Decisions or Resources Needed?</div>
+      <p style="margin-top:15px; font-size:16px; color:white;">Space for Questions and Answers</p>
     </div>
   `;
 }
-
-
 
 // ==================== NAVIGATION ====================
 
@@ -881,10 +879,10 @@ function getBlockerIcon(type) {
 
 function getBlockerTitle(type) {
     const titles = {
-        info: 'Información',
-        warning: 'Atención',
-        alert: 'Bloqueo Temporal',
-        success: 'Estado'
+        info: 'Information',
+        warning: 'Warning',
+        alert: 'Temporary Block',
+        success: 'Status'
     };
     return titles[type] || 'Información';
 }
@@ -895,7 +893,7 @@ function showError(message) {
             <div class="error-icon">⚠️</div>
             <h2 class="error-title">Error al cargar el portafolio</h2>
             <p class="error-description">${message}</p>
-            <button class="error-button" onclick="goBack()">Volver al Home</button>
+            <button class="error-button" onclick="goBack()">Back to Home</button>
         </div>
     `;
 }

@@ -1,79 +1,79 @@
 {
-  "appName": "Portafolio DX",
+  "appName": "DX Portfolio",
   "version": "1.0.0",
   "projectStatuses": {
     "in-progress": {
-      "label": "En Progreso",
-      "badge": "En Progreso",
+      "label": "In Progress",
+      "badge": "In Progress",
       "badgeClass": "badge-in-progress",
       "color": "#00D9FF",
-      "icon": "â–¶"
+      "icon": "▶"
     },
     "hold": {
-      "label": "Hold",
-      "badge": "Hold",
+      "label": "On Hold",
+      "badge": "On Hold",
       "badgeClass": "badge-hold",
       "color": "#FF6B00",
-      "icon": "â¸"
+      "icon": "⏸"
     },
     "discovery": {
       "label": "Discovery",
       "badge": "Discovery",
       "badgeClass": "badge-discovery",
       "color": "#9D00FF",
-      "icon": "ðŸ”"
+      "icon": "🔍"
     },
     "paused": {
-      "label": "Pausado",
-      "badge": "Pausado",
+      "label": "Paused",
+      "badge": "Paused",
       "badgeClass": "badge-paused",
       "color": "#FFD600",
-      "icon": "â¸"
+      "icon": "⏸"
     },
     "completed": {
-      "label": "Completado",
-      "badge": "Completado",
+      "label": "Completed",
+      "badge": "Completed",
       "badgeClass": "badge-completed",
       "color": "#00FF85",
-      "icon": "âœ“"
+      "icon": "✓"
     }
   },
   "priorities": {
     "high": {
-      "label": "Alta",
-      "badge": "Alta Prioridad",
+      "label": "High",
+      "badge": "High Priority",
       "badgeClass": "badge-priority-high",
       "color": "#FF0000"
     },
     "medium": {
-      "label": "Media",
-      "badge": "Prioridad Media",
+      "label": "Medium",
+      "badge": "Medium Priority",
       "badgeClass": "badge-priority-medium",
       "color": "#FFA500"
     },
     "low": {
-      "label": "Baja",
-      "badge": "Baja Prioridad",
+      "label": "Low",
+      "badge": "Low Priority",
       "badgeClass": "badge-priority-low",
       "color": "#00FF00"
     }
   },
   "blockerTypes": {
     "technical": {
-      "label": "TÃ©cnico",
-      "icon": "âš™ï¸"
+      "label": "Technical",
+      "icon": "⚙️"
     },
     "resources": {
-      "label": "Recursos",
-      "icon": "ðŸ‘¥"
+      "label": "Resources",
+      "icon": "👥"
     },
     "dependencies": {
-      "label": "Dependencias",
-      "icon": "ðŸ”—"
+      "label": "Dependencies",
+      "icon": "🔗"
     },
     "approval": {
-      "label": "AprobaciÃ³n",
-      "icon": "âœ‹"
+      "label": "Approval",
+      "icon": "✋"
     }
   }
 }

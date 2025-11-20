@@ -94,23 +94,23 @@ function renderStatsOverview() {
   statsOverview.innerHTML = `
     <div class="stat-card">
       <div class="stat-number">${stats.totalProjects}</div>
-      <div class="stat-label">Proyectos Totales</div>
+      <div class="stat-label">Total Projects</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.inProgress}</div>
-      <div class="stat-label">En Progreso</div>
+      <div class="stat-label">In Progress</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.hold}</div>
-      <div class="stat-label">En Hold</div>
+      <div class="stat-label">On Hold</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.discovery}</div>
-      <div class="stat-label">En Discovery</div>
+      <div class="stat-label">Discovery</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.completed}</div>
-      <div class="stat-label">Terminados</div>
+      <div class="stat-label">Finished</div>
     </div>
   `;
 }
@@ -268,7 +268,7 @@ function createCarouselProjectCard(project) {
                 <div class="carousel-card__footer">
                     <div class="carousel-card__progress">
                         <div class="carousel-progress-header">
-                            <span class="carousel-progress-label">Progreso</span>
+                            <span class="carousel-progress-label">Overall Progress</span>
                             <span class="carousel-progress-percentage">${project.progress}%</span>
                         </div>
                         <div class="carousel-progress-bar">
@@ -439,18 +439,18 @@ function renderCarousel() {
                 
                 <div class="featured-project-meta">
                     <div class="featured-meta-item">
-                        <span class="featured-meta-label">Fase:</span>
+                        <span class="featured-meta-label">Phase:</span>
                         <span class="featured-meta-value">${project.currentPhase || 'N/A'}</span>
                     </div>
                     <div class="featured-meta-item">
-                        <span class="featured-meta-label">Líder:</span>
+                        <span class="featured-meta-label">Leader:</span>
                         <span class="featured-meta-value">${ownerName}</span>
                     </div>
                 </div>
                 
                 <div class="featured-progress-section">
                     <div class="featured-progress-header">
-                        <span class="featured-progress-label">Progreso general</span>
+                        <span class="featured-progress-label">Overall progress</span>
                         <span class="featured-progress-percentage">${project.progress}%</span>
                     </div>
                     <div class="featured-progress-bar">
@@ -459,7 +459,7 @@ function renderCarousel() {
                 </div>
                 
                 <button class="featured-view-btn" onclick="viewProject('${project.id}')">
-                    Ver Detalles
+                    View Details
                     <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
                         <path d="M6 3L11 8L6 13" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -739,7 +739,7 @@ function setupSearch() {
         let html = '';
 
         if (projects.length > 0) {
-            html += '<h4 style="margin-bottom: 15px; color: var(--text-primary);">Proyectos</h4>';
+            html += '<h4 style="margin-bottom: 15px; color: var(--text-primary);">Projects</h4>';
             projects.forEach(project => {
                 html += `
                     <div class="search-result-item" onclick="viewProject('${project.id}')">
@@ -849,8 +849,8 @@ function openLoginModal() {
                 <button class="modal-close-btn" onclick="closeLoginModal()">×</button>
 
                 <div class="login-modal-header">
-                    <h2 class="login-modal-title">Iniciar Sesión</h2>
-                    <p class="login-modal-subtitle">Ingresa tus credenciales para continuar</p>
+                    <h2 class="login-modal-title">Login</h2>
+                    <p class="login-modal-subtitle">Enter your credentials to continue.</p>
                 </div>
 
                 <div class="login-modal-body">
@@ -858,7 +858,7 @@ function openLoginModal() {
                         <div id="loginError" class="form-error" style="display: none;"></div>
 
                         <div class="form-group">
-                            <label for="username">Usuario</label>
+                            <label for="username">Username</label>
                             <div class="form-input-wrapper">
                                 <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path>
@@ -868,7 +868,7 @@ function openLoginModal() {
                                     type="text"
                                     id="username"
                                     name="username"
-                                    placeholder="Tu usuario"
+                                    placeholder="Your username"
                                     required
                                     autocomplete="username"
                                 >
@@ -876,7 +876,7 @@ function openLoginModal() {
                         </div>
 
                         <div class="form-group">
-                            <label for="password">Contraseña</label>
+                            <label for="password">Password</label>
                             <div class="form-input-wrapper">
                                 <svg class="form-input-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -886,18 +886,18 @@ function openLoginModal() {
                                     type="password"
                                     id="password"
                                     name="password"
-                                    placeholder="Tu contraseña"
+                                    placeholder="Your Password"
                                     required
                                     autocomplete="current-password"
                                 >
                             </div>
                         </div>
 
-                        <button type="submit" class="btn-submit">Iniciar Sesión</button>
+                        <button type="submit" class="btn-submit">Login</button>
                     </form>
 
                     <div class="login-hint">
-                        <p><strong>Usuario:</strong> nombre.apellido</p>
+                        <p><strong>Usuario:</strong> firstname.lastname</p>
                         <p><strong>Contraseña:</strong> demo123</p>
                     </div>
                 </div>

@@ -52,12 +52,12 @@ const crossFilterConfig = {
 
 // Status Mapping
 const statusMap = {
-    'in-progress': { label: 'En Progreso', class: 'status-progress' },
-    'progress': { label: 'En Progreso', class: 'status-progress' },
-    'hold': { label: 'En Hold', class: 'status-hold' },
+    'in-progress': { label: 'In Progress', class: 'status-progress' },
+    'progress': { label: 'In Progress', class: 'status-progress' },
+    'hold': { label: 'On Hold', class: 'status-hold' },
     'discovery': { label: 'Discovery', class: 'status-discovery' },
-    'completed': { label: 'Completado', class: 'status-completed' },
-    'paused': { label: 'Pausado', class: 'status-hold' }
+    'completed': { label: 'Completed', class: 'status-completed' },
+    'paused': { label: 'Paused', class: 'status-hold' }
 };
 
 // ==================== INITIALIZATION ====================
@@ -100,20 +100,20 @@ function loadProjectsFromDataManager() {
             console.warn('⚠️ No hay proyectos cargados - mostrando tabla vacía');
         }
 
-        // Mapear proyectos al formato esperado por la UI
+// Mapear proyectos al formato esperado por la UI
         projects = projects.map(p => ({
             id: p.id,
             name: p.title,
             status: normalizeStatus(p.status),
             progress: p.progress || 0,
             lastUpdate: p.updatedAt || new Date().toISOString(),
-            nextStep: p.currentPhase || 'Por definir',
+            nextStep: p.currentPhase || 'To be defined',
             deliveryDate: p.targetDate || new Date().toISOString(),
-            responsible: dataManager.getUserById(p.ownerId)?.name || 'Sin asignar',
+            responsible: dataManager.getUserById(p.ownerId)?.name || 'Unassigned', // Antes: 'Sin asignar'
             ownerId: p.ownerId,
             blocked: p.blockers?.type === 'warning' || p.blockers?.type === 'error' ? true : false,
-            blockReason: p.blockers?.message || 'Sin bloqueos',
-            blockResponsible: 'Sistema',
+            blockReason: p.blockers?.message || 'No blockers', // Antes: 'Sin bloqueos'
+            blockResponsible: 'System', // Antes: 'Sistema'
             // Preservar datos originales
             _original: p
         }));
@@ -157,7 +157,7 @@ function openResourcesModal(projectId, event) {
     const modalContent = document.getElementById('resourcesModalContent');
     const title = document.getElementById('resourcesModalTitle');
 
-    title.textContent = 'RECURSOS';
+    title.textContent = 'RESOURCES';
 
     // ✅ MEJORADO: Verificar disponibilidad de recursos con datos actualizados
     const hasGantt = project._original?.ganttImage || project._original?.ganttImagePath;
@@ -255,8 +255,8 @@ async function openResourceGantt() {
 
     // ✅ ARREGLADO: Validar antes de procesar
     if (!ganttPath) {
-        console.warn('⚠️ Este proyecto no tiene diagrama Gantt');
-        alert('Este proyecto no tiene diagrama Gantt disponible');
+        console.warn('⚠️ This project has no Gantt chart');
+        alert('This project has no Gantt chart available');
         return;
     }
 
@@ -282,8 +282,8 @@ async function openResourceGantt() {
         modal.classList.add('active');
 
     } catch (error) {
-        console.error('Error cargando Gantt:', error);
-        alert('Error al cargar el diagrama de Gantt');
+        console.error('Error loading Gantt:', error);
+        alert('Error loading Gantt chart');
     }
 }
 
@@ -295,8 +295,8 @@ async function openResourceImages() {
     
     // ✅ ARREGLADO: Validar antes de procesar
     if (!project.images || !Array.isArray(project.images) || project.images.length === 0) {
-        console.warn('⚠️ Este proyecto no tiene imágenes');
-        alert('Este proyecto no tiene imágenes disponibles');
+        console.warn('⚠️ This project has no images');
+        alert('This project has no images available');
         return;
     }
 
@@ -305,7 +305,7 @@ async function openResourceImages() {
         const title = document.getElementById('imagesViewTitle');
         const grid = document.getElementById('imagesViewGrid');
 
-        title.textContent = `${currentResourceProject.name} - Imágenes`;
+        title.textContent = `${currentResourceProject.name} - Images`;
 
         const imagesHTML = await Promise.all(project.images.map(async (img) => {
             let imgSrc = img.src || img.path;
@@ -331,8 +331,8 @@ async function openResourceImages() {
         modal.classList.add('active');
 
     } catch (error) {
-        console.error('Error cargando imágenes:', error);
-        alert('Error al cargar las imágenes');
+        console.error('Error loading images:', error);
+        alert('Error loading images');
     }
 }
 
@@ -343,8 +343,8 @@ async function openResourceVideos() {
     
     // ✅ ARREGLADO: Validar antes de procesar
     if (!project.videos || !Array.isArray(project.videos) || project.videos.length === 0) {
-        console.warn('⚠️ Este proyecto no tiene videos');
-        alert('Este proyecto no tiene videos disponibles');
+        console.warn('⚠️ This project has no videos');
+        alert('This project has no videos available');
         return;
     }
 
@@ -379,8 +379,8 @@ async function openResourceVideos() {
         modal.classList.add('active');
 
     } catch (error) {
-        console.error('Error cargando videos:', error);
-        alert('Error al cargar los videos');
+        console.error('Error loading videos:', error);
+        alert('Error loading videos');
     }
 }
 
@@ -391,16 +391,12 @@ async function openResourceFiles() {
 
     // ✅ ARREGLADO: Validar antes de procesar
     if (!project.extraFiles || !Array.isArray(project.extraFiles) || project.extraFiles.length === 0) {
-        console.warn('⚠️ Este proyecto no tiene archivos extras');
-        alert('Este proyecto no tiene archivos disponibles');
+        console.warn('⚠️ This project has no extra files');
+        alert('This project has no files available');
         return;
     }
-
-    // ✅ ARREGLADO: No escanear directorio - confiar SOLO en los datos del proyecto
-    // Si extraFiles está vacío, simplemente mostrar mensaje de "no hay archivos"
-    // Esto evita que se muestren archivos que fueron eliminados del proyecto
     
-    console.log('📁 Abriendo archivos para proyecto:', {
+    console.log('📁 Opening files for project:', {
         projectId: project.id,
         extraFilesCount: project.extraFiles?.length || 0,
         extraFiles: project.extraFiles || []
@@ -411,7 +407,7 @@ async function openResourceFiles() {
         const title = document.getElementById('filesViewTitle');
         const list = document.getElementById('filesViewList');
 
-        title.textContent = `${currentResourceProject.name} - Archivos`;
+        title.textContent = `${currentResourceProject.name} - Files`;
 
         let filesHTML = '';
 
@@ -420,11 +416,11 @@ async function openResourceFiles() {
             filesHTML = `
                 <div style="text-align: center; padding: 40px 20px; color: rgba(245, 245, 247, 0.6);">
                     <div style="font-size: 48px; margin-bottom: 20px;">📂</div>
-                    <h3 style="margin: 0 0 10px 0; color: rgba(245, 245, 247, 0.8); font-size: 18px;">No hay archivos disponibles</h3>
-                    <p style="margin: 0; font-size: 14px;">Este proyecto no tiene archivos extra cargados.</p>
+                    <h3 style="margin: 0 0 10px 0; color: rgba(245, 245, 247, 0.8); font-size: 18px;">No files available</h3>
+                    <p style="margin: 0; font-size: 14px;">This project has no extra files uploaded.</p>
                 </div>
             `;
-            console.log('✓ Sin archivos a mostrar');
+            console.log('✓ No files to show');
         } else {
             // Show files
             filesHTML = project.extraFiles.map((file) => {
@@ -446,7 +442,7 @@ async function openResourceFiles() {
                     </div>
                 `;
             }).join('');
-            console.log(`✓ Mostrando ${project.extraFiles.length} archivos`);
+            console.log(`✓ Showing ${project.extraFiles.length} files`);
         }
 
         list.innerHTML = filesHTML;
@@ -455,8 +451,8 @@ async function openResourceFiles() {
         modal.classList.add('active');
 
     } catch (error) {
-        console.error('Error cargando archivos:', error);
-        alert('Error al cargar los archivos');
+        console.error('Error loading files:', error);
+        alert('Error loading files');
     }
 }
 
@@ -500,7 +496,7 @@ function openImageFullscreen(src, title) {
 
     const closeBtn = document.createElement('button');
     closeBtn.className = 'resource-btn';
-    closeBtn.innerHTML = '✖ Cerrar';
+    closeBtn.innerHTML = '✖ Close'; // Antes: '✖ Cerrar'
     closeBtn.style.cssText = `
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15);
@@ -588,8 +584,8 @@ async function downloadFile(filePath, fileName) {
         document.body.removeChild(link);
 
     } catch (error) {
-        console.error('Error descargando archivo:', error);
-        alert('Error al descargar el archivo');
+        console.error('Error downloading file:', error);
+        alert('Error downloading file');
     }
 }
 
@@ -733,7 +729,8 @@ function formatDate(dateString) {
     if (!dateString) return '—';
     try {
         const date = new Date(dateString);
-        return date.toLocaleDateString('es-MX', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        // Cambio de 'es-MX' a 'en-US'
+        return date.toLocaleDateString('en-US', { day: '2-digit', month: '2-digit', year: 'numeric' });
     } catch {
         return '—';
     }
@@ -832,7 +829,7 @@ function renderTeamMembers() {
             <div class="member-avatar">${getInitials(member.name)}</div>
             <div class="member-info">
                 <div class="member-name">${member.name}</div>
-                <div class="member-projects">${member.total} proyecto${member.total !== 1 ? 's' : ''} · ${member.blocked} bloqueado${member.blocked !== 1 ? 's' : ''}</div>
+                <div class="member-projects">${member.total} project${member.total !== 1 ? 's' : ''} · ${member.blocked} blocked${member.blocked !== 1 ? 's' : ''}</div>
             </div>
         </div>
     `).join('');
@@ -901,14 +898,14 @@ function updateActiveFiltersDisplay() {
         const statusLabel = statusMap[activeFilters.status]?.label || activeFilters.status;
         chips.push(`
             <div class="active-filter-chip" onclick="removeFilter('status')">
-                <span>Estado: ${statusLabel}</span>
+                <span>Status: ${statusLabel}</span>
                 <span class="chip-close">×</span>
             </div>
         `);
     }
 
     if (activeFilters.block !== 'all') {
-        const blockLabel = activeFilters.block === 'blocked' ? 'Con Bloqueos' : 'Sin Bloqueos';
+        const blockLabel = activeFilters.block === 'blocked' ? 'With Blockers' : 'Without Blockers';
         chips.push(`
             <div class="active-filter-chip" onclick="removeFilter('block')">
                 <span>${blockLabel}</span>
@@ -1040,15 +1037,13 @@ function renderProjects() {
     const end = start + itemsPerPage;
     const projectsToShow = filteredProjects.slice(start, end);
 
-    if (projectsToShow.length === 0) {
+if (projectsToShow.length === 0) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="10">
                     <div class="empty-state">
                         <div class="empty-state-icon">🔍</div>
-                        <h3>No se encontraron proyectos</h3>
-                        <p>Intenta ajustar los filtros o búsqueda</p>
-                    </div>
+                        <h3>No projects found</h3> <p>Try adjusting filters or search</p> </div>
                 </td>
             </tr>
         `;
@@ -1062,7 +1057,7 @@ function renderProjects() {
                 <div class="project-name">${project.name}</div>
             </td>
             <td class="col-concept">
-                <div class="project-concept">${project._original?.concept || 'Sin concepto definido'}</div>
+                <div class="project-concept">${project._original?.concept || 'No defined concept'}</div>
             </td>
             <td class="col-status">
                 <span class="status-badge ${statusMap[project.status]?.class || 'status-discovery'}">
@@ -1095,8 +1090,8 @@ function renderProjects() {
             </td>
             <td class="col-blocked">
                 <span class="${project.blocked ? 'block-yes' : 'block-no'}">
-                    ${project.blocked ? 'Sí' : 'No'}
-                </span>
+                    ${project.blocked ? 'Yes' : 'No'} </span>
+            </td>
             </td>
             <td class="col-block-desc">
                 ${project.blocked ? `
@@ -1114,7 +1109,7 @@ function renderProjects() {
                         <rect x="2" y="3" width="12" height="10" rx="2"/>
                         <path d="M2 6h12M6 3v3"/>
                     </svg>
-                    Ver
+                    View
                 </button>
             </td>
         </tr>
@@ -1138,7 +1133,7 @@ function updatePaginationInfo() {
 
     if (currentPageEl) currentPageEl.textContent = currentPage;
     if (totalPagesEl) totalPagesEl.textContent = totalPages || 1;
-    if (pageInfoEl) pageInfoEl.textContent = `Mostrando ${start}-${end} de ${filteredProjects.length} proyectos`;
+    if (pageInfoEl) pageInfoEl.textContent = `Showing ${start}-${end} of ${filteredProjects.length} projects`;
     if (showingEl) showingEl.textContent = filteredProjects.length;
     if (totalEl) totalEl.textContent = projects.length;
 
@@ -1481,7 +1476,7 @@ function updateCrossFilterIndicators() {
         crossFilterIndicator.appendChild(icon);
 
         const text = document.createElement('span');
-        text.textContent = 'Cross-filters activos';
+        text.textContent = 'Active Cross-filters';
         crossFilterIndicator.appendChild(text);
 
         // Insert after title
@@ -1521,18 +1516,18 @@ function updateCrossFilterChips() {
                 icon = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><circle cx="6" cy="4" r="2" stroke="currentColor" stroke-width="1.5"/><path d="M2 10C2 8.67097 3.34315 8 5 8H7C8.65685 8 10 8.67097 10 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
                 break;
             case 'status':
-                displayText = `Estado: ${statusMap[value]?.label || value}`;
+                displayText = `Status: ${statusMap[value]?.label || value}`;
                 icon = '<div style="width: 6px; height: 6px; border-radius: 50%; background: currentColor;"></div>';
                 break;
             case 'blocked':
-                displayText = value ? 'Bloqueados' : 'Sin Bloqueos';
+                displayText = value ? 'Blocked' : 'Unblocked';
                 icon = value ?
                     '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M6 1L11 10H1L6 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/></svg>' :
                     '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><path d="M2 6L5 9L10 2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
                 break;
             case 'projectId':
                 const project = projects.find(p => p.id === value);
-                displayText = project ? `${project.name}` : `Proyecto ${value}`;
+                displayText = project ? `${project.name}` : `Project ${value}`;
                 icon = '<svg width="12" height="12" viewBox="0 0 12 12" fill="none"><rect x="2" y="3" width="8" height="7" rx="1" stroke="currentColor" stroke-width="1.5"/><path d="M8 1V3M4 1V3" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>';
                 break;
         }
@@ -1607,16 +1602,22 @@ function generateAnalyticsFilters() {
     if (!container || !projects.length) return;
 
     // Get unique responsibles from projects
-    const responsibles = [...new Set(projects.map(p => p.responsible))].filter(r => r && r !== 'Sin asignar');
+    const responsibles = [...new Set(projects.map(p => p.responsible))].filter(r => r && r !== 'Unassigned');
 
     // Build filter HTML
     let html = `
         <div style="font-size: 12px; font-weight: 600; color: rgba(245, 245, 247, 0.6); text-transform: uppercase; letter-spacing: 0.5px; margin-right: 12px; display: flex; align-items: center;">
-            Filtros Interactivos:
+            Interactive Filters:
         </div>
 
-        <!-- Team Filters -->`;
-
+        `;
+    
+    // ... resto de la función generateAnalyticsFilters (se mantiene igual, ya tienes los chips en inglés en el código anterior)
+    // Nota: Asegúrate de que los textos de los chips ("In Progress", etc.) en el resto de esta función ya estén en inglés como corregimos antes.
+    
+    // ... (Para completar la función, asegúrate de usar la versión del código anterior que ya tenía "In Progress", "Blocked", etc.)
+    
+    // Aquí está el resto de generateAnalyticsFilters resumido para contexto:
     responsibles.slice(0, 5).forEach((responsible, index) => {
         const names = responsible.split(' ');
         const displayName = names.length > 1 ? `${names[0].charAt(0)}${names[1].charAt(0)}` : names[0].slice(0,2);
@@ -1632,15 +1633,13 @@ function generateAnalyticsFilters() {
 
     html += `
         <div class="filter-divider"></div>
-
-        <!-- Status Filters -->
         <div class="filter-chip" data-filter-type="status" data-filter-value="progress" onclick="updateAnalyticsFilter('status', 'progress')">
             <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(52, 199, 89, 0.85);"></div>
-            En Progreso
+            In Progress
         </div>
         <div class="filter-chip" data-filter-type="status" data-filter-value="hold" onclick="updateAnalyticsFilter('status', 'hold')">
             <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 159, 10, 0.85);"></div>
-            En Hold
+            On Hold
         </div>
         <div class="filter-chip" data-filter-type="status" data-filter-value="discovery" onclick="updateAnalyticsFilter('status', 'discovery')">
             <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(191, 90, 242, 0.85);"></div>
@@ -1648,23 +1647,22 @@ function generateAnalyticsFilters() {
         </div>
         <div class="filter-chip" data-filter-type="status" data-filter-value="completed" onclick="updateAnalyticsFilter('status', 'completed')">
             <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(48, 209, 88, 0.85);"></div>
-            Completados
+            Completed
         </div>
 
         <div class="filter-divider"></div>
 
-        <!-- Blocker Filters -->
         <div class="filter-chip" data-filter-type="blocked" data-filter-value="true" onclick="updateAnalyticsFilter('blocked', true)">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M7 1L13 12H1L7 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/>
             </svg>
-            Bloqueados
+            Blocked
         </div>
         <div class="filter-chip" data-filter-type="blocked" data-filter-value="false" onclick="updateAnalyticsFilter('blocked', false)">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
                 <path d="M3 7L6 10L11 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
             </svg>
-            Sin Bloqueos
+            Unblocked
         </div>`;
 
     container.innerHTML = html;
@@ -1739,7 +1737,7 @@ function initializeCharts() {
         charts.portfolioStatus = new Chart(portfolioStatusCtx, {
             type: 'doughnut',
             data: {
-                labels: ['En Progreso', 'En Hold', 'Discovery', 'Completados'],
+                labels: ['In Progress', 'On Hold', 'Discovery', 'Completed'],
                 datasets: [{
                     data: [statusCounts.progress, statusCounts.hold, statusCounts.discovery, statusCounts.completed],
                     backgroundColor: [
@@ -1786,13 +1784,13 @@ function initializeCharts() {
                 labels: filteredTeamData.map(m => m.name.split(' ')[0]),
                 datasets: [
                     {
-                        label: 'En Progreso',
+                        label: 'In Progress',
                         data: filteredTeamData.map(m => m.progress),
                         backgroundColor: 'rgba(52, 199, 89, 0.85)',
                         borderRadius: 8
                     },
                     {
-                        label: 'En Hold',
+                        label: 'On Hold',
                         data: filteredTeamData.map(m => m.hold),
                         backgroundColor: 'rgba(255, 159, 10, 0.85)',
                         borderRadius: 8
@@ -1804,7 +1802,7 @@ function initializeCharts() {
                         borderRadius: 8
                     },
                     {
-                        label: 'Completados',
+                        label: 'Completed',
                         data: filteredTeamData.map(m => m.completed),
                         backgroundColor: 'rgba(48, 209, 88, 0.85)',
                         borderRadius: 8
@@ -1834,7 +1832,7 @@ function initializeCharts() {
         });
     }
 
-// Progress Overview Chart
+    // Progress Overview Chart
     const progressProjects = filteredProjects
         .filter(p => p.status !== 'completed')
         .sort((a, b) => a.progress - b.progress)
@@ -1847,7 +1845,7 @@ function initializeCharts() {
             data: {
                 labels: progressProjects.map(p => p.name),
                 datasets: [{
-                    label: '% Completado',
+                    label: '% Completed',
                     data: progressProjects.map(p => p.progress),
                     backgroundColor: progressProjects.map(p => {
                         if (p.progress >= 80) return 'rgba(48, 209, 88, 0.85)';
@@ -1904,7 +1902,7 @@ function initializeCharts() {
         charts.blockers = new Chart(blockersCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Sin Bloqueos', 'Bloqueados'],
+                labels: ['No Blockers', 'Blocked'],
                 datasets: [{
                     data: [unblockedCount, blockedCount],
                     backgroundColor: [
@@ -1938,7 +1936,7 @@ function initializeCharts() {
             data: {
                 labels: deliveryData.labels,
                 datasets: [{
-                    label: 'Proyectos a Entregar',
+                    label: 'Projects to Deliver',
                     data: deliveryData.values,
                     borderColor: 'rgba(102, 126, 234, 1)',
                     backgroundColor: 'rgba(102, 126, 234, 0.1)',
@@ -1975,7 +1973,7 @@ function initializeCharts() {
                         },
                         title: {
                             display: true,
-                            text: 'Cantidad de Proyectos',
+                            text: 'Number of Projects',
                             color: textColor,
                             font: {
                                 size: 12,
@@ -2005,11 +2003,11 @@ function initializeCharts() {
                             label: function(context) {
                                 const count = context.parsed.y;
                                 if (count === 0) {
-                                    return 'Sin entregas programadas';
+                                    return 'No scheduled deliveries';
                                 } else if (count === 1) {
-                                    return '1 proyecto a entregar';
+                                    return '1 project to deliver';
                                 } else {
-                                    return `${count} proyectos a entregar`;
+                                    return `${count} projects to deliver`;
                                 }
                             },
                             afterLabel: function(context) {
@@ -2036,10 +2034,10 @@ function initializeCharts() {
                                     .map(p => `• ${p.name}`);
 
                                 if (projectsInMonth.length > 3) {
-                                    projectNames.push(`• ... y ${projectsInMonth.length - 3} más`);
+                                    projectNames.push(`• ... and ${projectsInMonth.length - 3} more`);
                                 }
 
-                                return ['\\nProyectos:', ...projectNames];
+                                return ['\\nProjects:', ...projectNames];
                             }
                         },
                         padding: 12,
@@ -2067,7 +2065,7 @@ function initializeCharts() {
                 labels: burndownData.labels,
                 datasets: [
                     {
-                        label: 'Objetivo',
+                        label: 'Target',
                         data: burndownData.ideal,
                         borderColor: 'rgba(134, 134, 139, 0.5)',
                         borderWidth: 2,
@@ -2075,7 +2073,7 @@ function initializeCharts() {
                         fill: false
                     },
                     {
-                        label: 'Real',
+                        label: 'Actual',
                         data: burndownData.actual,
                         borderColor: 'rgba(52, 199, 89, 1)',
                         backgroundColor: 'rgba(52, 199, 89, 0.1)',
@@ -2191,8 +2189,9 @@ function getDeliveryTimelineData(projectsList = projects) {
 
     const months = [];
     const labels = [];
-    const monthNames = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun',
-                        'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+    // Cambio de nombres de meses a Inglés
+    const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     // Generar 7 meses: Nov, Dic, Ene, Feb, Mar, Abr, May
     for (let i = 0; i < 7; i++) {
@@ -2234,7 +2233,8 @@ function getDeliveryTimelineData(projectsList = projects) {
 }
 
 function getBurndownData(projectsList) {
-    const months = ['Nov', 'Dic', 'Ene', 'Feb', 'Mar'];
+    // Cambio de nombres de meses a Inglés
+    const months = ['Nov', 'Dec', 'Jan', 'Feb', 'Mar'];
     const totalProjects = projectsList.filter(p => p.status !== 'completed').length;
     const completedByMonth = [0, 3, 7, 12, 15];
     const monthsToComplete = 4;
@@ -2276,7 +2276,7 @@ function togglePresentationMode() {
     const btnText = document.getElementById('presentationBtnText');
     const isPresentation = document.body.classList.contains('presentation-mode');
     if (btnText) {
-        btnText.textContent = isPresentation ? 'Salir de Presentación' : 'Modo Presentación';
+        btnText.textContent = isPresentation ? 'Exit Presentation Mode' : 'Presentation Mode';
     }
 }
 
