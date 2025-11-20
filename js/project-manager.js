@@ -2458,13 +2458,42 @@ function renderProjectsTable() {
 
 function truncateText(text, maxLength) {
     if (!text) return '—';
+
+    // Si text es un objeto, intentar extraer información útil
+    if (typeof text === 'object') {
+        // Si es un objeto con propiedades, convertir a JSON o tomar primer valor
+        if (Object.keys(text).length === 0) {
+            return 'Por definir';
+        }
+        // Si tiene propiedades, tomar el primer valor
+        const firstValue = Object.values(text)[0];
+        text = String(firstValue || 'Por definir');
+    }
+
+    // Asegurar que text sea string
+    text = String(text);
+
     if (text.length <= maxLength) return text;
     return text.substring(0, maxLength) + '...';
 }
 
 function renderTextCell(text, title) {
     if (!text || text === '—') return '—';
-    
+
+    // Si text es un objeto, intentar extraer información útil
+    if (typeof text === 'object') {
+        // Si es un objeto vacío
+        if (Object.keys(text).length === 0) {
+            return 'Por definir';
+        }
+        // Si tiene propiedades, tomar el primer valor
+        const firstValue = Object.values(text)[0];
+        text = String(firstValue || 'Por definir');
+    }
+
+    // Asegurar que text sea string
+    text = String(text);
+
     const textLength = text.length;
     
     // Texto corto: mostrar completo
