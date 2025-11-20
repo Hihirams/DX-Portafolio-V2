@@ -20,5 +20,18 @@
   "createdAt": "2025-11-18T16:31:41.019Z",
   "updatedAt": "2025-11-18T16:35:27.097Z",
   "extraFiles": [],
-  "concept": ""
+  "concept": "",
+  "priorityOrder": 26,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 40,
+  "nextSteps": "Por definir"
 }

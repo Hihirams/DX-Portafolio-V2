@@ -28,5 +28,18 @@
   "updatedAt": "2025-11-17T05:43:32.746Z",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": ""
+  "concept": "",
+  "priorityOrder": 4,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 20,
+  "nextSteps": "Por definir"
 }

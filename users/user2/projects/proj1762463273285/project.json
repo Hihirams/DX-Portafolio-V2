@@ -2,7 +2,7 @@
   "id": "proj1762463273285",
   "ownerId": "user2",
   "title": "YOKADX",
-  "status": "in-progress",
+  "status": "develop",
   "progress": 100,
   "icon": "📁",
   "updatedAt": "2025-11-18T15:20:03.775Z",
@@ -25,5 +25,18 @@
   "extraFiles": [],
   "createdAt": "2025-11-06T21:07:53.285Z",
   "ownerName": "Sandra Santos",
-  "concept": ""
+  "concept": "",
+  "priorityOrder": 10,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 100,
+  "nextSteps": "Por definir"
 }

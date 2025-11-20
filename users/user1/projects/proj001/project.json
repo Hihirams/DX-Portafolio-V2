@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "Quality Clinic Unity",
   "icon": "🌐",
-  "status": "in-progress",
+  "status": "develop",
   "featured": true,
   "priority": "high",
   "progress": 60,
@@ -52,5 +52,18 @@
   "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
+  "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos.",
+  "priorityOrder": 1,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 60,
+  "nextSteps": "Por definir"
 }

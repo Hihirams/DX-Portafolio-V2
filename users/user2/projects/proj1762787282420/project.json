@@ -2,7 +2,7 @@
   "id": "proj1762787282420",
   "ownerId": "user2",
   "title": "Jsox Dashboard",
-  "status": "completed",
+  "status": "yoko-tenkai",
   "progress": 100,
   "icon": "🧾",
   "currentPhase": "Fases del Proyecto:\n•\tObtener la base de datos de XLS -> XLSX (Proveedor & Interno atreves de DX Team)\n•\tTransformar la DATA para obtener los datos necesarios. \n•\tGenerar La visualización Dashboard (En base a la PPT)\n•\tRealizar Pilots\n•\tEntregar a QDOC Team & mostrar funcionamiento, \n",
@@ -18,5 +18,18 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-10T15:08:02.420Z"
+  "createdAt": "2025-11-10T15:08:02.420Z",
+  "priorityOrder": 14,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 100,
+  "nextSteps": "Por definir"
 }

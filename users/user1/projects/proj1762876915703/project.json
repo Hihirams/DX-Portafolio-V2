@@ -2,7 +2,7 @@
   "id": "proj1762876915703",
   "ownerId": "user1",
   "title": "Portafolio Evidencias DX",
-  "status": "in-progress",
+  "status": "develop",
   "progress": 54,
   "icon": "🖼",
   "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
@@ -38,5 +38,18 @@
   "previewImage": "",
   "previewImageFileName": "QCU1.png",
   "previewImageType": "image/png",
-  "concept": ""
+  "concept": "",
+  "priorityOrder": 8,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 54,
+  "nextSteps": "Por definir"
 }

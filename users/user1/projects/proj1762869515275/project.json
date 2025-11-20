@@ -2,7 +2,7 @@
   "id": "proj1762869515275",
   "ownerId": "user1",
   "title": "QC ALT",
-  "status": "in-progress",
+  "status": "develop",
   "progress": 80,
   "icon": "📊",
   "currentPhase": "",
@@ -27,5 +27,18 @@
   "featured": true,
   "previewImage": "",
   "previewImageFileName": "QCU2.png",
-  "previewImageType": "image/png"
+  "previewImageType": "image/png",
+  "priorityOrder": 6,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 80,
+  "nextSteps": "Por definir"
 }

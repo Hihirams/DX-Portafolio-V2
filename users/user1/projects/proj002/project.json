@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "QC ALT / DQITS",
   "icon": "🧪",
-  "status": "hold",
+  "status": "pilot",
   "featured": true,
   "priority": "medium",
   "progress": 55,
@@ -48,5 +48,18 @@
   "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": ""
+  "concept": "",
+  "priorityOrder": 2,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 55,
+  "nextSteps": "Por definir"
 }

@@ -2,7 +2,7 @@
   "id": "proj1762786312316",
   "ownerId": "user2",
   "title": "DX Expenses",
-  "status": "hold",
+  "status": "pilot",
   "progress": 50,
   "icon": "📈",
   "currentPhase": "Validacion de propuesta de visualización de gastos por departamento en Power BI:\n•\tSe muestran gastos por mes y acumulado.\n•\tFiltros por departamento, cuarto fiscal y unidad de negocio.",
@@ -29,5 +29,18 @@
       "title": "Screenshot 2025-11-10 085033.png"
     }
   ],
-  "createdAt": "2025-11-10T14:51:52.316Z"
+  "createdAt": "2025-11-10T14:51:52.316Z",
+  "priorityOrder": 11,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 50,
+  "nextSteps": "Por definir"
 }

@@ -20,5 +20,18 @@
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:53:21.399Z",
-  "updatedAt": "2025-11-18T16:53:21.399Z"
+  "updatedAt": "2025-11-18T16:53:21.399Z",
+  "priorityOrder": 17,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 62,
+  "nextSteps": "Por definir"
 }

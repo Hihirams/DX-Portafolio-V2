@@ -2,7 +2,7 @@
   "id": "proj1762784041699",
   "ownerId": "user2",
   "title": "Quality KPI Dashboard",
-  "status": "in-progress",
+  "status": "develop",
   "progress": 50,
   "icon": "📊",
   "currentPhase": "Desarrollo modular de cada apartado del QE Data Center. Cada KPI requiere cumplir con los mismos componentes estructurados. Asi como un apartado en la pantalla principal y su respectivo formulario.\n- Lista SharePoint con datos estructurados.\n- Reporte Power BI conectado a la lista\n- Apartado en la pantalla principal (Power Apps)\n- Pantalla de formulario para actualización \n- (Opcional) Flujos automatizados en Power Automate",
@@ -18,5 +18,18 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-10T14:14:01.699Z"
+  "createdAt": "2025-11-10T14:14:01.699Z",
+  "priorityOrder": 9,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 50,
+  "nextSteps": "Por definir"
 }

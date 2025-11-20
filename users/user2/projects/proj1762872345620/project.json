@@ -2,7 +2,7 @@
   "id": "proj1762872345620",
   "ownerId": "user2",
   "title": "Don Sillardo",
-  "status": "paused",
+  "status": "pilot",
   "progress": 0,
   "icon": "🪑",
   "currentPhase": "Se está generando material para una campaña que busca reducir juntas innecesarias y aprovechar mejor el tiempo, fomentando la innovación, la digitalización y el aprendizaje continuo para nutrir nuestra mente.aterial para la generacion de una campaña,que consiste en tratar de no tener tantan juntas sin sentido y aprovechar el  tiempo para poder inovar ,digitalizar y nutrir nuestra mente ",
@@ -18,5 +18,18 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T14:45:45.620Z"
+  "createdAt": "2025-11-11T14:45:45.620Z",
+  "priorityOrder": 16,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 0,
+  "nextSteps": "Por definir"
 }

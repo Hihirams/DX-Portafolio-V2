@@ -2,7 +2,7 @@
   "id": "proj1762787721514",
   "ownerId": "user2",
   "title": "RoBot Innovation Zone",
-  "status": "in-progress",
+  "status": "develop",
   "progress": 30,
   "icon": "🧰",
   "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
@@ -40,5 +40,18 @@
   "extraFiles": [],
   "createdAt": "2025-11-10T15:15:21.514Z",
   "ownerName": "Sandra Santos",
-  "concept": "Creation of a robot prototype to generate brand awareness at Izone"
+  "concept": "Creation of a robot prototype to generate brand awareness at Izone",
+  "priorityOrder": 15,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 30,
+  "nextSteps": "Por definir"
 }

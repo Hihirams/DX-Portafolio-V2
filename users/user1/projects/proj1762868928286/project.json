@@ -25,5 +25,18 @@
   "featured": true,
   "previewImage": "",
   "previewImageFileName": "QCU3.png",
-  "previewImageType": "image/png"
+  "previewImageType": "image/png",
+  "priorityOrder": 7,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 10,
+  "nextSteps": "Por definir"
 }

@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "LorenzoBot",
   "icon": "🤖",
-  "status": "paused",
+  "status": "pilot",
   "priority": "low",
   "progress": 85,
   "targetDate": "2026-03-15",
@@ -45,5 +45,18 @@
   "updatedAt": "2025-11-17T16:35:14.364Z",
   "extraFiles": [],
   "concept": "",
-  "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png"
+  "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
+  "priorityOrder": 5,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 85,
+  "nextSteps": "Por definir"
 }

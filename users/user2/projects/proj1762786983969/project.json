@@ -2,7 +2,7 @@
   "id": "proj1762786983969",
   "ownerId": "user2",
   "title": "DX Hold (Hold Monitor System) - ME",
-  "status": "completed",
+  "status": "yoko-tenkai",
   "progress": 95,
   "icon": "📦",
   "currentPhase": "Unidad Piloto ME\nPruebas finales, validación de usuario y actualización de indicadores (FY25).\nImplementación y despliegue final (Versión FY25).\nCorrecion de errores y mejoras rapidas.\n",
@@ -20,5 +20,18 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-10T15:03:03.969Z"
+  "createdAt": "2025-11-10T15:03:03.969Z",
+  "priorityOrder": 12,
+  "projectType": "New To DX",
+  "currentTask": "Por definir",
+  "complexity": "Medium",
+  "scope": "L4 Region",
+  "recovery": "JV",
+  "phaseDiscovery": "Not Started",
+  "phaseDecision": "Not Started",
+  "phaseDevelop": "Not Started",
+  "phasePilot": "Not Started",
+  "phaseYokoTenkai": "Not Started",
+  "percentage2": 95,
+  "nextSteps": "Por definir"
 }
