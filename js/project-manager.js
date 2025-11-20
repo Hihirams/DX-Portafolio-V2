@@ -1019,15 +1019,29 @@ function searchProjects() {
 function updateBadges() {
     if (!projects.length) return;
 
-    document.getElementById('badge-all').textContent = projects.length;
-    document.getElementById('badge-progress').textContent = projects.filter(p => p.status === 'progress').length;
-    document.getElementById('badge-hold').textContent = projects.filter(p => p.status === 'hold').length;
-    document.getElementById('badge-discovery').textContent = projects.filter(p => p.status === 'discovery').length;
-    document.getElementById('badge-completed').textContent = projects.filter(p => p.status === 'completed').length;
+    // Badges de estado (nuevos valores de fase)
+    const badgeAll = document.getElementById('badge-all');
+    const badgeDiscovery = document.getElementById('badge-discovery');
+    const badgeDecision = document.getElementById('badge-decision');
+    const badgeDevelop = document.getElementById('badge-develop');
+    const badgePilot = document.getElementById('badge-pilot');
+    const badgeYokoTenkai = document.getElementById('badge-yoko-tenkai');
 
-    document.getElementById('badge-block-all').textContent = projects.length;
-    document.getElementById('badge-blocked').textContent = projects.filter(p => p.blocked).length;
-    document.getElementById('badge-unblocked').textContent = projects.filter(p => !p.blocked).length;
+    if (badgeAll) badgeAll.textContent = projects.length;
+    if (badgeDiscovery) badgeDiscovery.textContent = projects.filter(p => p.status === 'discovery').length;
+    if (badgeDecision) badgeDecision.textContent = projects.filter(p => p.status === 'decision').length;
+    if (badgeDevelop) badgeDevelop.textContent = projects.filter(p => p.status === 'develop').length;
+    if (badgePilot) badgePilot.textContent = projects.filter(p => p.status === 'pilot').length;
+    if (badgeYokoTenkai) badgeYokoTenkai.textContent = projects.filter(p => p.status === 'yoko-tenkai').length;
+
+    // Badges de bloqueo
+    const badgeBlockAll = document.getElementById('badge-block-all');
+    const badgeBlocked = document.getElementById('badge-blocked');
+    const badgeUnblocked = document.getElementById('badge-unblocked');
+
+    if (badgeBlockAll) badgeBlockAll.textContent = projects.length;
+    if (badgeBlocked) badgeBlocked.textContent = projects.filter(p => p.blocked).length;
+    if (badgeUnblocked) badgeUnblocked.textContent = projects.filter(p => !p.blocked).length;
 }
 
 // ==================== TABLE RENDERING ====================

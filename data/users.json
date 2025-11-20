@@ -5,18 +5,18 @@
       "username": "hiram.gonzalez",
       "password": "demo123",
       "name": "Hiram González",
-      "role": "Software Engineer",
+      "role": "Intern. Software Engineer",
       "email": "hiram@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.365Z",
-      "hierarchyLevel": 2
+      "hierarchyLevel": 3
     },
     {
       "id": "user2",
       "username": "sandra.santos",
       "password": "demo123",
       "name": "Sandra Santos",
-      "role": "Project Evaluation",
+      "role": "Sp. Project Evaluation",
       "email": "sandra@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.368Z",
@@ -27,11 +27,33 @@
       "username": "miguel.coronado",
       "password": "demo123",
       "name": "Miguel Coronado",
-      "role": "Technical Tools Supervisor",
+      "role": "Sp.Adv Technical Tools",
       "email": "miguel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z",
       "hierarchyLevel": 1
+    },
+    {
+      "id": "user4",
+      "username": "ivanna.rodriguez",
+      "password": "demo123",
+      "name": "Ivanna Rodríguez",
+      "role": "Intern. Software Engineer",
+      "email": "ivanna@dx.com",
+      "avatar": null,
+      "createdAt": "2025-10-31T21:23:03.370Z",
+      "hierarchyLevel": 3
+    },
+    {
+      "id": "user5",
+      "username": "angel.alvarez",
+      "password": "demo123",
+      "name": "Angel Alvarez",
+      "role": "Intern. Software Engineer",
+      "email": "angel@dx.com",
+      "avatar": null,
+      "createdAt": "2025-10-31T21:23:03.370Z",
+      "hierarchyLevel": 3
     }
   ]
 }
