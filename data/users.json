@@ -2,18 +2,6 @@
   "users": [
     {
       "id": "user1",
-      "username": "hiram.gonzalez",
-      "password": "demo123",
-      "name": "Hiram González",
-      "role": "Software Engineer",
-      "hierarchyLevel": 3,
-      "role": "Intern. Software Engineer",
-      "email": "hiram@dx.com",
-      "avatar": null,
-      "createdAt": "2025-10-31T21:23:03.365Z"
-    },
-    {
-      "id": "user2",
       "username": "sandra.santos",
       "password": "demo123",
       "name": "Sandra Santos",
@@ -25,7 +13,7 @@
       "createdAt": "2025-10-31T21:23:03.368Z"
     },
     {
-      "id": "user3",
+      "id": "user2",
       "username": "miguel.coronado",
       "password": "demo123",
       "name": "Miguel Coronado",
@@ -35,6 +23,18 @@
       "email": "miguel@dx.com",
       "avatar": null,
       "createdAt": "2025-10-31T21:23:03.370Z"
+    },
+        {
+      "id": "user3",
+      "username": "hiram.gonzalez",
+      "password": "demo123",
+      "name": "Hiram González",
+      "role": "Software Engineer",
+      "hierarchyLevel": 3,
+      "role": "Intern. Software Engineer",
+      "email": "hiram@dx.com",
+      "avatar": null,
+      "createdAt": "2025-10-31T21:23:03.365Z"
     },
     {
       "id": "user4",
