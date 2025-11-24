@@ -193,7 +193,7 @@ function generateCoverSlide() {
             </div>
             <div class="stat-card">
                 <div class="stat-number">${stats.hold + stats.paused}</div>
-                <div class="stat-label">On Hold</div>
+                <div class="stat-label">On Hold / Paused</div>
             </div>
         </div>
 

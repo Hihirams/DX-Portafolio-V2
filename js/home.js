@@ -91,6 +91,9 @@ function renderStatsOverview() {
   const statsOverview = document.getElementById('statsOverview');
   const stats = dataManager.getStats();
 
+  // ✅ Combinar hold y paused para que la suma coincida con el total
+  const holdAndPaused = stats.hold + stats.paused;
+
   statsOverview.innerHTML = `
     <div class="stat-card">
       <div class="stat-number">${stats.totalProjects}</div>
@@ -101,8 +104,8 @@ function renderStatsOverview() {
       <div class="stat-label">In Progress</div>
     </div>
     <div class="stat-card">
-      <div class="stat-number">${stats.hold}</div>
-      <div class="stat-label">On Hold</div>
+      <div class="stat-number">${holdAndPaused}</div>
+      <div class="stat-label">On Hold / Paused</div>
     </div>
     <div class="stat-card">
       <div class="stat-number">${stats.discovery}</div>

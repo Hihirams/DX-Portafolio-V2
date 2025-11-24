@@ -132,7 +132,8 @@ function loadProjectsFromDataManager() {
 function normalizeStatus(status) {
     const statusLower = String(status).toLowerCase();
     if (statusLower.includes('progress')) return 'progress';
-    if (statusLower.includes('hold')) return 'hold';
+    // ✅ Combinar 'hold' y 'paused' bajo el mismo estado normalizado
+    if (statusLower.includes('hold') || statusLower.includes('paused')) return 'hold';
     if (statusLower.includes('discovery')) return 'discovery';
     if (statusLower.includes('completed')) return 'completed';
     return 'discovery';
