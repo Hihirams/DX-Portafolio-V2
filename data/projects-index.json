@@ -9,8 +9,8 @@
       "priority": "high",
       "progress": 60,
       "icon": "🌐",
-      "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-11-17T16:31:02.588Z"
+      "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
+      "updatedAt": "2025-11-24T14:38:48.842Z"
     },
     {
       "id": "proj002",
@@ -65,12 +65,12 @@
       "title": "YOKADX",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "in-progress",
+      "status": "completed",
       "priority": "high",
       "progress": 100,
       "icon": "📁",
       "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
-      "updatedAt": "2025-11-18T15:20:03.775Z"
+      "updatedAt": "2025-11-24T15:35:42.513Z"
     },
     {
       "id": "proj1762784041699",
@@ -132,12 +132,12 @@
       "title": "RoBot Innovation Zone",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
+      "status": "in-progress",
       "priority": "medium",
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": "2025-11-18T15:36:29.169Z"
+      "updatedAt": "2025-11-19T17:56:27.810Z"
     },
     {
       "id": "proj1762868928286",
@@ -297,23 +297,23 @@
       "title": "Videos Creation",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
-      "priority": "medium",
-      "progress": 62,
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 40,
       "icon": "📋",
-      "currentPhase": "",
-      "updatedAt": "2025-11-18T16:53:21.399Z"
+      "currentPhase": "Suport ECU Ishue Investigation",
+      "updatedAt": "2025-11-24T15:33:34.463Z"
     }
   ],
   "stats": {
     "totalProjects": 26,
-    "inProgress": 6,
-    "discovery": 14,
+    "inProgress": 7,
+    "discovery": 12,
     "hold": 2,
-    "completed": 2,
+    "completed": 3,
     "paused": 2,
-    "totalUsers": 3,
-    "avgProgress": 36
+    "totalUsers": 5,
+    "avgProgress": 35
   },
-  "lastUpdated": "2025-11-18T16:53:22.252Z"
+  "lastUpdated": "2025-11-24T15:35:43.183Z"
 }

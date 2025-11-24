@@ -10,20 +10,20 @@
       "priority": "high",
       "progress": 60,
       "targetDate": "2026-09-15",
-      "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
+      "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
       "achievements": {
-        "2025-08": "Diseño conceptual y objetivos visuales definidos",
-        "2025-09": "Entorno 3D interactivo de navegación completado",
-        "2025-10": "Escalabilidad validada con múltiples zonas"
+        "2025-08": "Conceptual design and visual objectives defined",
+        "2025-09": "Interactive 3D navigation environment completed",
+        "2025-10": "Scalability validated with multiple zones"
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
       "nextSteps": {
-        "2025-11": "Integrar datos en tiempo real desde IoT/MES",
-        "2025-12": "Piloto con KPIs vivos y tarjetas dinámicas",
-        "2026-01": "Documentación y presentación corporativa"
+        "2025-11": "Integrate real-time data from IoT/MES",
+        "2025-12": "Pilot with live KPIs and dynamic cards",
+        "2026-01": "Documentation and corporate presentation"
       },
       "videos": [
         {
@@ -50,11 +50,11 @@
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-17T16:31:02.588Z",
+      "updatedAt": "2025-11-24T14:38:48.842Z",
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
+      "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made."
     },
     {
       "id": "proj002",
@@ -261,14 +261,14 @@
       "id": "proj1762463273285",
       "ownerId": "user2",
       "title": "YOKADX",
-      "status": "in-progress",
+      "status": "completed",
       "progress": 100,
       "icon": "📁",
-      "updatedAt": "2025-11-18T15:20:03.775Z",
+      "updatedAt": "2025-11-24T15:35:42.513Z",
       "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
       "priority": "high",
       "achievements": {
-        "2025-11": "Se estan realizando cambios en los aprobadores a si como  tambien coachando a los usuarios finales "
+        "2025-11": "Adjustments are being made to the approvers, as well as providing support and training to end users."
       },
       "blockers": {
         "type": "success",
@@ -277,14 +277,14 @@
       "nextSteps": {
         "2025-11": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
       },
-      "targetDate": "2026-06-22",
+      "targetDate": "2025-11-21",
       "ganttImage": "",
       "videos": [],
       "images": [],
       "extraFiles": [],
       "createdAt": "2025-11-06T21:07:53.285Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "Library in a SharePoint site where you can find the Yokoniramis & Kakotora and other importants topics to QP"
     },
     {
       "id": "proj1762784041699",
@@ -340,16 +340,18 @@
       "id": "proj1762787721514",
       "ownerId": "user2",
       "title": "RoBot Innovation Zone",
-      "status": "discovery",
+      "status": "in-progress",
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": "2025-11-18T15:36:29.169Z",
+      "updatedAt": "2025-11-19T17:56:27.810Z",
       "priority": "medium",
-      "achievements": {},
+      "achievements": {
+        "2025-11": "se finalizó el proceso de forrado de las piezas en el robot.\nSe desarrolló un escáner que, al detectar la gafete del usuario, identifica su nombre y envía un saludo personalizado"
+      },
       "blockers": {
-        "type": "info",
-        "message": ""
+        "type": "warning",
+        "message": "Las cotizaciones de los componentes, necesarias para iniciar el proceso de los movimientos, tienen una fecha estimada de entrega de 4 a 6 semanas."
       },
       "nextSteps": {},
       "targetDate": "2025-11-10",
@@ -357,22 +359,26 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1763480189303_0.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1763574987912_0.png",
           "title": "RB1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1763480189371_1.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1763574987987_1.png",
           "title": "RB2.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1763480189432_2.png",
-          "title": "RB3.png"
+          "src": "users/user2/projects/proj1762787721514/images/image_1763574988059_2.png",
+          "title": "imagen 1.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1763574988115_3.jpg",
+          "title": "Slide1.JPG"
         }
       ],
       "extraFiles": [],
       "createdAt": "2025-11-10T15:15:21.514Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "Creation of a robot prototype to generate brand awareness at Izone"
     },
     {
       "id": "proj1762868928286",
@@ -651,25 +657,30 @@
       "id": "proj1763484801399",
       "ownerId": "user2",
       "title": "Videos Creation",
-      "status": "discovery",
-      "priority": "medium",
-      "progress": 62,
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 40,
       "icon": "📋",
-      "currentPhase": "",
+      "currentPhase": "Suport ECU Ishue Investigation",
       "achievements": {
-        "2025-10": "Se realizaron videos \"Norma\""
+        "2025-10": "The videos were reviewed and it has been determined which ones will be edited."
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
-      "nextSteps": {},
-      "targetDate": "2026-03-31",
+      "nextSteps": {
+        "2025-11": "The material will be created and shown once it is finished"
+      },
+      "targetDate": "2025-11-27",
       "ganttImage": "",
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:53:21.399Z",
-      "updatedAt": "2025-11-18T16:53:21.399Z"
+      "updatedAt": "2025-11-24T15:33:34.463Z",
+      "extraFiles": [],
+      "ownerName": "Sandra Santos",
+      "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]"
     }
   ]
 }

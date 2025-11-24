@@ -8,20 +8,20 @@
   "priority": "high",
   "progress": 60,
   "targetDate": "2026-09-15",
-  "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
+  "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
   "achievements": {
-    "2025-08": "Diseño conceptual y objetivos visuales definidos",
-    "2025-09": "Entorno 3D interactivo de navegación completado",
-    "2025-10": "Escalabilidad validada con múltiples zonas"
+    "2025-08": "Conceptual design and visual objectives defined",
+    "2025-09": "Interactive 3D navigation environment completed",
+    "2025-10": "Scalability validated with multiple zones"
   },
   "blockers": {
     "type": "success",
     "message": ""
   },
   "nextSteps": {
-    "2025-11": "Integrar datos en tiempo real desde IoT/MES",
-    "2025-12": "Piloto con KPIs vivos y tarjetas dinámicas",
-    "2026-01": "Documentación y presentación corporativa"
+    "2025-11": "Integrate real-time data from IoT/MES",
+    "2025-12": "Pilot with live KPIs and dynamic cards",
+    "2026-01": "Documentation and corporate presentation"
   },
   "videos": [
     {
@@ -48,9 +48,9 @@
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-11-17T16:31:02.588Z",
+  "updatedAt": "2025-11-24T14:38:48.842Z",
   "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
+  "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made."
 }

@@ -22,7 +22,7 @@ function initEditor() {
     // Verificar que el usuario esté loggeado
     if (!dataManager || !dataManager.isLoggedIn()) {
         console.error('❌ No hay sesión activa');
-        alert('Debes iniciar sesión para acceder al editor');
+        alert('You must log in to access the editor');
         window.location.href = 'index.html';
         return;
     }
@@ -46,7 +46,7 @@ function initEditor() {
         loadProject(projectId);
     } else {
         console.error('❌ No se especificó un proyecto válido');
-        alert('No se especificó un proyecto para editar');
+        alert('No project was specified to edit');
         window.location.href = 'index.html';
         return;
     }
@@ -69,7 +69,7 @@ function createNewProject() {
     
     if (!user) {
         console.error('❌ No se pudo obtener el usuario actual');
-        alert('Error: Usuario no válido');
+        alert('Error: Invalid user');
         window.location.href = 'index.html';
         return;
     }
@@ -79,7 +79,7 @@ function createNewProject() {
     currentProject = {
         id: `proj${Date.now()}`, // ID temporal
         ownerId: user.id,
-        title: 'Nuevo Proyecto',
+        title: 'New Project',
         icon: '📋',
         status: 'discovery',
         priority: 'medium',
@@ -107,7 +107,7 @@ function createNewProject() {
         isNull: currentProject.ganttImage === null
     });
     loadProjectData();
-    updateEditorTitle('Nuevo Proyecto');
+    updateEditorTitle('New Project');
 }
 
 // ==================== LOAD PROJECT ====================
@@ -125,14 +125,14 @@ async function loadProject(projectId) {
     }
 
     if (!project) {
-        alert('❌ Proyecto no encontrado.');
+        alert('❌ Project not found.');
         window.location.href = 'index.html';
         return;
     }
 
     // 3. Verificar que el usuario pueda editar este proyecto
     if (!dataManager.canEditProject(projectId)) {
-        alert('No tienes permisos para editar este proyecto');
+        alert('You do not have permission to edit this project');
         window.location.href = 'index.html';
         return;
     }
@@ -247,7 +247,7 @@ function loadAchievements() {
     const achievements = currentProject.achievements || {};
     
     if (Object.keys(achievements).length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aún</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No achievements added yet</p>';
         return;
     }
 
@@ -262,16 +262,16 @@ function createAchievementItem(date = '', text = '') {
     
     item.innerHTML = `
         <div class="dynamic-item-header">
-            <span class="dynamic-item-title">Logro</span>
+            <span class="dynamic-item-title">Achievement</span>
             <button class="btn-remove-item" onclick="removeAchievementItem(this)">×</button>
         </div>
         <div class="form-group">
-            <label>Fecha (YYYY-MM)</label>
+            <label>Date (YYYY-MM)</label>
             <input type="text" class="achievement-date" placeholder="2025-10" value="${date}" pattern="\\d{4}-\\d{2}">
         </div>
         <div class="form-group">
-            <label>Descripción del Logro</label>
-            <textarea class="achievement-text" rows="2" placeholder="Describe el logro...">${text}</textarea>
+            <label>Achievement Description</label>
+            <textarea class="achievement-text" rows="2" placeholder="Describe the achievement...">${text}</textarea>
         </div>
     `;
     
@@ -297,7 +297,7 @@ function removeAchievementItem(btn) {
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('achievementsList');
     if (container.children.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay logros agregados aún</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No achievements added yet</p>';
     }
 }
 
@@ -310,7 +310,7 @@ function loadNextSteps() {
     const nextSteps = currentProject.nextSteps || {};
     
     if (Object.keys(nextSteps).length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay próximos pasos agregados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No next steps added</p>';
         return;
     }
 
@@ -325,16 +325,16 @@ function createNextStepItem(date = '', text = '') {
     
     item.innerHTML = `
         <div class="dynamic-item-header">
-            <span class="dynamic-item-title">Próximo Paso</span>
+            <span class="dynamic-item-title">Next Step</span>
             <button class="btn-remove-item" onclick="removeNextStepItem(this)">×</button>
         </div>
         <div class="form-group">
-            <label>Fecha (YYYY-MM)</label>
+            <label>Date (YYYY-MM)</label>
             <input type="text" class="nextstep-date" placeholder="2025-11" value="${date}" pattern="\\d{4}-\\d{2}">
         </div>
         <div class="form-group">
-            <label>Descripción</label>
-            <textarea class="nextstep-text" rows="2" placeholder="Describe el próximo paso...">${text}</textarea>
+            <label>Description</label>
+            <textarea class="nextstep-text" rows="2" placeholder="Describe the next step...">${text}</textarea>
         </div>
     `;
     
@@ -360,7 +360,7 @@ function removeNextStepItem(btn) {
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('nextStepsList');
     if (container.children.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay próximos pasos agregados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No next steps added</p>';
     }
 }
 
@@ -401,7 +401,7 @@ async function loadGantt() {
             </div>
         `;
     } else {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay diagrama Gantt cargado</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No Gantt chart loaded</p>';
     }
 }
 
@@ -439,7 +439,7 @@ function loadImages() {
     }
     
     if (!currentProject.images || currentProject.images.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay imágenes cargadas</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No images loaded</p>';
         return;
     }
 
@@ -498,7 +498,7 @@ function loadVideos() {
     }
     
     if (!currentProject.videos || currentProject.videos.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay videos cargados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No videos loaded</p>';
         return;
     }
 
@@ -598,7 +598,7 @@ function loadExtraFiles() {
     }
     
     if (currentProject.extraFiles.length === 0) {
-        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No hay archivos extras cargados</p>';
+        container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No extra files loaded</p>';
         return;
     }
 
@@ -692,14 +692,14 @@ function updateProgressDisplay() {
 
 function markAsUnsaved() {
     hasUnsavedChanges = true;
-    document.getElementById('editorStatus').textContent = 'Sin guardar';
+    document.getElementById('editorStatus').textContent = 'Unsaved';
 }
 
 // ==================== SAVE PROJECT ====================
 
 async function saveProject() {
     if (!currentProject) {
-        alert('No hay proyecto para guardar');
+        alert('There is no project to save');
         return;
     }
 
@@ -774,8 +774,8 @@ async function saveProject() {
     console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••\n');
 
     // Mostrar feedback
-    document.getElementById('editorTitle').textContent = '💾 Guardando...';
-    document.getElementById('editorStatus').textContent = 'Procesando';
+    document.getElementById('editorTitle').textContent = '💾 Saving...';
+    document.getElementById('editorStatus').textContent = 'Processing';
 
     // ✅ Eliminar archivos físicos que fueron eliminados ANTES de guardar el proyecto
     if (deletedExtraFiles.length > 0) {
@@ -832,7 +832,7 @@ async function saveProject() {
     if (success) {
         console.log('\n✅✅✅ PROYECTO GUARDADO CORRECTAMENTE ✅✅✅\n');
         hasUnsavedChanges = false;
-        document.getElementById('editorStatus').textContent = '✅ Guardado';
+        document.getElementById('editorStatus').textContent = '✅ Saved';
         
         // Emitir evento para recargar datos en Home
         window.dispatchEvent(new Event('dataReloaded'));
@@ -843,8 +843,8 @@ async function saveProject() {
         }, 1000);
     } else {
         console.error('\n❌❌❌ ERROR AL GUARDAR EL PROYECTO ❌❌❌\n');
-        alert('❌ Error al guardar el proyecto. Revisa la consola para más detalles.');
-        document.getElementById('editorTitle').textContent = `Editando: ${currentProject.title}`;
+        alert('❌ Error saving the project. Check the console for more details.');
+        document.getElementById('editorTitle').textContent = `Editing: ${currentProject.title}`;
         document.getElementById('editorStatus').textContent = 'Error';
     }
 }
@@ -931,13 +931,13 @@ function generatePreviewHTML(data) {
             </div>
 
             <div class="info-section">
-                <div class="info-title">📋 Fase Actual</div>
+                <div class="info-title">📋 Current Phase</div>
                 <div class="info-content">${data.currentPhase}</div>
             </div>
 
             ${Object.keys(data.achievements).length > 0 ? `
                 <div class="info-section success">
-                    <div class="info-title">✅ Logros Recientes</div>
+                    <div class="info-title">✅ Recent Achievements</div>
                     <div class="info-content">
                         ${Object.entries(data.achievements).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -948,14 +948,14 @@ function generatePreviewHTML(data) {
 
             ${data.blockers.message ? `
                 <div class="info-section ${data.blockers.type}">
-                    <div class="info-title">⚠️ ${data.blockers.type === 'alert' ? 'Bloqueo' : 'Estado'}</div>
+                    <div class="info-title">⚠️ ${data.blockers.type === 'alert' ? 'Blocker' : 'Status'}</div>
                     <div class="info-content">${data.blockers.message}</div>
                 </div>
             ` : ''}
 
             ${Object.keys(data.nextSteps).length > 0 ? `
                 <div class="info-section">
-                    <div class="info-title">🎯 Próximos Pasos</div>
+                    <div class="info-title">🎯 Next Steps</div>
                     <div class="info-content">
                         ${Object.entries(data.nextSteps).map(([date, text]) => 
                             `<strong>${date}:</strong> ${text}`
@@ -975,7 +975,7 @@ function closePreviewModal() {
 
 function cancelEdit() {
     if (hasUnsavedChanges) {
-        if (!confirm('Tienes cambios sin guardar. ¿Estás seguro de que quieres salir?')) {
+        if (!confirm('You have unsaved changes. Are you sure you want to leave?')) {
             return;
         }
     }
@@ -1002,7 +1002,7 @@ function loadTheme() {
 
 function deleteProject() {
     if (!currentProject) {
-        alert('No hay proyecto para eliminar');
+        alert('There is no project to delete');
         return;
     }
 
@@ -1034,7 +1034,7 @@ async function confirmDelete() {
     const confirmText = document.getElementById('confirmDeleteText').value.trim();
     
     if (confirmText !== currentProject.title.trim()) {
-        alert('El nombre del proyecto no coincide');
+        alert('The project name does not match');
         return;
     }
 
@@ -1042,8 +1042,8 @@ async function confirmDelete() {
 
     // Mostrar feedback
     const originalTitle = document.getElementById('editorTitle').textContent;
-    document.getElementById('editorTitle').textContent = '🗑️ Eliminando proyecto...';
-    document.getElementById('editorStatus').textContent = 'Procesando';
+    document.getElementById('editorTitle').textContent = '🗑️ Deleting project...';
+    document.getElementById('editorStatus').textContent = 'Processing';
 
     try {
         // Llamar a la eliminación real
@@ -1051,7 +1051,7 @@ async function confirmDelete() {
 
         if (success) {
             console.log('✅ Proyecto eliminado correctamente');
-            alert('✅ Proyecto eliminado exitosamente');
+            alert('✅ Project deleted successfully');
             
             // No hay cambios sin guardar
             hasUnsavedChanges = false;
@@ -1065,7 +1065,7 @@ async function confirmDelete() {
         }
     } catch (error) {
         console.error('❌ Error eliminando proyecto:', error);
-        alert('❌ Error al eliminar el proyecto. Inténtalo de nuevo.');
+        alert('❌ Error deleting the project. Please try again.');
         document.getElementById('editorTitle').textContent = originalTitle;
         document.getElementById('editorStatus').textContent = 'Error';
     }
@@ -1074,7 +1074,7 @@ async function confirmDelete() {
 // ==================== HELPERS ====================
 
 function updateEditorTitle(title) {
-    document.getElementById('editorTitle').textContent = `Editando: ${title}`;
+    document.getElementById('editorTitle').textContent = `Editing: ${title}`;
 }
 
 // Agregar método canEditProject a dataManager si no existe

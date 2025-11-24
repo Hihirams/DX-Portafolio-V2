@@ -2,14 +2,14 @@
   "id": "proj1762463273285",
   "ownerId": "user2",
   "title": "YOKADX",
-  "status": "in-progress",
+  "status": "completed",
   "progress": 100,
   "icon": "📁",
-  "updatedAt": "2025-11-18T15:20:03.775Z",
+  "updatedAt": "2025-11-24T15:35:42.513Z",
   "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
   "priority": "high",
   "achievements": {
-    "2025-11": "Se estan realizando cambios en los aprobadores a si como  tambien coachando a los usuarios finales "
+    "2025-11": "Adjustments are being made to the approvers, as well as providing support and training to end users."
   },
   "blockers": {
     "type": "success",
@@ -18,12 +18,12 @@
   "nextSteps": {
     "2025-11": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
   },
-  "targetDate": "2026-06-22",
+  "targetDate": "2025-11-21",
   "ganttImage": "",
   "videos": [],
   "images": [],
   "extraFiles": [],
   "createdAt": "2025-11-06T21:07:53.285Z",
   "ownerName": "Sandra Santos",
-  "concept": ""
+  "concept": "Library in a SharePoint site where you can find the Yokoniramis & Kakotora and other importants topics to QP"
 }
