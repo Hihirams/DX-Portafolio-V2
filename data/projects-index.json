@@ -68,9 +68,15 @@
       "status": "completed",
       "priority": "high",
       "progress": 100,
+<<<<<<< HEAD
       "icon": "📂",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
       "updatedAt": "2025-11-24T16:15:01.844Z"
+=======
+      "icon": "📁",
+      "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
+      "updatedAt": "2025-11-24T15:35:42.513Z"
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
     },
     {
       "id": "proj1762784041699",
@@ -136,12 +142,17 @@
       "title": "Nova Innovation Zone",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
+      "status": "in-progress",
       "priority": "medium",
       "progress": 30,
       "icon": "🧰",
+<<<<<<< HEAD
       "currentPhase": "The robot's structure is fully completed. The next step is to acquire the components needed for movement—such as motors, microcontrollers, and additional electronics. Once these materials are obtained, functional testing will begin.",
       "updatedAt": "2025-11-25T16:52:54.221Z"
+=======
+      "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
+      "updatedAt": "2025-11-19T17:56:27.810Z"
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
     },
     {
       "id": "proj1762868928286",
@@ -304,16 +315,22 @@
       "title": "Videos Creation",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
-      "priority": "medium",
-      "progress": 62,
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 40,
       "icon": "📋",
+<<<<<<< HEAD
       "currentPhase": "",
       "updatedAt": "2025-11-25T16:54:43.494Z"
+=======
+      "currentPhase": "Suport ECU Ishue Investigation",
+      "updatedAt": "2025-11-24T15:33:34.463Z"
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
     }
   ],
   "stats": {
     "totalProjects": 26,
+<<<<<<< HEAD
     "inProgress": 6,
     "discovery": 13,
     "hold": 4,
@@ -322,4 +339,15 @@
     "avgProgress": 39
   },
   "lastUpdated": "2025-11-25T20:05:12.385518Z"
+=======
+    "inProgress": 7,
+    "discovery": 12,
+    "hold": 2,
+    "completed": 3,
+    "paused": 2,
+    "totalUsers": 5,
+    "avgProgress": 35
+  },
+  "lastUpdated": "2025-11-24T15:35:43.183Z"
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
 }

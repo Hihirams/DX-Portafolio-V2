@@ -2,6 +2,7 @@
   "id": "proj1763484801399",
   "ownerId": "user2",
   "title": "Videos Creation",
+<<<<<<< HEAD
   "status": "discovery",
   "priority": "medium",
   "progress": 62,
@@ -9,19 +10,40 @@
   "currentPhase": "",
   "achievements": {
     "2025-10": "A series of “Norma” videos were created, providing visual content to support and communicate the guidelines and standards in a clear and accessible way."
+=======
+  "status": "in-progress",
+  "priority": "high",
+  "progress": 40,
+  "icon": "📋",
+  "currentPhase": "Suport ECU Ishue Investigation",
+  "achievements": {
+    "2025-10": "The videos were reviewed and it has been determined which ones will be edited."
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
   },
   "blockers": {
     "type": "success",
     "message": ""
   },
+<<<<<<< HEAD
   "nextSteps": {},
   "targetDate": "2026-03-31",
+=======
+  "nextSteps": {
+    "2025-11": "The material will be created and shown once it is finished"
+  },
+  "targetDate": "2025-11-27",
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
   "ganttImage": "",
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:53:21.399Z",
+<<<<<<< HEAD
   "updatedAt": "2025-11-25T16:54:43.494Z",
   "extraFiles": [],
   "ownerName": "Sandra Santos",
+=======
+  "updatedAt": "2025-11-24T15:33:34.463Z",
+  "extraFiles": [],
+>>>>>>> 9a9071eba0bc4a1ad04ff0aa7d3216d9e16f8a71
   "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]"
 }
