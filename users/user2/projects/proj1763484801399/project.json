@@ -2,23 +2,26 @@
   "id": "proj1763484801399",
   "ownerId": "user2",
   "title": "Videos Creation",
-  "icon": "📋",
   "status": "discovery",
   "priority": "medium",
   "progress": 62,
-  "targetDate": "2026-03-31",
+  "icon": "📋",
   "currentPhase": "",
   "achievements": {
-    "2025-10": "Se realizaron videos \"Norma\""
+    "2025-10": "A series of “Norma” videos were created, providing visual content to support and communicate the guidelines and standards in a clear and accessible way."
   },
   "blockers": {
     "type": "success",
     "message": ""
   },
   "nextSteps": {},
+  "targetDate": "2026-03-31",
   "ganttImage": "",
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:53:21.399Z",
-  "updatedAt": "2025-11-18T16:53:21.399Z"
+  "updatedAt": "2025-11-25T16:54:43.494Z",
+  "extraFiles": [],
+  "ownerName": "Sandra Santos",
+  "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]"
 }

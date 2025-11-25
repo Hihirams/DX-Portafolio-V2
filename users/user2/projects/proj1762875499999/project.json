@@ -1,22 +1,25 @@
 {
   "id": "proj1762875499999",
   "ownerId": "user2",
-  "title": "Holograma 3D",
-  "icon": "🗾",
+  "title": "3D HoloDisplay",
   "status": "discovery",
-  "priority": "low",
   "progress": 0,
-  "targetDate": "2025-11-11",
-  "currentPhase": "Crear imágenes tridimensionales 3D",
+  "icon": "🗾",
+  "currentPhase": "Creating realistic three-dimensional visuals to better represent objects, improve communication of ideas, and enhance user experience through depth and spatial detail.",
+  "updatedAt": "2025-11-25T17:10:02.039Z",
+  "priority": "low",
   "achievements": {},
   "blockers": {
     "type": "info",
     "message": ""
   },
   "nextSteps": {},
+  "targetDate": "2025-11-11",
   "ganttImage": "",
   "videos": [],
   "images": [],
+  "extraFiles": [],
   "createdAt": "2025-11-11T15:38:19.999Z",
-  "updatedAt": "2025-11-11T15:38:19.999Z"
+  "ownerName": "Sandra Santos",
+  "concept": ""
 }

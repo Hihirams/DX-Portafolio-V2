@@ -5,8 +5,8 @@
   "status": "completed",
   "progress": 95,
   "icon": "📦",
-  "currentPhase": "Unidad Piloto ME\nPruebas finales, validación de usuario y actualización de indicadores (FY25).\nImplementación y despliegue final (Versión FY25).\nCorrecion de errores y mejoras rapidas.\n",
-  "updatedAt": "2025-11-11T14:33:53.759Z",
+  "currentPhase": "Pilot Unit ME\nFinal testing, user validation, and indicator updates (FY25).\nImplementation and final deployment (FY25 version).\nBug fixing and quick improvements.",
+  "updatedAt": "2025-11-25T16:51:27.569Z",
   "priority": "medium",
   "targetDate": "2025-11-10",
   "achievements": {},
@@ -15,10 +15,12 @@
     "message": ""
   },
   "nextSteps": {
-    "2025-12": "Etapa 2 del sistema  DxHold Montor\n1.\tCrear un analisis sitematico: visualizando e integrando un mejor panorama de la informacion \n2.\tMejoras visuales y de busqueda de informacion\n3.\t Evaluar mejoras de obtencion de datos de otros sistemas (ESSYM, AS400, etc)\n4.\tJuntas de actualizacion de datos continuamente\n5.\tEscalacion automatica en montos que superan los $500 000"
+    "2025-12": "Stage 2 of the DxHold Monitor System\nFocus on enhancing systematic analysis and data visualization, improving search capabilities, integrating data from external systems, maintaining continuous data-update reviews, and enabling automatic escalation for amounts over $500,000."
   },
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-10T15:03:03.969Z"
+  "createdAt": "2025-11-10T15:03:03.969Z",
+  "extraFiles": [],
+  "concept": ""
 }

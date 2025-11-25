@@ -1,12 +1,12 @@
 {
   "id": "proj1762787721514",
   "ownerId": "user2",
-  "title": "RoBot Innovation Zone",
+  "title": "Nova Innovation Zone",
   "status": "discovery",
   "progress": 30,
   "icon": "🧰",
-  "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-  "updatedAt": "2025-11-18T15:36:29.169Z",
+  "currentPhase": "The robot’s structure is fully completed. The next step is to acquire the components needed for movement—such as motors, microcontrollers, and additional electronics. Once these materials are obtained, functional testing will begin.",
+  "updatedAt": "2025-11-25T16:52:54.221Z",
   "priority": "medium",
   "achievements": {},
   "blockers": {
@@ -19,15 +19,15 @@
   "videos": [],
   "images": [
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1763480189303_0.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1764089574224_0.png",
       "title": "RB1.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1763480189371_1.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1764089574226_1.png",
       "title": "RB2.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1763480189432_2.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1764089574227_2.png",
       "title": "RB3.png"
     }
   ],

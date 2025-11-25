@@ -56,8 +56,7 @@ const statusMap = {
     'progress': { label: 'In Progress', class: 'status-progress' },
     'hold': { label: 'On Hold', class: 'status-hold' },
     'discovery': { label: 'Discovery', class: 'status-discovery' },
-    'completed': { label: 'Completed', class: 'status-completed' },
-    'paused': { label: 'Paused', class: 'status-hold' }
+    'completed': { label: 'Completed', class: 'status-completed' }
 };
 
 // ==================== INITIALIZATION ====================

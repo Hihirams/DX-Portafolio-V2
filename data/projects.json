@@ -10,20 +10,20 @@
       "priority": "high",
       "progress": 60,
       "targetDate": "2026-09-15",
-      "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
+      "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
       "achievements": {
-        "2025-08": "Diseño conceptual y objetivos visuales definidos",
-        "2025-09": "Entorno 3D interactivo de navegación completado",
-        "2025-10": "Escalabilidad validada con múltiples zonas"
+        "2025-08": "Conceptual design and visual objectives defined",
+        "2025-09": "Interactive 3D navigation environment completed",
+        "2025-10": "Scalability validated with multiple zones"
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
       "nextSteps": {
-        "2025-11": "Integrar datos en tiempo real desde IoT/MES",
-        "2025-12": "Piloto con KPIs vivos y tarjetas dinámicas",
-        "2026-01": "Documentación y presentación corporativa"
+        "2025-11": "Integrate real-time data from IoT/MES",
+        "2025-12": "Pilot with live KPIs and dynamic cards",
+        "2026-01": "Documentation and corporate presentation"
       },
       "videos": [
         {
@@ -50,11 +50,11 @@
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-17T16:31:02.588Z",
+      "updatedAt": "2025-11-24T14:38:48.842Z",
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "Plataforma que visualiza el estado de calidad de procesos o plantas, permitiendo detectar problemas, priorizar acciones y tomar decisiones rápidas basadas en datos."
+      "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made."
     },
     {
       "id": "proj002",
@@ -66,20 +66,20 @@
       "priority": "medium",
       "progress": 55,
       "targetDate": "2026-04-15",
-      "currentPhase": "Integración de detección y enlace IoT QueryLink (CSV automático)",
+      "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)",
       "achievements": {
-        "2025-08": "Arquitectura de flujo de video definida",
-        "2025-09": "Backend FastAPI y servidor local operativos",
-        "2025-10": "Pipeline de video validado + versión portable"
+        "2025-08": "Defined video flow architecture",
+        "2025-09": "FastAPI backend and local server operational",
+        "2025-10": "Validated video pipeline + portable version"
       },
       "blockers": {
         "type": "warning",
-        "message": "En HOLD por pruebas de compatibilidad del enlace IoT / CSV. Se espera resolución en 1-2 semanas."
+        "message": "On HOLD pending compatibility tests for the IoT / CSV link. Resolution expected in 1–2 weeks."
       },
       "nextSteps": {
-        "2025-11": "Finalizar integración IoT",
-        "2025-12": "Pruebas piloto con múltiples cámaras",
-        "2026-01": "Automatización y documentación final"
+        "2025-11": "Finalize IoT integration",
+        "2025-12": "Pilot tests with multiple cameras",
+        "2026-01": "Automation and final documentation"
       },
       "videos": [
         {
@@ -102,11 +102,11 @@
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-17T16:34:28.821Z",
+      "updatedAt": "2025-11-24T16:08:04.231Z",
       "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": ""
+      "concept": "Fusion between 2 existent systems QC ALT + DQITS that show abnormalities in real time & confirm the cycle time of the piece rate."
     },
     {
       "id": "proj003",
@@ -118,19 +118,19 @@
       "priority": "medium",
       "progress": 45,
       "targetDate": "2026-10-30",
-      "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
+      "currentPhase": "Development of motion detection prototype and recognition models",
       "achievements": {
-        "2025-10": "Fundamentos del sistema y editor desarrollados",
-        "2025-10-15": "Prototipo de detección de movimiento en ROIs completado"
+        "2025-10": "System foundations and editor developed",
+        "2025-10-15": "Motion detection prototype in ROIs completed"
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
       "nextSteps": {
-        "2025-11": "Integrar detección de personas, manos y rostros",
-        "2025-12": "Interfaz unificada de control y visualización",
-        "2026-01": "Optimización para múltiples cámaras"
+        "2025-11": "Integrate detection of people, hands, and faces",
+        "2025-12": "Unified control and visualization interface",
+        "2026-01": "Optimization for multiple cameras"
       },
       "videos": [
         {
@@ -169,11 +169,11 @@
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-11-17T16:36:08.920Z",
+      "updatedAt": "2025-11-24T16:17:18.135Z",
       "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": ""
+      "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors."
     },
     {
       "id": "proj004",
@@ -184,51 +184,51 @@
       "priority": "low",
       "progress": 20,
       "targetDate": "2026-06-30",
-      "currentPhase": "Explorar plataforma web interna para gestionar reportes MRM (Monthly Review Meeting) y compartir información entre departamentos",
+      "currentPhase": "Explore internal web platform to manage MRM (Monthly Review Meeting) reports and share information between departments",
       "achievements": {
-        "2025-10": "Entrevistas con usuarios iniciadas",
-        "2025-10-20": "Revisión de herramientas internas completada"
+        "2025-10": "User interviews initiated",
+        "2025-10-20": "Review of internal tools completed"
       },
       "blockers": {
         "type": "info",
-        "message": "En fase de discovery. Sin bloqueos actuales."
+        "message": "In discovery phase. No current blockers."
       },
       "nextSteps": {
-        "2025-11": "Completar entrevistas con usuarios",
-        "2025-12": "Presentación de hallazgos y decisión sobre desarrollo",
-        "2026-01": "Definir alcance y arquitectura (si aprobado)"
+        "2025-11": "Complete user interviews",
+        "2025-12": "Presentation of findings and decision on development",
+        "2026-01": "Define scope and architecture (if approved)"
       },
       "ganttImage": "",
       "videos": [],
       "images": [],
       "createdAt": "2025-10-15",
-      "updatedAt": "2025-11-17T05:43:32.746Z",
+      "updatedAt": "2025-11-24T16:09:22.643Z",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": ""
+      "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting"
     },
     {
       "id": "proj005",
       "ownerId": "user1",
       "title": "LorenzoBot",
       "icon": "🤖",
-      "status": "paused",
+      "status": "hold",
       "priority": "low",
       "progress": 85,
       "targetDate": "2026-03-15",
-      "currentPhase": "Bot operativo en entorno local. Despliegue en HOLD por decisiones de infraestructura IT.",
+      "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
       "achievements": {
-        "2025-06": "Desarrollo del bot completado",
-        "2025-08": "Pruebas locales exitosas",
-        "2025-09": "Integración con sistemas internos validada"
+        "2025-06": "Bot development completed",
+        "2025-08": "Successful local tests",
+        "2025-09": "Integration with internal systems validated"
       },
       "blockers": {
         "type": "alert",
-        "message": "Sin entorno web interno oficial. Pendiente confirmación de IT."
+        "message": "No official internal web environment. IT confirmation pending."
       },
       "nextSteps": {
-        "2026-01": "Revisión con IT sobre infraestructura",
-        "2026-03": "Reactivación estimada si se aprueba despliegue"
+        "2026-01": "Review with IT on infrastructure",
+        "2026-03": "Estimated reactivation if deployment is approved"
       },
       "videos": [
         {
@@ -238,63 +238,78 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj005/images/DENBOT1.png",
+          "src": "users/user1/projects/proj005/images/image_1764000621228_0.png",
           "title": "Interfaz Bot"
         },
         {
-          "src": "users/user1/projects/proj005/images/DENBOT2.png",
+          "src": "users/user1/projects/proj005/images/image_1764000621306_1.png",
           "title": "Reportes"
         },
         {
-          "src": "users/user1/projects/proj005/images/DENBOT3.png",
+          "src": "users/user1/projects/proj005/images/image_1764000621400_2.png",
           "title": "Flujo General"
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-11-17T16:35:14.364Z",
+      "updatedAt": "2025-11-24T16:10:20.928Z",
       "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": ""
+      "concept": "A virtual Agent whose principal function is to work as Help Desk to several pages [SharePoint / QDOC / ETC]"
     },
     {
       "id": "proj1762463273285",
       "ownerId": "user2",
       "title": "YOKADX",
-      "status": "in-progress",
+      "status": "completed",
       "progress": 100,
-      "icon": "📁",
-      "updatedAt": "2025-11-18T15:20:03.775Z",
-      "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
+      "icon": "📂",
+      "updatedAt": "2025-11-24T16:15:01.844Z",
+      "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
       "priority": "high",
       "achievements": {
-        "2025-11": "Se estan realizando cambios en los aprobadores a si como  tambien coachando a los usuarios finales "
+        "2025-11": "Adjustments are being made to the approvers, as well as providing support and training to end users."
       },
       "blockers": {
         "type": "success",
-        "message": "Sin bloqueos actuales."
+        "message": ""
       },
       "nextSteps": {
-        "2025-11": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
+        "2025-11": "Review meeting with managers to confirm requirements before final release."
       },
-      "targetDate": "2026-06-22",
+      "targetDate": "2025-11-21",
       "ganttImage": "",
       "videos": [],
       "images": [],
       "extraFiles": [],
       "createdAt": "2025-11-06T21:07:53.285Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "Library on a SharePoint site where you can find Yokoniramis & Kakotora and other important topics for QP"
     },
     {
       "id": "proj1762784041699",
       "ownerId": "user2",
       "title": "Quality KPI Dashboard",
       "status": "in-progress",
-      "progress": 50,
+      "progress": 60,
       "icon": "📊",
-      "currentPhase": "Desarrollo modular de cada apartado del QE Data Center. Cada KPI requiere cumplir con los mismos componentes estructurados. Asi como un apartado en la pantalla principal y su respectivo formulario.\n- Lista SharePoint con datos estructurados.\n- Reporte Power BI conectado a la lista\n- Apartado en la pantalla principal (Power Apps)\n- Pantalla de formulario para actualización \n- (Opcional) Flujos automatizados en Power Automate",
-      "updatedAt": 1762785262325
+      "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
+      "updatedAt": "2025-11-24T16:22:13.755Z",
+      "priority": "medium",
+      "achievements": {},
+      "blockers": {
+        "type": "success",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-21",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T14:14:01.699Z",
+      "ownerName": "Sandra Santos",
+      "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts"
     },
     {
       "id": "proj1762786312316",
@@ -303,8 +318,34 @@
       "status": "hold",
       "progress": 50,
       "icon": "📈",
-      "currentPhase": "Validacion de propuesta de visualización de gastos por departamento en Power BI:\n•\tSe muestran gastos por mes y acumulado.\n•\tFiltros por departamento, cuarto fiscal y unidad de negocio.",
-      "updatedAt": 1762871330112
+      "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
+      "updatedAt": "2025-11-24T16:23:23.803Z",
+      "priority": "low",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {
+        "2025-11": "Solicitud de mejoras\n•\t🔍 Filtro por Gerente y GM para visualizar todas sus áreas agrupadas.\n        Resp Miguel & Brayan \n•\t🗣️ Agregar comentarios en las gráficas para explicar desviaciones o situaciones especiales."
+      },
+      "targetDate": "2025-11-10",
+      "ganttImage": "",
+      "videos": [],
+      "images": [
+        {
+          "src": "users/user2/projects/proj1762786312316/images/image_1764001403830_0.png",
+          "title": "Screenshot 2025-11-10 085025.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762786312316/images/image_1764001403891_1.png",
+          "title": "Screenshot 2025-11-10 085033.png"
+        }
+      ],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T14:51:52.316Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762786524702",
@@ -312,7 +353,7 @@
       "title": "IATF Dashboard",
       "status": "discovery",
       "progress": 0,
-      "icon": "🧾",
+      "icon": "🦾",
       "currentPhase": "",
       "updatedAt": 1762787494930
     },
@@ -323,8 +364,25 @@
       "status": "completed",
       "progress": 95,
       "icon": "📦",
-      "currentPhase": "Unidad Piloto ME\nPruebas finales, validación de usuario y actualización de indicadores (FY25).\nImplementación y despliegue final (Versión FY25).\nCorrecion de errores y mejoras rapidas.\n",
-      "updatedAt": 1762871633978
+      "currentPhase": "Pilot Unit ME\nFinal testing, user validation, and indicator updates (FY25).\nImplementation and final deployment (FY25 version).\nBug fixing and quick improvements.",
+      "updatedAt": "2025-11-25T16:51:27.569Z",
+      "priority": "medium",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {
+        "2025-12": "Stage 2 of the DxHold Monitor System\nFocus on enhancing systematic analysis and data visualization, improving search capabilities, integrating data from external systems, maintaining continuous data-update reviews, and enabling automatic escalation for amounts over $500,000."
+      },
+      "targetDate": "2025-11-10",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T15:03:03.969Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762787282420",
@@ -332,19 +390,34 @@
       "title": "Jsox Dashboard",
       "status": "completed",
       "progress": 100,
-      "icon": "🧾",
-      "currentPhase": "Fases del Proyecto:\n•\tObtener la base de datos de XLS -> XLSX (Proveedor & Interno atreves de DX Team)\n•\tTransformar la DATA para obtener los datos necesarios. \n•\tGenerar La visualización Dashboard (En base a la PPT)\n•\tRealizar Pilots\n•\tEntregar a QDOC Team & mostrar funcionamiento, \n",
-      "updatedAt": 1762787308862
+      "icon": "🦾",
+      "currentPhase": "Convert and transform the data, build the dashboard visualization, run pilot tests, and deliver the final solution to the QDOC Team for review and demonstration.",
+      "updatedAt": "2025-11-25T16:52:07.651Z",
+      "priority": "low",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-10",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T15:08:02.420Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762787721514",
       "ownerId": "user2",
-      "title": "RoBot Innovation Zone",
+      "title": "Nova Innovation Zone",
       "status": "discovery",
       "progress": 30,
       "icon": "🧰",
-      "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": "2025-11-18T15:36:29.169Z",
+      "currentPhase": "The robot’s structure is fully completed. The next step is to acquire the components needed for movement—such as motors, microcontrollers, and additional electronics. Once these materials are obtained, functional testing will begin.",
+      "updatedAt": "2025-11-25T16:52:54.221Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -357,15 +430,15 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1763480189303_0.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1764089574224_0.png",
           "title": "RB1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1763480189371_1.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1764089574226_1.png",
           "title": "RB2.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1763480189432_2.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1764089574227_2.png",
           "title": "RB3.png"
         }
       ],
@@ -380,9 +453,9 @@
       "title": "Holo View DX",
       "status": "discovery",
       "progress": 10,
-      "icon": "🕶",
-      "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-      "updatedAt": "2025-11-17T05:43:39.447Z",
+      "icon": "🕶️",
+      "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
+      "updatedAt": "2025-11-24T16:21:25.867Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -397,7 +470,7 @@
       "extraFiles": [],
       "createdAt": "2025-11-11T13:48:48.286Z",
       "ownerName": "Hiram González",
-      "concept": ""
+      "concept": "A HoloLens 2 project creating an interactive AR interface that guides operators with hands-free instructions, real-time overlays, and remote support to improve productivity and reduce errors."
     },
     {
       "id": "proj1762869515275",
@@ -406,18 +479,52 @@
       "status": "in-progress",
       "progress": 80,
       "icon": "📊",
-      "currentPhase": "",
-      "updatedAt": 1762870587096
+      "currentPhase": "Implementation of Line P703 (Pilot Line)",
+      "updatedAt": "2025-11-24T16:20:11.590Z",
+      "priority": "high",
+      "achievements": {
+        "2025-03": "Implementation of Line P703 (Pilot Line)",
+        "2025-04": "Implementation on Line 920B",
+        "2025-06": "Implementation on MCV Line (QC ALT MTS)"
+      },
+      "blockers": {
+        "type": "alert",
+        "message": "Progress is currently on hold due to an active issue with the IoT system. Activities will resume once the problem is resolved."
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-11",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-11T13:58:35.275Z",
+      "ownerName": "Hiram González",
+      "concept": "Real-time platform showing production line incidents in a dome dashboard, highlighting alerts and trends for quick decision-making."
     },
     {
       "id": "proj1762872345620",
       "ownerId": "user2",
       "title": "Don Sillardo",
-      "status": "paused",
+      "status": "hold",
       "progress": 0,
       "icon": "🪑",
-      "currentPhase": "Se está generando material para una campaña que busca reducir juntas innecesarias y aprovechar mejor el tiempo, fomentando la innovación, la digitalización y el aprendizaje continuo para nutrir nuestra mente.aterial para la generacion de una campaña,que consiste en tratar de no tener tantan juntas sin sentido y aprovechar el  tiempo para poder inovar ,digitalizar y nutrir nuestra mente ",
-      "updatedAt": 1762873058105
+      "currentPhase": "Material is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time, encouraging innovation, digitalization, and continuous learning to help nurture our minds.",
+      "updatedAt": "2025-11-25T16:53:26.531Z",
+      "priority": "medium",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": "A member of the Governance team is currently working on a similar project, so we were asked to pause our development until further notice."
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-28",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-11T14:45:45.620Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762875499999",
@@ -425,30 +532,45 @@
       "title": "Holograma 3D",
       "status": "discovery",
       "progress": 0,
-      "icon": "🗾",
-      "currentPhase": "Crear imágenes tridimensionales 3D",
-      "updatedAt": 1762875500483
+      "icon": "🗺️",
+      "currentPhase": "Creating realistic three-dimensional visuals to better represent objects, improve communication of ideas, and enhance user experience through depth and spatial detail.",
+      "updatedAt": "2025-11-25T16:53:57.402Z",
+      "priority": "low",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-11",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-11T15:38:19.999Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762876915703",
       "ownerId": "user1",
-      "title": "Portafolio Evidencias DX",
+      "title": "DX Evidence Portfolio",
       "status": "in-progress",
       "progress": 54,
-      "icon": "🖼",
-      "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": "2025-11-17T16:37:54.523Z",
+      "icon": "🖼️",
+      "currentPhase": "Bug fixes on the Project Editing page",
+      "updatedAt": "2025-11-24T16:12:31.043Z",
       "priority": "medium",
       "achievements": {
-        "2025-10": "Se logra construir la base home del portafolio donde se muestran proyectos.\nSe implementa página de edición de proeyctos y visualización dinámica de los proyectos del usuario.",
-        "2025-11": "Archivo exe simplificado con acceso multi usuario permitiendo edición de cualquier persona en cualquier momento con un usuario registrado."
+        "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
+        "2025-11": "Simplified .exe file with multi-user access, allowing anyone to edit at any time with a registered user."
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
       "nextSteps": {
-        "2025-11": "Implementar tarjeta de proyectos terminados, filtro de proyectos en etapa terminado y opción en modo edición para poder configurar el proyecto terminado."
+        "2025-11": "Implement completed-project card, filter for projects in completed stage, and an option in edit mode to configure the completed project."
       },
       "targetDate": "2026-01-30",
       "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
@@ -466,7 +588,7 @@
       ],
       "createdAt": "2025-11-11T16:01:55.703Z",
       "ownerName": "Hiram González",
-      "concept": ""
+      "concept": "Portfolio designed for the storage and presentation of current projects in the DX area"
     },
     {
       "id": "proj1763483352243",
@@ -629,23 +751,45 @@
       "id": "proj1763483529675",
       "ownerId": "user3",
       "title": "Whyzer",
-      "status": "discovery",
+      "status": "in-progress",
       "priority": "medium",
-      "progress": 0,
+      "progress": 80,
       "icon": "📋",
-      "currentPhase": "",
-      "achievements": {},
+      "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
+      "achievements": {
+        "2025-11": "The agent attends the Copilot HUB Event at the request of the organizers and participants [Alpha Tester]."
+      },
       "blockers": {
         "type": "info",
         "message": ""
       },
       "nextSteps": {},
-      "targetDate": "2025-11-18",
+      "targetDate": "2025-12-19",
       "ganttImage": "",
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:32:09.675Z",
-      "updatedAt": "2025-11-18T16:32:09.675Z"
+      "updatedAt": "2025-11-24T16:02:32.162Z",
+      "extraFiles": [
+        {
+          "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764000152418.pptx",
+          "title": "Innovation Zone Best Practice whyzer.pptx",
+          "fileName": "Innovation_Zone_Best_Practice__1764000152418.pptx",
+          "fileType": "application/octet-stream",
+          "fileSize": 0,
+          "extension": "pptx"
+        },
+        {
+          "src": "users/user3/projects/proj1763483529675/extra-files/Design_26_1764000153239.png",
+          "title": "Design 26.png",
+          "fileName": "Design_26_1764000153239.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        }
+      ],
+      "ownerName": "Miguel Coronado",
+      "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses."
     },
     {
       "id": "proj1763484801399",
@@ -657,7 +801,7 @@
       "icon": "📋",
       "currentPhase": "",
       "achievements": {
-        "2025-10": "Se realizaron videos \"Norma\""
+        "2025-10": "A series of “Norma” videos were created, providing visual content to support and communicate the guidelines and standards in a clear and accessible way."
       },
       "blockers": {
         "type": "success",
@@ -669,7 +813,10 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:53:21.399Z",
-      "updatedAt": "2025-11-18T16:53:21.399Z"
+      "updatedAt": "2025-11-25T16:54:43.494Z",
+      "extraFiles": [],
+      "ownerName": "Sandra Santos",
+      "concept": "Creation of video of Innovation Zone [ Introduction to the Area + Purpose + Connection with DX Section]"
     }
   ]
 }

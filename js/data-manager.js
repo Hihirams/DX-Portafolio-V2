@@ -20,7 +20,7 @@ class DataManager {
     }
 
     // ============================================
-    // ðŸ” SESSION MANAGEMENT (NUEVO)
+    // 🔐 SESSION MANAGEMENT (NUEVO)
     // ============================================
 
     restoreSession() {
@@ -28,9 +28,9 @@ class DataManager {
         if (savedUser) {
             try {
                 this.currentUser = JSON.parse(savedUser);
-                console.log('âœ… SesiÃ³n restaurada:', this.currentUser.username);
+                console.log('✅ Sesión restaurada:', this.currentUser.username);
             } catch (error) {
-                console.error('âŒ Error restaurando sesiÃ³n:', error);
+                console.error('❌ Error restaurando sesión:', error);
                 sessionStorage.removeItem('portfolioDX_currentUser');
             }
         }
@@ -39,14 +39,14 @@ class DataManager {
     saveSession() {
         if (this.currentUser) {
             sessionStorage.setItem('portfolioDX_currentUser', JSON.stringify(this.currentUser));
-            console.log('ðŸ’¾ SesiÃ³n guardada');
+            console.log('💾 Sesión guardada');
         }
     }
 
     clearSession() {
         this.currentUser = null;
         sessionStorage.removeItem('portfolioDX_currentUser');
-        console.log('ðŸ—‘ï¸ SesiÃ³n limpiada');
+        console.log('🗑️ Sesión limpiada');
     }
 
     // ======= COMPAT: Home.js / Viewer.js esperan estos helpers =======
@@ -59,8 +59,8 @@ class DataManager {
 
     setCurrentUser(user) {
         this.currentUser = user;
-        this.saveSession(); // âœ… Guardar en sessionStorage
-        console.log(`âœ… Usuario actual: ${user?.name || user?.id}`);
+        this.saveSession(); // ✅ Guardar en sessionStorage
+        console.log(`✅ Usuario actual: ${user?.name || user?.id}`);
     }
 
     // Lista de proyectos por usuario (usado por viewer.js)
@@ -68,7 +68,7 @@ class DataManager {
         return this.projects.filter(p => p.ownerId === userId);
     }
 
-    // Si no lo tienes, deja tambiÃ©n este helper:
+    // Si no lo tienes, deja también este helper:
     getProjectById(projectId) {
         return this.projects.find(p => p.id === projectId) || null;
     }
@@ -90,7 +90,7 @@ class DataManager {
             // Normaliza alias del gantt
             if (!full.ganttImage && full.ganttImagePath) full.ganttImage = full.ganttImagePath;
 
-            // Mezcla datos del índice (status/progress/etc.) con el JSON completo (media, descripciones…)
+            // Mezcla datos del índice (status/progress/etc.) con el JSON completo (media, descripciones...)
             return { ...indexProj, ...full };
         } catch (e) {
             console.warn('⚠️ loadFullProject: usando índice por fallback', e?.message);
@@ -267,7 +267,7 @@ class DataManager {
             badge: status,
             badgeClass: `badge-${status}`,
             color: '#666',
-            icon: 'â—¯'
+            icon: '○'
         };
     }
 
@@ -291,7 +291,7 @@ class DataManager {
         // Fallback
         return {
             label: type,
-            icon: 'âš ï¸'
+            icon: '⚠️'
         };
     }
 
@@ -304,33 +304,33 @@ class DataManager {
 
         if (user) {
             this.currentUser = user;
-            this.saveSession(); // âœ… Guardar sesiÃ³n
-            console.log(`âœ… Usuario ${username} ha iniciado sesiÃ³n`);
+            this.saveSession(); // ✅ Guardar sesión
+            console.log(`✅ Usuario ${username} ha iniciado sesión`);
             return { success: true, user };
         }
 
-        console.log(`âŒ Login fallido para ${username}`);
-        return { success: false, message: 'Usuario o contraseÃ±a incorrectos' };
+        console.log(`❌ Login fallido para ${username}`);
+        return { success: false, message: 'Usuario o contraseña incorrectos' };
     }
 
     logout() {
-        this.clearSession(); // âœ… Limpiar sesiÃ³n
-        console.log('âœ… SesiÃ³n cerrada');
+        this.clearSession(); // ✅ Limpiar sesión
+        console.log('✅ Sesión cerrada');
     }
 
     isLoggedIn() {
-        // âœ… Verificar tambiÃ©n sessionStorage
+        // ✅ Verificar también sessionStorage
         if (this.currentUser) {
             return true;
         }
         
-        // Intentar restaurar sesiÃ³n
+        // Intentar restaurar sesión
         this.restoreSession();
         return this.currentUser !== null;
     }
 
     getCurrentUser() {
-        // âœ… Restaurar de sessionStorage si es necesario
+        // ✅ Restaurar de sessionStorage si es necesario
         if (!this.currentUser) {
             this.restoreSession();
         }
@@ -355,7 +355,7 @@ class DataManager {
         // Crear directorio del usuario
         await fileManager.api.createUserDir(newUser.id);
 
-        console.log(`âœ… Usuario ${newUser.username} agregado`);
+        console.log(`✅ Usuario ${newUser.username} agregado`);
         return newUser;
     }
 
@@ -366,13 +366,13 @@ class DataManager {
             this.users[userIndex] = { ...this.users[userIndex], ...updates };
             await fileManager.saveUsers(this.users);
             
-            // âœ… Si se actualiza el usuario actual, actualizar sesiÃ³n
+            // ✅ Si se actualiza el usuario actual, actualizar sesión
             if (this.currentUser && this.currentUser.id === userId) {
                 this.currentUser = this.users[userIndex];
                 this.saveSession();
             }
             
-            console.log(`âœ… Usuario ${userId} actualizado`);
+            console.log(`✅ Usuario ${userId} actualizado`);
             return this.users[userIndex];
         }
 
@@ -386,12 +386,12 @@ class DataManager {
             this.users.splice(userIndex, 1);
             await fileManager.saveUsers(this.users);
             
-            // âœ… Si se elimina el usuario actual, cerrar sesiÃ³n
+            // ✅ Si se elimina el usuario actual, cerrar sesión
             if (this.currentUser && this.currentUser.id === userId) {
                 this.logout();
             }
             
-            console.log(`âœ… Usuario ${userId} eliminado`);
+            console.log(`✅ Usuario ${userId} eliminado`);
             return true;
         }
 
@@ -406,7 +406,7 @@ class DataManager {
 
     async createProject(projectData) {
         if (!this.currentUser) {
-            console.error('âŒ No hay usuario loggeado');
+            console.error('❌ No hay usuario loggeado');
             return null;
         }
 
@@ -414,7 +414,7 @@ class DataManager {
             id: `proj${Date.now()}`,
             ownerId: this.currentUser.id,
             title: projectData.title || 'Nuevo Proyecto',
-            icon: projectData.icon || 'ðŸ“‹',
+            icon: projectData.icon || '📋',
             status: projectData.status || 'discovery',
             priority: projectData.priority || 'medium',
             progress: projectData.progress || 0,
@@ -436,11 +436,11 @@ class DataManager {
         if (saved) {
             this.projects.push(newProject);
             await this.updateProjectsIndex();
-            console.log(`âœ… Proyecto ${newProject.id} creado`);
+            console.log(`✅ Proyecto ${newProject.id} creado`);
             return newProject;
         }
 
-        console.error('âŒ Error guardando proyecto');
+        console.error('❌ Error guardando proyecto');
         return null;
     }
 
@@ -452,7 +452,7 @@ class DataManager {
             
             // Verificar permisos
             if (this.currentUser && project.ownerId !== this.currentUser.id) {
-                console.error('âŒ Sin permisos para editar este proyecto');
+                console.error('❌ Sin permisos para editar este proyecto');
                 return null;
             }
 
@@ -503,7 +503,7 @@ class DataManager {
                 }
                 
                 await this.updateProjectsIndex();
-                console.log(`âœ… Proyecto ${projectId} actualizado`);
+                console.log(`✅ Proyecto ${projectId} actualizado`);
                 return this.projects[projectIndex];
             }
         }
@@ -519,7 +519,7 @@ class DataManager {
             
             // Verificar permisos
             if (this.currentUser && project.ownerId !== this.currentUser.id) {
-                console.error('âŒ Sin permisos para eliminar este proyecto');
+                console.error('❌ Sin permisos para eliminar este proyecto');
                 return false;
             }
 
@@ -529,7 +529,7 @@ class DataManager {
             if (deleted) {
                 this.projects.splice(projectIndex, 1);
                 await this.updateProjectsIndex();
-                console.log(`âœ… Proyecto ${projectId} eliminado`);
+                console.log(`✅ Proyecto ${projectId} eliminado`);
                 return true;
             }
         }
@@ -541,7 +541,7 @@ class DataManager {
         return this.projects.filter(p => p.ownerId === userId);
     }
 
-    // Lista los proyectos del usuario actual (o de un userId explÃ­cito)
+    // Lista los proyectos del usuario actual (o de un userId explícito)
     getMyProjects(userId) {
       const uid = userId || this.getCurrentUser()?.id;
       if (!uid) return [];
@@ -560,7 +560,7 @@ class DataManager {
         return this.projects;
     }
 
-    // âœ… MÃ©todo para verificar permisos de ediciÃ³n
+    // ✅ Método para verificar permisos de edición
     canEditProject(projectId) {
         const project = this.getProjectById(projectId);
         if (!project) return false;
@@ -610,7 +610,7 @@ class DataManager {
             discovery: this.projects.filter(p => p.status === 'discovery').length,
             hold: this.projects.filter(p => p.status === 'hold').length,
             completed: this.projects.filter(p => p.status === 'completed').length,
-            paused: this.projects.filter(p => p.status === 'paused').length,
+
             totalUsers: this.users.length,
             avgProgress: this.projects.length > 0 
                 ? Math.round(this.projects.reduce((sum, p) => sum + p.progress, 0) / this.projects.length)
@@ -657,26 +657,26 @@ class DataManager {
     // ==================== INITIALIZATION ====================
 
     async initialize() {
-        console.log('ðŸš€ Inicializando DataManager (Electron)...');
+        console.log('🚀 Inicializando DataManager (Electron)...');
         
         const success = await this.loadAllData();
         
         if (success) {
-            console.log('âœ… DataManager inicializado correctamente');
-            console.log(`ðŸ“Š ${this.projects.length} proyectos disponibles`);
-            console.log(`ðŸ‘¥ ${this.users.length} usuarios registrados`);
-            console.log('ðŸ’¾ Almacenamiento: local - Depende del espacio en disco');
+            console.log('✅ DataManager inicializado correctamente');
+            console.log(`📊 ${this.projects.length} proyectos disponibles`);
+            console.log(`👥 ${this.users.length} usuarios registrados`);
+            console.log('💾 Almacenamiento: local - Depende del espacio en disco');
             
-            // âœ… Mostrar estado de sesiÃ³n
+            // ✅ Mostrar estado de sesión
             if (this.currentUser) {
-                console.log(`ðŸ‘¤ SesiÃ³n activa: ${this.currentUser.username}`);
+                console.log(`👤 Sesión activa: ${this.currentUser.username}`);
             } else {
-                console.log('ðŸ”“ Sin sesiÃ³n activa');
+                console.log('🔒 Sin sesión activa');
             }
             
             return true;
         } else {
-            console.error('âŒ Error inicializando DataManager');
+            console.error('❌ Error inicializando DataManager');
             return false;
         }
     }

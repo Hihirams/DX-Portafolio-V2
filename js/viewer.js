@@ -170,8 +170,7 @@ function generateCoverSlide() {
         total: projectsToShow.length,
         inProgress: projectsToShow.filter(p => p.status === 'in-progress').length,
         hold: projectsToShow.filter(p => p.status === 'hold').length,
-        discovery: projectsToShow.filter(p => p.status === 'discovery').length,
-        paused: projectsToShow.filter(p => p.status === 'paused').length
+        discovery: projectsToShow.filter(p => p.status === 'discovery').length
     };
     
     coverSlide.innerHTML = `
@@ -192,7 +191,7 @@ function generateCoverSlide() {
                 <div class="stat-label">In Discovery</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">${stats.hold + stats.paused}</div>
+                <div class="stat-number">${stats.hold}</div>
                 <div class="stat-label">On Hold</div>
             </div>
         </div>
@@ -391,8 +390,7 @@ function generateSummarySlide() {
   const stats = {
     inProgress: projectsToShow.filter(p => p.status === 'in-progress').length,
     hold:       projectsToShow.filter(p => p.status === 'hold').length,
-    discovery:  projectsToShow.filter(p => p.status === 'discovery').length,
-    paused:     projectsToShow.filter(p => p.status === 'paused').length
+    discovery:  projectsToShow.filter(p => p.status === 'discovery').length
   };
 
   // Key dates
@@ -424,14 +422,6 @@ function generateSummarySlide() {
           <div class="info-title">🛠️ ${stats.hold} project(s) on temporary technical hold</div>
           <div class="info-content">
             ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Unblocking in progress'}`).join('•')}
-          </div>
-        </div>` : ''}
-
-      ${stats.paused > 0 ? `
-        <div class="summary-item" style="border-left-color:#8e8e93;">
-          <div class="info-title">❄️ ${stats.paused} paused project(s)</div>
-          <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='paused').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
         </div>` : ''}
 
