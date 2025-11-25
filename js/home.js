@@ -92,23 +92,23 @@ function renderStatsOverview() {
   const stats = dataManager.getStats();
 
   statsOverview.innerHTML = `
-    <div class="stat-card">
+    <div class="stat-card" onclick="scrollToAllProjects('all')">
       <div class="stat-number">${stats.totalProjects}</div>
       <div class="stat-label">Total Projects</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="scrollToAllProjects('in-progress')">
       <div class="stat-number">${stats.inProgress}</div>
       <div class="stat-label">In Progress</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="scrollToAllProjects('hold')">
       <div class="stat-number">${stats.hold}</div>
       <div class="stat-label">On Hold</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="scrollToAllProjects('discovery')">
       <div class="stat-number">${stats.discovery}</div>
       <div class="stat-label">Discovery</div>
     </div>
-    <div class="stat-card">
+    <div class="stat-card" onclick="scrollToAllProjects('completed')">
       <div class="stat-number">${stats.completed}</div>
       <div class="stat-label">Finished</div>
     </div>
@@ -1044,6 +1044,48 @@ document.addEventListener('keydown', function(e) {
         closeLoginModal();
     }
 });
+
+// ==================== SCROLL TO ALL PROJECTS ====================
+
+function scrollToAllProjects(filter) {
+    // Obtener la sección de All Projects
+    const allProjectsSection = document.querySelector('.featured-section-full-width');
+
+    if (!allProjectsSection) return;
+
+    // Calcular posición con offset para el header
+    const headerHeight = 80;
+    const elementPosition = allProjectsSection.getBoundingClientRect().top;
+    const offsetPosition = elementPosition + window.pageYOffset - headerHeight;
+
+    // Scroll suave
+    window.scrollTo({
+        top: offsetPosition,
+        behavior: 'smooth'
+    });
+
+    // Esperar a que termine el scroll, luego aplicar filtro
+    setTimeout(() => {
+        applyFilter(filter);
+    }, 600);
+}
+
+// ==================== APPLY FILTER ====================
+
+function applyFilter(filter) {
+    // Find and activate the correct filter button
+    const filterButtons = document.querySelectorAll('.filter-btn');
+    filterButtons.forEach(btn => {
+        btn.classList.remove('active');
+        if (btn.dataset.filter === filter) {
+            btn.classList.add('active');
+        }
+    });
+
+    // Update current filter and render projects
+    currentFilter = filter;
+    renderFeaturedProjects(filter);
+}
 
 // ==================== THEME TOGGLE ====================
 
