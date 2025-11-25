@@ -2,23 +2,24 @@
   "id": "proj1762872345620",
   "ownerId": "user2",
   "title": "Don Sillardo",
-  "status": "paused",
+  "status": "hold",
   "progress": 0,
   "icon": "🪑",
-  "currentPhase": "Material is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time, encouraging innovation, digitalization, and continuous learning to help nurture our minds.",
-  "updatedAt": "2025-11-25T16:53:26.531Z",
+  "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
+  "updatedAt": "2025-11-25T21:02:42.206Z",
   "priority": "medium",
-  "targetDate": "2025-11-28",
   "achievements": {},
   "blockers": {
     "type": "info",
-    "message": "A member of the Governance team is currently working on a similar project, so we were asked to pause our development until further notice."
+    "message": "A member of the Governance team is currently working on a similar initiative, so we were asked to pause development of this project until further notice."
   },
   "nextSteps": {},
+  "targetDate": "2025-11-28",
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T14:45:45.620Z",
   "extraFiles": [],
+  "createdAt": "2025-11-11T14:45:45.620Z",
+  "ownerName": "Sandra Santos",
   "concept": ""
 }

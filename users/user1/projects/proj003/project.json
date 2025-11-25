@@ -8,19 +8,19 @@
   "priority": "medium",
   "progress": 45,
   "targetDate": "2026-10-30",
-  "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
+  "currentPhase": "Development of motion detection prototype and recognition models",
   "achievements": {
-    "2025-10": "Fundamentos del sistema y editor desarrollados",
-    "2025-10-15": "Prototipo de detección de movimiento en ROIs completado"
+    "2025-10": "System foundations and editor developed",
+    "2025-10-15": "Motion detection prototype in ROIs completed"
   },
   "blockers": {
     "type": "success",
     "message": ""
   },
   "nextSteps": {
-    "2025-11": "Integrar detección de personas, manos y rostros",
-    "2025-12": "Interfaz unificada de control y visualización",
-    "2026-01": "Optimización para múltiples cámaras"
+    "2025-11": "Integrate detection of people, hands, and faces",
+    "2025-12": "Unified control and visualization interface",
+    "2026-01": "Optimization for multiple cameras"
   },
   "videos": [
     {
@@ -59,9 +59,9 @@
     }
   ],
   "createdAt": "2025-10-01",
-  "updatedAt": "2025-11-17T16:36:08.920Z",
+  "updatedAt": "2025-11-24T16:17:18.135Z",
   "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": ""
+  "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors."
 }

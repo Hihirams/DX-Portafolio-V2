@@ -1,29 +1,28 @@
 {
   "id": "proj1762876915703",
   "ownerId": "user1",
-  "title": "Portafolio Evidencias DX",
+  "title": "DX Evidence Portfolio",
   "status": "in-progress",
   "progress": 54,
   "icon": "🖼",
-  "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-  "updatedAt": "2025-11-17T16:37:54.523Z",
+  "currentPhase": "Bug fixes on the Project Editing page",
+  "updatedAt": "2025-11-24T16:12:31.043Z",
   "priority": "medium",
-  "targetDate": "2026-01-30",
   "achievements": {
-    "2025-10": "Se logra construir la base home del portafolio donde se muestran proyectos.\nSe implementa página de edición de proeyctos y visualización dinámica de los proyectos del usuario.",
-    "2025-11": "Archivo exe simplificado con acceso multi usuario permitiendo edición de cualquier persona en cualquier momento con un usuario registrado."
+    "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
+    "2025-11": "Simplified .exe file with multi-user access, allowing anyone to edit at any time with a registered user."
   },
   "blockers": {
     "type": "success",
     "message": ""
   },
   "nextSteps": {
-    "2025-11": "Implementar tarjeta de proyectos terminados, filtro de proyectos en etapa terminado y opción en modo edición para poder configurar el proyecto terminado."
+    "2025-11": "Implement completed-project card, filter for projects in completed stage, and an option in edit mode to configure the completed project."
   },
+  "targetDate": "2026-01-30",
+  "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T16:01:55.703Z",
-  "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
   "extraFiles": [
     {
       "src": "users/user1/projects/proj1762876915703/extra-files/RobotDX-Propuesta_1762983021511.pdf",
@@ -34,9 +33,11 @@
       "extension": "pdf"
     }
   ],
+  "createdAt": "2025-11-11T16:01:55.703Z",
+  "ownerName": "Hiram González",
+  "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
   "featured": true,
   "previewImage": "",
   "previewImageFileName": "QCU1.png",
-  "previewImageType": "image/png",
-  "concept": ""
+  "previewImageType": "image/png"
 }

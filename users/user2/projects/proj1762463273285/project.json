@@ -5,18 +5,18 @@
   "status": "completed",
   "progress": 100,
   "icon": "📁",
-  "updatedAt": "2025-11-24T15:35:42.513Z",
-  "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
+  "updatedAt": "2025-11-24T16:15:01.844Z",
+  "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
   "priority": "high",
   "achievements": {
     "2025-11": "Adjustments are being made to the approvers, as well as providing support and training to end users."
   },
   "blockers": {
     "type": "success",
-    "message": "Sin bloqueos actuales."
+    "message": ""
   },
   "nextSteps": {
-    "2025-11": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final..."
+    "2025-11": "Review meeting with managers to confirm requirements before final release."
   },
   "targetDate": "2025-11-21",
   "ganttImage": "",
@@ -25,5 +25,5 @@
   "extraFiles": [],
   "createdAt": "2025-11-06T21:07:53.285Z",
   "ownerName": "Sandra Santos",
-  "concept": "Library in a SharePoint site where you can find the Yokoniramis & Kakotora and other importants topics to QP"
+  "concept": "Library on a SharePoint site where you can find Yokoniramis & Kakotora and other important topics for QP"
 }

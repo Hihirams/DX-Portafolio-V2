@@ -3,23 +3,23 @@
   "ownerId": "user1",
   "title": "LorenzoBot",
   "icon": "🤖",
-  "status": "paused",
+  "status": "hold",
   "priority": "low",
   "progress": 85,
   "targetDate": "2026-03-15",
-  "currentPhase": "Bot operativo en entorno local. Despliegue en HOLD por decisiones de infraestructura IT.",
+  "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
   "achievements": {
-    "2025-06": "Desarrollo del bot completado",
-    "2025-08": "Pruebas locales exitosas",
-    "2025-09": "Integración con sistemas internos validada"
+    "2025-06": "Bot development completed",
+    "2025-08": "Successful local tests",
+    "2025-09": "Integration with internal systems validated"
   },
   "blockers": {
     "type": "alert",
-    "message": "Sin entorno web interno oficial. Pendiente confirmación de IT."
+    "message": "No official internal web environment. IT confirmation pending."
   },
   "nextSteps": {
-    "2026-01": "Revisión con IT sobre infraestructura",
-    "2026-03": "Reactivación estimada si se aprueba despliegue"
+    "2026-01": "Review with IT on infrastructure",
+    "2026-03": "Estimated reactivation if deployment is approved"
   },
   "videos": [
     {
@@ -29,21 +29,22 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj005/images/DENBOT1.png",
+      "src": "users/user1/projects/proj005/images/image_1764104233918_0.png",
       "title": "Interfaz Bot"
     },
     {
-      "src": "users/user1/projects/proj005/images/DENBOT2.png",
+      "src": "users/user1/projects/proj005/images/image_1764104234017_1.png",
       "title": "Reportes"
     },
     {
-      "src": "users/user1/projects/proj005/images/DENBOT3.png",
+      "src": "users/user1/projects/proj005/images/image_1764104234136_2.png",
       "title": "Flujo General"
     }
   ],
   "createdAt": "2025-06-01",
-  "updatedAt": "2025-11-17T16:35:14.364Z",
+  "updatedAt": "2025-11-25T20:57:13.660Z",
+  "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
   "extraFiles": [],
-  "concept": "",
-  "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png"
+  "ownerName": "Hiram González",
+  "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]"
 }

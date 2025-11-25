@@ -7,26 +7,26 @@
   "priority": "low",
   "progress": 20,
   "targetDate": "2026-06-30",
-  "currentPhase": "Explorar plataforma web interna para gestionar reportes MRM (Monthly Review Meeting) y compartir información entre departamentos",
+  "currentPhase": "Explore internal web platform to manage MRM (Monthly Review Meeting) reports and share information between departments",
   "achievements": {
-    "2025-10": "Entrevistas con usuarios iniciadas",
-    "2025-10-20": "Revisión de herramientas internas completada"
+    "2025-10": "User interviews initiated",
+    "2025-10-20": "Review of internal tools completed"
   },
   "blockers": {
     "type": "info",
-    "message": "En fase de discovery. Sin bloqueos actuales."
+    "message": "In discovery phase. No current blockers."
   },
   "nextSteps": {
-    "2025-11": "Completar entrevistas con usuarios",
-    "2025-12": "Presentación de hallazgos y decisión sobre desarrollo",
-    "2026-01": "Definir alcance y arquitectura (si aprobado)"
+    "2025-11": "Complete user interviews",
+    "2025-12": "Presentation of findings and decision on development",
+    "2026-01": "Define scope and architecture (if approved)"
   },
   "ganttImage": "",
   "videos": [],
   "images": [],
   "createdAt": "2025-10-15",
-  "updatedAt": "2025-11-17T05:43:32.746Z",
+  "updatedAt": "2025-11-24T16:09:22.643Z",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": ""
+  "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting"
 }

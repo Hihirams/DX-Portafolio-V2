@@ -106,7 +106,7 @@
       "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "Fusion between 2 existent systems QC ALT + DQITS that show abnormalities in real time & confirm the cycle time of the piece rate."
+      "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate "
     },
     {
       "id": "proj003",
@@ -238,24 +238,24 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj005/images/image_1764000621228_0.png",
+          "src": "users/user1/projects/proj005/images/image_1764104233918_0.png",
           "title": "Interfaz Bot"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1764000621306_1.png",
+          "src": "users/user1/projects/proj005/images/image_1764104234017_1.png",
           "title": "Reportes"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1764000621400_2.png",
+          "src": "users/user1/projects/proj005/images/image_1764104234136_2.png",
           "title": "Flujo General"
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-11-24T16:10:20.928Z",
+      "updatedAt": "2025-11-25T20:57:13.660Z",
       "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "A virtual Agent whose principal function is to work as Help Desk to several pages [SharePoint / QDOC / ETC]"
+      "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]"
     },
     {
       "id": "proj1762463273285",
@@ -263,7 +263,7 @@
       "title": "YOKADX",
       "status": "completed",
       "progress": 100,
-      "icon": "📂",
+      "icon": "📁",
       "updatedAt": "2025-11-24T16:15:01.844Z",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
       "priority": "high",
@@ -309,7 +309,7 @@
       "extraFiles": [],
       "createdAt": "2025-11-10T14:14:01.699Z",
       "ownerName": "Sandra Santos",
-      "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts"
+      "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts "
     },
     {
       "id": "proj1762786312316",
@@ -327,7 +327,7 @@
         "message": ""
       },
       "nextSteps": {
-        "2025-11": "Solicitud de mejoras\n•\t🔍 Filtro por Gerente y GM para visualizar todas sus áreas agrupadas.\n        Resp Miguel & Brayan \n•\t🗣️ Agregar comentarios en las gráficas para explicar desviaciones o situaciones especiales."
+        "2025-11": "Solicitud de mejoras\n•\t🔍 Filtro por Gerente y GM para visualizar todas sus áreas agrupadas.\n       Resp Miguel & Brayan \n•\t🗨️ Agregar comentarios en las gráficas para explicar desviaciones o situaciones especiales."
       },
       "targetDate": "2025-11-10",
       "ganttImage": "",
@@ -353,7 +353,7 @@
       "title": "IATF Dashboard",
       "status": "discovery",
       "progress": 0,
-      "icon": "🦾",
+      "icon": "🧾",
       "currentPhase": "",
       "updatedAt": 1762787494930
     },
@@ -364,8 +364,8 @@
       "status": "completed",
       "progress": 95,
       "icon": "📦",
-      "currentPhase": "Pilot Unit ME\nFinal testing, user validation, and indicator updates (FY25).\nImplementation and final deployment (FY25 version).\nBug fixing and quick improvements.",
-      "updatedAt": "2025-11-25T16:51:27.569Z",
+      "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
+      "updatedAt": "2025-11-25T21:00:40.633Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -373,7 +373,7 @@
         "message": ""
       },
       "nextSteps": {
-        "2025-12": "Stage 2 of the DxHold Monitor System\nFocus on enhancing systematic analysis and data visualization, improving search capabilities, integrating data from external systems, maintaining continuous data-update reviews, and enabling automatic escalation for amounts over $500,000."
+        "2025-12": "Stage 2 of the DxHold Monitor system focuses on creating a systematic analysis to provide clearer, integrated insights. Visual improvements and enhanced information search will be implemented, along with evaluating new data-integration options from systems like ESSYM and AS400. Continuous data-update meetings will be maintained, and automatic escalation will be triggered for amounts exceeding $500,000."
       },
       "targetDate": "2025-11-10",
       "ganttImage": "",
@@ -390,9 +390,9 @@
       "title": "Jsox Dashboard",
       "status": "completed",
       "progress": 100,
-      "icon": "🦾",
-      "currentPhase": "Convert and transform the data, build the dashboard visualization, run pilot tests, and deliver the final solution to the QDOC Team for review and demonstration.",
-      "updatedAt": "2025-11-25T16:52:07.651Z",
+      "icon": "🧾",
+      "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
+      "updatedAt": "2025-11-25T21:01:06.744Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -412,17 +412,19 @@
     {
       "id": "proj1762787721514",
       "ownerId": "user2",
-      "title": "Nova Innovation Zone",
-      "status": "discovery",
+      "title": "RoBot Innovation Zone",
+      "status": "in-progress",
       "progress": 30,
       "icon": "🧰",
-      "currentPhase": "The robot’s structure is fully completed. The next step is to acquire the components needed for movement—such as motors, microcontrollers, and additional electronics. Once these materials are obtained, functional testing will begin.",
-      "updatedAt": "2025-11-25T16:52:54.221Z",
+      "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
+      "updatedAt": "2025-11-25T21:02:12.526Z",
       "priority": "medium",
-      "achievements": {},
+      "achievements": {
+        "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
+      },
       "blockers": {
-        "type": "info",
-        "message": ""
+        "type": "warning",
+        "message": "The component quotes required to begin the movement phase have an estimated delivery time of 4 to 6 weeks."
       },
       "nextSteps": {},
       "targetDate": "2025-11-10",
@@ -430,22 +432,26 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764089574224_0.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1764104532650_0.png",
           "title": "RB1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764089574226_1.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1764104532704_1.png",
           "title": "RB2.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764089574227_2.png",
-          "title": "RB3.png"
+          "src": "users/user2/projects/proj1762787721514/images/image_1764104532785_2.png",
+          "title": "imagen 1.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762787721514/images/image_1764104532863_3.png",
+          "title": "Slide1.JPG"
         }
       ],
       "extraFiles": [],
       "createdAt": "2025-11-10T15:15:21.514Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "Creation of a robot prototype to generate brand awareness at Izone"
     },
     {
       "id": "proj1762868928286",
@@ -453,7 +459,7 @@
       "title": "Holo View DX",
       "status": "discovery",
       "progress": 10,
-      "icon": "🕶️",
+      "icon": "🕶",
       "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
       "updatedAt": "2025-11-24T16:21:25.867Z",
       "priority": "low",
@@ -508,13 +514,13 @@
       "status": "hold",
       "progress": 0,
       "icon": "🪑",
-      "currentPhase": "Material is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time, encouraging innovation, digitalization, and continuous learning to help nurture our minds.",
-      "updatedAt": "2025-11-25T16:53:26.531Z",
+      "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
+      "updatedAt": "2025-11-25T21:02:42.206Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
         "type": "info",
-        "message": "A member of the Governance team is currently working on a similar project, so we were asked to pause our development until further notice."
+        "message": "A member of the Governance team is currently working on a similar initiative, so we were asked to pause development of this project until further notice."
       },
       "nextSteps": {},
       "targetDate": "2025-11-28",
@@ -532,9 +538,9 @@
       "title": "Holograma 3D",
       "status": "discovery",
       "progress": 0,
-      "icon": "🗺️",
-      "currentPhase": "Creating realistic three-dimensional visuals to better represent objects, improve communication of ideas, and enhance user experience through depth and spatial detail.",
-      "updatedAt": "2025-11-25T16:53:57.402Z",
+      "icon": "🗾",
+      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
+      "updatedAt": "2025-11-25T21:03:06.541Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -557,7 +563,7 @@
       "title": "DX Evidence Portfolio",
       "status": "in-progress",
       "progress": 54,
-      "icon": "🖼️",
+      "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
       "updatedAt": "2025-11-24T16:12:31.043Z",
       "priority": "medium",
@@ -757,7 +763,7 @@
       "icon": "📋",
       "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
       "achievements": {
-        "2025-11": "The agent attends the Copilot HUB Event at the request of the organizers and participants [Alpha Tester]."
+        "2025-11": "The agent attends the Copilot HUB Event at the request of the organizers and participants [Alpha Tester]. "
       },
       "blockers": {
         "type": "info",
@@ -789,34 +795,36 @@
         }
       ],
       "ownerName": "Miguel Coronado",
-      "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses."
+      "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. "
     },
     {
       "id": "proj1763484801399",
       "ownerId": "user2",
       "title": "Videos Creation",
-      "status": "discovery",
-      "priority": "medium",
-      "progress": 62,
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 40,
       "icon": "📋",
-      "currentPhase": "",
+      "currentPhase": "Suport ECU Ishue Investigation",
       "achievements": {
-        "2025-10": "A series of “Norma” videos were created, providing visual content to support and communicate the guidelines and standards in a clear and accessible way."
+        "2025-10": "The videos were reviewed and it has been determined which ones will be edited."
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
-      "nextSteps": {},
-      "targetDate": "2026-03-31",
+      "nextSteps": {
+        "2025-11": "The material will be created and shown once it is finished"
+      },
+      "targetDate": "2025-11-27",
       "ganttImage": "",
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:53:21.399Z",
-      "updatedAt": "2025-11-25T16:54:43.494Z",
+      "updatedAt": "2025-11-25T21:03:16.250Z",
       "extraFiles": [],
       "ownerName": "Sandra Santos",
-      "concept": "Creation of video of Innovation Zone [ Introduction to the Area + Purpose + Connection with DX Section]"
+      "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]"
     }
   ]
 }

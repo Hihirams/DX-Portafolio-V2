@@ -58,7 +58,7 @@
       "progress": 85,
       "icon": "🤖",
       "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
-      "updatedAt": "2025-11-24T16:10:20.928Z"
+      "updatedAt": "2025-11-25T20:57:13.660Z"
     },
     {
       "id": "proj1762463273285",
@@ -68,7 +68,7 @@
       "status": "completed",
       "priority": "high",
       "progress": 100,
-      "icon": "📂",
+      "icon": "📁",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
       "updatedAt": "2025-11-24T16:15:01.844Z"
     },
@@ -103,7 +103,7 @@
       "ownerName": "Sandra Santos",
       "status": "discovery",
       "progress": 0,
-      "icon": "🦾",
+      "icon": "🧾",
       "currentPhase": "",
       "updatedAt": 1762787494930
     },
@@ -116,8 +116,8 @@
       "priority": "medium",
       "progress": 95,
       "icon": "📦",
-      "currentPhase": "Pilot Unit ME\nFinal testing, user validation, and indicator updates (FY25).\nImplementation and final deployment (FY25 version).\nBug fixing and quick improvements.",
-      "updatedAt": "2025-11-25T16:51:27.569Z"
+      "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
+      "updatedAt": "2025-11-25T21:00:40.633Z"
     },
     {
       "id": "proj1762787282420",
@@ -127,21 +127,21 @@
       "status": "completed",
       "priority": "low",
       "progress": 100,
-      "icon": "🦾",
-      "currentPhase": "Convert and transform the data, build the dashboard visualization, run pilot tests, and deliver the final solution to the QDOC Team for review and demonstration.",
-      "updatedAt": "2025-11-25T16:52:07.651Z"
+      "icon": "🧾",
+      "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
+      "updatedAt": "2025-11-25T21:01:06.744Z"
     },
     {
       "id": "proj1762787721514",
-      "title": "Nova Innovation Zone",
+      "title": "RoBot Innovation Zone",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
+      "status": "in-progress",
       "priority": "medium",
       "progress": 30,
       "icon": "🧰",
-      "currentPhase": "The robot's structure is fully completed. The next step is to acquire the components needed for movement—such as motors, microcontrollers, and additional electronics. Once these materials are obtained, functional testing will begin.",
-      "updatedAt": "2025-11-25T16:52:54.221Z"
+      "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
+      "updatedAt": "2025-11-25T21:02:12.526Z"
     },
     {
       "id": "proj1762868928286",
@@ -151,7 +151,7 @@
       "status": "discovery",
       "priority": "low",
       "progress": 10,
-      "icon": "🕶️",
+      "icon": "🕶",
       "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
       "updatedAt": "2025-11-24T16:21:25.867Z"
     },
@@ -176,8 +176,8 @@
       "priority": "medium",
       "progress": 0,
       "icon": "🪑",
-      "currentPhase": "Material is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time, encouraging innovation, digitalization, and continuous learning to help nurture our minds.",
-      "updatedAt": "2025-11-25T16:53:26.531Z"
+      "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
+      "updatedAt": "2025-11-25T21:02:42.206Z"
     },
     {
       "id": "proj1762875499999",
@@ -187,9 +187,9 @@
       "status": "discovery",
       "priority": "low",
       "progress": 0,
-      "icon": "🗺️",
-      "currentPhase": "Creating realistic three-dimensional visuals to better represent objects, improve communication of ideas, and enhance user experience through depth and spatial detail.",
-      "updatedAt": "2025-11-25T16:53:57.402Z"
+      "icon": "🗾",
+      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
+      "updatedAt": "2025-11-25T21:03:06.541Z"
     },
     {
       "id": "proj1762876915703",
@@ -199,7 +199,7 @@
       "status": "in-progress",
       "priority": "medium",
       "progress": 54,
-      "icon": "🖼️",
+      "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
       "updatedAt": "2025-11-24T16:12:31.043Z"
     },
@@ -304,22 +304,22 @@
       "title": "Videos Creation",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
-      "priority": "medium",
-      "progress": 62,
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 40,
       "icon": "📋",
-      "currentPhase": "",
-      "updatedAt": "2025-11-25T16:54:43.494Z"
+      "currentPhase": "Suport ECU Ishue Investigation",
+      "updatedAt": "2025-11-25T21:03:16.250Z"
     }
   ],
   "stats": {
     "totalProjects": 26,
-    "inProgress": 6,
-    "discovery": 13,
+    "inProgress": 8,
+    "discovery": 11,
     "hold": 4,
     "completed": 3,
     "totalUsers": 5,
     "avgProgress": 39
   },
-  "lastUpdated": "2025-11-25T20:05:12.385518Z"
+  "lastUpdated": "2025-11-25T21:03:16.674Z"
 }
