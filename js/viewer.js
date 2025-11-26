@@ -271,7 +271,7 @@ function generateProjectSlides() {
     return `
       <div class="slide">
         <div class="project-header">
-          <h2 class="project-title">${project.icon} ${project.title}</h2>
+          <h2 class="project-title"><span class="priority-badge">${project.priorityNumber || ""}</span> ${project.icon} ${project.title}</h2>
           <span class="badge ${priorityConfig.badgeClass || statusConfig.badgeClass}">
             ${priorityConfig.badge || statusConfig.badge}
           </span>

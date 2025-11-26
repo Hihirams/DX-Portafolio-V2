@@ -1019,3 +1019,26 @@ body.light-theme .media-item-preview {
 .light-theme .extra-file-item:hover {
     background: rgba(139, 92, 246, 0.03);
 }
+
+/* ==========================================
+   PRIORITY NUMBER INPUT - Estilos especiales
+   ========================================== */
+
+#projectPriorityNumber {
+    font-size: 18px;
+    font-weight: 600;
+    text-align: center;
+    max-width: 120px;
+    padding: 12px 20px;
+}
+
+#projectPriorityNumber::-webkit-inner-spin-button,
+#projectPriorityNumber::-webkit-outer-spin-button {
+    opacity: 1;
+    height: 30px;
+}
+
+#priorityNumberHelper {
+    color: var(--text-secondary);
+    font-style: italic;
+}

@@ -83,6 +83,7 @@ function createNewProject() {
         icon: '📋',
         status: 'discovery',
         priority: 'medium',
+        priorityNumber: 1, // ✅ NUEVO: Número de prioridad
         progress: 0,
         targetDate: new Date().toISOString().split('T')[0],
         currentPhase: '',
@@ -215,6 +216,7 @@ function loadProjectData() {
     document.getElementById('currentPhase').value = currentProject.currentPhase || '';
     document.getElementById('projectStatus').value = currentProject.status || 'discovery';
     document.getElementById('projectPriority').value = currentProject.priority || 'medium';
+    document.getElementById('projectPriorityNumber').value = currentProject.priorityNumber || 1;
 
     // Progreso y Fechas
     document.getElementById('projectProgress').value = currentProject.progress || 0;
@@ -236,6 +238,9 @@ function loadProjectData() {
     loadImages();
     loadVideos();
     loadExtraFiles();
+
+    // Actualizar rango de prioridad
+    updatePriorityNumberMax();
 }
 
 // ==================== ACHIEVEMENTS ====================
@@ -712,6 +717,7 @@ async function saveProject() {
         currentPhase: document.getElementById('currentPhase').value,
         status: document.getElementById('projectStatus').value,
         priority: document.getElementById('projectPriority').value,
+        priorityNumber: parseInt(document.getElementById('projectPriorityNumber').value) || 1,
         progress: parseInt(document.getElementById('projectProgress').value),
         targetDate: document.getElementById('targetDate').value,
         blockers: {
@@ -722,7 +728,16 @@ async function saveProject() {
         nextSteps: collectNextSteps(),
         updatedAt: new Date().toISOString()
     };
-    
+
+    // ✅ Validar número de prioridad
+    const totalProjects = dataManager.getAllProjects().length;
+    const maxPriority = editorMode === 'new' ? totalProjects + 1 : totalProjects;
+
+    if (updatedProject.priorityNumber < 1 || updatedProject.priorityNumber > maxPriority) {
+        alert(`Priority number must be between 1 and ${maxPriority}`);
+        return;
+    }
+
     console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••');
     console.log('📋 DEBUG COMPLETO - Proyecto antes de guardar');
     console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••');
@@ -1069,6 +1084,21 @@ async function confirmDelete() {
         document.getElementById('editorTitle').textContent = originalTitle;
         document.getElementById('editorStatus').textContent = 'Error';
     }
+}
+
+// ==================== PRIORITY NUMBER ====================
+
+function updatePriorityNumberMax() {
+    const totalProjects = dataManager.getAllProjects().length;
+    const maxPriority = editorMode === 'new' ? totalProjects + 1 : totalProjects;
+
+    const input = document.getElementById('projectPriorityNumber');
+    input.max = maxPriority;
+
+    const helper = document.getElementById('priorityNumberHelper');
+    helper.textContent = `Higher priority = lower number (1 is highest, ${maxPriority} is lowest)`;
+
+    console.log(`✅ Priority range set: 1 to ${maxPriority}`);
 }
 
 // ==================== HELPERS ====================

@@ -54,7 +54,8 @@
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made."
+      "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made.",
+      "priorityNumber": 1
     },
     {
       "id": "proj002",
@@ -106,7 +107,8 @@
       "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate "
+      "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate ",
+      "priorityNumber": 2
     },
     {
       "id": "proj003",
@@ -173,7 +175,8 @@
       "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors."
+      "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors.",
+      "priorityNumber": 3
     },
     {
       "id": "proj004",
@@ -205,7 +208,8 @@
       "updatedAt": "2025-11-24T16:09:22.643Z",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting"
+      "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting",
+      "priorityNumber": 4
     },
     {
       "id": "proj005",
@@ -255,7 +259,8 @@
       "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
-      "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]"
+      "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]",
+      "priorityNumber": 5
     },
     {
       "id": "proj1762463273285",
@@ -284,7 +289,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-06T21:07:53.285Z",
       "ownerName": "Sandra Santos",
-      "concept": "Library on a SharePoint site where you can find Yokoniramis & Kakotora and other important topics for QP"
+      "concept": "Library on a SharePoint site where you can find Yokoniramis & Kakotora and other important topics for QP",
+      "priorityNumber": 6
     },
     {
       "id": "proj1762784041699",
@@ -309,7 +315,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-10T14:14:01.699Z",
       "ownerName": "Sandra Santos",
-      "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts "
+      "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts ",
+      "priorityNumber": 7
     },
     {
       "id": "proj1762786312316",
@@ -345,7 +352,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-10T14:51:52.316Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "",
+      "priorityNumber": 8
     },
     {
       "id": "proj1762786524702",
@@ -355,7 +363,8 @@
       "progress": 0,
       "icon": "🧾",
       "currentPhase": "",
-      "updatedAt": 1762787494930
+      "updatedAt": 1762787494930,
+      "priorityNumber": 9
     },
     {
       "id": "proj1762786983969",
@@ -382,7 +391,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-10T15:03:03.969Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "",
+      "priorityNumber": 10
     },
     {
       "id": "proj1762787282420",
@@ -407,7 +417,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-10T15:08:02.420Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "",
+      "priorityNumber": 11
     },
     {
       "id": "proj1762787721514",
@@ -451,7 +462,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-10T15:15:21.514Z",
       "ownerName": "Sandra Santos",
-      "concept": "Creation of a robot prototype to generate brand awareness at Izone"
+      "concept": "Creation of a robot prototype to generate brand awareness at Izone",
+      "priorityNumber": 12
     },
     {
       "id": "proj1762868928286",
@@ -476,7 +488,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-11T13:48:48.286Z",
       "ownerName": "Hiram González",
-      "concept": "A HoloLens 2 project creating an interactive AR interface that guides operators with hands-free instructions, real-time overlays, and remote support to improve productivity and reduce errors."
+      "concept": "A HoloLens 2 project creating an interactive AR interface that guides operators with hands-free instructions, real-time overlays, and remote support to improve productivity and reduce errors.",
+      "priorityNumber": 13
     },
     {
       "id": "proj1762869515275",
@@ -505,7 +518,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-11T13:58:35.275Z",
       "ownerName": "Hiram González",
-      "concept": "Real-time platform showing production line incidents in a dome dashboard, highlighting alerts and trends for quick decision-making."
+      "concept": "Real-time platform showing production line incidents in a dome dashboard, highlighting alerts and trends for quick decision-making.",
+      "priorityNumber": 14
     },
     {
       "id": "proj1762872345620",
@@ -530,7 +544,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-11T14:45:45.620Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "",
+      "priorityNumber": 15
     },
     {
       "id": "proj1762875499999",
@@ -555,7 +570,8 @@
       "extraFiles": [],
       "createdAt": "2025-11-11T15:38:19.999Z",
       "ownerName": "Sandra Santos",
-      "concept": ""
+      "concept": "",
+      "priorityNumber": 16
     },
     {
       "id": "proj1762876915703",
@@ -594,7 +610,8 @@
       ],
       "createdAt": "2025-11-11T16:01:55.703Z",
       "ownerName": "Hiram González",
-      "concept": "Portfolio designed for the storage and presentation of current projects in the DX area"
+      "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
+      "priorityNumber": 17
     },
     {
       "id": "proj1763483352243",
@@ -616,7 +633,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:29:12.243Z",
-      "updatedAt": "2025-11-18T16:29:12.243Z"
+      "updatedAt": "2025-11-18T16:29:12.243Z",
+      "priorityNumber": 18
     },
     {
       "id": "proj1763483378691",
@@ -638,7 +656,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:29:38.691Z",
-      "updatedAt": "2025-11-18T16:29:38.691Z"
+      "updatedAt": "2025-11-18T16:29:38.691Z",
+      "priorityNumber": 19
     },
     {
       "id": "proj1763483412529",
@@ -660,7 +679,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:30:12.529Z",
-      "updatedAt": "2025-11-18T16:30:12.529Z"
+      "updatedAt": "2025-11-18T16:30:12.529Z",
+      "priorityNumber": 20
     },
     {
       "id": "proj1763483430619",
@@ -682,7 +702,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:30:30.619Z",
-      "updatedAt": "2025-11-18T16:30:30.619Z"
+      "updatedAt": "2025-11-18T16:30:30.619Z",
+      "priorityNumber": 21
     },
     {
       "id": "proj1763483450152",
@@ -704,7 +725,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:30:50.152Z",
-      "updatedAt": "2025-11-18T16:30:50.152Z"
+      "updatedAt": "2025-11-18T16:30:50.152Z",
+      "priorityNumber": 22
     },
     {
       "id": "proj1763483501019",
@@ -729,7 +751,8 @@
       "updatedAt": "2025-11-18T16:35:27.097Z",
       "extraFiles": [],
       "ownerName": "Miguel Coronado",
-      "concept": ""
+      "concept": "",
+      "priorityNumber": 23
     },
     {
       "id": "proj1763483513611",
@@ -751,7 +774,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:31:53.611Z",
-      "updatedAt": "2025-11-18T16:31:53.611Z"
+      "updatedAt": "2025-11-18T16:31:53.611Z",
+      "priorityNumber": 24
     },
     {
       "id": "proj1763483529675",
@@ -795,7 +819,8 @@
         }
       ],
       "ownerName": "Miguel Coronado",
-      "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. "
+      "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. ",
+      "priorityNumber": 25
     },
     {
       "id": "proj1763484801399",
@@ -824,7 +849,8 @@
       "updatedAt": "2025-11-25T21:03:16.250Z",
       "extraFiles": [],
       "ownerName": "Sandra Santos",
-      "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]"
+      "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]",
+      "priorityNumber": 26
     }
   ]
 }

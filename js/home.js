@@ -263,7 +263,7 @@ function createCarouselProjectCard(project) {
                         ${statusConfig.badge}
                     </div>
                 </div>
-                <h3 class="carousel-card__title">${project.title}</h3>
+                <h3 class="carousel-card__title">${project.priorityNumber ? project.priorityNumber + ". " : ""}${project.title}</h3>
                 <p class="carousel-card__description">${project.currentPhase || 'Sin fase definida'}</p>
                 <div class="carousel-card__footer">
                     <div class="carousel-card__progress">
@@ -428,7 +428,7 @@ function renderCarousel() {
                 <div class="featured-project-icon">${project.icon}</div>
 
                 <div class="featured-title-wrapper">
-                    <h3 class="featured-project-title">${project.title}</h3>
+                    <h3 class="featured-project-title">${project.priorityNumber ? project.priorityNumber + ". " : ""}${project.title}</h3>
                     <div class="featured-status-badge status-${project.status}">
                         <span class="status-dot"></span>
                         ${statusConfig.badge}
@@ -615,7 +615,7 @@ function createProjectCard(project, showEditButton = false) {
                     <div class="project-badge ${statusConfig.badgeClass}">${statusConfig.badge}</div>
                 </div>
             </div>
-            <h4 class="project-card-title">${project.title}</h4>
+            <h4 class="project-card-title">${project.priorityNumber ? project.priorityNumber + ". " : ""}${project.title}</h4>
             <p class="project-card-phase">${project.currentPhase || 'Sin fase definida'}</p>
             <div class="project-card-footer">
                 <div class="project-progress">
@@ -743,7 +743,7 @@ function setupSearch() {
             projects.forEach(project => {
                 html += `
                     <div class="search-result-item" onclick="viewProject('${project.id}')">
-                        <div class="search-result-title">${project.icon} ${project.title}</div>
+                        <div class="search-result-title">${project.priorityNumber ? project.priorityNumber + ". " : ""}${project.icon} ${project.title}</div>
                         <div class="search-result-meta">${project.currentPhase.substring(0, 80)}...</div>
                     </div>
                 `;

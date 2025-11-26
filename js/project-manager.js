@@ -102,7 +102,7 @@ function loadProjectsFromDataManager() {
 // Mapear proyectos al formato esperado por la UI
         projects = projects.map(p => ({
             id: p.id,
-            name: p.title,
+            name: (p.priorityNumber ? p.priorityNumber + ". " : "") + p.title,
             status: normalizeStatus(p.status),
             progress: p.progress || 0,
             lastUpdate: p.updatedAt || new Date().toISOString(),
