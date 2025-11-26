@@ -2,21 +2,24 @@
   "id": "proj1762872345620",
   "ownerId": "user2",
   "title": "Don Sillardo",
-  "status": "paused",
+  "status": "hold",
   "progress": 0,
   "icon": "🪑",
-  "currentPhase": "Se está generando material para una campaña que busca reducir juntas innecesarias y aprovechar mejor el tiempo, fomentando la innovación, la digitalización y el aprendizaje continuo para nutrir nuestra mente.aterial para la generacion de una campaña,que consiste en tratar de no tener tantan juntas sin sentido y aprovechar el  tiempo para poder inovar ,digitalizar y nutrir nuestra mente ",
-  "updatedAt": "2025-11-11T14:57:37.672Z",
+  "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
+  "updatedAt": "2025-11-25T21:02:42.206Z",
   "priority": "medium",
-  "targetDate": "2025-11-28",
   "achievements": {},
   "blockers": {
     "type": "info",
-    "message": "Actualmente, un miembro del equipo de Governance está trabajando en un proyecto similar, por lo que se nos solicitó detener el desarrollo de este proyecto hasta nuevo aviso."
+    "message": "A member of the Governance team is currently working on a similar initiative, so we were asked to pause development of this project until further notice."
   },
   "nextSteps": {},
+  "targetDate": "2025-11-28",
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T14:45:45.620Z"
+  "extraFiles": [],
+  "createdAt": "2025-11-11T14:45:45.620Z",
+  "ownerName": "Sandra Santos",
+  "concept": ""
 }

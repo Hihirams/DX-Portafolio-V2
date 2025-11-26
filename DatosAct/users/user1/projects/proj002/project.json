@@ -8,20 +8,20 @@
   "priority": "medium",
   "progress": 55,
   "targetDate": "2026-04-15",
-  "currentPhase": "Integración de detección y enlace IoT QueryLink (CSV automático)",
+  "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)",
   "achievements": {
-    "2025-08": "Arquitectura de flujo de video definida",
-    "2025-09": "Backend FastAPI y servidor local operativos",
-    "2025-10": "Pipeline de video validado + versión portable"
+    "2025-08": "Defined video flow architecture",
+    "2025-09": "FastAPI backend and local server operational",
+    "2025-10": "Validated video pipeline + portable version"
   },
   "blockers": {
     "type": "warning",
-    "message": "En HOLD por pruebas de compatibilidad del enlace IoT / CSV. Se espera resolución en 1-2 semanas."
+    "message": "On HOLD pending compatibility tests for the IoT / CSV link. Resolution expected in 1–2 weeks."
   },
   "nextSteps": {
-    "2025-11": "Finalizar integración IoT",
-    "2025-12": "Pruebas piloto con múltiples cámaras",
-    "2026-01": "Automatización y documentación final"
+    "2025-11": "Finalize IoT integration",
+    "2025-12": "Pilot tests with multiple cameras",
+    "2026-01": "Automation and final documentation"
   },
   "videos": [
     {
@@ -44,9 +44,9 @@
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-11-17T16:34:28.821Z",
+  "updatedAt": "2025-11-24T16:08:04.231Z",
   "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": ""
+  "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate "
 }

@@ -2,12 +2,13 @@
   "id": "proj1762875499999",
   "ownerId": "user2",
   "title": "Holograma 3D",
-  "icon": "🗾",
   "status": "discovery",
-  "priority": "low",
   "progress": 0,
+  "icon": "🗾",
+  "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
+  "updatedAt": "2025-11-25T21:03:06.541Z",
+  "priority": "low",
   "targetDate": "2025-11-11",
-  "currentPhase": "Crear imágenes tridimensionales 3D",
   "achievements": {},
   "blockers": {
     "type": "info",
@@ -18,5 +19,6 @@
   "videos": [],
   "images": [],
   "createdAt": "2025-11-11T15:38:19.999Z",
-  "updatedAt": "2025-11-11T15:38:19.999Z"
+  "extraFiles": [],
+  "concept": ""
 }

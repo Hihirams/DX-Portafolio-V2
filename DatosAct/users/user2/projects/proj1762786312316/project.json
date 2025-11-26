@@ -5,8 +5,8 @@
   "status": "hold",
   "progress": 50,
   "icon": "📈",
-  "currentPhase": "Validacion de propuesta de visualización de gastos por departamento en Power BI:\n•\tSe muestran gastos por mes y acumulado.\n•\tFiltros por departamento, cuarto fiscal y unidad de negocio.",
-  "updatedAt": "2025-11-11T14:28:49.867Z",
+  "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
+  "updatedAt": "2025-11-24T16:23:23.803Z",
   "priority": "low",
   "targetDate": "2025-11-10",
   "achievements": {},
@@ -21,13 +21,15 @@
   "videos": [],
   "images": [
     {
-      "src": "users/user2/projects/proj1762786312316/images/image_1762871329921_0.png",
+      "src": "users/user2/projects/proj1762786312316/images/image_1764001403830_0.png",
       "title": "Screenshot 2025-11-10 085025.png"
     },
     {
-      "src": "users/user2/projects/proj1762786312316/images/image_1762871329997_1.png",
+      "src": "users/user2/projects/proj1762786312316/images/image_1764001403891_1.png",
       "title": "Screenshot 2025-11-10 085033.png"
     }
   ],
-  "createdAt": "2025-11-10T14:51:52.316Z"
+  "createdAt": "2025-11-10T14:51:52.316Z",
+  "extraFiles": [],
+  "concept": ""
 }

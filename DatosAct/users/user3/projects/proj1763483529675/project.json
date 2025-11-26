@@ -1,0 +1,44 @@
+{
+  "id": "proj1763483529675",
+  "ownerId": "user3",
+  "title": "Whyzer",
+  "status": "in-progress",
+  "priority": "medium",
+  "progress": 80,
+  "icon": "📋",
+  "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
+  "achievements": {
+    "2025-11": "The agent attends the Copilot HUB Event at the request of the organizers and participants [Alpha Tester]. "
+  },
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "targetDate": "2025-12-19",
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-18T16:32:09.675Z",
+  "updatedAt": "2025-11-24T16:02:32.162Z",
+  "extraFiles": [
+    {
+      "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764000152418.pptx",
+      "title": "Innovation Zone Best Practice whyzer.pptx",
+      "fileName": "Innovation_Zone_Best_Practice__1764000152418.pptx",
+      "fileType": "application/octet-stream",
+      "fileSize": 0,
+      "extension": "pptx"
+    },
+    {
+      "src": "users/user3/projects/proj1763483529675/extra-files/Design_26_1764000153239.png",
+      "title": "Design 26.png",
+      "fileName": "Design_26_1764000153239.png",
+      "fileType": "image/png",
+      "fileSize": 0,
+      "extension": "png"
+    }
+  ],
+  "ownerName": "Miguel Coronado",
+  "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. "
+}

@@ -5,8 +5,8 @@
   "status": "completed",
   "progress": 100,
   "icon": "🧾",
-  "currentPhase": "Fases del Proyecto:\n•\tObtener la base de datos de XLS -> XLSX (Proveedor & Interno atreves de DX Team)\n•\tTransformar la DATA para obtener los datos necesarios. \n•\tGenerar La visualización Dashboard (En base a la PPT)\n•\tRealizar Pilots\n•\tEntregar a QDOC Team & mostrar funcionamiento, \n",
-  "updatedAt": "2025-11-10T15:08:28.780Z",
+  "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
+  "updatedAt": "2025-11-25T21:01:06.744Z",
   "priority": "low",
   "targetDate": "2025-11-10",
   "achievements": {},
@@ -18,5 +18,7 @@
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-10T15:08:02.420Z"
+  "createdAt": "2025-11-10T15:08:02.420Z",
+  "extraFiles": [],
+  "concept": ""
 }

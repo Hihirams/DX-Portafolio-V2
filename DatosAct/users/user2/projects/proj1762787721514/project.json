@@ -1,17 +1,19 @@
 {
   "id": "proj1762787721514",
   "ownerId": "user2",
-  "title": "Bot Innovation Zone",
-  "status": "discovery",
+  "title": "RoBot Innovation Zone",
+  "status": "in-progress",
   "progress": 30,
   "icon": "🧰",
-  "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-  "updatedAt": "2025-11-17T16:47:20.501Z",
+  "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
+  "updatedAt": "2025-11-25T21:02:12.526Z",
   "priority": "medium",
-  "achievements": {},
+  "achievements": {
+    "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
+  },
   "blockers": {
-    "type": "info",
-    "message": ""
+    "type": "warning",
+    "message": "The component quotes required to begin the movement phase have an estimated delivery time of 4 to 6 weeks."
   },
   "nextSteps": {},
   "targetDate": "2025-11-10",
@@ -19,20 +21,24 @@
   "videos": [],
   "images": [
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1763398040709_0.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1764104532650_0.png",
       "title": "RB1.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1763398041062_1.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1764104532704_1.png",
       "title": "RB2.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1763398041216_2.png",
-      "title": "RB3.png"
+      "src": "users/user2/projects/proj1762787721514/images/image_1764104532785_2.png",
+      "title": "imagen 1.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762787721514/images/image_1764104532863_3.png",
+      "title": "Slide1.JPG"
     }
   ],
   "extraFiles": [],
   "createdAt": "2025-11-10T15:15:21.514Z",
   "ownerName": "Sandra Santos",
-  "concept": ""
+  "concept": "Creation of a robot prototype designed to boost brand awareness at Innovation Zone."
 }

@@ -1,0 +1,24 @@
+{
+  "id": "proj1763483501019",
+  "ownerId": "user3",
+  "title": "Trace Link 360",
+  "status": "discovery",
+  "priority": "medium",
+  "progress": 40,
+  "icon": "🔗",
+  "currentPhase": "",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "targetDate": "2026-03-31",
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-18T16:31:41.019Z",
+  "updatedAt": "2025-11-18T16:35:27.097Z",
+  "extraFiles": [],
+  "concept": ""
+}

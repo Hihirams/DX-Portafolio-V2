@@ -9,8 +9,8 @@
       "priority": "high",
       "progress": 60,
       "icon": "🌐",
-      "currentPhase": "Preparación del piloto IoT/MES para mostrar KPIs en tiempo real dentro del entorno 3D de planta",
-      "updatedAt": "2025-11-17T16:31:02.588Z"
+      "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
+      "updatedAt": "2025-11-24T14:38:48.842Z"
     },
     {
       "id": "proj002",
@@ -21,8 +21,8 @@
       "priority": "medium",
       "progress": 55,
       "icon": "🧪",
-      "currentPhase": "Integración de detección y enlace IoT QueryLink (CSV automático)",
-      "updatedAt": "2025-11-17T16:34:28.821Z"
+      "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)",
+      "updatedAt": "2025-11-24T16:08:04.231Z"
     },
     {
       "id": "proj003",
@@ -33,8 +33,8 @@
       "priority": "medium",
       "progress": 45,
       "icon": "🎥",
-      "currentPhase": "Desarrollo de prototipo de detección de movimiento y modelos de reconocimiento",
-      "updatedAt": "2025-11-17T16:36:08.920Z"
+      "currentPhase": "Development of motion detection prototype and recognition models",
+      "updatedAt": "2025-11-24T16:17:18.135Z"
     },
     {
       "id": "proj004",
@@ -45,31 +45,32 @@
       "priority": "low",
       "progress": 20,
       "icon": "📋",
-      "currentPhase": "Explorar plataforma web interna para gestionar reportes MRM (Monthly Review Meeting) y compartir información entre departamentos",
-      "updatedAt": "2025-11-17T05:43:32.746Z"
+      "currentPhase": "Explore internal web platform to manage MRM (Monthly Review Meeting) reports and share information between departments",
+      "updatedAt": "2025-11-24T16:09:22.643Z"
     },
     {
       "id": "proj005",
       "title": "LorenzoBot",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "paused",
+      "status": "hold",
       "priority": "low",
       "progress": 85,
       "icon": "🤖",
-      "currentPhase": "Bot operativo en entorno local. Despliegue en HOLD por decisiones de infraestructura IT.",
-      "updatedAt": "2025-11-17T16:35:14.364Z"
+      "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
+      "updatedAt": "2025-11-25T20:57:13.660Z"
     },
     {
       "id": "proj1762463273285",
       "title": "YOKADX",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "in-progress",
-      "progress": 95,
+      "status": "completed",
+      "priority": "high",
+      "progress": 100,
       "icon": "📁",
-      "currentPhase": "Actualmente se encuentra en fase de despliegue. \nSe Programara una sesión con los gerentes para revisar el avance y los entregables del proyecto.\nEl objetivo de esta reunión es validar si se cumplen los criterios necesarios para proceder con la liberación hacia el usuario final...",
-      "updatedAt": 1762871227497
+      "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
+      "updatedAt": "2025-11-24T16:15:01.844Z"
     },
     {
       "id": "proj1762784041699",
@@ -77,10 +78,11 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "in-progress",
-      "progress": 50,
+      "priority": "medium",
+      "progress": 60,
       "icon": "📊",
-      "currentPhase": "Desarrollo modular de cada apartado del QE Data Center. Cada KPI requiere cumplir con los mismos componentes estructurados. Asi como un apartado en la pantalla principal y su respectivo formulario.\n- Lista SharePoint con datos estructurados.\n- Reporte Power BI conectado a la lista\n- Apartado en la pantalla principal (Power Apps)\n- Pantalla de formulario para actualización \n- (Opcional) Flujos automatizados en Power Automate",
-      "updatedAt": 1762785262325
+      "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
+      "updatedAt": "2025-11-24T16:22:13.755Z"
     },
     {
       "id": "proj1762786312316",
@@ -88,10 +90,11 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "hold",
+      "priority": "low",
       "progress": 50,
       "icon": "📈",
-      "currentPhase": "Validacion de propuesta de visualización de gastos por departamento en Power BI:\n•\tSe muestran gastos por mes y acumulado.\n•\tFiltros por departamento, cuarto fiscal y unidad de negocio.",
-      "updatedAt": 1762871330112
+      "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
+      "updatedAt": "2025-11-24T16:23:23.803Z"
     },
     {
       "id": "proj1762786524702",
@@ -110,10 +113,11 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "completed",
+      "priority": "medium",
       "progress": 95,
       "icon": "📦",
-      "currentPhase": "Unidad Piloto ME\nPruebas finales, validación de usuario y actualización de indicadores (FY25).\nImplementación y despliegue final (Versión FY25).\nCorrecion de errores y mejoras rapidas.\n",
-      "updatedAt": 1762871633978
+      "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
+      "updatedAt": "2025-11-25T21:00:40.633Z"
     },
     {
       "id": "proj1762787282420",
@@ -121,22 +125,23 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "completed",
+      "priority": "low",
       "progress": 100,
       "icon": "🧾",
-      "currentPhase": "Fases del Proyecto:\n•\tObtener la base de datos de XLS -> XLSX (Proveedor & Interno atreves de DX Team)\n•\tTransformar la DATA para obtener los datos necesarios. \n•\tGenerar La visualización Dashboard (En base a la PPT)\n•\tRealizar Pilots\n•\tEntregar a QDOC Team & mostrar funcionamiento, \n",
-      "updatedAt": 1762787308862
+      "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
+      "updatedAt": "2025-11-25T21:01:06.744Z"
     },
     {
       "id": "proj1762787721514",
-      "title": "Bot Innovation Zone",
+      "title": "RoBot Innovation Zone",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "discovery",
+      "status": "in-progress",
       "priority": "medium",
       "progress": 30,
       "icon": "🧰",
-      "currentPhase": "Actualmente, la estructura del robot está completamente terminada. El siguiente paso consiste en adquirir los materiales necesarios para dotarlo de movimiento, tales como motores, microcontroladores y componentes electrónicos adicionales. Una vez obtenidos estos elementos, se iniciarán las pruebas funcionales.",
-      "updatedAt": "2025-11-17T16:47:20.501Z"
+      "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
+      "updatedAt": "2025-11-25T21:02:12.526Z"
     },
     {
       "id": "proj1762868928286",
@@ -147,8 +152,8 @@
       "priority": "low",
       "progress": 10,
       "icon": "🕶",
-      "currentPhase": "En proceso de adquirir / liberar licencias de Microsoft Dynamics por parte IT.",
-      "updatedAt": "2025-11-17T05:43:39.447Z"
+      "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
+      "updatedAt": "2025-11-24T16:21:25.867Z"
     },
     {
       "id": "proj1762869515275",
@@ -156,21 +161,23 @@
       "ownerId": "user1",
       "ownerName": "Hiram González",
       "status": "in-progress",
+      "priority": "high",
       "progress": 80,
       "icon": "📊",
-      "currentPhase": "",
-      "updatedAt": 1762870587096
+      "currentPhase": "Implementation of Line P703 (Pilot Line)",
+      "updatedAt": "2025-11-24T16:20:11.590Z"
     },
     {
       "id": "proj1762872345620",
       "title": "Don Sillardo",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "paused",
+      "status": "hold",
+      "priority": "medium",
       "progress": 0,
       "icon": "🪑",
-      "currentPhase": "Se está generando material para una campaña que busca reducir juntas innecesarias y aprovechar mejor el tiempo, fomentando la innovación, la digitalización y el aprendizaje continuo para nutrir nuestra mente.aterial para la generacion de una campaña,que consiste en tratar de no tener tantan juntas sin sentido y aprovechar el  tiempo para poder inovar ,digitalizar y nutrir nuestra mente ",
-      "updatedAt": 1762873058105
+      "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
+      "updatedAt": "2025-11-25T21:02:42.206Z"
     },
     {
       "id": "proj1762875499999",
@@ -178,33 +185,141 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "discovery",
+      "priority": "low",
       "progress": 0,
       "icon": "🗾",
-      "currentPhase": "Crear imágenes tridimensionales 3D",
-      "updatedAt": 1762875500483
+      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
+      "updatedAt": "2025-11-25T21:03:06.541Z"
     },
     {
       "id": "proj1762876915703",
-      "title": "Portafolio Evidencias DX",
+      "title": "DX Evidence Portfolio",
       "ownerId": "user1",
       "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "medium",
       "progress": 54,
       "icon": "🖼",
-      "currentPhase": "Portafolio diseñado para el guardado y presentación de proeyctos actuales de área de DX\n\nFase Actual: Corrección de bugs en página de Edición de Proyectos",
-      "updatedAt": "2025-11-17T16:37:54.523Z"
+      "currentPhase": "Bug fixes on the Project Editing page",
+      "updatedAt": "2025-11-24T16:12:31.043Z"
+    },
+    {
+      "id": "proj1763483352243",
+      "title": "CR PDCA",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:29:12.243Z"
+    },
+    {
+      "id": "proj1763483378691",
+      "title": "CSR DX",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:29:38.691Z"
+    },
+    {
+      "id": "proj1763483412529",
+      "title": "ESC DX",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:30:12.529Z"
+    },
+    {
+      "id": "proj1763483430619",
+      "title": "MeetMind",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:30:30.619Z"
+    },
+    {
+      "id": "proj1763483450152",
+      "title": "QC ALT + Maper",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:30:50.152Z"
+    },
+    {
+      "id": "proj1763483501019",
+      "title": "Trace Link 360",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 40,
+      "icon": "🔗",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:35:27.097Z"
+    },
+    {
+      "id": "proj1763483513611",
+      "title": "MRM",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 0,
+      "icon": "📋",
+      "currentPhase": "",
+      "updatedAt": "2025-11-18T16:31:53.611Z"
+    },
+    {
+      "id": "proj1763483529675",
+      "title": "Whyzer",
+      "ownerId": "user3",
+      "ownerName": "Miguel Coronado",
+      "status": "in-progress",
+      "priority": "medium",
+      "progress": 80,
+      "icon": "📋",
+      "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
+      "updatedAt": "2025-11-24T16:02:32.162Z"
+    },
+    {
+      "id": "proj1763484801399",
+      "title": "Videos Creation",
+      "ownerId": "user2",
+      "ownerName": "Sandra Santos",
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 40,
+      "icon": "📋",
+      "currentPhase": "Suport ECU Ishue Investigation",
+      "updatedAt": "2025-11-25T21:03:16.250Z"
     }
   ],
   "stats": {
-    "totalProjects": 17,
-    "inProgress": 6,
-    "discovery": 5,
-    "hold": 2,
-    "completed": 2,
-    "paused": 2,
-    "totalUsers": 3,
-    "avgProgress": 49
+    "totalProjects": 26,
+    "inProgress": 8,
+    "discovery": 11,
+    "hold": 4,
+    "completed": 3,
+    "totalUsers": 5,
+    "avgProgress": 39
   },
-  "lastUpdated": "2025-11-17T16:47:21.759Z"
+  "lastUpdated": "2025-11-25T21:03:16.674Z"
 }

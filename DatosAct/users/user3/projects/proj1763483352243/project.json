@@ -1,0 +1,22 @@
+{
+  "id": "proj1763483352243",
+  "ownerId": "user3",
+  "title": "CR PDCA",
+  "icon": "📋",
+  "status": "discovery",
+  "priority": "medium",
+  "progress": 0,
+  "targetDate": "2025-11-18",
+  "currentPhase": "",
+  "achievements": {},
+  "blockers": {
+    "type": "info",
+    "message": ""
+  },
+  "nextSteps": {},
+  "ganttImage": "",
+  "videos": [],
+  "images": [],
+  "createdAt": "2025-11-18T16:29:12.243Z",
+  "updatedAt": "2025-11-18T16:29:12.243Z"
+}
