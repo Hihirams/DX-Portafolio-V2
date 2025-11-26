@@ -1,5 +1,5 @@
 :: ========================================
-::   Portfolio DX - Instalador (versión corregida)
+::   Portfolio DX - Instalador (con PNPM)
 :: ========================================
 
 @echo off
@@ -14,21 +14,32 @@ if %errorlevel% neq 0 (
 echo OK - Node.js encontrado
 echo.
 
-echo [2/3] Instalando dependencias...
-call npm install
+echo [2/3] Verificando PNPM...
+where pnpm >nul 2>nul
+if %errorlevel% neq 0 (
+    echo ERROR: PNPM no está instalado. Ejecuta:
+    echo    npm install -g pnpm
+    pause
+    exit /b
+)
+echo OK - PNPM encontrado
 echo.
 
 echo [3/3] Compilando ejecutable portable...
 if not exist ".cache" mkdir ".cache"
 
 set "ELECTRON_BUILDER_CACHE=%CD%\.cache"
-call npx electron-builder --win portable --x64
+
+:: 🔁 Antes era "npx electron-builder", ahora es:
+call pnpm exec electron-builder --win portable --x64
+
 if %errorlevel% neq 0 (
     echo.
-    echo ERROR: Fallo la compilacion
+    echo ❌ ERROR: Falló la compilación
     pause
     exit /b
 )
+
 echo.
-echo ✅ Compilacion finalizada correctamente
+echo ✅ Compilación finalizada correctamente
 pause
