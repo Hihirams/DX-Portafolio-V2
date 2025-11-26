@@ -1096,3 +1096,38 @@ body.light-theme .priority-warning strong {
 #priorityWarningText {
     flex: 1;
 }
+
+/* ==================== METRICS EDITOR ==================== */
+
+.metrics-editor-group {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--border-color);
+    border-radius: 12px;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+body.light-theme .metrics-editor-group {
+    background: rgba(0, 0, 0, 0.02);
+}
+
+.metrics-editor-group h3 {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin: 0 0 20px 0;
+}
+
+.metrics-editor-group:last-child {
+    margin-bottom: 0;
+}
+
+/* Adjust form inputs for better metrics appearance */
+.metrics-editor-group input[type="number"] {
+    text-align: right;
+    font-weight: 600;
+}
+
+.metrics-editor-group textarea {
+    min-height: 60px;
+}

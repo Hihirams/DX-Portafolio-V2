@@ -86,6 +86,9 @@
                     <button class="editor-nav-btn" data-section="media" onclick="switchSection('media')">
                         📹 Media
                     </button>
+                    <button class="editor-nav-btn" data-section="metrics" onclick="switchSection('metrics')">
+                        📊 Metrics
+                    </button>
                 </nav>
             </aside>
 
@@ -261,13 +264,118 @@
                         <h3>📎 Extra Files</h3>
                         <p class="subsection-description">Any type of file: PDF, Excel, PowerPoint, ZIP, etc.</p>
                         <div id="extraFilesPreview" class="media-preview">
-                            <!-- Se llenará dinámicamente -->
+                            <!-- Se llenarán dinámicamente -->
                         </div>
                         <button class="btn-add" onclick="uploadExtraFiles()">
                             + Add Files
                         </button>
                     </div>
-                </div> 
+                </div>
+
+                <!-- Sección: Métricas KPI -->
+                <div class="editor-section" id="section-metrics">
+                    <h2 class="section-title">📊 Project Metrics</h2>
+                    <p class="section-description">Configure key performance indicators for this project</p>
+
+                    <!-- KPIs Principales -->
+                    <div class="metrics-editor-group">
+                        <h3>📈 Main KPIs</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-totalHours">Total Hours Estimated</label>
+                                <input type="number" id="kpi-totalHours" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-hoursSpent">Hours Spent</label>
+                                <input type="number" id="kpi-hoursSpent" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-fteSaved">FTE Saved</label>
+                                <input type="number" id="kpi-fteSaved" min="0" step="0.1" placeholder="0.0">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-completion">Completion %</label>
+                                <input type="number" id="kpi-completion" min="0" max="100" placeholder="0">
+                                <small>Should match project progress</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Timeline -->
+                    <div class="metrics-editor-group">
+                        <h3>📅 Timeline</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-startDate">Start Date</label>
+                                <input type="date" id="kpi-startDate">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-targetEnd">Target End Date</label>
+                                <input type="date" id="kpi-targetEnd">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kpi-currentPhase">Current Phase Description</label>
+                            <textarea id="kpi-currentPhase" rows="2" placeholder="Describe the current phase..."></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Resources -->
+                    <div class="metrics-editor-group">
+                        <h3>👥 Resource Allocation</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-engineerHours">Software Engineer Hours</label>
+                                <input type="number" id="kpi-engineerHours" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-testingHours">Testing & QA Hours</label>
+                                <input type="number" id="kpi-testingHours" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-managementHours">Project Management Hours</label>
+                                <input type="number" id="kpi-managementHours" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-remainingHours">Remaining Hours</label>
+                                <input type="number" id="kpi-remainingHours" min="0" placeholder="0">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Performance Metrics -->
+                    <div class="metrics-editor-group">
+                        <h3>🎯 Performance Metrics</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-tasksCompleted">Tasks Completed</label>
+                                <input type="number" id="kpi-tasksCompleted" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-totalTasks">Total Tasks</label>
+                                <input type="number" id="kpi-totalTasks" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="kpi-milestonesOnTime">Milestones On Time</label>
+                                <input type="number" id="kpi-milestonesOnTime" min="0" placeholder="0">
+                            </div>
+                            <div class="form-group">
+                                <label for="kpi-totalMilestones">Total Milestones</label>
+                                <input type="number" id="kpi-totalMilestones" min="0" placeholder="0">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="kpi-resourceUtilization">Resource Utilization %</label>
+                            <input type="number" id="kpi-resourceUtilization" min="0" max="100" placeholder="0">
+                        </div>
+                    </div>
+                </div>
             </section>
 
         </div>

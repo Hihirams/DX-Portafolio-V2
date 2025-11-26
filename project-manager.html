@@ -369,6 +369,14 @@
                     </svg>
                     Files
                 </button>
+                <!-- ✅ NUEVO BOTÓN METRICS -->
+                <button class="resource-btn resource-btn-metrics" onclick="openResourceMetrics()">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M2 12L6 8L9 11L14 6"/>
+                        <path d="M10 6H14V10"/>
+                    </svg>
+                    Metrics
+                </button>
             </div>
         </div>
     </div>
@@ -420,6 +428,176 @@
             </div>
         </div>
     </div>
+
+<!-- MODAL DE MÉTRICAS KPI -->
+<div class="analytics-modal" id="metricsViewModal">
+    <div class="modal-overlay" onclick="closeMetricsViewModal()"></div>
+    <div class="modal-content metrics-modal-wrapper">
+        <div class="modal-header">
+            <div class="modal-title-section">
+                <h2 class="modal-title" id="metricsViewTitle">Project Metrics</h2>
+                <p class="modal-subtitle" id="metricsViewSubtitle">Key Performance Indicators</p>
+            </div>
+            <button class="modal-close" onclick="closeMetricsViewModal()">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                </svg>
+            </button>
+        </div>
+
+        <div class="modal-body" id="metricsViewBody">
+            <!-- KPIs Grid -->
+            <div class="metrics-kpi-grid">
+                <div class="metrics-kpi-card">
+                    <div class="metrics-kpi-icon" style="background: rgba(102, 126, 234, 0.15);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <div class="metrics-kpi-content">
+                        <div class="metrics-kpi-label">Total Hours</div>
+                        <div class="metrics-kpi-value" id="metric-totalHours">0</div>
+                    </div>
+                </div>
+
+                <div class="metrics-kpi-card">
+                    <div class="metrics-kpi-icon" style="background: rgba(255, 159, 10, 0.15);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff9f0a" stroke-width="2">
+                            <path d="M12 2v20M2 12h20"/>
+                        </svg>
+                    </div>
+                    <div class="metrics-kpi-content">
+                        <div class="metrics-kpi-label">Hours Spent</div>
+                        <div class="metrics-kpi-value" id="metric-hoursSpent">0</div>
+                    </div>
+                </div>
+
+                <div class="metrics-kpi-card">
+                    <div class="metrics-kpi-icon" style="background: rgba(52, 199, 89, 0.15);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34c759" stroke-width="2">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                            <polyline points="22 4 12 14.01 9 11.01"/>
+                        </svg>
+                    </div>
+                    <div class="metrics-kpi-content">
+                        <div class="metrics-kpi-label">FTE Saved</div>
+                        <div class="metrics-kpi-value" id="metric-fteSaved">0</div>
+                    </div>
+                </div>
+
+                <div class="metrics-kpi-card">
+                    <div class="metrics-kpi-icon" style="background: rgba(191, 90, 242, 0.15);">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bf5af2" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M12 6v6l4 2"/>
+                        </svg>
+                    </div>
+                    <div class="metrics-kpi-content">
+                        <div class="metrics-kpi-label">Completion</div>
+                        <div class="metrics-kpi-value" id="metric-completion">0%</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Timeline Section -->
+            <div class="metrics-section">
+                <h4 class="metrics-section-title">Timeline</h4>
+                <div class="metrics-timeline-grid">
+                    <div class="metrics-timeline-item">
+                        <div class="metrics-timeline-label">Start Date</div>
+                        <div class="metrics-timeline-value" id="metric-startDate">—</div>
+                    </div>
+                    <div class="metrics-timeline-item">
+                        <div class="metrics-timeline-label">Target End</div>
+                        <div class="metrics-timeline-value" id="metric-targetEnd">—</div>
+                    </div>
+                    <div class="metrics-timeline-item metrics-timeline-full">
+                        <div class="metrics-timeline-label">Current Phase</div>
+                        <div class="metrics-timeline-value" id="metric-currentPhase">—</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Resources Section -->
+            <div class="metrics-section">
+                <h4 class="metrics-section-title">Resources Allocation</h4>
+                <div class="metrics-resources-grid">
+                    <div class="metrics-resource-bar">
+                        <div class="metrics-resource-label">
+                            <span>Software Engineering</span>
+                            <span class="metrics-resource-hours" id="metric-engineerHours">0h</span>
+                        </div>
+                        <div class="metrics-resource-progress">
+                            <div class="metrics-resource-fill" id="metric-engineerBar" style="width: 0%; background: #667eea;"></div>
+                        </div>
+                    </div>
+                    <div class="metrics-resource-bar">
+                        <div class="metrics-resource-label">
+                            <span>Testing & QA</span>
+                            <span class="metrics-resource-hours" id="metric-testingHours">0h</span>
+                        </div>
+                        <div class="metrics-resource-progress">
+                            <div class="metrics-resource-fill" id="metric-testingBar" style="width: 0%; background: #ff9f0a;"></div>
+                        </div>
+                    </div>
+                    <div class="metrics-resource-bar">
+                        <div class="metrics-resource-label">
+                            <span>Project Management</span>
+                            <span class="metrics-resource-hours" id="metric-managementHours">0h</span>
+                        </div>
+                        <div class="metrics-resource-progress">
+                            <div class="metrics-resource-fill" id="metric-managementBar" style="width: 0%; background: #34c759;"></div>
+                        </div>
+                    </div>
+                    <div class="metrics-resource-bar">
+                        <div class="metrics-resource-label">
+                            <span>Remaining Hours</span>
+                            <span class="metrics-resource-hours" id="metric-remainingHours">0h</span>
+                        </div>
+                        <div class="metrics-resource-progress">
+                            <div class="metrics-resource-fill" id="metric-remainingBar" style="width: 0%; background: #bf5af2;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Performance Metrics -->
+            <div class="metrics-section">
+                <h4 class="metrics-section-title">Performance Metrics</h4>
+                <div class="metrics-performance-grid">
+                    <div class="metrics-metric-item">
+                        <div class="metrics-metric-label">Tasks Completed</div>
+                        <div class="metrics-metric-value">
+                            <span id="metric-tasksCompleted">0</span> / <span id="metric-totalTasks">0</span>
+                        </div>
+                        <div class="metrics-metric-progress">
+                            <div class="metrics-metric-fill" id="metric-tasksBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="metrics-metric-item">
+                        <div class="metrics-metric-label">Milestones On Time</div>
+                        <div class="metrics-metric-value">
+                            <span id="metric-milestonesOnTime">0</span> / <span id="metric-totalMilestones">0</span>
+                        </div>
+                        <div class="metrics-metric-progress">
+                            <div class="metrics-metric-fill" id="metric-milestonesBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                    <div class="metrics-metric-item">
+                        <div class="metrics-metric-label">Resource Utilization</div>
+                        <div class="metrics-metric-value">
+                            <span id="metric-resourceUtilization">0</span>%
+                        </div>
+                        <div class="metrics-metric-progress">
+                            <div class="metrics-metric-fill" id="metric-utilizationBar" style="width: 0%;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="js/file-manager.js"></script>

@@ -472,6 +472,84 @@ function closeFilesViewModal() {
     document.getElementById('filesViewModal').classList.remove('active');
 }
 
+// ==================== METRICS RESOURCE ====================
+
+async function openResourceMetrics() {
+    if (!currentResourceProject) return;
+
+    const project = currentResourceProject._original;
+
+    // ✅ Validar si tiene KPIs
+    if (!project.kpis) {
+        console.warn('⚠️ This project has no metrics data');
+        alert('This project has no metrics available');
+        return;
+    }
+
+    try {
+        const modal = document.getElementById('metricsViewModal');
+        const title = document.getElementById('metricsViewTitle');
+        const subtitle = document.getElementById('metricsViewSubtitle');
+
+        title.textContent = `${currentResourceProject.name}`;
+        subtitle.textContent = 'Key Performance Indicators';
+
+        // ✅ KPIs principales
+        document.getElementById('metric-totalHours').textContent = project.kpis.totalHoursEstimated || '0';
+        document.getElementById('metric-hoursSpent').textContent = project.kpis.hoursSpent || '0';
+        document.getElementById('metric-fteSaved').textContent = project.kpis.fteSaved || '0';
+        document.getElementById('metric-completion').textContent = `${project.kpis.completion || 0}%`;
+
+        // ✅ Timeline
+        document.getElementById('metric-startDate').textContent = formatDate(project.kpis.timeline?.startDate) || '—';
+        document.getElementById('metric-targetEnd').textContent = formatDate(project.kpis.timeline?.targetEnd) || '—';
+        document.getElementById('metric-currentPhase').textContent = project.kpis.timeline?.currentPhase || '—';
+
+        // ✅ Resources con barras de progreso
+        const totalHours = project.kpis.totalHoursEstimated || 1;
+        const resources = project.kpis.resources || {};
+
+        document.getElementById('metric-engineerHours').textContent = `${resources.softwareEngineerHours || 0}h`;
+        document.getElementById('metric-engineerBar').style.width = `${(resources.softwareEngineerHours / totalHours * 100) || 0}%`;
+
+        document.getElementById('metric-testingHours').textContent = `${resources.testingQAHours || 0}h`;
+        document.getElementById('metric-testingBar').style.width = `${(resources.testingQAHours / totalHours * 100) || 0}%`;
+
+        document.getElementById('metric-managementHours').textContent = `${resources.projectManagementHours || 0}h`;
+        document.getElementById('metric-managementBar').style.width = `${(resources.projectManagementHours / totalHours * 100) || 0}%`;
+
+        document.getElementById('metric-remainingHours').textContent = `${resources.remainingHours || 0}h`;
+        document.getElementById('metric-remainingBar').style.width = `${(resources.remainingHours / totalHours * 100) || 0}%`;
+
+        // ✅ Performance Metrics
+        const metrics = project.kpis.metrics || {};
+
+        document.getElementById('metric-tasksCompleted').textContent = metrics.tasksCompleted || 0;
+        document.getElementById('metric-totalTasks').textContent = metrics.totalTasks || 0;
+        const tasksPercent = metrics.totalTasks ? (metrics.tasksCompleted / metrics.totalTasks * 100) : 0;
+        document.getElementById('metric-tasksBar').style.width = `${tasksPercent}%`;
+
+        document.getElementById('metric-milestonesOnTime').textContent = metrics.milestonesOnTime || 0;
+        document.getElementById('metric-totalMilestones').textContent = metrics.totalMilestones || 0;
+        const milestonesPercent = metrics.totalMilestones ? (metrics.milestonesOnTime / metrics.totalMilestones * 100) : 0;
+        document.getElementById('metric-milestonesBar').style.width = `${milestonesPercent}%`;
+
+        document.getElementById('metric-resourceUtilization').textContent = metrics.resourceUtilization || 0;
+        document.getElementById('metric-utilizationBar').style.width = `${metrics.resourceUtilization || 0}%`;
+
+        closeResourcesModal();
+        modal.classList.add('active');
+
+    } catch (error) {
+        console.error('Error loading metrics:', error);
+        alert('Error loading project metrics');
+    }
+}
+
+function closeMetricsViewModal() {
+    document.getElementById('metricsViewModal').classList.remove('active');
+}
+
 // ==================== MEDIA UTILITIES ====================
 
 function openImageFullscreen(src, title) {

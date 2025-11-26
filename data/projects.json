@@ -55,7 +55,31 @@
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made.",
-      "priorityNumber": 1
+      "priorityNumber": 1,
+      "kpis": {
+        "totalHoursEstimated": 766,
+        "hoursSpent": 459,
+        "fteSaved": 3.5,
+        "completion": 60,
+        "timeline": {
+          "startDate": "2025-08-01",
+          "targetEnd": "2026-09-15",
+          "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment"
+        },
+        "resources": {
+          "softwareEngineerHours": 229,
+          "testingQAHours": 137,
+          "projectManagementHours": 93,
+          "remainingHours": 307
+        },
+        "metrics": {
+          "tasksCompleted": 32,
+          "totalTasks": 54,
+          "milestonesOnTime": 9,
+          "totalMilestones": 12,
+          "resourceUtilization": 89
+        }
+      }
     },
     {
       "id": "proj002",
@@ -108,7 +132,31 @@
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate ",
-      "priorityNumber": 2
+      "priorityNumber": 2,
+      "kpis": {
+        "totalHoursEstimated": 716,
+        "hoursSpent": 393,
+        "fteSaved": 2.3,
+        "completion": 55,
+        "timeline": {
+          "startDate": "2025-08-01",
+          "targetEnd": "2026-04-15",
+          "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)"
+        },
+        "resources": {
+          "softwareEngineerHours": 196,
+          "testingQAHours": 117,
+          "projectManagementHours": 80,
+          "remainingHours": 323
+        },
+        "metrics": {
+          "tasksCompleted": 29,
+          "totalTasks": 54,
+          "milestonesOnTime": 6,
+          "totalMilestones": 9,
+          "resourceUtilization": 77
+        }
+      }
     },
     {
       "id": "proj003",
@@ -176,7 +224,31 @@
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors.",
-      "priorityNumber": 3
+      "priorityNumber": 3,
+      "kpis": {
+        "totalHoursEstimated": 903,
+        "hoursSpent": 406,
+        "fteSaved": 1.7,
+        "completion": 45,
+        "timeline": {
+          "startDate": "2025-10-01",
+          "targetEnd": "2026-10-30",
+          "currentPhase": "Development of motion detection prototype and recognition models"
+        },
+        "resources": {
+          "softwareEngineerHours": 203,
+          "testingQAHours": 121,
+          "projectManagementHours": 82,
+          "remainingHours": 497
+        },
+        "metrics": {
+          "tasksCompleted": 23,
+          "totalTasks": 53,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 71
+        }
+      }
     },
     {
       "id": "proj004",
@@ -209,7 +281,31 @@
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting",
-      "priorityNumber": 4
+      "priorityNumber": 4,
+      "kpis": {
+        "totalHoursEstimated": 866,
+        "hoursSpent": 173,
+        "fteSaved": 1.6,
+        "completion": 20,
+        "timeline": {
+          "startDate": "2025-10-15",
+          "targetEnd": "2026-06-30",
+          "currentPhase": "Explore internal web platform to manage MRM (Monthly Review Meeting) reports and share information between departments"
+        },
+        "resources": {
+          "softwareEngineerHours": 86,
+          "testingQAHours": 51,
+          "projectManagementHours": 36,
+          "remainingHours": 693
+        },
+        "metrics": {
+          "tasksCompleted": 6,
+          "totalTasks": 34,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 92
+        }
+      }
     },
     {
       "id": "proj005",
@@ -260,7 +356,31 @@
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]",
-      "priorityNumber": 5
+      "priorityNumber": 5,
+      "kpis": {
+        "totalHoursEstimated": 913,
+        "hoursSpent": 776,
+        "fteSaved": 2.5,
+        "completion": 85,
+        "timeline": {
+          "startDate": "2025-06-01",
+          "targetEnd": "2026-03-15",
+          "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions."
+        },
+        "resources": {
+          "softwareEngineerHours": 388,
+          "testingQAHours": 232,
+          "projectManagementHours": 156,
+          "remainingHours": 137
+        },
+        "metrics": {
+          "tasksCompleted": 56,
+          "totalTasks": 66,
+          "milestonesOnTime": 9,
+          "totalMilestones": 12,
+          "resourceUtilization": 85
+        }
+      }
     },
     {
       "id": "proj1762463273285",
@@ -290,7 +410,31 @@
       "createdAt": "2025-11-06T21:07:53.285Z",
       "ownerName": "Sandra Santos",
       "concept": "Library on a SharePoint site where you can find Yokoniramis & Kakotora and other important topics for QP",
-      "priorityNumber": 6
+      "priorityNumber": 6,
+      "kpis": {
+        "totalHoursEstimated": 924,
+        "hoursSpent": 924,
+        "fteSaved": 0.6,
+        "completion": 100,
+        "timeline": {
+          "startDate": "2025-11-06T21:07:53.285Z",
+          "targetEnd": "2025-11-21",
+          "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release."
+        },
+        "resources": {
+          "softwareEngineerHours": 462,
+          "testingQAHours": 277,
+          "projectManagementHours": 185,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 34,
+          "totalTasks": 34,
+          "milestonesOnTime": 8,
+          "totalMilestones": 11,
+          "resourceUtilization": 72
+        }
+      }
     },
     {
       "id": "proj1762784041699",
@@ -316,7 +460,31 @@
       "createdAt": "2025-11-10T14:14:01.699Z",
       "ownerName": "Sandra Santos",
       "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts ",
-      "priorityNumber": 7
+      "priorityNumber": 7,
+      "kpis": {
+        "totalHoursEstimated": 721,
+        "hoursSpent": 432,
+        "fteSaved": 2.3,
+        "completion": 60,
+        "timeline": {
+          "startDate": "2025-11-10T14:14:01.699Z",
+          "targetEnd": "2025-11-21",
+          "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows."
+        },
+        "resources": {
+          "softwareEngineerHours": 216,
+          "testingQAHours": 129,
+          "projectManagementHours": 87,
+          "remainingHours": 289
+        },
+        "metrics": {
+          "tasksCompleted": 20,
+          "totalTasks": 34,
+          "milestonesOnTime": 6,
+          "totalMilestones": 9,
+          "resourceUtilization": 92
+        }
+      }
     },
     {
       "id": "proj1762786312316",
@@ -353,7 +521,31 @@
       "createdAt": "2025-11-10T14:51:52.316Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 8
+      "priorityNumber": 8,
+      "kpis": {
+        "totalHoursEstimated": 835,
+        "hoursSpent": 417,
+        "fteSaved": 1.8,
+        "completion": 50,
+        "timeline": {
+          "startDate": "2025-11-10T14:51:52.316Z",
+          "targetEnd": "2025-11-10",
+          "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit."
+        },
+        "resources": {
+          "softwareEngineerHours": 208,
+          "testingQAHours": 125,
+          "projectManagementHours": 84,
+          "remainingHours": 418
+        },
+        "metrics": {
+          "tasksCompleted": 27,
+          "totalTasks": 55,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 72
+        }
+      }
     },
     {
       "id": "proj1762786524702",
@@ -364,7 +556,31 @@
       "icon": "🧾",
       "currentPhase": "",
       "updatedAt": 1762787494930,
-      "priorityNumber": 9
+      "priorityNumber": 9,
+      "kpis": {
+        "totalHoursEstimated": 831,
+        "hoursSpent": 0,
+        "fteSaved": 3.6,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2024-01-15",
+          "targetEnd": "2024-12-31",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 831
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 41,
+          "milestonesOnTime": 8,
+          "totalMilestones": 11,
+          "resourceUtilization": 87
+        }
+      }
     },
     {
       "id": "proj1762786983969",
@@ -392,7 +608,31 @@
       "createdAt": "2025-11-10T15:03:03.969Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 10
+      "priorityNumber": 10,
+      "kpis": {
+        "totalHoursEstimated": 650,
+        "hoursSpent": 617,
+        "fteSaved": 2.5,
+        "completion": 95,
+        "timeline": {
+          "startDate": "2025-11-10T15:03:03.969Z",
+          "targetEnd": "2025-11-10",
+          "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed."
+        },
+        "resources": {
+          "softwareEngineerHours": 308,
+          "testingQAHours": 185,
+          "projectManagementHours": 124,
+          "remainingHours": 33
+        },
+        "metrics": {
+          "tasksCompleted": 37,
+          "totalTasks": 39,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 73
+        }
+      }
     },
     {
       "id": "proj1762787282420",
@@ -418,7 +658,31 @@
       "createdAt": "2025-11-10T15:08:02.420Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 11
+      "priorityNumber": 11,
+      "kpis": {
+        "totalHoursEstimated": 720,
+        "hoursSpent": 720,
+        "fteSaved": 3.6,
+        "completion": 100,
+        "timeline": {
+          "startDate": "2025-11-10T15:08:02.420Z",
+          "targetEnd": "2025-11-10",
+          "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality."
+        },
+        "resources": {
+          "softwareEngineerHours": 360,
+          "testingQAHours": 216,
+          "projectManagementHours": 144,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 66,
+          "totalTasks": 66,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 84
+        }
+      }
     },
     {
       "id": "proj1762787721514",
@@ -463,7 +727,31 @@
       "createdAt": "2025-11-10T15:15:21.514Z",
       "ownerName": "Sandra Santos",
       "concept": "Creation of a robot prototype to generate brand awareness at Izone",
-      "priorityNumber": 12
+      "priorityNumber": 12,
+      "kpis": {
+        "totalHoursEstimated": 655,
+        "hoursSpent": 196,
+        "fteSaved": 1.7,
+        "completion": 30,
+        "timeline": {
+          "startDate": "2025-11-10T15:15:21.514Z",
+          "targetEnd": "2025-11-10",
+          "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin."
+        },
+        "resources": {
+          "softwareEngineerHours": 98,
+          "testingQAHours": 58,
+          "projectManagementHours": 40,
+          "remainingHours": 459
+        },
+        "metrics": {
+          "tasksCompleted": 10,
+          "totalTasks": 34,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 93
+        }
+      }
     },
     {
       "id": "proj1762868928286",
@@ -489,7 +777,31 @@
       "createdAt": "2025-11-11T13:48:48.286Z",
       "ownerName": "Hiram González",
       "concept": "A HoloLens 2 project creating an interactive AR interface that guides operators with hands-free instructions, real-time overlays, and remote support to improve productivity and reduce errors.",
-      "priorityNumber": 13
+      "priorityNumber": 13,
+      "kpis": {
+        "totalHoursEstimated": 624,
+        "hoursSpent": 62,
+        "fteSaved": 2.3,
+        "completion": 10,
+        "timeline": {
+          "startDate": "2025-11-11T13:48:48.286Z",
+          "targetEnd": "2025-11-11",
+          "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT"
+        },
+        "resources": {
+          "softwareEngineerHours": 31,
+          "testingQAHours": 18,
+          "projectManagementHours": 13,
+          "remainingHours": 562
+        },
+        "metrics": {
+          "tasksCompleted": 6,
+          "totalTasks": 61,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 72
+        }
+      }
     },
     {
       "id": "proj1762869515275",
@@ -519,7 +831,31 @@
       "createdAt": "2025-11-11T13:58:35.275Z",
       "ownerName": "Hiram González",
       "concept": "Real-time platform showing production line incidents in a dome dashboard, highlighting alerts and trends for quick decision-making.",
-      "priorityNumber": 14
+      "priorityNumber": 14,
+      "kpis": {
+        "totalHoursEstimated": 682,
+        "hoursSpent": 545,
+        "fteSaved": 2.9,
+        "completion": 80,
+        "timeline": {
+          "startDate": "2025-11-11T13:58:35.275Z",
+          "targetEnd": "2025-11-11",
+          "currentPhase": "Implementation of Line P703 (Pilot Line)"
+        },
+        "resources": {
+          "softwareEngineerHours": 272,
+          "testingQAHours": 163,
+          "projectManagementHours": 110,
+          "remainingHours": 137
+        },
+        "metrics": {
+          "tasksCompleted": 24,
+          "totalTasks": 30,
+          "milestonesOnTime": 6,
+          "totalMilestones": 9,
+          "resourceUtilization": 73
+        }
+      }
     },
     {
       "id": "proj1762872345620",
@@ -545,7 +881,31 @@
       "createdAt": "2025-11-11T14:45:45.620Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 15
+      "priorityNumber": 15,
+      "kpis": {
+        "totalHoursEstimated": 790,
+        "hoursSpent": 0,
+        "fteSaved": 3.2,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-11T14:45:45.620Z",
+          "targetEnd": "2025-11-28",
+          "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing."
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 790
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 69,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 89
+        }
+      }
     },
     {
       "id": "proj1762875499999",
@@ -571,7 +931,31 @@
       "createdAt": "2025-11-11T15:38:19.999Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 16
+      "priorityNumber": 16,
+      "kpis": {
+        "totalHoursEstimated": 952,
+        "hoursSpent": 0,
+        "fteSaved": 1.9,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-11T15:38:19.999Z",
+          "targetEnd": "2025-11-11",
+          "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components."
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 952
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 63,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 87
+        }
+      }
     },
     {
       "id": "proj1762876915703",
@@ -611,7 +995,31 @@
       "createdAt": "2025-11-11T16:01:55.703Z",
       "ownerName": "Hiram González",
       "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
-      "priorityNumber": 17
+      "priorityNumber": 17,
+      "kpis": {
+        "totalHoursEstimated": 995,
+        "hoursSpent": 537,
+        "fteSaved": 1.5,
+        "completion": 54,
+        "timeline": {
+          "startDate": "2025-11-11T16:01:55.703Z",
+          "targetEnd": "2026-01-30",
+          "currentPhase": "Bug fixes on the Project Editing page"
+        },
+        "resources": {
+          "softwareEngineerHours": 268,
+          "testingQAHours": 161,
+          "projectManagementHours": 108,
+          "remainingHours": 458
+        },
+        "metrics": {
+          "tasksCompleted": 29,
+          "totalTasks": 54,
+          "milestonesOnTime": 9,
+          "totalMilestones": 12,
+          "resourceUtilization": 86
+        }
+      }
     },
     {
       "id": "proj1763483352243",
@@ -634,7 +1042,31 @@
       "images": [],
       "createdAt": "2025-11-18T16:29:12.243Z",
       "updatedAt": "2025-11-18T16:29:12.243Z",
-      "priorityNumber": 18
+      "priorityNumber": 18,
+      "kpis": {
+        "totalHoursEstimated": 793,
+        "hoursSpent": 0,
+        "fteSaved": 1,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-18T16:29:12.243Z",
+          "targetEnd": "2025-11-18",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 793
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 45,
+          "milestonesOnTime": 9,
+          "totalMilestones": 12,
+          "resourceUtilization": 71
+        }
+      }
     },
     {
       "id": "proj1763483378691",
@@ -657,7 +1089,31 @@
       "images": [],
       "createdAt": "2025-11-18T16:29:38.691Z",
       "updatedAt": "2025-11-18T16:29:38.691Z",
-      "priorityNumber": 19
+      "priorityNumber": 19,
+      "kpis": {
+        "totalHoursEstimated": 989,
+        "hoursSpent": 0,
+        "fteSaved": 3.6,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-18T16:29:38.691Z",
+          "targetEnd": "2025-11-18",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 989
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 56,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 80
+        }
+      }
     },
     {
       "id": "proj1763483412529",
@@ -680,7 +1136,31 @@
       "images": [],
       "createdAt": "2025-11-18T16:30:12.529Z",
       "updatedAt": "2025-11-18T16:30:12.529Z",
-      "priorityNumber": 20
+      "priorityNumber": 20,
+      "kpis": {
+        "totalHoursEstimated": 931,
+        "hoursSpent": 0,
+        "fteSaved": 1.1,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-18T16:30:12.529Z",
+          "targetEnd": "2025-11-18",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 931
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 36,
+          "milestonesOnTime": 8,
+          "totalMilestones": 11,
+          "resourceUtilization": 77
+        }
+      }
     },
     {
       "id": "proj1763483430619",
@@ -703,7 +1183,31 @@
       "images": [],
       "createdAt": "2025-11-18T16:30:30.619Z",
       "updatedAt": "2025-11-18T16:30:30.619Z",
-      "priorityNumber": 21
+      "priorityNumber": 21,
+      "kpis": {
+        "totalHoursEstimated": 866,
+        "hoursSpent": 0,
+        "fteSaved": 3.8,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-18T16:30:30.619Z",
+          "targetEnd": "2025-11-18",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 866
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 56,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 76
+        }
+      }
     },
     {
       "id": "proj1763483450152",
@@ -726,7 +1230,31 @@
       "images": [],
       "createdAt": "2025-11-18T16:30:50.152Z",
       "updatedAt": "2025-11-18T16:30:50.152Z",
-      "priorityNumber": 22
+      "priorityNumber": 22,
+      "kpis": {
+        "totalHoursEstimated": 609,
+        "hoursSpent": 0,
+        "fteSaved": 3.4,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-18T16:30:50.152Z",
+          "targetEnd": "2025-11-18",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 609
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 58,
+          "milestonesOnTime": 7,
+          "totalMilestones": 10,
+          "resourceUtilization": 90
+        }
+      }
     },
     {
       "id": "proj1763483501019",
@@ -752,7 +1280,31 @@
       "extraFiles": [],
       "ownerName": "Miguel Coronado",
       "concept": "",
-      "priorityNumber": 23
+      "priorityNumber": 23,
+      "kpis": {
+        "totalHoursEstimated": 684,
+        "hoursSpent": 273,
+        "fteSaved": 3.1,
+        "completion": 40,
+        "timeline": {
+          "startDate": "2025-11-18T16:31:41.019Z",
+          "targetEnd": "2026-03-31",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 136,
+          "testingQAHours": 81,
+          "projectManagementHours": 56,
+          "remainingHours": 411
+        },
+        "metrics": {
+          "tasksCompleted": 16,
+          "totalTasks": 42,
+          "milestonesOnTime": 8,
+          "totalMilestones": 11,
+          "resourceUtilization": 73
+        }
+      }
     },
     {
       "id": "proj1763483513611",
@@ -775,7 +1327,31 @@
       "images": [],
       "createdAt": "2025-11-18T16:31:53.611Z",
       "updatedAt": "2025-11-18T16:31:53.611Z",
-      "priorityNumber": 24
+      "priorityNumber": 24,
+      "kpis": {
+        "totalHoursEstimated": 637,
+        "hoursSpent": 0,
+        "fteSaved": 3.4,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-18T16:31:53.611Z",
+          "targetEnd": "2025-11-18",
+          "currentPhase": "Development"
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 637
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 38,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 87
+        }
+      }
     },
     {
       "id": "proj1763483529675",
@@ -820,7 +1396,31 @@
       ],
       "ownerName": "Miguel Coronado",
       "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. ",
-      "priorityNumber": 25
+      "priorityNumber": 25,
+      "kpis": {
+        "totalHoursEstimated": 719,
+        "hoursSpent": 575,
+        "fteSaved": 2.6,
+        "completion": 80,
+        "timeline": {
+          "startDate": "2025-11-18T16:32:09.675Z",
+          "targetEnd": "2025-12-19",
+          "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it."
+        },
+        "resources": {
+          "softwareEngineerHours": 287,
+          "testingQAHours": 172,
+          "projectManagementHours": 116,
+          "remainingHours": 144
+        },
+        "metrics": {
+          "tasksCompleted": 30,
+          "totalTasks": 38,
+          "milestonesOnTime": 9,
+          "totalMilestones": 12,
+          "resourceUtilization": 83
+        }
+      }
     },
     {
       "id": "proj1763484801399",
@@ -850,7 +1450,31 @@
       "extraFiles": [],
       "ownerName": "Sandra Santos",
       "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]",
-      "priorityNumber": 26
+      "priorityNumber": 26,
+      "kpis": {
+        "totalHoursEstimated": 727,
+        "hoursSpent": 290,
+        "fteSaved": 2.1,
+        "completion": 40,
+        "timeline": {
+          "startDate": "2025-11-18T16:53:21.399Z",
+          "targetEnd": "2025-11-27",
+          "currentPhase": "Suport ECU Ishue Investigation"
+        },
+        "resources": {
+          "softwareEngineerHours": 145,
+          "testingQAHours": 87,
+          "projectManagementHours": 58,
+          "remainingHours": 437
+        },
+        "metrics": {
+          "tasksCompleted": 14,
+          "totalTasks": 36,
+          "milestonesOnTime": 6,
+          "totalMilestones": 8,
+          "resourceUtilization": 80
+        }
+      }
     }
   ]
 }

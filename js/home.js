@@ -997,15 +997,42 @@ async function handleLogin(event) {
 function handleLogout() {
     if (confirm('¿Estás seguro de que quieres cerrar sesión?')) {
         dataManager.logout();
-        
+
+        // Cerrar cualquier modal de login que esté abierto
+        closeLoginModal();
+        closeOriginalLoginModal();
+
         // Actualizar la UI
         updateUserSection();
         document.getElementById('myProjectsSection').style.display = 'none';
-        
+
         // Re-renderizar proyectos destacados para ocultar botones de edicion
         renderFeaturedProjects(currentFilter);
-        
+
         console.log('OK Sesion cerrada');
+    }
+}
+
+function closeOriginalLoginModal() {
+    const modal = document.getElementById('loginModal');
+    if (modal) {
+        modal.style.display = 'none';
+        document.body.style.overflow = '';
+
+        // Resetear el formulario y habilitar inputs
+        const form = modal.querySelector('#loginForm');
+        if (form) {
+            form.reset();
+            const inputs = form.querySelectorAll('input');
+            inputs.forEach(input => {
+                input.disabled = false;
+            });
+        }
+
+        const errorDiv = modal.querySelector('#loginError');
+        if (errorDiv) {
+            errorDiv.style.display = 'none';
+        }
     }
 }
 

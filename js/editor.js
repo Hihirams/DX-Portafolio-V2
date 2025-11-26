@@ -97,6 +97,30 @@ function createNewProject() {
         videos: [],
         images: [],
         extraFiles: [],
+        kpis: { // ✅ AGREGAR ESTA ESTRUCTURA
+            totalHoursEstimated: 0,
+            hoursSpent: 0,
+            fteSaved: 0,
+            completion: 0,
+            timeline: {
+                startDate: '',
+                targetEnd: '',
+                currentPhase: ''
+            },
+            resources: {
+                softwareEngineerHours: 0,
+                testingQAHours: 0,
+                projectManagementHours: 0,
+                remainingHours: 0
+            },
+            metrics: {
+                tasksCompleted: 0,
+                totalTasks: 0,
+                milestonesOnTime: 0,
+                totalMilestones: 0,
+                resourceUtilization: 0
+            }
+        },
         createdAt: new Date().toISOString().split('T')[0],
         updatedAt: new Date().toISOString().split('T')[0]
     };
@@ -239,8 +263,42 @@ function loadProjectData() {
     loadVideos();
     loadExtraFiles();
 
+    // Cargar métricas
+    loadMetrics();
+
     // Actualizar rango de prioridad
     updatePriorityNumberMax();
+}
+
+function loadMetrics() {
+    const kpis = currentProject.kpis || {};
+
+    // Main KPIs
+    document.getElementById('kpi-totalHours').value = kpis.totalHoursEstimated || '';
+    document.getElementById('kpi-hoursSpent').value = kpis.hoursSpent || '';
+    document.getElementById('kpi-fteSaved').value = kpis.fteSaved || '';
+    document.getElementById('kpi-completion').value = kpis.completion || '';
+
+    // Timeline
+    const timeline = kpis.timeline || {};
+    document.getElementById('kpi-startDate').value = timeline.startDate ? timeline.startDate.split('T')[0] : '';
+    document.getElementById('kpi-targetEnd').value = timeline.targetEnd ? timeline.targetEnd.split('T')[0] : '';
+    document.getElementById('kpi-currentPhase').value = timeline.currentPhase || '';
+
+    // Resources
+    const resources = kpis.resources || {};
+    document.getElementById('kpi-engineerHours').value = resources.softwareEngineerHours || '';
+    document.getElementById('kpi-testingHours').value = resources.testingQAHours || '';
+    document.getElementById('kpi-managementHours').value = resources.projectManagementHours || '';
+    document.getElementById('kpi-remainingHours').value = resources.remainingHours || '';
+
+    // Metrics
+    const metrics = kpis.metrics || {};
+    document.getElementById('kpi-tasksCompleted').value = metrics.tasksCompleted || '';
+    document.getElementById('kpi-totalTasks').value = metrics.totalTasks || '';
+    document.getElementById('kpi-milestonesOnTime').value = metrics.milestonesOnTime || '';
+    document.getElementById('kpi-totalMilestones').value = metrics.totalMilestones || '';
+    document.getElementById('kpi-resourceUtilization').value = metrics.resourceUtilization || '';
 }
 
 // ==================== ACHIEVEMENTS ====================
@@ -731,6 +789,7 @@ async function saveProject() {
             type: document.getElementById('blockerType').value,
             message: document.getElementById('blockerMessage').value
         },
+        kpis: collectMetrics(),
         achievements: collectAchievements(),
         nextSteps: collectNextSteps(),
         updatedAt: new Date().toISOString()
@@ -889,7 +948,7 @@ function collectAchievements() {
 function collectNextSteps() {
     const nextSteps = {};
     const items = document.querySelectorAll('#nextStepsList .dynamic-item');
-    
+
     items.forEach(item => {
         const date = item.querySelector('.nextstep-date').value;
         const text = item.querySelector('.nextstep-text').value;
@@ -897,8 +956,35 @@ function collectNextSteps() {
             nextSteps[date] = text;
         }
     });
-    
+
     return nextSteps;
+}
+
+function collectMetrics() {
+    return {
+        totalHoursEstimated: parseInt(document.getElementById('kpi-totalHours').value) || 0,
+        hoursSpent: parseInt(document.getElementById('kpi-hoursSpent').value) || 0,
+        fteSaved: parseFloat(document.getElementById('kpi-fteSaved').value) || 0,
+        completion: parseInt(document.getElementById('kpi-completion').value) || 0,
+        timeline: {
+            startDate: document.getElementById('kpi-startDate').value || '',
+            targetEnd: document.getElementById('kpi-targetEnd').value || '',
+            currentPhase: document.getElementById('kpi-currentPhase').value || ''
+        },
+        resources: {
+            softwareEngineerHours: parseInt(document.getElementById('kpi-engineerHours').value) || 0,
+            testingQAHours: parseInt(document.getElementById('kpi-testingHours').value) || 0,
+            projectManagementHours: parseInt(document.getElementById('kpi-managementHours').value) || 0,
+            remainingHours: parseInt(document.getElementById('kpi-remainingHours').value) || 0
+        },
+        metrics: {
+            tasksCompleted: parseInt(document.getElementById('kpi-tasksCompleted').value) || 0,
+            totalTasks: parseInt(document.getElementById('kpi-totalTasks').value) || 0,
+            milestonesOnTime: parseInt(document.getElementById('kpi-milestonesOnTime').value) || 0,
+            totalMilestones: parseInt(document.getElementById('kpi-totalMilestones').value) || 0,
+            resourceUtilization: parseInt(document.getElementById('kpi-resourceUtilization').value) || 0
+        }
+    };
 }
 
 // ==================== PREVIEW ====================
