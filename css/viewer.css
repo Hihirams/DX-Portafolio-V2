@@ -623,26 +623,23 @@ body.light-theme .dx-branding {
     height: 32px;
     padding: 0 8px;
     margin-right: 12px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    color: #fff;
+    background: #F5F5F7;
+    color: #1d1d1f;
     font-size: 14px;
     font-weight: 700;
     border-radius: 8px;
-    box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+    position: relative;
+    top: -3px;
+    vertical-align: middle;
     transition: all 0.3s ease;
 }
 
 body.light-theme .priority-badge {
-    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
-    box-shadow: 0 2px 8px rgba(90, 103, 216, 0.3);
+    background: #F5F5F7;
+    color: #1d1d1f;
 }
 
 /* Animación sutil para dar énfasis */
 .project-header:hover .priority-badge {
-    transform: scale(1.1);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
-}
-
-body.light-theme .project-header:hover .priority-badge {
-    box-shadow: 0 4px 12px rgba(90, 103, 216, 0.5);
+    transform: scale(1.05);
 }
