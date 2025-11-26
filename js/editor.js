@@ -688,6 +688,13 @@ function setupEventListeners() {
     if (progressSlider) {
         progressSlider.addEventListener('input', updateProgressDisplay);
     }
+
+    // ✅ NUEVO: Listener para verificar prioridad duplicada
+    const priorityInput = document.getElementById('projectPriorityNumber');
+    if (priorityInput) {
+        priorityInput.addEventListener('input', checkDuplicatePriority);
+        priorityInput.addEventListener('change', checkDuplicatePriority);
+    }
 }
 
 function updateProgressDisplay() {
@@ -1099,6 +1106,37 @@ function updatePriorityNumberMax() {
     helper.textContent = `Higher priority = lower number (1 is highest, ${maxPriority} is lowest)`;
 
     console.log(`✅ Priority range set: 1 to ${maxPriority}`);
+}
+
+// ==================== CHECK DUPLICATE PRIORITY ====================
+
+function checkDuplicatePriority() {
+    const inputValue = parseInt(document.getElementById('projectPriorityNumber').value);
+    const warningDiv = document.getElementById('priorityWarning');
+    const warningText = document.getElementById('priorityWarningText');
+
+    // Si no hay valor, ocultar warning
+    if (!inputValue || isNaN(inputValue)) {
+        warningDiv.style.display = 'none';
+        return;
+    }
+
+    // Buscar si otro proyecto tiene esa prioridad
+    const allProjects = dataManager.getAllProjects();
+    const currentProjectId = currentProject?.id;
+
+    const duplicateProject = allProjects.find(p =>
+        p.priorityNumber === inputValue && p.id !== currentProjectId
+    );
+
+    if (duplicateProject) {
+        // Mostrar warning con el nombre del proyecto
+        warningText.innerHTML = `This priority number is already used by <strong>${duplicateProject.title}</strong>. Consider updating that project after saving.`;
+        warningDiv.style.display = 'flex';  // Cambiar de 'block' a 'flex'
+    } else {
+        // Ocultar warning
+        warningDiv.style.display = 'none';
+    }
 }
 
 // ==================== HELPERS ====================
