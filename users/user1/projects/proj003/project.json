@@ -26,42 +26,63 @@
     {
       "src": "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4",
       "title": "Detección de Movimiento"
-    },
-    {
-      "src": "users/user1/projects/proj003/videos/Demo2_v1.1.2_AICAMERA.mp4",
-      "title": "Visión de Operador"
     }
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj003/images/image_1763397369232_0.png",
+      "src": "users/user1/projects/proj003/images/image_1764258342964_0.png",
       "title": "Interfaz de programa"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763397369327_1.png",
+      "src": "users/user1/projects/proj003/images/image_1764258342966_1.png",
       "title": "Multi Visión"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763397369412_2.png",
+      "src": "users/user1/projects/proj003/images/image_1764258342969_2.png",
       "title": "Interfaz de Operador"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763397369487_3.png",
+      "src": "users/user1/projects/proj003/images/image_1764258342971_3.png",
       "title": "Editor de RIO"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763397369598_4.png",
+      "src": "users/user1/projects/proj003/images/image_1764258342978_4.png",
       "title": "Detección en vivo"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1763397369728_5.png",
+      "src": "users/user1/projects/proj003/images/image_1764258342983_5.png",
       "title": "Alerta y detección de objeto"
     }
   ],
   "createdAt": "2025-10-01",
-  "updatedAt": "2025-11-24T16:17:18.135Z",
+  "updatedAt": "2025-11-27T15:45:42.959Z",
   "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors."
+  "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors.",
+  "priorityNumber": 3,
+  "kpis": {
+    "totalHoursEstimated": 903,
+    "hoursSpent": 406,
+    "fteSaved": 1.7,
+    "completion": 45,
+    "timeline": {
+      "startDate": "2025-10-01",
+      "targetEnd": "2026-10-30",
+      "currentPhase": "Development of motion detection prototype and recognition models"
+    },
+    "resources": {
+      "softwareEngineerHours": 203,
+      "testingQAHours": 121,
+      "projectManagementHours": 82,
+      "remainingHours": 497
+    },
+    "metrics": {
+      "tasksCompleted": 23,
+      "totalTasks": 53,
+      "milestonesOnTime": 6,
+      "totalMilestones": 8,
+      "resourceUtilization": 71
+    }
+  }
 }

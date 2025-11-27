@@ -23,28 +23,53 @@
   },
   "videos": [
     {
-      "src": "users/user1/projects/proj005/videos/Demo_v1.3.0_DENBOT.mp4",
-      "title": "Bot en Acción"
+      "src": "users/user1/projects/proj005/videos/video_1764258522976_0.mp4",
+      "title": "Pilot Preview"
     }
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj005/images/image_1764104233918_0.png",
+      "src": "users/user1/projects/proj005/images/image_1764258522971_0.png",
       "title": "Interfaz Bot"
     },
     {
-      "src": "users/user1/projects/proj005/images/image_1764104234017_1.png",
+      "src": "users/user1/projects/proj005/images/image_1764258522973_1.png",
       "title": "Reportes"
     },
     {
-      "src": "users/user1/projects/proj005/images/image_1764104234136_2.png",
+      "src": "users/user1/projects/proj005/images/image_1764258522974_2.png",
       "title": "Flujo General"
     }
   ],
   "createdAt": "2025-06-01",
-  "updatedAt": "2025-11-25T20:57:13.660Z",
+  "updatedAt": "2025-11-27T15:48:42.968Z",
   "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]"
+  "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]",
+  "priorityNumber": 5,
+  "kpis": {
+    "totalHoursEstimated": 913,
+    "hoursSpent": 776,
+    "fteSaved": 2.5,
+    "completion": 85,
+    "timeline": {
+      "startDate": "2025-06-01",
+      "targetEnd": "2026-03-15",
+      "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions."
+    },
+    "resources": {
+      "softwareEngineerHours": 388,
+      "testingQAHours": 232,
+      "projectManagementHours": 156,
+      "remainingHours": 137
+    },
+    "metrics": {
+      "tasksCompleted": 56,
+      "totalTasks": 66,
+      "milestonesOnTime": 9,
+      "totalMilestones": 12,
+      "resourceUtilization": 85
+    }
+  }
 }

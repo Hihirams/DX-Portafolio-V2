@@ -34,7 +34,7 @@
       "progress": 45,
       "icon": "🎥",
       "currentPhase": "Development of motion detection prototype and recognition models",
-      "updatedAt": "2025-11-24T16:17:18.135Z"
+      "updatedAt": "2025-11-27T15:45:42.959Z"
     },
     {
       "id": "proj004",
@@ -58,7 +58,7 @@
       "progress": 85,
       "icon": "🤖",
       "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
-      "updatedAt": "2025-11-25T20:57:13.660Z"
+      "updatedAt": "2025-11-27T15:48:42.968Z"
     },
     {
       "id": "proj1762463273285",
@@ -201,7 +201,7 @@
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
-      "updatedAt": "2025-11-24T16:12:31.043Z"
+      "updatedAt": "2025-11-27T15:45:09.369Z"
     },
     {
       "id": "proj1763483352243",
@@ -297,7 +297,7 @@
       "progress": 80,
       "icon": "📋",
       "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
-      "updatedAt": "2025-11-24T16:02:32.162Z"
+      "updatedAt": "2025-11-27T15:51:06.281Z"
     },
     {
       "id": "proj1763484801399",
@@ -321,5 +321,5 @@
     "totalUsers": 5,
     "avgProgress": 39
   },
-  "lastUpdated": "2025-11-26T17:50:53.909Z"
+  "lastUpdated": "2025-11-27T15:51:06.371Z"
 }

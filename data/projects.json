@@ -186,40 +186,36 @@
         {
           "src": "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4",
           "title": "Detección de Movimiento"
-        },
-        {
-          "src": "users/user1/projects/proj003/videos/Demo2_v1.1.2_AICAMERA.mp4",
-          "title": "Visión de Operador"
         }
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/image_1763397369232_0.png",
+          "src": "users/user1/projects/proj003/images/image_1764258342964_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763397369327_1.png",
+          "src": "users/user1/projects/proj003/images/image_1764258342966_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763397369412_2.png",
+          "src": "users/user1/projects/proj003/images/image_1764258342969_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763397369487_3.png",
+          "src": "users/user1/projects/proj003/images/image_1764258342971_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763397369598_4.png",
+          "src": "users/user1/projects/proj003/images/image_1764258342978_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1763397369728_5.png",
+          "src": "users/user1/projects/proj003/images/image_1764258342983_5.png",
           "title": "Alerta y detección de objeto"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-11-24T16:17:18.135Z",
+      "updatedAt": "2025-11-27T15:45:42.959Z",
       "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -332,26 +328,26 @@
       },
       "videos": [
         {
-          "src": "users/user1/projects/proj005/videos/Demo_v1.3.0_DENBOT.mp4",
-          "title": "Bot en Acción"
+          "src": "users/user1/projects/proj005/videos/video_1764258522976_0.mp4",
+          "title": "Pilot Preview"
         }
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj005/images/image_1764104233918_0.png",
+          "src": "users/user1/projects/proj005/images/image_1764258522971_0.png",
           "title": "Interfaz Bot"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1764104234017_1.png",
+          "src": "users/user1/projects/proj005/images/image_1764258522973_1.png",
           "title": "Reportes"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1764104234136_2.png",
+          "src": "users/user1/projects/proj005/images/image_1764258522974_2.png",
           "title": "Flujo General"
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-11-25T20:57:13.660Z",
+      "updatedAt": "2025-11-27T15:48:42.968Z",
       "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -965,7 +961,7 @@
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
-      "updatedAt": "2025-11-24T16:12:31.043Z",
+      "updatedAt": "2025-11-27T15:45:09.369Z",
       "priority": "medium",
       "achievements": {
         "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
@@ -982,16 +978,7 @@
       "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
       "videos": [],
       "images": [],
-      "extraFiles": [
-        {
-          "src": "users/user1/projects/proj1762876915703/extra-files/RobotDX-Propuesta_1762983021511.pdf",
-          "title": "RobotDX-Propuesta.pdf",
-          "fileName": "RobotDX-Propuesta_1762983021511.pdf",
-          "fileType": "application/octet-stream",
-          "fileSize": 0,
-          "extension": "pdf"
-        }
-      ],
+      "extraFiles": [],
       "createdAt": "2025-11-11T16:01:55.703Z",
       "ownerName": "Hiram González",
       "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
@@ -1373,25 +1360,22 @@
       "targetDate": "2025-12-19",
       "ganttImage": "",
       "videos": [],
-      "images": [],
+      "images": [
+        {
+          "src": "users/user3/projects/proj1763483529675/images/image_1764258666285_0.png",
+          "title": "Infografia"
+        }
+      ],
       "createdAt": "2025-11-18T16:32:09.675Z",
-      "updatedAt": "2025-11-24T16:02:32.162Z",
+      "updatedAt": "2025-11-27T15:51:06.281Z",
       "extraFiles": [
         {
-          "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764000152418.pptx",
-          "title": "Innovation Zone Best Practice whyzer.pptx",
-          "fileName": "Innovation_Zone_Best_Practice__1764000152418.pptx",
+          "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764258666301.pptx",
+          "title": "Innovation_Zone_Best_Practice__1764000152418.pptx",
+          "fileName": "Innovation_Zone_Best_Practice__1764258666301.pptx",
           "fileType": "application/octet-stream",
           "fileSize": 0,
           "extension": "pptx"
-        },
-        {
-          "src": "users/user3/projects/proj1763483529675/extra-files/Design_26_1764000153239.png",
-          "title": "Design 26.png",
-          "fileName": "Design_26_1764000153239.png",
-          "fileType": "image/png",
-          "fileSize": 0,
-          "extension": "png"
         }
       ],
       "ownerName": "Miguel Coronado",

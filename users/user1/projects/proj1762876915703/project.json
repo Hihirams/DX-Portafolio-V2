@@ -6,7 +6,7 @@
   "progress": 54,
   "icon": "🖼",
   "currentPhase": "Bug fixes on the Project Editing page",
-  "updatedAt": "2025-11-24T16:12:31.043Z",
+  "updatedAt": "2025-11-27T15:45:09.369Z",
   "priority": "medium",
   "achievements": {
     "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
@@ -23,19 +23,35 @@
   "ganttImagePath": "users/user1/projects/proj1762876915703/gantt/gantt_1763397474973.png",
   "videos": [],
   "images": [],
-  "extraFiles": [
-    {
-      "src": "users/user1/projects/proj1762876915703/extra-files/RobotDX-Propuesta_1762983021511.pdf",
-      "title": "RobotDX-Propuesta.pdf",
-      "fileName": "RobotDX-Propuesta_1762983021511.pdf",
-      "fileType": "application/octet-stream",
-      "fileSize": 0,
-      "extension": "pdf"
-    }
-  ],
+  "extraFiles": [],
   "createdAt": "2025-11-11T16:01:55.703Z",
   "ownerName": "Hiram González",
   "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
+  "priorityNumber": 17,
+  "kpis": {
+    "totalHoursEstimated": 995,
+    "hoursSpent": 537,
+    "fteSaved": 1.5,
+    "completion": 54,
+    "timeline": {
+      "startDate": "2025-11-11",
+      "targetEnd": "2026-01-30",
+      "currentPhase": "Bug fixes on the Project Editing page"
+    },
+    "resources": {
+      "softwareEngineerHours": 268,
+      "testingQAHours": 161,
+      "projectManagementHours": 108,
+      "remainingHours": 458
+    },
+    "metrics": {
+      "tasksCompleted": 29,
+      "totalTasks": 54,
+      "milestonesOnTime": 9,
+      "totalMilestones": 12,
+      "resourceUtilization": 86
+    }
+  },
   "featured": true,
   "previewImage": "",
   "previewImageFileName": "QCU1.png",

@@ -18,27 +18,49 @@
   "targetDate": "2025-12-19",
   "ganttImage": "",
   "videos": [],
-  "images": [],
+  "images": [
+    {
+      "src": "users/user3/projects/proj1763483529675/images/image_1764258666285_0.png",
+      "title": "Infografia"
+    }
+  ],
   "createdAt": "2025-11-18T16:32:09.675Z",
-  "updatedAt": "2025-11-24T16:02:32.162Z",
+  "updatedAt": "2025-11-27T15:51:06.281Z",
   "extraFiles": [
     {
-      "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764000152418.pptx",
-      "title": "Innovation Zone Best Practice whyzer.pptx",
-      "fileName": "Innovation_Zone_Best_Practice__1764000152418.pptx",
+      "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764258666301.pptx",
+      "title": "Innovation_Zone_Best_Practice__1764000152418.pptx",
+      "fileName": "Innovation_Zone_Best_Practice__1764258666301.pptx",
       "fileType": "application/octet-stream",
       "fileSize": 0,
       "extension": "pptx"
-    },
-    {
-      "src": "users/user3/projects/proj1763483529675/extra-files/Design_26_1764000153239.png",
-      "title": "Design 26.png",
-      "fileName": "Design_26_1764000153239.png",
-      "fileType": "image/png",
-      "fileSize": 0,
-      "extension": "png"
     }
   ],
   "ownerName": "Miguel Coronado",
-  "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. "
+  "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. ",
+  "priorityNumber": 25,
+  "kpis": {
+    "totalHoursEstimated": 719,
+    "hoursSpent": 575,
+    "fteSaved": 2.6,
+    "completion": 80,
+    "timeline": {
+      "startDate": "2025-11-18",
+      "targetEnd": "2025-12-19",
+      "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it."
+    },
+    "resources": {
+      "softwareEngineerHours": 287,
+      "testingQAHours": 172,
+      "projectManagementHours": 116,
+      "remainingHours": 144
+    },
+    "metrics": {
+      "tasksCompleted": 30,
+      "totalTasks": 38,
+      "milestonesOnTime": 9,
+      "totalMilestones": 12,
+      "resourceUtilization": 83
+    }
+  }
 }
