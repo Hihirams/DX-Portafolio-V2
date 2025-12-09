@@ -757,10 +757,12 @@ function initializeApp() {
 // ==================== DATA OBSERVER ====================
 
 function setupDataObserver() {
-    // Simular observador de cambios (verificar cada 2 segundos)
-    setInterval(() => {
-        checkForDataChanges();
-    }, 2000);
+    // ❌ DESACTIVADO: El observador automático causaba loops infinitos y reseteo de página
+    // Solo actualizamos cuando el editor guarda cambios explícitamente
+
+    // setInterval(() => {
+    //     checkForDataChanges();
+    // }, 5000);
 
     // Listener for immediate data reload when editor saves changes
     window.addEventListener('dataReloaded', () => {
@@ -771,7 +773,7 @@ function setupDataObserver() {
         renderProjects();
     });
 
-    console.log('👁️ Observador de cambios activado');
+    console.log('👁️ Observador de cambios configurado (solo para eventos del editor)');
 }
 
 function checkForDataChanges() {
@@ -788,9 +790,26 @@ function checkForDataChanges() {
         }
 
         // Comparar cambios en proyectos existentes
+        // Usar una comparación más inteligente que evite loops infinitos
         for (let i = 0; i < newProjects.length; i++) {
-            if (JSON.stringify(newProjects[i]) !== JSON.stringify(projects[i]?._original)) {
-                console.log('📝 Proyecto modificado:', newProjects[i].id);
+            const currentOriginal = projects[i]?._original;
+            const newProject = newProjects[i];
+
+            // Si no hay proyecto original guardado, skip
+            if (!currentOriginal) continue;
+
+            // Comparar solo campos relevantes que realmente indican cambios
+            const hasChanged =
+                currentOriginal.id !== newProject.id ||
+                currentOriginal.title !== newProject.title ||
+                currentOriginal.status !== newProject.status ||
+                currentOriginal.progress !== newProject.progress ||
+                currentOriginal.priority !== newProject.priority ||
+                currentOriginal.priorityNumber !== newProject.priorityNumber ||
+                currentOriginal.updatedAt !== newProject.updatedAt;
+
+            if (hasChanged) {
+                console.log('📝 Proyecto modificado:', newProject.id);
                 loadProjectsFromDataManager();
                 applyFilters();
                 updateBadges();
@@ -2372,3 +2391,162 @@ function goToHome() {
 }
 
 console.log('✓ Project Manager Script Cargado');
+
+// ==================== TEXT TOOLTIP SYSTEM ====================
+
+let currentTooltip = null;
+let tooltipTimeout = null;
+
+// Crear el elemento tooltip una sola vez
+function createTooltipElement() {
+    if (document.getElementById('textTooltip')) {
+        return document.getElementById('textTooltip');
+    }
+
+    const tooltip = document.createElement('div');
+    tooltip.id = 'textTooltip';
+    tooltip.className = 'text-tooltip';
+    tooltip.innerHTML = '<div class="text-tooltip-content"></div>';
+    document.body.appendChild(tooltip);
+    return tooltip;
+}
+
+// Verificar si un elemento está truncado
+function isTextTruncated(element) {
+    // Para elementos con -webkit-line-clamp
+    if (window.getComputedStyle(element).webkitLineClamp) {
+        return element.scrollHeight > element.clientHeight;
+    }
+    // Para elementos con overflow: hidden y text-overflow: ellipsis
+    return element.scrollWidth > element.clientWidth || element.scrollHeight > element.clientHeight;
+}
+
+// Mostrar tooltip
+function showTooltip(element, text) {
+    if (!text || text.trim() === '' || text === '—' || text === 'No defined concept') {
+        return;
+    }
+
+    // Verificar si el texto está truncado
+    if (!isTextTruncated(element)) {
+        return;
+    }
+
+    const tooltip = createTooltipElement();
+    const content = tooltip.querySelector('.text-tooltip-content');
+    content.textContent = text;
+
+    // Posicionar el tooltip
+    const rect = element.getBoundingClientRect();
+
+    // Mostrar tooltip temporalmente para medir su tamaño
+    tooltip.style.opacity = '0';
+    tooltip.style.display = 'block';
+    const tooltipRect = tooltip.getBoundingClientRect();
+    tooltip.style.display = '';
+    tooltip.style.opacity = '';
+
+    // Calcular posición (arriba del elemento por defecto, con flecha apuntando hacia abajo)
+    let top = rect.top - tooltipRect.height - 12; // 12px de espacio para la flecha
+    let left = rect.left;
+
+    // Ajustar si se sale de la pantalla por arriba
+    const showBelow = top < 10;
+    if (showBelow) {
+        top = rect.bottom + 12; // Mostrar abajo si no cabe arriba (flecha apunta hacia arriba)
+    }
+
+    // Ajustar si se sale de la pantalla por la izquierda
+    if (left < 10) {
+        left = 10;
+    }
+
+    // Ajustar si se sale de la pantalla por la derecha
+    if (left + tooltipRect.width > window.innerWidth - 10) {
+        left = window.innerWidth - tooltipRect.width - 10;
+    }
+
+    tooltip.style.top = `${top}px`;
+    tooltip.style.left = `${left}px`;
+
+    // Calcular posición de la flecha para que apunte al centro del elemento
+    const elementCenter = rect.left + (rect.width / 2);
+    const tooltipLeft = left;
+    const arrowLeft = elementCenter - tooltipLeft;
+
+    // Asegurar que la flecha esté dentro del tooltip (con margen)
+    const clampedArrowLeft = Math.max(16, Math.min(arrowLeft, tooltipRect.width - 16));
+
+    // Aplicar posición de la flecha usando CSS variable
+    tooltip.style.setProperty('--arrow-left', `${clampedArrowLeft}px`);
+
+    // Si el tooltip está abajo, invertir la flecha
+    if (showBelow) {
+        tooltip.classList.add('tooltip-below');
+    } else {
+        tooltip.classList.remove('tooltip-below');
+    }
+
+    // Mostrar con delay
+    clearTimeout(tooltipTimeout);
+    tooltipTimeout = setTimeout(() => {
+        tooltip.classList.add('active');
+    }, 300);
+
+    currentTooltip = tooltip;
+}
+
+// Ocultar tooltip
+function hideTooltip() {
+    clearTimeout(tooltipTimeout);
+    if (currentTooltip) {
+        currentTooltip.classList.remove('active');
+        currentTooltip = null;
+    }
+}
+
+// Inicializar tooltips con event delegation (solo una vez)
+function initializeTooltips() {
+    const tbody = document.getElementById('projectsBody');
+    if (!tbody || tbody.dataset.tooltipsInitialized) return;
+
+    // Marcar como inicializado
+    tbody.dataset.tooltipsInitialized = 'true';
+
+    // Usar event delegation en el tbody
+    tbody.addEventListener('mouseenter', function (e) {
+        const target = e.target;
+
+        // Verificar si el elemento es uno de los que necesita tooltip
+        if (target.classList.contains('project-concept') ||
+            (target.classList.contains('text-highlight') && target.closest('.col-next')) ||
+            target.classList.contains('block-description')) {
+            showTooltip(target, target.textContent);
+        }
+    }, true); // useCapture = true para capturar en fase de captura
+
+    tbody.addEventListener('mouseleave', function (e) {
+        const target = e.target;
+
+        // Verificar si el elemento es uno de los que tiene tooltip
+        if (target.classList.contains('project-concept') ||
+            (target.classList.contains('text-highlight') && target.closest('.col-next')) ||
+            target.classList.contains('block-description')) {
+            hideTooltip();
+        }
+    }, true);
+
+    console.log('✓ Tooltips initialized with event delegation');
+}
+
+// Llamar initializeTooltips una sola vez cuando la app se inicializa
+document.addEventListener('DOMContentLoaded', () => {
+    // Esperar a que el tbody exista
+    const checkTbody = setInterval(() => {
+        const tbody = document.getElementById('projectsBody');
+        if (tbody) {
+            clearInterval(checkTbody);
+            initializeTooltips();
+        }
+    }, 100);
+});
