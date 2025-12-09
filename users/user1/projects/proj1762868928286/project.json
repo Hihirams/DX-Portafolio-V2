@@ -6,7 +6,7 @@
   "progress": 10,
   "icon": "🕶",
   "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
-  "updatedAt": "2025-11-24T16:21:25.867Z",
+  "updatedAt": "2025-12-09T18:20:43.030Z",
   "priority": "low",
   "achievements": {},
   "blockers": {
@@ -22,6 +22,31 @@
   "createdAt": "2025-11-11T13:48:48.286Z",
   "ownerName": "Hiram González",
   "concept": "A HoloLens 2 project creating an interactive AR interface that guides operators with hands-free instructions, real-time overlays, and remote support to improve productivity and reduce errors.",
+  "priorityNumber": 9,
+  "kpis": {
+    "totalHoursEstimated": 624,
+    "hoursSpent": 62,
+    "fteSaved": 2.3,
+    "completion": 10,
+    "timeline": {
+      "startDate": "2025-11-11",
+      "targetEnd": "2025-11-11",
+      "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT"
+    },
+    "resources": {
+      "softwareEngineerHours": 31,
+      "testingQAHours": 18,
+      "projectManagementHours": 13,
+      "remainingHours": 562
+    },
+    "metrics": {
+      "tasksCompleted": 6,
+      "totalTasks": 61,
+      "milestonesOnTime": 6,
+      "totalMilestones": 8,
+      "resourceUtilization": 72
+    }
+  },
   "featured": true,
   "previewImage": "",
   "previewImageFileName": "QCU3.png",

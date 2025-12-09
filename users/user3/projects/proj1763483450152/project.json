@@ -2,11 +2,10 @@
   "id": "proj1763483450152",
   "ownerId": "user3",
   "title": "QC ALT + Maper",
-  "icon": "📋",
   "status": "discovery",
   "priority": "medium",
   "progress": 0,
-  "targetDate": "2025-11-18",
+  "icon": "📋",
   "currentPhase": "",
   "achievements": {},
   "blockers": {
@@ -14,9 +13,37 @@
     "message": ""
   },
   "nextSteps": {},
+  "targetDate": "2025-11-18",
   "ganttImage": "",
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:30:50.152Z",
-  "updatedAt": "2025-11-18T16:30:50.152Z"
+  "updatedAt": "2025-12-09T18:07:06.745Z",
+  "priorityNumber": 12,
+  "kpis": {
+    "totalHoursEstimated": 609,
+    "hoursSpent": 0,
+    "fteSaved": 3.4,
+    "completion": 0,
+    "timeline": {
+      "startDate": "2025-11-18",
+      "targetEnd": "2025-11-18",
+      "currentPhase": "Development"
+    },
+    "resources": {
+      "softwareEngineerHours": 0,
+      "testingQAHours": 0,
+      "projectManagementHours": 0,
+      "remainingHours": 609
+    },
+    "metrics": {
+      "tasksCompleted": 0,
+      "totalTasks": 58,
+      "milestonesOnTime": 7,
+      "totalMilestones": 10,
+      "resourceUtilization": 90
+    }
+  },
+  "extraFiles": [],
+  "concept": ""
 }

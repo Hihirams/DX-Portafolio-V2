@@ -48,8 +48,8 @@ function normalizeProject(p) {
 
   // Objetos mínimos
   proj.achievements = (proj.achievements && typeof proj.achievements === 'object') ? proj.achievements : {};
-  proj.nextSteps   = (proj.nextSteps   && typeof proj.nextSteps   === 'object') ? proj.nextSteps   : {};
-  proj.blockers    = (proj.blockers    && typeof proj.blockers    === 'object') ? proj.blockers    : { type:'info', message:'' };
+  proj.nextSteps = (proj.nextSteps && typeof proj.nextSteps === 'object') ? proj.nextSteps : {};
+  proj.blockers = (proj.blockers && typeof proj.blockers === 'object') ? proj.blockers : { type: 'info', message: '' };
 
   return proj;
 }
@@ -57,123 +57,138 @@ function normalizeProject(p) {
 // ==================== INIT ====================
 
 document.addEventListener('dataLoaded', () => {
-    console.log('✓ Datos cargados, inicializando Viewer...');
-    initViewer();
+  console.log('✓ Datos cargados, inicializando Viewer...');
+  initViewer();
 });
 
 async function initViewer() {
-    // Determinar qué mostrar según localStorage
-    const viewingUserId = localStorage.getItem('viewingUserId');
-    const viewingProjectId = localStorage.getItem('viewingProjectId');
-    
-    if (viewingProjectId) {
-        // Mostrar un proyecto específico - CARGAR PROYECTO COMPLETO
-        console.log(`📁‚ Cargando proyecto completo ${viewingProjectId}...`);
-        const fullProject = await dataManager.loadFullProject(viewingProjectId);
-        if (fullProject) {
-            projectsToShow = [ normalizeProject(fullProject) ];
-            viewingUser = dataManager.getUserById(fullProject.ownerId);
-        } else {
-            // Fallback: usar índice si falla la carga completa
-            const project = dataManager.getProjectById(viewingProjectId);
-            if (project) {
-                projectsToShow = [project];
-                viewingUser = dataManager.getUserById(project.ownerId);
-            }
-        }
-    } else if (viewingUserId) {
-        // Mostrar TODOS los proyectos de un usuario - CARGAR PROYECTOS COMPLETOS
-        const projectsIndex = dataManager.getProjectsByUserId(viewingUserId);
-        viewingUser = dataManager.getUserById(viewingUserId);
-        console.log(`📊 Cargando ${projectsIndex.length} proyectos completos de ${viewingUser?.name || 'usuario'}...`);
-        
-        // Cargar cada proyecto completo
-        projectsToShow = [];
-        for (const projectIndex of projectsIndex) {
-            const fullProject = await dataManager.loadFullProject(projectIndex.id);
-            if (fullProject) {
-                projectsToShow.push( normalizeProject(fullProject) );
-            } else {
-                // Fallback: usar índice si falla
-                projectsToShow.push(projectIndex);
-            }
-        }
+  // Determinar qué mostrar según localStorage
+  const viewingUserId = localStorage.getItem('viewingUserId');
+  const viewingProjectId = localStorage.getItem('viewingProjectId');
+
+  if (viewingProjectId) {
+    // Mostrar un proyecto específico - CARGAR PROYECTO COMPLETO
+    console.log(`📁‚ Cargando proyecto completo ${viewingProjectId}...`);
+    const fullProject = await dataManager.loadFullProject(viewingProjectId);
+    if (fullProject) {
+      projectsToShow = [normalizeProject(fullProject)];
+      viewingUser = dataManager.getUserById(fullProject.ownerId);
     } else {
-        // Sin parámetros, mostrar todos los proyectos del área - CARGAR COMPLETOS
-        const projectsIndex = dataManager.getAllProjects();
-        console.log(`📊 Cargando ${projectsIndex.length} proyectos completos totales...`);
-        
-        // Cargar cada proyecto completo
-        projectsToShow = [];
-        for (const projectIndex of projectsIndex) {
-            const fullProject = await dataManager.loadFullProject(projectIndex.id);
-            if (fullProject) {
-                projectsToShow.push( normalizeProject(fullProject) );
-            } else {
-                // Fallback: usar índice si falla
-                projectsToShow.push(projectIndex);
-            }
-        }
-        viewingUser = null;
+      // Fallback: usar índice si falla la carga completa
+      const project = dataManager.getProjectById(viewingProjectId);
+      if (project) {
+        projectsToShow = [project];
+        viewingUser = dataManager.getUserById(project.ownerId);
+      }
     }
-    
-    if (projectsToShow.length === 0) {
-        showError('No se encontraron proyectos para mostrar');
-        return;
+  } else if (viewingUserId) {
+    // Mostrar TODOS los proyectos de un usuario - CARGAR PROYECTOS COMPLETOS
+    const projectsIndex = dataManager.getProjectsByUserId(viewingUserId);
+    viewingUser = dataManager.getUserById(viewingUserId);
+    console.log(`📊 Cargando ${projectsIndex.length} proyectos completos de ${viewingUser?.name || 'usuario'}...`);
+
+    // Cargar cada proyecto completo
+    projectsToShow = [];
+    for (const projectIndex of projectsIndex) {
+      const fullProject = await dataManager.loadFullProject(projectIndex.id);
+      if (fullProject) {
+        projectsToShow.push(normalizeProject(fullProject));
+      } else {
+        // Fallback: usar índice si falla
+        projectsToShow.push(projectIndex);
+      }
     }
-    
-    // Generar las slides
-    generateSlides();
-    
-    // Limpiar localStorage después de leer
-    localStorage.removeItem('viewingUserId');
-    localStorage.removeItem('viewingProjectId');
+
+    // ✅ NUEVO: Ordenar proyectos por priorityNumber (ascendente: 1, 2, 3...)
+    projectsToShow.sort((a, b) => {
+      const priorityA = a.priorityNumber || 999;
+      const priorityB = b.priorityNumber || 999;
+      return priorityA - priorityB;
+    });
+  } else {
+    // Sin parámetros, mostrar todos los proyectos del área - CARGAR COMPLETOS
+    const projectsIndex = dataManager.getAllProjects();
+    console.log(`📊 Cargando ${projectsIndex.length} proyectos completos totales...`);
+
+    // Cargar cada proyecto completo
+    projectsToShow = [];
+    for (const projectIndex of projectsIndex) {
+      const fullProject = await dataManager.loadFullProject(projectIndex.id);
+      if (fullProject) {
+        projectsToShow.push(normalizeProject(fullProject));
+      } else {
+        // Fallback: usar índice si falla
+        projectsToShow.push(projectIndex);
+      }
+    }
+
+    // ✅ NUEVO: Ordenar proyectos por priorityNumber (ascendente: 1, 2, 3...)
+    projectsToShow.sort((a, b) => {
+      const priorityA = a.priorityNumber || 999;
+      const priorityB = b.priorityNumber || 999;
+      return priorityA - priorityB;
+    });
+
+    viewingUser = null;
+  }
+
+  if (projectsToShow.length === 0) {
+    showError('No se encontraron proyectos para mostrar');
+    return;
+  }
+
+  // Generar las slides
+  generateSlides();
+
+  // Limpiar localStorage después de leer
+  localStorage.removeItem('viewingUserId');
+  localStorage.removeItem('viewingProjectId');
 }
 
 
 // ==================== GENERATE SLIDES ====================
 
 function generateSlides() {
-    // 1. Generar slide de portada
-    generateCoverSlide();
-    
-    // 2. Generar slides de proyectos
-    generateProjectSlides();
-    
-    // 3. Generar slide de resumen
-    generateSummarySlide();
-    
-    // 4. Actualizar contador
-    updateSlideCount();
-    
-    // 5. Inicializar navegación
-    updateSlides();
-    
-    console.log(`✓ ${totalSlides} slides generadas`);
+  // 1. Generar slide de portada
+  generateCoverSlide();
+
+  // 2. Generar slides de proyectos
+  generateProjectSlides();
+
+  // 3. Generar slide de resumen
+  generateSummarySlide();
+
+  // 4. Actualizar contador
+  updateSlideCount();
+
+  // 5. Inicializar navegación
+  updateSlides();
+
+  console.log(`✓ ${totalSlides} slides generadas`);
 }
 
 // ==================== COVER SLIDE ====================
 
 function generateCoverSlide() {
-    const coverSlide = document.getElementById('coverSlide');
-    
-    const title = viewingUser 
-        ? `Portfolio de ${viewingUser.name}`
-        : `Portfolio Q4 2025`;
-    
-    const subtitle = viewingUser
-        ? `${viewingUser.role} | ${projectsToShow.length} proyecto(s)`
-        : `Duration: 15 minutes | Focus on Impact and Next Steps`;
-    
-    // Calcular estadísticas
-    const stats = {
-        total: projectsToShow.length,
-        inProgress: projectsToShow.filter(p => p.status === 'in-progress').length,
-        hold: projectsToShow.filter(p => p.status === 'hold').length,
-        discovery: projectsToShow.filter(p => p.status === 'discovery').length
-    };
-    
-    coverSlide.innerHTML = `
+  const coverSlide = document.getElementById('coverSlide');
+
+  const title = viewingUser
+    ? `Portfolio de ${viewingUser.name}`
+    : `Portfolio Q4 2025`;
+
+  const subtitle = viewingUser
+    ? `${viewingUser.role} | ${projectsToShow.length} proyecto(s)`
+    : `Duration: 15 minutes | Focus on Impact and Next Steps`;
+
+  // Calcular estadísticas
+  const stats = {
+    total: projectsToShow.length,
+    inProgress: projectsToShow.filter(p => p.status === 'in-progress').length,
+    hold: projectsToShow.filter(p => p.status === 'hold').length,
+    discovery: projectsToShow.filter(p => p.status === 'discovery').length
+  };
+
+  coverSlide.innerHTML = `
         <h1 class="slide-title logo-gradient">${title}</h1>
         <p class="slide-subtitle">${subtitle}</p>
         
@@ -235,29 +250,29 @@ function generateProjectSlides() {
 
     // ✅ CORRECCIÃ“N: Verificar correctamente la existencia de multimedia
     const hasGantt = Boolean(
-      project.ganttImage || 
+      project.ganttImage ||
       project.ganttImagePath
     ) && (
-      (typeof project.ganttImage === 'string' && project.ganttImage.trim().length > 0) ||
-      (typeof project.ganttImagePath === 'string' && project.ganttImagePath.trim().length > 0)
-    );
+        (typeof project.ganttImage === 'string' && project.ganttImage.trim().length > 0) ||
+        (typeof project.ganttImagePath === 'string' && project.ganttImagePath.trim().length > 0)
+      );
 
     const hasVideos = Boolean(
-      project.videos && 
-      Array.isArray(project.videos) && 
+      project.videos &&
+      Array.isArray(project.videos) &&
       project.videos.length > 0 &&
       project.videos.some(v => v && (v.src || v.path) && (v.src || v.path).trim().length > 0)
     );
 
-        const hasExtraFiles = Boolean(
-      project.extraFiles && 
-      Array.isArray(project.extraFiles) && 
+    const hasExtraFiles = Boolean(
+      project.extraFiles &&
+      Array.isArray(project.extraFiles) &&
       project.extraFiles.length > 0
     );
 
     const hasImages = Boolean(
-      project.images && 
-      Array.isArray(project.images) && 
+      project.images &&
+      Array.isArray(project.images) &&
       project.images.length > 0 &&
       project.images.some(img => img && (img.src || img.path) && (img.src || img.path).trim().length > 0)
     );
@@ -389,8 +404,8 @@ function generateSummarySlide() {
 
   const stats = {
     inProgress: projectsToShow.filter(p => p.status === 'in-progress').length,
-    hold:       projectsToShow.filter(p => p.status === 'hold').length,
-    discovery:  projectsToShow.filter(p => p.status === 'discovery').length
+    hold: projectsToShow.filter(p => p.status === 'hold').length,
+    discovery: projectsToShow.filter(p => p.status === 'discovery').length
   };
 
   // Key dates
@@ -413,7 +428,7 @@ function generateSummarySlide() {
         <div class="summary-item" style="border-left-color:#30d158;">
           <div class="info-title">✅ ${stats.inProgress} project(s) progressing as planned</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='in-progress').map(p => `${p.title} (${p.progress}%)`).join('•')}
+            ${projectsToShow.filter(p => p.status === 'in-progress').map(p => `${p.title} (${p.progress}%)`).join('•')}
           </div>
         </div>` : ''}
 
@@ -421,7 +436,7 @@ function generateSummarySlide() {
         <div class="summary-item" style="border-left-color:#ff9500;">
           <div class="info-title">🛠️ ${stats.hold} project(s) on temporary technical hold</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Unblocking in progress'}`).join('•')}
+            ${projectsToShow.filter(p => p.status === 'hold').map(p => `${p.title} (${p.progress}%) - ${p.blockers?.message || 'Unblocking in progress'}`).join('•')}
           </div>
         </div>` : ''}
 
@@ -429,7 +444,7 @@ function generateSummarySlide() {
         <div class="summary-item" style="border-left-color:#ff9f0a;">
           <div class="info-title">🔍 ${stats.discovery} project(s) in discovery</div>
           <div class="info-content">
-            ${projectsToShow.filter(p => p.status==='discovery').map(p => `${p.title}`).join('•')}
+            ${projectsToShow.filter(p => p.status === 'discovery').map(p => `${p.title}`).join('•')}
           </div>
         </div>` : ''}
     </div>
@@ -438,7 +453,7 @@ function generateSummarySlide() {
       <div class="info-section" style="margin-top:30px;">
         <div class="info-title">🎯 Upcoming Key Dates</div>
         <div class="info-content">
-          ${sortedDates.slice(0,5).map(date => `
+          ${sortedDates.slice(0, 5).map(date => `
             <strong>${formatMonth(date)}:</strong><br>
             ${upcomingMilestones[date].map(step => `• ${step}`).join('<br>')}
           `).join('<br><br>')}
@@ -455,55 +470,55 @@ function generateSummarySlide() {
 // ==================== NAVIGATION ====================
 
 function updateSlideCount() {
-    totalSlides = document.querySelectorAll('.slide').length;
-    const totalElement = document.getElementById('total-slides');
-    if (totalElement) {
-        totalElement.textContent = totalSlides;
-    }
-    console.log(`📊 Total de slides: ${totalSlides}`);
+  totalSlides = document.querySelectorAll('.slide').length;
+  const totalElement = document.getElementById('total-slides');
+  if (totalElement) {
+    totalElement.textContent = totalSlides;
+  }
+  console.log(`📊 Total de slides: ${totalSlides}`);
 }
 
 function updateSlides() {
-    const slides = document.querySelectorAll('.slide');
-    slides.forEach((slide, index) => {
-        slide.classList.remove('active', 'prev', 'next');
-        const slideNum = index + 1;
-        
-        if (slideNum === currentSlide) {
-            slide.classList.add('active');
-        } else if (slideNum < currentSlide) {
-            slide.classList.add('prev');
-        } else {
-            slide.classList.add('next');
-        }
-    });
-    
-    const currentElement = document.getElementById('current-slide');
-    if (currentElement) {
-        currentElement.textContent = currentSlide;
+  const slides = document.querySelectorAll('.slide');
+  slides.forEach((slide, index) => {
+    slide.classList.remove('active', 'prev', 'next');
+    const slideNum = index + 1;
+
+    if (slideNum === currentSlide) {
+      slide.classList.add('active');
+    } else if (slideNum < currentSlide) {
+      slide.classList.add('prev');
+    } else {
+      slide.classList.add('next');
     }
-    
-    console.log(`📁 Slide actual: ${currentSlide}/${totalSlides}`);
+  });
+
+  const currentElement = document.getElementById('current-slide');
+  if (currentElement) {
+    currentElement.textContent = currentSlide;
+  }
+
+  console.log(`📁 Slide actual: ${currentSlide}/${totalSlides}`);
 }
 
 function nextSlide() {
-    if (currentSlide < totalSlides) {
-        currentSlide++;
-        updateSlides();
-    }
+  if (currentSlide < totalSlides) {
+    currentSlide++;
+    updateSlides();
+  }
 }
 
 function previousSlide() {
-    if (currentSlide > 1) {
-        currentSlide--;
-        updateSlides();
-    }
+  if (currentSlide > 1) {
+    currentSlide--;
+    updateSlides();
+  }
 }
 
 // Atajos de teclado
 document.addEventListener('keydown', (e) => {
-    if (e.key === 'ArrowLeft') previousSlide();
-    if (e.key === 'ArrowRight') nextSlide();
+  if (e.key === 'ArrowLeft') previousSlide();
+  if (e.key === 'ArrowRight') nextSlide();
 });
 
 // --- viewer.js ---
@@ -535,7 +550,7 @@ async function openGanttModal(projectId) {
 
   const modal = document.getElementById('ganttModal');
   const title = document.getElementById('modalTitle');
-  const img   = document.getElementById('ganttImage');
+  const img = document.getElementById('ganttImage');
 
   title.textContent = `${project.icon} ${project.title} - Gantt`;
   img.src = ganttSrc;
@@ -546,9 +561,9 @@ async function openGanttModal(projectId) {
 }
 
 function closeGanttModal() {
-    const modal = document.getElementById('ganttModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  const modal = document.getElementById('ganttModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 async function openVideoGallery(projectId) {
@@ -557,7 +572,7 @@ async function openVideoGallery(projectId) {
 
   const modal = document.getElementById('videoGalleryModal');
   const title = document.getElementById('videoGalleryTitle');
-  const grid  = document.getElementById('videoGalleryGrid');
+  const grid = document.getElementById('videoGalleryGrid');
 
   title.textContent = `${project.icon} ${project.title} - Videos`;
 
@@ -581,9 +596,9 @@ async function openVideoGallery(projectId) {
 }
 
 function closeVideoGallery() {
-    const modal = document.getElementById('videoGalleryModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  const modal = document.getElementById('videoGalleryModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 async function openVideoPlayer(projectId, index) {
@@ -592,8 +607,8 @@ async function openVideoPlayer(projectId, index) {
 
   const video = project.videos[index];
 
-  const modal  = document.getElementById('videoPlayerModal');
-  const title  = document.getElementById('videoPlayerTitle');
+  const modal = document.getElementById('videoPlayerModal');
+  const title = document.getElementById('videoPlayerTitle');
   const player = document.getElementById('videoPlayer');
 
   title.textContent = video.title || 'Video';
@@ -608,47 +623,47 @@ async function openVideoPlayer(projectId, index) {
 }
 
 function closeVideoPlayer() {
-    const modal = document.getElementById('videoPlayerModal');
-    const player = document.getElementById('videoPlayer');
+  const modal = document.getElementById('videoPlayerModal');
+  const player = document.getElementById('videoPlayer');
 
-    player.pause();
-    player.src = '';
+  player.pause();
+  player.src = '';
 
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 async function openImageGallery(projectId) {
-    const project = getProjectFromView(projectId);
-    if (!project || !project.images || project.images.length === 0) return;
+  const project = getProjectFromView(projectId);
+  if (!project || !project.images || project.images.length === 0) return;
 
-    const modal = document.getElementById('imageGalleryModal');
-    const title = document.getElementById('imageGalleryTitle');
-    const grid = document.getElementById('imageGalleryGrid');
+  const modal = document.getElementById('imageGalleryModal');
+  const title = document.getElementById('imageGalleryTitle');
+  const grid = document.getElementById('imageGalleryGrid');
 
-    title.textContent = `${project.icon} ${project.title} - Imágenes`;
+  title.textContent = `${project.icon} ${project.title} - Imágenes`;
 
-    // Resolver todos los src de imágenes
-    const resolvedImages = await Promise.all(project.images.map(async (image) => ({
-        ...image,
-        src: await resolveMediaSrc(image.src)
-    })));
+  // Resolver todos los src de imágenes
+  const resolvedImages = await Promise.all(project.images.map(async (image) => ({
+    ...image,
+    src: await resolveMediaSrc(image.src)
+  })));
 
-    grid.innerHTML = resolvedImages.map((image, index) => `
+  grid.innerHTML = resolvedImages.map((image, index) => `
         <div class="gallery-item" onclick="openImageLightbox('${projectId}', ${index})">
             <img src="${image.src}" alt="${image.title}">
             <div class="gallery-item-title">${image.title}</div>
         </div>
     `).join('');
 
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeImageGallery() {
-    const modal = document.getElementById('imageGalleryModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  const modal = document.getElementById('imageGalleryModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 async function openImageLightbox(projectId, index) {
@@ -659,7 +674,7 @@ async function openImageLightbox(projectId, index) {
 
   const modal = document.getElementById('imageLightboxModal');
   const title = document.getElementById('imageLightboxTitle');
-  const img   = document.getElementById('lightboxImage');
+  const img = document.getElementById('lightboxImage');
 
   title.textContent = image.title;
   img.src = await resolveMediaSrc(image.src);
@@ -671,89 +686,89 @@ async function openImageLightbox(projectId, index) {
 }
 
 function closeImageLightbox() {
-    const modal = document.getElementById('imageLightboxModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  const modal = document.getElementById('imageLightboxModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 // Zoom functionality
 function toggleZoom(img, event) {
-    if (!img.classList.contains('zoomed')) {
-        const rect = img.getBoundingClientRect();
-        const x = event.clientX - rect.left;
-        const y = event.clientY - rect.top;
-        const xPercent = (x / rect.width) * 100;
-        const yPercent = (y / rect.height) * 100;
+  if (!img.classList.contains('zoomed')) {
+    const rect = img.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const xPercent = (x / rect.width) * 100;
+    const yPercent = (y / rect.height) * 100;
 
-        img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
-        img.classList.add('zoomed');
-        img.style.transform = 'scale(2)';
+    img.style.transformOrigin = `${xPercent}% ${yPercent}%`;
+    img.classList.add('zoomed');
+    img.style.transform = 'scale(2)';
 
-        const zoomLevel = document.getElementById('zoomLevel');
-        zoomLevel.textContent = '200%';
-    } else {
-        img.classList.remove('zoomed');
-        img.style.transform = 'scale(1)';
-        img.style.transformOrigin = 'center center';
+    const zoomLevel = document.getElementById('zoomLevel');
+    zoomLevel.textContent = '200%';
+  } else {
+    img.classList.remove('zoomed');
+    img.style.transform = 'scale(1)';
+    img.style.transformOrigin = 'center center';
 
-        const zoomLevel = document.getElementById('zoomLevel');
-        zoomLevel.textContent = '100%';
-    }
+    const zoomLevel = document.getElementById('zoomLevel');
+    zoomLevel.textContent = '100%';
+  }
 }
 
 // Close modals on outside click
-document.getElementById('ganttModal').addEventListener('click', function(e) {
-    if (e.target === this) closeGanttModal();
+document.getElementById('ganttModal').addEventListener('click', function (e) {
+  if (e.target === this) closeGanttModal();
 });
 
-document.getElementById('videoGalleryModal').addEventListener('click', function(e) {
-    if (e.target === this) closeVideoGallery();
+document.getElementById('videoGalleryModal').addEventListener('click', function (e) {
+  if (e.target === this) closeVideoGallery();
 });
 
-document.getElementById('imageGalleryModal').addEventListener('click', function(e) {
-    if (e.target === this) closeImageGallery();
+document.getElementById('imageGalleryModal').addEventListener('click', function (e) {
+  if (e.target === this) closeImageGallery();
 });
 
-document.getElementById('videoPlayerModal').addEventListener('click', function(e) {
-    if (e.target === this) closeVideoPlayer();
+document.getElementById('videoPlayerModal').addEventListener('click', function (e) {
+  if (e.target === this) closeVideoPlayer();
 });
 
-document.getElementById('imageLightboxModal').addEventListener('click', function(e) {
-    if (e.target === this) closeImageLightbox();
+document.getElementById('imageLightboxModal').addEventListener('click', function (e) {
+  if (e.target === this) closeImageLightbox();
 });
 
-document.getElementById('extraFilesModal').addEventListener('click', function(e) {
-    if (e.target === this) closeExtraFilesModal();
+document.getElementById('extraFilesModal').addEventListener('click', function (e) {
+  if (e.target === this) closeExtraFilesModal();
 });
 
 // Close modals on ESC
-document.addEventListener('keydown', function(e) {
-    if (e.key === 'Escape') {
-        closeGanttModal();
-        closeVideoGallery();
-        closeImageGallery();
-        closeVideoPlayer();
-        closeImageLightbox();
-        closeExtraFilesModal();
-    }
+document.addEventListener('keydown', function (e) {
+  if (e.key === 'Escape') {
+    closeGanttModal();
+    closeVideoGallery();
+    closeImageGallery();
+    closeVideoPlayer();
+    closeImageLightbox();
+    closeExtraFilesModal();
+  }
 });
 
 async function openExtraFilesModal(projectId) {
-    const project = getProjectFromView(projectId);
-    if (!project || !project.extraFiles || project.extraFiles.length === 0) return;
+  const project = getProjectFromView(projectId);
+  if (!project || !project.extraFiles || project.extraFiles.length === 0) return;
 
-    const modal = document.getElementById('extraFilesModal');
-    const title = document.getElementById('extraFilesTitle');
-    const list = document.getElementById('extraFilesList');
+  const modal = document.getElementById('extraFilesModal');
+  const title = document.getElementById('extraFilesTitle');
+  const list = document.getElementById('extraFilesList');
 
-    title.textContent = `${project.icon} ${project.title} - Archivos Extras`;
+  title.textContent = `${project.icon} ${project.title} - Archivos Extras`;
 
-    // Generar lista de archivos
-    list.innerHTML = project.extraFiles.map((file, index) => {
-        const icon = getFileIcon(file.fileName);
-        const sizeInKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
-        
-        return `
+  // Generar lista de archivos
+  list.innerHTML = project.extraFiles.map((file, index) => {
+    const icon = getFileIcon(file.fileName);
+    const sizeInKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
+
+    return `
             <div class="extra-file-row" onclick="downloadExtraFile('${projectId}', ${index})">
                 <div class="file-icon-large">${icon}</div>
                 <div class="file-info">
@@ -772,113 +787,113 @@ async function openExtraFilesModal(projectId) {
                 </div>
             </div>
         `;
-    }).join('');
+  }).join('');
 
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+  modal.classList.add('active');
+  document.body.style.overflow = 'hidden';
 }
 
 function closeExtraFilesModal() {
-    const modal = document.getElementById('extraFilesModal');
-    modal.classList.remove('active');
-    document.body.style.overflow = '';
+  const modal = document.getElementById('extraFilesModal');
+  modal.classList.remove('active');
+  document.body.style.overflow = '';
 }
 
 async function downloadExtraFile(projectId, index) {
-    const project = getProjectFromView(projectId);
-    if (!project || !project.extraFiles || !project.extraFiles[index]) return;
+  const project = getProjectFromView(projectId);
+  if (!project || !project.extraFiles || !project.extraFiles[index]) return;
 
-    const file = project.extraFiles[index];
-    
-    try {
-        // Resolver el src (puede ser base64 o path)
-        const fileSrc = await resolveMediaSrc(file.src);
-        
-        // Crear link temporal para descarga
-        const link = document.createElement('a');
-        link.href = fileSrc;
-        link.download = file.fileName;
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        console.log('✅ Archivo descargado:', file.fileName);
-    } catch (error) {
-        console.error('❌ Error al descargar archivo:', error);
-        alert('Error al descargar el archivo');
-    }
+  const file = project.extraFiles[index];
+
+  try {
+    // Resolver el src (puede ser base64 o path)
+    const fileSrc = await resolveMediaSrc(file.src);
+
+    // Crear link temporal para descarga
+    const link = document.createElement('a');
+    link.href = fileSrc;
+    link.download = file.fileName;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+
+    console.log('✅ Archivo descargado:', file.fileName);
+  } catch (error) {
+    console.error('❌ Error al descargar archivo:', error);
+    alert('Error al descargar el archivo');
+  }
 }
 
 // ==================== HELPERS ====================
 
 function formatDate(dateString) {
-    if (!dateString || typeof dateString !== 'string') {
-        return "N/A";
-    }
+  if (!dateString || typeof dateString !== 'string') {
+    return "N/A";
+  }
 
-    const parts = dateString.split('-');
-    if (parts.length < 3) {
-        // Si no viene en formato YYYY-MM-DD, la regresamos como está
-        return dateString;
-    }
+  const parts = dateString.split('-');
+  if (parts.length < 3) {
+    // Si no viene en formato YYYY-MM-DD, la regresamos como está
+    return dateString;
+  }
 
-    const [year, month, day] = parts;
-    const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
+  const [year, month, day] = parts;
+  const months = ['Ene', 'Feb', 'Mar', 'Abr', 'May', 'Jun', 'Jul', 'Ago', 'Sep', 'Oct', 'Nov', 'Dic'];
 
-    // Validar mes numérico
-    const monthIndex = parseInt(month) - 1;
-    if (isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) {
-        return dateString;
-    }
+  // Validar mes numérico
+  const monthIndex = parseInt(month) - 1;
+  if (isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) {
+    return dateString;
+  }
 
-    return `${months[monthIndex]} ${day}, ${year}`;
+  return `${months[monthIndex]} ${day}, ${year}`;
 }
 
 function formatMonth(dateString) {
-    if (!dateString || typeof dateString !== 'string') {
-        return "N/A";
-    }
+  if (!dateString || typeof dateString !== 'string') {
+    return "N/A";
+  }
 
-    const parts = dateString.split('-');
-    if (parts.length < 2) {
-        return dateString;
-    }
+  const parts = dateString.split('-');
+  if (parts.length < 2) {
+    return dateString;
+  }
 
-    const [year, month] = parts;
-    const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
+  const [year, month] = parts;
+  const months = ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'];
 
-    const monthIndex = parseInt(month) - 1;
-    if (isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) {
-        return dateString;
-    }
+  const monthIndex = parseInt(month) - 1;
+  if (isNaN(monthIndex) || monthIndex < 0 || monthIndex > 11) {
+    return dateString;
+  }
 
-    return `${months[monthIndex]} ${year}`;
+  return `${months[monthIndex]} ${year}`;
 }
 
 
 function getBlockerIcon(type) {
-    const icons = {
-        info: 'ℹ️',
-        warning: '⚠️',
-        alert: '🚫',
-        success: '✅'
-    };
-    return icons[type] || 'ℹ️';
+  const icons = {
+    info: 'ℹ️',
+    warning: '⚠️',
+    alert: '🚫',
+    success: '✅'
+  };
+  return icons[type] || 'ℹ️';
 }
 
 
 function getBlockerTitle(type) {
-    const titles = {
-        info: 'Information',
-        warning: 'Warning',
-        alert: 'Temporary Block',
-        success: 'Status'
-    };
-    return titles[type] || 'Información';
+  const titles = {
+    info: 'Information',
+    warning: 'Warning',
+    alert: 'Temporary Block',
+    success: 'Status'
+  };
+  return titles[type] || 'Información';
 }
 
 function showError(message) {
-    document.body.innerHTML = `
+  document.body.innerHTML = `
         <div class="error-container">
             <div class="error-icon">⚠️</div>
             <h2 class="error-title">Error al cargar el portafolio</h2>
@@ -889,14 +904,14 @@ function showError(message) {
 }
 
 function goBack() {
-    window.location.href = 'index.html';
+  window.location.href = 'index.html';
 }
 
 function getFileIcon(fileName) {
-    if (!fileName) return '📁';
-    
-const ext = fileName.split('.').pop().toLowerCase();
-const icons = {
+  if (!fileName) return '📁';
+
+  const ext = fileName.split('.').pop().toLowerCase();
+  const icons = {
     // Documentos
     'pdf': '📄',
     'doc': '📁', 'docx': '📁',
@@ -919,23 +934,23 @@ const icons = {
 
     // Código
     'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
-};
-    return icons[ext] || '📁Ž';
+  };
+  return icons[ext] || '📁Ž';
 }
 
 // ==================== THEME ====================
 
 function toggleTheme() {
-    document.body.classList.toggle('light-theme');
-    const isLight = document.body.classList.contains('light-theme');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  document.body.classList.toggle('light-theme');
+  const isLight = document.body.classList.contains('light-theme');
+  localStorage.setItem('theme', isLight ? 'light' : 'dark');
 }
 
 function loadTheme() {
-    const savedTheme = localStorage.getItem('theme');
-    if (savedTheme === 'light') {
-        document.body.classList.add('light-theme');
-    }
+  const savedTheme = localStorage.getItem('theme');
+  if (savedTheme === 'light') {
+    document.body.classList.add('light-theme');
+  }
 }
 
 loadTheme();

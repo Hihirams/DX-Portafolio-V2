@@ -25,8 +25,33 @@
   "videos": [],
   "images": [],
   "createdAt": "2025-10-15",
-  "updatedAt": "2025-11-24T16:09:22.643Z",
+  "updatedAt": "2025-12-09T18:00:33.628Z",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting"
+  "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting",
+  "priorityNumber": 21,
+  "kpis": {
+    "totalHoursEstimated": 866,
+    "hoursSpent": 173,
+    "fteSaved": 1.6,
+    "completion": 20,
+    "timeline": {
+      "startDate": "2025-10-15",
+      "targetEnd": "2026-06-30",
+      "currentPhase": "Explore internal web platform to manage MRM (Monthly Review Meeting) reports and share information between departments"
+    },
+    "resources": {
+      "softwareEngineerHours": 86,
+      "testingQAHours": 51,
+      "projectManagementHours": 36,
+      "remainingHours": 693
+    },
+    "metrics": {
+      "tasksCompleted": 6,
+      "totalTasks": 34,
+      "milestonesOnTime": 7,
+      "totalMilestones": 10,
+      "resourceUtilization": 92
+    }
+  }
 }

@@ -14,7 +14,7 @@ class DataManager {
         this.projects = [];
         this.config = {};
         this.currentUser = null;
-        
+
         // ✅ Restaurar sesión al inicializar
         this.restoreSession();
     }
@@ -83,7 +83,7 @@ class DataManager {
             if (!fm || !fm.isElectron) {
                 return indexProj; // fallback si no hay Electron
             }
-            
+
             const full = await fm.loadProject(indexProj.ownerId, projectId);
             if (!full) return indexProj; // fallback
 
@@ -103,18 +103,18 @@ class DataManager {
     async loadAllData() {
         try {
             console.log('🔄 Cargando todos los datos...');
-            
+
             await Promise.all([
                 this.loadUsers(),
                 this.loadProjects(),
                 this.loadConfig()
             ]);
-            
+
             console.log('✅ Todos los datos cargados correctamente');
-            
+
             // ✅ Restaurar sesión después de cargar datos
             this.restoreSession();
-            
+
             return true;
         } catch (error) {
             console.error('❌ Error cargando datos:', error);
@@ -298,7 +298,7 @@ class DataManager {
     // ==================== USER MANAGEMENT ====================
 
     async login(username, password) {
-        const user = this.users.find(u => 
+        const user = this.users.find(u =>
             u.username === username && u.password === password
         );
 
@@ -323,7 +323,7 @@ class DataManager {
         if (this.currentUser) {
             return true;
         }
-        
+
         // Intentar restaurar sesión
         this.restoreSession();
         return this.currentUser !== null;
@@ -361,17 +361,17 @@ class DataManager {
 
     async updateUser(userId, updates) {
         const userIndex = this.users.findIndex(u => u.id === userId);
-        
+
         if (userIndex !== -1) {
             this.users[userIndex] = { ...this.users[userIndex], ...updates };
             await fileManager.saveUsers(this.users);
-            
+
             // ✅ Si se actualiza el usuario actual, actualizar sesión
             if (this.currentUser && this.currentUser.id === userId) {
                 this.currentUser = this.users[userIndex];
                 this.saveSession();
             }
-            
+
             console.log(`✅ Usuario ${userId} actualizado`);
             return this.users[userIndex];
         }
@@ -381,16 +381,16 @@ class DataManager {
 
     async deleteUser(userId) {
         const userIndex = this.users.findIndex(u => u.id === userId);
-        
+
         if (userIndex !== -1) {
             this.users.splice(userIndex, 1);
             await fileManager.saveUsers(this.users);
-            
+
             // ✅ Si se elimina el usuario actual, cerrar sesión
             if (this.currentUser && this.currentUser.id === userId) {
                 this.logout();
             }
-            
+
             console.log(`✅ Usuario ${userId} eliminado`);
             return true;
         }
@@ -417,6 +417,7 @@ class DataManager {
             icon: projectData.icon || '📋',
             status: projectData.status || 'discovery',
             priority: projectData.priority || 'medium',
+            priorityNumber: projectData.priorityNumber || 1,
             progress: projectData.progress || 0,
             targetDate: projectData.targetDate || '',
             currentPhase: projectData.currentPhase || '',
@@ -446,10 +447,10 @@ class DataManager {
 
     async updateProject(projectId, updates) {
         const projectIndex = this.projects.findIndex(p => p.id === projectId);
-        
+
         if (projectIndex !== -1) {
             const project = this.projects[projectIndex];
-            
+
             // Verificar permisos
             if (this.currentUser && project.ownerId !== this.currentUser.id) {
                 console.error('❌ Sin permisos para editar este proyecto');
@@ -469,7 +470,7 @@ class DataManager {
             const saved = await fileManager.saveProject(project.ownerId, this.projects[projectIndex]);
 
             if (saved) {
-            // ✅ NUEVO: Actualizar también el índice data/projects.json con TODOS los campos
+                // ✅ NUEVO: Actualizar también el índice data/projects.json con TODOS los campos
                 const projectMeta = {
                     id: this.projects[projectIndex].id,
                     title: this.projects[projectIndex].title,
@@ -477,6 +478,7 @@ class DataManager {
                     ownerName: this.getUserById(this.projects[projectIndex].ownerId)?.name || 'Unknown',
                     status: this.projects[projectIndex].status,
                     priority: this.projects[projectIndex].priority,
+                    priorityNumber: this.projects[projectIndex].priorityNumber,
                     progress: this.projects[projectIndex].progress,
                     icon: this.projects[projectIndex].icon,
                     currentPhase: this.projects[projectIndex].currentPhase,
@@ -490,10 +492,11 @@ class DataManager {
                     videos: this.projects[projectIndex].videos,
                     images: this.projects[projectIndex].images,
                     extraFiles: this.projects[projectIndex].extraFiles,
+                    kpis: this.projects[projectIndex].kpis,
                     createdAt: this.projects[projectIndex].createdAt,
                     updatedAt: this.projects[projectIndex].updatedAt
                 };
-                
+
                 try {
                     await fileManager.upsertProjectInIndex(projectMeta);
                     console.log(`✅ Índice data/projects.json actualizado para ${projectId}`);
@@ -501,7 +504,7 @@ class DataManager {
                     console.error('⚠️ Error actualizando índice:', indexError.message);
                     // No fallar - el proyecto se guardó pero el índice tuvo problemas
                 }
-                
+
                 await this.updateProjectsIndex();
                 console.log(`✅ Proyecto ${projectId} actualizado`);
                 return this.projects[projectIndex];
@@ -513,10 +516,10 @@ class DataManager {
 
     async deleteProject(projectId) {
         const projectIndex = this.projects.findIndex(p => p.id === projectId);
-        
+
         if (projectIndex !== -1) {
             const project = this.projects[projectIndex];
-            
+
             // Verificar permisos
             if (this.currentUser && project.ownerId !== this.currentUser.id) {
                 console.error('❌ Sin permisos para eliminar este proyecto');
@@ -543,9 +546,9 @@ class DataManager {
 
     // Lista los proyectos del usuario actual (o de un userId explícito)
     getMyProjects(userId) {
-      const uid = userId || this.getCurrentUser()?.id;
-      if (!uid) return [];
-      return (this.projects || []).filter(p => p.ownerId === uid);
+        const uid = userId || this.getCurrentUser()?.id;
+        if (!uid) return [];
+        return (this.projects || []).filter(p => p.ownerId === uid);
     }
 
     getProjectsByStatus(status) {
@@ -572,16 +575,16 @@ class DataManager {
 
     searchProjects(query) {
         const lowerQuery = query.toLowerCase();
-        
+
         return this.projects.filter(p => {
             return (
                 p.title.toLowerCase().includes(lowerQuery) ||
                 p.currentPhase.toLowerCase().includes(lowerQuery) ||
                 p.status.toLowerCase().includes(lowerQuery) ||
-                Object.values(p.achievements || {}).some(a => 
+                Object.values(p.achievements || {}).some(a =>
                     a.toLowerCase().includes(lowerQuery)
                 ) ||
-                Object.values(p.nextSteps || {}).some(n => 
+                Object.values(p.nextSteps || {}).some(n =>
                     n.toLowerCase().includes(lowerQuery)
                 )
             );
@@ -590,7 +593,7 @@ class DataManager {
 
     searchUsers(query) {
         const lowerQuery = query.toLowerCase();
-        
+
         return this.users.filter(u => {
             return (
                 u.name.toLowerCase().includes(lowerQuery) ||
@@ -612,7 +615,7 @@ class DataManager {
             completed: this.projects.filter(p => p.status === 'completed').length,
 
             totalUsers: this.users.length,
-            avgProgress: this.projects.length > 0 
+            avgProgress: this.projects.length > 0
                 ? Math.round(this.projects.reduce((sum, p) => sum + p.progress, 0) / this.projects.length)
                 : 0
         };
@@ -624,7 +627,7 @@ class DataManager {
         const userProjects = this.getProjectsByUser(userId);
         const stats = {
             totalProjects: userProjects.length,
-            avgProgress: userProjects.length > 0 
+            avgProgress: userProjects.length > 0
                 ? Math.round(userProjects.reduce((sum, p) => sum + p.progress, 0) / userProjects.length)
                 : 0
         };
@@ -642,6 +645,7 @@ class DataManager {
                 ownerName: this.getUserById(p.ownerId)?.name || 'Unknown',
                 status: p.status,
                 priority: p.priority,
+                priorityNumber: p.priorityNumber,
                 progress: p.progress,
                 icon: p.icon,
                 currentPhase: p.currentPhase,  // ✅ AGREGADO: currentPhase
@@ -658,22 +662,22 @@ class DataManager {
 
     async initialize() {
         console.log('🚀 Inicializando DataManager (Electron)...');
-        
+
         const success = await this.loadAllData();
-        
+
         if (success) {
             console.log('✅ DataManager inicializado correctamente');
             console.log(`📊 ${this.projects.length} proyectos disponibles`);
             console.log(`👥 ${this.users.length} usuarios registrados`);
             console.log('💾 Almacenamiento: local - Depende del espacio en disco');
-            
+
             // ✅ Mostrar estado de sesión
             if (this.currentUser) {
                 console.log(`👤 Sesión activa: ${this.currentUser.username}`);
             } else {
                 console.log('🔒 Sin sesión activa');
             }
-            
+
             return true;
         } else {
             console.error('❌ Error inicializando DataManager');

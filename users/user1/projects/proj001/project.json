@@ -27,30 +27,55 @@
     {
       "src": "users/user1/projects/proj001/videos/Demo_0.9.5_QCU.mp4",
       "title": "Demo 0.9.5"
+    },
+    {
+      "src": "users/user1/projects/proj001/videos/video_1764690487738_1.mp4",
+      "title": "API REQUEST.mp4"
     }
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj001/images/image_1763397063055_0.png",
+      "src": "users/user1/projects/proj001/images/image_1765303100104_0.png",
       "title": "Vista inicial Planeta"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1763397063136_1.png",
+      "src": "users/user1/projects/proj001/images/image_1765303100107_1.png",
       "title": "Vista libre MTS"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1763397063239_2.png",
+      "src": "users/user1/projects/proj001/images/image_1765303100111_2.png",
       "title": "Vista Cenital"
-    },
-    {
-      "src": "users/user1/projects/proj001/images/image_1763397063323_3.png",
-      "title": "Datos en vivo API REST"
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-11-24T14:38:48.842Z",
+  "updatedAt": "2025-12-09T17:58:20.099Z",
   "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made."
+  "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made.",
+  "priorityNumber": 4,
+  "kpis": {
+    "totalHoursEstimated": 766,
+    "hoursSpent": 459,
+    "fteSaved": 3.5,
+    "completion": 60,
+    "timeline": {
+      "startDate": "2025-08-01",
+      "targetEnd": "2026-09-15",
+      "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment"
+    },
+    "resources": {
+      "softwareEngineerHours": 229,
+      "testingQAHours": 137,
+      "projectManagementHours": 93,
+      "remainingHours": 307
+    },
+    "metrics": {
+      "tasksCompleted": 32,
+      "totalTasks": 54,
+      "milestonesOnTime": 9,
+      "totalMilestones": 12,
+      "resourceUtilization": 89
+    }
+  }
 }

@@ -6,7 +6,7 @@
   "progress": 54,
   "icon": "🖼",
   "currentPhase": "Bug fixes on the Project Editing page",
-  "updatedAt": "2025-11-27T15:45:09.369Z",
+  "updatedAt": "2025-12-09T18:21:50.001Z",
   "priority": "medium",
   "achievements": {
     "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
@@ -27,7 +27,7 @@
   "createdAt": "2025-11-11T16:01:55.703Z",
   "ownerName": "Hiram González",
   "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
-  "priorityNumber": 17,
+  "priorityNumber": 28,
   "kpis": {
     "totalHoursEstimated": 995,
     "hoursSpent": 537,

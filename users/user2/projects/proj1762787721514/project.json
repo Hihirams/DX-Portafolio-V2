@@ -6,7 +6,7 @@
   "progress": 30,
   "icon": "🧰",
   "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-  "updatedAt": "2025-11-25T21:02:12.526Z",
+  "updatedAt": "2025-12-09T18:05:22.427Z",
   "priority": "medium",
   "achievements": {
     "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
@@ -21,24 +21,49 @@
   "videos": [],
   "images": [
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1764104532650_0.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1765303522429_0.png",
       "title": "RB1.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1764104532704_1.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1765303522430_1.png",
       "title": "RB2.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1764104532785_2.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1765303522432_2.png",
       "title": "imagen 1.png"
     },
     {
-      "src": "users/user2/projects/proj1762787721514/images/image_1764104532863_3.png",
+      "src": "users/user2/projects/proj1762787721514/images/image_1765303522433_3.png",
       "title": "Slide1.JPG"
     }
   ],
   "extraFiles": [],
   "createdAt": "2025-11-10T15:15:21.514Z",
   "ownerName": "Sandra Santos",
-  "concept": "Creation of a robot prototype designed to boost brand awareness at Innovation Zone."
+  "concept": "Creation of a robot prototype designed to boost brand awareness at Innovation Zone.",
+  "priorityNumber": 19,
+  "kpis": {
+    "totalHoursEstimated": 655,
+    "hoursSpent": 196,
+    "fteSaved": 1.7,
+    "completion": 30,
+    "timeline": {
+      "startDate": "2025-11-10",
+      "targetEnd": "2025-11-10",
+      "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin."
+    },
+    "resources": {
+      "softwareEngineerHours": 98,
+      "testingQAHours": 58,
+      "projectManagementHours": 40,
+      "remainingHours": 459
+    },
+    "metrics": {
+      "tasksCompleted": 10,
+      "totalTasks": 34,
+      "milestonesOnTime": 7,
+      "totalMilestones": 10,
+      "resourceUtilization": 93
+    }
+  }
 }

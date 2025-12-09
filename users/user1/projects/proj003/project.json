@@ -30,37 +30,37 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj003/images/image_1764258342964_0.png",
+      "src": "users/user1/projects/proj003/images/image_1765303170332_0.png",
       "title": "Interfaz de programa"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1764258342966_1.png",
+      "src": "users/user1/projects/proj003/images/image_1765303170334_1.png",
       "title": "Multi Visión"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1764258342969_2.png",
+      "src": "users/user1/projects/proj003/images/image_1765303170337_2.png",
       "title": "Interfaz de Operador"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1764258342971_3.png",
+      "src": "users/user1/projects/proj003/images/image_1765303170339_3.png",
       "title": "Editor de RIO"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1764258342978_4.png",
+      "src": "users/user1/projects/proj003/images/image_1765303170347_4.png",
       "title": "Detección en vivo"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1764258342983_5.png",
+      "src": "users/user1/projects/proj003/images/image_1765303170352_5.png",
       "title": "Alerta y detección de objeto"
     }
   ],
   "createdAt": "2025-10-01",
-  "updatedAt": "2025-11-27T15:45:42.959Z",
+  "updatedAt": "2025-12-09T17:59:30.328Z",
   "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
   "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors.",
-  "priorityNumber": 3,
+  "priorityNumber": 17,
   "kpis": {
     "totalHoursEstimated": 903,
     "hoursSpent": 406,

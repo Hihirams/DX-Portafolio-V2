@@ -31,22 +31,47 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj002/images/image_1763397271985_0.png",
+      "src": "users/user1/projects/proj002/images/image_1765303114024_0.png",
       "title": "Interfaz Principal"
     },
     {
-      "src": "users/user1/projects/proj002/images/image_1763397272451_1.png",
+      "src": "users/user1/projects/proj002/images/image_1765303114027_1.png",
       "title": "Detección Activa"
     },
     {
-      "src": "users/user1/projects/proj002/images/image_1763397272521_2.png",
+      "src": "users/user1/projects/proj002/images/image_1765303114030_2.png",
       "title": "Respuesta de FASTAPI"
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-11-24T16:08:04.231Z",
+  "updatedAt": "2025-12-09T17:58:34.020Z",
   "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
-  "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate "
+  "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate ",
+  "priorityNumber": 3,
+  "kpis": {
+    "totalHoursEstimated": 716,
+    "hoursSpent": 393,
+    "fteSaved": 2.3,
+    "completion": 55,
+    "timeline": {
+      "startDate": "2025-08-01",
+      "targetEnd": "2026-04-15",
+      "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)"
+    },
+    "resources": {
+      "softwareEngineerHours": 196,
+      "testingQAHours": 117,
+      "projectManagementHours": 80,
+      "remainingHours": 323
+    },
+    "metrics": {
+      "tasksCompleted": 29,
+      "totalTasks": 54,
+      "milestonesOnTime": 6,
+      "totalMilestones": 9,
+      "resourceUtilization": 77
+    }
+  }
 }

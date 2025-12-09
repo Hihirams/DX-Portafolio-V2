@@ -7,10 +7,11 @@
       "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "high",
+      "priorityNumber": 4,
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
-      "updatedAt": "2025-11-24T14:38:48.842Z"
+      "updatedAt": "2025-12-09T17:58:20.099Z"
     },
     {
       "id": "proj002",
@@ -19,10 +20,11 @@
       "ownerName": "Hiram González",
       "status": "hold",
       "priority": "medium",
+      "priorityNumber": 3,
       "progress": 55,
       "icon": "🧪",
       "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)",
-      "updatedAt": "2025-11-24T16:08:04.231Z"
+      "updatedAt": "2025-12-09T17:58:34.020Z"
     },
     {
       "id": "proj003",
@@ -31,10 +33,11 @@
       "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "medium",
+      "priorityNumber": 17,
       "progress": 45,
       "icon": "🎥",
       "currentPhase": "Development of motion detection prototype and recognition models",
-      "updatedAt": "2025-11-27T15:45:42.959Z"
+      "updatedAt": "2025-12-09T17:59:30.328Z"
     },
     {
       "id": "proj004",
@@ -43,10 +46,11 @@
       "ownerName": "Hiram González",
       "status": "discovery",
       "priority": "low",
+      "priorityNumber": 21,
       "progress": 20,
       "icon": "📋",
       "currentPhase": "Explore internal web platform to manage MRM (Monthly Review Meeting) reports and share information between departments",
-      "updatedAt": "2025-11-24T16:09:22.643Z"
+      "updatedAt": "2025-12-09T18:00:33.628Z"
     },
     {
       "id": "proj005",
@@ -55,10 +59,11 @@
       "ownerName": "Hiram González",
       "status": "hold",
       "priority": "low",
+      "priorityNumber": 8,
       "progress": 85,
       "icon": "🤖",
       "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
-      "updatedAt": "2025-11-27T15:48:42.968Z"
+      "updatedAt": "2025-12-09T18:00:26.166Z"
     },
     {
       "id": "proj1762463273285",
@@ -67,10 +72,11 @@
       "ownerName": "Sandra Santos",
       "status": "completed",
       "priority": "high",
+      "priorityNumber": 1,
       "progress": 100,
       "icon": "📁",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
-      "updatedAt": "2025-11-24T16:15:01.844Z"
+      "updatedAt": "2025-12-09T18:22:17.237Z"
     },
     {
       "id": "proj1762784041699",
@@ -79,10 +85,11 @@
       "ownerName": "Sandra Santos",
       "status": "in-progress",
       "priority": "medium",
+      "priorityNumber": 5,
       "progress": 60,
       "icon": "📊",
       "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
-      "updatedAt": "2025-11-24T16:22:13.755Z"
+      "updatedAt": "2025-12-09T18:03:51.073Z"
     },
     {
       "id": "proj1762786312316",
@@ -91,10 +98,11 @@
       "ownerName": "Sandra Santos",
       "status": "hold",
       "priority": "low",
+      "priorityNumber": 20,
       "progress": 50,
       "icon": "📈",
       "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
-      "updatedAt": "2025-11-24T16:23:23.803Z"
+      "updatedAt": "2025-12-09T18:04:05.060Z"
     },
     {
       "id": "proj1762786524702",
@@ -102,10 +110,12 @@
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
       "status": "discovery",
+      "priority": "low",
+      "priorityNumber": 14,
       "progress": 0,
       "icon": "🧾",
       "currentPhase": "",
-      "updatedAt": 1762787494930
+      "updatedAt": "2025-12-09T18:04:15.856Z"
     },
     {
       "id": "proj1762786983969",
@@ -114,10 +124,11 @@
       "ownerName": "Sandra Santos",
       "status": "completed",
       "priority": "medium",
+      "priorityNumber": 7,
       "progress": 95,
       "icon": "📦",
       "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-      "updatedAt": "2025-11-25T21:00:40.633Z"
+      "updatedAt": "2025-12-09T18:04:41.705Z"
     },
     {
       "id": "proj1762787282420",
@@ -126,10 +137,11 @@
       "ownerName": "Sandra Santos",
       "status": "completed",
       "priority": "low",
+      "priorityNumber": 26,
       "progress": 100,
       "icon": "🧾",
       "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
-      "updatedAt": "2025-11-25T21:01:06.744Z"
+      "updatedAt": "2025-12-09T18:04:52.579Z"
     },
     {
       "id": "proj1762787721514",
@@ -138,10 +150,11 @@
       "ownerName": "Sandra Santos",
       "status": "in-progress",
       "priority": "medium",
+      "priorityNumber": 19,
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-      "updatedAt": "2025-11-25T21:02:12.526Z"
+      "updatedAt": "2025-12-09T18:05:22.427Z"
     },
     {
       "id": "proj1762868928286",
@@ -150,10 +163,11 @@
       "ownerName": "Hiram González",
       "status": "discovery",
       "priority": "low",
+      "priorityNumber": 9,
       "progress": 10,
       "icon": "🕶",
       "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
-      "updatedAt": "2025-11-24T16:21:25.867Z"
+      "updatedAt": "2025-12-09T18:20:43.030Z"
     },
     {
       "id": "proj1762869515275",
@@ -162,10 +176,11 @@
       "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "high",
+      "priorityNumber": 2,
       "progress": 80,
       "icon": "📊",
       "currentPhase": "Implementation of Line P703 (Pilot Line)",
-      "updatedAt": "2025-11-24T16:20:11.590Z"
+      "updatedAt": "2025-12-09T18:01:30.144Z"
     },
     {
       "id": "proj1762872345620",
@@ -174,10 +189,11 @@
       "ownerName": "Sandra Santos",
       "status": "hold",
       "priority": "medium",
+      "priorityNumber": 11,
       "progress": 0,
       "icon": "🪑",
       "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
-      "updatedAt": "2025-11-25T21:02:42.206Z"
+      "updatedAt": "2025-12-09T18:05:32.917Z"
     },
     {
       "id": "proj1762875499999",
@@ -186,10 +202,11 @@
       "ownerName": "Sandra Santos",
       "status": "discovery",
       "priority": "low",
+      "priorityNumber": 22,
       "progress": 0,
       "icon": "🗾",
-      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
-      "updatedAt": "2025-11-25T21:03:06.541Z"
+      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.El ",
+      "updatedAt": "2025-12-09T18:05:42.543Z"
     },
     {
       "id": "proj1762876915703",
@@ -198,10 +215,11 @@
       "ownerName": "Hiram González",
       "status": "in-progress",
       "priority": "medium",
+      "priorityNumber": 28,
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
-      "updatedAt": "2025-11-27T15:45:09.369Z"
+      "updatedAt": "2025-12-09T18:21:50.001Z"
     },
     {
       "id": "proj1763483352243",
@@ -210,10 +228,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 15,
       "progress": 0,
       "icon": "📋",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:29:12.243Z"
+      "updatedAt": "2025-12-09T18:06:16.798Z"
     },
     {
       "id": "proj1763483378691",
@@ -222,10 +241,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 16,
       "progress": 0,
       "icon": "📋",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:29:38.691Z"
+      "updatedAt": "2025-12-09T18:06:25.329Z"
     },
     {
       "id": "proj1763483412529",
@@ -234,10 +254,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 24,
       "progress": 0,
       "icon": "📋",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:30:12.529Z"
+      "updatedAt": "2025-12-09T18:24:48.367Z"
     },
     {
       "id": "proj1763483430619",
@@ -246,10 +267,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 23,
       "progress": 0,
       "icon": "📋",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:30:30.619Z"
+      "updatedAt": "2025-12-09T18:06:53.629Z"
     },
     {
       "id": "proj1763483450152",
@@ -258,10 +280,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 12,
       "progress": 0,
       "icon": "📋",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:30:50.152Z"
+      "updatedAt": "2025-12-09T18:07:06.745Z"
     },
     {
       "id": "proj1763483501019",
@@ -270,10 +293,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 6,
       "progress": 40,
       "icon": "🔗",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:35:27.097Z"
+      "updatedAt": "2025-12-09T18:07:18.402Z"
     },
     {
       "id": "proj1763483513611",
@@ -282,10 +306,11 @@
       "ownerName": "Miguel Coronado",
       "status": "discovery",
       "priority": "medium",
+      "priorityNumber": 25,
       "progress": 0,
       "icon": "📋",
       "currentPhase": "",
-      "updatedAt": "2025-11-18T16:31:53.611Z"
+      "updatedAt": "2025-12-09T18:07:28.862Z"
     },
     {
       "id": "proj1763483529675",
@@ -294,10 +319,11 @@
       "ownerName": "Miguel Coronado",
       "status": "in-progress",
       "priority": "medium",
+      "priorityNumber": 18,
       "progress": 80,
       "icon": "📋",
       "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
-      "updatedAt": "2025-11-27T15:51:06.281Z"
+      "updatedAt": "2025-12-09T18:07:37.124Z"
     },
     {
       "id": "proj1763484801399",
@@ -306,20 +332,47 @@
       "ownerName": "Sandra Santos",
       "status": "in-progress",
       "priority": "high",
+      "priorityNumber": 27,
       "progress": 40,
       "icon": "📋",
       "currentPhase": "Suport ECU Ishue Investigation",
-      "updatedAt": "2025-11-25T21:03:16.250Z"
+      "updatedAt": "2025-12-09T18:05:49.753Z"
+    },
+    {
+      "id": "proj1764601398436",
+      "title": "Automatizacion IMDS",
+      "ownerId": "user4",
+      "ownerName": "Ivanna Rodríguez",
+      "status": "discovery",
+      "priority": "high",
+      "priorityNumber": 27,
+      "progress": 8,
+      "icon": "📋",
+      "currentPhase": "Actualmente, me encuentro colaborando con el equipo para comprender al 100% la plataforma para así poder proponer soluciones.",
+      "updatedAt": "2025-12-01T21:32:11.847Z"
+    },
+    {
+      "id": "proj1764623073513",
+      "title": "QA-DX System",
+      "ownerId": "user5",
+      "ownerName": "Angel Alvarez",
+      "status": "in-progress",
+      "priority": "high",
+      "priorityNumber": 27,
+      "progress": 12,
+      "icon": "📊",
+      "currentPhase": "The project is in development, currently is in the phase of design and link the automate to the power apps.",
+      "updatedAt": "2025-12-09T15:11:14.070Z"
     }
   ],
   "stats": {
-    "totalProjects": 26,
-    "inProgress": 8,
-    "discovery": 11,
+    "totalProjects": 28,
+    "inProgress": 9,
+    "discovery": 12,
     "hold": 4,
     "completed": 3,
     "totalUsers": 5,
-    "avgProgress": 39
+    "avgProgress": 37
   },
-  "lastUpdated": "2025-11-27T15:51:06.371Z"
+  "lastUpdated": "2025-12-09T18:24:48.389Z"
 }

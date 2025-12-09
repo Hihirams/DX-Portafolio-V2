@@ -99,7 +99,7 @@ function loadProjectsFromDataManager() {
             console.warn('⚠️ No hay proyectos cargados - mostrando tabla vacía');
         }
 
-// Mapear proyectos al formato esperado por la UI
+        // Mapear proyectos al formato esperado por la UI
         projects = projects.map(p => ({
             id: p.id,
             name: (p.priorityNumber ? p.priorityNumber + ". " : "") + p.title,
@@ -116,6 +116,13 @@ function loadProjectsFromDataManager() {
             // Preservar datos originales
             _original: p
         }));
+
+        // ✅ NUEVO: Ordenar proyectos por priorityNumber (ascendente: 1, 2, 3...)
+        projects.sort((a, b) => {
+            const priorityA = a._original.priorityNumber || 999;
+            const priorityB = b._original.priorityNumber || 999;
+            return priorityA - priorityB;
+        });
 
         filteredProjects = [...projects];
 
@@ -291,7 +298,7 @@ async function openResourceImages() {
     if (!currentResourceProject) return;
 
     const project = currentResourceProject._original;
-    
+
     // ✅ ARREGLADO: Validar antes de procesar
     if (!project.images || !Array.isArray(project.images) || project.images.length === 0) {
         console.warn('⚠️ This project has no images');
@@ -339,7 +346,7 @@ async function openResourceVideos() {
     if (!currentResourceProject) return;
 
     const project = currentResourceProject._original;
-    
+
     // ✅ ARREGLADO: Validar antes de procesar
     if (!project.videos || !Array.isArray(project.videos) || project.videos.length === 0) {
         console.warn('⚠️ This project has no videos');
@@ -394,7 +401,7 @@ async function openResourceFiles() {
         alert('This project has no files available');
         return;
     }
-    
+
     console.log('📁 Opening files for project:', {
         projectId: project.id,
         extraFilesCount: project.extraFiles?.length || 0,
@@ -1071,7 +1078,7 @@ function applyFilters() {
         if (activeFilters.search) {
             const searchLower = activeFilters.search.toLowerCase();
             return project.name.toLowerCase().includes(searchLower) ||
-                   project.responsible.toLowerCase().includes(searchLower);
+                project.responsible.toLowerCase().includes(searchLower);
         }
 
         return true;
@@ -1114,7 +1121,7 @@ function renderProjects() {
     const end = start + itemsPerPage;
     const projectsToShow = filteredProjects.slice(start, end);
 
-if (projectsToShow.length === 0) {
+    if (projectsToShow.length === 0) {
         tbody.innerHTML = `
             <tr>
                 <td colspan="10">
@@ -1157,10 +1164,10 @@ if (projectsToShow.length === 0) {
             </td>
             <td class="col-delivery">
                 ${(() => {
-                    const status = getDeliveryStatus(project.deliveryDate);
-                    const icon = getDeliveryIcon(status.icon);
-                    return `<span class="delivery-date ${status.class}">${icon}${formatDate(project.deliveryDate)}</span>`;
-                })()}
+            const status = getDeliveryStatus(project.deliveryDate);
+            const icon = getDeliveryIcon(status.icon);
+            return `<span class="delivery-date ${status.class}">${icon}${formatDate(project.deliveryDate)}</span>`;
+        })()}
             </td>
             <td class="col-responsible">
                 <span class="text-highlight">${project.responsible}</span>
@@ -1374,7 +1381,7 @@ function clearAllCrossFilters() {
     updateCrossFilterChips();
     refreshAllChartsWithCrossFilters();
 
-        console.log('🗑️ All cross-filters cleared');
+    console.log('🗑️ All cross-filters cleared');
 }
 
 // Get projects filtered by cross-filters only (ignoring manual filters)
@@ -1688,16 +1695,16 @@ function generateAnalyticsFilters() {
         </div>
 
         `;
-    
+
     // ... resto de la función generateAnalyticsFilters (se mantiene igual, ya tienes los chips en inglés en el código anterior)
     // Nota: Asegúrate de que los textos de los chips ("In Progress", etc.) en el resto de esta función ya estén en inglés como corregimos antes.
-    
+
     // ... (Para completar la función, asegúrate de usar la versión del código anterior que ya tenía "In Progress", "Blocked", etc.)
-    
+
     // Aquí está el resto de generateAnalyticsFilters resumido para contexto:
     responsibles.slice(0, 5).forEach((responsible, index) => {
         const names = responsible.split(' ');
-        const displayName = names.length > 1 ? `${names[0].charAt(0)}${names[1].charAt(0)}` : names[0].slice(0,2);
+        const displayName = names.length > 1 ? `${names[0].charAt(0)}${names[1].charAt(0)}` : names[0].slice(0, 2);
         html += `
         <div class="filter-chip" data-filter-type="responsible" data-filter-value="${responsible}" onclick="updateAnalyticsFilter('responsible', '${responsible}')">
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -2038,7 +2045,7 @@ function initializeCharts() {
                         ticks: {
                             color: textColor,
                             stepSize: 1,
-                            callback: function(value) {
+                            callback: function (value) {
                                 if (Number.isInteger(value)) {
                                     return value;
                                 }
@@ -2074,10 +2081,10 @@ function initializeCharts() {
                     tooltip: {
                         ...commonOptions.plugins.tooltip,
                         callbacks: {
-                            title: function(context) {
+                            title: function (context) {
                                 return context[0].label;
                             },
-                            label: function(context) {
+                            label: function (context) {
                                 const count = context.parsed.y;
                                 if (count === 0) {
                                     return 'No scheduled deliveries';
@@ -2087,7 +2094,7 @@ function initializeCharts() {
                                     return `${count} projects to deliver`;
                                 }
                             },
-                            afterLabel: function(context) {
+                            afterLabel: function (context) {
                                 const monthLabel = context.label;
                                 const count = context.parsed.y;
 
@@ -2102,7 +2109,7 @@ function initializeCharts() {
                                     if (!p.deliveryDate) return false;
                                     const d = new Date(p.deliveryDate);
                                     return d.getMonth() === monthData.month &&
-                                           d.getFullYear() === monthData.year;
+                                        d.getFullYear() === monthData.year;
                                 });
 
                                 // Mostrar máximo 3 proyectos en el tooltip
@@ -2268,7 +2275,7 @@ function getDeliveryTimelineData(projectsList = projects) {
     const labels = [];
     // Cambio de nombres de meses a Inglés
     const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-                        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+        'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
     // Generar 7 meses: Nov, Dic, Ene, Feb, Mar, Abr, May
     for (let i = 0; i < 7; i++) {

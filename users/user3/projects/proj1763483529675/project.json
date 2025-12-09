@@ -20,12 +20,12 @@
   "videos": [],
   "images": [
     {
-      "src": "users/user3/projects/proj1763483529675/images/image_1764258666285_0.png",
+      "src": "users/user3/projects/proj1763483529675/images/image_1765303657128_0.png",
       "title": "Infografia"
     }
   ],
   "createdAt": "2025-11-18T16:32:09.675Z",
-  "updatedAt": "2025-11-27T15:51:06.281Z",
+  "updatedAt": "2025-12-09T18:07:37.124Z",
   "extraFiles": [
     {
       "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764258666301.pptx",
@@ -38,7 +38,7 @@
   ],
   "ownerName": "Miguel Coronado",
   "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. ",
-  "priorityNumber": 25,
+  "priorityNumber": 18,
   "kpis": {
     "totalHoursEstimated": 719,
     "hoursSpent": 575,

@@ -2,11 +2,10 @@
   "id": "proj1763483412529",
   "ownerId": "user3",
   "title": "ESC DX",
-  "icon": "📋",
   "status": "discovery",
   "priority": "medium",
   "progress": 0,
-  "targetDate": "2025-11-18",
+  "icon": "📋",
   "currentPhase": "",
   "achievements": {},
   "blockers": {
@@ -14,9 +13,38 @@
     "message": ""
   },
   "nextSteps": {},
+  "targetDate": "2025-11-18",
   "ganttImage": "",
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:30:12.529Z",
-  "updatedAt": "2025-11-18T16:30:12.529Z"
+  "updatedAt": "2025-12-09T18:24:48.367Z",
+  "priorityNumber": 24,
+  "kpis": {
+    "totalHoursEstimated": 931,
+    "hoursSpent": 0,
+    "fteSaved": 1.1,
+    "completion": 0,
+    "timeline": {
+      "startDate": "2025-11-18",
+      "targetEnd": "2025-11-18",
+      "currentPhase": "Development"
+    },
+    "resources": {
+      "softwareEngineerHours": 0,
+      "testingQAHours": 0,
+      "projectManagementHours": 0,
+      "remainingHours": 931
+    },
+    "metrics": {
+      "tasksCompleted": 0,
+      "totalTasks": 36,
+      "milestonesOnTime": 8,
+      "totalMilestones": 11,
+      "resourceUtilization": 77
+    }
+  },
+  "extraFiles": [],
+  "ownerName": "Miguel Coronado",
+  "concept": ""
 }

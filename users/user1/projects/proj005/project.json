@@ -23,31 +23,31 @@
   },
   "videos": [
     {
-      "src": "users/user1/projects/proj005/videos/video_1764258522976_0.mp4",
-      "title": "Pilot Preview"
+      "src": "users/user1/projects/proj005/videos/video_1764259975244_0.mp4",
+      "title": "Project-LorenzoBot"
     }
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj005/images/image_1764258522971_0.png",
+      "src": "users/user1/projects/proj005/images/image_1765303226169_0.png",
       "title": "Interfaz Bot"
     },
     {
-      "src": "users/user1/projects/proj005/images/image_1764258522973_1.png",
+      "src": "users/user1/projects/proj005/images/image_1765303226170_1.png",
       "title": "Reportes"
     },
     {
-      "src": "users/user1/projects/proj005/images/image_1764258522974_2.png",
+      "src": "users/user1/projects/proj005/images/image_1765303226172_2.png",
       "title": "Flujo General"
     }
   ],
   "createdAt": "2025-06-01",
-  "updatedAt": "2025-11-27T15:48:42.968Z",
+  "updatedAt": "2025-12-09T18:00:26.166Z",
   "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
   "extraFiles": [],
   "ownerName": "Hiram González",
   "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]",
-  "priorityNumber": 5,
+  "priorityNumber": 8,
   "kpis": {
     "totalHoursEstimated": 913,
     "hoursSpent": 776,

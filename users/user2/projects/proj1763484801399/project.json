@@ -22,8 +22,33 @@
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:53:21.399Z",
-  "updatedAt": "2025-11-25T21:03:16.250Z",
+  "updatedAt": "2025-12-09T18:05:49.753Z",
   "extraFiles": [],
   "ownerName": "Sandra Santos",
-  "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]"
+  "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]",
+  "priorityNumber": 27,
+  "kpis": {
+    "totalHoursEstimated": 727,
+    "hoursSpent": 290,
+    "fteSaved": 2.1,
+    "completion": 40,
+    "timeline": {
+      "startDate": "2025-11-18",
+      "targetEnd": "2025-11-27",
+      "currentPhase": "Suport ECU Ishue Investigation"
+    },
+    "resources": {
+      "softwareEngineerHours": 145,
+      "testingQAHours": 87,
+      "projectManagementHours": 58,
+      "remainingHours": 437
+    },
+    "metrics": {
+      "tasksCompleted": 14,
+      "totalTasks": 36,
+      "milestonesOnTime": 6,
+      "totalMilestones": 8,
+      "resourceUtilization": 80
+    }
+  }
 }

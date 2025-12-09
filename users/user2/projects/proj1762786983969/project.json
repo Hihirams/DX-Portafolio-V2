@@ -6,9 +6,8 @@
   "progress": 95,
   "icon": "📦",
   "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-  "updatedAt": "2025-11-25T21:00:40.633Z",
+  "updatedAt": "2025-12-09T18:04:41.705Z",
   "priority": "medium",
-  "targetDate": "2025-11-10",
   "achievements": {},
   "blockers": {
     "type": "info",
@@ -17,10 +16,63 @@
   "nextSteps": {
     "2025-12": "Stage 2 of the DxHold Monitor system focuses on creating a systematic analysis to provide clearer, integrated insights. Visual improvements and enhanced information search will be implemented, along with evaluating new data-integration options from systems like ESSYM and AS400. Continuous data-update meetings will be maintained, and automatic escalation will be triggered for amounts exceeding $500,000."
   },
+  "targetDate": "2025-11-10",
   "ganttImage": "",
-  "videos": [],
-  "images": [],
-  "createdAt": "2025-11-10T15:03:03.969Z",
+  "videos": [
+    {
+      "src": "users/user2/projects/proj1762786983969/videos/video_1765290356845_0.mp4",
+      "title": "DX_HOLD_PREVIEW.mp4"
+    }
+  ],
+  "images": [
+    {
+      "src": "users/user2/projects/proj1762786983969/images/image_1765303481708_0.png",
+      "title": "DX_HOLD_VIEW.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762786983969/images/image_1765303481713_1.png",
+      "title": "HOLD_MONITOR_SYSTEM.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762786983969/images/image_1765303481715_2.png",
+      "title": "HOLD_MONITOR_SYSTEM_2.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762786983969/images/image_1765303481719_3.png",
+      "title": "HOLD_MONITOR_SYSTEM_3.png"
+    },
+    {
+      "src": "users/user2/projects/proj1762786983969/images/image_1765303481722_4.png",
+      "title": "HOLD_MONITOR_SYSTEM_4.png"
+    }
+  ],
   "extraFiles": [],
-  "concept": ""
+  "createdAt": "2025-11-10T15:03:03.969Z",
+  "ownerName": "Sandra Santos",
+  "concept": "",
+  "priorityNumber": 7,
+  "kpis": {
+    "totalHoursEstimated": 650,
+    "hoursSpent": 617,
+    "fteSaved": 2.5,
+    "completion": 95,
+    "timeline": {
+      "startDate": "2025-11-10",
+      "targetEnd": "2025-11-10",
+      "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed."
+    },
+    "resources": {
+      "softwareEngineerHours": 308,
+      "testingQAHours": 185,
+      "projectManagementHours": 124,
+      "remainingHours": 33
+    },
+    "metrics": {
+      "tasksCompleted": 37,
+      "totalTasks": 39,
+      "milestonesOnTime": 7,
+      "totalMilestones": 10,
+      "resourceUtilization": 73
+    }
+  }
 }

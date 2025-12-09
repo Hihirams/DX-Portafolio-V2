@@ -6,7 +6,7 @@
   "progress": 60,
   "icon": "📊",
   "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
-  "updatedAt": "2025-11-24T16:22:13.755Z",
+  "updatedAt": "2025-12-09T18:03:51.073Z",
   "priority": "medium",
   "achievements": {},
   "blockers": {
@@ -21,5 +21,30 @@
   "extraFiles": [],
   "createdAt": "2025-11-10T14:14:01.699Z",
   "ownerName": "Sandra Santos",
-  "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts "
+  "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts ",
+  "priorityNumber": 5,
+  "kpis": {
+    "totalHoursEstimated": 721,
+    "hoursSpent": 432,
+    "fteSaved": 2.3,
+    "completion": 60,
+    "timeline": {
+      "startDate": "2025-11-10",
+      "targetEnd": "2025-11-21",
+      "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows."
+    },
+    "resources": {
+      "softwareEngineerHours": 216,
+      "testingQAHours": 129,
+      "projectManagementHours": 87,
+      "remainingHours": 289
+    },
+    "metrics": {
+      "tasksCompleted": 20,
+      "totalTasks": 34,
+      "milestonesOnTime": 6,
+      "totalMilestones": 9,
+      "resourceUtilization": 92
+    }
+  }
 }

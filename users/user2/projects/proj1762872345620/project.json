@@ -6,7 +6,7 @@
   "progress": 0,
   "icon": "🪑",
   "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
-  "updatedAt": "2025-11-25T21:02:42.206Z",
+  "updatedAt": "2025-12-09T18:05:32.917Z",
   "priority": "medium",
   "achievements": {},
   "blockers": {
@@ -21,5 +21,30 @@
   "extraFiles": [],
   "createdAt": "2025-11-11T14:45:45.620Z",
   "ownerName": "Sandra Santos",
-  "concept": ""
+  "concept": "",
+  "priorityNumber": 11,
+  "kpis": {
+    "totalHoursEstimated": 790,
+    "hoursSpent": 0,
+    "fteSaved": 3.2,
+    "completion": 0,
+    "timeline": {
+      "startDate": "2025-11-11",
+      "targetEnd": "2025-11-28",
+      "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing."
+    },
+    "resources": {
+      "softwareEngineerHours": 0,
+      "testingQAHours": 0,
+      "projectManagementHours": 0,
+      "remainingHours": 790
+    },
+    "metrics": {
+      "tasksCompleted": 0,
+      "totalTasks": 69,
+      "milestonesOnTime": 7,
+      "totalMilestones": 10,
+      "resourceUtilization": 89
+    }
+  }
 }

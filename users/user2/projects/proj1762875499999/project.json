@@ -5,20 +5,46 @@
   "status": "discovery",
   "progress": 0,
   "icon": "🗾",
-  "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
-  "updatedAt": "2025-11-25T21:03:06.541Z",
+  "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.El ",
+  "updatedAt": "2025-12-09T18:05:42.543Z",
   "priority": "low",
-  "targetDate": "2025-11-11",
   "achievements": {},
   "blockers": {
     "type": "info",
     "message": ""
   },
   "nextSteps": {},
+  "targetDate": "2025-11-11",
   "ganttImage": "",
   "videos": [],
   "images": [],
-  "createdAt": "2025-11-11T15:38:19.999Z",
   "extraFiles": [],
-  "concept": ""
+  "createdAt": "2025-11-11T15:38:19.999Z",
+  "ownerName": "Sandra Santos",
+  "concept": "",
+  "priorityNumber": 22,
+  "kpis": {
+    "totalHoursEstimated": 952,
+    "hoursSpent": 0,
+    "fteSaved": 1.9,
+    "completion": 0,
+    "timeline": {
+      "startDate": "2025-11-11",
+      "targetEnd": "2025-11-11",
+      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components."
+    },
+    "resources": {
+      "softwareEngineerHours": 0,
+      "testingQAHours": 0,
+      "projectManagementHours": 0,
+      "remainingHours": 952
+    },
+    "metrics": {
+      "tasksCompleted": 0,
+      "totalTasks": 63,
+      "milestonesOnTime": 6,
+      "totalMilestones": 8,
+      "resourceUtilization": 87
+    }
+  }
 }

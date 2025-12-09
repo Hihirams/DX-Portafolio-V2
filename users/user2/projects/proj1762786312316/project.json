@@ -6,9 +6,8 @@
   "progress": 50,
   "icon": "📈",
   "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
-  "updatedAt": "2025-11-24T16:23:23.803Z",
+  "updatedAt": "2025-12-09T18:04:05.060Z",
   "priority": "low",
-  "targetDate": "2025-11-10",
   "achievements": {},
   "blockers": {
     "type": "info",
@@ -17,19 +16,46 @@
   "nextSteps": {
     "2025-11": "Solicitud de mejoras\n•\t🔍 Filtro por Gerente y GM para visualizar todas sus áreas agrupadas.\n       Resp Miguel & Brayan \n•\t🗨️ Agregar comentarios en las gráficas para explicar desviaciones o situaciones especiales."
   },
+  "targetDate": "2025-11-10",
   "ganttImage": "",
   "videos": [],
   "images": [
     {
-      "src": "users/user2/projects/proj1762786312316/images/image_1764001403830_0.png",
+      "src": "users/user2/projects/proj1762786312316/images/image_1765303445063_0.png",
       "title": "Screenshot 2025-11-10 085025.png"
     },
     {
-      "src": "users/user2/projects/proj1762786312316/images/image_1764001403891_1.png",
+      "src": "users/user2/projects/proj1762786312316/images/image_1765303445071_1.png",
       "title": "Screenshot 2025-11-10 085033.png"
     }
   ],
-  "createdAt": "2025-11-10T14:51:52.316Z",
   "extraFiles": [],
-  "concept": ""
+  "createdAt": "2025-11-10T14:51:52.316Z",
+  "ownerName": "Sandra Santos",
+  "concept": "",
+  "priorityNumber": 20,
+  "kpis": {
+    "totalHoursEstimated": 835,
+    "hoursSpent": 417,
+    "fteSaved": 1.8,
+    "completion": 50,
+    "timeline": {
+      "startDate": "2025-11-10",
+      "targetEnd": "2025-11-10",
+      "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit."
+    },
+    "resources": {
+      "softwareEngineerHours": 208,
+      "testingQAHours": 125,
+      "projectManagementHours": 84,
+      "remainingHours": 418
+    },
+    "metrics": {
+      "tasksCompleted": 27,
+      "totalTasks": 55,
+      "milestonesOnTime": 6,
+      "totalMilestones": 8,
+      "resourceUtilization": 72
+    }
+  }
 }

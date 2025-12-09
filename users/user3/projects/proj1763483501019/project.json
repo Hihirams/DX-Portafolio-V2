@@ -18,7 +18,33 @@
   "videos": [],
   "images": [],
   "createdAt": "2025-11-18T16:31:41.019Z",
-  "updatedAt": "2025-11-18T16:35:27.097Z",
+  "updatedAt": "2025-12-09T18:07:18.402Z",
   "extraFiles": [],
-  "concept": ""
+  "ownerName": "Miguel Coronado",
+  "concept": "",
+  "priorityNumber": 6,
+  "kpis": {
+    "totalHoursEstimated": 684,
+    "hoursSpent": 273,
+    "fteSaved": 3.1,
+    "completion": 40,
+    "timeline": {
+      "startDate": "2025-11-18",
+      "targetEnd": "2026-03-31",
+      "currentPhase": "Development"
+    },
+    "resources": {
+      "softwareEngineerHours": 136,
+      "testingQAHours": 81,
+      "projectManagementHours": 56,
+      "remainingHours": 411
+    },
+    "metrics": {
+      "tasksCompleted": 16,
+      "totalTasks": 42,
+      "milestonesOnTime": 8,
+      "totalMilestones": 11,
+      "resourceUtilization": 73
+    }
+  }
 }

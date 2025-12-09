@@ -29,33 +29,33 @@
         {
           "src": "users/user1/projects/proj001/videos/Demo_0.9.5_QCU.mp4",
           "title": "Demo 0.9.5"
+        },
+        {
+          "src": "users/user1/projects/proj001/videos/video_1764690487738_1.mp4",
+          "title": "API REQUEST.mp4"
         }
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj001/images/image_1763397063055_0.png",
+          "src": "users/user1/projects/proj001/images/image_1765303100104_0.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1763397063136_1.png",
+          "src": "users/user1/projects/proj001/images/image_1765303100107_1.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1763397063239_2.png",
+          "src": "users/user1/projects/proj001/images/image_1765303100111_2.png",
           "title": "Vista Cenital"
-        },
-        {
-          "src": "users/user1/projects/proj001/images/image_1763397063323_3.png",
-          "title": "Datos en vivo API REST"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-24T14:38:48.842Z",
+      "updatedAt": "2025-12-09T17:58:20.099Z",
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made.",
-      "priorityNumber": 1,
+      "priorityNumber": 4,
       "kpis": {
         "totalHoursEstimated": 766,
         "hoursSpent": 459,
@@ -114,25 +114,25 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj002/images/image_1763397271985_0.png",
+          "src": "users/user1/projects/proj002/images/image_1765303114024_0.png",
           "title": "Interfaz Principal"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1763397272451_1.png",
+          "src": "users/user1/projects/proj002/images/image_1765303114027_1.png",
           "title": "Detección Activa"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1763397272521_2.png",
+          "src": "users/user1/projects/proj002/images/image_1765303114030_2.png",
           "title": "Respuesta de FASTAPI"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-11-24T16:08:04.231Z",
+      "updatedAt": "2025-12-09T17:58:34.020Z",
       "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate ",
-      "priorityNumber": 2,
+      "priorityNumber": 3,
       "kpis": {
         "totalHoursEstimated": 716,
         "hoursSpent": 393,
@@ -190,37 +190,37 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/image_1764258342964_0.png",
+          "src": "users/user1/projects/proj003/images/image_1765303170332_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1764258342966_1.png",
+          "src": "users/user1/projects/proj003/images/image_1765303170334_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1764258342969_2.png",
+          "src": "users/user1/projects/proj003/images/image_1765303170337_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1764258342971_3.png",
+          "src": "users/user1/projects/proj003/images/image_1765303170339_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1764258342978_4.png",
+          "src": "users/user1/projects/proj003/images/image_1765303170347_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1764258342983_5.png",
+          "src": "users/user1/projects/proj003/images/image_1765303170352_5.png",
           "title": "Alerta y detección de objeto"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-11-27T15:45:42.959Z",
+      "updatedAt": "2025-12-09T17:59:30.328Z",
       "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors.",
-      "priorityNumber": 3,
+      "priorityNumber": 17,
       "kpis": {
         "totalHoursEstimated": 903,
         "hoursSpent": 406,
@@ -273,11 +273,11 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-10-15",
-      "updatedAt": "2025-11-24T16:09:22.643Z",
+      "updatedAt": "2025-12-09T18:00:33.628Z",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Generation of an interactive dashboard to display MRM KPIs and thus eliminate the meeting",
-      "priorityNumber": 4,
+      "priorityNumber": 21,
       "kpis": {
         "totalHoursEstimated": 866,
         "hoursSpent": 173,
@@ -328,31 +328,31 @@
       },
       "videos": [
         {
-          "src": "users/user1/projects/proj005/videos/video_1764258522976_0.mp4",
-          "title": "Pilot Preview"
+          "src": "users/user1/projects/proj005/videos/video_1764259975244_0.mp4",
+          "title": "Project-LorenzoBot"
         }
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj005/images/image_1764258522971_0.png",
+          "src": "users/user1/projects/proj005/images/image_1765303226169_0.png",
           "title": "Interfaz Bot"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1764258522973_1.png",
+          "src": "users/user1/projects/proj005/images/image_1765303226170_1.png",
           "title": "Reportes"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1764258522974_2.png",
+          "src": "users/user1/projects/proj005/images/image_1765303226172_2.png",
           "title": "Flujo General"
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-11-27T15:48:42.968Z",
+      "updatedAt": "2025-12-09T18:00:26.166Z",
       "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "A virtual Agent that the principal funtion its work as Help Desk to several pages [SharePoint / QDOC / ETC]",
-      "priorityNumber": 5,
+      "priorityNumber": 8,
       "kpis": {
         "totalHoursEstimated": 913,
         "hoursSpent": 776,
@@ -385,7 +385,7 @@
       "status": "completed",
       "progress": 100,
       "icon": "📁",
-      "updatedAt": "2025-11-24T16:15:01.844Z",
+      "updatedAt": "2025-12-09T18:22:17.237Z",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
       "priority": "high",
       "achievements": {
@@ -406,14 +406,14 @@
       "createdAt": "2025-11-06T21:07:53.285Z",
       "ownerName": "Sandra Santos",
       "concept": "Library on a SharePoint site where you can find Yokoniramis & Kakotora and other important topics for QP",
-      "priorityNumber": 6,
+      "priorityNumber": 1,
       "kpis": {
         "totalHoursEstimated": 924,
         "hoursSpent": 924,
         "fteSaved": 0.6,
         "completion": 100,
         "timeline": {
-          "startDate": "2025-11-06T21:07:53.285Z",
+          "startDate": "2025-11-06",
           "targetEnd": "2025-11-21",
           "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release."
         },
@@ -440,7 +440,7 @@
       "progress": 60,
       "icon": "📊",
       "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
-      "updatedAt": "2025-11-24T16:22:13.755Z",
+      "updatedAt": "2025-12-09T18:03:51.073Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -456,7 +456,7 @@
       "createdAt": "2025-11-10T14:14:01.699Z",
       "ownerName": "Sandra Santos",
       "concept": "An Interactive Dashboard where show the most important KPI status to KPI by charts ",
-      "priorityNumber": 7,
+      "priorityNumber": 5,
       "kpis": {
         "totalHoursEstimated": 721,
         "hoursSpent": 432,
@@ -490,7 +490,7 @@
       "progress": 50,
       "icon": "📈",
       "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
-      "updatedAt": "2025-11-24T16:23:23.803Z",
+      "updatedAt": "2025-12-09T18:04:05.060Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -505,11 +505,11 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762786312316/images/image_1764001403830_0.png",
+          "src": "users/user2/projects/proj1762786312316/images/image_1765303445063_0.png",
           "title": "Screenshot 2025-11-10 085025.png"
         },
         {
-          "src": "users/user2/projects/proj1762786312316/images/image_1764001403891_1.png",
+          "src": "users/user2/projects/proj1762786312316/images/image_1765303445071_1.png",
           "title": "Screenshot 2025-11-10 085033.png"
         }
       ],
@@ -517,7 +517,7 @@
       "createdAt": "2025-11-10T14:51:52.316Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 8,
+      "priorityNumber": 20,
       "kpis": {
         "totalHoursEstimated": 835,
         "hoursSpent": 417,
@@ -551,8 +551,8 @@
       "progress": 0,
       "icon": "🧾",
       "currentPhase": "",
-      "updatedAt": 1762787494930,
-      "priorityNumber": 9,
+      "updatedAt": "2025-12-09T18:04:15.856Z",
+      "priorityNumber": 14,
       "kpis": {
         "totalHoursEstimated": 831,
         "hoursSpent": 0,
@@ -576,7 +576,22 @@
           "totalMilestones": 11,
           "resourceUtilization": 87
         }
-      }
+      },
+      "priority": "low",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-11-10",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "extraFiles": [],
+      "createdAt": "2025-11-10T14:55:24.702Z",
+      "ownerName": "Sandra Santos",
+      "concept": ""
     },
     {
       "id": "proj1762786983969",
@@ -586,7 +601,7 @@
       "progress": 95,
       "icon": "📦",
       "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-      "updatedAt": "2025-11-25T21:00:40.633Z",
+      "updatedAt": "2025-12-09T18:04:41.705Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -598,13 +613,39 @@
       },
       "targetDate": "2025-11-10",
       "ganttImage": "",
-      "videos": [],
-      "images": [],
+      "videos": [
+        {
+          "src": "users/user2/projects/proj1762786983969/videos/video_1765290356845_0.mp4",
+          "title": "DX_HOLD_PREVIEW.mp4"
+        }
+      ],
+      "images": [
+        {
+          "src": "users/user2/projects/proj1762786983969/images/image_1765303481708_0.png",
+          "title": "DX_HOLD_VIEW.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762786983969/images/image_1765303481713_1.png",
+          "title": "HOLD_MONITOR_SYSTEM.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762786983969/images/image_1765303481715_2.png",
+          "title": "HOLD_MONITOR_SYSTEM_2.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762786983969/images/image_1765303481719_3.png",
+          "title": "HOLD_MONITOR_SYSTEM_3.png"
+        },
+        {
+          "src": "users/user2/projects/proj1762786983969/images/image_1765303481722_4.png",
+          "title": "HOLD_MONITOR_SYSTEM_4.png"
+        }
+      ],
       "extraFiles": [],
       "createdAt": "2025-11-10T15:03:03.969Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 10,
+      "priorityNumber": 7,
       "kpis": {
         "totalHoursEstimated": 650,
         "hoursSpent": 617,
@@ -638,7 +679,7 @@
       "progress": 100,
       "icon": "🧾",
       "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
-      "updatedAt": "2025-11-25T21:01:06.744Z",
+      "updatedAt": "2025-12-09T18:04:52.579Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -654,7 +695,7 @@
       "createdAt": "2025-11-10T15:08:02.420Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 11,
+      "priorityNumber": 26,
       "kpis": {
         "totalHoursEstimated": 720,
         "hoursSpent": 720,
@@ -688,7 +729,7 @@
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-      "updatedAt": "2025-11-25T21:02:12.526Z",
+      "updatedAt": "2025-12-09T18:05:22.427Z",
       "priority": "medium",
       "achievements": {
         "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
@@ -703,27 +744,27 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764104532650_0.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765303522429_0.png",
           "title": "RB1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764104532704_1.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765303522430_1.png",
           "title": "RB2.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764104532785_2.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765303522432_2.png",
           "title": "imagen 1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1764104532863_3.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765303522433_3.png",
           "title": "Slide1.JPG"
         }
       ],
       "extraFiles": [],
       "createdAt": "2025-11-10T15:15:21.514Z",
       "ownerName": "Sandra Santos",
-      "concept": "Creation of a robot prototype to generate brand awareness at Izone",
-      "priorityNumber": 12,
+      "concept": "Creation of a robot prototype designed to boost brand awareness at Innovation Zone.",
+      "priorityNumber": 19,
       "kpis": {
         "totalHoursEstimated": 655,
         "hoursSpent": 196,
@@ -757,7 +798,7 @@
       "progress": 10,
       "icon": "🕶",
       "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT",
-      "updatedAt": "2025-11-24T16:21:25.867Z",
+      "updatedAt": "2025-12-09T18:20:43.030Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -773,14 +814,14 @@
       "createdAt": "2025-11-11T13:48:48.286Z",
       "ownerName": "Hiram González",
       "concept": "A HoloLens 2 project creating an interactive AR interface that guides operators with hands-free instructions, real-time overlays, and remote support to improve productivity and reduce errors.",
-      "priorityNumber": 13,
+      "priorityNumber": 9,
       "kpis": {
         "totalHoursEstimated": 624,
         "hoursSpent": 62,
         "fteSaved": 2.3,
         "completion": 10,
         "timeline": {
-          "startDate": "2025-11-11T13:48:48.286Z",
+          "startDate": "2025-11-11",
           "targetEnd": "2025-11-11",
           "currentPhase": "In the process of acquiring / releasing Microsoft Dynamics licenses by IT"
         },
@@ -807,7 +848,7 @@
       "progress": 80,
       "icon": "📊",
       "currentPhase": "Implementation of Line P703 (Pilot Line)",
-      "updatedAt": "2025-11-24T16:20:11.590Z",
+      "updatedAt": "2025-12-09T18:01:30.144Z",
       "priority": "high",
       "achievements": {
         "2025-03": "Implementation of Line P703 (Pilot Line)",
@@ -827,7 +868,7 @@
       "createdAt": "2025-11-11T13:58:35.275Z",
       "ownerName": "Hiram González",
       "concept": "Real-time platform showing production line incidents in a dome dashboard, highlighting alerts and trends for quick decision-making.",
-      "priorityNumber": 14,
+      "priorityNumber": 2,
       "kpis": {
         "totalHoursEstimated": 682,
         "hoursSpent": 545,
@@ -861,7 +902,7 @@
       "progress": 0,
       "icon": "🪑",
       "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
-      "updatedAt": "2025-11-25T21:02:42.206Z",
+      "updatedAt": "2025-12-09T18:05:32.917Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -877,7 +918,7 @@
       "createdAt": "2025-11-11T14:45:45.620Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 15,
+      "priorityNumber": 11,
       "kpis": {
         "totalHoursEstimated": 790,
         "hoursSpent": 0,
@@ -910,8 +951,8 @@
       "status": "discovery",
       "progress": 0,
       "icon": "🗾",
-      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.",
-      "updatedAt": "2025-11-25T21:03:06.541Z",
+      "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.El ",
+      "updatedAt": "2025-12-09T18:05:42.543Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -927,7 +968,7 @@
       "createdAt": "2025-11-11T15:38:19.999Z",
       "ownerName": "Sandra Santos",
       "concept": "",
-      "priorityNumber": 16,
+      "priorityNumber": 22,
       "kpis": {
         "totalHoursEstimated": 952,
         "hoursSpent": 0,
@@ -961,7 +1002,7 @@
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
-      "updatedAt": "2025-11-27T15:45:09.369Z",
+      "updatedAt": "2025-12-09T18:21:50.001Z",
       "priority": "medium",
       "achievements": {
         "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
@@ -982,14 +1023,14 @@
       "createdAt": "2025-11-11T16:01:55.703Z",
       "ownerName": "Hiram González",
       "concept": "Portfolio designed for the storage and presentation of current projects in the DX area",
-      "priorityNumber": 17,
+      "priorityNumber": 28,
       "kpis": {
         "totalHoursEstimated": 995,
         "hoursSpent": 537,
         "fteSaved": 1.5,
         "completion": 54,
         "timeline": {
-          "startDate": "2025-11-11T16:01:55.703Z",
+          "startDate": "2025-11-11",
           "targetEnd": "2026-01-30",
           "currentPhase": "Bug fixes on the Project Editing page"
         },
@@ -1028,8 +1069,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:29:12.243Z",
-      "updatedAt": "2025-11-18T16:29:12.243Z",
-      "priorityNumber": 18,
+      "updatedAt": "2025-12-09T18:06:16.798Z",
+      "priorityNumber": 15,
       "kpis": {
         "totalHoursEstimated": 793,
         "hoursSpent": 0,
@@ -1053,7 +1094,10 @@
           "totalMilestones": 12,
           "resourceUtilization": 71
         }
-      }
+      },
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
     },
     {
       "id": "proj1763483378691",
@@ -1075,8 +1119,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:29:38.691Z",
-      "updatedAt": "2025-11-18T16:29:38.691Z",
-      "priorityNumber": 19,
+      "updatedAt": "2025-12-09T18:06:25.329Z",
+      "priorityNumber": 16,
       "kpis": {
         "totalHoursEstimated": 989,
         "hoursSpent": 0,
@@ -1100,7 +1144,10 @@
           "totalMilestones": 8,
           "resourceUtilization": 80
         }
-      }
+      },
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
     },
     {
       "id": "proj1763483412529",
@@ -1122,15 +1169,15 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:30:12.529Z",
-      "updatedAt": "2025-11-18T16:30:12.529Z",
-      "priorityNumber": 20,
+      "updatedAt": "2025-12-09T18:24:48.367Z",
+      "priorityNumber": 24,
       "kpis": {
         "totalHoursEstimated": 931,
         "hoursSpent": 0,
         "fteSaved": 1.1,
         "completion": 0,
         "timeline": {
-          "startDate": "2025-11-18T16:30:12.529Z",
+          "startDate": "2025-11-18",
           "targetEnd": "2025-11-18",
           "currentPhase": "Development"
         },
@@ -1147,7 +1194,10 @@
           "totalMilestones": 11,
           "resourceUtilization": 77
         }
-      }
+      },
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
     },
     {
       "id": "proj1763483430619",
@@ -1169,8 +1219,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:30:30.619Z",
-      "updatedAt": "2025-11-18T16:30:30.619Z",
-      "priorityNumber": 21,
+      "updatedAt": "2025-12-09T18:06:53.629Z",
+      "priorityNumber": 23,
       "kpis": {
         "totalHoursEstimated": 866,
         "hoursSpent": 0,
@@ -1194,7 +1244,10 @@
           "totalMilestones": 10,
           "resourceUtilization": 76
         }
-      }
+      },
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
     },
     {
       "id": "proj1763483450152",
@@ -1216,8 +1269,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:30:50.152Z",
-      "updatedAt": "2025-11-18T16:30:50.152Z",
-      "priorityNumber": 22,
+      "updatedAt": "2025-12-09T18:07:06.745Z",
+      "priorityNumber": 12,
       "kpis": {
         "totalHoursEstimated": 609,
         "hoursSpent": 0,
@@ -1241,7 +1294,10 @@
           "totalMilestones": 10,
           "resourceUtilization": 90
         }
-      }
+      },
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
     },
     {
       "id": "proj1763483501019",
@@ -1263,11 +1319,11 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:31:41.019Z",
-      "updatedAt": "2025-11-18T16:35:27.097Z",
+      "updatedAt": "2025-12-09T18:07:18.402Z",
       "extraFiles": [],
       "ownerName": "Miguel Coronado",
       "concept": "",
-      "priorityNumber": 23,
+      "priorityNumber": 6,
       "kpis": {
         "totalHoursEstimated": 684,
         "hoursSpent": 273,
@@ -1313,8 +1369,8 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:31:53.611Z",
-      "updatedAt": "2025-11-18T16:31:53.611Z",
-      "priorityNumber": 24,
+      "updatedAt": "2025-12-09T18:07:28.862Z",
+      "priorityNumber": 25,
       "kpis": {
         "totalHoursEstimated": 637,
         "hoursSpent": 0,
@@ -1338,7 +1394,10 @@
           "totalMilestones": 8,
           "resourceUtilization": 87
         }
-      }
+      },
+      "extraFiles": [],
+      "ownerName": "Miguel Coronado",
+      "concept": ""
     },
     {
       "id": "proj1763483529675",
@@ -1362,12 +1421,12 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user3/projects/proj1763483529675/images/image_1764258666285_0.png",
+          "src": "users/user3/projects/proj1763483529675/images/image_1765303657128_0.png",
           "title": "Infografia"
         }
       ],
       "createdAt": "2025-11-18T16:32:09.675Z",
-      "updatedAt": "2025-11-27T15:51:06.281Z",
+      "updatedAt": "2025-12-09T18:07:37.124Z",
       "extraFiles": [
         {
           "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764258666301.pptx",
@@ -1380,7 +1439,7 @@
       ],
       "ownerName": "Miguel Coronado",
       "concept": "Artificial intelligence agent specializing in investigating 5 Whys analyses. ",
-      "priorityNumber": 25,
+      "priorityNumber": 18,
       "kpis": {
         "totalHoursEstimated": 719,
         "hoursSpent": 575,
@@ -1430,11 +1489,11 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:53:21.399Z",
-      "updatedAt": "2025-11-25T21:03:16.250Z",
+      "updatedAt": "2025-12-09T18:05:49.753Z",
       "extraFiles": [],
       "ownerName": "Sandra Santos",
       "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]",
-      "priorityNumber": 26,
+      "priorityNumber": 27,
       "kpis": {
         "totalHoursEstimated": 727,
         "hoursSpent": 290,
@@ -1459,6 +1518,101 @@
           "resourceUtilization": 80
         }
       }
+    },
+    {
+      "id": "proj1764601398436",
+      "ownerId": "user4",
+      "title": "Automatizacion IMDS",
+      "status": "discovery",
+      "priority": "high",
+      "progress": 8,
+      "icon": "📋",
+      "currentPhase": "Actualmente, me encuentro colaborando con el equipo para comprender al 100% la plataforma para así poder proponer soluciones.",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2025-12-01",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2025-12-01T15:03:18.436Z",
+      "updatedAt": "2025-12-01T21:32:11.847Z",
+      "extraFiles": [],
+      "ownerName": "Ivanna Rodríguez",
+      "concept": "El propósito de este proyecto es explorar las opciones para ayudar al equipo de IMDS a automatizar su flujo de trabajo.",
+      "priorityNumber": 27
+    },
+    {
+      "id": "proj1764623073513",
+      "ownerId": "user5",
+      "title": "QA-DX System",
+      "status": "in-progress",
+      "priority": "high",
+      "progress": 12,
+      "icon": "📊",
+      "currentPhase": "The project is in development, currently is in the phase of design and link the automate to the power apps.",
+      "achievements": {
+        "2025-12": "The NPCC screens "
+      },
+      "blockers": {
+        "type": "success",
+        "message": ""
+      },
+      "nextSteps": {
+        "2025-12": "Increase the design making it more attractive, change the colors, change the shapes design, etc."
+      },
+      "targetDate": "2025-12-12",
+      "videos": [
+        {
+          "src": "users/user5/projects/proj1764623073513/videos/video_1764883696234_0.mp4",
+          "title": "Screen Recording 2025-12-04 152532.mp4"
+        }
+      ],
+      "images": [
+        {
+          "src": "users/user5/projects/proj1764623073513/images/image_1765293074131_0.png",
+          "title": "Screenshot 2025-12-04 152227.png"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/images/image_1765293074170_1.png",
+          "title": "Screenshot 2025-12-04 152234.png"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/images/image_1765293074201_2.png",
+          "title": "Screenshot 2025-12-04 152240.png"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/images/image_1765293074240_3.png",
+          "title": "Screenshot 2025-12-04 152248.png"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/images/image_1765293074271_4.png",
+          "title": "Screenshot 2025-12-04 152256.png"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/images/image_1765293074312_5.png",
+          "title": "Screenshot 2025-12-04 152303.png"
+        }
+      ],
+      "createdAt": "2025-12-01T21:04:33.513Z",
+      "updatedAt": "2025-12-09T15:11:14.070Z",
+      "extraFiles": [
+        {
+          "src": "users/user5/projects/proj1764623073513/extra-files/QA_NPCC_Digitalization_Proposa_1764623349973.pptx",
+          "title": "QA NPCC Digitalization Proposal.pptx",
+          "fileName": "QA_NPCC_Digitalization_Proposa_1764623349973.pptx",
+          "fileType": "application/octet-stream",
+          "fileSize": 0,
+          "extension": "pptx"
+        }
+      ],
+      "ownerName": "Angel Alvarez",
+      "concept": "This system is designed to digitize the NPCC and Project Transfer process, enabling each quality analyst to standardize formats, automate due dates and status report and develop department skills, used throughout the workflow and providing an interactive GUI where every user has a defined access level to view and manage the available data.",
+      "ganttImagePath": "users/user5/projects/proj1764623073513/gantt/gantt_1765293074099.png",
+      "priorityNumber": 27
     }
   ]
 }
