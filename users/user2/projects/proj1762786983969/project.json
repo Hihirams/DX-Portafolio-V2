@@ -2,11 +2,11 @@
   "id": "proj1762786983969",
   "ownerId": "user2",
   "title": "DX Hold (Hold Monitor System) - ME",
-  "status": "completed",
+  "status": "pilot",
   "progress": 95,
   "icon": "📦",
   "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-  "updatedAt": "2025-12-09T18:04:41.705Z",
+  "updatedAt": "2025-12-10T20:09:39.905Z",
   "priority": "medium",
   "achievements": {},
   "blockers": {
@@ -26,23 +26,23 @@
   ],
   "images": [
     {
-      "src": "users/user2/projects/proj1762786983969/images/image_1765303481708_0.png",
+      "src": "users/user2/projects/proj1762786983969/images/image_1765397379909_0.png",
       "title": "DX_HOLD_VIEW.png"
     },
     {
-      "src": "users/user2/projects/proj1762786983969/images/image_1765303481713_1.png",
+      "src": "users/user2/projects/proj1762786983969/images/image_1765397379913_1.png",
       "title": "HOLD_MONITOR_SYSTEM.png"
     },
     {
-      "src": "users/user2/projects/proj1762786983969/images/image_1765303481715_2.png",
+      "src": "users/user2/projects/proj1762786983969/images/image_1765397379916_2.png",
       "title": "HOLD_MONITOR_SYSTEM_2.png"
     },
     {
-      "src": "users/user2/projects/proj1762786983969/images/image_1765303481719_3.png",
+      "src": "users/user2/projects/proj1762786983969/images/image_1765397379920_3.png",
       "title": "HOLD_MONITOR_SYSTEM_3.png"
     },
     {
-      "src": "users/user2/projects/proj1762786983969/images/image_1765303481722_4.png",
+      "src": "users/user2/projects/proj1762786983969/images/image_1765397379922_4.png",
       "title": "HOLD_MONITOR_SYSTEM_4.png"
     }
   ],

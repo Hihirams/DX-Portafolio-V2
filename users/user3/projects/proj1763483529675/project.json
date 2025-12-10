@@ -2,7 +2,7 @@
   "id": "proj1763483529675",
   "ownerId": "user3",
   "title": "Whyzer",
-  "status": "in-progress",
+  "status": "develop",
   "priority": "medium",
   "progress": 80,
   "icon": "📋",
@@ -20,12 +20,12 @@
   "videos": [],
   "images": [
     {
-      "src": "users/user3/projects/proj1763483529675/images/image_1765303657128_0.png",
+      "src": "users/user3/projects/proj1763483529675/images/image_1765397512725_0.png",
       "title": "Infografia"
     }
   ],
   "createdAt": "2025-11-18T16:32:09.675Z",
-  "updatedAt": "2025-12-09T18:07:37.124Z",
+  "updatedAt": "2025-12-10T20:11:52.722Z",
   "extraFiles": [
     {
       "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764258666301.pptx",

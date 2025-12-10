@@ -37,7 +37,7 @@ const crossFilterConfig = {
     // Chart types that can trigger cross-filters
     portfolioStatus: {
         filterType: 'status',
-        valueMap: ['progress', 'hold', 'discovery', 'completed']
+        valueMap: ['discovery', 'decision', 'develop', 'pilot', 'yokotenkai', 'finished']
     },
     teamWorkload: {
         filterType: 'responsible',
@@ -52,11 +52,12 @@ const crossFilterConfig = {
 
 // Status Mapping
 const statusMap = {
-    'in-progress': { label: 'In Progress', class: 'status-progress' },
-    'progress': { label: 'In Progress', class: 'status-progress' },
-    'hold': { label: 'On Hold', class: 'status-hold' },
     'discovery': { label: 'Discovery', class: 'status-discovery' },
-    'completed': { label: 'Completed', class: 'status-completed' }
+    'decision': { label: 'Decision', class: 'status-decision' },
+    'develop': { label: 'Develop', class: 'status-develop' },
+    'pilot': { label: 'Pilot', class: 'status-pilot' },
+    'yokotenkai': { label: 'Yokotenkai', class: 'status-yokotenkai' },
+    'finished': { label: 'Finished', class: 'status-finished' }
 };
 
 // ==================== INITIALIZATION ====================
@@ -137,10 +138,16 @@ function loadProjectsFromDataManager() {
 
 function normalizeStatus(status) {
     const statusLower = String(status).toLowerCase();
-    if (statusLower.includes('progress')) return 'progress';
-    if (statusLower.includes('hold')) return 'hold';
     if (statusLower.includes('discovery')) return 'discovery';
-    if (statusLower.includes('completed')) return 'completed';
+    if (statusLower.includes('decision')) return 'decision';
+    if (statusLower.includes('develop')) return 'develop';
+    if (statusLower.includes('pilot')) return 'pilot';
+    if (statusLower.includes('yokotenkai')) return 'yokotenkai';
+    if (statusLower.includes('finished')) return 'finished';
+    // Fallback para etapas antiguas
+    if (statusLower.includes('progress')) return 'develop';
+    if (statusLower.includes('hold')) return 'pilot';
+    if (statusLower.includes('completed')) return 'finished';
     return 'discovery';
 }
 
@@ -1120,10 +1127,12 @@ function updateBadges() {
     if (!projects.length) return;
 
     document.getElementById('badge-all').textContent = projects.length;
-    document.getElementById('badge-progress').textContent = projects.filter(p => p.status === 'progress').length;
-    document.getElementById('badge-hold').textContent = projects.filter(p => p.status === 'hold').length;
     document.getElementById('badge-discovery').textContent = projects.filter(p => p.status === 'discovery').length;
-    document.getElementById('badge-completed').textContent = projects.filter(p => p.status === 'completed').length;
+    document.getElementById('badge-decision').textContent = projects.filter(p => p.status === 'decision').length;
+    document.getElementById('badge-develop').textContent = projects.filter(p => p.status === 'develop').length;
+    document.getElementById('badge-pilot').textContent = projects.filter(p => p.status === 'pilot').length;
+    document.getElementById('badge-yokotenkai').textContent = projects.filter(p => p.status === 'yokotenkai').length;
+    document.getElementById('badge-finished').textContent = projects.filter(p => p.status === 'finished').length;
 
     document.getElementById('badge-block-all').textContent = projects.length;
     document.getElementById('badge-blocked').textContent = projects.filter(p => p.blocked).length;
@@ -1460,16 +1469,18 @@ function updateKPIsWithCrossFilters(filteredProjects = getCrossFilteredProjects(
 // Update charts with cross-filtered data
 function updateAllChartsWithCrossFilters(crossFilteredProjects) {
     const statusCounts = {
-        progress: crossFilteredProjects.filter(p => p.status === 'progress').length,
-        hold: crossFilteredProjects.filter(p => p.status === 'hold').length,
         discovery: crossFilteredProjects.filter(p => p.status === 'discovery').length,
-        completed: crossFilteredProjects.filter(p => p.status === 'completed').length
+        decision: crossFilteredProjects.filter(p => p.status === 'decision').length,
+        develop: crossFilteredProjects.filter(p => p.status === 'develop').length,
+        pilot: crossFilteredProjects.filter(p => p.status === 'pilot').length,
+        yokotenkai: crossFilteredProjects.filter(p => p.status === 'yokotenkai').length,
+        finished: crossFilteredProjects.filter(p => p.status === 'finished').length
     };
 
     // Portfolio Status Chart
     if (charts.portfolioStatus) {
         charts.portfolioStatus.data.datasets[0].data = [
-            statusCounts.progress, statusCounts.hold, statusCounts.discovery, statusCounts.completed
+            statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.finished
         ];
         charts.portfolioStatus.update('active');
     }
@@ -1736,21 +1747,29 @@ function generateAnalyticsFilters() {
 
     html += `
         <div class="filter-divider"></div>
-        <div class="filter-chip" data-filter-type="status" data-filter-value="progress" onclick="updateAnalyticsFilter('status', 'progress')">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(52, 199, 89, 0.85);"></div>
-            In Progress
-        </div>
-        <div class="filter-chip" data-filter-type="status" data-filter-value="hold" onclick="updateAnalyticsFilter('status', 'hold')">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 159, 10, 0.85);"></div>
-            On Hold
-        </div>
         <div class="filter-chip" data-filter-type="status" data-filter-value="discovery" onclick="updateAnalyticsFilter('status', 'discovery')">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(191, 90, 242, 0.85);"></div>
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(147, 112, 219, 0.85);"></div>
             Discovery
         </div>
-        <div class="filter-chip" data-filter-type="status" data-filter-value="completed" onclick="updateAnalyticsFilter('status', 'completed')">
-            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(48, 209, 88, 0.85);"></div>
-            Completed
+        <div class="filter-chip" data-filter-type="status" data-filter-value="decision" onclick="updateAnalyticsFilter('status', 'decision')">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 193, 7, 0.85);"></div>
+            Decision
+        </div>
+        <div class="filter-chip" data-filter-type="status" data-filter-value="develop" onclick="updateAnalyticsFilter('status', 'develop')">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(52, 152, 219, 0.85);"></div>
+            Develop
+        </div>
+        <div class="filter-chip" data-filter-type="status" data-filter-value="pilot" onclick="updateAnalyticsFilter('status', 'pilot')">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(230, 126, 34, 0.85);"></div>
+            Pilot
+        </div>
+        <div class="filter-chip" data-filter-type="status" data-filter-value="yokotenkai" onclick="updateAnalyticsFilter('status', 'yokotenkai')">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(219, 112, 147, 0.85);"></div>
+            Yokotenkai
+        </div>
+        <div class="filter-chip" data-filter-type="status" data-filter-value="finished" onclick="updateAnalyticsFilter('status', 'finished')">
+            <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(46, 204, 113, 0.85);"></div>
+            Finished
         </div>
 
         <div class="filter-divider"></div>
@@ -1828,10 +1847,12 @@ function initializeCharts() {
 
     const filteredProjects = getFilteredAnalyticsProjects();
     const statusCounts = {
-        progress: filteredProjects.filter(p => p.status === 'progress').length,
-        hold: filteredProjects.filter(p => p.status === 'hold').length,
         discovery: filteredProjects.filter(p => p.status === 'discovery').length,
-        completed: filteredProjects.filter(p => p.status === 'completed').length
+        decision: filteredProjects.filter(p => p.status === 'decision').length,
+        develop: filteredProjects.filter(p => p.status === 'develop').length,
+        pilot: filteredProjects.filter(p => p.status === 'pilot').length,
+        yokotenkai: filteredProjects.filter(p => p.status === 'yokotenkai').length,
+        finished: filteredProjects.filter(p => p.status === 'finished').length
     };
 
     // Portfolio Status Chart
@@ -1840,14 +1861,16 @@ function initializeCharts() {
         charts.portfolioStatus = new Chart(portfolioStatusCtx, {
             type: 'doughnut',
             data: {
-                labels: ['In Progress', 'On Hold', 'Discovery', 'Completed'],
+                labels: ['Discovery', 'Decision', 'Develop', 'Pilot', 'Yokotenkai', 'Finished'],
                 datasets: [{
-                    data: [statusCounts.progress, statusCounts.hold, statusCounts.discovery, statusCounts.completed],
+                    data: [statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.finished],
                     backgroundColor: [
-                        'rgba(52, 199, 89, 0.85)',
-                        'rgba(255, 159, 10, 0.85)',
-                        'rgba(191, 90, 242, 0.85)',
-                        'rgba(48, 209, 88, 0.85)'
+                        'rgba(157, 0, 255, 0.85)',
+                        'rgba(255, 214, 0, 0.85)',
+                        'rgba(0, 217, 255, 0.85)',
+                        'rgba(255, 107, 0, 0.85)',
+                        'rgba(0, 191, 255, 0.85)',
+                        'rgba(0, 255, 133, 0.85)'
                     ],
                     borderWidth: 3,
                     borderColor: isDarkMode ? '#000000' : '#ffffff'
@@ -2208,13 +2231,15 @@ function updateAllCharts() {
     // Update Portfolio Status
     if (charts.portfolioStatus) {
         const statusCounts = {
-            progress: filteredProjects.filter(p => p.status === 'progress').length,
-            hold: filteredProjects.filter(p => p.status === 'hold').length,
             discovery: filteredProjects.filter(p => p.status === 'discovery').length,
-            completed: filteredProjects.filter(p => p.status === 'completed').length
+            decision: filteredProjects.filter(p => p.status === 'decision').length,
+            develop: filteredProjects.filter(p => p.status === 'develop').length,
+            pilot: filteredProjects.filter(p => p.status === 'pilot').length,
+            yokotenkai: filteredProjects.filter(p => p.status === 'yokotenkai').length,
+            finished: filteredProjects.filter(p => p.status === 'finished').length
         };
         charts.portfolioStatus.data.datasets[0].data = [
-            statusCounts.progress, statusCounts.hold, statusCounts.discovery, statusCounts.completed
+            statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.finished
         ];
         charts.portfolioStatus.update('active');
     }

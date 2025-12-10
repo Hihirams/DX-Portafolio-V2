@@ -5,39 +5,39 @@
       "title": "Quality Clinic Unity",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "high",
       "priorityNumber": 4,
       "progress": 60,
       "icon": "🌐",
       "currentPhase": "Preparation of the IoT/MES pilot to display real-time KPIs within the plant's 3D environment",
-      "updatedAt": "2025-12-09T17:58:20.099Z"
+      "updatedAt": "2025-12-10T20:01:20.015Z"
     },
     {
       "id": "proj002",
       "title": "QC ALT / DQITS",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "hold",
+      "status": "decision",
       "priority": "medium",
       "priorityNumber": 3,
       "progress": 55,
       "icon": "🧪",
       "currentPhase": "Integration of detection and IoT QueryLink linking (automatic CSV)",
-      "updatedAt": "2025-12-09T17:58:34.020Z"
+      "updatedAt": "2025-12-10T20:05:45.458Z"
     },
     {
       "id": "proj003",
       "title": "AI Camera",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "in-progress",
+      "status": "discovery",
       "priority": "medium",
       "priorityNumber": 17,
       "progress": 45,
       "icon": "🎥",
       "currentPhase": "Development of motion detection prototype and recognition models",
-      "updatedAt": "2025-12-09T17:59:30.328Z"
+      "updatedAt": "2025-12-10T20:06:22.382Z"
     },
     {
       "id": "proj004",
@@ -57,52 +57,52 @@
       "title": "LorenzoBot",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "hold",
+      "status": "pilot",
       "priority": "low",
       "priorityNumber": 8,
       "progress": 85,
       "icon": "🤖",
       "currentPhase": "Bot operational in local environment. Deployment on HOLD due to IT infrastructure decisions.",
-      "updatedAt": "2025-12-09T18:00:26.166Z"
+      "updatedAt": "2025-12-10T20:06:50.176Z"
     },
     {
       "id": "proj1762463273285",
       "title": "YOKADX",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "completed",
+      "status": "yokotenkai",
       "priority": "high",
       "priorityNumber": 1,
       "progress": 100,
       "icon": "📁",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
-      "updatedAt": "2025-12-09T18:22:17.237Z"
+      "updatedAt": "2025-12-10T20:07:59.056Z"
     },
     {
       "id": "proj1762784041699",
       "title": "Quality KPI Dashboard",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "in-progress",
+      "status": "yokotenkai",
       "priority": "medium",
       "priorityNumber": 5,
       "progress": 60,
       "icon": "📊",
       "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
-      "updatedAt": "2025-12-09T18:03:51.073Z"
+      "updatedAt": "2025-12-10T20:08:19.984Z"
     },
     {
       "id": "proj1762786312316",
       "title": "DX Expenses",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "hold",
+      "status": "develop",
       "priority": "low",
       "priorityNumber": 20,
       "progress": 50,
       "icon": "📈",
       "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
-      "updatedAt": "2025-12-09T18:04:05.060Z"
+      "updatedAt": "2025-12-10T20:08:36.993Z"
     },
     {
       "id": "proj1762786524702",
@@ -122,39 +122,39 @@
       "title": "DX Hold (Hold Monitor System) - ME",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "completed",
+      "status": "pilot",
       "priority": "medium",
       "priorityNumber": 7,
       "progress": 95,
       "icon": "📦",
       "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-      "updatedAt": "2025-12-09T18:04:41.705Z"
+      "updatedAt": "2025-12-10T20:09:39.905Z"
     },
     {
       "id": "proj1762787282420",
       "title": "Jsox Dashboard",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "completed",
+      "status": "finished",
       "priority": "low",
       "priorityNumber": 26,
       "progress": 100,
       "icon": "🧾",
       "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
-      "updatedAt": "2025-12-09T18:04:52.579Z"
+      "updatedAt": "2025-12-10T20:10:22.619Z"
     },
     {
       "id": "proj1762787721514",
       "title": "RoBot Innovation Zone",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "medium",
       "priorityNumber": 19,
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-      "updatedAt": "2025-12-09T18:05:22.427Z"
+      "updatedAt": "2025-12-10T20:10:34.923Z"
     },
     {
       "id": "proj1762868928286",
@@ -174,26 +174,26 @@
       "title": "QC ALT",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "in-progress",
+      "status": "pilot",
       "priority": "high",
       "priorityNumber": 2,
       "progress": 80,
       "icon": "📊",
       "currentPhase": "Implementation of Line P703 (Pilot Line)",
-      "updatedAt": "2025-12-09T18:01:30.144Z"
+      "updatedAt": "2025-12-10T20:07:24.519Z"
     },
     {
       "id": "proj1762872345620",
       "title": "Don Sillardo",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "hold",
+      "status": "discovery",
       "priority": "medium",
       "priorityNumber": 11,
       "progress": 0,
       "icon": "🪑",
       "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
-      "updatedAt": "2025-12-09T18:05:32.917Z"
+      "updatedAt": "2025-12-10T20:10:55.599Z"
     },
     {
       "id": "proj1762875499999",
@@ -213,13 +213,13 @@
       "title": "DX Evidence Portfolio",
       "ownerId": "user1",
       "ownerName": "Hiram González",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "medium",
       "priorityNumber": 28,
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
-      "updatedAt": "2025-12-09T18:21:50.001Z"
+      "updatedAt": "2025-12-10T20:07:32.516Z"
     },
     {
       "id": "proj1763483352243",
@@ -317,26 +317,26 @@
       "title": "Whyzer",
       "ownerId": "user3",
       "ownerName": "Miguel Coronado",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "medium",
       "priorityNumber": 18,
       "progress": 80,
       "icon": "📋",
       "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it.",
-      "updatedAt": "2025-12-09T18:07:37.124Z"
+      "updatedAt": "2025-12-10T20:11:52.722Z"
     },
     {
       "id": "proj1763484801399",
       "title": "Videos Creation",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "high",
       "priorityNumber": 27,
       "progress": 40,
       "icon": "📋",
       "currentPhase": "Suport ECU Ishue Investigation",
-      "updatedAt": "2025-12-09T18:05:49.753Z"
+      "updatedAt": "2025-12-10T20:11:13.998Z"
     },
     {
       "id": "proj1764601398436",
@@ -356,23 +356,25 @@
       "title": "QA-DX System",
       "ownerId": "user5",
       "ownerName": "Angel Alvarez",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "high",
       "priorityNumber": 27,
       "progress": 12,
       "icon": "📊",
       "currentPhase": "The project is in development, currently is in the phase of design and link the automate to the power apps.",
-      "updatedAt": "2025-12-09T15:11:14.070Z"
+      "updatedAt": "2025-12-10T20:12:38.416Z"
     }
   ],
   "stats": {
     "totalProjects": 28,
-    "inProgress": 9,
-    "discovery": 12,
-    "hold": 4,
-    "completed": 3,
+    "discovery": 14,
+    "decision": 1,
+    "develop": 7,
+    "pilot": 3,
+    "yokotenkai": 2,
+    "finished": 1,
     "totalUsers": 5,
     "avgProgress": 37
   },
-  "lastUpdated": "2025-12-09T18:24:48.389Z"
+  "lastUpdated": "2025-12-10T20:12:38.453Z"
 }

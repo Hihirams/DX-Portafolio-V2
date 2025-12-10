@@ -2,20 +2,6 @@
   "appName": "DX Portfolio",
   "version": "1.0.0",
   "projectStatuses": {
-    "in-progress": {
-      "label": "In Progress",
-      "badge": "In Progress",
-      "badgeClass": "badge-in-progress",
-      "color": "#00D9FF",
-      "icon": "▶"
-    },
-    "hold": {
-      "label": "On Hold",
-      "badge": "On Hold",
-      "badgeClass": "badge-hold",
-      "color": "#FF6B00",
-      "icon": "⏸"
-    },
     "discovery": {
       "label": "Discovery",
       "badge": "Discovery",
@@ -23,17 +9,38 @@
       "color": "#9D00FF",
       "icon": "🔍"
     },
-    "paused": {
-      "label": "Paused",
-      "badge": "Paused",
-      "badgeClass": "badge-paused",
+    "decision": {
+      "label": "Decision",
+      "badge": "Decision",
+      "badgeClass": "badge-decision",
       "color": "#FFD600",
-      "icon": "⏸"
+      "icon": "🤔"
     },
-    "completed": {
-      "label": "Completed",
-      "badge": "Completed",
-      "badgeClass": "badge-completed",
+    "develop": {
+      "label": "Develop",
+      "badge": "Develop",
+      "badgeClass": "badge-develop",
+      "color": "#00D9FF",
+      "icon": "⚙️"
+    },
+    "pilot": {
+      "label": "Pilot",
+      "badge": "Pilot",
+      "badgeClass": "badge-pilot",
+      "color": "#FF6B00",
+      "icon": "🚀"
+    },
+    "yokotenkai": {
+      "label": "Yokotenkai",
+      "badge": "Yokotenkai",
+      "badgeClass": "badge-yokotenkai",
+      "color": "#00BFFF",
+      "icon": "🌐"
+    },
+    "finished": {
+      "label": "Finished",
+      "badge": "Finished",
+      "badgeClass": "badge-finished",
       "color": "#00FF85",
       "icon": "✓"
     }

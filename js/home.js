@@ -88,28 +88,36 @@ function getInitials(name) {
 // ==================== STATS OVERVIEW ====================
 
 function renderStatsOverview() {
-  const statsOverview = document.getElementById('statsOverview');
-  const stats = dataManager.getStats();
+    const statsOverview = document.getElementById('statsOverview');
+    const stats = dataManager.getStats();
 
-  statsOverview.innerHTML = `
+    statsOverview.innerHTML = `
     <div class="stat-card" onclick="scrollToAllProjects('all')">
       <div class="stat-number">${stats.totalProjects}</div>
       <div class="stat-label">Total Projects</div>
-    </div>
-    <div class="stat-card" onclick="scrollToAllProjects('in-progress')">
-      <div class="stat-number">${stats.inProgress}</div>
-      <div class="stat-label">In Progress</div>
-    </div>
-    <div class="stat-card" onclick="scrollToAllProjects('hold')">
-      <div class="stat-number">${stats.hold}</div>
-      <div class="stat-label">On Hold</div>
     </div>
     <div class="stat-card" onclick="scrollToAllProjects('discovery')">
       <div class="stat-number">${stats.discovery}</div>
       <div class="stat-label">Discovery</div>
     </div>
-    <div class="stat-card" onclick="scrollToAllProjects('completed')">
-      <div class="stat-number">${stats.completed}</div>
+    <div class="stat-card" onclick="scrollToAllProjects('decision')">
+      <div class="stat-number">${stats.decision}</div>
+      <div class="stat-label">Decision</div>
+    </div>
+    <div class="stat-card" onclick="scrollToAllProjects('develop')">
+      <div class="stat-number">${stats.develop}</div>
+      <div class="stat-label">Develop</div>
+    </div>
+    <div class="stat-card" onclick="scrollToAllProjects('pilot')">
+      <div class="stat-number">${stats.pilot}</div>
+      <div class="stat-label">Pilot</div>
+    </div>
+    <div class="stat-card" onclick="scrollToAllProjects('yokotenkai')">
+      <div class="stat-number">${stats.yokotenkai}</div>
+      <div class="stat-label">Yokotenkai</div>
+    </div>
+    <div class="stat-card" onclick="scrollToAllProjects('finished')">
+      <div class="stat-number">${stats.finished}</div>
       <div class="stat-label">Finished</div>
     </div>
   `;
@@ -124,11 +132,11 @@ function showMyProjects() {
     section.style.display = 'block';
 
     const myProjects = (typeof dataManager.getMyProjects === 'function')
-      ? dataManager.getMyProjects()
-      : (dataManager.getProjectsByUser
-          ? dataManager.getProjectsByUser(dataManager.getCurrentUser()?.id)
-          : []);
-    
+        ? dataManager.getMyProjects()
+        : (dataManager.getProjectsByUser
+            ? dataManager.getProjectsByUser(dataManager.getCurrentUser()?.id)
+            : []);
+
     if (myProjects.length === 0) {
         grid.innerHTML = `
             <div class="empty-state">
@@ -141,7 +149,7 @@ function showMyProjects() {
         `;
         return;
     }
-    
+
     grid.innerHTML = myProjects.map(project => createProjectCard(project, true)).join('');
 }
 
@@ -169,22 +177,22 @@ function shuffleArray(array) {
 function arrangeProjectCardsIntelligently(projects) {
     // RANDOMIZAR el orden para tener variedad visual
     const sortedProjects = shuffleArray(projects);
-    
+
     // Grid virtual: 2 filas, columnas infinitas
     const grid = [];
     const ROWS = 2;
     let maxCol = 0;
-    
+
     // Inicializar grid con columnas suficientes
     for (let i = 0; i < 100; i++) {
         grid[i] = Array(ROWS).fill(0);
     }
-    
+
     const placement = [];
-    
+
     sortedProjects.forEach((project, index) => {
         let cols, rows, size;
-        
+
         // Determinar tamaño basado en importancia o alternar
         // Tarjetas importantes (featured) son más grandes
         if (project.featured || index % 7 === 0) {
@@ -200,7 +208,7 @@ function arrangeProjectCardsIntelligently(projects) {
             size = 'small';
             cols = 1; rows = 1;
         }
-        
+
         // Buscar primer espacio disponible
         let placed = false;
         for (let col = 0; col < 100 && !placed; col++) {
@@ -216,7 +224,7 @@ function arrangeProjectCardsIntelligently(projects) {
                     }
                     if (!canPlace) break;
                 }
-                
+
                 if (canPlace) {
                     // ¡Encontré mi espacio! Me coloco aquí
                     for (let c = 0; c < cols; c++) {
@@ -224,9 +232,9 @@ function arrangeProjectCardsIntelligently(projects) {
                             grid[col + c][row + r] = project.id;
                         }
                     }
-                    placement.push({ 
-                        ...project, 
-                        col: col + 1, 
+                    placement.push({
+                        ...project,
+                        col: col + 1,
                         row: row + 1,
                         size: size,
                         cols: cols,
@@ -238,7 +246,7 @@ function arrangeProjectCardsIntelligently(projects) {
             }
         }
     });
-    
+
     return placement;
 }
 
@@ -247,10 +255,10 @@ function createCarouselProjectCard(project) {
     const statusConfig = dataManager.getStatusConfig(project.status);
     const owner = dataManager.getUserById(project.ownerId);
     const ownerName = owner ? owner.name : 'Desconocido';
-    
+
     // Color de fondo basado en el status
     const bgGradient = `linear-gradient(135deg, ${statusConfig.color}20, ${statusConfig.color}40)`;
-    
+
     return `
         <div class="carousel-project-card carousel-card--${project.size}" 
              style="grid-column: ${project.col} / span ${project.cols}; grid-row: ${project.row} / span ${project.rows};"
@@ -288,16 +296,16 @@ function createCarouselProjectCard(project) {
 // Función principal para renderizar proyectos destacados con carrusel
 function renderFeaturedProjects(filter = 'all') {
     allProjectsCarouselState.currentFilter = filter;
-    
+
     let projects = dataManager.getAllProjects();
-    
+
     // Aplicar filtro
     if (filter !== 'all') {
         projects = projects.filter(p => p.status === filter);
     }
-    
+
     const track = document.getElementById('allProjectsCarouselTrack');
-    
+
     if (projects.length === 0) {
         track.innerHTML = `
             <div class="empty-state" style="grid-column: 1; grid-row: 1 / span 2; padding: 40px; text-align: center;">
@@ -308,13 +316,13 @@ function renderFeaturedProjects(filter = 'all') {
         updateAllProjectsCarousel();
         return;
     }
-    
+
     // Arranjar las tarjetas inteligentemente
     const arrangedProjects = arrangeProjectCardsIntelligently(projects);
-    
+
     // Renderizar
     track.innerHTML = arrangedProjects.map(project => createCarouselProjectCard(project)).join('');
-    
+
     // Resetear posición y actualizar controles
     allProjectsCarouselState.scrollPosition = 0;
     updateAllProjectsCarousel();
@@ -326,14 +334,14 @@ function updateAllProjectsCarousel() {
     const viewport = document.querySelector('.all-projects-carousel-viewport');
     const leftArrow = document.getElementById('allProjectsCarouselLeft');
     const rightArrow = document.getElementById('allProjectsCarouselRight');
-    
+
     if (!track || !viewport) return;
-    
+
     const maxScroll = Math.max(0, track.scrollWidth - viewport.offsetWidth);
-    
+
     allProjectsCarouselState.scrollPosition = Math.max(0, Math.min(allProjectsCarouselState.scrollPosition, maxScroll));
     track.style.transform = `translateX(-${allProjectsCarouselState.scrollPosition}px)`;
-    
+
     if (leftArrow) leftArrow.disabled = allProjectsCarouselState.scrollPosition <= 0;
     if (rightArrow) rightArrow.disabled = allProjectsCarouselState.scrollPosition >= maxScroll - 1;
 }
@@ -342,21 +350,21 @@ function updateAllProjectsCarousel() {
 function setupAllProjectsCarousel() {
     const leftArrow = document.getElementById('allProjectsCarouselLeft');
     const rightArrow = document.getElementById('allProjectsCarouselRight');
-    
+
     if (leftArrow) {
         leftArrow.addEventListener('click', () => {
             allProjectsCarouselState.scrollPosition -= allProjectsCarouselState.scrollStep;
             updateAllProjectsCarousel();
         });
     }
-    
+
     if (rightArrow) {
         rightArrow.addEventListener('click', () => {
             allProjectsCarouselState.scrollPosition += allProjectsCarouselState.scrollStep;
             updateAllProjectsCarousel();
         });
     }
-    
+
     window.addEventListener('resize', () => {
         setTimeout(updateAllProjectsCarousel, 100);
     });
@@ -376,16 +384,16 @@ function initFeaturedCarousel() {
     // Obtener proyectos destacados
     const allProjects = dataManager.getAllProjects();
     carouselState.featuredProjects = allProjects.filter(p => p.featured === true).slice(0, 5);
-    
+
     // Si no hay proyectos destacados, ocultar el carrusel
     if (carouselState.featuredProjects.length === 0) {
         document.getElementById('featuredCarouselWrapper').style.display = 'none';
         return;
     }
-    
+
     // Mostrar el carrusel
     document.getElementById('featuredCarouselWrapper').style.display = 'block';
-    
+
     // Renderizar el carrusel
     renderCarousel();
     renderCarouselIndicators();
@@ -404,19 +412,19 @@ function initFeaturedCarousel() {
 function renderCarousel() {
     const container = document.getElementById('featuredCarouselContainer');
     const { featuredProjects } = carouselState;
-    
+
     container.innerHTML = featuredProjects.map((project, index) => {
         const statusConfig = dataManager.getStatusConfig(project.status);
         const owner = dataManager.getUserById(project.ownerId);
         const ownerName = owner ? owner.name : 'Desconocido';
-        
+
         // **** ESTA ES LA ESTRUCTURA HTML MODIFICADA ****
         // 1. Quité el <div> "featured-content" que envolvía todo.
         // 2. Agregué el nuevo <div> "featured-title-wrapper".
         // 3. Moví el título y el estado dentro del "featured-title-wrapper".
         // 4. Moví el icono para que esté antes del "featured-title-wrapper".
         // 5. La insignia "featured-badge" se queda, pero el CSS la ocultará.
-        
+
         return `
             <div class="featured-project-card ${index === 0 ? 'active' : ''}" data-index="${index}">
                 
@@ -468,7 +476,7 @@ function renderCarousel() {
             </div>
         `;
     }).join('');
-    
+
     updateCarouselView();
 }
 //
@@ -480,7 +488,7 @@ function renderCarousel() {
 function renderCarouselIndicators() {
     const container = document.getElementById('carouselIndicators');
     const { featuredProjects } = carouselState;
-    
+
     container.innerHTML = featuredProjects.map((_, index) => `
         <button class="carousel-indicator ${index === 0 ? 'active' : ''}" 
                 data-index="${index}" 
@@ -493,19 +501,19 @@ function setupCarouselEventListeners() {
     // Botones de navegaciÃ³n
     const prevBtn = document.getElementById('carouselPrevBtn');
     const nextBtn = document.getElementById('carouselNextBtn');
-    
+
     if (prevBtn && nextBtn) {
         prevBtn.addEventListener('click', () => {
             carouselNext();
             resetCarouselAutoplay();
         });
-        
+
         nextBtn.addEventListener('click', () => {
             carouselPrev();
             resetCarouselAutoplay();
         });
     }
-    
+
     // Indicadores
     const indicators = document.querySelectorAll('.carousel-indicator');
     indicators.forEach(indicator => {
@@ -515,14 +523,14 @@ function setupCarouselEventListeners() {
             resetCarouselAutoplay();
         });
     });
-    
+
     // Pausar autoplay al pasar el mouse
     const carouselContainer = document.getElementById('featuredCarouselContainer');
     if (carouselContainer) {
         carouselContainer.addEventListener('mouseenter', stopCarouselAutoplay);
         carouselContainer.addEventListener('mouseleave', startCarouselAutoplay);
     }
-    
+
     // NavegaciÃ³n con teclado
     document.addEventListener('keydown', (e) => {
         if (e.key === 'ArrowLeft') {
@@ -539,10 +547,10 @@ function updateCarouselView() {
     const cards = document.querySelectorAll('.featured-project-card');
     const indicators = document.querySelectorAll('.carousel-indicator');
     const { currentSlide, featuredProjects } = carouselState;
-    
+
     cards.forEach((card, index) => {
         card.classList.remove('active', 'prev', 'next');
-        
+
         if (index === currentSlide) {
             card.classList.add('active');
         } else if (index === (currentSlide - 1 + featuredProjects.length) % featuredProjects.length) {
@@ -551,7 +559,7 @@ function updateCarouselView() {
             card.classList.add('next');
         }
     });
-    
+
     indicators.forEach((indicator, index) => {
         indicator.classList.toggle('active', index === currentSlide);
     });
@@ -576,7 +584,7 @@ function goToCarouselSlide(index) {
 
 function startCarouselAutoplay() {
     if (carouselState.featuredProjects.length <= 1) return;
-    
+
     stopCarouselAutoplay(); // Limpiar cualquier intervalo existente
     carouselState.autoplayInterval = setInterval(() => {
         carouselNext();
@@ -601,7 +609,7 @@ function createProjectCard(project, showEditButton = false) {
     const ownerName = owner ? owner.name : 'Desconocido';
     const currentUser = dataManager.getCurrentUser();
     const canEdit = currentUser && project.ownerId === currentUser.id;
-    
+
     return `
         <div class="project-card" onclick="viewProject('${project.id}')">
             <div class="project-card-header">
@@ -684,15 +692,15 @@ function renderOrgChart() {
 
 function setupFilters() {
     const filterButtons = document.querySelectorAll('.filter-btn');
-    
+
     filterButtons.forEach(btn => {
         btn.addEventListener('click', () => {
             // Remover active de todos
             filterButtons.forEach(b => b.classList.remove('active'));
-            
+
             // Agregar active al clickeado
             btn.classList.add('active');
-            
+
             // Filtrar proyectos
             const filter = btn.dataset.filter;
             currentFilter = filter;
@@ -787,7 +795,7 @@ function setupSearch() {
 function viewProject(projectId) {
     // Guardar el ID del proyecto en localStorage
     localStorage.setItem('viewingProjectId', projectId);
-    
+
     // Redirigir al visor de portafolio
     window.location.href = 'portfolio-viewer.html';
 }
@@ -795,7 +803,7 @@ function viewProject(projectId) {
 function viewUserPortfolio(userId) {
     // Guardar el ID del usuario en localStorage
     localStorage.setItem('viewingUserId', userId);
-    
+
     // Redirigir al visor de portafolio
     window.location.href = 'portfolio-viewer.html';
 }
@@ -806,17 +814,17 @@ function editProject(projectId) {
         openLoginModal();
         return;
     }
-    
+
     // Verificar permisos
     if (!dataManager.canEditProject(projectId)) {
         alert('No tienes permisos para editar este proyecto');
         return;
     }
-    
+
     // Configurar modo edicion
     localStorage.setItem('editorMode', 'edit');
     localStorage.setItem('editingProjectId', projectId);
-    
+
     // Redirigir al editor
     window.location.href = 'portfolio-editor.html';
 }
@@ -827,7 +835,7 @@ function createNewProject() {
         openLoginModal();
         return;
     }
-    
+
     // Redirigir al editor con modo "nuevo"
     localStorage.setItem('editorMode', 'new');
     localStorage.removeItem('editingProjectId');
@@ -941,42 +949,42 @@ function closeLoginModal() {
 
 async function handleLogin(event) {
     event.preventDefault();
-    
+
     console.log('🔐 Intentando login...');
-    
+
     // Obtener los valores directamente del formulario
     const form = event.target;
     const usernameInput = form.querySelector('#username');
     const passwordInput = form.querySelector('#password');
     const errorDiv = document.getElementById('loginError');
-    
+
     if (!usernameInput || !passwordInput) {
         console.error('❌ No se encontraron los inputs del formulario');
         return;
     }
-    
+
     const username = usernameInput.value.trim();
     const password = passwordInput.value.trim();
-    
+
     console.log('📝 Username:', username ? '✓' : '✗');
     console.log('📝 Password:', password ? '✓' : '✗');
-    
+
     if (!username || !password) {
         errorDiv.textContent = 'Por favor, completa todos los campos';
         errorDiv.style.display = 'block';
         return;
     }
-    
+
     try {
         const res = await dataManager.login(username, password);
-        
+
         if (res.success) {
             console.log('✅ Login exitoso');
             closeLoginModal();
             updateUserSection();
             showMyProjects();
             errorDiv.style.display = 'none';
-            
+
             // Mostrar mensaje de bienvenida
             const user = dataManager.getCurrentUser();
             if (user) {
@@ -1046,14 +1054,14 @@ function showWelcomeMessage(userName) {
             <span class="welcome-text">¡Bienvenido, ${userName.split(' ')[0]}!</span>
         </div>
     `;
-    
+
     document.body.appendChild(notification);
-    
+
     // Mostrar con animacion
     setTimeout(() => {
         notification.classList.add('show');
     }, 100);
-    
+
     // Ocultar despues de 3 segundos
     setTimeout(() => {
         notification.classList.remove('show');
@@ -1066,7 +1074,7 @@ function showWelcomeMessage(userName) {
 // ==================== MODAL HELPERS ====================
 
 // Cerrar modal con ESC
-document.addEventListener('keydown', function(e) {
+document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') {
         closeLoginModal();
     }
@@ -1171,7 +1179,7 @@ function openGeneralPortfolio() {
 
 function openProjectManager() {
     console.log('📈 Abriendo Project Manager - Vista ejecutiva');
-    
+
     // Redirigir al Project Manager
     window.location.href = 'project-manager.html';
 }

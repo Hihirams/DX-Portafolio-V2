@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,29 +9,30 @@
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/editor.css">
 </head>
+
 <body>
     <!-- Header del Editor -->
     <header class="editor-header">
         <div class="header-content">
             <button class="back-button" onclick="cancelEdit()">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7"/>
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
                 </svg>
                 Cancel
             </button>
             <button class="delete-button" onclick="deleteProject()" title="Delete Project">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2m3 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6h14z"/>
-                    <line x1="10" y1="11" x2="10" y2="17"/>
-                    <line x1="14" y1="11" x2="14" y2="17"/>
+                    <path d="M3 6h18M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2m3 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6h14z" />
+                    <line x1="10" y1="11" x2="10" y2="17" />
+                    <line x1="14" y1="11" x2="14" y2="17" />
                 </svg>
             </button>
-            
+
             <div class="editor-title">
                 <h1 id="editorTitle">Editing Project</h1>
                 <span class="editor-status" id="editorStatus">Unsaved</span>
             </div>
-            
+
             <div class="editor-actions">
                 <!-- Botón de cambio de tema -->
                 <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">
@@ -49,7 +51,7 @@
                         <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                     </svg>
                 </button>
-                
+
                 <button class="btn-preview" onclick="previewProject()">
                     👁️ Preview
                 </button>
@@ -63,7 +65,7 @@
     <!-- Contenido Principal del Editor -->
     <main class="editor-content">
         <div class="editor-container">
-            
+
             <!-- Panel de Navegación Lateral -->
             <aside class="editor-sidebar">
                 <h3>📋 Sections</h3>
@@ -94,11 +96,11 @@
 
             <!-- Panel de Edición Principal -->
             <section class="editor-main">
-                
+
                 <!-- Sección: Información Básica -->
                 <div class="editor-section active" id="section-basic">
                     <h2 class="section-title">ℹ️ Basic Information</h2>
-                    
+
                     <div class="form-group">
                         <label for="projectIcon">Project Icon (Emoji)</label>
                         <input type="text" id="projectIcon" placeholder="📋" maxlength="2">
@@ -121,24 +123,27 @@
 
                     <div class="form-group">
                         <label for="projectConcept">Project Concept</label>
-                        <textarea id="projectConcept" rows="3" placeholder="Brief description or concept of the project..."></textarea>
+                        <textarea id="projectConcept" rows="3"
+                            placeholder="Brief description or concept of the project..."></textarea>
                         <small>Short description that will appear in the project table</small>
                     </div>
 
                     <div class="form-group">
                         <label for="currentPhase">Current Phase / Description</label>
-                        <textarea id="currentPhase" rows="4" placeholder="Describe the current phase of the project..." required></textarea>
+                        <textarea id="currentPhase" rows="4" placeholder="Describe the current phase of the project..."
+                            required></textarea>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label for="projectStatus">Project Status</label>
                             <select id="projectStatus">
-                                <option value="in-progress">In Progress</option>
-                                <option value="hold">Hold</option>
-                                <option value="discovery">Discovery</option>
-                                <option value="paused">Paused</option>
-                                <option value="completed">Completed</option>
+                                <option value="discovery">🔍 Discovery</option>
+                                <option value="decision">🤔 Decision</option>
+                                <option value="develop">⚙️ Develop</option>
+                                <option value="pilot">🚀 Pilot</option>
+                                <option value="yokotenkai">🌐 Yokotenkai</option>
+                                <option value="finished">✓ Finished</option>
                             </select>
                         </div>
 
@@ -156,11 +161,12 @@
                 <!-- Sección: Progreso y Fechas -->
                 <div class="editor-section" id="section-progress">
                     <h2 class="section-title">📊 Progress & Dates</h2>
-                    
+
                     <div class="form-group">
                         <label for="projectProgress">Progress (%)</label>
                         <div class="progress-input-group">
-                            <input type="range" id="projectProgress" min="0" max="100" value="0" oninput="updateProgressDisplay()">
+                            <input type="range" id="projectProgress" min="0" max="100" value="0"
+                                oninput="updateProgressDisplay()">
                             <span class="progress-value" id="progressValue">0%</span>
                         </div>
                         <div class="progress-bar-preview">
@@ -178,11 +184,11 @@
                 <div class="editor-section" id="section-achievements">
                     <h2 class="section-title">✅ Recent Achievements</h2>
                     <p class="section-description">Add the important milestones you have achieved</p>
-                    
+
                     <div id="achievementsList" class="dynamic-list">
                         <!-- Se llenarán dinámicamente -->
                     </div>
-                    
+
                     <button class="btn-add" onclick="addAchievement()">
                         + Add Achievement
                     </button>
@@ -191,7 +197,7 @@
                 <!-- Sección: Bloqueos -->
                 <div class="editor-section" id="section-blockers">
                     <h2 class="section-title">⚠️ Blockers</h2>
-                    
+
                     <div class="form-group">
                         <label for="blockerType">Blocker Type</label>
                         <select id="blockerType">
@@ -204,7 +210,8 @@
 
                     <div class="form-group">
                         <label for="blockerMessage">Blocker Message</label>
-                        <textarea id="blockerMessage" rows="3" placeholder="Describe the blocker or current status..."></textarea>
+                        <textarea id="blockerMessage" rows="3"
+                            placeholder="Describe the blocker or current status..."></textarea>
                     </div>
                 </div>
 
@@ -212,11 +219,11 @@
                 <div class="editor-section" id="section-nextsteps">
                     <h2 class="section-title">🎯 Next Steps</h2>
                     <p class="section-description">Define the upcoming project milestones</p>
-                    
+
                     <div id="nextStepsList" class="dynamic-list">
                         <!-- Se llenarán dinámicamente -->
                     </div>
-                    
+
                     <button class="btn-add" onclick="addNextStep()">
                         + Add Step
                     </button>
@@ -225,7 +232,7 @@
                 <!-- Sección: Multimedia -->
                 <div class="editor-section" id="section-media">
                     <h2 class="section-title">📹 Media</h2>
-                    
+
                     <!-- Gantt -->
                     <div class="media-subsection">
                         <h3>📊 Gantt Chart</h3>
@@ -248,7 +255,7 @@
                         </button>
                     </div>
 
-<!-- Galería de Videos -->
+                    <!-- Galería de Videos -->
                     <div class="media-subsection">
                         <h3>🎬 Video Gallery</h3>
                         <div id="videosPreview" class="media-preview">
@@ -318,7 +325,8 @@
                         </div>
                         <div class="form-group">
                             <label for="kpi-currentPhase">Current Phase Description</label>
-                            <textarea id="kpi-currentPhase" rows="2" placeholder="Describe the current phase..."></textarea>
+                            <textarea id="kpi-currentPhase" rows="2"
+                                placeholder="Describe the current phase..."></textarea>
                         </div>
                     </div>
 
@@ -408,13 +416,13 @@
                         <h4>This action cannot be undone</h4>
                     </div>
                 </div>
-                
+
                 <p>You are about to permanently delete:</p>
-                
+
                 <div class="delete-project-info">
                     <strong id="deleteProjectTitle"></strong>
                 </div>
-                
+
                 <p class="delete-note">All project data will be deleted including:</p>
                 <ul class="delete-list">
                     <li>📊 Gantt Chart</li>
@@ -422,17 +430,12 @@
                     <li>🎬 Videos</li>
                     <li>📝 All project content</li>
                 </ul>
-                
+
                 <div class="delete-confirm-box">
                     <label for="confirmDeleteText">
                         To confirm, type the project name:
                     </label>
-                    <input 
-                        type="text" 
-                        id="confirmDeleteText" 
-                        placeholder="Project name"
-                        autocomplete="off"
-                    >
+                    <input type="text" id="confirmDeleteText" placeholder="Project name" autocomplete="off">
                 </div>
             </div>
             <div class="modal-footer">
@@ -450,4 +453,5 @@
     <script src="js/data-manager.js"></script>
     <script src="js/editor.js"></script>
 </body>
+
 </html>

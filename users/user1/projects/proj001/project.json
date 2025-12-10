@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "Quality Clinic Unity",
   "icon": "🌐",
-  "status": "in-progress",
+  "status": "develop",
   "featured": true,
   "priority": "high",
   "progress": 60,
@@ -35,20 +35,20 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj001/images/image_1765303100104_0.png",
+      "src": "users/user1/projects/proj001/images/image_1765396880019_0.png",
       "title": "Vista inicial Planeta"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1765303100107_1.png",
+      "src": "users/user1/projects/proj001/images/image_1765396880021_1.png",
       "title": "Vista libre MTS"
     },
     {
-      "src": "users/user1/projects/proj001/images/image_1765303100111_2.png",
+      "src": "users/user1/projects/proj001/images/image_1765396880026_2.png",
       "title": "Vista Cenital"
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-12-09T17:58:20.099Z",
+  "updatedAt": "2025-12-10T20:01:20.015Z",
   "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
   "extraFiles": [],
   "ownerName": "Hiram González",

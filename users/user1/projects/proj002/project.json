@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "QC ALT / DQITS",
   "icon": "🧪",
-  "status": "hold",
+  "status": "decision",
   "featured": true,
   "priority": "medium",
   "progress": 55,
@@ -31,20 +31,20 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj002/images/image_1765303114024_0.png",
+      "src": "users/user1/projects/proj002/images/image_1765397145461_0.png",
       "title": "Interfaz Principal"
     },
     {
-      "src": "users/user1/projects/proj002/images/image_1765303114027_1.png",
+      "src": "users/user1/projects/proj002/images/image_1765397145464_1.png",
       "title": "Detección Activa"
     },
     {
-      "src": "users/user1/projects/proj002/images/image_1765303114030_2.png",
+      "src": "users/user1/projects/proj002/images/image_1765397145467_2.png",
       "title": "Respuesta de FASTAPI"
     }
   ],
   "createdAt": "2025-08-01",
-  "updatedAt": "2025-12-09T17:58:34.020Z",
+  "updatedAt": "2025-12-10T20:05:45.458Z",
   "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
   "extraFiles": [],
   "ownerName": "Hiram González",

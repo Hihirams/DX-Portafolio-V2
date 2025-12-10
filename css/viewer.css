@@ -58,34 +58,40 @@ body.light-theme .badge-low {
     color: #fff;
 }
 
-.badge-in-progress {
-    background: rgba(0, 217, 255, 0.15);
-    color: #00D9FF;
-    border: 1px solid rgba(0, 217, 255, 0.3);
-}
-
-.badge-hold {
-    background: rgba(255, 107, 0, 0.15);
-    color: #FF6B00;
-    border: 1px solid rgba(255, 107, 0, 0.3);
-}
-
 .badge-discovery {
-    background: rgba(157, 0, 255, 0.15);
-    color: #9D00FF;
-    border: 1px solid rgba(157, 0, 255, 0.3);
+    background: rgba(147, 112, 219, 0.15);
+    color: #8B7AB8;
+    border: 1px solid rgba(147, 112, 219, 0.25);
 }
 
-.badge-paused {
-    background: rgba(255, 214, 0, 0.15);
-    color: #FFD600;
-    border: 1px solid rgba(255, 214, 0, 0.3);
+.badge-decision {
+    background: rgba(255, 193, 7, 0.15);
+    color: #D4A017;
+    border: 1px solid rgba(255, 193, 7, 0.25);
 }
 
-.badge-completed {
-    background: rgba(0, 255, 133, 0.15);
-    color: #00FF85;
-    border: 1px solid rgba(0, 255, 133, 0.3);
+.badge-develop {
+    background: rgba(52, 152, 219, 0.15);
+    color: #5DADE2;
+    border: 1px solid rgba(52, 152, 219, 0.25);
+}
+
+.badge-pilot {
+    background: rgba(230, 126, 34, 0.15);
+    color: #E67E22;
+    border: 1px solid rgba(230, 126, 34, 0.25);
+}
+
+.badge-yokotenkai {
+    background: rgba(219, 112, 147, 0.15);
+    color: #C9779C;
+    border: 1px solid rgba(219, 112, 147, 0.25);
+}
+
+.badge-finished {
+    background: rgba(46, 204, 113, 0.15);
+    color: #52C77A;
+    border: 1px solid rgba(46, 204, 113, 0.25);
 }
 
 /* Prioridades */
@@ -108,29 +114,34 @@ body.light-theme .badge-low {
 }
 
 /* Tema Light - Ajustes */
-body.light-theme .badge-in-progress {
-    background: rgba(0, 217, 255, 0.25);
-    color: #0099CC;
-}
-
-body.light-theme .badge-hold {
-    background: rgba(255, 107, 0, 0.25);
-    color: #CC5500;
-}
-
 body.light-theme .badge-discovery {
-    background: rgba(157, 0, 255, 0.25);
-    color: #7700CC;
+    background: rgba(147, 112, 219, 0.2);
+    color: #7B68A6;
 }
 
-body.light-theme .badge-paused {
-    background: rgba(255, 214, 0, 0.25);
-    color: #CC9900;
+body.light-theme .badge-decision {
+    background: rgba(255, 193, 7, 0.2);
+    color: #B8860B;
 }
 
-body.light-theme .badge-completed {
-    background: rgba(0, 255, 133, 0.25);
-    color: #00AA55;
+body.light-theme .badge-develop {
+    background: rgba(52, 152, 219, 0.2);
+    color: #3498DB;
+}
+
+body.light-theme .badge-pilot {
+    background: rgba(230, 126, 34, 0.2);
+    color: #D68910;
+}
+
+body.light-theme .badge-yokotenkai {
+    background: rgba(219, 112, 147, 0.2);
+    color: #B8638C;
+}
+
+body.light-theme .badge-finished {
+    background: rgba(46, 204, 113, 0.2);
+    color: #28A745;
 }
 
 body.light-theme .badge-priority-high {
@@ -168,7 +179,9 @@ body.light-theme .badge-priority-low {
 }
 
 @keyframes spin {
-    to { transform: rotate(360deg); }
+    to {
+        transform: rotate(360deg);
+    }
 }
 
 .loading-text {
@@ -231,7 +244,7 @@ body.light-theme .badge-priority-low {
         padding: 8px 16px;
         font-size: 13px;
     }
-    
+
     .back-button svg {
         width: 16px;
         height: 16px;
@@ -253,7 +266,7 @@ body .presentation-container .slide {
 }
 
 /* Asegurar que el contenido interno tambiÃƒÂ©n respete el espacio */
-body .slide > * {
+body .slide>* {
     flex-shrink: 0;
 }
 
@@ -327,7 +340,7 @@ body.light-theme .slide::-webkit-scrollbar-thumb:hover {
 }
 
 /* Asegurar que el contenido de las slides no se corte */
-.slide > * {
+.slide>* {
     flex-shrink: 0;
 }
 
@@ -345,7 +358,7 @@ body.light-theme .slide::-webkit-scrollbar-thumb:hover {
     padding: 15px;
 }
 
-.info-section + .info-section {
+.info-section+.info-section {
     margin-top: 12px;
 }
 
@@ -397,7 +410,8 @@ body.light-theme .slide::-webkit-scrollbar-thumb:hover {
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;  /* â† QUITA EL PADDING */
+    padding: 0;
+    /* â† QUITA EL PADDING */
     background: rgba(255, 255, 255, 0.08);
     backdrop-filter: blur(20px);
     border: 1px solid var(--border-color);
@@ -407,7 +421,8 @@ body.light-theme .slide::-webkit-scrollbar-thumb:hover {
 }
 
 .viewer-logo {
-    width: 80px;  /* â† Ajusta al tamaÃ±o que quieras */
+    width: 80px;
+    /* â† Ajusta al tamaÃ±o que quieras */
     height: 80px;
     object-fit: contain;
 }
@@ -422,9 +437,10 @@ body.light-theme .dx-branding {
         left: 15px;
         width: 42px;
         height: 42px;
-        padding: 0;  /* â† QUITA EL PADDING */
+        padding: 0;
+        /* â† QUITA EL PADDING */
     }
-    
+
     .viewer-logo {
         width: 38px;
         height: 38px;
@@ -471,14 +487,13 @@ body.light-theme .dx-branding {
     font-weight: 600;
     letter-spacing: -2px;
     background: linear-gradient(135deg,
-        #1d4e89 0%,
-        #2666a8 10%,
-        #4a7099 25%,
-        #9d7f4e 45%,
-        #b8975a 65%,
-        #c9a862 85%,
-        #d4b06f 100%
-    );
+            #1d4e89 0%,
+            #2666a8 10%,
+            #4a7099 25%,
+            #9d7f4e 45%,
+            #b8975a 65%,
+            #c9a862 85%,
+            #d4b06f 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -489,13 +504,12 @@ body.light-theme .dx-branding {
 /* Gradiente más comprimido para textos pequeños como project-title */
 .project-title.logo-gradient {
     background: linear-gradient(90deg,
-        #1d4e89 0%,
-        #2666a8 8%,
-        #6a8eb5 20%,
-        #9d7f4e 40%,
-        #c9a862 65%,
-        #ddb968 100%
-    );
+            #1d4e89 0%,
+            #2666a8 8%,
+            #6a8eb5 20%,
+            #9d7f4e 40%,
+            #c9a862 65%,
+            #ddb968 100%);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

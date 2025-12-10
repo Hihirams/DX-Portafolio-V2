@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "LorenzoBot",
   "icon": "🤖",
-  "status": "hold",
+  "status": "pilot",
   "priority": "low",
   "progress": 85,
   "targetDate": "2026-03-15",
@@ -29,20 +29,20 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj005/images/image_1765303226169_0.png",
+      "src": "users/user1/projects/proj005/images/image_1765397210179_0.png",
       "title": "Interfaz Bot"
     },
     {
-      "src": "users/user1/projects/proj005/images/image_1765303226170_1.png",
+      "src": "users/user1/projects/proj005/images/image_1765397210180_1.png",
       "title": "Reportes"
     },
     {
-      "src": "users/user1/projects/proj005/images/image_1765303226172_2.png",
+      "src": "users/user1/projects/proj005/images/image_1765397210182_2.png",
       "title": "Flujo General"
     }
   ],
   "createdAt": "2025-06-01",
-  "updatedAt": "2025-12-09T18:00:26.166Z",
+  "updatedAt": "2025-12-10T20:06:50.176Z",
   "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
   "extraFiles": [],
   "ownerName": "Hiram González",

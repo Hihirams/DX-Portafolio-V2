@@ -70,7 +70,7 @@
 .featured-carousel-container {
     position: relative;
     /* **** CAMBIO: Aumentada altura mínima **** */
-    min-height: 500px; 
+    min-height: 500px;
     height: auto;
     perspective: 1000px;
 }
@@ -80,7 +80,7 @@
     position: absolute;
     width: 100%;
     /* **** CAMBIO: Aumentado tamaño **** */
-    max-width: 720px; 
+    max-width: 720px;
     left: 50%;
     transform: translateX(-50%) scale(0.9);
     opacity: 0;
@@ -134,7 +134,8 @@ body.light-theme .featured-project-card {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 12px; /* Espacio después del grupo */
+    margin-bottom: 12px;
+    /* Espacio después del grupo */
 }
 
 /* Status Badge */
@@ -150,32 +151,46 @@ body.light-theme .featured-project-card {
     letter-spacing: 0.5px;
     /* **** CAMBIO: Margen reseteado, lo maneja el wrapper **** */
     margin-bottom: 0;
-    flex-shrink: 0; /* Evita que la etiqueta se encoja */
-    margin-left: 16px; /* Espacio entre título y etiqueta */
-}
-
-.featured-status-badge.status-in-progress {
-    background: rgba(0, 217, 255, 0.15);
-    color: #00D9FF;
-    border: 1px solid rgba(0, 217, 255, 0.3);
-}
-
-.featured-status-badge.status-hold {
-    background: rgba(255, 107, 0, 0.15);
-    color: #FF6B00;
-    border: 1px solid rgba(255, 107, 0, 0.3);
+    flex-shrink: 0;
+    /* Evita que la etiqueta se encoja */
+    margin-left: 16px;
+    /* Espacio entre título y etiqueta */
 }
 
 .featured-status-badge.status-discovery {
-    background: rgba(157, 0, 255, 0.15);
-    color: #9D00FF;
-    border: 1px solid rgba(157, 0, 255, 0.3);
+    background: rgba(147, 112, 219, 0.15);
+    color: #8B7AB8;
+    border: 1px solid rgba(147, 112, 219, 0.25);
 }
 
-.featured-status-badge.status-completed {
-    background: rgba(0, 255, 133, 0.15);
-    color: #00FF85;
-    border: 1px solid rgba(0, 255, 133, 0.3);
+.featured-status-badge.status-decision {
+    background: rgba(255, 193, 7, 0.15);
+    color: #D4A017;
+    border: 1px solid rgba(255, 193, 7, 0.25);
+}
+
+.featured-status-badge.status-develop {
+    background: rgba(52, 152, 219, 0.15);
+    color: #5DADE2;
+    border: 1px solid rgba(52, 152, 219, 0.25);
+}
+
+.featured-status-badge.status-pilot {
+    background: rgba(230, 126, 34, 0.15);
+    color: #E67E22;
+    border: 1px solid rgba(230, 126, 34, 0.25);
+}
+
+.featured-status-badge.status-yokotenkai {
+    background: rgba(219, 112, 147, 0.15);
+    color: #C9779C;
+    border: 1px solid rgba(219, 112, 147, 0.25);
+}
+
+.featured-status-badge.status-finished {
+    background: rgba(46, 204, 113, 0.15);
+    color: #52C77A;
+    border: 1px solid rgba(46, 204, 113, 0.25);
 }
 
 .status-dot {
@@ -410,7 +425,7 @@ body.light-theme .carousel-indicator {
         gap: 12px;
         margin-bottom: 16px;
     }
-    
+
     .featured-status-badge {
         margin-left: 0;
     }

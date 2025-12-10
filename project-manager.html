@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="css/project-manager.css">
     <title>Project Portfolio | QE DX-INN</title>
 </head>
+
 <body>
-    <div id="loadingOverlay" style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;">
+    <div id="loadingOverlay"
+        style="position: fixed; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.7); display: flex; align-items: center; justify-content: center; z-index: 9999;">
         <div style="color: white; font-size: 18px; text-align: center;">
             <div style="margin-bottom: 20px;">⏳ Loading Project Manager...</div>
             <div style="font-size: 12px; opacity: 0.7;" id="loadingStatus">Please wait while data is loading...</div>
@@ -18,25 +21,40 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">FILTER BY STATUS</div>
                 <div class="filter-group">
-                    <button class="filter-btn active" data-filter="status" data-value="all" onclick="toggleFilter('status', 'all')">
+                    <button class="filter-btn active" data-filter="status" data-value="all"
+                        onclick="toggleFilter('status', 'all')">
                         <span class="filter-label">All Statuses</span>
                         <span class="filter-badge" id="badge-all">30</span>
                     </button>
-                    <button class="filter-btn" data-filter="status" data-value="progress" onclick="toggleFilter('status', 'progress')">
-                        <span class="filter-label">In Progress</span>
-                        <span class="filter-badge" id="badge-progress">0</span>
-                    </button>
-                    <button class="filter-btn" data-filter="status" data-value="hold" onclick="toggleFilter('status', 'hold')">
-                        <span class="filter-label">On Hold</span>
-                        <span class="filter-badge" id="badge-hold">0</span>
-                    </button>
-                    <button class="filter-btn" data-filter="status" data-value="discovery" onclick="toggleFilter('status', 'discovery')">
+                    <button class="filter-btn" data-filter="status" data-value="discovery"
+                        onclick="toggleFilter('status', 'discovery')">
                         <span class="filter-label">Discovery</span>
                         <span class="filter-badge" id="badge-discovery">0</span>
                     </button>
-                    <button class="filter-btn" data-filter="status" data-value="completed" onclick="toggleFilter('status', 'completed')">
-                        <span class="filter-label">Completed</span>
-                        <span class="filter-badge" id="badge-completed">0</span>
+                    <button class="filter-btn" data-filter="status" data-value="decision"
+                        onclick="toggleFilter('status', 'decision')">
+                        <span class="filter-label">Decision</span>
+                        <span class="filter-badge" id="badge-decision">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="develop"
+                        onclick="toggleFilter('status', 'develop')">
+                        <span class="filter-label">Develop</span>
+                        <span class="filter-badge" id="badge-develop">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="pilot"
+                        onclick="toggleFilter('status', 'pilot')">
+                        <span class="filter-label">Pilot</span>
+                        <span class="filter-badge" id="badge-pilot">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="yokotenkai"
+                        onclick="toggleFilter('status', 'yokotenkai')">
+                        <span class="filter-label">Yokotenkai</span>
+                        <span class="filter-badge" id="badge-yokotenkai">0</span>
+                    </button>
+                    <button class="filter-btn" data-filter="status" data-value="finished"
+                        onclick="toggleFilter('status', 'finished')">
+                        <span class="filter-label">Finished</span>
+                        <span class="filter-badge" id="badge-finished">0</span>
                     </button>
                 </div>
             </div>
@@ -44,15 +62,18 @@
             <div class="sidebar-section">
                 <div class="sidebar-title">FILTER BY BLOCKERS</div>
                 <div class="filter-group">
-                    <button class="filter-btn active" data-filter="block" data-value="all" onclick="toggleFilter('block', 'all')">
+                    <button class="filter-btn active" data-filter="block" data-value="all"
+                        onclick="toggleFilter('block', 'all')">
                         <span class="filter-label">All</span>
                         <span class="filter-badge" id="badge-block-all">30</span>
                     </button>
-                    <button class="filter-btn" data-filter="block" data-value="blocked" onclick="toggleFilter('block', 'blocked')">
+                    <button class="filter-btn" data-filter="block" data-value="blocked"
+                        onclick="toggleFilter('block', 'blocked')">
                         <span class="filter-label">With Blockers</span>
                         <span class="filter-badge" id="badge-blocked">0</span>
                     </button>
-                    <button class="filter-btn" data-filter="block" data-value="unblocked" onclick="toggleFilter('block', 'unblocked')">
+                    <button class="filter-btn" data-filter="block" data-value="unblocked"
+                        onclick="toggleFilter('block', 'unblocked')">
                         <span class="filter-label">Without Blockers</span>
                         <span class="filter-badge" id="badge-unblocked">0</span>
                     </button>
@@ -62,7 +83,7 @@
             <div class="sidebar-section team-section">
                 <div class="sidebar-title">TEAM RESPONSIBLES</div>
                 <div class="team-list" id="teamList">
-                    </div>
+                </div>
             </div>
         </div>
 
@@ -71,7 +92,8 @@
                 <div class="header-left">
                     <button class="back-btn" onclick="goToHome()" aria-label="Back to home" title="Back to home">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12.5 15L7.5 10L12.5 5" stroke="currentColor" stroke-width="2"
+                                stroke-linecap="round" stroke-linejoin="round" />
                         </svg>
                     </button>
                     <div class="logo">QE DX-INN</div>
@@ -83,17 +105,17 @@
                 <div class="header-right">
                     <button class="action-btn analytics-btn" onclick="openAnalytics()">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 6px;">
-                            <rect x="2" y="9" width="3" height="5" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                            <rect x="6.5" y="6" width="3" height="8" rx="1" stroke="currentColor" stroke-width="1.5"/>
-                            <rect x="11" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.5"/>
+                            <rect x="2" y="9" width="3" height="5" rx="1" stroke="currentColor" stroke-width="1.5" />
+                            <rect x="6.5" y="6" width="3" height="8" rx="1" stroke="currentColor" stroke-width="1.5" />
+                            <rect x="11" y="2" width="3" height="12" rx="1" stroke="currentColor" stroke-width="1.5" />
                         </svg>
                         Charts & Analytics
                     </button>
                     <button class="action-btn clear-btn" onclick="clearAllFilters()">Clear Filters</button>
                     <button class="action-btn presentation-btn" onclick="togglePresentationMode()">
                         <svg width="16" height="16" viewBox="0 0 16 16" fill="none" style="margin-right: 6px;">
-                            <rect x="2" y="3" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/>
-                            <path d="M2 6h12M5 3v3M11 3v3" stroke="currentColor" stroke-width="1.5"/>
+                            <rect x="2" y="3" width="12" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5" />
+                            <path d="M2 6h12M5 3v3M11 3v3" stroke="currentColor" stroke-width="1.5" />
                         </svg>
                         <span id="presentationBtnText">Presentation Mode</span>
                     </button>
@@ -119,16 +141,11 @@
             <div class="search-bar">
                 <div class="search-wrapper">
                     <svg class="search-icon" width="16" height="16" viewBox="0 0 16 16" fill="none">
-                        <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5"/>
-                        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                        <circle cx="7" cy="7" r="5.5" stroke="currentColor" stroke-width="1.5" />
+                        <path d="M11 11L14 14" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
                     </svg>
-                    <input 
-                        type="text" 
-                        class="search-input" 
-                        id="searchInput" 
-                        placeholder="Search by project name or responsible..."
-                        oninput="searchProjects()"
-                    >
+                    <input type="text" class="search-input" id="searchInput"
+                        placeholder="Search by project name or responsible..." oninput="searchProjects()">
                 </div>
                 <div class="stats-display">
                     <div class="stat-item">
@@ -167,7 +184,7 @@
                             </tr>
                         </thead>
                         <tbody id="projectsBody">
-                            </tbody>
+                        </tbody>
                     </table>
                 </div>
             </div>
@@ -179,7 +196,8 @@
                 <div class="pagination-controls">
                     <button class="page-btn" id="prevBtn" onclick="previousPage()">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M12 15L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 15L7 10L12 5" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </button>
                     <div class="page-number">
@@ -189,7 +207,8 @@
                     </div>
                     <button class="page-btn" id="nextBtn" onclick="nextPage()">
                         <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
-                            <path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M8 5L13 10L8 15" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                                stroke-linejoin="round" />
                         </svg>
                     </button>
                 </div>
@@ -207,20 +226,22 @@
                 </div>
                 <button class="modal-close" onclick="closeAnalytics()">
                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
                     </svg>
                 </button>
             </div>
 
             <div class="modal-body">
                 <div class="analytics-filters" id="analyticsFilters">
-                    </div>
+                </div>
 
                 <div class="kpi-grid">
                     <div class="kpi-card">
                         <div class="kpi-icon" style="background: rgba(52, 199, 89, 0.15);">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#34c759" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="#34c759" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <div class="kpi-content">
@@ -232,7 +253,9 @@
                     <div class="kpi-card">
                         <div class="kpi-icon" style="background: rgba(255, 159, 10, 0.15);">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ff9f0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M12 8V12L15 15M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="#ff9f0a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <div class="kpi-content">
@@ -244,7 +267,9 @@
                     <div class="kpi-card">
                         <div class="kpi-icon" style="background: rgba(255, 69, 58, 0.15);">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M12 9V13M12 17H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="#ff453a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path
+                                    d="M12 9V13M12 17H12.01M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z"
+                                    stroke="#ff453a" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
                             </svg>
                         </div>
                         <div class="kpi-content">
@@ -256,7 +281,8 @@
                     <div class="kpi-card">
                         <div class="kpi-icon" style="background: rgba(48, 209, 88, 0.15);">
                             <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                                <path d="M5 13L9 17L19 7" stroke="#30d158" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M5 13L9 17L19 7" stroke="#30d158" stroke-width="2" stroke-linecap="round"
+                                    stroke-linejoin="round" />
                             </svg>
                         </div>
                         <div class="kpi-content">
@@ -290,7 +316,8 @@
                     <div class="chart-card chart-card-wide">
                         <div class="chart-header">
                             <h3 class="chart-title">General Progress</h3>
-                            <span class="chart-subtitle">% Progress per project (Top 10 in progress) · Click to filter</span>
+                            <span class="chart-subtitle">% Progress per project (Top 10 in progress) · Click to
+                                filter</span>
                         </div>
                         <div class="chart-container">
                             <canvas id="progressOverviewChart"></canvas>
@@ -340,40 +367,40 @@
             <div class="resources-grid">
                 <button class="resource-btn" id="btnGantt" onclick="openResourceGantt()">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="2" y="2" width="12" height="12" rx="1.5"/>
-                        <line x1="6" y1="2" x2="6" y2="14"/>
-                        <line x1="2" y1="6" x2="14" y2="6"/>
-                        <line x1="2" y1="10" x2="14" y2="10"/>
+                        <rect x="2" y="2" width="12" height="12" rx="1.5" />
+                        <line x1="6" y1="2" x2="6" y2="14" />
+                        <line x1="2" y1="6" x2="14" y2="6" />
+                        <line x1="2" y1="10" x2="14" y2="10" />
                     </svg>
                     Gantt
                 </button>
                 <button class="resource-btn" id="btnImages" onclick="openResourceImages()">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="2" y="2" width="12" height="12" rx="1.5"/>
-                        <circle cx="5.5" cy="5.5" r="1"/>
-                        <polyline points="14 11 10 7 2 14"/>
+                        <rect x="2" y="2" width="12" height="12" rx="1.5" />
+                        <circle cx="5.5" cy="5.5" r="1" />
+                        <polyline points="14 11 10 7 2 14" />
                     </svg>
                     Images
                 </button>
                 <button class="resource-btn" id="btnVideos" onclick="openResourceVideos()">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <rect x="1" y="3" width="10" height="10" rx="1.5"/>
-                        <polygon points="15 8 11 6 11 10 15 8"/>
+                        <rect x="1" y="3" width="10" height="10" rx="1.5" />
+                        <polygon points="15 8 11 6 11 10 15 8" />
                     </svg>
                     Videos
                 </button>
                 <button class="resource-btn" id="btnFiles" onclick="openResourceFiles()">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M9 2H4a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 4 14h8a1.5 1.5 0 0 0 1.5-1.5V6L9 2z"/>
-                        <polyline points="9 2 9 6 13 6"/>
+                        <path d="M9 2H4a1.5 1.5 0 0 0-1.5 1.5v9A1.5 1.5 0 0 0 4 14h8a1.5 1.5 0 0 0 1.5-1.5V6L9 2z" />
+                        <polyline points="9 2 9 6 13 6" />
                     </svg>
                     Files
                 </button>
                 <!-- ✅ NUEVO BOTÓN METRICS -->
                 <button class="resource-btn resource-btn-metrics" onclick="openResourceMetrics()">
                     <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M2 12L6 8L9 11L14 6"/>
-                        <path d="M10 6H14V10"/>
+                        <path d="M2 12L6 8L9 11L14 6" />
+                        <path d="M10 6H14V10" />
                     </svg>
                     Metrics
                 </button>
@@ -429,181 +456,189 @@
         </div>
     </div>
 
-<!-- MODAL DE MÉTRICAS KPI -->
-<div class="analytics-modal" id="metricsViewModal">
-    <div class="modal-overlay" onclick="closeMetricsViewModal()"></div>
-    <div class="modal-content metrics-modal-wrapper">
-        <div class="modal-header">
-            <div class="modal-title-section">
-                <h2 class="modal-title" id="metricsViewTitle">Project Metrics</h2>
-                <p class="modal-subtitle" id="metricsViewSubtitle">Key Performance Indicators</p>
-            </div>
-            <button class="modal-close" onclick="closeMetricsViewModal()">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-                    <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                </svg>
-            </button>
-        </div>
-
-        <div class="modal-body" id="metricsViewBody">
-            <!-- KPIs Grid -->
-            <div class="metrics-kpi-grid">
-                <div class="metrics-kpi-card">
-                    <div class="metrics-kpi-icon" style="background: rgba(102, 126, 234, 0.15);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#667eea" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <div class="metrics-kpi-content">
-                        <div class="metrics-kpi-label">Total Hours</div>
-                        <div class="metrics-kpi-value" id="metric-totalHours">0</div>
-                    </div>
+    <!-- MODAL DE MÉTRICAS KPI -->
+    <div class="analytics-modal" id="metricsViewModal">
+        <div class="modal-overlay" onclick="closeMetricsViewModal()"></div>
+        <div class="modal-content metrics-modal-wrapper">
+            <div class="modal-header">
+                <div class="modal-title-section">
+                    <h2 class="modal-title" id="metricsViewTitle">Project Metrics</h2>
+                    <p class="modal-subtitle" id="metricsViewSubtitle">Key Performance Indicators</p>
                 </div>
-
-                <div class="metrics-kpi-card">
-                    <div class="metrics-kpi-icon" style="background: rgba(255, 159, 10, 0.15);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff9f0a" stroke-width="2">
-                            <path d="M12 2v20M2 12h20"/>
-                        </svg>
-                    </div>
-                    <div class="metrics-kpi-content">
-                        <div class="metrics-kpi-label">Hours Spent</div>
-                        <div class="metrics-kpi-value" id="metric-hoursSpent">0</div>
-                    </div>
-                </div>
-
-                <div class="metrics-kpi-card">
-                    <div class="metrics-kpi-icon" style="background: rgba(52, 199, 89, 0.15);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34c759" stroke-width="2">
-                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
-                            <polyline points="22 4 12 14.01 9 11.01"/>
-                        </svg>
-                    </div>
-                    <div class="metrics-kpi-content">
-                        <div class="metrics-kpi-label">FTE Saved</div>
-                        <div class="metrics-kpi-value" id="metric-fteSaved">0</div>
-                    </div>
-                </div>
-
-                <div class="metrics-kpi-card">
-                    <div class="metrics-kpi-icon" style="background: rgba(191, 90, 242, 0.15);">
-                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bf5af2" stroke-width="2">
-                            <circle cx="12" cy="12" r="10"/>
-                            <path d="M12 6v6l4 2"/>
-                        </svg>
-                    </div>
-                    <div class="metrics-kpi-content">
-                        <div class="metrics-kpi-label">Completion</div>
-                        <div class="metrics-kpi-value" id="metric-completion">0%</div>
-                    </div>
-                </div>
+                <button class="modal-close" onclick="closeMetricsViewModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+                        <path d="M18 6L6 18M6 6L18 18" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
+                    </svg>
+                </button>
             </div>
 
-            <!-- Timeline Section -->
-            <div class="metrics-section">
-                <h4 class="metrics-section-title">Timeline</h4>
-                <div class="metrics-timeline-grid">
-                    <div class="metrics-timeline-item">
-                        <div class="metrics-timeline-label">Start Date</div>
-                        <div class="metrics-timeline-value" id="metric-startDate">—</div>
+            <div class="modal-body" id="metricsViewBody">
+                <!-- KPIs Grid -->
+                <div class="metrics-kpi-grid">
+                    <div class="metrics-kpi-card">
+                        <div class="metrics-kpi-icon" style="background: rgba(102, 126, 234, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#667eea"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
+                        </div>
+                        <div class="metrics-kpi-content">
+                            <div class="metrics-kpi-label">Total Hours</div>
+                            <div class="metrics-kpi-value" id="metric-totalHours">0</div>
+                        </div>
                     </div>
-                    <div class="metrics-timeline-item">
-                        <div class="metrics-timeline-label">Target End</div>
-                        <div class="metrics-timeline-value" id="metric-targetEnd">—</div>
-                    </div>
-                    <div class="metrics-timeline-item metrics-timeline-full">
-                        <div class="metrics-timeline-label">Current Phase</div>
-                        <div class="metrics-timeline-value" id="metric-currentPhase">—</div>
-                    </div>
-                </div>
-            </div>
 
-            <!-- Resources Section -->
-            <div class="metrics-section">
-                <h4 class="metrics-section-title">Resources Allocation</h4>
-                <div class="metrics-resources-grid">
-                    <div class="metrics-resource-bar">
-                        <div class="metrics-resource-label">
-                            <span>Software Engineering</span>
-                            <span class="metrics-resource-hours" id="metric-engineerHours">0h</span>
+                    <div class="metrics-kpi-card">
+                        <div class="metrics-kpi-icon" style="background: rgba(255, 159, 10, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#ff9f0a"
+                                stroke-width="2">
+                                <path d="M12 2v20M2 12h20" />
+                            </svg>
                         </div>
-                        <div class="metrics-resource-progress">
-                            <div class="metrics-resource-fill" id="metric-engineerBar" style="width: 0%; background: #667eea;"></div>
-                        </div>
-                    </div>
-                    <div class="metrics-resource-bar">
-                        <div class="metrics-resource-label">
-                            <span>Testing & QA</span>
-                            <span class="metrics-resource-hours" id="metric-testingHours">0h</span>
-                        </div>
-                        <div class="metrics-resource-progress">
-                            <div class="metrics-resource-fill" id="metric-testingBar" style="width: 0%; background: #ff9f0a;"></div>
+                        <div class="metrics-kpi-content">
+                            <div class="metrics-kpi-label">Hours Spent</div>
+                            <div class="metrics-kpi-value" id="metric-hoursSpent">0</div>
                         </div>
                     </div>
-                    <div class="metrics-resource-bar">
-                        <div class="metrics-resource-label">
-                            <span>Project Management</span>
-                            <span class="metrics-resource-hours" id="metric-managementHours">0h</span>
+
+                    <div class="metrics-kpi-card">
+                        <div class="metrics-kpi-icon" style="background: rgba(52, 199, 89, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#34c759"
+                                stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
+                                <polyline points="22 4 12 14.01 9 11.01" />
+                            </svg>
                         </div>
-                        <div class="metrics-resource-progress">
-                            <div class="metrics-resource-fill" id="metric-managementBar" style="width: 0%; background: #34c759;"></div>
+                        <div class="metrics-kpi-content">
+                            <div class="metrics-kpi-label">FTE Saved</div>
+                            <div class="metrics-kpi-value" id="metric-fteSaved">0</div>
                         </div>
                     </div>
-                    <div class="metrics-resource-bar">
-                        <div class="metrics-resource-label">
-                            <span>Remaining Hours</span>
-                            <span class="metrics-resource-hours" id="metric-remainingHours">0h</span>
+
+                    <div class="metrics-kpi-card">
+                        <div class="metrics-kpi-icon" style="background: rgba(191, 90, 242, 0.15);">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#bf5af2"
+                                stroke-width="2">
+                                <circle cx="12" cy="12" r="10" />
+                                <path d="M12 6v6l4 2" />
+                            </svg>
                         </div>
-                        <div class="metrics-resource-progress">
-                            <div class="metrics-resource-fill" id="metric-remainingBar" style="width: 0%; background: #bf5af2;"></div>
+                        <div class="metrics-kpi-content">
+                            <div class="metrics-kpi-label">Completion</div>
+                            <div class="metrics-kpi-value" id="metric-completion">0%</div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <!-- Performance Metrics -->
-            <div class="metrics-section">
-                <h4 class="metrics-section-title">Performance Metrics</h4>
-                <div class="metrics-performance-grid">
-                    <div class="metrics-metric-item">
-                        <div class="metrics-metric-label">Tasks Completed</div>
-                        <div class="metrics-metric-value">
-                            <span id="metric-tasksCompleted">0</span> / <span id="metric-totalTasks">0</span>
+                <!-- Timeline Section -->
+                <div class="metrics-section">
+                    <h4 class="metrics-section-title">Timeline</h4>
+                    <div class="metrics-timeline-grid">
+                        <div class="metrics-timeline-item">
+                            <div class="metrics-timeline-label">Start Date</div>
+                            <div class="metrics-timeline-value" id="metric-startDate">—</div>
                         </div>
-                        <div class="metrics-metric-progress">
-                            <div class="metrics-metric-fill" id="metric-tasksBar" style="width: 0%;"></div>
+                        <div class="metrics-timeline-item">
+                            <div class="metrics-timeline-label">Target End</div>
+                            <div class="metrics-timeline-value" id="metric-targetEnd">—</div>
                         </div>
-                    </div>
-                    <div class="metrics-metric-item">
-                        <div class="metrics-metric-label">Milestones On Time</div>
-                        <div class="metrics-metric-value">
-                            <span id="metric-milestonesOnTime">0</span> / <span id="metric-totalMilestones">0</span>
-                        </div>
-                        <div class="metrics-metric-progress">
-                            <div class="metrics-metric-fill" id="metric-milestonesBar" style="width: 0%;"></div>
+                        <div class="metrics-timeline-item metrics-timeline-full">
+                            <div class="metrics-timeline-label">Current Phase</div>
+                            <div class="metrics-timeline-value" id="metric-currentPhase">—</div>
                         </div>
                     </div>
-                    <div class="metrics-metric-item">
-                        <div class="metrics-metric-label">Resource Utilization</div>
-                        <div class="metrics-metric-value">
-                            <span id="metric-resourceUtilization">0</span>%
+                </div>
+
+                <!-- Resources Section -->
+                <div class="metrics-section">
+                    <h4 class="metrics-section-title">Resources Allocation</h4>
+                    <div class="metrics-resources-grid">
+                        <div class="metrics-resource-bar">
+                            <div class="metrics-resource-label">
+                                <span>Software Engineering</span>
+                                <span class="metrics-resource-hours" id="metric-engineerHours">0h</span>
+                            </div>
+                            <div class="metrics-resource-progress">
+                                <div class="metrics-resource-fill" id="metric-engineerBar"
+                                    style="width: 0%; background: #667eea;"></div>
+                            </div>
                         </div>
-                        <div class="metrics-metric-progress">
-                            <div class="metrics-metric-fill" id="metric-utilizationBar" style="width: 0%;"></div>
+                        <div class="metrics-resource-bar">
+                            <div class="metrics-resource-label">
+                                <span>Testing & QA</span>
+                                <span class="metrics-resource-hours" id="metric-testingHours">0h</span>
+                            </div>
+                            <div class="metrics-resource-progress">
+                                <div class="metrics-resource-fill" id="metric-testingBar"
+                                    style="width: 0%; background: #ff9f0a;"></div>
+                            </div>
+                        </div>
+                        <div class="metrics-resource-bar">
+                            <div class="metrics-resource-label">
+                                <span>Project Management</span>
+                                <span class="metrics-resource-hours" id="metric-managementHours">0h</span>
+                            </div>
+                            <div class="metrics-resource-progress">
+                                <div class="metrics-resource-fill" id="metric-managementBar"
+                                    style="width: 0%; background: #34c759;"></div>
+                            </div>
+                        </div>
+                        <div class="metrics-resource-bar">
+                            <div class="metrics-resource-label">
+                                <span>Remaining Hours</span>
+                                <span class="metrics-resource-hours" id="metric-remainingHours">0h</span>
+                            </div>
+                            <div class="metrics-resource-progress">
+                                <div class="metrics-resource-fill" id="metric-remainingBar"
+                                    style="width: 0%; background: #bf5af2;"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Performance Metrics -->
+                <div class="metrics-section">
+                    <h4 class="metrics-section-title">Performance Metrics</h4>
+                    <div class="metrics-performance-grid">
+                        <div class="metrics-metric-item">
+                            <div class="metrics-metric-label">Tasks Completed</div>
+                            <div class="metrics-metric-value">
+                                <span id="metric-tasksCompleted">0</span> / <span id="metric-totalTasks">0</span>
+                            </div>
+                            <div class="metrics-metric-progress">
+                                <div class="metrics-metric-fill" id="metric-tasksBar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="metrics-metric-item">
+                            <div class="metrics-metric-label">Milestones On Time</div>
+                            <div class="metrics-metric-value">
+                                <span id="metric-milestonesOnTime">0</span> / <span id="metric-totalMilestones">0</span>
+                            </div>
+                            <div class="metrics-metric-progress">
+                                <div class="metrics-metric-fill" id="metric-milestonesBar" style="width: 0%;"></div>
+                            </div>
+                        </div>
+                        <div class="metrics-metric-item">
+                            <div class="metrics-metric-label">Resource Utilization</div>
+                            <div class="metrics-metric-value">
+                                <span id="metric-resourceUtilization">0</span>%
+                            </div>
+                            <div class="metrics-metric-progress">
+                                <div class="metrics-metric-fill" id="metric-utilizationBar" style="width: 0%;"></div>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
     <script src="js/file-manager.js"></script>
     <script src="js/data-manager.js"></script>
     <script src="js/project-manager.js"></script>
-    
+
     <script>
         function updateLoadingStatus(message) {
             const statusEl = document.getElementById('loadingStatus');
@@ -624,7 +659,7 @@
                 const startTime = Date.now();
                 const checkInterval = setInterval(() => {
                     const elapsed = Date.now() - startTime;
-                    
+
                     if (typeof window.fileManager !== 'undefined' && typeof window.dataManager !== 'undefined') {
                         clearInterval(checkInterval);
                         resolve();
@@ -637,46 +672,46 @@
         }
 
         // Wait for dataManager to be ready
-        (async function() {
+        (async function () {
             try {
                 updateLoadingStatus('🔄 Initializing DataManager from Project Manager...');
-                
+
                 console.log('🔍 Checking environment...');
                 console.log('   - Electron:', checkIsElectron());
                 console.log('   - FileManager defined:', typeof window.fileManager !== 'undefined');
                 console.log('   - DataManager defined:', typeof window.dataManager !== 'undefined');
-                
+
                 // Wait for managers to load
                 console.log('⏳ Waiting for managers to load...');
                 await waitForManagers(5000);
-                
+
                 // Final validations
                 if (typeof window.fileManager === 'undefined') {
                     throw new Error('FileManager is not defined after loading');
                 }
-                
+
                 if (typeof window.dataManager === 'undefined') {
                     throw new Error('DataManager is not defined after loading');
                 }
-                
+
                 console.log('✅ Managers loaded correctly');
-                
+
                 updateLoadingStatus('📂 Verifying loaded data...');
                 console.log('📊 DataManager Status:', {
                     users: window.dataManager.users ? window.dataManager.users.length : 0,
                     projects: window.dataManager.projects ? window.dataManager.projects.length : 0
                 });
-                
+
                 // Load data if not loaded
                 if (!window.dataManager.projects || window.dataManager.projects.length === 0) {
                     updateLoadingStatus('📥 Loading projects...');
                     console.log('🔄 Starting loadAllData()...');
                     await window.dataManager.loadAllData();
                 }
-                
+
                 updateLoadingStatus(`✅ ${window.dataManager.projects.length} projects loaded`);
                 console.log('✅ DataManager ready with', window.dataManager.projects.length, 'projects');
-                
+
                 // Initialize Project Manager
                 if (typeof startProjectManager === 'function') {
                     updateLoadingStatus('🚀 Initializing interface...');
@@ -685,7 +720,7 @@
                 } else {
                     throw new Error('startProjectManager is not defined');
                 }
-                
+
                 // Hide loader after brief delay
                 setTimeout(() => {
                     const loadingOverlay = document.getElementById('loadingOverlay');
@@ -693,7 +728,7 @@
                         loadingOverlay.style.display = 'none';
                     }
                 }, 500);
-                
+
             } catch (error) {
                 console.error('❌ Error initializing:', error);
                 console.error('   Stack:', error.stack);
@@ -702,7 +737,7 @@
                 console.log('   - window.dataManager:', typeof window.dataManager);
                 console.log('   - window.electronAPI:', typeof window.electronAPI);
                 console.log('   - window.isElectron:', typeof window.isElectron);
-                
+
                 const loadingOverlay = document.getElementById('loadingOverlay');
                 if (loadingOverlay) {
                     loadingOverlay.innerHTML = '<div style="color: #ff453a; font-size: 18px;">❌ Error loading data<br><small style="font-size: 12px; opacity: 0.7;">' + error.message + '</small></div>';
@@ -711,4 +746,5 @@
         })();
     </script>
 </body>
+
 </html>

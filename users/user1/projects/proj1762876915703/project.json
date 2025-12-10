@@ -2,11 +2,11 @@
   "id": "proj1762876915703",
   "ownerId": "user1",
   "title": "DX Evidence Portfolio",
-  "status": "in-progress",
+  "status": "develop",
   "progress": 54,
   "icon": "🖼",
   "currentPhase": "Bug fixes on the Project Editing page",
-  "updatedAt": "2025-12-09T18:21:50.001Z",
+  "updatedAt": "2025-12-10T20:07:32.516Z",
   "priority": "medium",
   "achievements": {
     "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",

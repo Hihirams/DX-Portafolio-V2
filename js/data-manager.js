@@ -609,10 +609,12 @@ class DataManager {
     getStats() {
         const stats = {
             totalProjects: this.projects.length,
-            inProgress: this.projects.filter(p => p.status === 'in-progress').length,
             discovery: this.projects.filter(p => p.status === 'discovery').length,
-            hold: this.projects.filter(p => p.status === 'hold').length,
-            completed: this.projects.filter(p => p.status === 'completed').length,
+            decision: this.projects.filter(p => p.status === 'decision').length,
+            develop: this.projects.filter(p => p.status === 'develop').length,
+            pilot: this.projects.filter(p => p.status === 'pilot').length,
+            yokotenkai: this.projects.filter(p => p.status === 'yokotenkai').length,
+            finished: this.projects.filter(p => p.status === 'finished').length,
 
             totalUsers: this.users.length,
             avgProgress: this.projects.length > 0

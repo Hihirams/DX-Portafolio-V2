@@ -3,7 +3,7 @@
   "ownerId": "user1",
   "title": "AI Camera",
   "icon": "🎥",
-  "status": "in-progress",
+  "status": "discovery",
   "featured": true,
   "priority": "medium",
   "progress": 45,
@@ -30,32 +30,32 @@
   ],
   "images": [
     {
-      "src": "users/user1/projects/proj003/images/image_1765303170332_0.png",
+      "src": "users/user1/projects/proj003/images/image_1765397182389_0.png",
       "title": "Interfaz de programa"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1765303170334_1.png",
+      "src": "users/user1/projects/proj003/images/image_1765397182392_1.png",
       "title": "Multi Visión"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1765303170337_2.png",
+      "src": "users/user1/projects/proj003/images/image_1765397182395_2.png",
       "title": "Interfaz de Operador"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1765303170339_3.png",
+      "src": "users/user1/projects/proj003/images/image_1765397182397_3.png",
       "title": "Editor de RIO"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1765303170347_4.png",
+      "src": "users/user1/projects/proj003/images/image_1765397182405_4.png",
       "title": "Detección en vivo"
     },
     {
-      "src": "users/user1/projects/proj003/images/image_1765303170352_5.png",
+      "src": "users/user1/projects/proj003/images/image_1765397182410_5.png",
       "title": "Alerta y detección de objeto"
     }
   ],
   "createdAt": "2025-10-01",
-  "updatedAt": "2025-12-09T17:59:30.328Z",
+  "updatedAt": "2025-12-10T20:06:22.382Z",
   "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
   "extraFiles": [],
   "ownerName": "Hiram González",

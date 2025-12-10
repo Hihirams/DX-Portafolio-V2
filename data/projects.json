@@ -5,7 +5,7 @@
       "ownerId": "user1",
       "title": "Quality Clinic Unity",
       "icon": "🌐",
-      "status": "in-progress",
+      "status": "develop",
       "featured": true,
       "priority": "high",
       "progress": 60,
@@ -37,20 +37,20 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj001/images/image_1765303100104_0.png",
+          "src": "users/user1/projects/proj001/images/image_1765396880019_0.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1765303100107_1.png",
+          "src": "users/user1/projects/proj001/images/image_1765396880021_1.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1765303100111_2.png",
+          "src": "users/user1/projects/proj001/images/image_1765396880026_2.png",
           "title": "Vista Cenital"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-12-09T17:58:20.099Z",
+      "updatedAt": "2025-12-10T20:01:20.015Z",
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -86,7 +86,7 @@
       "ownerId": "user1",
       "title": "QC ALT / DQITS",
       "icon": "🧪",
-      "status": "hold",
+      "status": "decision",
       "featured": true,
       "priority": "medium",
       "progress": 55,
@@ -114,20 +114,20 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj002/images/image_1765303114024_0.png",
+          "src": "users/user1/projects/proj002/images/image_1765397145461_0.png",
           "title": "Interfaz Principal"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1765303114027_1.png",
+          "src": "users/user1/projects/proj002/images/image_1765397145464_1.png",
           "title": "Detección Activa"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1765303114030_2.png",
+          "src": "users/user1/projects/proj002/images/image_1765397145467_2.png",
           "title": "Respuesta de FASTAPI"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-12-09T17:58:34.020Z",
+      "updatedAt": "2025-12-10T20:05:45.458Z",
       "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -163,7 +163,7 @@
       "ownerId": "user1",
       "title": "AI Camera",
       "icon": "🎥",
-      "status": "in-progress",
+      "status": "discovery",
       "featured": true,
       "priority": "medium",
       "progress": 45,
@@ -190,32 +190,32 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/image_1765303170332_0.png",
+          "src": "users/user1/projects/proj003/images/image_1765397182389_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765303170334_1.png",
+          "src": "users/user1/projects/proj003/images/image_1765397182392_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765303170337_2.png",
+          "src": "users/user1/projects/proj003/images/image_1765397182395_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765303170339_3.png",
+          "src": "users/user1/projects/proj003/images/image_1765397182397_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765303170347_4.png",
+          "src": "users/user1/projects/proj003/images/image_1765397182405_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765303170352_5.png",
+          "src": "users/user1/projects/proj003/images/image_1765397182410_5.png",
           "title": "Alerta y detección de objeto"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-12-09T17:59:30.328Z",
+      "updatedAt": "2025-12-10T20:06:22.382Z",
       "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -308,7 +308,7 @@
       "ownerId": "user1",
       "title": "LorenzoBot",
       "icon": "🤖",
-      "status": "hold",
+      "status": "pilot",
       "priority": "low",
       "progress": 85,
       "targetDate": "2026-03-15",
@@ -334,20 +334,20 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj005/images/image_1765303226169_0.png",
+          "src": "users/user1/projects/proj005/images/image_1765397210179_0.png",
           "title": "Interfaz Bot"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1765303226170_1.png",
+          "src": "users/user1/projects/proj005/images/image_1765397210180_1.png",
           "title": "Reportes"
         },
         {
-          "src": "users/user1/projects/proj005/images/image_1765303226172_2.png",
+          "src": "users/user1/projects/proj005/images/image_1765397210182_2.png",
           "title": "Flujo General"
         }
       ],
       "createdAt": "2025-06-01",
-      "updatedAt": "2025-12-09T18:00:26.166Z",
+      "updatedAt": "2025-12-10T20:06:50.176Z",
       "ganttImagePath": "users/user1/projects/proj005/gantt/gantt_1763397314576.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -382,10 +382,10 @@
       "id": "proj1762463273285",
       "ownerId": "user2",
       "title": "YOKADX",
-      "status": "completed",
+      "status": "yokotenkai",
       "progress": 100,
       "icon": "📁",
-      "updatedAt": "2025-12-09T18:22:17.237Z",
+      "updatedAt": "2025-12-10T20:07:59.056Z",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
       "priority": "high",
       "achievements": {
@@ -436,11 +436,11 @@
       "id": "proj1762784041699",
       "ownerId": "user2",
       "title": "Quality KPI Dashboard",
-      "status": "in-progress",
+      "status": "yokotenkai",
       "progress": 60,
       "icon": "📊",
       "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows.",
-      "updatedAt": "2025-12-09T18:03:51.073Z",
+      "updatedAt": "2025-12-10T20:08:19.984Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -463,7 +463,7 @@
         "fteSaved": 2.3,
         "completion": 60,
         "timeline": {
-          "startDate": "2025-11-10T14:14:01.699Z",
+          "startDate": "2025-11-10",
           "targetEnd": "2025-11-21",
           "currentPhase": "Modular development of each QE Data Center KPI using the same structure: SharePoint data list, connected Power BI report, Power Apps main section and update form, plus optional Power Automate flows."
         },
@@ -486,11 +486,11 @@
       "id": "proj1762786312316",
       "ownerId": "user2",
       "title": "DX Expenses",
-      "status": "hold",
+      "status": "develop",
       "progress": 50,
       "icon": "📈",
       "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
-      "updatedAt": "2025-12-09T18:04:05.060Z",
+      "updatedAt": "2025-12-10T20:08:36.993Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -505,11 +505,11 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762786312316/images/image_1765303445063_0.png",
+          "src": "users/user2/projects/proj1762786312316/images/image_1765397316998_0.png",
           "title": "Screenshot 2025-11-10 085025.png"
         },
         {
-          "src": "users/user2/projects/proj1762786312316/images/image_1765303445071_1.png",
+          "src": "users/user2/projects/proj1762786312316/images/image_1765397317005_1.png",
           "title": "Screenshot 2025-11-10 085033.png"
         }
       ],
@@ -524,7 +524,7 @@
         "fteSaved": 1.8,
         "completion": 50,
         "timeline": {
-          "startDate": "2025-11-10T14:51:52.316Z",
+          "startDate": "2025-11-10",
           "targetEnd": "2025-11-10",
           "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit."
         },
@@ -597,11 +597,11 @@
       "id": "proj1762786983969",
       "ownerId": "user2",
       "title": "DX Hold (Hold Monitor System) - ME",
-      "status": "completed",
+      "status": "pilot",
       "progress": 95,
       "icon": "📦",
       "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-      "updatedAt": "2025-12-09T18:04:41.705Z",
+      "updatedAt": "2025-12-10T20:09:39.905Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -621,23 +621,23 @@
       ],
       "images": [
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765303481708_0.png",
+          "src": "users/user2/projects/proj1762786983969/images/image_1765397379909_0.png",
           "title": "DX_HOLD_VIEW.png"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765303481713_1.png",
+          "src": "users/user2/projects/proj1762786983969/images/image_1765397379913_1.png",
           "title": "HOLD_MONITOR_SYSTEM.png"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765303481715_2.png",
+          "src": "users/user2/projects/proj1762786983969/images/image_1765397379916_2.png",
           "title": "HOLD_MONITOR_SYSTEM_2.png"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765303481719_3.png",
+          "src": "users/user2/projects/proj1762786983969/images/image_1765397379920_3.png",
           "title": "HOLD_MONITOR_SYSTEM_3.png"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765303481722_4.png",
+          "src": "users/user2/projects/proj1762786983969/images/image_1765397379922_4.png",
           "title": "HOLD_MONITOR_SYSTEM_4.png"
         }
       ],
@@ -652,7 +652,7 @@
         "fteSaved": 2.5,
         "completion": 95,
         "timeline": {
-          "startDate": "2025-11-10T15:03:03.969Z",
+          "startDate": "2025-11-10",
           "targetEnd": "2025-11-10",
           "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed."
         },
@@ -675,11 +675,11 @@
       "id": "proj1762787282420",
       "ownerId": "user2",
       "title": "Jsox Dashboard",
-      "status": "completed",
+      "status": "finished",
       "progress": 100,
       "icon": "🧾",
       "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
-      "updatedAt": "2025-12-09T18:04:52.579Z",
+      "updatedAt": "2025-12-10T20:10:22.619Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -702,7 +702,7 @@
         "fteSaved": 3.6,
         "completion": 100,
         "timeline": {
-          "startDate": "2025-11-10T15:08:02.420Z",
+          "startDate": "2025-11-10",
           "targetEnd": "2025-11-10",
           "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality."
         },
@@ -725,11 +725,11 @@
       "id": "proj1762787721514",
       "ownerId": "user2",
       "title": "RoBot Innovation Zone",
-      "status": "in-progress",
+      "status": "develop",
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-      "updatedAt": "2025-12-09T18:05:22.427Z",
+      "updatedAt": "2025-12-10T20:10:34.923Z",
       "priority": "medium",
       "achievements": {
         "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
@@ -744,19 +744,19 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765303522429_0.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765397434926_0.png",
           "title": "RB1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765303522430_1.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765397434927_1.png",
           "title": "RB2.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765303522432_2.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765397434929_2.png",
           "title": "imagen 1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765303522433_3.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1765397434930_3.png",
           "title": "Slide1.JPG"
         }
       ],
@@ -771,7 +771,7 @@
         "fteSaved": 1.7,
         "completion": 30,
         "timeline": {
-          "startDate": "2025-11-10T15:15:21.514Z",
+          "startDate": "2025-11-10",
           "targetEnd": "2025-11-10",
           "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin."
         },
@@ -844,11 +844,11 @@
       "id": "proj1762869515275",
       "ownerId": "user1",
       "title": "QC ALT",
-      "status": "in-progress",
+      "status": "pilot",
       "progress": 80,
       "icon": "📊",
       "currentPhase": "Implementation of Line P703 (Pilot Line)",
-      "updatedAt": "2025-12-09T18:01:30.144Z",
+      "updatedAt": "2025-12-10T20:07:24.519Z",
       "priority": "high",
       "achievements": {
         "2025-03": "Implementation of Line P703 (Pilot Line)",
@@ -875,7 +875,7 @@
         "fteSaved": 2.9,
         "completion": 80,
         "timeline": {
-          "startDate": "2025-11-11T13:58:35.275Z",
+          "startDate": "2025-11-11",
           "targetEnd": "2025-11-11",
           "currentPhase": "Implementation of Line P703 (Pilot Line)"
         },
@@ -898,11 +898,11 @@
       "id": "proj1762872345620",
       "ownerId": "user2",
       "title": "Don Sillardo",
-      "status": "hold",
+      "status": "discovery",
       "progress": 0,
       "icon": "🪑",
       "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing.",
-      "updatedAt": "2025-12-09T18:05:32.917Z",
+      "updatedAt": "2025-12-10T20:10:55.599Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -925,7 +925,7 @@
         "fteSaved": 3.2,
         "completion": 0,
         "timeline": {
-          "startDate": "2025-11-11T14:45:45.620Z",
+          "startDate": "2025-11-11",
           "targetEnd": "2025-11-28",
           "currentPhase": "Content is being developed for a campaign aimed at reducing unnecessary meetings and making better use of time. The initiative encourages innovation, digitalization, and continuous learning to keep our minds energized and growing."
         },
@@ -998,11 +998,11 @@
       "id": "proj1762876915703",
       "ownerId": "user1",
       "title": "DX Evidence Portfolio",
-      "status": "in-progress",
+      "status": "develop",
       "progress": 54,
       "icon": "🖼",
       "currentPhase": "Bug fixes on the Project Editing page",
-      "updatedAt": "2025-12-09T18:21:50.001Z",
+      "updatedAt": "2025-12-10T20:07:32.516Z",
       "priority": "medium",
       "achievements": {
         "2025-10": "The home base of the portfolio is successfully built, displaying projects.\nThe project editing page is implemented along with dynamic visualization of the user’s projects.",
@@ -1403,7 +1403,7 @@
       "id": "proj1763483529675",
       "ownerId": "user3",
       "title": "Whyzer",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "medium",
       "progress": 80,
       "icon": "📋",
@@ -1421,12 +1421,12 @@
       "videos": [],
       "images": [
         {
-          "src": "users/user3/projects/proj1763483529675/images/image_1765303657128_0.png",
+          "src": "users/user3/projects/proj1763483529675/images/image_1765397512725_0.png",
           "title": "Infografia"
         }
       ],
       "createdAt": "2025-11-18T16:32:09.675Z",
-      "updatedAt": "2025-12-09T18:07:37.124Z",
+      "updatedAt": "2025-12-10T20:11:52.722Z",
       "extraFiles": [
         {
           "src": "users/user3/projects/proj1763483529675/extra-files/Innovation_Zone_Best_Practice__1764258666301.pptx",
@@ -1446,7 +1446,7 @@
         "fteSaved": 2.6,
         "completion": 80,
         "timeline": {
-          "startDate": "2025-11-18T16:32:09.675Z",
+          "startDate": "2025-11-18",
           "targetEnd": "2025-12-19",
           "currentPhase": "It is being explained and tested with the teams involved in the investigations [QC]\nand quick training sessions are being given on how to use it."
         },
@@ -1469,7 +1469,7 @@
       "id": "proj1763484801399",
       "ownerId": "user2",
       "title": "Videos Creation",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "high",
       "progress": 40,
       "icon": "📋",
@@ -1489,7 +1489,7 @@
       "videos": [],
       "images": [],
       "createdAt": "2025-11-18T16:53:21.399Z",
-      "updatedAt": "2025-12-09T18:05:49.753Z",
+      "updatedAt": "2025-12-10T20:11:13.998Z",
       "extraFiles": [],
       "ownerName": "Sandra Santos",
       "concept": "Creation of video of Innovation Zone [ Introduction to de Area + Purpose + Connection with DX Section]",
@@ -1500,7 +1500,7 @@
         "fteSaved": 2.1,
         "completion": 40,
         "timeline": {
-          "startDate": "2025-11-18T16:53:21.399Z",
+          "startDate": "2025-11-18",
           "targetEnd": "2025-11-27",
           "currentPhase": "Suport ECU Ishue Investigation"
         },
@@ -1549,7 +1549,7 @@
       "id": "proj1764623073513",
       "ownerId": "user5",
       "title": "QA-DX System",
-      "status": "in-progress",
+      "status": "develop",
       "priority": "high",
       "progress": 12,
       "icon": "📊",
@@ -1573,32 +1573,32 @@
       ],
       "images": [
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765293074131_0.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1765397558420_0.png",
           "title": "Screenshot 2025-12-04 152227.png"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765293074170_1.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1765397558421_1.png",
           "title": "Screenshot 2025-12-04 152234.png"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765293074201_2.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1765397558422_2.png",
           "title": "Screenshot 2025-12-04 152240.png"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765293074240_3.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1765397558423_3.png",
           "title": "Screenshot 2025-12-04 152248.png"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765293074271_4.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1765397558424_4.png",
           "title": "Screenshot 2025-12-04 152256.png"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765293074312_5.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1765397558426_5.png",
           "title": "Screenshot 2025-12-04 152303.png"
         }
       ],
       "createdAt": "2025-12-01T21:04:33.513Z",
-      "updatedAt": "2025-12-09T15:11:14.070Z",
+      "updatedAt": "2025-12-10T20:12:38.416Z",
       "extraFiles": [
         {
           "src": "users/user5/projects/proj1764623073513/extra-files/QA_NPCC_Digitalization_Proposa_1764623349973.pptx",
@@ -1612,7 +1612,31 @@
       "ownerName": "Angel Alvarez",
       "concept": "This system is designed to digitize the NPCC and Project Transfer process, enabling each quality analyst to standardize formats, automate due dates and status report and develop department skills, used throughout the workflow and providing an interactive GUI where every user has a defined access level to view and manage the available data.",
       "ganttImagePath": "users/user5/projects/proj1764623073513/gantt/gantt_1765293074099.png",
-      "priorityNumber": 27
+      "priorityNumber": 27,
+      "kpis": {
+        "totalHoursEstimated": 0,
+        "hoursSpent": 0,
+        "fteSaved": 0,
+        "completion": 0,
+        "timeline": {
+          "startDate": "2025-11-28",
+          "targetEnd": "2026-01-01",
+          "currentPhase": ""
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 0,
+          "milestonesOnTime": 0,
+          "totalMilestones": 0,
+          "resourceUtilization": 0
+        }
+      }
     }
   ]
 }

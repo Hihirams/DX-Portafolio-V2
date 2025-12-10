@@ -740,28 +740,40 @@ body.light-mode .theme-toggle .moon-icon {
     letter-spacing: 0.5px;
 }
 
-.status-progress {
-    background: rgba(52, 199, 89, 0.12);
-    color: #34c759;
-    border: 1px solid rgba(52, 199, 89, 0.25);
-}
-
-.status-hold {
-    background: rgba(255, 159, 10, 0.12);
-    color: #ff9f0a;
-    border: 1px solid rgba(255, 159, 10, 0.25);
-}
-
 .status-discovery {
-    background: rgba(191, 90, 242, 0.12);
-    color: #bf5af2;
-    border: 1px solid rgba(191, 90, 242, 0.25);
+    background: rgba(147, 112, 219, 0.15);
+    color: #8B7AB8;
+    border: 1px solid rgba(147, 112, 219, 0.25);
 }
 
-.status-completed {
-    background: rgba(48, 209, 88, 0.12);
-    color: #30d158;
-    border: 1px solid rgba(48, 209, 88, 0.25);
+.status-decision {
+    background: rgba(255, 193, 7, 0.15);
+    color: #D4A017;
+    border: 1px solid rgba(255, 193, 7, 0.25);
+}
+
+.status-develop {
+    background: rgba(52, 152, 219, 0.15);
+    color: #5DADE2;
+    border: 1px solid rgba(52, 152, 219, 0.25);
+}
+
+.status-pilot {
+    background: rgba(230, 126, 34, 0.15);
+    color: #E67E22;
+    border: 1px solid rgba(230, 126, 34, 0.25);
+}
+
+.status-yokotenkai {
+    background: rgba(219, 112, 147, 0.15);
+    color: #C9779C;
+    border: 1px solid rgba(219, 112, 147, 0.25);
+}
+
+.status-finished {
+    background: rgba(46, 204, 113, 0.15);
+    color: #52C77A;
+    border: 1px solid rgba(46, 204, 113, 0.25);
 }
 
 /* Progress Bar */
