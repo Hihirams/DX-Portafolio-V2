@@ -70,13 +70,13 @@
       "title": "YOKADX",
       "ownerId": "user2",
       "ownerName": "Sandra Santos",
-      "status": "yokotenkai",
+      "status": "finished",
       "priority": "high",
       "priorityNumber": 1,
       "progress": 100,
       "icon": "📁",
       "currentPhase": "The project is in deployment, pending a review meeting with managers to confirm requirements before final release.",
-      "updatedAt": "2025-12-10T20:07:59.056Z"
+      "updatedAt": "2025-12-10T20:42:47.779Z"
     },
     {
       "id": "proj1762784041699",
@@ -340,7 +340,7 @@
     },
     {
       "id": "proj1764601398436",
-      "title": "Automatizacion IMDS",
+      "title": "Automation IMDS",
       "ownerId": "user4",
       "ownerName": "Ivanna Rodríguez",
       "status": "discovery",
@@ -348,8 +348,8 @@
       "priorityNumber": 27,
       "progress": 8,
       "icon": "📋",
-      "currentPhase": "Actualmente, me encuentro colaborando con el equipo para comprender al 100% la plataforma para así poder proponer soluciones.",
-      "updatedAt": "2025-12-01T21:32:11.847Z"
+      "currentPhase": "Currently, I am collaborating with the team to fully understand the platform in order to propose solutions.",
+      "updatedAt": "2025-12-10T20:51:06.011Z"
     },
     {
       "id": "proj1764623073513",
@@ -371,10 +371,10 @@
     "decision": 1,
     "develop": 7,
     "pilot": 3,
-    "yokotenkai": 2,
-    "finished": 1,
+    "yokotenkai": 1,
+    "finished": 2,
     "totalUsers": 5,
     "avgProgress": 37
   },
-  "lastUpdated": "2025-12-10T20:12:38.453Z"
+  "lastUpdated": "2025-12-10T20:51:06.034Z"
 }

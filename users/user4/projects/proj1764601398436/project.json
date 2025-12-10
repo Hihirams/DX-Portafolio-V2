@@ -1,12 +1,12 @@
 {
   "id": "proj1764601398436",
   "ownerId": "user4",
-  "title": "Automatizacion IMDS",
+  "title": "Automation IMDS",
   "status": "discovery",
   "priority": "high",
   "progress": 8,
   "icon": "📋",
-  "currentPhase": "Actualmente, me encuentro colaborando con el equipo para comprender al 100% la plataforma para así poder proponer soluciones.",
+  "currentPhase": "Currently, I am collaborating with the team to fully understand the platform in order to propose solutions.",
   "achievements": {},
   "blockers": {
     "type": "info",
@@ -18,10 +18,10 @@
   "videos": [],
   "images": [],
   "createdAt": "2025-12-01T15:03:18.436Z",
-  "updatedAt": "2025-12-01T21:32:11.847Z",
+  "updatedAt": "2025-12-10T20:51:06.011Z",
   "extraFiles": [],
   "ownerName": "Ivanna Rodríguez",
-  "concept": "El propósito de este proyecto es explorar las opciones para ayudar al equipo de IMDS a automatizar su flujo de trabajo.",
+  "concept": "The purpose of this project is to explore options to help the IMDS team automate their workflow.",
   "priorityNumber": 27,
   "kpis": {
     "totalHoursEstimated": 0,
