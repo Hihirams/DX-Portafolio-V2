@@ -92,7 +92,7 @@ function renderStatsOverview() {
     const stats = dataManager.getStats();
 
     statsOverview.innerHTML = `
-    <div class="stat-card" onclick="scrollToAllProjects('all')">
+    <div class="stat-card stat-card-total" onclick="scrollToAllProjects('all')">
       <div class="stat-number">${stats.totalProjects}</div>
       <div class="stat-label">Total Projects</div>
     </div>
