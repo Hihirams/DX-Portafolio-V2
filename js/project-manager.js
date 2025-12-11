@@ -846,7 +846,12 @@ function formatDate(dateString) {
     }
 }
 
-function getDeliveryStatus(deliveryDate) {
+function getDeliveryStatus(deliveryDate, project) {
+    // Check if project is finished with 100% progress
+    if (project && project.status === 'finished' && project.progress === 100) {
+        return { class: 'completed', icon: 'check' };
+    }
+
     if (!deliveryDate) return { class: '', icon: 'calendar' };
 
     const today = new Date();
@@ -873,7 +878,8 @@ function getDeliveryIcon(type) {
     const icons = {
         alert: '<svg class="delivery-icon" viewBox="0 0 14 14" fill="none"><path d="M7 1L13 12H1L7 1Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round"/><path d="M7 5.5V8" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/><circle cx="7" cy="10" r="0.5" fill="currentColor"/></svg>',
         clock: '<svg class="delivery-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M7 3.5V7L9.5 9.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
-        calendar: '<svg class="delivery-icon" viewBox="0 0 14 14" fill="none"><rect x="2" y="3" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 6H12" stroke="currentColor" stroke-width="1.5"/><path d="M5 2V4M9 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>'
+        calendar: '<svg class="delivery-icon" viewBox="0 0 14 14" fill="none"><rect x="2" y="3" width="10" height="9" rx="1.5" stroke="currentColor" stroke-width="1.5"/><path d="M2 6H12" stroke="currentColor" stroke-width="1.5"/><path d="M5 2V4M9 2V4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>',
+        check: '<svg class="delivery-icon" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.5"/><path d="M4 7L6 9L10 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>'
     };
     return icons[type] || icons.calendar;
 }
@@ -1163,7 +1169,11 @@ function renderProjects() {
         return;
     }
 
-    tbody.innerHTML = projectsToShow.map(project => `
+    tbody.innerHTML = projectsToShow.map(project => {
+        // Check if project is finished with 100% progress
+        const isFinished = project.status === 'finished' && project.progress === 100;
+
+        return `
         <tr>
             <td class="col-name">
                 <div class="project-name">${project.name}</div>
@@ -1188,14 +1198,14 @@ function renderProjects() {
                 <span class="text-secondary">${formatDate(project.lastUpdate)}</span>
             </td>
             <td class="col-next">
-                <span class="text-highlight">${project.nextStep}</span>
+                <span class="text-highlight">${isFinished ? '—' : project.nextStep}</span>
             </td>
             <td class="col-delivery">
                 ${(() => {
-            const status = getDeliveryStatus(project.deliveryDate);
-            const icon = getDeliveryIcon(status.icon);
-            return `<span class="delivery-date ${status.class}">${icon}${formatDate(project.deliveryDate)}</span>`;
-        })()}
+                const status = getDeliveryStatus(project.deliveryDate, project);
+                const icon = getDeliveryIcon(status.icon);
+                return `<span class="delivery-date ${status.class}">${icon}${formatDate(project.deliveryDate)}</span>`;
+            })()}
             </td>
             <td class="col-responsible">
                 <span class="text-highlight">${project.responsible}</span>
@@ -1206,14 +1216,14 @@ function renderProjects() {
             </td>
             </td>
             <td class="col-block-desc">
-                ${project.blocked ? `
+                ${isFinished ? '<span class="text-secondary">—</span>' : (project.blocked ? `
                     <div class="block-description">${project.blockReason}</div>
-                ` : '<span class="text-secondary">—</span>'}
+                ` : '<span class="text-secondary">—</span>')}
             </td>
             <td class="col-block-resp">
-                ${project.blocked ? `
+                ${isFinished ? '<span class="text-secondary">—</span>' : (project.blocked ? `
                     <div class="block-responsible">${project.blockResponsible}</div>
-                ` : '<span class="text-secondary">—</span>'}
+                ` : '<span class="text-secondary">—</span>')}
             </td>
             <td class="col-resources">
                 <button class="btn-resources" onclick="openResourcesModal('${project.id}', event)">
@@ -1225,7 +1235,8 @@ function renderProjects() {
                 </button>
             </td>
         </tr>
-    `).join('');
+        `;
+    }).join('');
 
     updatePaginationInfo();
 }

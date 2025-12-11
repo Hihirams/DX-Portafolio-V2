@@ -868,6 +868,18 @@ body.light-mode .theme-toggle .moon-icon {
     color: #ff9500;
 }
 
+.delivery-date.completed {
+    background: rgba(52, 199, 89, 0.15);
+    border-color: rgba(52, 199, 89, 0.4);
+    color: #34c759;
+}
+
+.light-mode .delivery-date.completed {
+    background: rgba(52, 199, 89, 0.12);
+    border-color: rgba(52, 199, 89, 0.3);
+    color: #30d158;
+}
+
 .delivery-icon {
     width: 14px;
     height: 14px;
