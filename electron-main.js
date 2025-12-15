@@ -20,64 +20,64 @@ const IS_DEV = process.argv.includes('--dev');
 // âœ… Resolver raÃ­z de proyecto priorizando carpeta del .exe si hay datos
 // Reemplaza tu resolveProjectRoot() completo por este
 function resolveProjectRoot() {
-  const path = require('path');
-  const fs = require('fs');
+    const path = require('path');
+    const fs = require('fs');
 
-  // 1) Si electron-builder portable: directorio real del .exe
-  const portableDir = process.env.PORTABLE_EXECUTABLE_DIR || null;
+    // 1) Si electron-builder portable: directorio real del .exe
+    const portableDir = process.env.PORTABLE_EXECUTABLE_DIR || null;
 
-  // 2) "Start in" del acceso directo / cwd
-  const startIn = process.cwd();
+    // 2) "Start in" del acceso directo / cwd
+    const startIn = process.cwd();
 
-  // 3) Carpeta del ejecutable que realmente corriÃ³
-  const exeDir = path.dirname(process.execPath);
+    // 3) Carpeta del ejecutable que realmente corriÃ³
+    const exeDir = path.dirname(process.execPath);
 
-  // 4) Salir de resources/app.asar â†’ ir a la carpeta que lo contiene
-  const resourcesParent = (process.resourcesPath)
-    ? path.join(process.resourcesPath, '..')
-    : null;
+    // 4) Salir de resources/app.asar â†’ ir a la carpeta que lo contiene
+    const resourcesParent = (process.resourcesPath)
+        ? path.join(process.resourcesPath, '..')
+        : null;
 
-  // 5) Salir de app.asar por __dirname (cuando el main vive dentro del asar)
-  const asarEscape = path.join(__dirname, '..', '..');
+    // 5) Salir de app.asar por __dirname (cuando el main vive dentro del asar)
+    const asarEscape = path.join(__dirname, '..', '..');
 
-  const clean = (p) => (p && p.includes('.asar')) ? path.dirname(p) : p;
+    const clean = (p) => (p && p.includes('.asar')) ? path.dirname(p) : p;
 
-  const candidates = [
-    clean(portableDir),
-    clean(startIn),
-    clean(exeDir),
-    clean(resourcesParent),
-    clean(asarEscape),
-  ].filter(Boolean);
+    const candidates = [
+        clean(portableDir),
+        clean(startIn),
+        clean(exeDir),
+        clean(resourcesParent),
+        clean(asarEscape),
+    ].filter(Boolean);
 
-  const hasBoth = (dir) => {
-    try {
-      const d = path.join(dir, 'data');
-      const u = path.join(dir, 'users');
-      return fs.existsSync(d) && fs.statSync(d).isDirectory() &&
-             fs.existsSync(u) && fs.statSync(u).isDirectory();
-    } catch { return false; }
-  };
+    const hasBoth = (dir) => {
+        try {
+            const d = path.join(dir, 'data');
+            const u = path.join(dir, 'users');
+            return fs.existsSync(d) && fs.statSync(d).isDirectory() &&
+                fs.existsSync(u) && fs.statSync(u).isDirectory();
+        } catch { return false; }
+    };
 
-  // Preferir carpeta que tiene *ambas* (data y users)
-  for (const c of candidates) if (hasBoth(c)) return c;
+    // Preferir carpeta que tiene *ambas* (data y users)
+    for (const c of candidates) if (hasBoth(c)) return c;
 
-  // Si no hay ambas, al menos la que tenga uno de los dos
-  for (const c of candidates) {
-    try {
-      if (fs.existsSync(path.join(c, 'data')) || fs.existsSync(path.join(c, 'users'))) return c;
-    } catch {}
-  }
+    // Si no hay ambas, al menos la que tenga uno de los dos
+    for (const c of candidates) {
+        try {
+            if (fs.existsSync(path.join(c, 'data')) || fs.existsSync(path.join(c, 'users'))) return c;
+        } catch { }
+    }
 
-  // Ãšltimo recurso: exeDir
-  return exeDir;
+    // Ãšltimo recurso: exeDir
+    return exeDir;
 }
 
 
 
 const PROJECT_ROOT = resolveProjectRoot();
 const USERS_DIR = path.join(PROJECT_ROOT, 'users');
-const DATA_DIR  = path.join(PROJECT_ROOT, 'data');
+const DATA_DIR = path.join(PROJECT_ROOT, 'data');
 
 console.log('[RUTAS]');
 console.log('  PROJECT_ROOT:', PROJECT_ROOT);
@@ -88,11 +88,17 @@ console.log('   process.execPath:', process.execPath);
 // ==================== CREAR VENTANA ====================
 
 function createWindow() {
+    // Resolver ruta del icono que funcione en desarrollo y producción
+    const iconPath = IS_DEV
+        ? path.join(__dirname, 'assets', 'logo-dx.ico')
+        : path.join(PROJECT_ROOT, 'assets', 'logo-dx.ico');
+
     mainWindow = new BrowserWindow({
         width: 1400,
         height: 900,
         minWidth: 1200,
         minHeight: 700,
+        icon: iconPath,
         webPreferences: {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
@@ -124,7 +130,7 @@ app.whenReady().then(() => {
     const { protocol } = require('electron');
     protocol.interceptFileProtocol('file', (request, callback) => {
         const url = request.url.substr(7); // quitar 'file://'
-        
+
         // Si la petición es para assets/, servirlo desde PROJECT_ROOT/assets/
         if (url.includes('/assets/') || url.includes('\\assets\\')) {
             const assetPath = url.split(/[\\/]assets[\\/]/).pop();
@@ -134,7 +140,7 @@ app.whenReady().then(() => {
             callback({ path: path.normalize(url) });
         }
     });
-    
+
 
     initializeDirectories();
     createWindow();
@@ -246,9 +252,9 @@ ipcMain.handle('file:writeJSON', async (event, filePath, data) => {
     try {
         const fullPath = path.join(PROJECT_ROOT, filePath);
         const dir = path.dirname(fullPath);
-        
+
         console.log('Escribiendo JSON en:', fullPath);
-        
+
         // Crear directorio si no existe
         if (!fsSync.existsSync(dir)) {
             await fs.mkdir(dir, { recursive: true });
@@ -267,7 +273,7 @@ ipcMain.handle('file:saveMedia', async (event, filePath, base64Data) => {
     try {
         const fullPath = path.join(PROJECT_ROOT, filePath);
         const dir = path.dirname(fullPath);
-        
+
         // Crear directorio si no existe
         if (!fsSync.existsSync(dir)) {
             await fs.mkdir(dir, { recursive: true });
@@ -276,7 +282,7 @@ ipcMain.handle('file:saveMedia', async (event, filePath, base64Data) => {
         // Extraer data real del base64 (quitar "data:image/png;base64,")
         const base64String = base64Data.includes(',') ? base64Data.split(',')[1] : base64Data;
         const buffer = Buffer.from(base64String, 'base64');
-        
+
         await fs.writeFile(fullPath, buffer);
         return { success: true, path: filePath };
     } catch (error) {
@@ -291,21 +297,21 @@ ipcMain.handle('file:readMedia', async (event, filePath) => {
         const fullPath = path.join(PROJECT_ROOT, filePath);
         const buffer = await fs.readFile(fullPath);
         const base64 = buffer.toString('base64');
-        
+
         // Detectar tipo de archivo
         const ext = path.extname(filePath).toLowerCase();
         let mimeType = 'application/octet-stream';
-        
+
         if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) {
             mimeType = `image/${ext.substring(1)}`;
         } else if (['.mp4', '.webm', '.mov'].includes(ext)) {
             mimeType = `video/${ext.substring(1)}`;
         }
-        
-        return { 
-            success: true, 
+
+        return {
+            success: true,
             data: `data:${mimeType};base64,${base64}`,
-            mimeType 
+            mimeType
         };
     } catch (error) {
         console.error('Error leyendo media:', error);
@@ -384,7 +390,7 @@ ipcMain.handle('dialog:openFile', async (event, options) => {
         const buffer = await fs.readFile(filePath);
         const base64 = buffer.toString('base64');
         const ext = path.extname(filePath).toLowerCase();
-        
+
         let mimeType = 'application/octet-stream';
         if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) {
             mimeType = `image/${ext.substring(1)}`;
@@ -565,24 +571,24 @@ ipcMain.handle('project:delete', async (event, userId, projectId) => {
         const projectDir = path.join(USERS_DIR, userId, 'projects', projectId);
         await fs.rm(projectDir, { recursive: true, force: true });
         console.log(`📁 Carpeta del proyecto eliminada: ${projectId}`);
-        
+
         // 2. Actualizar el archivo projects.json en data/
         const projectsJsonPath = path.join(DATA_DIR, 'projects.json');
-        
+
         if (fsSync.existsSync(projectsJsonPath)) {
             const projectsData = JSON.parse(await fs.readFile(projectsJsonPath, 'utf8'));
-            
+
             // Filtrar el proyecto eliminado
             const originalLength = projectsData.projects.length;
             projectsData.projects = projectsData.projects.filter(p => p.id !== projectId);
-            
+
             // Guardar el archivo actualizado
             await fs.writeFile(projectsJsonPath, JSON.stringify(projectsData, null, 2), 'utf8');
-            
+
             const deletedCount = originalLength - projectsData.projects.length;
             console.log(`✅ Proyecto ${projectId} eliminado de projects.json (${deletedCount} entrada(s))`);
         }
-        
+
         return { success: true };
     } catch (error) {
         console.error('❌ Error eliminando proyecto:', error);
@@ -594,14 +600,14 @@ ipcMain.handle('project:delete', async (event, userId, projectId) => {
 ipcMain.handle('project:listByUser', async (event, userId) => {
     try {
         const projectsDir = path.join(USERS_DIR, userId, 'projects');
-        
+
         if (!fsSync.existsSync(projectsDir)) {
             return { success: true, projects: [] };
         }
-        
+
         const projectFolders = await fs.readdir(projectsDir);
         const projects = [];
-        
+
         for (const folder of projectFolders) {
             const projectFile = path.join(projectsDir, folder, 'project.json');
             if (fsSync.existsSync(projectFile)) {
@@ -609,7 +615,7 @@ ipcMain.handle('project:listByUser', async (event, userId) => {
                 projects.push(JSON.parse(data));
             }
         }
-        
+
         return { success: true, projects };
     } catch (error) {
         console.error('Error listando proyectos:', error);
@@ -624,9 +630,9 @@ ipcMain.handle('user:createDir', async (event, userId) => {
     try {
         const userDir = path.join(USERS_DIR, userId);
         const projectsDir = path.join(userDir, 'projects');
-        
+
         await fs.mkdir(projectsDir, { recursive: true });
-        
+
         console.log(`Directorio de usuario creado: ${userDir}`);
         return { success: true, path: userDir };
     } catch (error) {
