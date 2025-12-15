@@ -88,7 +88,7 @@ body.light-theme .badge-low {
     border: 1px solid rgba(219, 112, 147, 0.25);
 }
 
-.badge-finished {
+.badge-released {
     background: rgba(46, 204, 113, 0.15);
     color: #52C77A;
     border: 1px solid rgba(46, 204, 113, 0.25);
@@ -139,7 +139,7 @@ body.light-theme .badge-yokotenkai {
     color: #B8638C;
 }
 
-body.light-theme .badge-finished {
+body.light-theme .badge-released {
     background: rgba(46, 204, 113, 0.2);
     color: #28A745;
 }

@@ -116,9 +116,9 @@ function renderStatsOverview() {
       <div class="stat-number">${stats.yokotenkai}</div>
       <div class="stat-label">Yokotenkai</div>
     </div>
-    <div class="stat-card" onclick="scrollToAllProjects('finished')">
-      <div class="stat-number">${stats.finished}</div>
-      <div class="stat-label">Finished</div>
+    <div class="stat-card" onclick="scrollToAllProjects('released')">
+      <div class="stat-number">${stats.released}</div>
+      <div class="stat-label">Released</div>
     </div>
   `;
 }
@@ -301,7 +301,11 @@ function renderFeaturedProjects(filter = 'all') {
 
     // Aplicar filtro
     if (filter !== 'all') {
-        projects = projects.filter(p => p.status === filter);
+        if (filter === 'released') {
+            projects = projects.filter(p => p.status === 'released' || p.status === 'finished');
+        } else {
+            projects = projects.filter(p => p.status === filter);
+        }
     }
 
     const track = document.getElementById('allProjectsCarouselTrack');

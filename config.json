@@ -37,10 +37,10 @@
       "color": "#00BFFF",
       "icon": "🌐"
     },
-    "finished": {
-      "label": "Finished",
-      "badge": "Finished",
-      "badgeClass": "badge-finished",
+    "released": {
+      "label": "Released",
+      "badge": "Released",
+      "badgeClass": "badge-released",
       "color": "#00FF85",
       "icon": "✓"
     }

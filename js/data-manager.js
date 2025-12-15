@@ -261,6 +261,15 @@ class DataManager {
         if (this.config.projectStatuses && this.config.projectStatuses[status]) {
             return this.config.projectStatuses[status];
         }
+        if (status === 'finished' || status === 'released') {
+            return {
+                label: 'Released',
+                badge: 'Released',
+                badgeClass: 'badge-released',
+                color: '#2ecc71',
+                icon: '✓'
+            };
+        }
         // Fallback si no existe el config
         return {
             label: status,
@@ -614,7 +623,7 @@ class DataManager {
             develop: this.projects.filter(p => p.status === 'develop').length,
             pilot: this.projects.filter(p => p.status === 'pilot').length,
             yokotenkai: this.projects.filter(p => p.status === 'yokotenkai').length,
-            finished: this.projects.filter(p => p.status === 'finished').length,
+            released: this.projects.filter(p => p.status === 'finished' || p.status === 'released').length,
 
             totalUsers: this.users.length,
             avgProgress: this.projects.length > 0

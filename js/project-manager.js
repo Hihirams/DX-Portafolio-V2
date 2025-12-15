@@ -37,7 +37,7 @@ const crossFilterConfig = {
     // Chart types that can trigger cross-filters
     portfolioStatus: {
         filterType: 'status',
-        valueMap: ['discovery', 'decision', 'develop', 'pilot', 'yokotenkai', 'finished']
+        valueMap: ['discovery', 'decision', 'develop', 'pilot', 'yokotenkai', 'released']
     },
     teamWorkload: {
         filterType: 'responsible',
@@ -57,7 +57,8 @@ const statusMap = {
     'develop': { label: 'Develop', class: 'status-develop' },
     'pilot': { label: 'Pilot', class: 'status-pilot' },
     'yokotenkai': { label: 'Yokotenkai', class: 'status-yokotenkai' },
-    'finished': { label: 'Finished', class: 'status-finished' }
+    'finished': { label: 'Released', class: 'status-released' },
+    'released': { label: 'Released', class: 'status-released' }
 };
 
 // ==================== INITIALIZATION ====================
@@ -143,11 +144,12 @@ function normalizeStatus(status) {
     if (statusLower.includes('develop')) return 'develop';
     if (statusLower.includes('pilot')) return 'pilot';
     if (statusLower.includes('yokotenkai')) return 'yokotenkai';
-    if (statusLower.includes('finished')) return 'finished';
+    if (statusLower.includes('finished')) return 'released';
+    if (statusLower.includes('released')) return 'released';
     // Fallback para etapas antiguas
     if (statusLower.includes('progress')) return 'develop';
     if (statusLower.includes('hold')) return 'pilot';
-    if (statusLower.includes('completed')) return 'finished';
+    if (statusLower.includes('completed')) return 'released';
     return 'discovery';
 }
 
@@ -848,7 +850,7 @@ function formatDate(dateString) {
 
 function getDeliveryStatus(deliveryDate, project) {
     // Check if project is finished with 100% progress
-    if (project && project.status === 'finished' && project.progress === 100) {
+    if (project && project.status === 'released' && project.progress === 100) {
         return { class: 'completed', icon: 'check' };
     }
 
@@ -897,11 +899,14 @@ function getTeamMembers() {
                 membersMap[userName] = {
                     name: userName,
                     total: 0,
-                    progress: 0,
-                    hold: 0,
+                    develop: 0,
+                    pilot: 0,
                     discovery: 0,
-                    completed: 0,
-                    blocked: 0
+                    released: 0,
+                    blocked: 0,
+                    // Otros contadores para evitar NaN si se usan
+                    decision: 0,
+                    yokotenkai: 0
                 };
             }
         });
@@ -915,11 +920,13 @@ function getTeamMembers() {
             membersMap[responsible] = {
                 name: responsible,
                 total: 0,
-                progress: 0,
-                hold: 0,
+                develop: 0,
+                pilot: 0,
                 discovery: 0,
-                completed: 0,
-                blocked: 0
+                released: 0,
+                blocked: 0,
+                decision: 0,
+                yokotenkai: 0
             };
         }
 
@@ -1138,7 +1145,7 @@ function updateBadges() {
     document.getElementById('badge-develop').textContent = projects.filter(p => p.status === 'develop').length;
     document.getElementById('badge-pilot').textContent = projects.filter(p => p.status === 'pilot').length;
     document.getElementById('badge-yokotenkai').textContent = projects.filter(p => p.status === 'yokotenkai').length;
-    document.getElementById('badge-finished').textContent = projects.filter(p => p.status === 'finished').length;
+    document.getElementById('badge-released').textContent = projects.filter(p => p.status === 'released').length;
 
     document.getElementById('badge-block-all').textContent = projects.length;
     document.getElementById('badge-blocked').textContent = projects.filter(p => p.blocked).length;
@@ -1171,7 +1178,7 @@ function renderProjects() {
 
     tbody.innerHTML = projectsToShow.map(project => {
         // Check if project is finished with 100% progress
-        const isFinished = project.status === 'finished' && project.progress === 100;
+        const isFinished = project.status === 'released' && project.progress === 100;
 
         return `
         <tr>
@@ -1457,14 +1464,14 @@ function refreshAllChartsWithCrossFilters() {
 
 // Update KPIs with cross-filtered data
 function updateKPIsWithCrossFilters(filteredProjects = getCrossFilteredProjects()) {
-    const activeProjects = filteredProjects.filter(p => p.status !== 'completed').length;
+    const activeProjects = filteredProjects.filter(p => p.status !== 'released').length;
     const riskProjects = filteredProjects.filter(p => {
-        if (p.status === 'completed') return false;
+        if (p.status === 'released') return false;
         const status = getDeliveryStatus(p.deliveryDate);
         return (status.class === 'urgent' || status.class === 'soon');
     }).length;
     const blockedProjects = filteredProjects.filter(p => p.blocked).length;
-    const completedProjects = filteredProjects.filter(p => p.status === 'completed').length;
+    const completedProjects = filteredProjects.filter(p => p.status === 'released').length;
 
     const kpiActive = document.getElementById('kpi-active');
     const kpiRisk = document.getElementById('kpi-risk');
@@ -1485,13 +1492,13 @@ function updateAllChartsWithCrossFilters(crossFilteredProjects) {
         develop: crossFilteredProjects.filter(p => p.status === 'develop').length,
         pilot: crossFilteredProjects.filter(p => p.status === 'pilot').length,
         yokotenkai: crossFilteredProjects.filter(p => p.status === 'yokotenkai').length,
-        finished: crossFilteredProjects.filter(p => p.status === 'finished').length
+        released: crossFilteredProjects.filter(p => p.status === 'released').length
     };
 
     // Portfolio Status Chart
     if (charts.portfolioStatus) {
         charts.portfolioStatus.data.datasets[0].data = [
-            statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.finished
+            statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.released
         ];
         charts.portfolioStatus.update('active');
     }
@@ -1503,10 +1510,10 @@ function updateAllChartsWithCrossFilters(crossFilteredProjects) {
             const memberProjects = crossFilteredProjects.filter(p => p.responsible === member.name);
             return {
                 name: member.name,
-                progress: memberProjects.filter(p => p.status === 'progress').length,
-                hold: memberProjects.filter(p => p.status === 'hold').length,
+                progress: memberProjects.filter(p => p.status === 'develop').length,
+                hold: memberProjects.filter(p => p.status === 'pilot').length,
                 discovery: memberProjects.filter(p => p.status === 'discovery').length,
-                completed: memberProjects.filter(p => p.status === 'completed').length
+                completed: memberProjects.filter(p => p.status === 'released').length
             };
         });
 
@@ -1523,7 +1530,7 @@ function updateAllChartsWithCrossFilters(crossFilteredProjects) {
     // Progress Overview Chart - Filter to active projects in cross-filtered data
     if (charts.progressOverview) {
         const progressProjects = crossFilteredProjects
-            .filter(p => p.status !== 'completed')
+            .filter(p => p.status !== 'released')
             .sort((a, b) => a.progress - b.progress)
             .slice(0, 10);
 
@@ -1778,9 +1785,9 @@ function generateAnalyticsFilters() {
             <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(219, 112, 147, 0.85);"></div>
             Yokotenkai
         </div>
-        <div class="filter-chip" data-filter-type="status" data-filter-value="finished" onclick="updateAnalyticsFilter('status', 'finished')">
+        <div class="filter-chip" data-filter-type="status" data-filter-value="released" onclick="updateAnalyticsFilter('status', 'released')">
             <div style="width: 8px; height: 8px; border-radius: 50%; background: rgba(46, 204, 113, 0.85);"></div>
-            Finished
+            Released
         </div>
 
         <div class="filter-divider"></div>
@@ -1863,7 +1870,7 @@ function initializeCharts() {
         develop: filteredProjects.filter(p => p.status === 'develop').length,
         pilot: filteredProjects.filter(p => p.status === 'pilot').length,
         yokotenkai: filteredProjects.filter(p => p.status === 'yokotenkai').length,
-        finished: filteredProjects.filter(p => p.status === 'finished').length
+        released: filteredProjects.filter(p => p.status === 'released').length
     };
 
     // Portfolio Status Chart
@@ -1872,9 +1879,9 @@ function initializeCharts() {
         charts.portfolioStatus = new Chart(portfolioStatusCtx, {
             type: 'doughnut',
             data: {
-                labels: ['Discovery', 'Decision', 'Develop', 'Pilot', 'Yokotenkai', 'Finished'],
+                labels: ['Discovery', 'Decision', 'Develop', 'Pilot', 'Yokotenkai', 'Released'],
                 datasets: [{
-                    data: [statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.finished],
+                    data: [statusCounts.discovery, statusCounts.decision, statusCounts.develop, statusCounts.pilot, statusCounts.yokotenkai, statusCounts.released],
                     backgroundColor: [
                         'rgba(157, 0, 255, 0.85)',
                         'rgba(255, 214, 0, 0.85)',
@@ -1906,10 +1913,10 @@ function initializeCharts() {
         const memberProjects = filteredProjects.filter(p => p.responsible === member.name);
         return {
             name: member.name,
-            progress: memberProjects.filter(p => p.status === 'progress').length,
-            hold: memberProjects.filter(p => p.status === 'hold').length,
+            progress: memberProjects.filter(p => p.status === 'develop').length,
+            hold: memberProjects.filter(p => p.status === 'pilot').length,
             discovery: memberProjects.filter(p => p.status === 'discovery').length,
-            completed: memberProjects.filter(p => p.status === 'completed').length
+            completed: memberProjects.filter(p => p.status === 'released').length
         };
     });
 
@@ -1971,7 +1978,7 @@ function initializeCharts() {
 
     // Progress Overview Chart
     const progressProjects = filteredProjects
-        .filter(p => p.status !== 'completed')
+        .filter(p => p.status !== 'released')
         .sort((a, b) => a.progress - b.progress)
         .slice(0, 10);
 

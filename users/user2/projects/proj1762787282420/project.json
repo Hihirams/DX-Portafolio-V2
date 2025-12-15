@@ -2,11 +2,11 @@
   "id": "proj1762787282420",
   "ownerId": "user2",
   "title": "Jsox Dashboard",
-  "status": "finished",
+  "status": "released",
   "progress": 100,
   "icon": "🧾",
   "currentPhase": "The project will begin by converting the database from XLS to XLSX using both provider and internal sources through the DX Team. The data will then be transformed to extract all required information. A dashboard visualization will be created based on the provided PPT. Pilot tests will be conducted, and the final solution will be delivered to the QDOC Team along with a walkthrough of its functionality.",
-  "updatedAt": "2025-12-10T20:10:22.619Z",
+  "updatedAt": "2025-12-15T13:56:20.143Z",
   "priority": "low",
   "achievements": {},
   "blockers": {
