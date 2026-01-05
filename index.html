@@ -84,17 +84,34 @@
     <!-- Main Content -->
     <main class="main-content">
 
-        <!-- Hero Section -->
-        <section class="hero-section">
-            <h2 class="hero-title logo-gradient h2">Digital Transformation</h2>
-            <p class="hero-description">
-                Internal platform to view and manage DX team projects
-            </p>
-        </section>
+        <!-- Hero Section - Full Landing Page -->
+        <section class="hero-fullscreen">
+            <div class="hero-content">
+                <h1 class="hero-mega-title">
+                    <span class="hero-line-1">Digital</span>
+                    <span class="hero-line-2"><em>Transformation</em></span>
+                </h1>
+                <p class="hero-tagline">
+                    A unified workspace for the DX team to visualize, manage, and track high-impact innovation projects.
+                </p>
+                <div class="hero-actions">
+                    <button class="hero-btn-primary" onclick="openGeneralPortfolio()">
+                        View Portfolio
+                    </button>
+                </div>
 
-        <!-- Stats Overview -->
-        <section class="stats-overview" id="statsOverview">
-            <!-- Se llenara dinamicamente -->
+                <!-- Stats Overview justo debajo del boton -->
+                <div class="stats-overview" id="statsOverview">
+                    <!-- Se llenara dinamicamente -->
+                </div>
+
+                <!-- Scroll Down Arrow - ahora dentro de hero-content, justo despues de stats -->
+                <button class="scroll-down-arrow" onclick="scrollToFeatured()" aria-label="Scroll to next section">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M7 10L12 15L17 10" stroke-linecap="round" stroke-linejoin="round" />
+                    </svg>
+                </button>
+            </div>
         </section>
 
         <!-- Featured Carousel Section -->

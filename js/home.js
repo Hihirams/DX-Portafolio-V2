@@ -20,11 +20,113 @@ function initHome() {
     setupSearch();
     setupFilters();
     setupAllProjectsCarousel(); // Configurar carrusel de todos los proyectos
+    setupHeroScroll(); // Auto-scroll en hero section
 
     // Si esta loggeado, mostrar "Mis Proyectos"
     if (dataManager.isLoggedIn()) {
         showMyProjects();
     }
+}
+
+// ==================== HERO AUTO-SCROLL ====================
+
+// Animación de scroll personalizada con duración controlable
+function smoothScrollTo(targetPosition, duration = 2000) {
+    const startPosition = window.scrollY;
+    const distance = targetPosition - startPosition;
+    let startTime = null;
+
+    // Si ya estamos en la posición, salir
+    if (Math.abs(distance) < 10) return;
+
+    // Función de easing para movimiento suave
+    function easeInOutQuad(t) {
+        return t < 0.5 ? 2 * t * t : 1 - Math.pow(-2 * t + 2, 2) / 2;
+    }
+
+    function animation(currentTime) {
+        if (startTime === null) startTime = currentTime;
+        const timeElapsed = currentTime - startTime;
+        const progress = Math.min(timeElapsed / duration, 1);
+
+        const easedProgress = easeInOutQuad(progress);
+        window.scrollTo(0, startPosition + (distance * easedProgress));
+
+        if (progress < 1) {
+            requestAnimationFrame(animation);
+        }
+    }
+
+    requestAnimationFrame(animation);
+}
+
+let heroScrollTriggered = false;
+
+function setupHeroScroll() {
+    const featuredSection = document.getElementById('featuredCarouselWrapper');
+    if (!featuredSection) return;
+
+    // =============================================
+    // CONFIGURACIÓN
+    // =============================================
+    const SCROLL_OFFSET = 160;
+    const SCROLL_DURATION = 200; // Animación instantánea
+
+    // Detectar CUALQUIER scroll hacia abajo cuando estamos en el top
+    window.addEventListener('wheel', (e) => {
+        // Detectar el más mínimo scroll hacia abajo - ultra sensible
+        if (e.deltaY > 0 && window.scrollY < 10 && !heroScrollTriggered) {
+            e.preventDefault(); // Prevenir el scroll nativo
+            heroScrollTriggered = true;
+
+            const targetPosition = featuredSection.offsetTop - SCROLL_OFFSET;
+            smoothScrollTo(targetPosition, SCROLL_DURATION);
+
+            // Reset después de la animación
+            setTimeout(() => {
+                heroScrollTriggered = false;
+            }, SCROLL_DURATION + 300);
+        }
+    }, { passive: false }); // passive: false para poder usar preventDefault
+
+    // También detectar touch scroll en dispositivos móviles
+    let touchStartY = 0;
+    window.addEventListener('touchstart', (e) => {
+        touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    window.addEventListener('touchmove', (e) => {
+        const touchCurrentY = e.touches[0].clientY;
+        const deltaY = touchStartY - touchCurrentY;
+
+        // Si está haciendo scroll hacia abajo (dedo hacia arriba)
+        if (deltaY > 30 && window.scrollY < 50 && !heroScrollTriggered) {
+            heroScrollTriggered = true;
+
+            const targetPosition = featuredSection.offsetTop - SCROLL_OFFSET;
+            smoothScrollTo(targetPosition, SCROLL_DURATION);
+
+            setTimeout(() => {
+                heroScrollTriggered = false;
+            }, SCROLL_DURATION + 500);
+        }
+    }, { passive: true });
+}
+
+// Función para el botón de flecha
+function scrollToFeatured() {
+    const featuredSection = document.getElementById('featuredCarouselWrapper');
+    if (!featuredSection) {
+        console.log('Featured section not found');
+        return;
+    }
+
+    const SCROLL_OFFSET = 160;
+    const SCROLL_DURATION = 200; // Animación instantánea
+    const targetPosition = featuredSection.offsetTop - SCROLL_OFFSET;
+
+    console.log('Scrolling to:', targetPosition);
+    smoothScrollTo(targetPosition, SCROLL_DURATION);
 }
 
 // ==================== USER SECTION ====================
