@@ -17,134 +17,498 @@ body {
     /* ✅ Aumentado para que no se corte el texto */
 }
 
-/* ==================== HEADER ==================== */
+/* ==================== LIQUID GLASS NAVBAR ==================== */
 
-.main-header {
+/* Header Container - Floating islands layout */
+.liquid-glass-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background: var(--bg-secondary);
-    backdrop-filter: saturate(180%) blur(40px);
-    border-bottom: 1px solid var(--border-color);
-    padding: 10px 0;
-    /* 🔧 AJUSTABLE: 5px (pequeño) - 20px (grande) */
-    transition: transform 0.3s ease, padding 0.3s ease;
-}
-
-.header-content {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 30px;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 20px;
-}
-
-.logo-section {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 1px;
-    flex-shrink: 0;
-}
-
-.dx-logo {
-    height: 50px;
-    /* 🔧 AJUSTABLE: 30px (pequeño) - 80px (grande) */
-    width: auto;
-    object-fit: contain;
-    transition: height 0.3s ease;
-}
-
-.logo-text {
-    display: flex;
-    flex-direction: column;
-    gap: 2px;
-}
-
-.logo-title {
-    font-size: 20px;
-    /* 🔧 AJUSTABLE: 16px (pequeño) - 28px (grande) */
-    font-weight: 600;
-    color: var(--text-primary);
-    margin: 0;
-    transition: font-size 0.3s ease;
-}
-
-.logo-subtitle {
-    font-size: 11px;
-    /* 🔧 AJUSTABLE: 9px (pequeño) - 14px (grande) */
-    color: var(--text-secondary);
-    margin: 0;
-    transition: font-size 0.3s ease;
-}
-
-/* ✅ NUEVO: Contenedor central para el buscador */
-.header-center {
-    flex: 1;
     display: flex;
     justify-content: center;
-    max-width: 500px;
-    margin: 0 15px;
-}
-
-.header-center .search-container {
-    position: relative;
-    width: 100%;
-}
-
-.header-center .search-input {
-    width: 100%;
-    padding: 10px 40px 10px 16px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 14px;
-    color: var(--text-primary);
-    transition: all 0.3s ease;
-}
-
-.header-center .search-input:focus {
-    outline: none;
-    border-color: #0071e3;
-    background: var(--bg-card-hover);
-    box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.1);
-}
-
-.header-center .search-input::placeholder {
-    color: var(--text-secondary);
-}
-
-.header-center .search-icon {
-    position: absolute;
-    right: 14px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 18px;
-    height: 18px;
-    color: var(--text-secondary);
+    align-items: center;
+    gap: 16px;
+    padding: 16px 24px;
     pointer-events: none;
 }
 
-/* ✅ Resultados de búsqueda en el header - FONDO NEGRO SÓLIDO */
+.liquid-glass-header>* {
+    pointer-events: auto;
+}
+
+/* ==================== BASE GLASS ISLAND ==================== */
+/* 🔧 CONTROLES DE TRANSLUCIDEZ:
+   - background: transparent = 100% transparente, o usa rgba(255,255,255, 0.05) para algo de color
+   - blur(): 10px = muy claro, 20px = medio, 40px = muy borroso  
+   - border opacity: 0.05 = casi invisible, 0.2 = visible
+*/
+
+.glass-island {
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 100px;
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    height: 48px;
+}
+
+/* Liquid shimmer effect */
+.glass-island::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.1),
+            transparent);
+    transition: left 0.6s ease;
+    pointer-events: none;
+}
+
+.glass-island:hover::before {
+    left: 100%;
+}
+
+/* Breathing animation */
+@keyframes glass-breathe {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.3),
+            0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+            0 1px 0 rgba(255, 255, 255, 0.1) inset;
+    }
+
+    50% {
+        box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.35),
+            0 0 0 1px rgba(255, 255, 255, 0.08) inset,
+            0 1px 0 rgba(255, 255, 255, 0.15) inset;
+    }
+}
+
+.glass-island {
+    animation: glass-breathe 4s ease-in-out infinite;
+}
+
+.glass-island:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    border-top-color: rgba(255, 255, 255, 0.25);
+    transform: translateY(-2px);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+    animation: none;
+}
+
+/* ==================== ISLAND 1: LOGO ==================== */
+
+.glass-island-logo {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 0 20px 0 14px;
+    cursor: pointer;
+    height: 48px;
+}
+
+.island-logo-img {
+    height: 36px;
+    width: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 2px 8px rgba(0, 0, 0, 0.3));
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-island-logo:hover .island-logo-img {
+    transform: scale(1.1) rotate(3deg);
+}
+
+.island-logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 1px;
+}
+
+.island-logo-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+    letter-spacing: -0.3px;
+    line-height: 1.2;
+}
+
+.island-logo-subtitle {
+    font-size: 10px;
+    color: var(--text-secondary);
+    opacity: 0.7;
+    line-height: 1;
+}
+
+/* ==================== ISLAND 2: SEARCH ==================== */
+
+.glass-island-search {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 0 18px;
+    min-width: 220px;
+    max-width: 340px;
+    flex: 1;
+    cursor: text;
+    height: 48px;
+}
+
+.glass-island-search:focus-within {
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(0, 113, 227, 0.5);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.4),
+        0 0 0 3px rgba(0, 113, 227, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
+    animation: none;
+}
+
+.island-search-icon {
+    width: 18px;
+    height: 18px;
+    color: var(--text-secondary);
+    opacity: 0.6;
+    flex-shrink: 0;
+    transition: all 0.3s ease;
+}
+
+.glass-island-search:focus-within .island-search-icon {
+    color: #0071e3;
+    opacity: 1;
+}
+
+.island-search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color: var(--text-primary);
+    min-width: 0;
+}
+
+.island-search-input::placeholder {
+    color: var(--text-secondary);
+    opacity: 0.5;
+}
+
+/* ==================== ISLAND 3: NAVIGATION ==================== */
+
+.glass-island-nav {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    padding: 0 10px;
+    height: 48px;
+}
+
+.island-nav-btn {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 14px;
+    background: transparent;
+    border: none;
+    border-radius: 100px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    white-space: nowrap;
+}
+
+.island-nav-btn svg {
+    width: 16px;
+    height: 16px;
+    opacity: 0.7;
+    transition: all 0.3s ease;
+}
+
+.island-nav-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.island-nav-btn:hover svg {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+.island-nav-btn:active {
+    transform: scale(0.97);
+}
+
+.island-nav-divider {
+    width: 1px;
+    height: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    margin: 0 4px;
+}
+
+/* User section inside nav island */
+.glass-island-nav .user-section {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.glass-island-nav .btn-login {
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #0071e3, #00a8ff);
+    color: white;
+    border: none;
+    border-radius: 100px;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glass-island-nav .btn-login:hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 20px rgba(0, 113, 227, 0.4);
+}
+
+.glass-island-nav .user-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 12px 6px 6px;
+    background: rgba(255, 255, 255, 0.08);
+    border-radius: 100px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glass-island-nav .user-info:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.glass-island-nav .user-avatar {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #0071e3, #00a8ff);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.glass-island-nav .user-name {
+    font-size: 13px;
+    color: var(--text-primary);
+    font-weight: 500;
+}
+
+.glass-island-nav .btn-logout {
+    padding: 6px 12px;
+    background: transparent;
+    color: var(--text-secondary);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 100px;
+    font-size: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.glass-island-nav .btn-logout:hover {
+    background: rgba(255, 255, 255, 0.1);
+    color: var(--text-primary);
+}
+
+/* ==================== ISLAND 4: THEME TOGGLE ==================== */
+
+.glass-island-theme {
+    width: 48px;
+    height: 48px;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border-radius: 50%;
+}
+
+.glass-island-theme svg {
+    width: 20px;
+    height: 20px;
+    position: absolute;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.glass-island-theme .sun-icon {
+    opacity: 0;
+    transform: rotate(-90deg) scale(0.5);
+    color: var(--text-primary);
+}
+
+.glass-island-theme .moon-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+    color: var(--text-primary);
+}
+
+.glass-island-theme:hover {
+    background: rgba(255, 255, 255, 0.15);
+}
+
+.glass-island-theme:hover .moon-icon {
+    transform: rotate(15deg) scale(1.1);
+}
+
+.glass-island-theme:active {
+    transform: scale(0.92);
+}
+
+/* ==================== LIGHT THEME OVERRIDES ==================== */
+
+body.light-theme .glass-island {
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 4px 24px rgba(0, 0, 0, 0.05),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+body.light-theme .glass-island:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: rgba(255, 255, 255, 0.5);
+    border-top-color: rgba(255, 255, 255, 0.7);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+body.light-theme .glass-island::before {
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.5),
+            transparent);
+}
+
+@keyframes glass-breathe-light {
+
+    0%,
+    100% {
+        box-shadow:
+            0 8px 32px rgba(0, 0, 0, 0.08),
+            0 0 0 1px rgba(255, 255, 255, 0.5) inset,
+            0 1px 0 rgba(255, 255, 255, 0.8) inset;
+    }
+
+    50% {
+        box-shadow:
+            0 12px 40px rgba(0, 0, 0, 0.1),
+            0 0 0 1px rgba(255, 255, 255, 0.6) inset,
+            0 1px 0 rgba(255, 255, 255, 0.9) inset;
+    }
+}
+
+body.light-theme .glass-island {
+    animation: glass-breathe-light 4s ease-in-out infinite;
+}
+
+body.light-theme .glass-island:hover {
+    animation: none;
+}
+
+body.light-theme .island-nav-btn:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .island-nav-divider {
+    background: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .glass-island-theme:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .glass-island-theme .sun-icon {
+    opacity: 1;
+    transform: rotate(0deg) scale(1);
+}
+
+body.light-theme .glass-island-theme .moon-icon {
+    opacity: 0;
+    transform: rotate(90deg) scale(0.5);
+}
+
+body.light-theme .glass-island-theme:hover .sun-icon {
+    transform: rotate(-15deg) scale(1.1);
+}
+
+body.light-theme .glass-island-search:focus-within {
+    background: rgba(255, 255, 255, 0.9);
+    box-shadow:
+        0 16px 48px rgba(0, 0, 0, 0.1),
+        0 0 0 3px rgba(0, 113, 227, 0.15),
+        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+}
+
+body.light-theme .glass-island-nav .user-info {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .glass-island-nav .user-info:hover {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .glass-island-nav .btn-logout {
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .glass-island-nav .btn-logout:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+/* ==================== SEARCH RESULTS ==================== */
+
 .search-results-header {
     position: fixed;
-    top: 70px;
+    top: 80px;
     left: 50%;
     transform: translateX(-50%);
     width: 600px;
     max-width: 90vw;
-    background: #1c1c1e;
-    /* ✅ NEGRO SÓLIDO - Sin transparencia */
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    padding: 20px;
+    background: rgba(20, 20, 22, 0.75);
+    backdrop-filter: blur(50px) saturate(200%);
+    -webkit-backdrop-filter: blur(50px) saturate(200%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 16px;
     max-height: 400px;
     overflow-y: auto;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.4),
+        0 0 0 0.5px rgba(255, 255, 255, 0.08) inset,
+        0 2px 0 rgba(255, 255, 255, 0.05) inset;
     z-index: 10001;
 }
 
@@ -157,262 +521,132 @@ body {
 }
 
 .search-results-header::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 10px;
 }
 
 .search-results-header::-webkit-scrollbar-thumb:hover {
-    background: rgba(255, 255, 255, 0.4);
+    background: rgba(255, 255, 255, 0.3);
 }
 
-/* ✅ Tema claro con fondo blanco sólido */
 body.light-theme .search-results-header {
-    background: #ffffff;
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    background: rgba(255, 255, 255, 0.65);
+    border: 1px solid rgba(255, 255, 255, 0.7);
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.1),
+        0 0 0 0.5px rgba(255, 255, 255, 0.9) inset,
+        0 2px 0 rgba(255, 255, 255, 1) inset;
 }
 
 body.light-theme .search-results-header::-webkit-scrollbar-thumb {
-    background: rgba(0, 0, 0, 0.2);
+    background: rgba(0, 0, 0, 0.15);
 }
 
 body.light-theme .search-results-header::-webkit-scrollbar-thumb:hover {
-    background: rgba(0, 0, 0, 0.3);
+    background: rgba(0, 0, 0, 0.25);
 }
 
-.header-nav {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    flex-shrink: 0;
-}
+/* ==================== RESPONSIVE LIQUID GLASS ==================== */
 
-/* ✅ NUEVO: Botón Portafolio General */
-.btn-portfolio-general {
-    padding: 8px 20px;
-    background: transparent;
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.btn-portfolio-general:hover {
-    background: var(--bg-card);
-    border-color: #0071e3;
-    color: #0071e3;
-    transform: scale(1.05);
-}
-
-/* ✅ NUEVO: Botón Project Manager */
-.btn-project-manager {
-    padding: 8px 20px;
-    background: transparent;
-    color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-}
-
-.btn-project-manager:hover {
-    background: var(--bg-card);
-    border-color: #34c759;
-    color: #34c759;
-    transform: scale(1.05);
-}
-
-/* ✅ NUEVO: Botón de tema en el header */
-.theme-toggle-header {
-    width: 40px;
-    height: 40px;
-    background: var(--bg-card);
-    border: 1px solid var(--border-color);
-    border-radius: 50%;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    position: relative;
-}
-
-.theme-toggle-header:hover {
-    background: var(--bg-card-hover);
-    transform: scale(1.1);
-}
-
-.theme-toggle-header svg {
-    width: 20px;
-    height: 20px;
-    position: absolute;
-    transition: opacity 0.3s ease, transform 0.3s ease;
-}
-
-.theme-toggle-header .sun-icon {
-    opacity: 0;
-    transform: rotate(-90deg);
-}
-
-.theme-toggle-header .moon-icon {
-    opacity: 1;
-    transform: rotate(0deg);
-}
-
-body.light-theme .theme-toggle-header .sun-icon {
-    opacity: 1;
-    transform: rotate(0deg);
-}
-
-body.light-theme .theme-toggle-header .moon-icon {
-    opacity: 0;
-    transform: rotate(90deg);
-}
-
-.user-section {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-    padding: 8px 16px;
-    background: var(--bg-card);
-    border-radius: 20px;
-    border: 1px solid var(--border-color);
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.user-info:hover {
-    background: var(--bg-card-hover);
-}
-
-.user-avatar {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    background: linear-gradient(135deg, #0071e3, #00a8ff);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 600;
-    font-size: 14px;
-}
-
-.user-name {
-    font-size: 14px;
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.btn-login {
-    padding: 8px 20px;
-    background: #0071e3;
-    color: white;
-    border: none;
-    border-radius: 20px;
-    font-size: 14px;
-    font-weight: 500;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-login:hover {
-    background: #0077ed;
-    transform: scale(1.05);
-}
-
-.btn-logout {
-    padding: 6px 16px;
-    background: var(--bg-card);
-    color: var(--text-secondary);
-    border: 1px solid var(--border-color);
-    border-radius: 16px;
-    font-size: 13px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.btn-logout:hover {
-    background: var(--bg-card-hover);
-    color: var(--text-primary);
-}
-
-/* ==================== RESPONSIVE HEADER ==================== */
-
-@media (max-width: 1024px) {
-    .header-content {
-        gap: 15px;
+@media (max-width: 1100px) {
+    .liquid-glass-header {
+        flex-wrap: wrap;
+        gap: 12px;
+        padding: 12px 16px;
     }
 
-    .header-center {
-        max-width: 400px;
+    .glass-island-search {
+        order: 10;
+        flex: 1 1 100%;
+        max-width: 100%;
+    }
+
+    .island-nav-btn span {
+        display: none;
+    }
+
+    .island-nav-btn {
+        padding: 10px;
+    }
+
+    .island-nav-btn svg {
+        width: 20px;
+        height: 20px;
     }
 }
 
 @media (max-width: 768px) {
     .main-content {
-        padding-top: 160px;
-        /* ✅ Más espacio en móvil para el header que hace wrap */
+        padding-top: 140px;
     }
 
-    .header-content {
-        flex-wrap: wrap;
+    .liquid-glass-header {
         gap: 10px;
-        padding: 0 20px;
+        padding: 10px 12px;
     }
 
-    .logo-section {
-        order: 1;
-        flex: 1;
+    .glass-island-logo {
+        padding: 8px 14px 8px 10px;
     }
 
-    .dx-logo {
+    .island-logo-img {
+        height: 28px;
+    }
+
+    .island-logo-title {
+        font-size: 13px;
+    }
+
+    .island-logo-subtitle {
+        font-size: 9px;
+    }
+
+    .glass-island-nav {
+        padding: 4px 6px;
+        gap: 2px;
+    }
+
+    .island-nav-divider {
+        height: 16px;
+        margin: 0 2px;
+    }
+
+    .glass-island-theme {
+        width: 40px;
         height: 40px;
     }
 
-    .logo-title {
-        font-size: 18px;
-    }
-
-    .logo-subtitle {
-        font-size: 10px;
-    }
-
-    .header-nav {
-        order: 2;
-        gap: 10px;
-    }
-
-    .btn-portfolio-general {
-        padding: 6px 14px;
-        font-size: 12px;
-    }
-
-    .header-center {
-        order: 3;
-        width: 100%;
-        max-width: 100%;
-        margin: 0;
+    .glass-island-theme svg {
+        width: 18px;
+        height: 18px;
     }
 
     .search-results-header {
-        width: calc(100vw - 40px);
+        top: 120px;
+        width: calc(100vw - 24px);
     }
 }
+
+@media (max-width: 480px) {
+    .main-content {
+        padding-top: 160px;
+    }
+
+    .glass-island-logo .island-logo-text {
+        display: none;
+    }
+
+    .glass-island-logo {
+        padding: 10px;
+        border-radius: 50%;
+    }
+
+    .glass-island-nav .user-name {
+        display: none;
+    }
+}
+
+
 
 /* ==================== HERO SECTION ==================== */
 
