@@ -18,7 +18,7 @@ function initEditor() {
     console.log('📋 Verificando sesión...');
     console.log('dataManager disponible:', typeof dataManager !== 'undefined');
     console.log('Usuario actual:', dataManager?.currentUser);
-    
+
     // Verificar que el usuario esté loggeado
     if (!dataManager || !dataManager.isLoggedIn()) {
         console.error('❌ No hay sesión activa');
@@ -53,10 +53,10 @@ function initEditor() {
 
     // Setup event listeners
     setupEventListeners();
-    
+
     // Cargar tema guardado
     loadTheme();
-    
+
     // Limpiar localStorage
     localStorage.removeItem('editorMode');
     localStorage.removeItem('editingProjectId');
@@ -66,16 +66,16 @@ function initEditor() {
 
 function createNewProject() {
     const user = dataManager.getCurrentUser();
-    
+
     if (!user) {
         console.error('❌ No se pudo obtener el usuario actual');
         alert('Error: Invalid user');
         window.location.href = 'index.html';
         return;
     }
-    
+
     console.log('📋 Creando proyecto para usuario:', user.id);
-    
+
     currentProject = {
         id: `proj${Date.now()}`, // ID temporal
         ownerId: user.id,
@@ -165,9 +165,9 @@ async function loadProject(projectId) {
     // 4. Normalizar y asegurar campos mínimos
     currentProject = JSON.parse(JSON.stringify(project));
 
-if (!currentProject.images) currentProject.images = [];
+    if (!currentProject.images) currentProject.images = [];
     if (!currentProject.videos) currentProject.videos = [];
-    
+
     // ✅ CORREGIDO: Preservar originalGanttPath para evitar duplicación
     // ✅ CORREGIDO: NO copiar path a ganttImage - evita error de carga
     if (currentProject.ganttImagePath && currentProject.ganttImagePath.startsWith('users/')) {
@@ -181,7 +181,7 @@ if (!currentProject.images) currentProject.images = [];
     }
 
 
- // 5. Normalizar rutas: PRESERVAR originalPath para evitar duplicación
+    // 5. Normalizar rutas: PRESERVAR originalPath para evitar duplicación
     currentProject.images = currentProject.images.map(img => {
         const srcPath = img.src || img.path || '';
         return {
@@ -308,7 +308,7 @@ function loadAchievements() {
     container.innerHTML = '';
 
     const achievements = currentProject.achievements || {};
-    
+
     if (Object.keys(achievements).length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No achievements added yet</p>';
         return;
@@ -322,7 +322,7 @@ function loadAchievements() {
 function createAchievementItem(date = '', text = '') {
     const item = document.createElement('div');
     item.className = 'dynamic-item';
-    
+
     item.innerHTML = `
         <div class="dynamic-item-header">
             <span class="dynamic-item-title">Achievement</span>
@@ -337,18 +337,18 @@ function createAchievementItem(date = '', text = '') {
             <textarea class="achievement-text" rows="2" placeholder="Describe the achievement...">${text}</textarea>
         </div>
     `;
-    
+
     return item;
 }
 
 function addAchievement() {
     const container = document.getElementById('achievementsList');
-    
+
     // Remover mensaje de "no hay logros" si existe
     if (container.querySelector('p')) {
         container.innerHTML = '';
     }
-    
+
     container.appendChild(createAchievementItem());
     markAsUnsaved();
 }
@@ -356,7 +356,7 @@ function addAchievement() {
 function removeAchievementItem(btn) {
     btn.closest('.dynamic-item').remove();
     markAsUnsaved();
-    
+
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('achievementsList');
     if (container.children.length === 0) {
@@ -371,7 +371,7 @@ function loadNextSteps() {
     container.innerHTML = '';
 
     const nextSteps = currentProject.nextSteps || {};
-    
+
     if (Object.keys(nextSteps).length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No next steps added</p>';
         return;
@@ -385,7 +385,7 @@ function loadNextSteps() {
 function createNextStepItem(date = '', text = '') {
     const item = document.createElement('div');
     item.className = 'dynamic-item';
-    
+
     item.innerHTML = `
         <div class="dynamic-item-header">
             <span class="dynamic-item-title">Next Step</span>
@@ -400,18 +400,18 @@ function createNextStepItem(date = '', text = '') {
             <textarea class="nextstep-text" rows="2" placeholder="Describe the next step...">${text}</textarea>
         </div>
     `;
-    
+
     return item;
 }
 
 function addNextStep() {
     const container = document.getElementById('nextStepsList');
-    
+
     // Remover mensaje si existe
     if (container.querySelector('p')) {
         container.innerHTML = '';
     }
-    
+
     container.appendChild(createNextStepItem());
     markAsUnsaved();
 }
@@ -419,7 +419,7 @@ function addNextStep() {
 function removeNextStepItem(btn) {
     btn.closest('.dynamic-item').remove();
     markAsUnsaved();
-    
+
     // Si no quedan items, mostrar mensaje
     const container = document.getElementById('nextStepsList');
     if (container.children.length === 0) {
@@ -431,12 +431,12 @@ function removeNextStepItem(btn) {
 
 async function loadGantt() {
     const container = document.getElementById('ganttPreview');
-    
+
     if (!container) {
         console.error('❌ Elemento ganttPreview no encontrado');
         return;
     }
-    
+
     // ✅ CASO 1: Hay originalGanttPath = cargar desde filesystem
     if (currentProject.originalGanttPath && currentProject.originalGanttPath.startsWith('users/')) {
         try {
@@ -445,7 +445,8 @@ async function loadGantt() {
                 container.innerHTML = `
                     <div class="media-preview-item">
                         <img src="${result.data}" alt="Gantt">
-                        <button class="btn-remove-media" onclick="removeGantt()">×</button>
+                        <button class="btn-preview-media" onclick="previewMedia('${result.data}', 'image', 'Gantt Chart')" title="Preview">⊙</button>
+                        <button class="btn-remove-media" onclick="removeGantt()" title="Delete">×</button>
                     </div>
                 `;
                 return;
@@ -454,13 +455,14 @@ async function loadGantt() {
             console.error('❌ Error cargando Gantt desde filesystem:', e.message);
         }
     }
-    
+
     // ✅ CASO 2: Hay ganttImage en base64 (nuevo upload)
     if (currentProject.ganttImage && currentProject.ganttImage.startsWith('data:')) {
         container.innerHTML = `
             <div class="media-preview-item">
                 <img src="${currentProject.ganttImage}" alt="Gantt">
-                <button class="btn-remove-media" onclick="removeGantt()">×</button>
+                <button class="btn-preview-media" onclick="previewMedia('${currentProject.ganttImage}', 'image', 'Gantt Chart')" title="Preview">⊙</button>
+                <button class="btn-remove-media" onclick="removeGantt()" title="Delete">×</button>
             </div>
         `;
     } else {
@@ -495,12 +497,12 @@ function removeGantt() {
 
 function loadImages() {
     const container = document.getElementById('imagesPreview');
-    
+
     if (!container) {
         console.error('❌ Elemento imagesPreview no encontrado');
         return;
     }
-    
+
     if (!currentProject.images || currentProject.images.length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No images loaded</p>';
         return;
@@ -513,7 +515,8 @@ function loadImages() {
                 <input type="text" class="media-title" value="${img.title}" 
                        onchange="updateImageTitle(${index}, this.value)">
             </div>
-            <button class="btn-remove-media" onclick="removeImage(${index})">×</button>
+            <button class="btn-preview-media" onclick="previewMedia('${img.src}', 'image', '${img.title}')" title="Preview">⊙</button>
+            <button class="btn-remove-media" onclick="removeImage(${index})" title="Delete">×</button>
         </div>
     `).join('');
 }
@@ -531,7 +534,7 @@ async function uploadImages() {
             fileType: file.mimeType,
             fileSize: 0
         });
-        
+
         loadImages();
         markAsUnsaved();
     }
@@ -554,12 +557,12 @@ function removeImage(index) {
 
 function loadVideos() {
     const container = document.getElementById('videosPreview');
-    
+
     if (!container) {
         console.error('❌ Elemento videosPreview no encontrado');
         return;
     }
-    
+
     if (!currentProject.videos || currentProject.videos.length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No videos loaded</p>';
         return;
@@ -567,12 +570,13 @@ function loadVideos() {
 
     container.innerHTML = currentProject.videos.map((video, index) => `
         <div class="media-preview-item">
-            <video src="${video.src}" controls></video>
+            <video src="${video.src}"></video>
             <div class="media-info">
                 <input type="text" class="media-title" value="${video.title}" 
                        onchange="updateVideoTitle(${index}, this.value)">
             </div>
-            <button class="btn-remove-media" onclick="removeVideo(${index})">×</button>
+            <button class="btn-preview-media" onclick="previewMedia('${video.src}', 'video', '${video.title}')" title="Preview">⊙</button>
+            <button class="btn-remove-media" onclick="removeVideo(${index})" title="Delete">×</button>
         </div>
     `).join('');
 }
@@ -590,7 +594,7 @@ async function uploadVideos() {
             fileType: file.mimeType,
             fileSize: 0
         });
-        
+
         loadVideos();
         markAsUnsaved();
     }
@@ -611,55 +615,55 @@ function removeVideo(index) {
 
 function getFileIcon(fileName) {
     if (!fileName) return '📁';
-    
-const ext = fileName.split('.').pop().toLowerCase();
-const icons = {
-    // Documentos
-    'pdf': '📄',
-    'doc': '📁', 'docx': '📁',
-    'txt': '📄',
 
-    // Hojas de cálculo
-    'xls': '📊', 'xlsx': '📊', 'csv': '📊',
+    const ext = fileName.split('.').pop().toLowerCase();
+    const icons = {
+        // Documentos
+        'pdf': '📄',
+        'doc': '📁', 'docx': '📁',
+        'txt': '📄',
 
-    // Presentaciones
-    'ppt': '📈', 'pptx': '📈',
+        // Hojas de cálculo
+        'xls': '📊', 'xlsx': '📊', 'csv': '📊',
 
-    // Comprimidos
-    'zip': '🗜️', 'rar': '🗜️', '7z': '🗜️',
+        // Presentaciones
+        'ppt': '📈', 'pptx': '📈',
 
-    // Imágenes
-    'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
+        // Comprimidos
+        'zip': '🗜️', 'rar': '🗜️', '7z': '🗜️',
 
-    // Videos
-    'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
+        // Imágenes
+        'jpg': '🖼️', 'jpeg': '🖼️', 'png': '🖼️', 'gif': '🖼️', 'webp': '🖼️',
 
-    // Código
-    'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
-};
+        // Videos
+        'mp4': '🎬', 'avi': '🎬', 'mov': '🎬', 'webm': '🎬',
 
-    
+        // Código
+        'js': '💻', 'py': '💻', 'java': '💻', 'cpp': '💻', 'html': '💻', 'css': '💻'
+    };
+
+
     return icons[ext] || '📁';
 }
 
 function loadExtraFiles() {
     const container = document.getElementById('extraFilesPreview');
-    
+
     if (!container) {
         console.error('❌ Elemento extraFilesPreview no encontrado');
         return;
     }
-    
+
     // Normalizar extraFiles si no existe
     if (!currentProject.extraFiles) {
         currentProject.extraFiles = [];
     }
-    
+
     // Asegurar que sea un array
     if (!Array.isArray(currentProject.extraFiles)) {
         currentProject.extraFiles = [];
     }
-    
+
     if (currentProject.extraFiles.length === 0) {
         container.innerHTML = '<p style="color: var(--text-secondary); font-size: 14px;">No extra files loaded</p>';
         return;
@@ -668,7 +672,7 @@ function loadExtraFiles() {
     container.innerHTML = currentProject.extraFiles.map((file, index) => {
         const icon = getFileIcon(file.fileName);
         const sizeInKB = file.fileSize ? (file.fileSize / 1024).toFixed(2) : '0';
-        
+
         return `
             <div class="media-preview-item extra-file-item">
                 <div class="file-icon">${icon}</div>
@@ -695,7 +699,7 @@ async function uploadExtraFiles() {
         if (!currentProject.extraFiles) {
             currentProject.extraFiles = [];
         }
-        
+
         currentProject.extraFiles.push({
             src: file.data,
             title: file.fileName,
@@ -704,7 +708,7 @@ async function uploadExtraFiles() {
             fileSize: file.size || 0,
             extension: file.fileName.split('.').pop().toLowerCase()
         });
-        
+
         loadExtraFiles();
         markAsUnsaved();
     }
@@ -725,7 +729,7 @@ function removeExtraFile(index) {
             deletedExtraFiles.push(deletedFile.src || deletedFile.path);
             console.log('📁 Archivo marcado para eliminar:', deletedFile.src || deletedFile.path);
         }
-        
+
         currentProject.extraFiles.splice(index, 1);
         loadExtraFiles();
         markAsUnsaved();
@@ -807,7 +811,7 @@ async function saveProject() {
     console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••');
     console.log('📋 DEBUG COMPLETO - Proyecto antes de guardar');
     console.log('••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••••');
-    
+
     console.log('📋 Basic Info:', {
         id: updatedProject.id,
         title: updatedProject.title,
@@ -821,7 +825,7 @@ async function saveProject() {
         isString: typeof updatedProject.ganttImage === 'string',
         length: updatedProject.ganttImage?.length || 0,
         startsWithData: updatedProject.ganttImage?.startsWith('data:') || false,
-        preview: updatedProject.ganttImage ? 
+        preview: updatedProject.ganttImage ?
             updatedProject.ganttImage.substring(0, 60) + '...' : 'null'
     });
 
@@ -832,9 +836,9 @@ async function saveProject() {
             title: img.title || 'Sin título',
             hasData: !!img.data,
             hasSrc: !!img.src,
-            srcType: img.src?.startsWith('data:') ? 'base64' : 
-                     img.src?.startsWith('users/') ? 'path' : 
-                     img.src ? 'other' : 'none',
+            srcType: img.src?.startsWith('data:') ? 'base64' :
+                img.src?.startsWith('users/') ? 'path' :
+                    img.src ? 'other' : 'none',
             srcPreview: img.src ? img.src.substring(0, 60) + '...' : 'null'
         })) || []
     });
@@ -846,9 +850,9 @@ async function saveProject() {
             title: v.title || 'Sin título',
             hasData: !!v.data,
             hasSrc: !!v.src,
-            srcType: v.src?.startsWith('data:') ? 'base64' : 
-                     v.src?.startsWith('users/') ? 'path' : 
-                     v.src ? 'other' : 'none'
+            srcType: v.src?.startsWith('data:') ? 'base64' :
+                v.src?.startsWith('users/') ? 'path' :
+                    v.src ? 'other' : 'none'
         })) || []
     });
 
@@ -879,14 +883,14 @@ async function saveProject() {
 
     // Guardar proyecto en la base de datos
     let success = false;
-    
+
     try {
         if (editorMode === 'new') {
             // Crear nuevo proyecto
             console.log('📋 Modo: Crear nuevo proyecto');
             const newProject = await dataManager.createProject(updatedProject);
             success = newProject !== null;
-            
+
             if (success) {
                 console.log('✅ Nuevo proyecto creado:', newProject.id);
             } else {
@@ -897,7 +901,7 @@ async function saveProject() {
             console.log('✏️ Modo: Actualizar proyecto existente');
             const updated = await dataManager.updateProject(currentProject.id, updatedProject);
             success = updated !== null;
-            
+
             if (success) {
                 console.log('✅ Proyecto actualizado:', updated.id);
             } else {
@@ -914,7 +918,7 @@ async function saveProject() {
         console.log('\n✅✅✅ PROYECTO GUARDADO CORRECTAMENTE ✅✅✅\n');
         hasUnsavedChanges = false;
         document.getElementById('editorStatus').textContent = '✅ Saved';
-        
+
         // Emitir evento para recargar datos en Home
         window.dispatchEvent(new Event('dataReloaded'));
 
@@ -933,7 +937,7 @@ async function saveProject() {
 function collectAchievements() {
     const achievements = {};
     const items = document.querySelectorAll('#achievementsList .dynamic-item');
-    
+
     items.forEach(item => {
         const date = item.querySelector('.achievement-date').value;
         const text = item.querySelector('.achievement-text').value;
@@ -941,7 +945,7 @@ function collectAchievements() {
             achievements[date] = text;
         }
     });
-    
+
     return achievements;
 }
 
@@ -1009,7 +1013,7 @@ function previewProject() {
 
     // Generar HTML de vista previa
     const previewHTML = generatePreviewHTML(previewData);
-    
+
     // Mostrar en modal
     document.getElementById('previewContent').innerHTML = previewHTML;
     document.getElementById('previewModal').classList.add('active');
@@ -1018,7 +1022,7 @@ function previewProject() {
 function generatePreviewHTML(data) {
     const statusConfig = dataManager.getStatusConfig(data.status);
     const priorityConfig = dataManager.getPriorityConfig(data.priority);
-    
+
     return `
         <div style="padding: 40px; background: var(--bg-card); border-radius: 12px;">
             <div class="project-header">
@@ -1047,9 +1051,9 @@ function generatePreviewHTML(data) {
                 <div class="info-section success">
                     <div class="info-title">✅ Recent Achievements</div>
                     <div class="info-content">
-                        ${Object.entries(data.achievements).map(([date, text]) => 
-                            `<strong>${date}:</strong> ${text}`
-                        ).join('<br>')}
+                        ${Object.entries(data.achievements).map(([date, text]) =>
+        `<strong>${date}:</strong> ${text}`
+    ).join('<br>')}
                     </div>
                 </div>
             ` : ''}
@@ -1065,9 +1069,9 @@ function generatePreviewHTML(data) {
                 <div class="info-section">
                     <div class="info-title">🎯 Next Steps</div>
                     <div class="info-content">
-                        ${Object.entries(data.nextSteps).map(([date, text]) => 
-                            `<strong>${date}:</strong> ${text}`
-                        ).join('<br>')}
+                        ${Object.entries(data.nextSteps).map(([date, text]) =>
+        `<strong>${date}:</strong> ${text}`
+    ).join('<br>')}
                     </div>
                 </div>
             ` : ''}
@@ -1087,7 +1091,7 @@ function cancelEdit() {
             return;
         }
     }
-    
+
     window.location.href = 'index.html';
 }
 
@@ -1123,8 +1127,8 @@ function deleteProject() {
     // Validación en tiempo real
     const confirmInput = document.getElementById('confirmDeleteText');
     const confirmBtn = document.getElementById('btnConfirmDelete');
-    
-    confirmInput.oninput = function() {
+
+    confirmInput.oninput = function () {
         if (this.value.trim() === currentProject.title.trim()) {
             confirmBtn.disabled = false;
         } else {
@@ -1140,7 +1144,7 @@ function closeDeleteModal() {
 
 async function confirmDelete() {
     const confirmText = document.getElementById('confirmDeleteText').value.trim();
-    
+
     if (confirmText !== currentProject.title.trim()) {
         alert('The project name does not match');
         return;
@@ -1160,10 +1164,10 @@ async function confirmDelete() {
         if (success) {
             console.log('✅ Proyecto eliminado correctamente');
             alert('✅ Project deleted successfully');
-            
+
             // No hay cambios sin guardar
             hasUnsavedChanges = false;
-            
+
             // Redirigir al home
             setTimeout(() => {
                 window.location.href = 'index.html';
@@ -1233,7 +1237,7 @@ function updateEditorTitle(title) {
 
 // Agregar método canEditProject a dataManager si no existe
 if (dataManager && !dataManager.canEditProject) {
-    dataManager.canEditProject = function(projectId) {
+    dataManager.canEditProject = function (projectId) {
         const project = this.getProjectById(projectId);
         if (!project) return false;
         if (!this.currentUser) return false;
@@ -1245,7 +1249,7 @@ if (dataManager && !dataManager.canEditProject) {
 
 function switchSection(sectionName) {
     console.log('📋 Cambiando a sección:', sectionName);
-    
+
     // Ocultar todas las secciones
     document.querySelectorAll('.editor-section').forEach(section => {
         section.classList.remove('active');
@@ -1263,12 +1267,73 @@ function switchSection(sectionName) {
     } else {
         console.error('❌ Sección no encontrada:', 'section-' + sectionName);
     }
-    
+
     // Activar botón correspondiente
     const targetButton = document.querySelector(`[data-section="${sectionName}"]`);
     if (targetButton) {
         targetButton.classList.add('active');
     }
 }
+
+// ==================== MEDIA LIGHTBOX PREVIEW ====================
+
+function previewMedia(src, type, title) {
+    // Crear el modal de lightbox si no existe
+    let lightbox = document.getElementById('mediaLightbox');
+
+    if (!lightbox) {
+        lightbox = document.createElement('div');
+        lightbox.id = 'mediaLightbox';
+        lightbox.className = 'media-lightbox';
+        lightbox.innerHTML = `
+            <div class="lightbox-overlay" onclick="closeLightbox()"></div>
+            <div class="lightbox-container">
+                <div class="lightbox-header">
+                    <h3 class="lightbox-title"></h3>
+                    <button class="lightbox-close" onclick="closeLightbox()">×</button>
+                </div>
+                <div class="lightbox-content"></div>
+            </div>
+        `;
+        document.body.appendChild(lightbox);
+    }
+
+    // Actualizar contenido
+    const titleEl = lightbox.querySelector('.lightbox-title');
+    const contentEl = lightbox.querySelector('.lightbox-content');
+
+    titleEl.textContent = title || 'Preview';
+
+    if (type === 'video') {
+        contentEl.innerHTML = `<video src="${src}" controls autoplay></video>`;
+    } else {
+        contentEl.innerHTML = `<img src="${src}" alt="${title}">`;
+    }
+
+    // Mostrar lightbox
+    lightbox.classList.add('active');
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLightbox() {
+    const lightbox = document.getElementById('mediaLightbox');
+    if (lightbox) {
+        // Pausar video si existe
+        const video = lightbox.querySelector('video');
+        if (video) {
+            video.pause();
+        }
+
+        lightbox.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+}
+
+// Cerrar lightbox con ESC
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeLightbox();
+    }
+});
 
 console.log('✅ Editor.js cargado');

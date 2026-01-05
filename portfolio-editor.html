@@ -53,10 +53,10 @@
                 </button>
 
                 <button class="btn-preview" onclick="previewProject()">
-                    👁️ Preview
+                    Preview
                 </button>
                 <button class="btn-save" onclick="saveProject()">
-                    💾 Save Changes
+                    Save Changes
                 </button>
             </div>
         </div>
@@ -68,28 +68,28 @@
 
             <!-- Panel de Navegación Lateral -->
             <aside class="editor-sidebar">
-                <h3>📋 Sections</h3>
+                <h3>Sections</h3>
                 <nav class="editor-nav">
                     <button class="editor-nav-btn active" data-section="basic" onclick="switchSection('basic')">
-                        ℹ️ Basic Information
+                        Basic Information
                     </button>
                     <button class="editor-nav-btn" data-section="progress" onclick="switchSection('progress')">
-                        📊 Progress & Dates
+                        Progress & Dates
                     </button>
                     <button class="editor-nav-btn" data-section="achievements" onclick="switchSection('achievements')">
-                        ✅ Recent Achievements
+                        Recent Achievements
                     </button>
                     <button class="editor-nav-btn" data-section="blockers" onclick="switchSection('blockers')">
-                        ⚠️ Blockers
+                        Blockers
                     </button>
                     <button class="editor-nav-btn" data-section="nextsteps" onclick="switchSection('nextsteps')">
-                        🎯 Next Steps
+                        Next Steps
                     </button>
                     <button class="editor-nav-btn" data-section="media" onclick="switchSection('media')">
-                        📹 Media
+                        Media
                     </button>
                     <button class="editor-nav-btn" data-section="metrics" onclick="switchSection('metrics')">
-                        📊 Metrics
+                        Metrics
                     </button>
                 </nav>
             </aside>
@@ -99,7 +99,7 @@
 
                 <!-- Sección: Información Básica -->
                 <div class="editor-section active" id="section-basic">
-                    <h2 class="section-title">ℹ️ Basic Information</h2>
+                    <h2 class="section-title">Basic Information</h2>
 
                     <div class="form-group">
                         <label for="projectIcon">Project Icon (Emoji)</label>
@@ -160,7 +160,7 @@
 
                 <!-- Sección: Progreso y Fechas -->
                 <div class="editor-section" id="section-progress">
-                    <h2 class="section-title">📊 Progress & Dates</h2>
+                    <h2 class="section-title">Progress & Dates</h2>
 
                     <div class="form-group">
                         <label for="projectProgress">Progress (%)</label>
@@ -182,7 +182,7 @@
 
                 <!-- Sección: Logros Recientes -->
                 <div class="editor-section" id="section-achievements">
-                    <h2 class="section-title">✅ Recent Achievements</h2>
+                    <h2 class="section-title">Recent Achievements</h2>
                     <p class="section-description">Add the important milestones you have achieved</p>
 
                     <div id="achievementsList" class="dynamic-list">
@@ -196,7 +196,7 @@
 
                 <!-- Sección: Bloqueos -->
                 <div class="editor-section" id="section-blockers">
-                    <h2 class="section-title">⚠️ Blockers</h2>
+                    <h2 class="section-title">Blockers</h2>
 
                     <div class="form-group">
                         <label for="blockerType">Blocker Type</label>
@@ -217,7 +217,7 @@
 
                 <!-- Sección: Próximos Pasos -->
                 <div class="editor-section" id="section-nextsteps">
-                    <h2 class="section-title">🎯 Next Steps</h2>
+                    <h2 class="section-title">Next Steps</h2>
                     <p class="section-description">Define the upcoming project milestones</p>
 
                     <div id="nextStepsList" class="dynamic-list">
@@ -231,11 +231,11 @@
 
                 <!-- Sección: Multimedia -->
                 <div class="editor-section" id="section-media">
-                    <h2 class="section-title">📹 Media</h2>
+                    <h2 class="section-title">Media</h2>
 
                     <!-- Gantt -->
                     <div class="media-subsection">
-                        <h3>📊 Gantt Chart</h3>
+                        <h3>Gantt Chart</h3>
                         <div id="ganttPreview" class="media-preview">
                             <!-- Se llenará dinámicamente -->
                         </div>
@@ -246,7 +246,7 @@
 
                     <!-- Galería de Imágenes -->
                     <div class="media-subsection">
-                        <h3>🖼️ Image Gallery</h3>
+                        <h3>Image Gallery</h3>
                         <div id="imagesPreview" class="media-preview">
                             <!-- Se llenará dinámicamente -->
                         </div>
@@ -257,7 +257,7 @@
 
                     <!-- Galería de Videos -->
                     <div class="media-subsection">
-                        <h3>🎬 Video Gallery</h3>
+                        <h3>Video Gallery</h3>
                         <div id="videosPreview" class="media-preview">
                             <!-- Se llenará dinámicamente -->
                         </div>
@@ -268,7 +268,7 @@
 
                     <!-- Archivos Extras -->
                     <div class="media-subsection">
-                        <h3>📎 Extra Files</h3>
+                        <h3>Extra Files</h3>
                         <p class="subsection-description">Any type of file: PDF, Excel, PowerPoint, ZIP, etc.</p>
                         <div id="extraFilesPreview" class="media-preview">
                             <!-- Se llenarán dinámicamente -->
@@ -281,12 +281,12 @@
 
                 <!-- Sección: Métricas KPI -->
                 <div class="editor-section" id="section-metrics">
-                    <h2 class="section-title">📊 Project Metrics</h2>
+                    <h2 class="section-title">Project Metrics</h2>
                     <p class="section-description">Configure key performance indicators for this project</p>
 
                     <!-- KPIs Principales -->
                     <div class="metrics-editor-group">
-                        <h3>📈 Main KPIs</h3>
+                        <h3>Main KPIs</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="kpi-totalHours">Total Hours Estimated</label>
@@ -312,7 +312,7 @@
 
                     <!-- Timeline -->
                     <div class="metrics-editor-group">
-                        <h3>📅 Timeline</h3>
+                        <h3>Timeline</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="kpi-startDate">Start Date</label>
@@ -332,7 +332,7 @@
 
                     <!-- Resources -->
                     <div class="metrics-editor-group">
-                        <h3>👥 Resource Allocation</h3>
+                        <h3>Resource Allocation</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="kpi-engineerHours">Software Engineer Hours</label>
@@ -357,7 +357,7 @@
 
                     <!-- Performance Metrics -->
                     <div class="metrics-editor-group">
-                        <h3>🎯 Performance Metrics</h3>
+                        <h3>Performance Metrics</h3>
                         <div class="form-row">
                             <div class="form-group">
                                 <label for="kpi-tasksCompleted">Tasks Completed</label>
@@ -393,7 +393,7 @@
     <div id="previewModal" class="modal">
         <div class="modal-content modal-large">
             <div class="modal-header">
-                <h3 class="modal-title">👁️ Preview</h3>
+                <h3 class="modal-title">Preview</h3>
                 <button class="modal-close" onclick="closePreviewModal()">×</button>
             </div>
             <div class="modal-body" id="previewContent">
@@ -406,12 +406,12 @@
     <div id="deleteModal" class="modal">
         <div class="modal-content modal-delete">
             <div class="modal-header">
-                <h3 class="modal-title">🗑️ Delete Project</h3>
+                <h3 class="modal-title">Delete Project</h3>
                 <button class="modal-close" onclick="closeDeleteModal()">×</button>
             </div>
             <div class="modal-body">
                 <div class="delete-warning">
-                    <div class="warning-icon">⚠️</div>
+                    <div class="warning-icon">!</div>
                     <div>
                         <h4>This action cannot be undone</h4>
                     </div>
@@ -425,10 +425,10 @@
 
                 <p class="delete-note">All project data will be deleted including:</p>
                 <ul class="delete-list">
-                    <li>📊 Gantt Chart</li>
-                    <li>🖼️ Image Gallery</li>
-                    <li>🎬 Videos</li>
-                    <li>📝 All project content</li>
+                    <li>Gantt Chart</li>
+                    <li>Image Gallery</li>
+                    <li>Videos</li>
+                    <li>All project content</li>
                 </ul>
 
                 <div class="delete-confirm-box">
