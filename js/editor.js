@@ -1333,7 +1333,171 @@ function closeLightbox() {
 document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') {
         closeLightbox();
+        closeTransferModal();
     }
 });
+
+// ==================== TRANSFER PROJECT ====================
+
+let selectedTransferUserId = null;
+
+function openTransferModal() {
+    if (!currentProject) {
+        alert('There is no project to transfer');
+        return;
+    }
+
+    // Mostrar modal
+    document.getElementById('transferProjectTitle').textContent = currentProject.title;
+    document.getElementById('transferModal').classList.add('active');
+    document.getElementById('transferUserSearch').value = '';
+    document.getElementById('transferUserSearch').disabled = false;
+    document.getElementById('btnConfirmTransfer').disabled = true;
+    selectedTransferUserId = null;
+
+    // Ocultar info de usuario seleccionado
+    document.getElementById('selectedUserInfo').style.display = 'none';
+
+    // Limpiar dropdown - NO mostrar lista automáticamente
+    document.getElementById('transferUsersList').innerHTML = '';
+}
+
+function closeTransferModal() {
+    document.getElementById('transferModal').classList.remove('active');
+    document.getElementById('transferUserSearch').value = '';
+    document.getElementById('transferUsersList').innerHTML = '';
+    selectedTransferUserId = null;
+}
+
+function populateTransferUsers(filter = '') {
+    const container = document.getElementById('transferUsersList');
+    const currentOwnerId = currentProject?.ownerId;
+
+    // Si no hay filtro, no mostrar nada
+    if (filter.trim() === '') {
+        container.innerHTML = '';
+        return;
+    }
+
+    // Obtener todos los usuarios excepto el propietario actual
+    const users = dataManager.users.filter(user =>
+        user.id !== currentOwnerId &&
+        (user.name.toLowerCase().includes(filter.toLowerCase()) ||
+            user.username.toLowerCase().includes(filter.toLowerCase()))
+    );
+
+    if (users.length === 0) {
+        container.innerHTML = '<div class="user-option no-results">No users found</div>';
+        return;
+    }
+
+    container.innerHTML = users.map(user => `
+        <div class="user-option" onclick="selectTransferUser('${user.id}')">
+            <div class="user-avatar">${getInitialsForTransfer(user.name)}</div>
+            <div class="user-details">
+                <strong>${user.name}</strong>
+                <span>${user.role || 'User'}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+function filterTransferUsers() {
+    const query = document.getElementById('transferUserSearch').value;
+    populateTransferUsers(query);
+}
+
+function selectTransferUser(userId) {
+    const user = dataManager.users.find(u => u.id === userId);
+    if (!user) return;
+
+    selectedTransferUserId = userId;
+
+    // Ocultar dropdown
+    document.getElementById('transferUsersList').innerHTML = '';
+    document.getElementById('transferUserSearch').value = '';
+
+    // Mostrar usuario seleccionado
+    const selectedInfo = document.getElementById('selectedUserInfo');
+    document.getElementById('selectedUserAvatar').textContent = getInitialsForTransfer(user.name);
+    document.getElementById('selectedUserName').textContent = user.name;
+    document.getElementById('selectedUserRole').textContent = user.role || 'User';
+    selectedInfo.style.display = 'block';
+
+    // Habilitar botón de confirmación
+    document.getElementById('btnConfirmTransfer').disabled = false;
+}
+
+function clearSelectedUser() {
+    selectedTransferUserId = null;
+    document.getElementById('selectedUserInfo').style.display = 'none';
+    document.getElementById('btnConfirmTransfer').disabled = true;
+
+    // Re-habilitar y enfocar el input
+    const searchInput = document.getElementById('transferUserSearch');
+    searchInput.disabled = false;
+    searchInput.value = '';
+    searchInput.focus();
+}
+
+function getInitialsForTransfer(name) {
+    if (!name) return '?';
+    return name.split(' ')
+        .map(word => word.charAt(0).toUpperCase())
+        .slice(0, 2)
+        .join('');
+}
+
+async function confirmTransfer() {
+    if (!selectedTransferUserId || !currentProject) {
+        return;
+    }
+
+    const targetUser = dataManager.users.find(u => u.id === selectedTransferUserId);
+    if (!targetUser) {
+        alert('Selected user not found');
+        return;
+    }
+
+    // Confirmación adicional
+    const confirmed = confirm(`Are you sure you want to transfer "${currentProject.title}" to ${targetUser.name}?\n\nYou will no longer be able to edit this project.`);
+
+    if (!confirmed) return;
+
+    // ✅ Guardar el ID antes de cerrar el modal (que lo resetea a null)
+    const newOwnerId = selectedTransferUserId;
+    const projectId = currentProject.id;
+
+    closeTransferModal();
+
+    // Mostrar feedback
+    document.getElementById('editorTitle').textContent = '🔄 Transferring...';
+    document.getElementById('editorStatus').textContent = 'Processing';
+
+    try {
+        // Realizar la transferencia con los valores guardados
+        const success = await dataManager.transferProject(projectId, newOwnerId);
+
+        if (success) {
+            console.log('✅ Proyecto transferido correctamente');
+            alert(`✅ Project transferred successfully to ${targetUser.name}`);
+
+            // No hay cambios sin guardar
+            hasUnsavedChanges = false;
+
+            // Redirigir al home
+            setTimeout(() => {
+                window.location.href = 'index.html';
+            }, 500);
+        } else {
+            throw new Error('Transfer failed');
+        }
+    } catch (error) {
+        console.error('❌ Error transfiriendo proyecto:', error);
+        alert('❌ Error transferring the project. Please try again.');
+        document.getElementById('editorTitle').textContent = `Editing: ${currentProject.title}`;
+        document.getElementById('editorStatus').textContent = 'Error';
+    }
+}
 
 console.log('✅ Editor.js cargado');

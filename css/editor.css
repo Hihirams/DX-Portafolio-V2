@@ -62,6 +62,12 @@ body {
     align-items: center;
 }
 
+.editor-left-actions {
+    display: flex;
+    gap: 12px;
+    align-items: center;
+}
+
 /* Theme Toggle en Editor */
 .editor-actions .theme-toggle {
     position: static;
@@ -928,20 +934,76 @@ body.light-theme .media-info {
     border-top: 1px solid var(--border-color);
 }
 
-.btn-secondary {
-    padding: 10px 20px;
-    background: var(--bg-card);
+/* Modal Buttons - Liquid Glass Style */
+.btn-secondary,
+.btn-transfer {
+    position: relative;
+    padding: 10px 24px;
+    background: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
+    border-radius: 100px;
     font-size: 14px;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.3s ease;
+    overflow: hidden;
 }
 
-.btn-secondary:hover {
-    background: var(--bg-card-hover);
+/* Shimmer effect */
+.btn-secondary::before,
+.btn-transfer::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent,
+            rgba(255, 255, 255, 0.15),
+            transparent);
+    transition: left 0.5s ease;
+    pointer-events: none;
+}
+
+.btn-secondary:hover::before,
+.btn-transfer:not(:disabled):hover::before {
+    left: 100%;
+}
+
+.btn-secondary:hover,
+.btn-transfer:not(:disabled):hover {
+    transform: translateY(-2px);
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.25);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.15);
+}
+
+body.light-theme .btn-secondary,
+body.light-theme .btn-transfer {
+    background: rgba(255, 255, 255, 0.3);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow:
+        0 4px 16px rgba(0, 0, 0, 0.08),
+        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+}
+
+body.light-theme .btn-secondary:hover,
+body.light-theme .btn-transfer:not(:disabled):hover {
+    background: rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 8px 24px rgba(0, 0, 0, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.6);
 }
 
 .btn-primary {
@@ -1391,4 +1453,311 @@ body.light-theme .metrics-editor-group {
 
 .metrics-editor-group textarea {
     min-height: 60px;
+}
+
+/* ==================== TRANSFER BUTTON ==================== */
+
+.transfer-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(29, 78, 137, 0.15), rgba(157, 127, 78, 0.15));
+    color: #4a7099;
+    border: 1px solid rgba(45, 90, 158, 0.3);
+    border-radius: 50%;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.transfer-button:hover {
+    background: linear-gradient(135deg, rgba(29, 78, 137, 0.25), rgba(157, 127, 78, 0.25));
+    transform: scale(1.1);
+    color: #2d5a9e;
+}
+
+.transfer-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+/* ==================== TRANSFER MODAL ==================== */
+
+.modal-transfer {
+    max-width: 500px;
+}
+
+.transfer-warning {
+    display: flex;
+    gap: 16px;
+    align-items: flex-start;
+    padding: 20px;
+    background: linear-gradient(135deg, rgba(29, 78, 137, 0.1), rgba(157, 127, 78, 0.1));
+    border: 1px solid rgba(45, 90, 158, 0.3);
+    border-radius: 12px;
+    margin-bottom: 24px;
+}
+
+.transfer-warning .warning-icon {
+    flex-shrink: 0;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, rgba(29, 78, 137, 0.2), rgba(157, 127, 78, 0.2));
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.transfer-warning .warning-icon svg {
+    width: 22px;
+    height: 22px;
+    stroke: #4a7099;
+}
+
+.transfer-warning h4 {
+    font-size: 16px;
+    font-weight: 600;
+    background: linear-gradient(135deg,
+            #1d4e89 0%,
+            #2d5a9e 20%,
+            #4a7099 40%,
+            #9d7f4e 65%,
+            #b8975a 85%,
+            #c9a862 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin: 0 0 8px 0;
+}
+
+.transfer-warning p {
+    font-size: 14px;
+    color: var(--text-secondary);
+    margin: 0;
+    line-height: 1.5;
+}
+
+.transfer-project-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-bottom: 24px;
+}
+
+body.light-theme .transfer-project-info {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.transfer-project-info span {
+    font-size: 14px;
+    color: var(--text-secondary);
+}
+
+.transfer-project-info strong {
+    font-size: 16px;
+    color: var(--text-primary);
+}
+
+/* User Search Container */
+.user-search-container {
+    position: relative;
+}
+
+.user-search-container input {
+    width: 100%;
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    font-size: 14px;
+    color: var(--text-primary);
+    transition: all 0.3s ease;
+}
+
+body.light-theme .user-search-container input {
+    background: rgba(0, 0, 0, 0.03);
+}
+
+.user-search-container input:focus {
+    outline: none;
+    border-color: #0a84ff;
+}
+
+.user-search-container input::placeholder {
+    color: var(--text-secondary);
+}
+
+/* Users Dropdown */
+.users-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    max-height: 200px;
+    overflow-y: auto;
+    background-color: #1c1c1e;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    margin-top: 8px;
+    z-index: 100;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+body.light-theme .users-dropdown {
+    background-color: #ffffff;
+}
+
+.users-dropdown:empty {
+    display: none;
+}
+
+.user-option {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.user-option:not(:last-child) {
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+}
+
+.user-option.no-results {
+    color: var(--text-secondary);
+    justify-content: center;
+    cursor: default;
+}
+
+.user-option:hover:not(.no-results) {
+    background: rgba(10, 132, 255, 0.1);
+}
+
+.user-option .user-avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1d4e89, #4a7099, #9d7f4e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    font-weight: 600;
+    color: white;
+    flex-shrink: 0;
+}
+
+.user-option .user-details {
+    flex: 1;
+}
+
+.user-option .user-details strong {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--text-primary);
+    margin-bottom: 2px;
+}
+
+.user-option .user-details span {
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+/* Selected User Info */
+.selected-user-info {
+    margin-top: 16px;
+    padding: 16px;
+    background: linear-gradient(135deg, rgba(29, 78, 137, 0.1), rgba(157, 127, 78, 0.1));
+    border: 1px solid rgba(45, 90, 158, 0.3);
+    border-radius: 10px;
+}
+
+.selected-user-info>span {
+    display: block;
+    font-size: 12px;
+    color: var(--text-secondary);
+    margin-bottom: 10px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.selected-user-details {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.selected-user-details .user-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #1d4e89, #4a7099, #9d7f4e);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+    font-weight: 600;
+    color: white;
+}
+
+.selected-user-details .user-info {
+    flex: 1;
+}
+
+.selected-user-details .user-info strong {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--text-primary);
+}
+
+.selected-user-details .user-info span {
+    font-size: 13px;
+    color: var(--text-secondary);
+}
+
+.btn-clear-user {
+    width: 28px;
+    height: 28px;
+    background: rgba(255, 69, 58, 0.15);
+    color: #ff453a;
+    border: none;
+    border-radius: 50%;
+    font-size: 18px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    align-self: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+}
+
+.btn-clear-user:hover {
+    background: rgba(255, 69, 58, 0.25);
+}
+
+/* Additional btn-transfer specifics */
+.btn-transfer {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.btn-transfer:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.btn-transfer svg {
+    width: 18px;
+    height: 18px;
 }

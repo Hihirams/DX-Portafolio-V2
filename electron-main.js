@@ -623,6 +623,113 @@ ipcMain.handle('project:listByUser', async (event, userId) => {
     }
 });
 
+// Transfer project to another user
+ipcMain.handle('project:transfer', async (event, fromUserId, toUserId, projectId) => {
+    console.log('='.repeat(80));
+    console.log('🔄 PROJECT:TRANSFER HANDLER STARTED');
+    console.log('='.repeat(80));
+    console.log('📂 Parameters:');
+    console.log('   fromUserId:', fromUserId);
+    console.log('   toUserId:', toUserId);
+    console.log('   projectId:', projectId);
+
+    try {
+        const sourceDir = path.join(USERS_DIR, fromUserId, 'projects', projectId);
+        const destDir = path.join(USERS_DIR, toUserId, 'projects', projectId);
+        const projectFile = path.join(sourceDir, 'project.json');
+
+        console.log('📂 Source:', sourceDir);
+        console.log('📂 Destination:', destDir);
+
+        // 1. Check if source exists
+        if (!fsSync.existsSync(sourceDir)) {
+            console.error('❌ Source project directory does not exist');
+            return { success: false, error: 'Source project not found' };
+        }
+
+        // 2. Create destination user's projects directory if needed
+        const destUserProjectsDir = path.join(USERS_DIR, toUserId, 'projects');
+        if (!fsSync.existsSync(destUserProjectsDir)) {
+            await fs.mkdir(destUserProjectsDir, { recursive: true });
+            console.log('✅ Created destination projects directory');
+        }
+
+        // 3. Copy the entire project folder
+        console.log('📋 Copying project folder...');
+        await copyDirectoryRecursive(sourceDir, destDir);
+        console.log('✅ Project folder copied');
+
+        // 4. Load and update project.json with new ownerId
+        console.log('📝 Updating project.json with new owner...');
+        const projectDataRaw = await fs.readFile(path.join(destDir, 'project.json'), 'utf8');
+        const projectData = JSON.parse(projectDataRaw);
+
+        // Read users.json to get new owner's name
+        const usersJsonPath = path.join(DATA_DIR, 'users.json');
+        let newOwnerName = 'Unknown';
+        if (fsSync.existsSync(usersJsonPath)) {
+            const usersData = JSON.parse(await fs.readFile(usersJsonPath, 'utf8'));
+            const newOwner = usersData.users.find(u => u.id === toUserId);
+            if (newOwner) {
+                newOwnerName = newOwner.name;
+            }
+        }
+
+        projectData.ownerId = toUserId;
+        projectData.ownerName = newOwnerName;
+        projectData.updatedAt = new Date().toISOString();
+
+        await fs.writeFile(path.join(destDir, 'project.json'), JSON.stringify(projectData, null, 2), 'utf8');
+        console.log('✅ project.json updated with new owner:', newOwnerName);
+
+        // 5. Update data/projects.json
+        const projectsJsonPath = path.join(DATA_DIR, 'projects.json');
+        if (fsSync.existsSync(projectsJsonPath)) {
+            const projectsFile = JSON.parse(await fs.readFile(projectsJsonPath, 'utf8'));
+            const projectIndex = projectsFile.projects.findIndex(p => p.id === projectId);
+
+            if (projectIndex >= 0) {
+                projectsFile.projects[projectIndex].ownerId = toUserId;
+                projectsFile.projects[projectIndex].ownerName = newOwnerName;
+                projectsFile.projects[projectIndex].updatedAt = new Date().toISOString();
+                await fs.writeFile(projectsJsonPath, JSON.stringify(projectsFile, null, 2), 'utf8');
+                console.log('✅ data/projects.json updated');
+            }
+        }
+
+        // 6. Delete source folder
+        console.log('🗑️ Deleting source folder...');
+        await fs.rm(sourceDir, { recursive: true, force: true });
+        console.log('✅ Source folder deleted');
+
+        console.log('='.repeat(80));
+        console.log('✅✅✅ PROJECT TRANSFERRED SUCCESSFULLY ✅✅✅');
+        console.log('='.repeat(80));
+
+        return { success: true };
+    } catch (error) {
+        console.error('❌ Error transferring project:', error);
+        return { success: false, error: error.message };
+    }
+});
+
+// Helper function for recursive directory copy
+async function copyDirectoryRecursive(source, dest) {
+    await fs.mkdir(dest, { recursive: true });
+    const entries = await fs.readdir(source, { withFileTypes: true });
+
+    for (const entry of entries) {
+        const srcPath = path.join(source, entry.name);
+        const destPath = path.join(dest, entry.name);
+
+        if (entry.isDirectory()) {
+            await copyDirectoryRecursive(srcPath, destPath);
+        } else {
+            await fs.copyFile(srcPath, destPath);
+        }
+    }
+}
+
 // ====== USER OPERATIONS ======
 
 // Crear directorio para nuevo usuario

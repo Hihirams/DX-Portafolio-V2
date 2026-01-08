@@ -549,6 +549,64 @@ class DataManager {
         return false;
     }
 
+    // ==================== TRANSFER PROJECT ====================
+
+    async transferProject(projectId, newOwnerId) {
+        const projectIndex = this.projects.findIndex(p => p.id === projectId);
+
+        if (projectIndex === -1) {
+            console.error('❌ Proyecto no encontrado');
+            return false;
+        }
+
+        const project = this.projects[projectIndex];
+        const oldOwnerId = project.ownerId;
+
+        // Verificar permisos
+        if (this.currentUser && project.ownerId !== this.currentUser.id) {
+            console.error('❌ Sin permisos para transferir este proyecto');
+            return false;
+        }
+
+        // Obtener nombre del nuevo propietario
+        const newOwner = this.users.find(u => u.id === newOwnerId);
+        if (!newOwner) {
+            console.error('❌ Nuevo propietario no encontrado:', newOwnerId);
+            console.log('Usuarios disponibles:', this.users.map(u => u.id));
+            return false;
+        }
+
+        console.log(`🔄 Transfiriendo proyecto ${projectId} de ${oldOwnerId} a ${newOwnerId}...`);
+
+        try {
+            // Llamar a fileManager para transferir los archivos
+            const transferred = await fileManager.transferProject(oldOwnerId, newOwnerId, projectId);
+
+            if (!transferred) {
+                console.error('❌ Error transfiriendo archivos del proyecto');
+                return false;
+            }
+
+            // Actualizar datos del proyecto en memoria
+            this.projects[projectIndex] = {
+                ...project,
+                ownerId: newOwnerId,
+                ownerName: newOwner.name,
+                updatedAt: new Date().toISOString()
+            };
+
+            // Actualizar el índice
+            await this.updateProjectsIndex();
+
+            console.log(`✅ Proyecto ${projectId} transferido a ${newOwner.name}`);
+            return true;
+
+        } catch (error) {
+            console.error('❌ Error en transferencia:', error);
+            return false;
+        }
+    }
+
     getProjectsByUser(userId) {
         return this.projects.filter(p => p.ownerId === userId);
     }

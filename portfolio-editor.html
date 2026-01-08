@@ -14,19 +14,29 @@
     <!-- Header del Editor -->
     <header class="editor-header">
         <div class="header-content">
-            <button class="back-button" onclick="cancelEdit()">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                Cancel
-            </button>
-            <button class="delete-button" onclick="deleteProject()" title="Delete Project">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M3 6h18M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2m3 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6h14z" />
-                    <line x1="10" y1="11" x2="10" y2="17" />
-                    <line x1="14" y1="11" x2="14" y2="17" />
-                </svg>
-            </button>
+            <div class="editor-left-actions">
+                <button class="back-button" onclick="cancelEdit()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M19 12H5M12 19l-7-7 7-7" />
+                    </svg>
+                    Cancel
+                </button>
+                <button class="transfer-button" onclick="openTransferModal()" title="Transfer Project">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 1l4 4-4 4" />
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                        <path d="M7 23l-4-4 4-4" />
+                        <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                    </svg>
+                </button>
+                <button class="delete-button" onclick="deleteProject()" title="Delete Project">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2m3 0v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6h14z" />
+                        <line x1="10" y1="11" x2="10" y2="17" />
+                        <line x1="14" y1="11" x2="14" y2="17" />
+                    </svg>
+                </button>
+            </div>
 
             <div class="editor-title">
                 <h1 id="editorTitle">Editing Project</h1>
@@ -442,6 +452,70 @@
                 <button class="btn-secondary" onclick="closeDeleteModal()">Cancel</button>
                 <button class="btn-danger" onclick="confirmDelete()" id="btnConfirmDelete" disabled>
                     Delete Permanently
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Transferencia de Proyecto -->
+    <div id="transferModal" class="modal">
+        <div class="modal-content modal-transfer">
+            <div class="modal-header">
+                <h3 class="modal-title">Transfer Project</h3>
+                <button class="modal-close" onclick="closeTransferModal()">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="transfer-warning">
+                    <div class="warning-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M17 1l4 4-4 4" />
+                            <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                            <path d="M7 23l-4-4 4-4" />
+                            <path d="M21 13v2a4 4 0 0 1-4 4H3" />
+                        </svg>
+                    </div>
+                    <div>
+                        <h4>Transfer Ownership</h4>
+                        <p>The selected user will become the new owner of this project and will be able to edit it. You
+                            will no longer have access to edit this project.</p>
+                    </div>
+                </div>
+
+                <div class="transfer-project-info">
+                    <span>Project:</span>
+                    <strong id="transferProjectTitle"></strong>
+                </div>
+
+                <div class="form-group">
+                    <label for="transferUserSearch">Select New Owner</label>
+                    <div class="user-search-container">
+                        <input type="text" id="transferUserSearch" placeholder="Search users..."
+                            oninput="filterTransferUsers()">
+                        <div id="transferUsersList" class="users-dropdown">
+                            <!-- Users will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <div class="selected-user-info" id="selectedUserInfo" style="display: none;">
+                    <span>Transfer to:</span>
+                    <div class="selected-user-details">
+                        <div class="user-avatar" id="selectedUserAvatar"></div>
+                        <div class="user-info">
+                            <strong id="selectedUserName"></strong>
+                            <span id="selectedUserRole"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" onclick="closeTransferModal()">Cancel</button>
+                <button class="btn-transfer" onclick="confirmTransfer()" id="btnConfirmTransfer" disabled>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M17 1l4 4-4 4" />
+                        <path d="M3 11V9a4 4 0 0 1 4-4h14" />
+                    </svg>
+                    Transfer Project
                 </button>
             </div>
         </div>

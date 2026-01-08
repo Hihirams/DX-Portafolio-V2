@@ -1,12 +1,12 @@
 {
   "id": "proj1762786983969",
-  "ownerId": "user2",
+  "ownerId": "user5",
   "title": "DX Hold (Hold Monitor System) - ME",
   "status": "pilot",
   "progress": 95,
   "icon": "📦",
   "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-  "updatedAt": "2025-12-10T20:09:39.905Z",
+  "updatedAt": "2026-01-08T17:32:01.817Z",
   "priority": "medium",
   "achievements": {},
   "blockers": {
@@ -48,7 +48,7 @@
   ],
   "extraFiles": [],
   "createdAt": "2025-11-10T15:03:03.969Z",
-  "ownerName": "Sandra Santos",
+  "ownerName": "Angel Alvarez",
   "concept": "",
   "priorityNumber": 7,
   "kpis": {
