@@ -7,6 +7,12 @@ let totalSlides = 0;
 let projectsToShow = [];
 let viewingUser = null;
 
+// Modal navigation state
+let currentLightboxProjectId = null;
+let currentLightboxIndex = 0;
+let currentVideoProjectId = null;
+let currentVideoIndex = 0;
+
 // --- viewer.js ---
 function normalizeProject(p) {
   const proj = { ...p };
@@ -605,14 +611,29 @@ async function openVideoPlayer(projectId, index) {
   const project = getProjectFromView(projectId);
   if (!project || !project.videos || !project.videos[index]) return;
 
+  // Store navigation state
+  currentVideoProjectId = projectId;
+  currentVideoIndex = index;
+
   const video = project.videos[index];
+  const totalVideos = project.videos.length;
 
   const modal = document.getElementById('videoPlayerModal');
   const title = document.getElementById('videoPlayerTitle');
   const player = document.getElementById('videoPlayer');
+  const counter = document.getElementById('videoCounter');
+  const prevBtn = document.getElementById('videoPrevBtn');
+  const nextBtn = document.getElementById('videoNextBtn');
 
   title.textContent = video.title || 'Video';
   const playableSrc = await resolveMediaSrc(video.src);
+
+  // Update counter
+  if (counter) counter.textContent = `${index + 1} / ${totalVideos}`;
+
+  // Update navigation button states
+  if (prevBtn) prevBtn.classList.toggle('disabled', index === 0);
+  if (nextBtn) nextBtn.classList.toggle('disabled', index === totalVideos - 1);
 
   closeVideoGallery();
   modal.classList.add('active');
@@ -629,8 +650,28 @@ function closeVideoPlayer() {
   player.pause();
   player.src = '';
 
+  // Reset navigation state
+  currentVideoProjectId = null;
+  currentVideoIndex = 0;
+
   modal.classList.remove('active');
   document.body.style.overflow = '';
+}
+
+async function navigateVideo(direction) {
+  if (!currentVideoProjectId) return;
+
+  const project = getProjectFromView(currentVideoProjectId);
+  if (!project || !project.videos) return;
+
+  const newIndex = currentVideoIndex + direction;
+  if (newIndex < 0 || newIndex >= project.videos.length) return;
+
+  // Pause current video before navigating
+  const player = document.getElementById('videoPlayer');
+  if (player) player.pause();
+
+  await openVideoPlayer(currentVideoProjectId, newIndex);
 }
 
 async function openImageGallery(projectId) {
@@ -670,15 +711,30 @@ async function openImageLightbox(projectId, index) {
   const project = getProjectFromView(projectId);
   if (!project || !project.images || !project.images[index]) return;
 
+  // Store navigation state
+  currentLightboxProjectId = projectId;
+  currentLightboxIndex = index;
+
   const image = project.images[index];
+  const totalImages = project.images.length;
 
   const modal = document.getElementById('imageLightboxModal');
   const title = document.getElementById('imageLightboxTitle');
   const img = document.getElementById('lightboxImage');
+  const counter = document.getElementById('imageCounter');
+  const prevBtn = document.getElementById('imagePrevBtn');
+  const nextBtn = document.getElementById('imageNextBtn');
 
   title.textContent = image.title;
   img.src = await resolveMediaSrc(image.src);
   img.alt = image.title;
+
+  // Update counter
+  if (counter) counter.textContent = `${index + 1} / ${totalImages}`;
+
+  // Update navigation button states
+  if (prevBtn) prevBtn.classList.toggle('disabled', index === 0);
+  if (nextBtn) nextBtn.classList.toggle('disabled', index === totalImages - 1);
 
   closeImageGallery();
   modal.classList.add('active');
@@ -687,8 +743,25 @@ async function openImageLightbox(projectId, index) {
 
 function closeImageLightbox() {
   const modal = document.getElementById('imageLightboxModal');
+
+  // Reset navigation state
+  currentLightboxProjectId = null;
+  currentLightboxIndex = 0;
+
   modal.classList.remove('active');
   document.body.style.overflow = '';
+}
+
+async function navigateImage(direction) {
+  if (!currentLightboxProjectId) return;
+
+  const project = getProjectFromView(currentLightboxProjectId);
+  if (!project || !project.images) return;
+
+  const newIndex = currentLightboxIndex + direction;
+  if (newIndex < 0 || newIndex >= project.images.length) return;
+
+  await openImageLightbox(currentLightboxProjectId, newIndex);
 }
 
 // Zoom functionality
@@ -741,7 +814,7 @@ document.getElementById('extraFilesModal').addEventListener('click', function (e
   if (e.target === this) closeExtraFilesModal();
 });
 
-// Close modals on ESC
+// Close modals on ESC and navigate with arrow keys
 document.addEventListener('keydown', function (e) {
   if (e.key === 'Escape') {
     closeGanttModal();
@@ -750,6 +823,32 @@ document.addEventListener('keydown', function (e) {
     closeVideoPlayer();
     closeImageLightbox();
     closeExtraFilesModal();
+  }
+
+  // Arrow key navigation for image lightbox
+  const imageLightboxModal = document.getElementById('imageLightboxModal');
+  if (imageLightboxModal && imageLightboxModal.classList.contains('active')) {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      navigateImage(-1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      navigateImage(1);
+    }
+    return;
+  }
+
+  // Arrow key navigation for video player
+  const videoPlayerModal = document.getElementById('videoPlayerModal');
+  if (videoPlayerModal && videoPlayerModal.classList.contains('active')) {
+    if (e.key === 'ArrowLeft') {
+      e.preventDefault();
+      navigateVideo(-1);
+    } else if (e.key === 'ArrowRight') {
+      e.preventDefault();
+      navigateVideo(1);
+    }
+    return;
   }
 });
 

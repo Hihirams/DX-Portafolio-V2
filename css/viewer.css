@@ -657,3 +657,108 @@ body.light-theme .priority-badge {
 .project-header:hover .priority-badge {
     transform: scale(1.05);
 }
+
+/* ==========================================
+   MODAL NAVIGATION - Flechas de navegación
+   ========================================== */
+
+.modal-with-nav .modal-image-container {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-nav-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 50px;
+    height: 50px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+    z-index: 10;
+}
+
+.modal-nav-arrow:hover {
+    background: rgba(255, 255, 255, 0.25);
+    transform: translateY(-50%) scale(1.1);
+}
+
+.modal-nav-arrow.left {
+    left: 20px;
+}
+
+.modal-nav-arrow.right {
+    right: 20px;
+}
+
+.modal-nav-arrow svg {
+    width: 28px;
+    height: 28px;
+    fill: var(--text-primary);
+}
+
+.modal-nav-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.modal-counter {
+    font-size: 14px;
+    font-weight: 500;
+    color: var(--text-secondary);
+    background: rgba(255, 255, 255, 0.1);
+    padding: 4px 12px;
+    border-radius: 20px;
+    margin-left: auto;
+    margin-right: 10px;
+}
+
+/* Tema claro */
+body.light-theme .modal-nav-arrow {
+    background: rgba(0, 0, 0, 0.08);
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .modal-nav-arrow:hover {
+    background: rgba(0, 0, 0, 0.15);
+}
+
+body.light-theme .modal-nav-arrow svg {
+    fill: #1d1d1f;
+}
+
+body.light-theme .modal-counter {
+    background: rgba(0, 0, 0, 0.08);
+    color: #1d1d1f;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .modal-nav-arrow {
+        width: 40px;
+        height: 40px;
+    }
+
+    .modal-nav-arrow.left {
+        left: 10px;
+    }
+
+    .modal-nav-arrow.right {
+        right: 10px;
+    }
+
+    .modal-nav-arrow svg {
+        width: 22px;
+        height: 22px;
+    }
+}

@@ -9,6 +9,13 @@ const itemsPerPage = 10;
 let charts = {};
 let currentResourceProject = null;
 
+// Navigation state for fullscreen modals
+let currentFullscreenImages = [];
+let currentFullscreenImageIndex = 0;
+let currentFullscreenVideos = [];
+let currentFullscreenVideoIndex = 0;
+let currentFullscreenOverlay = null;
+
 // Active filters
 let activeFilters = {
     status: 'all',
@@ -322,7 +329,8 @@ async function openResourceImages() {
 
         title.textContent = `${currentResourceProject.name} - Images`;
 
-        const imagesHTML = await Promise.all(project.images.map(async (img) => {
+        // Store resolved images for navigation
+        currentFullscreenImages = await Promise.all(project.images.map(async (img) => {
             let imgSrc = img.src || img.path;
 
             if (imgSrc && imgSrc.startsWith('users/')) {
@@ -332,13 +340,18 @@ async function openResourceImages() {
                 }
             }
 
-            return `
-                <div class=\"resource-image-item\" onclick=\"openImageFullscreen('${imgSrc}', '${img.title || img.fileName}')\">
-                    <img src=\"${imgSrc}\" alt=\"${img.title || img.fileName}\">
-                    <p class=\"resource-image-title\">${img.title || img.fileName}</p>
-                </div>
-            `;
+            return {
+                src: imgSrc,
+                title: img.title || img.fileName
+            };
         }));
+
+        const imagesHTML = currentFullscreenImages.map((img, index) => `
+            <div class="resource-image-item" onclick="openImageFullscreen(${index})">
+                <img src="${img.src}" alt="${img.title}">
+                <p class="resource-image-title">${img.title}</p>
+            </div>
+        `);
 
         grid.innerHTML = imagesHTML.join('');
 
@@ -370,7 +383,8 @@ async function openResourceVideos() {
 
         title.textContent = `${currentResourceProject.name} - Videos`;
 
-        const videosHTML = await Promise.all(project.videos.map(async (video) => {
+        // Store resolved videos for navigation
+        currentFullscreenVideos = await Promise.all(project.videos.map(async (video) => {
             let videoSrc = video.src || video.path;
 
             if (videoSrc && videoSrc.startsWith('users/')) {
@@ -380,13 +394,18 @@ async function openResourceVideos() {
                 }
             }
 
-            return `
-                <div class=\"resource-video-item\" onclick=\"playVideo('${videoSrc}', '${video.title || video.fileName}')\">
-                    <video src=\"${videoSrc}\" preload=\"metadata\"></video>
-                    <p class=\"resource-video-title\">${video.title || video.fileName}</p>
-                </div>
-            `;
+            return {
+                src: videoSrc,
+                title: video.title || video.fileName
+            };
         }));
+
+        const videosHTML = currentFullscreenVideos.map((video, index) => `
+            <div class="resource-video-item" onclick="playVideo(${index})">
+                <video src="${video.src}" preload="metadata"></video>
+                <p class="resource-video-title">${video.title}</p>
+            </div>
+        `);
 
         grid.innerHTML = videosHTML.join('');
 
@@ -568,94 +587,269 @@ function closeMetricsViewModal() {
 
 // ==================== MEDIA UTILITIES ====================
 
-function openImageFullscreen(src, title) {
-    // Crear modal temporal para imagen fullscreen
+function openImageFullscreen(index) {
+    // Validate index and images array
+    if (!currentFullscreenImages || currentFullscreenImages.length === 0) return;
+    if (index < 0 || index >= currentFullscreenImages.length) return;
+
+    currentFullscreenImageIndex = index;
+    const image = currentFullscreenImages[index];
+    const totalImages = currentFullscreenImages.length;
+
+    // Remove existing overlay if any
+    if (currentFullscreenOverlay) {
+        currentFullscreenOverlay.remove();
+    }
+
+    // Create modal overlay
     const overlay = document.createElement('div');
+    overlay.id = 'imageFullscreenOverlay';
     overlay.style.cssText = `
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
         background: rgba(0,0,0,0.95); z-index: 10001;
         display: flex; align-items: center; justify-content: center;
         flex-direction: column; gap: 20px;
     `;
+    currentFullscreenOverlay = overlay;
+
+    // Header with title and counter
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; align-items: center; gap: 15px;';
 
     const titleEl = document.createElement('h3');
-    titleEl.textContent = title;
-    titleEl.style.cssText = 'color: white; font-size: 20px; font-weight: 600;';
+    titleEl.textContent = image.title;
+    titleEl.style.cssText = 'color: white; font-size: 20px; font-weight: 600; margin: 0;';
 
+    const counter = document.createElement('span');
+    counter.id = 'pmImageCounter';
+    counter.textContent = `${index + 1} / ${totalImages}`;
+    counter.style.cssText = `
+        font-size: 14px; color: rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.1); padding: 4px 12px;
+        border-radius: 20px;
+    `;
+
+    header.appendChild(titleEl);
+    header.appendChild(counter);
+
+    // Image container with navigation arrows
+    const container = document.createElement('div');
+    container.style.cssText = 'position: relative; display: flex; align-items: center; justify-content: center;';
+
+    // Left arrow
+    const leftArrow = document.createElement('button');
+    leftArrow.innerHTML = '<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>';
+    leftArrow.style.cssText = `
+        position: absolute; left: -70px; top: 50%; transform: translateY(-50%);
+        width: 50px; height: 50px; border-radius: 50%;
+        background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: all 0.3s ease; backdrop-filter: blur(10px);
+        ${index === 0 ? 'opacity: 0.3; pointer-events: none;' : ''}
+    `;
+    leftArrow.onclick = (e) => {
+        e.stopPropagation();
+        navigateFullscreenImage(-1);
+    };
+
+    // Right arrow
+    const rightArrow = document.createElement('button');
+    rightArrow.innerHTML = '<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>';
+    rightArrow.style.cssText = `
+        position: absolute; right: -70px; top: 50%; transform: translateY(-50%);
+        width: 50px; height: 50px; border-radius: 50%;
+        background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: all 0.3s ease; backdrop-filter: blur(10px);
+        ${index === totalImages - 1 ? 'opacity: 0.3; pointer-events: none;' : ''}
+    `;
+    rightArrow.onclick = (e) => {
+        e.stopPropagation();
+        navigateFullscreenImage(1);
+    };
+
+    // Image element
     const img = document.createElement('img');
-    img.src = src;
-    img.alt = title;
-    img.style.cssText = 'max-width: 90%; max-height: 70%; border-radius: 12px;';
+    img.src = image.src;
+    img.alt = image.title;
+    img.style.cssText = 'max-width: 80vw; max-height: 70vh; border-radius: 12px;';
+    img.onclick = (e) => e.stopPropagation();
 
+    container.appendChild(leftArrow);
+    container.appendChild(img);
+    container.appendChild(rightArrow);
+
+    // Close button
     const closeBtn = document.createElement('button');
     closeBtn.className = 'resource-btn';
-    closeBtn.innerHTML = '✖ Close'; // Antes: '✖ Cerrar'
+    closeBtn.innerHTML = '✖ Close';
     closeBtn.style.cssText = `
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        color: #f5f5f7;
+        color: #f5f5f7; padding: 10px 20px;
+        border-radius: 8px; cursor: pointer;
         backdrop-filter: blur(20px);
     `;
-    closeBtn.onclick = () => overlay.remove();
-
-    overlay.onclick = (e) => {
-        if (e.target === overlay) overlay.remove();
+    closeBtn.onclick = () => {
+        overlay.remove();
+        currentFullscreenOverlay = null;
+        currentFullscreenImages = [];
     };
 
-    overlay.appendChild(titleEl);
-    overlay.appendChild(img);
+    overlay.onclick = (e) => {
+        if (e.target === overlay) {
+            overlay.remove();
+            currentFullscreenOverlay = null;
+            currentFullscreenImages = [];
+        }
+    };
+
+    overlay.appendChild(header);
+    overlay.appendChild(container);
     overlay.appendChild(closeBtn);
     document.body.appendChild(overlay);
 }
 
-function playVideo(src, title) {
-    // Crear modal temporal para video player
+function navigateFullscreenImage(direction) {
+    const newIndex = currentFullscreenImageIndex + direction;
+    if (newIndex >= 0 && newIndex < currentFullscreenImages.length) {
+        openImageFullscreen(newIndex);
+    }
+}
+
+function playVideo(index) {
+    // Validate index and videos array
+    if (!currentFullscreenVideos || currentFullscreenVideos.length === 0) return;
+    if (index < 0 || index >= currentFullscreenVideos.length) return;
+
+    currentFullscreenVideoIndex = index;
+    const video = currentFullscreenVideos[index];
+    const totalVideos = currentFullscreenVideos.length;
+
+    // Remove existing overlay if any
+    if (currentFullscreenOverlay) {
+        const existingVideo = currentFullscreenOverlay.querySelector('video');
+        if (existingVideo) existingVideo.pause();
+        currentFullscreenOverlay.remove();
+    }
+
+    // Create modal overlay
     const overlay = document.createElement('div');
+    overlay.id = 'videoFullscreenOverlay';
     overlay.style.cssText = `
         position: fixed; top: 0; left: 0; right: 0; bottom: 0;
         background: rgba(0,0,0,0.95); z-index: 10001;
         display: flex; align-items: center; justify-content: center;
         flex-direction: column; gap: 20px;
     `;
+    currentFullscreenOverlay = overlay;
+
+    // Header with title and counter
+    const header = document.createElement('div');
+    header.style.cssText = 'display: flex; align-items: center; gap: 15px;';
 
     const titleEl = document.createElement('h3');
-    titleEl.textContent = title;
-    titleEl.style.cssText = 'color: white; font-size: 20px; font-weight: 600;';
+    titleEl.textContent = video.title;
+    titleEl.style.cssText = 'color: white; font-size: 20px; font-weight: 600; margin: 0;';
 
-    const video = document.createElement('video');
-    video.src = src;
-    video.controls = true;
-    video.autoplay = true;
-    video.style.cssText = 'max-width: 90%; max-height: 70%; border-radius: 12px;';
+    const counter = document.createElement('span');
+    counter.id = 'pmVideoCounter';
+    counter.textContent = `${index + 1} / ${totalVideos}`;
+    counter.style.cssText = `
+        font-size: 14px; color: rgba(255,255,255,0.7);
+        background: rgba(255,255,255,0.1); padding: 4px 12px;
+        border-radius: 20px;
+    `;
 
-    // Agregar event listener para cerrar al hacer click en el video
-    video.onclick = (e) => {
-        e.stopPropagation(); // Prevenir que el click en el video cierre el modal
+    header.appendChild(titleEl);
+    header.appendChild(counter);
+
+    // Video container with navigation arrows
+    const container = document.createElement('div');
+    container.style.cssText = 'position: relative; display: flex; align-items: center; justify-content: center;';
+
+    // Left arrow
+    const leftArrow = document.createElement('button');
+    leftArrow.innerHTML = '<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>';
+    leftArrow.style.cssText = `
+        position: absolute; left: -70px; top: 50%; transform: translateY(-50%);
+        width: 50px; height: 50px; border-radius: 50%;
+        background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: all 0.3s ease; backdrop-filter: blur(10px);
+        ${index === 0 ? 'opacity: 0.3; pointer-events: none;' : ''}
+    `;
+    leftArrow.onclick = (e) => {
+        e.stopPropagation();
+        navigateFullscreenVideo(-1);
     };
 
+    // Right arrow
+    const rightArrow = document.createElement('button');
+    rightArrow.innerHTML = '<svg viewBox="0 0 24 24" style="width:28px;height:28px;fill:white;"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>';
+    rightArrow.style.cssText = `
+        position: absolute; right: -70px; top: 50%; transform: translateY(-50%);
+        width: 50px; height: 50px; border-radius: 50%;
+        background: rgba(255,255,255,0.15); border: 1px solid rgba(255,255,255,0.2);
+        cursor: pointer; display: flex; align-items: center; justify-content: center;
+        transition: all 0.3s ease; backdrop-filter: blur(10px);
+        ${index === totalVideos - 1 ? 'opacity: 0.3; pointer-events: none;' : ''}
+    `;
+    rightArrow.onclick = (e) => {
+        e.stopPropagation();
+        navigateFullscreenVideo(1);
+    };
+
+    // Video element
+    const videoEl = document.createElement('video');
+    videoEl.src = video.src;
+    videoEl.controls = true;
+    videoEl.autoplay = true;
+    videoEl.style.cssText = 'max-width: 80vw; max-height: 70vh; border-radius: 12px;';
+    videoEl.onclick = (e) => e.stopPropagation();
+
+    container.appendChild(leftArrow);
+    container.appendChild(videoEl);
+    container.appendChild(rightArrow);
+
+    // Close button
     const closeBtn = document.createElement('button');
     closeBtn.className = 'resource-btn';
-    closeBtn.innerHTML = '✖ Cerrar';
+    closeBtn.innerHTML = '✖ Close';
     closeBtn.style.cssText = `
         background: rgba(255, 255, 255, 0.08);
         border: 1px solid rgba(255, 255, 255, 0.15);
-        color: #f5f5f7;
+        color: #f5f5f7; padding: 10px 20px;
+        border-radius: 8px; cursor: pointer;
         backdrop-filter: blur(20px);
     `;
     closeBtn.onclick = () => {
-        video.pause();
+        videoEl.pause();
         overlay.remove();
+        currentFullscreenOverlay = null;
+        currentFullscreenVideos = [];
     };
 
-    overlay.onclick = () => {
-        video.pause();
-        overlay.remove();
+    overlay.onclick = (e) => {
+        if (e.target === overlay) {
+            videoEl.pause();
+            overlay.remove();
+            currentFullscreenOverlay = null;
+            currentFullscreenVideos = [];
+        }
     };
 
-    overlay.appendChild(titleEl);
-    overlay.appendChild(video);
+    overlay.appendChild(header);
+    overlay.appendChild(container);
     overlay.appendChild(closeBtn);
     document.body.appendChild(overlay);
+}
+
+function navigateFullscreenVideo(direction) {
+    const newIndex = currentFullscreenVideoIndex + direction;
+    if (newIndex >= 0 && newIndex < currentFullscreenVideos.length) {
+        playVideo(newIndex);
+    }
 }
 
 async function downloadFile(filePath, fileName) {
@@ -697,8 +891,39 @@ function getFileIcon(fileName) {
     return icons[ext] || '📎';
 }
 
-// Cerrar con ESC
+// Cerrar con ESC y navegación con flechas
 document.addEventListener('keydown', (e) => {
+    // Handle fullscreen overlay navigation
+    if (currentFullscreenOverlay) {
+        if (e.key === 'Escape') {
+            const video = currentFullscreenOverlay.querySelector('video');
+            if (video) video.pause();
+            currentFullscreenOverlay.remove();
+            currentFullscreenOverlay = null;
+            currentFullscreenImages = [];
+            currentFullscreenVideos = [];
+            return;
+        }
+        if (e.key === 'ArrowLeft') {
+            e.preventDefault();
+            if (currentFullscreenImages.length > 0) {
+                navigateFullscreenImage(-1);
+            } else if (currentFullscreenVideos.length > 0) {
+                navigateFullscreenVideo(-1);
+            }
+            return;
+        }
+        if (e.key === 'ArrowRight') {
+            e.preventDefault();
+            if (currentFullscreenImages.length > 0) {
+                navigateFullscreenImage(1);
+            } else if (currentFullscreenVideos.length > 0) {
+                navigateFullscreenVideo(1);
+            }
+            return;
+        }
+    }
+
     if (e.key === 'Escape') {
         closeResourcesModal();
         closeGanttViewModal();
