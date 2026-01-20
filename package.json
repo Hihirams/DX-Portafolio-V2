@@ -29,47 +29,35 @@
       "icon": "assets/logo-dx.ico",
       "signAndEditExecutable": false
     },
+    "asar": true,
     "files": [
-      "**/*",
-      "!**/node_modules/*/{CHANGELOG.md,README.md,README,readme.md,readme}",
-      "!**/node_modules/*/{test,__tests__,tests,powered-test,example,examples}",
-      "!**/node_modules/*.d.ts",
-      "!**/node_modules/.bin",
-      "!**/*.{iml,o,hprof,orig,pyc,pyo,rbc,swp,csproj,sln,xproj}",
-      "!.editorconfig",
-      "!**/._*",
-      "!**/{.DS_Store,.git,.hg,.svn,CVS,RCS,SCCS,.gitignore,.gitattributes}",
-      "!**/{__pycache__,thumbs.db,.flowconfig,.idea,.vs,.nyc_output}",
-      "!**/{appveyor.yml,.travis.yml,circle.yml}",
-      "!**/{npm-debug.log,yarn.lock,.yarn-integrity,.yarn-metadata.json}"
+      "electron-main.js",
+      "preload.js",
+      "index.html",
+      "portfolio-editor.html",
+      "portfolio-viewer.html",
+      "project-manager.html",
+      "js/**/*",
+      "css/**/*",
+      "!**/{.cache,.git,dist,node_modules}",
+      "!**/*.{bat,py,md,txt,yaml,yml}",
+      "!**/users/**",
+      "!**/data/**",
+      "!**/assets/**",
+      "!**/DatosAct/**",
+      "!**/FeaturePages/**",
+      "!**/{pnpm-lock.yaml,pnpm-workspace.yaml}",
+      "!**/{diagnostic-*.js,diagnostic-*.txt}",
+      "!**/{add-kpis-to-projects.js,test-*.js,fix-*.bat}",
+      "!**/config.json"
     ],
     "extraResources": [
-      {
-        "from": "users",
-        "to": "users",
-        "filter": [
-          "**/*"
-        ]
-      },
-      {
-        "from": "data",
-        "to": "data",
-        "filter": [
-          "**/*"
-        ]
-      },
-      {
-        "from": ".",
-        "to": ".",
-        "filter": [
-          "projects.json"
-        ]
-      },
       {
         "from": "assets",
         "to": "assets",
         "filter": [
-          "**/*"
+          "**/*",
+          "!Thumbs.db"
         ]
       }
     ]

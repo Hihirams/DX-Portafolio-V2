@@ -31,27 +31,31 @@
           "title": "Demo 0.9.5"
         },
         {
-          "src": "users/user1/projects/proj001/videos/video_1764690487738_1.mp4",
+          "src": "users/user1/projects/proj001/videos/video_1767973082804_1.mp4",
           "title": "API REQUEST.mp4"
         }
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj001/images/image_1765396880019_0.png",
+          "src": "users/user1/projects/proj001/images/image_1767973081923_0.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1765396880021_1.png",
+          "src": "users/user1/projects/proj001/images/image_1767973081991_1.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1765396880026_2.png",
+          "src": "users/user1/projects/proj001/images/image_1767973082093_2.png",
           "title": "Vista Cenital"
+        },
+        {
+          "src": "users/user1/projects/proj001/images/image_1767973082198_3.png",
+          "title": "Infografia_1.png"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-12-10T20:01:20.015Z",
-      "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1763397062963.png",
+      "updatedAt": "2026-01-09T15:38:01.698Z",
+      "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1767646592170.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Platform that displays the quality status of processes or plants, allowing problems to be detected, actions to be prioritized, and quick data-based decisions to be made.",
@@ -114,21 +118,21 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj002/images/image_1765397145461_0.png",
+          "src": "users/user1/projects/proj002/images/image_1767646613002_0.png",
           "title": "Interfaz Principal"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1765397145464_1.png",
+          "src": "users/user1/projects/proj002/images/image_1767646613087_1.png",
           "title": "Detección Activa"
         },
         {
-          "src": "users/user1/projects/proj002/images/image_1765397145467_2.png",
+          "src": "users/user1/projects/proj002/images/image_1767646613232_2.png",
           "title": "Respuesta de FASTAPI"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2025-12-10T20:05:45.458Z",
-      "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1763397271039.png",
+      "updatedAt": "2026-01-05T20:56:52.656Z",
+      "ganttImagePath": "users/user1/projects/proj002/gantt/gantt_1767646612866.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "Fusión between 2 existent system QC ALT +DQITS that show Abnoramlities in real time & confirm the cycle time of the pice rate ",
@@ -190,33 +194,33 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/image_1765397182389_0.png",
+          "src": "users/user1/projects/proj003/images/image_1767646627661_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765397182392_1.png",
+          "src": "users/user1/projects/proj003/images/image_1767646627732_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765397182395_2.png",
+          "src": "users/user1/projects/proj003/images/image_1767646627795_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765397182397_3.png",
+          "src": "users/user1/projects/proj003/images/image_1767646627870_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765397182405_4.png",
+          "src": "users/user1/projects/proj003/images/image_1767646627960_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1765397182410_5.png",
+          "src": "users/user1/projects/proj003/images/image_1767646628059_5.png",
           "title": "Alerta y detección de objeto"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2025-12-10T20:06:22.382Z",
-      "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1763397369133.png",
+      "updatedAt": "2026-01-05T20:57:07.377Z",
+      "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1767646627609.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
       "concept": "AI camera system detecting people, movement, and misplaced objects, generating alerts to improve safety and reduce operational errors.",
@@ -484,13 +488,13 @@
     },
     {
       "id": "proj1762786312316",
-      "ownerId": "user2",
+      "ownerId": "user4",
       "title": "DX Expenses",
       "status": "develop",
       "progress": 50,
       "icon": "📈",
       "currentPhase": "The proposal for visualizing departmental expenses in Power BI has been validated. The report displays both monthly and accumulated spending and includes filters by department, fiscal quarter, and business unit.",
-      "updatedAt": "2025-12-10T20:08:36.993Z",
+      "updatedAt": "2026-01-09T14:40:35.663Z",
       "priority": "low",
       "achievements": {},
       "blockers": {
@@ -515,7 +519,7 @@
       ],
       "extraFiles": [],
       "createdAt": "2025-11-10T14:51:52.316Z",
-      "ownerName": "Sandra Santos",
+      "ownerName": "Ivanna Rodríguez",
       "concept": "",
       "priorityNumber": 20,
       "kpis": {
@@ -601,7 +605,7 @@
       "progress": 95,
       "icon": "📦",
       "currentPhase": "Final testing and user validation for FY25 will be completed, followed by full implementation and deployment of the FY25 version. Quick bug fixes and targeted improvements will also be addressed.",
-      "updatedAt": "2026-01-08T17:32:01.819Z",
+      "updatedAt": "2026-01-15T15:17:42.640Z",
       "priority": "medium",
       "achievements": {},
       "blockers": {
@@ -615,30 +619,38 @@
       "ganttImage": "",
       "videos": [
         {
-          "src": "users/user2/projects/proj1762786983969/videos/video_1765290356845_0.mp4",
-          "title": "DX_HOLD_PREVIEW.mp4"
+          "src": "users/user5/projects/proj1762786983969/videos/video_1768490262952_0.mp4",
+          "title": "Dx Hold Functionality"
         }
       ],
       "images": [
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765397379909_0.png",
-          "title": "DX_HOLD_VIEW.png"
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262665_0.png",
+          "title": "Log in Menu Screen"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765397379913_1.png",
-          "title": "HOLD_MONITOR_SYSTEM.png"
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262711_1.png",
+          "title": "Home Screen"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765397379916_2.png",
-          "title": "HOLD_MONITOR_SYSTEM_2.png"
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262745_2.png",
+          "title": "Dashboard Screen"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765397379920_3.png",
-          "title": "HOLD_MONITOR_SYSTEM_3.png"
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262791_3.png",
+          "title": "New Ticket Screen Main"
         },
         {
-          "src": "users/user2/projects/proj1762786983969/images/image_1765397379922_4.png",
-          "title": "HOLD_MONITOR_SYSTEM_4.png"
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262836_4.png",
+          "title": "New Ticket Create Screen"
+        },
+        {
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262872_5.png",
+          "title": "My On Hold Ticket Main"
+        },
+        {
+          "src": "users/user5/projects/proj1762786983969/images/image_1768490262913_6.png",
+          "title": "My On Hold Ticket Details"
         }
       ],
       "extraFiles": [],
@@ -729,7 +741,7 @@
       "progress": 30,
       "icon": "🧰",
       "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-      "updatedAt": "2025-12-10T20:10:34.923Z",
+      "updatedAt": "2026-01-05T20:59:58.290Z",
       "priority": "medium",
       "achievements": {
         "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
@@ -740,23 +752,23 @@
       },
       "nextSteps": {},
       "targetDate": "2025-11-10",
-      "ganttImagePath": "users/user2/projects/proj1762787721514/gantt/gantt_1763397727269.png",
+      "ganttImagePath": "users/user2/projects/proj1762787721514/gantt/gantt_1767646798409.png",
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765397434926_0.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1767646798478_0.png",
           "title": "RB1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765397434927_1.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1767646798582_1.png",
           "title": "RB2.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765397434929_2.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1767646798655_2.png",
           "title": "imagen 1.png"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1765397434930_3.png",
+          "src": "users/user2/projects/proj1762787721514/images/image_1767646798723_3.png",
           "title": "Slide1.JPG"
         }
       ],
@@ -946,28 +958,50 @@
     },
     {
       "id": "proj1762875499999",
-      "ownerId": "user2",
+      "ownerId": "user5",
       "title": "Holograma 3D",
-      "status": "discovery",
-      "progress": 0,
+      "status": "develop",
+      "progress": 53,
       "icon": "🗾",
       "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components.El ",
-      "updatedAt": "2025-12-09T18:05:42.543Z",
-      "priority": "low",
-      "achievements": {},
+      "updatedAt": "2026-01-09T15:12:17.835Z",
+      "priority": "medium",
+      "achievements": {
+        "2025-12": "Projection of images related to the Innovation Zone."
+      },
       "blockers": {
         "type": "info",
         "message": ""
       },
-      "nextSteps": {},
-      "targetDate": "2025-11-11",
-      "ganttImage": "",
+      "nextSteps": {
+        "2026-01": "Project animated videos related to the Innovation Zone.",
+        "2026-02": "Reduce the noise caused by the four blades of the hologram."
+      },
+      "targetDate": "2026-02-01",
       "videos": [],
-      "images": [],
-      "extraFiles": [],
+      "images": [
+        {
+          "src": "users/user2/projects/proj1762875499999/images/image_1767648869997_0.png",
+          "title": "Una de las proyecciones del Holograma 3D."
+        },
+        {
+          "src": "users/user2/projects/proj1762875499999/images/image_1767648870038_1.png",
+          "title": "Segundo Holograma 3D."
+        }
+      ],
+      "extraFiles": [
+        {
+          "src": "users/user5/projects/proj1762875499999/extra-files/Infographic_3D_Hologram_1767971537863.png",
+          "title": "Infographic 3D Hologram.png",
+          "fileName": "Infographic_3D_Hologram_1767971537863.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        }
+      ],
       "createdAt": "2025-11-11T15:38:19.999Z",
-      "ownerName": "Sandra Santos",
-      "concept": "",
+      "ownerName": "Angel Alvarez",
+      "concept": "It is a 3D hologram for the visualization of images and videos, dedicated for use in the Innovation Zone.",
       "priorityNumber": 22,
       "kpis": {
         "totalHoursEstimated": 952,
@@ -975,7 +1009,7 @@
         "fteSaved": 1.9,
         "completion": 0,
         "timeline": {
-          "startDate": "2025-11-11T15:38:19.999Z",
+          "startDate": "2025-11-11",
           "targetEnd": "2025-11-11",
           "currentPhase": "Creating three-dimensional (3D) images to enhance visual clarity, improve user interaction, and provide a more immersive representation of the project’s concepts and components."
         },
@@ -992,7 +1026,8 @@
           "totalMilestones": 8,
           "resourceUtilization": 87
         }
-      }
+      },
+      "ganttImagePath": "users/user5/projects/proj1762875499999/gantt/gantt_1767971517896.png"
     },
     {
       "id": "proj1762876915703",
@@ -1522,25 +1557,69 @@
     {
       "id": "proj1764601398436",
       "ownerId": "user4",
-      "title": "Automation IMDS",
-      "status": "discovery",
+      "title": "IMDS Automation Workflow",
+      "status": "pilot",
       "priority": "high",
-      "progress": 8,
+      "progress": 85,
       "icon": "📋",
-      "currentPhase": "Currently, I am collaborating with the team to fully understand the platform in order to propose solutions.",
-      "achievements": {},
+      "currentPhase": "This project is currently in the Pilot phase. Together with the IMDS team, I am conducting tests to verify that the results are indeed as expected.",
+      "achievements": {
+        "2025/12": "Certain inconsistencies were identified in the data export generated by the iPoint Compliance Agent portal. This finding proved significant, as it allowed us to understand that the issue was not so much with the macro used, but rather with the way the portal performs the data export.",
+        "2026-01": "The macro was successfully updated to capture the COMPONENT PART NUMBER and COMPONENT PENDING NAME associated with the “The hidden substance…” warning. Further work is in progress to fine-tune the remaining details.",
+        "2026/01": "I have finished correcting and adding what was necessary for the Macro to work. I'm currently waiting for feedback.\n"
+      },
       "blockers": {
         "type": "info",
         "message": ""
       },
-      "nextSteps": {},
-      "targetDate": "2025-12-01",
-      "ganttImage": "",
-      "videos": [],
-      "images": [],
+      "nextSteps": {
+        "2026/01": "Review and incorporate feedback (if necessary) from the IMDS team."
+      },
+      "targetDate": "2026-05-02",
+      "videos": [
+        {
+          "src": "users/user4/projects/proj1764601398436/videos/video_1768401745053_0.mp4",
+          "title": "Macro_Pruebas.mp4"
+        }
+      ],
+      "images": [
+        {
+          "src": "users/user4/projects/proj1764601398436/images/image_1768508472864_0.png",
+          "title": "Macro actual.png"
+        },
+        {
+          "src": "users/user4/projects/proj1764601398436/images/image_1768508472908_1.png",
+          "title": "Sumario.png"
+        }
+      ],
       "createdAt": "2025-12-01T15:03:18.436Z",
-      "updatedAt": "2025-12-10T20:51:06.011Z",
-      "extraFiles": [],
+      "updatedAt": "2026-01-15T20:21:12.805Z",
+      "extraFiles": [
+        {
+          "src": "users/user4/projects/proj1764601398436/extra-files/IMDS_infographic_1768407305101.jpg",
+          "title": "IMDS_infographic.jpg",
+          "fileName": "IMDS_infographic_1768407305101.jpg",
+          "fileType": "image/jpg",
+          "fileSize": 0,
+          "extension": "jpg"
+        },
+        {
+          "src": "users/user4/projects/proj1764601398436/extra-files/Prototype_1768501346041.png",
+          "title": "Prototype.png",
+          "fileName": "Prototype_1768501346041.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        },
+        {
+          "src": "users/user4/projects/proj1764601398436/extra-files/Prototype__1__1768501346087.png",
+          "title": "Prototype (1).png",
+          "fileName": "Prototype__1__1768501346087.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        }
+      ],
       "ownerName": "Ivanna Rodríguez",
       "concept": "The purpose of this project is to explore options to help the IMDS team automate their workflow.",
       "priorityNumber": 27,
@@ -1567,62 +1646,65 @@
           "totalMilestones": 0,
           "resourceUtilization": 0
         }
-      }
+      },
+      "ganttImagePath": "users/user4/projects/proj1764601398436/gantt/gantt_1768422964443.png"
     },
     {
       "id": "proj1764623073513",
       "ownerId": "user5",
-      "title": "QA-DX System",
+      "title": "QA PMS",
       "status": "develop",
       "priority": "high",
-      "progress": 12,
+      "progress": 45,
       "icon": "📊",
-      "currentPhase": "The project is in development, currently is in the phase of design and link the automate to the power apps.",
+      "currentPhase": "The project is in development, currently is in the phase of design and link the automate to the power apps/automate.",
       "achievements": {
-        "2025-12": "The NPCC screens "
+        "2025-12": "Design of the first Three main screens.",
+        "2026-01": "Functions like: Connections to SharePoint, and main design."
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
       "nextSteps": {
-        "2025-12": "Increase the design making it more attractive, change the colors, change the shapes design, etc."
+        "2025-12": "Increase the design making it more attractive, change the colors, change the shapes design, etc.",
+        "2026-01": "Develop a flow on power automate to automatically create a Sharepoint List called \"New Products CheckList\"."
       },
-      "targetDate": "2025-12-12",
+      "targetDate": "2026-02-01",
       "videos": [
         {
-          "src": "users/user5/projects/proj1764623073513/videos/video_1764883696234_0.mp4",
-          "title": "Screen Recording 2025-12-04 152532.mp4"
+          "src": "users/user5/projects/proj1764623073513/videos/video_1768312097808_0.mp4",
+          "title": "App Functionality 0.30.0.mp4"
         }
       ],
       "images": [
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765397558420_0.png",
-          "title": "Screenshot 2025-12-04 152227.png"
+          "src": "users/user5/projects/proj1764623073513/images/image_1768830343197_0.png",
+          "title": "Main Menu"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765397558421_1.png",
-          "title": "Screenshot 2025-12-04 152234.png"
+          "src": "users/user5/projects/proj1764623073513/images/image_1768830343243_1.png",
+          "title": "New Projects Screen 1"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765397558422_2.png",
-          "title": "Screenshot 2025-12-04 152240.png"
+          "src": "users/user5/projects/proj1764623073513/images/image_1768830343275_2.png",
+          "title": "New Projects Screen 2"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765397558423_3.png",
-          "title": "Screenshot 2025-12-04 152248.png"
+          "src": "users/user5/projects/proj1764623073513/images/image_1768830343311_3.png",
+          "title": "New Projects Screen 3"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765397558424_4.png",
-          "title": "Screenshot 2025-12-04 152256.png"
+          "src": "users/user5/projects/proj1764623073513/images/image_1768830343347_4.png",
+          "title": "New Projects Screen 4"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1765397558426_5.png",
-          "title": "Screenshot 2025-12-04 152303.png"
+          "src": "users/user5/projects/proj1764623073513/images/image_1768830343387_5.png",
+          "title": "All Projects Screen"
         }
       ],
       "createdAt": "2025-12-01T21:04:33.513Z",
-      "updatedAt": "2025-12-10T20:12:38.416Z",
+      "updatedAt": "2026-01-19T13:45:43.158Z",
       "extraFiles": [
         {
           "src": "users/user5/projects/proj1764623073513/extra-files/QA_NPCC_Digitalization_Proposa_1764623349973.pptx",
@@ -1631,11 +1713,27 @@
           "fileType": "application/octet-stream",
           "fileSize": 0,
           "extension": "pptx"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/extra-files/Diagrama_de_flujo_de_funcionam_1767966641812.png",
+          "title": "Diagrama de flujo de funcionamiento.png",
+          "fileName": "Diagrama_de_flujo_de_funcionam_1767966641812.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        },
+        {
+          "src": "users/user5/projects/proj1764623073513/extra-files/QA_PMS_Infographic_1767968370386.jpg",
+          "title": "QA PMS Infographic.jpg",
+          "fileName": "QA_PMS_Infographic_1767968370386.jpg",
+          "fileType": "image/jpg",
+          "fileSize": 0,
+          "extension": "jpg"
         }
       ],
       "ownerName": "Angel Alvarez",
       "concept": "This system is designed to digitize the NPCC and Project Transfer process, enabling each quality analyst to standardize formats, automate due dates and status report and develop department skills, used throughout the workflow and providing an interactive GUI where every user has a defined access level to view and manage the available data.",
-      "ganttImagePath": "users/user5/projects/proj1764623073513/gantt/gantt_1765293074099.png",
+      "ganttImagePath": "users/user5/projects/proj1764623073513/gantt/gantt_1767968359847.png",
       "priorityNumber": 27,
       "kpis": {
         "totalHoursEstimated": 0,
@@ -1645,6 +1743,173 @@
         "timeline": {
           "startDate": "2025-11-28",
           "targetEnd": "2026-01-01",
+          "currentPhase": ""
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 0,
+          "milestonesOnTime": 0,
+          "totalMilestones": 0,
+          "resourceUtilization": 0
+        }
+      }
+    },
+    {
+      "id": "proj1767880589770",
+      "ownerId": "user4",
+      "title": "Scorecard data automation",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 10,
+      "icon": "📋",
+      "currentPhase": "Currently, this project is in the Discovery phase.\n",
+      "achievements": {
+        "2026/01": "The cells were successfully linked across several sheets in the Excel workbook so that the summary fills in automatically."
+      },
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {
+        "2026/01": "I'll enter the second phase of this project, which consists of finding the best way to link different Excel files."
+      },
+      "targetDate": "2026-01-16",
+      "ganttImage": "",
+      "videos": [],
+      "images": [
+        {
+          "src": "users/user4/projects/proj1767880589770/images/image_1768576016843_0.png",
+          "title": "Summary.png"
+        }
+      ],
+      "createdAt": "2026-01-08T13:56:29.770Z",
+      "updatedAt": "2026-01-16T15:06:56.774Z",
+      "extraFiles": [
+        {
+          "src": "users/user4/projects/proj1767880589770/extra-files/scorecard_process__phase_1__1768576016892.png",
+          "title": "scorecard process (phase 1).png",
+          "fileName": "scorecard_process__phase_1__1768576016892.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        }
+      ],
+      "ownerName": "Ivanna Rodríguez",
+      "priorityNumber": 10,
+      "concept": "This project is about automating the way the Scorecard summary is filled out.",
+      "kpis": {
+        "totalHoursEstimated": 0,
+        "hoursSpent": 0,
+        "fteSaved": 0,
+        "completion": 0,
+        "timeline": {
+          "startDate": "",
+          "targetEnd": "",
+          "currentPhase": ""
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 0,
+          "milestonesOnTime": 0,
+          "totalMilestones": 0,
+          "resourceUtilization": 0
+        }
+      }
+    },
+    {
+      "id": "proj1767974828674",
+      "ownerId": "user2",
+      "title": "DX Expo MX Edition",
+      "status": "discovery",
+      "priority": "high",
+      "progress": 3,
+      "icon": "📚",
+      "currentPhase": "Phase: Preparation, Organization, and Participant Sessions (Deadline: January 16)\nFinalize agenda, confirm participants, and prepare DX/INN documentation and materials.\nOrganize logistics, assign roles, and set up communication and feedback tools; conduct briefing and coaching sessions with presenters.",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {
+        "2025-01-16": "Generate Roles and Responsibilities\nDefine key roles for event coordination (e.g., Event Lead, Logistics Coordinator, Communication Manager, Participant Liaison).\nAssign clear responsibilities for agenda preparation, material readiness, participant sessions, and feedback collection.",
+        "2025-01-15": "Present proposal to management for the decision phase:\nInclude suggested topics to be showcased at the Expo, proposed timelines, and review which plants will participate."
+      },
+      "targetDate": "2026-01-16",
+      "videos": [],
+      "images": [
+        {
+          "src": "users/user2/projects/proj1767974828674/images/image_1768580179499_0.png",
+          "title": "image (2).png"
+        }
+      ],
+      "createdAt": "2026-01-09T16:07:08.674Z",
+      "updatedAt": "2026-01-16T16:16:03.609Z",
+      "ganttImagePath": "users/user2/projects/proj1767974828674/gantt/gantt_1768580177638.png",
+      "extraFiles": [
+        {
+          "src": "users/user2/projects/proj1767974828674/extra-files/Vinil_Cot_1768580197320.png",
+          "title": "Vinil Cot.png",
+          "fileName": "Vinil_Cot_1768580197320.png",
+          "fileType": "image/png",
+          "fileSize": 0,
+          "extension": "png"
+        }
+      ]
+    },
+    {
+      "id": "proj1768501895905",
+      "ownerId": "user4",
+      "title": "Driving Experience Proposed Scenario",
+      "status": "released",
+      "priority": "low",
+      "progress": 100,
+      "icon": "📋",
+      "currentPhase": "The proposal was sent to the developers.",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2026-01-15",
+      "ganttImage": "",
+      "videos": [],
+      "images": [],
+      "createdAt": "2026-01-15T18:31:35.905Z",
+      "updatedAt": "2026-01-15T20:18:04.084Z",
+      "extraFiles": [
+        {
+          "src": "users/user4/projects/proj1768501895905/extra-files/Pitch_1768508284143.pdf",
+          "title": "Pitch.pdf",
+          "fileName": "Pitch_1768508284143.pdf",
+          "fileType": "application/octet-stream",
+          "fileSize": 0,
+          "extension": "pdf"
+        }
+      ],
+      "ownerName": "Ivanna Rodríguez",
+      "priorityNumber": 29,
+      "concept": "In this project, a proposal for a scene for the Driving Experience was developed.",
+      "kpis": {
+        "totalHoursEstimated": 0,
+        "hoursSpent": 0,
+        "fteSaved": 0,
+        "completion": 0,
+        "timeline": {
+          "startDate": "",
+          "targetEnd": "",
           "currentPhase": ""
         },
         "resources": {

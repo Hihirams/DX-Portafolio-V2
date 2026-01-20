@@ -2,89 +2,67 @@
 // ELECTRON MAIN - Proceso principal
 // ============================================
 
-const { app, BrowserWindow, ipcMain, dialog } = require('electron'); // â† SOLO una vez
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
 
 // fs de dos sabores:
 const fsSync = require('fs');                 // sync: existsSync, mkdirSync...
 const fs = require('fs').promises;            // promesas: readFile, writeFile...
 
-// âœ… FIX: Check if running in Electron main process
+// ✅ FIX: Check if running in Electron main process
 if (typeof app === 'undefined') {
-    console.error('âŒ This script must be run in Electron main process');
+    console.error('❌ This script must be run in Electron main process');
     process.exit(1);
 }
 
+// ⚡ OPTIMIZACIÓN: Flags de V8 para inicio más rápido
+app.commandLine.appendSwitch('disable-gpu-sandbox');
+app.commandLine.appendSwitch('disable-software-rasterizer');
+
 const IS_DEV = process.argv.includes('--dev');
 
-// âœ… Resolver raÃ­z de proyecto priorizando carpeta del .exe si hay datos
-// Reemplaza tu resolveProjectRoot() completo por este
+// ✅ OPTIMIZADO: Resolver raíz de proyecto de forma más eficiente
 function resolveProjectRoot() {
-    const path = require('path');
-    const fs = require('fs');
-
-    // 1) Si electron-builder portable: directorio real del .exe
-    const portableDir = process.env.PORTABLE_EXECUTABLE_DIR || null;
-
-    // 2) "Start in" del acceso directo / cwd
-    const startIn = process.cwd();
-
-    // 3) Carpeta del ejecutable que realmente corriÃ³
-    const exeDir = path.dirname(process.execPath);
-
-    // 4) Salir de resources/app.asar â†’ ir a la carpeta que lo contiene
-    const resourcesParent = (process.resourcesPath)
-        ? path.join(process.resourcesPath, '..')
-        : null;
-
-    // 5) Salir de app.asar por __dirname (cuando el main vive dentro del asar)
-    const asarEscape = path.join(__dirname, '..', '..');
-
-    const clean = (p) => (p && p.includes('.asar')) ? path.dirname(p) : p;
-
-    const candidates = [
-        clean(portableDir),
-        clean(startIn),
-        clean(exeDir),
-        clean(resourcesParent),
-        clean(asarEscape),
-    ].filter(Boolean);
-
-    const hasBoth = (dir) => {
-        try {
-            const d = path.join(dir, 'data');
-            const u = path.join(dir, 'users');
-            return fs.existsSync(d) && fs.statSync(d).isDirectory() &&
-                fs.existsSync(u) && fs.statSync(u).isDirectory();
-        } catch { return false; }
-    };
-
-    // Preferir carpeta que tiene *ambas* (data y users)
-    for (const c of candidates) if (hasBoth(c)) return c;
-
-    // Si no hay ambas, al menos la que tenga uno de los dos
-    for (const c of candidates) {
-        try {
-            if (fs.existsSync(path.join(c, 'data')) || fs.existsSync(path.join(c, 'users'))) return c;
-        } catch { }
+    // PORTABLE: usar directamente PORTABLE_EXECUTABLE_DIR (más rápido)
+    const portableDir = process.env.PORTABLE_EXECUTABLE_DIR;
+    if (portableDir && fsSync.existsSync(path.join(portableDir, 'data'))) {
+        return portableDir;
     }
 
-    // Ãšltimo recurso: exeDir
+    // DESARROLLO: usar el directorio del proyecto
+    if (IS_DEV) {
+        return __dirname;
+    }
+
+    // PORTABLE SIN ENV: buscar junto al exe
+    const exeDir = path.dirname(process.execPath);
+    if (fsSync.existsSync(path.join(exeDir, 'data'))) {
+        return exeDir;
+    }
+
+    // CWD: carpeta de trabajo actual
+    const cwd = process.cwd();
+    if (fsSync.existsSync(path.join(cwd, 'data'))) {
+        return cwd;
+    }
+
+    // ÚLTIMO RECURSO: exeDir
     return exeDir;
 }
-
-
 
 const PROJECT_ROOT = resolveProjectRoot();
 const USERS_DIR = path.join(PROJECT_ROOT, 'users');
 const DATA_DIR = path.join(PROJECT_ROOT, 'data');
 
-console.log('[RUTAS]');
-console.log('  PROJECT_ROOT:', PROJECT_ROOT);
-console.log('  USERS_DIR   :', USERS_DIR);
-console.log('  DATA_DIR    :', DATA_DIR);
-console.log('  IS_DEV      :', IS_DEV);
-console.log('   process.execPath:', process.execPath);
+// Solo mostrar logs en modo desarrollo
+if (IS_DEV) {
+    console.log('[RUTAS]');
+    console.log('  PROJECT_ROOT:', PROJECT_ROOT);
+    console.log('  USERS_DIR   :', USERS_DIR);
+    console.log('  DATA_DIR    :', DATA_DIR);
+    console.log('  IS_DEV      :', IS_DEV);
+    console.log('  process.execPath:', process.execPath);
+}
 // ==================== CREAR VENTANA ====================
 
 function createWindow() {
@@ -103,7 +81,8 @@ function createWindow() {
             preload: path.join(__dirname, 'preload.js'),
             contextIsolation: true,
             nodeIntegration: false,
-            enableRemoteModule: false
+            enableRemoteModule: false,
+            backgroundThrottling: false  // ⚡ Prevenir throttling durante carga inicial
         },
         backgroundColor: '#000000',
         show: false

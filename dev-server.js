@@ -13,8 +13,24 @@ const fs = require('fs');
 const path = require('path');
 const url = require('url');
 
-const PORT = 3000;
+const PORT = 8080; // Puerto alternativo, más abierto en redes corporativas
+const HOST = '0.0.0.0'; // Escucha en todas las interfaces de red
 const ROOT_DIR = __dirname;
+
+// Función para obtener la IP local
+function getLocalIP() {
+    const os = require('os');
+    const interfaces = os.networkInterfaces();
+    for (const name of Object.keys(interfaces)) {
+        for (const iface of interfaces[name]) {
+            // Buscar IPv4 no interna
+            if (iface.family === 'IPv4' && !iface.internal) {
+                return iface.address;
+            }
+        }
+    }
+    return 'localhost';
+}
 
 // MIME types
 const MIME_TYPES = {
@@ -47,7 +63,7 @@ function serveFile(filePath, res) {
 
         const ext = path.extname(filePath).toLowerCase();
         const contentType = MIME_TYPES[ext] || 'application/octet-stream';
-        
+
         res.writeHead(200, {
             'Content-Type': contentType,
             'Cache-Control': 'no-cache, no-store, must-revalidate',
@@ -64,7 +80,7 @@ function serveFile(filePath, res) {
 function listDirectory(dirPath, res) {
     try {
         const fullPath = path.join(ROOT_DIR, dirPath);
-        
+
         // Seguridad: no permitir acceso fuera de ROOT_DIR
         if (!fullPath.startsWith(ROOT_DIR)) {
             res.writeHead(403, { 'Content-Type': 'application/json' });
@@ -151,15 +167,20 @@ const server = http.createServer((req, res) => {
 /**
  * Inicia el servidor
  */
-server.listen(PORT, () => {
+server.listen(PORT, HOST, () => {
+    const localIP = getLocalIP();
     console.log(`
 ╔════════════════════════════════════════════════════════════════╗
 ║                                                                ║
 ║           🚀 Servidor de Desarrollo - Portafolio DX           ║
 ║                                                                ║
-║   URL: http://localhost:${PORT}                                     ║
+║   🖥️  URL Local:    http://localhost:${PORT}                        ║
+║   🌐 URL de Red:   http://${localIP}:${PORT}                       ║
+║                                                                ║
+║   📡 Comparte la URL de Red con tu equipo para acceso remoto  ║
 ║                                                                ║
 ║   Características:                                            ║
+║   ✅ Accesible desde cualquier dispositivo en la red          ║
 ║   ✅ Hot-reload automático de datos                           ║
 ║   ✅ Sin necesidad de compilar (build)                        ║
 ║   ✅ Cambios en vivo cada 3 segundos                          ║
@@ -168,7 +189,7 @@ server.listen(PORT, () => {
 ║                                                                ║
 ╚════════════════════════════════════════════════════════════════╝
     `);
-    
+
     console.log('📝 Editando projects.json para ver cambios en vivo...\n');
 });
 
