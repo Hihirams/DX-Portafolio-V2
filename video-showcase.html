@@ -1,0 +1,639 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DX Video Showcase - QE DX-INN</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/video-showcase.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+</head>
+
+<body class="video-showcase-page">
+    <!-- Header - Liquid Glass Islands (Same as Home) -->
+    <header class="liquid-glass-header">
+        <!-- Island 1: Logo -->
+        <div class="glass-island glass-island-logo" onclick="window.location.href='index.html'">
+            <img src="assets/logo-dx.png" alt="DX Logo" class="island-logo-img">
+            <div class="island-logo-text">
+                <span class="island-logo-title">QE DX-INN</span>
+                <span class="island-logo-subtitle">Digital Transformation</span>
+            </div>
+        </div>
+
+        <!-- Island 2: Search -->
+        <div class="glass-island glass-island-search">
+            <svg class="island-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"></circle>
+                <path d="m21 21-4.35-4.35"></path>
+            </svg>
+            <input type="text" class="island-search-input" id="searchInput" placeholder="Search videos...">
+        </div>
+
+        <!-- Island 3: Navigation -->
+        <div class="glass-island glass-island-nav">
+            <button class="island-nav-btn" onclick="window.location.href='index.html'">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path
+                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6">
+                    </path>
+                </svg>
+                <span>Home</span>
+            </button>
+            <div class="island-nav-divider"></div>
+            <button class="island-nav-btn" onclick="openGeneralPortfolio()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                    <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                    <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                    <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                </svg>
+                <span>Portfolio DX</span>
+            </button>
+            <div class="island-nav-divider"></div>
+            <button class="island-nav-btn" onclick="openProjectManager()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path>
+                    <rect x="9" y="3" width="6" height="4" rx="1"></rect>
+                    <path d="M9 12h6M9 16h6"></path>
+                </svg>
+                <span>Project Overview</span>
+            </button>
+            <div class="user-section" id="userSection">
+                <!-- Se llenará dinámicamente con Login o User Info -->
+            </div>
+        </div>
+        <!-- Theme toggle removed for this page - always dark mode -->
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content video-showcase-main">
+        <!-- Hero Section - Featured Video -->
+        <section class="hero-video-section">
+            <div class="hero-video-bg">
+                <img src="https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80"
+                    alt="Digital Factory" id="heroImage">
+            </div>
+            <div class="hero-video-content">
+                <div class="hero-video-inner">
+                    <div class="hero-featured-tag">
+                        <span class="line"></span>
+                        <span>Featured Project</span>
+                    </div>
+                    <h1 class="hero-video-title" id="heroTitle">
+                        Quality Clinic <br>
+                        <span class="gradient-text">Unity 2.0</span>
+                    </h1>
+                    <div class="hero-video-meta" id="heroMeta">
+                        <span class="match">98% Match</span>
+                        <span>2023</span>
+                        <span class="badge">4K</span>
+                        <span>IoT Integration</span>
+                    </div>
+                    <p class="hero-video-description" id="heroDescription">
+                        A unified workspace visualizing real-time KPIs within the plant's 3D environment. Experience the
+                        seamless integration of detection and IoT QueryLink linking.
+                    </p>
+                    <div class="hero-video-actions">
+                        <button class="btn-play" onclick="playFeaturedVideo()">
+                            <span class="icon material-icons">play_arrow</span>
+                            Play
+                        </button>
+                        <button class="btn-more-info" onclick="showVideoInfo()">
+                            <span class="icon material-icons">info_outline</span>
+                            More Info
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Video Sections -->
+        <div class="video-sections">
+            <!-- Latest Innovation Demos -->
+            <section class="video-section">
+                <div class="section-header-row">
+                    <h3 class="section-title">Latest Innovation Demos</h3>
+                    <div class="carousel-nav-arrows">
+                        <button class="carousel-arrow-btn" id="innovationPrev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-arrow-btn" id="innovationNext" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="carousel-wrapper">
+                    <div class="video-carousel" id="innovationCarousel">
+                        <!-- Cards will be generated dynamically -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Top Departmental Showcases (Ranked) -->
+            <section class="video-section">
+                <div class="section-header-row">
+                    <h3 class="section-title">Top Departmental Showcases</h3>
+                    <div class="carousel-nav-arrows">
+                        <button class="carousel-arrow-btn" id="rankedPrev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-arrow-btn" id="rankedNext" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="ranked-carousel" id="rankedCarousel">
+                    <!-- Ranked items will be generated dynamically -->
+                </div>
+            </section>
+
+            <!-- Success Stories -->
+            <section class="video-section">
+                <div class="section-header-row">
+                    <h3 class="section-title">Success Stories</h3>
+                    <div class="carousel-nav-arrows">
+                        <button class="carousel-arrow-btn" id="successPrev" aria-label="Previous">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M15 18l-6-6 6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                        <button class="carousel-arrow-btn" id="successNext" aria-label="Next">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 18l6-6-6-6" stroke-linecap="round" stroke-linejoin="round" />
+                            </svg>
+                        </button>
+                    </div>
+                </div>
+                <div class="carousel-wrapper">
+                    <div class="success-carousel" id="successCarousel">
+                        <!-- Success cards will be generated dynamically -->
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Video Player Modal -->
+    <div class="video-modal" id="videoModal">
+        <div class="video-modal-content">
+            <button class="video-modal-close" onclick="closeVideoModal()">
+                <span class="material-icons">close</span>
+            </button>
+            <div class="video-modal-player">
+                <video id="videoPlayer" controls>
+                    <source src="" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <p>&copy; 2025 Digital Transformation Team. All rights reserved</p>
+    </footer>
+
+    <script>
+        // ==================== SAMPLE DATA ====================
+        const sampleVideos = {
+            innovation: [
+                {
+                    id: 'vid-001',
+                    title: 'Robot Innovation Line',
+                    thumbnail: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=640&q=80',
+                    duration: '12:04',
+                    progress: 66,
+                    match: 96,
+                    quality: 'HD',
+                    isNew: false
+                },
+                {
+                    id: 'vid-002',
+                    title: 'AI Predictive Maintenance',
+                    thumbnail: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?w=640&q=80',
+                    duration: '8:32',
+                    progress: 0,
+                    match: 94,
+                    quality: '4K',
+                    isNew: true
+                },
+                {
+                    id: 'vid-003',
+                    title: 'DX Hold Monitor',
+                    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&q=80',
+                    duration: '15:20',
+                    progress: 100,
+                    match: 91,
+                    quality: 'HD',
+                    isNew: false
+                },
+                {
+                    id: 'vid-004',
+                    title: 'AR Remote Assist',
+                    thumbnail: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=640&q=80',
+                    duration: '6:45',
+                    progress: 0,
+                    match: 88,
+                    quality: 'HD',
+                    isNew: false
+                },
+                {
+                    id: 'vid-005',
+                    title: 'Smart Warehouse System',
+                    thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=640&q=80',
+                    duration: '10:15',
+                    progress: 25,
+                    match: 92,
+                    quality: '4K',
+                    isNew: true
+                },
+                {
+                    id: 'vid-006',
+                    title: 'Digital Twin Factory',
+                    thumbnail: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=640&q=80',
+                    duration: '9:30',
+                    progress: 0,
+                    match: 89,
+                    quality: '4K',
+                    isNew: true
+                },
+                {
+                    id: 'vid-007',
+                    title: 'IoT Sensor Network',
+                    thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=640&q=80',
+                    duration: '11:22',
+                    progress: 50,
+                    match: 93,
+                    quality: 'HD',
+                    isNew: false
+                },
+                {
+                    id: 'vid-008',
+                    title: 'Machine Learning QC',
+                    thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80',
+                    duration: '7:18',
+                    progress: 0,
+                    match: 95,
+                    quality: '4K',
+                    isNew: true
+                }
+            ],
+            ranked: [
+                { id: 'dept-001', title: 'Engineering', thumbnail: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&q=80' },
+                { id: 'dept-002', title: 'Supply Chain', thumbnail: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&q=80' },
+                { id: 'dept-003', title: 'HR & Safety', thumbnail: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&q=80' },
+                { id: 'dept-004', title: 'IT Infrastructure', thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80' },
+                { id: 'dept-005', title: 'Quality Control', thumbnail: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&q=80' },
+                { id: 'dept-006', title: 'Manufacturing', thumbnail: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&q=80' },
+                { id: 'dept-007', title: 'R&D Innovation', thumbnail: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80' },
+                { id: 'dept-008', title: 'Maintenance', thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&q=80' },
+                { id: 'dept-009', title: 'Logistics', thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&q=80' },
+                { id: 'dept-010', title: 'Finance & Ops', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80' }
+            ],
+            success: [
+                {
+                    id: 'success-001',
+                    title: 'Global Logistics Sync',
+                    description: 'How we achieved 99.9% accuracy in inventory tracking across 14 sites.',
+                    thumbnail: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=640&q=80',
+                    duration: '3m 20s',
+                    year: '2023',
+                    tag: 'High Impact'
+                },
+                {
+                    id: 'success-002',
+                    title: 'Paperless Floor',
+                    description: 'The complete transition to digital worksheets saved 4M sheets annually.',
+                    thumbnail: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=640&q=80',
+                    duration: '5m 12s',
+                    year: '2023',
+                    tag: 'Pilot'
+                },
+                {
+                    id: 'success-003',
+                    title: 'Virtual Training VR',
+                    description: 'Reducing onboarding time by 40% using immersive VR headsets.',
+                    thumbnail: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=640&q=80',
+                    duration: '4m 05s',
+                    year: '2024',
+                    tag: 'New'
+                },
+                {
+                    id: 'success-004',
+                    title: 'Zero Defect Vision',
+                    description: 'AI-powered visual inspection achieving 99.97% defect detection rate.',
+                    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=640&q=80',
+                    duration: '6m 45s',
+                    year: '2024',
+                    tag: 'High Impact'
+                },
+                {
+                    id: 'success-005',
+                    title: 'Energy Optimization',
+                    description: 'Reduced energy consumption by 32% through smart monitoring systems.',
+                    thumbnail: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=640&q=80',
+                    duration: '4m 30s',
+                    year: '2024',
+                    tag: 'Pilot'
+                },
+                {
+                    id: 'success-006',
+                    title: 'Predictive Maintenance',
+                    description: 'Prevented $2.5M in unplanned downtime with ML-based predictions.',
+                    thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=640&q=80',
+                    duration: '5m 55s',
+                    year: '2023',
+                    tag: 'High Impact'
+                }
+            ]
+        };
+
+        // ==================== RENDER FUNCTIONS ====================
+
+        function renderInnovationCarousel() {
+            const container = document.getElementById('innovationCarousel');
+            container.innerHTML = sampleVideos.innovation.map(video => `
+                <div class="video-card" onclick="playVideo('${video.id}')">
+                    <div class="video-card-thumbnail">
+                        <img src="${video.thumbnail}" alt="${video.title}">
+                        <span class="video-card-duration">${video.duration}</span>
+                        ${video.isNew ? '<span class="video-card-badge">NEW</span>' : ''}
+                        ${video.progress > 0 ? `
+                            <div class="video-card-progress">
+                                <div class="video-card-progress-fill" style="width: ${video.progress}%"></div>
+                            </div>
+                        ` : ''}
+                        <div class="video-card-overlay">
+                            <div class="video-card-hover-actions">
+                                <button class="video-card-hover-btn primary">
+                                    <span class="icon material-icons">play_arrow</span>
+                                </button>
+                                <button class="video-card-hover-btn secondary">
+                                    <span class="icon material-icons">add</span>
+                                </button>
+                            </div>
+                            <div class="video-card-hover-title">${video.title}</div>
+                            <div class="video-card-hover-meta">
+                                <span class="match">${video.match}% Match</span>
+                                <span class="badge">${video.quality}</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderRankedCarousel() {
+            const container = document.getElementById('rankedCarousel');
+            container.innerHTML = sampleVideos.ranked.map((item, index) => `
+                <div class="ranked-item${index >= 9 ? ' ranked-item-double' : ''}" onclick="playVideo('${item.id}')">
+                    <div class="ranked-item-inner">
+                        <svg class="ranked-number" viewBox="0 0 ${index >= 9 ? 140 : 70} 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; width: auto; position: absolute; left: 0; bottom: 0; z-index: 0;">
+                            <text x="0" y="140" fill="black" stroke="#555" stroke-width="4" font-family="Inter" font-size="160" font-weight="900">${index + 1}</text>
+                        </svg>
+                        <div class="ranked-poster">
+                            <img src="${item.thumbnail}" alt="${item.title}">
+                            <div class="ranked-overlay">
+                                <div class="ranked-title">${item.title}</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function renderSuccessCarousel() {
+            const container = document.getElementById('successCarousel');
+            container.innerHTML = sampleVideos.success.map(item => `
+                <div class="success-card" onclick="playVideo('${item.id}')">
+                    <div class="success-card-image">
+                        <img src="${item.thumbnail}" alt="${item.title}">
+                        <div class="success-card-play-overlay">
+                            <div class="success-card-play-btn">
+                                <span class="material-icons">play_arrow</span>
+                            </div>
+                        </div>
+                        <div class="success-card-duration">${item.duration}</div>
+                    </div>
+                    <div class="success-card-content">
+                        <div class="success-card-tags">
+                            <span class="success-card-tag ${item.tag.toLowerCase().replace(' ', '-')}">${item.tag}</span>
+                            <span class="success-card-year">${item.year}</span>
+                        </div>
+                        <h4 class="success-card-title">${item.title}</h4>
+                        <p class="success-card-description">${item.description}</p>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // ==================== CAROUSEL CONTROLS ====================
+
+        function setupCarouselControls() {
+            // Innovation Carousel
+            const innovationCarousel = document.getElementById('innovationCarousel');
+            const innovationPrev = document.getElementById('innovationPrev');
+            const innovationNext = document.getElementById('innovationNext');
+            const scrollAmount = 340; // Card width + gap
+
+            innovationPrev.addEventListener('click', () => {
+                innovationCarousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+            });
+
+            innovationNext.addEventListener('click', () => {
+                innovationCarousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+            });
+
+            // Success Carousel
+            const successCarousel = document.getElementById('successCarousel');
+            const successPrev = document.getElementById('successPrev');
+            const successNext = document.getElementById('successNext');
+            const successScrollAmount = 370; // Card width + gap
+
+            successPrev.addEventListener('click', () => {
+                successCarousel.scrollBy({ left: -successScrollAmount, behavior: 'smooth' });
+            });
+
+            successNext.addEventListener('click', () => {
+                successCarousel.scrollBy({ left: successScrollAmount, behavior: 'smooth' });
+            });
+
+            // Ranked Carousel
+            const rankedCarousel = document.getElementById('rankedCarousel');
+            const rankedPrev = document.getElementById('rankedPrev');
+            const rankedNext = document.getElementById('rankedNext');
+            const rankedScrollAmount = 220; // Item width + gap
+
+            rankedPrev.addEventListener('click', () => {
+                rankedCarousel.scrollBy({ left: -rankedScrollAmount, behavior: 'smooth' });
+            });
+
+            rankedNext.addEventListener('click', () => {
+                rankedCarousel.scrollBy({ left: rankedScrollAmount, behavior: 'smooth' });
+            });
+
+            // Enable drag scrolling
+            enableDragScroll(innovationCarousel);
+            enableDragScroll(successCarousel);
+            enableDragScroll(rankedCarousel);
+        }
+
+        function enableDragScroll(element) {
+            let isDown = false;
+            let startX;
+            let scrollLeft;
+
+            element.addEventListener('mousedown', (e) => {
+                isDown = true;
+                element.classList.add('dragging');
+                startX = e.pageX - element.offsetLeft;
+                scrollLeft = element.scrollLeft;
+            });
+
+            element.addEventListener('mouseleave', () => {
+                isDown = false;
+                element.classList.remove('dragging');
+            });
+
+            element.addEventListener('mouseup', () => {
+                isDown = false;
+                element.classList.remove('dragging');
+            });
+
+            element.addEventListener('mousemove', (e) => {
+                if (!isDown) return;
+                e.preventDefault();
+                const x = e.pageX - element.offsetLeft;
+                const walk = (x - startX) * 1.5;
+                element.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        // ==================== VIDEO PLAYER ====================
+
+        function playVideo(videoId) {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('videoPlayer');
+
+            // In a real implementation, this would load the actual video
+            // player.src = `users/user2/ai-videos/videos/${videoId}.mp4`;
+
+            modal.classList.add('active');
+            // player.play();
+        }
+
+        function closeVideoModal() {
+            const modal = document.getElementById('videoModal');
+            const player = document.getElementById('videoPlayer');
+
+            modal.classList.remove('active');
+            player.pause();
+            player.currentTime = 0;
+        }
+
+        function playFeaturedVideo() {
+            playVideo('featured');
+        }
+
+        function showVideoInfo() {
+            // Would show a modal with more info about the featured video
+            console.log('Show video info');
+        }
+
+        // ==================== NAVIGATION ====================
+
+        function openGeneralPortfolio() {
+            window.location.href = 'portfolio-viewer.html';
+        }
+
+        function openProjectManager() {
+            window.location.href = 'project-manager.html';
+        }
+
+        // ==================== KEYBOARD SHORTCUTS ====================
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeVideoModal();
+            }
+        });
+
+        // Close modal on backdrop click
+        document.getElementById('videoModal').addEventListener('click', (e) => {
+            if (e.target.classList.contains('video-modal')) {
+                closeVideoModal();
+            }
+        });
+
+        // ==================== INITIALIZE ====================
+
+        document.addEventListener('DOMContentLoaded', () => {
+            renderInnovationCarousel();
+            renderRankedCarousel();
+            renderSuccessCarousel();
+            setupCarouselControls();
+            updateUserSection();
+        });
+
+        // ==================== USER AUTHENTICATION ====================
+
+        function updateUserSection() {
+            const userSection = document.getElementById('userSection');
+            const currentUser = localStorage.getItem('currentUser');
+
+            if (currentUser) {
+                const user = JSON.parse(currentUser);
+                userSection.innerHTML = `
+                    <div class="island-nav-divider"></div>
+                    <div class="user-info">
+                        <div class="user-avatar">${getInitials(user.name)}</div>
+                        <span class="user-name">${user.name}</span>
+                    </div>
+                    <button class="btn-logout" onclick="handleLogout()">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="16" height="16">
+                            <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path>
+                            <polyline points="16,17 21,12 16,7"></polyline>
+                            <line x1="21" y1="12" x2="9" y2="12"></line>
+                        </svg>
+                    </button>
+                `;
+            } else {
+                userSection.innerHTML = `
+                    <div class="island-nav-divider"></div>
+                    <button class="btn-login" onclick="window.location.href='index.html'">
+                        Login
+                    </button>
+                `;
+            }
+        }
+
+        function getInitials(name) {
+            return name
+                .split(' ')
+                .map(word => word[0])
+                .join('')
+                .toUpperCase()
+                .slice(0, 2);
+        }
+
+        function handleLogout() {
+            localStorage.removeItem('currentUser');
+            updateUserSection();
+        }
+    </script>
+</body>
+
+</html>

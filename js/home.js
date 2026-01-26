@@ -1268,6 +1268,15 @@ function openProjectManager() {
     window.location.href = 'project-manager.html';
 }
 
+// ==================== VIDEO SHOWCASE ====================
+
+function openVideoShowcase() {
+    console.log('🎬 Abriendo Video Showcase');
+
+    // Redirigir al Video Showcase
+    window.location.href = 'video-showcase.html';
+}
+
 // Cargar tema al iniciar
 loadTheme();
 
