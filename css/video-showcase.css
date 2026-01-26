@@ -301,7 +301,13 @@ body.video-showcase-page.light-theme {
 .section-title {
     font-size: 20px;
     font-weight: 600;
-    background: linear-gradient(to right, #8bb4e0, #c5a572, #d4b896);
+    background: linear-gradient(135deg,
+            #1d4e89 0%,
+            #2d5a9e 20%,
+            #4a7099 40%,
+            #9d7f4e 65%,
+            #b8975a 85%,
+            #c9a862 100%);
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
