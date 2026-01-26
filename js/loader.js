@@ -30,7 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     };
 
     // ==========================================
-    // PÁGINAS CON TEMA OSCURO
+    // PÁGINAS CON TEMA OSCURO (FORZADO)
     // ==========================================
     const darkThemePages = [
         'video-showcase',
@@ -38,18 +38,59 @@ document.addEventListener("DOMContentLoaded", () => {
         // Agrega aquí más páginas que necesiten tema oscuro
     ];
 
+    // Obtener preferencia del usuario (localStorage)
+    // Asumimos que tu toggle de tema guarda 'dark' o 'light' en 'theme'
+    const userTheme = localStorage.getItem('theme') || 'light';
+
+    // Detectar si venimos de una página forzada oscura (Usando sessionStorage para mayor fiabilidad)
+    const previousPage = sessionStorage.getItem('lastPage') || '';
+    const cameFromForcedDark = darkThemePages.includes(previousPage);
+    const isForcedDarkPage = darkThemePages.includes(currentPage);
+
+    // Guardar página actual para la siguiente navegación
+    sessionStorage.setItem('lastPage', currentPage);
+
+    // Estado inicial del loader
+    let startDark = (userTheme === 'dark') || (userTheme === 'light' && cameFromForcedDark);
+
+    // Si vamos a una página forzada oscura y somos light, empezamos light para el fade (Light -> Dark)
+    if (isForcedDarkPage && userTheme === 'light') {
+        startDark = false;
+    }
+
+    // Aplicar clase inicial INMEDIATAMENTE antes de que renderice
+    if (startDark) {
+        loader.classList.add('dx-loader-transitioning');
+        loader.classList.add('dx-loader-dark');
+    } else {
+        loader.classList.remove('dx-loader-transitioning');
+        loader.classList.remove('dx-loader-dark');
+    }
+
     // Cambiar título según la página actual
     const displayTitle = sectionTitles[currentPage] || sectionTitles['default'];
     titleElement.textContent = displayTitle;
 
     // ==========================================
-    // TRANSICIÓN GRADUAL A TEMA OSCURO
+    // LÓGICA DE TRANSICIÓN
     // ==========================================
-    if (darkThemePages.includes(currentPage)) {
-        // Esperar 600ms antes de iniciar la transición (después de la animación de entrada)
+
+    // CASO 1: Usuario Light -> Entra a Página Forzada Oscura (Fade Light -> Dark)
+    if (userTheme === 'light' && isForcedDarkPage) {
+        // Esperar 600ms antes de iniciar la transición
         setTimeout(() => {
             loader.classList.add('dx-loader-transitioning');
         }, 600);
+    }
+
+    // CASO 2: Usuario Light -> Sale de Página Forzada Oscura a Normal (Fade Dark -> Light)
+    else if (userTheme === 'light' && cameFromForcedDark && !isForcedDarkPage) {
+        // Ya empezamos con dark (startDark = true)
+        // Ahora debemos quitarlo suavemente para que haga fade a blanco
+        setTimeout(() => {
+            loader.classList.remove('dx-loader-transitioning');
+            loader.classList.remove('dx-loader-dark');
+        }, 100);
     }
 
     // ==========================================
