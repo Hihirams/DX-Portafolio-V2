@@ -10,9 +10,8 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // DETECTAR PÁGINA ACTUAL POR ARCHIVO HTML
     // ==========================================
-    // Normalizamos a minúsculas para evitar problemas de mayúsculas/minúsculas
     const path = window.location.pathname;
-    const filename = path.split('/').pop().split('?')[0].split('#')[0]; // Limpiar query params y hash
+    const filename = path.split('/').pop().split('?')[0].split('#')[0];
     const currentPage = filename.replace('.html', '').toLowerCase() || 'index';
 
     const sectionTitles = {
@@ -30,9 +29,28 @@ document.addEventListener("DOMContentLoaded", () => {
         'default': 'Digital Transformation'
     };
 
+    // ==========================================
+    // PÁGINAS CON TEMA OSCURO
+    // ==========================================
+    const darkThemePages = [
+        'video-showcase',
+        'portfolio-viewer',
+        // Agrega aquí más páginas que necesiten tema oscuro
+    ];
+
     // Cambiar título según la página actual
     const displayTitle = sectionTitles[currentPage] || sectionTitles['default'];
     titleElement.textContent = displayTitle;
+
+    // ==========================================
+    // TRANSICIÓN GRADUAL A TEMA OSCURO
+    // ==========================================
+    if (darkThemePages.includes(currentPage)) {
+        // Esperar 600ms antes de iniciar la transición (después de la animación de entrada)
+        setTimeout(() => {
+            loader.classList.add('dx-loader-transitioning');
+        }, 600);
+    }
 
     // ==========================================
     // MENSAJES DE ESTADO
@@ -69,5 +87,5 @@ document.addEventListener("DOMContentLoaded", () => {
             loader.remove();
         }, 1000);
 
-    }, 1500); // 4 segundos de carga
+    }, 1500);
 });
