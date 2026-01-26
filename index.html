@@ -5,7 +5,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Portfolio DX - Home</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
     <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="stylesheet" href="css/loader.css">
     <link rel="stylesheet" href="css/home.css">
     <link rel="stylesheet" href="css/carousel-featured.css">
     <link rel="stylesheet" href="css/carousel-all-projects.css">
@@ -265,6 +274,52 @@
     <script src="js/init-data.js"></script>
     <script src="js/data-manager.js"></script>
     <script src="js/home.js"></script>
+
+    <div id="dx-loader-overlay">
+        <div class="dx-loader-bg-elements">
+            <div class="dx-blob dx-blob-blue"></div>
+            <div class="dx-blob dx-blob-gold"></div>
+        </div>
+
+        <div class="dx-animate-entrance" style="display:flex; gap:0.5rem; opacity:0; width:100%; max-width:1200px;">
+            <div style="height:1px; width:40px; background:rgba(69,115,165,0.3)"></div>
+            <div style="height:1px; width:40px; background:rgba(176,149,93,0.3)"></div>
+        </div>
+
+        <div class="dx-animate-entrance" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+            <div style="text-align:center; margin-bottom: 2rem;">
+                <h1 class="dx-loader-title dx-text-alive">
+                    Digital Transformation
+                </h1>
+                <p class="dx-loader-subtitle">
+                    Refining the Future Architecture
+                </p>
+            </div>
+
+            <div style="width:100%; display:flex; flex-direction:column; align-items:center;">
+                <div class="dx-loader-line-container"></div>
+
+                <p id="dx-loader-status"
+                    style="color:#86868b; font-size:10px; text-transform:uppercase; letter-spacing:0.1em;">
+                    Initializing System
+                </p>
+            </div>
+        </div>
+
+        <div class="dx-loader-footer dx-animate-entrance" style="opacity:0; animation-delay:0.3s;">
+            <div class="dx-encrypted-badge">
+                <span class="material-symbols-outlined" style="font-size:12px; color:#4573a5;">lock</span>
+                <span>Encrypted Connection</span>
+            </div>
+            <div style="height:1px; width:30px; background:rgba(176,149,93,0.3); margin-top:0.5rem;"></div>
+            <p
+                style="font-size:9px; color:rgba(134,134,139,0.5); letter-spacing:0.2em; text-transform:uppercase; margin-top:0.25rem;">
+                © 2026 QE DX-INN
+            </p>
+        </div>
+    </div>
+
+    <script src="js/loader.js"></script>
 </body>
 
 </html>
