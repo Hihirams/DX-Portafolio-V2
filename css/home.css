@@ -46,15 +46,12 @@ body {
 */
 
 .glass-island {
-    background: rgba(255, 255, 255, 0.05);
+    background: rgba(255, 255, 255, 0.03);
     backdrop-filter: blur(20px) saturate(150%);
     -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.15);
     border-radius: 100px;
-    box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.1),
-        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     position: relative;
     overflow: hidden;
@@ -62,57 +59,18 @@ body {
 }
 
 /* Liquid shimmer effect */
+/* Shimmer effect disabled for cleaner look */
 .glass-island::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.1),
-            transparent);
-    transition: left 0.6s ease;
-    pointer-events: none;
+    display: none;
 }
 
-.glass-island:hover::before {
-    left: 100%;
-}
-
-/* Breathing animation */
-@keyframes glass-breathe {
-
-    0%,
-    100% {
-        box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.3),
-            0 0 0 1px rgba(255, 255, 255, 0.05) inset,
-            0 1px 0 rgba(255, 255, 255, 0.1) inset;
-    }
-
-    50% {
-        box-shadow:
-            0 12px 40px rgba(0, 0, 0, 0.35),
-            0 0 0 1px rgba(255, 255, 255, 0.08) inset,
-            0 1px 0 rgba(255, 255, 255, 0.15) inset;
-    }
-}
-
-.glass-island {
-    animation: glass-breathe 4s ease-in-out infinite;
-}
+/* Breathing animation disabled for cleaner look */
 
 .glass-island:hover {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
-    border-top-color: rgba(255, 255, 255, 0.25);
+    background: rgba(255, 255, 255, 0.06);
+    border-color: rgba(255, 255, 255, 0.22);
     transform: translateY(-2px);
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.12),
-        inset 0 1px 0 rgba(255, 255, 255, 0.15);
-    animation: none;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.12);
 }
 
 /* ==================== ISLAND 1: LOGO ==================== */
@@ -174,13 +132,8 @@ body {
 }
 
 .glass-island-search:focus-within {
-    background: rgba(255, 255, 255, 0.15);
-    border-color: rgba(0, 113, 227, 0.5);
-    box-shadow:
-        0 16px 48px rgba(0, 0, 0, 0.4),
-        0 0 0 3px rgba(0, 113, 227, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.1) inset;
-    animation: none;
+    background: rgba(255, 255, 255, 0.1);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15);
 }
 
 .island-search-icon {
@@ -261,8 +214,8 @@ body {
 .island-nav-divider {
     width: 1px;
     height: 20px;
-    background: rgba(255, 255, 255, 0.15);
-    margin: 0 4px;
+    background: rgba(255, 255, 255, 0.08);
+    margin: 0 6px;
 }
 
 /* User section inside nav island */
@@ -293,15 +246,15 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 6px 12px 6px 6px;
-    background: rgba(255, 255, 255, 0.08);
+    padding: 8px 12px;
+    background: transparent;
     border-radius: 100px;
     cursor: pointer;
     transition: all 0.3s ease;
 }
 
 .glass-island-nav .user-info:hover {
-    background: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.1);
 }
 
 .glass-island-nav .user-avatar {
@@ -337,6 +290,157 @@ body {
 .glass-island-nav .btn-logout:hover {
     background: rgba(255, 255, 255, 0.1);
     color: var(--text-primary);
+}
+
+/* ==================== USER DROPDOWN MENU ==================== */
+
+.user-dropdown-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+/* Fix: Allow dropdown to overflow the glass-island container */
+.glass-island-nav {
+    overflow: visible !important;
+}
+
+.user-dropdown-menu {
+    position: absolute;
+    top: calc(100% + 4px);
+    right: -10px;
+    min-width: 200px;
+    background: rgba(30, 30, 35, 0.95);
+    backdrop-filter: blur(20px) saturate(150%);
+    -webkit-backdrop-filter: blur(20px) saturate(150%);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 8px 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.4),
+        inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    z-index: 9999;
+    pointer-events: none;
+}
+
+.user-dropdown-wrapper:hover .user-dropdown-menu,
+.user-dropdown-menu:hover {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+.user-dropdown-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 400;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+}
+
+.user-dropdown-item:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.user-dropdown-item svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.7;
+    flex-shrink: 0;
+}
+
+.user-dropdown-item:hover svg {
+    opacity: 1;
+}
+
+.user-dropdown-divider {
+    height: 1px;
+    background: rgba(255, 255, 255, 0.1);
+    margin: 8px 0;
+}
+
+.user-dropdown-item.logout-item {
+    color: #ff6b6b;
+}
+
+.user-dropdown-item.logout-item:hover {
+    background: rgba(255, 107, 107, 0.15);
+}
+
+/* ==================== UPLOAD VIDEO ISLAND BUTTON ==================== */
+
+.glass-island-upload {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 0 16px;
+    height: 48px;
+    cursor: pointer;
+    border-radius: 100px;
+    white-space: nowrap;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--text-primary);
+}
+
+.glass-island-upload svg {
+    width: 18px;
+    height: 18px;
+    opacity: 0.8;
+    transition: all 0.3s ease;
+}
+
+.glass-island-upload:hover svg {
+    opacity: 1;
+    transform: translateY(-2px);
+}
+
+.glass-island-upload span {
+    opacity: 0.9;
+}
+
+.glass-island-upload:hover span {
+    opacity: 1;
+}
+
+/* Light theme overrides for dropdown */
+body.light-theme .user-dropdown-menu {
+    background: rgba(255, 255, 255, 0.95);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow:
+        0 8px 32px rgba(0, 0, 0, 0.15),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
+}
+
+body.light-theme .user-dropdown-item:hover {
+    background: rgba(0, 0, 0, 0.05);
+}
+
+body.light-theme .user-dropdown-divider {
+    background: rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .user-dropdown-item.logout-item {
+    color: #dc3545;
+}
+
+body.light-theme .user-dropdown-item.logout-item:hover {
+    background: rgba(220, 53, 69, 0.1);
 }
 
 /* ==================== ISLAND 4: THEME TOGGLE ==================== */
@@ -386,64 +490,27 @@ body {
 /* ==================== LIGHT THEME OVERRIDES ==================== */
 
 body.light-theme .glass-island {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.25);
     backdrop-filter: blur(20px) saturate(150%);
     -webkit-backdrop-filter: blur(20px) saturate(150%);
-    border: 1px solid rgba(255, 255, 255, 0.4);
-    border-top: 1px solid rgba(255, 255, 255, 0.6);
-    box-shadow:
-        0 4px 24px rgba(0, 0, 0, 0.05),
-        inset 0 1px 0 rgba(255, 255, 255, 0.5);
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.04);
 }
 
 body.light-theme .glass-island:hover {
-    background: rgba(255, 255, 255, 0.3);
-    border-color: rgba(255, 255, 255, 0.5);
-    border-top-color: rgba(255, 255, 255, 0.7);
-    box-shadow:
-        0 8px 32px rgba(0, 0, 0, 0.08),
-        inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    background: rgba(255, 255, 255, 0.35);
+    border-color: rgba(0, 0, 0, 0.18);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.06);
 }
 
-body.light-theme .glass-island::before {
-    background: linear-gradient(90deg,
-            transparent,
-            rgba(255, 255, 255, 0.5),
-            transparent);
-}
-
-@keyframes glass-breathe-light {
-
-    0%,
-    100% {
-        box-shadow:
-            0 8px 32px rgba(0, 0, 0, 0.08),
-            0 0 0 1px rgba(255, 255, 255, 0.5) inset,
-            0 1px 0 rgba(255, 255, 255, 0.8) inset;
-    }
-
-    50% {
-        box-shadow:
-            0 12px 40px rgba(0, 0, 0, 0.1),
-            0 0 0 1px rgba(255, 255, 255, 0.6) inset,
-            0 1px 0 rgba(255, 255, 255, 0.9) inset;
-    }
-}
-
-body.light-theme .glass-island {
-    animation: glass-breathe-light 4s ease-in-out infinite;
-}
-
-body.light-theme .glass-island:hover {
-    animation: none;
-}
+/* Light theme breathing animation disabled for cleaner look */
 
 body.light-theme .island-nav-btn:hover {
     background: rgba(0, 0, 0, 0.05);
 }
 
 body.light-theme .island-nav-divider {
-    background: rgba(0, 0, 0, 0.1);
+    background: rgba(0, 0, 0, 0.06);
 }
 
 body.light-theme .glass-island-theme:hover {
@@ -465,19 +532,17 @@ body.light-theme .glass-island-theme:hover .sun-icon {
 }
 
 body.light-theme .glass-island-search:focus-within {
-    background: rgba(255, 255, 255, 0.9);
-    box-shadow:
-        0 16px 48px rgba(0, 0, 0, 0.1),
-        0 0 0 3px rgba(0, 113, 227, 0.15),
-        0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+    background: rgba(255, 255, 255, 0.8);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
 }
 
+
 body.light-theme .glass-island-nav .user-info {
-    background: rgba(0, 0, 0, 0.05);
+    background: transparent;
 }
 
 body.light-theme .glass-island-nav .user-info:hover {
-    background: rgba(0, 0, 0, 0.08);
+    background: rgba(0, 0, 0, 0.05);
 }
 
 body.light-theme .glass-island-nav .btn-logout {
@@ -497,18 +562,15 @@ body.light-theme .glass-island-nav .btn-logout:hover {
     transform: translateX(-50%);
     width: 600px;
     max-width: 90vw;
-    background: rgba(20, 20, 22, 0.75);
+    background: rgba(20, 20, 22, 0.85);
     backdrop-filter: blur(50px) saturate(200%);
     -webkit-backdrop-filter: blur(50px) saturate(200%);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: none;
     border-radius: 24px;
     padding: 16px;
     max-height: 400px;
     overflow-y: auto;
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.4),
-        0 0 0 0.5px rgba(255, 255, 255, 0.08) inset,
-        0 2px 0 rgba(255, 255, 255, 0.05) inset;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
     z-index: 10001;
 }
 
@@ -530,12 +592,9 @@ body.light-theme .glass-island-nav .btn-logout:hover {
 }
 
 body.light-theme .search-results-header {
-    background: rgba(255, 255, 255, 0.65);
-    border: 1px solid rgba(255, 255, 255, 0.7);
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.1),
-        0 0 0 0.5px rgba(255, 255, 255, 0.9) inset,
-        0 2px 0 rgba(255, 255, 255, 1) inset;
+    background: rgba(255, 255, 255, 0.85);
+    border: none;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
 }
 
 body.light-theme .search-results-header::-webkit-scrollbar-thumb {

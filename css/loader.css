@@ -191,11 +191,10 @@
 #dx-loader-overlay .dx-encrypted-badge,
 #dx-loader-overlay .dx-blob-blue,
 #dx-loader-overlay .dx-blob-gold {
-    transition: all 1.5s cubic-bezier(0.4, 0, 0.2, 1);
+    transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
-/* Loader iniciando transición a tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning,
+/* Loader en tema oscuro */
 #dx-loader-overlay.dx-loader-dark {
     background-color: #0a0a0a;
     background-image:
@@ -206,7 +205,6 @@
 }
 
 /* Título en tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning .dx-loader-title,
 #dx-loader-overlay.dx-loader-dark .dx-loader-title {
     background: linear-gradient(135deg, #7da5d8 0%, #6b9dd8 40%, #d4b97a 100%);
     -webkit-background-clip: text;
@@ -216,31 +214,26 @@
 }
 
 /* Subtítulo en tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning .dx-loader-subtitle,
 #dx-loader-overlay.dx-loader-dark .dx-loader-subtitle {
     color: #a0a0a5;
 }
 
 /* Línea de progreso en tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning .dx-loader-line-container,
 #dx-loader-overlay.dx-loader-dark .dx-loader-line-container {
     background: rgba(255, 255, 255, 0.1);
     box-shadow: 0 0 15px rgba(212, 185, 122, 0.2);
 }
 
-#dx-loader-overlay.dx-loader-transitioning .dx-loader-line-container::after,
 #dx-loader-overlay.dx-loader-dark .dx-loader-line-container::after {
     background: linear-gradient(90deg, transparent, rgba(212, 185, 122, 0.8), transparent);
 }
 
 /* Texto de estado en tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning #dx-loader-status,
 #dx-loader-overlay.dx-loader-dark #dx-loader-status {
     color: rgba(160, 160, 165, 0.8);
 }
 
 /* Badge encriptado en tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning .dx-encrypted-badge,
 #dx-loader-overlay.dx-loader-dark .dx-encrypted-badge {
     background: rgba(20, 20, 20, 0.5);
     backdrop-filter: blur(10px);
@@ -248,18 +241,15 @@
     color: #a0a0a5;
 }
 
-#dx-loader-overlay.dx-loader-transitioning .dx-encrypted-badge .material-symbols-outlined,
 #dx-loader-overlay.dx-loader-dark .dx-encrypted-badge .material-symbols-outlined {
     color: rgba(125, 165, 216, 0.9);
 }
 
 /* Blobs de fondo en tema oscuro */
-#dx-loader-overlay.dx-loader-transitioning .dx-blob-blue,
 #dx-loader-overlay.dx-loader-dark .dx-blob-blue {
     background-color: rgba(125, 165, 216, 0.06);
 }
 
-#dx-loader-overlay.dx-loader-transitioning .dx-blob-gold,
 #dx-loader-overlay.dx-loader-dark .dx-blob-gold {
     background-color: rgba(212, 185, 122, 0.06);
 }
