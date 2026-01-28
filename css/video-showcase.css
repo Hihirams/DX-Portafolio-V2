@@ -96,14 +96,12 @@ body.video-showcase-page.light-theme {
 }
 
 /* Drag scrolling cursor */
-.video-carousel.dragging,
-.success-carousel.dragging {
+.video-carousel.dragging {
     cursor: grabbing;
     user-select: none;
 }
 
-.video-carousel:not(.dragging),
-.success-carousel:not(.dragging) {
+.video-carousel:not(.dragging) {
     cursor: grab;
 }
 
@@ -387,6 +385,8 @@ body.video-showcase-page.light-theme {
     font-family: monospace;
 }
 
+
+
 .video-card-badge {
     position: absolute;
     top: 8px;
@@ -433,6 +433,8 @@ body.video-showcase-page.light-theme {
     opacity: 1;
 }
 
+
+
 .video-card-hover-actions {
     display: flex;
     align-items: center;
@@ -478,23 +480,7 @@ body.video-showcase-page.light-theme {
     margin-bottom: 4px;
 }
 
-.video-card-hover-meta {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    font-size: 10px;
-    color: #d1d5db;
-}
 
-.video-card-hover-meta .match {
-    color: #4ade80;
-}
-
-.video-card-hover-meta .badge {
-    border: 1px solid #6b7280;
-    padding: 1px 4px;
-    border-radius: 2px;
-}
 
 /* ==================== RANKED LIST (Top 10 Style) ==================== */
 
@@ -601,157 +587,7 @@ body.video-showcase-page.light-theme {
     padding-left: 130px;
 }
 
-/* ==================== SUCCESS STORIES CARDS ==================== */
 
-.success-carousel {
-    display: flex;
-    gap: 16px;
-    overflow-x: auto;
-    padding-bottom: 32px;
-    scroll-snap-type: x mandatory;
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-}
-
-.success-carousel::-webkit-scrollbar {
-    display: none;
-}
-
-.success-card {
-    flex: 0 0 350px;
-    scroll-snap-align: start;
-    background: #181818;
-    border-radius: 8px;
-    overflow: hidden;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    border: 1px solid #374151;
-}
-
-.success-card:hover {
-    background: #202020;
-    transform: scale(1.02);
-}
-
-.success-card-image {
-    position: relative;
-    height: 192px;
-    overflow: hidden;
-}
-
-.success-card-image img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    transition: transform 0.3s ease;
-}
-
-.success-card:hover .success-card-image img {
-    transform: scale(1.05);
-}
-
-.success-card-play-overlay {
-    position: absolute;
-    inset: 0;
-    background: rgba(0, 0, 0, 0.4);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    opacity: 0;
-    transition: opacity 0.3s ease;
-}
-
-.success-card:hover .success-card-play-overlay {
-    opacity: 1;
-}
-
-.success-card-play-btn {
-    width: 56px;
-    height: 56px;
-    border-radius: 50%;
-    background: transparent;
-    border: 2px solid #ffffff;
-    color: #ffffff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 28px;
-}
-
-.success-card-duration {
-    position: absolute;
-    bottom: 8px;
-    right: 8px;
-    background: rgba(0, 0, 0, 0.8);
-    color: #ffffff;
-    font-size: 12px;
-    padding: 2px 6px;
-    border-radius: 4px;
-}
-
-.success-card-content {
-    padding: 16px;
-}
-
-.success-card-tags {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    margin-bottom: 8px;
-}
-
-.success-card-tag {
-    font-size: 10px;
-    font-weight: 700;
-    text-transform: uppercase;
-    padding: 3px 8px;
-    border-radius: 4px;
-    letter-spacing: 0.05em;
-}
-
-.success-card-tag.high-impact {
-    color: #4ade80;
-    border: 1px solid rgba(74, 222, 128, 0.3);
-}
-
-.success-card-tag.pilot {
-    color: #c5a572;
-    border: 1px solid rgba(197, 165, 114, 0.3);
-}
-
-.success-card-tag.new {
-    color: #60a5fa;
-    border: 1px solid rgba(96, 165, 250, 0.3);
-}
-
-.success-card-year {
-    font-size: 10px;
-    color: #9ca3af;
-}
-
-.success-card-title {
-    font-size: 18px;
-    font-weight: 700;
-    color: #ffffff;
-    margin-bottom: 8px;
-    line-height: 1.3;
-    transition: color 0.3s ease;
-}
-
-.success-card:hover .success-card-title {
-    color: #60a5fa;
-}
-
-.success-card-description {
-    font-size: 12px;
-    color: #9ca3af;
-    line-height: 1.5;
-    display: -webkit-box;
-    -webkit-line-clamp: 2;
-    line-clamp: 2;
-    -webkit-box-orient: vertical;
-    overflow: hidden;
-}
 
 /* ==================== VIDEO PLAYER MODAL ==================== */
 
@@ -883,9 +719,7 @@ body.video-showcase-page.light-theme {
         flex: 0 0 260px;
     }
 
-    .success-card {
-        flex: 0 0 300px;
-    }
+
 
     .footer-links {
         grid-template-columns: repeat(2, 1fr);
@@ -912,5 +746,217 @@ body.video-showcase-page.light-theme {
 
     .ranked-number {
         font-size: 120px;
+    }
+}
+
+/* ==================== VIDEO INFO MODAL (Netflix Style) ==================== */
+
+.video-info-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10001;
+    /* Above video player modal */
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(8px);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    padding: 24px;
+    overflow-y: auto;
+}
+
+.video-info-modal.active {
+    display: flex;
+    opacity: 1;
+}
+
+.video-info-content {
+    position: relative;
+    width: 100%;
+    max-width: 850px;
+    background: #181818;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.9);
+    transform: scale(0.9);
+    transition: transform 0.3s ease;
+    animation: modal-pop 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+}
+
+@keyframes modal-pop {
+    from {
+        transform: scale(0.9);
+        opacity: 0;
+    }
+
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.video-info-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: #181818;
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    /* Easier to see */
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 20;
+    transition: all 0.2s ease;
+}
+
+.video-info-close:hover {
+    background: #ffffff;
+    color: #000000;
+    transform: scale(1.1);
+}
+
+.video-info-backdrop {
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16/9;
+    background: #000;
+}
+
+.video-info-backdrop img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-info-backdrop-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, #181818 0%, transparent 50%),
+        linear-gradient(to right, rgba(0, 0, 0, 0.4) 0%, transparent 100%);
+}
+
+.video-info-header {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 32px 48px;
+    z-index: 10;
+}
+
+.video-info-title {
+    font-size: 3rem;
+    font-weight: 800;
+    color: #ffffff;
+    margin-bottom: 16px;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.8);
+    line-height: 1.1;
+}
+
+.video-info-meta-row {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.video-info-meta-row .match-score {
+    color: #46d369;
+    /* Netflix green */
+}
+
+.video-info-meta-row .video-year {
+    color: #a3a3a3;
+}
+
+.video-info-meta-row .video-badge {
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    padding: 0 6px;
+    border-radius: 3px;
+    font-size: 12px;
+    color: #dadada;
+}
+
+.video-info-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.video-info-actions .btn-play {
+    padding: 10px 28px;
+    font-size: 1.1rem;
+    border-radius: 4px;
+}
+
+.video-info-body {
+    display: flex;
+    gap: 48px;
+    padding: 24px 48px 48px 48px;
+    background: #181818;
+}
+
+.video-info-main-col {
+    flex: 2;
+}
+
+.video-info-side-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    font-size: 14px;
+}
+
+.video-info-description {
+    font-size: 18px;
+    line-height: 1.6;
+    color: #ffffff;
+}
+
+.video-info-item {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 6px;
+}
+
+.video-info-item .label {
+    color: #777;
+    margin-right: 4px;
+}
+
+.video-info-item .value {
+    color: #dddddd;
+    line-height: 1.4;
+}
+
+@media (max-width: 768px) {
+    .video-info-content {
+        max-width: 100%;
+        margin: 16px;
+    }
+
+    .video-info-header {
+        padding: 24px;
+    }
+
+    .video-info-title {
+        font-size: 2rem;
+    }
+
+    .video-info-body {
+        flex-direction: column;
+        gap: 24px;
+        padding: 24px;
     }
 }
