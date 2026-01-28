@@ -357,7 +357,7 @@ function toggleTheme() {
 // ==================== NAVIGATION ====================
 
 function navigateToMyVideos() {
-    window.location.href = 'video-showcase.html';
+    window.location.href = 'my-videos.html';
 }
 
 function navigateToMyProjects() {
@@ -389,7 +389,7 @@ function openProjectManager() {
 }
 
 function openVideoShowcase() {
-    window.location.href = 'video-showcase.html';
+    window.location.href = 'my-videos.html';
 }
 
 // ==================== PROJECT ACTIONS ====================

@@ -972,7 +972,7 @@ function createNewProject() {
 // ==================== DROPDOWN MENU NAVIGATION ====================
 
 function navigateToMyVideos() {
-    window.location.href = 'video-showcase.html';
+    window.location.href = 'my-videos.html';
 }
 
 function navigateToMyProjects() {
@@ -993,7 +993,7 @@ function navigateToHelp() {
 }
 
 function openVideoShowcase() {
-    window.location.href = 'video-showcase.html';
+    window.location.href = 'my-videos.html';
 }
 
 // ==================== LOGIN/LOGOUT ====================
