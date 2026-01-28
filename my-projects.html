@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Projects - DX Portfolio</title>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;1,400&family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/loader.css">
+    <link rel="stylesheet" href="css/home.css">
+    <link rel="stylesheet" href="css/my-projects.css">
+</head>
+
+<body>
+    <!-- Mesh Gradient Background Container -->
+    <div class="mesh-gradient-bg">
+
+        <!-- Header - Liquid Glass Islands -->
+        <header class="liquid-glass-header">
+            <!-- Island 1: Logo -->
+            <div class="glass-island glass-island-logo" onclick="goHome()">
+                <img src="assets/logo-dx.png" alt="DX Logo" class="island-logo-img">
+                <div class="island-logo-text">
+                    <span class="island-logo-title">QE DX-INN</span>
+                    <span class="island-logo-subtitle">Digital Transformation</span>
+                </div>
+            </div>
+
+            <!-- Island 2: Search -->
+            <div class="glass-island glass-island-search">
+                <svg class="island-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"></circle>
+                    <path d="m21 21-4.35-4.35"></path>
+                </svg>
+                <input type="text" class="island-search-input" id="projectSearch" placeholder="Search your projects...">
+            </div>
+
+            <!-- Island 3: Navigation -->
+            <div class="glass-island glass-island-nav">
+                <button class="island-nav-btn" onclick="goHome()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                        <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                    </svg>
+                    <span>Home</span>
+                </button>
+                <div class="island-nav-divider"></div>
+                <button class="island-nav-btn" onclick="openGeneralPortfolio()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="3" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="3" width="7" height="7" rx="1"></rect>
+                        <rect x="3" y="14" width="7" height="7" rx="1"></rect>
+                        <rect x="14" y="14" width="7" height="7" rx="1"></rect>
+                    </svg>
+                    <span>Portfolio DX</span>
+                </button>
+                <div class="island-nav-divider"></div>
+                <button class="island-nav-btn" onclick="openProjectManager()">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2"></path>
+                        <rect x="9" y="3" width="6" height="4" rx="1"></rect>
+                        <path d="M9 12h6M9 16h6"></path>
+                    </svg>
+                    <span>Project Overview</span>
+                </button>
+                <div class="user-section" id="userSection">
+                    <!-- Will be filled dynamically -->
+                </div>
+            </div>
+
+            <!-- Island 4: Theme Toggle -->
+            <button class="glass-island glass-island-theme" onclick="toggleTheme()" aria-label="Toggle theme">
+                <svg class="sun-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="5"></circle>
+                    <line x1="12" y1="1" x2="12" y2="3"></line>
+                    <line x1="12" y1="21" x2="12" y2="23"></line>
+                    <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                    <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                    <line x1="1" y1="12" x2="3" y2="12"></line>
+                    <line x1="21" y1="12" x2="23" y2="12"></line>
+                    <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                    <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                </svg>
+                <svg class="moon-icon" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                </svg>
+            </button>
+        </header>
+
+        <!-- Main Content -->
+        <main class="my-projects-main">
+            <!-- Header Section -->
+            <div class="my-projects-header">
+                <div class="my-projects-header-top">
+                    <div>
+                        <p class="my-projects-date">JAN 27, 2026</p>
+                        <h1 class="my-projects-title">Good Morning, User</h1>
+                        <p class="my-projects-subtitle">
+                            You have <strong>0 active projects</strong> and <strong>0 pending tasks</strong> requiring
+                            attention.
+                        </p>
+                    </div>
+                    <div class="my-projects-header-actions">
+                        <button class="btn-new-project" onclick="createNewProject()">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <line x1="12" y1="5" x2="12" y2="19" />
+                                <line x1="5" y1="12" x2="19" y2="12" />
+                            </svg>
+                            <span>New Project</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bento Grid -->
+            <div class="bento-grid" id="myProjectsGrid">
+                <!-- Projects will be rendered here dynamically -->
+            </div>
+        </main>
+    </div>
+
+    <!-- Loader -->
+    <div id="dx-loader-overlay">
+        <div class="dx-loader-bg-elements">
+            <div class="dx-blob dx-blob-blue"></div>
+            <div class="dx-blob dx-blob-gold"></div>
+        </div>
+
+        <div class="dx-animate-entrance" style="display:flex; gap:0.5rem; opacity:0; width:100%; max-width:1200px;">
+            <div style="height:1px; width:40px; background:rgba(69,115,165,0.3)"></div>
+            <div style="height:1px; width:40px; background:rgba(176,149,93,0.3)"></div>
+        </div>
+
+        <div class="dx-animate-entrance" style="display:flex; flex-direction:column; align-items:center; width:100%;">
+            <div style="text-align:center; margin-bottom: 2rem;">
+                <h1 class="dx-loader-title dx-text-alive">
+                    My Projects
+                </h1>
+                <p class="dx-loader-subtitle">
+                    Loading Your Dashboard
+                </p>
+            </div>
+
+            <div style="width:100%; display:flex; flex-direction:column; align-items:center;">
+                <div class="dx-loader-line-container"></div>
+
+                <p id="dx-loader-status"
+                    style="color:#86868b; font-size:10px; text-transform:uppercase; letter-spacing:0.1em;">
+                    Initializing System
+                </p>
+            </div>
+        </div>
+
+        <div class="dx-loader-footer dx-animate-entrance" style="opacity:0; animation-delay:0.3s;">
+            <div class="dx-encrypted-badge">
+                <span class="material-symbols-outlined" style="font-size:12px; color:#4573a5;">lock</span>
+                <span>Encrypted Connection</span>
+            </div>
+            <div style="height:1px; width:30px; background:rgba(176,149,93,0.3); margin-top:0.5rem;"></div>
+            <p
+                style="font-size:9px; color:rgba(134,134,139,0.5); letter-spacing:0.2em; text-transform:uppercase; margin-top:0.25rem;">
+                © 2026 QE DX-INN
+            </p>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/data-loader-dev.js"></script>
+    <script src="js/file-manager.js"></script>
+    <script src="js/init-data.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/my-projects.js"></script>
+    <script src="js/loader.js"></script>
+</body>
+
+</html>

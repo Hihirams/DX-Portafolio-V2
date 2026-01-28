@@ -976,15 +976,8 @@ function navigateToMyVideos() {
 }
 
 function navigateToMyProjects() {
-    // Show user's projects section
-    if (dataManager.isLoggedIn()) {
-        showMyProjects();
-        // Scroll to my projects section
-        const myProjectsSection = document.getElementById('myProjectsSection');
-        if (myProjectsSection) {
-            myProjectsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-        }
-    }
+    // Redirect to the dedicated My Projects dashboard page
+    window.location.href = 'my-projects.html';
 }
 
 function navigateToMyProfile() {
