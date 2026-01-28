@@ -256,8 +256,16 @@ function createVideoCard(video) {
 }
 
 function editVideo(videoId) {
-    // Placeholder for edit functionality
-    alert(`Edit video feature coming soon!\nVideo ID: ${videoId}`);
+    const video = MOCK_VIDEOS.find(v => v.id === videoId);
+    if (video) {
+        // Add some mock tags if they don't exist for better demo
+        if (!video.tags) {
+            video.tags = ['Industrial', 'Demo'];
+        }
+        openUploadVideoModal(video);
+    } else {
+        console.error('Video not found:', videoId);
+    }
 }
 
 function formatDate(dateStr) {
@@ -348,7 +356,7 @@ function viewVideo(videoId) {
 }
 
 function uploadNewVideo() {
-    alert('Video upload feature coming soon!');
+    openUploadVideoModal();
 }
 
 function handleLogout() {

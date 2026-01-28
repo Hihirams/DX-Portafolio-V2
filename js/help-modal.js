@@ -29,16 +29,8 @@ const helpModalHTML = `
                     <div class="contact-icon">📧</div>
                     <div class="contact-info">
                         <h5>Email Support</h5>
-                        <p>dx-support@example.com</p>
-                        <a href="mailto:dx-support@example.com" class="contact-link">Send Email</a>
-                    </div>
-                </div>
-                <div class="contact-card">
-                    <div class="contact-icon">💬</div>
-                    <div class="contact-info">
-                        <h5>Teams Channel</h5>
-                        <p>DX Innovation Zone</p>
-                        <a href="#" class="contact-link">Open Teams</a>
+                        <p>hiram.gonzalez@na.denso.com</p>
+                        <a href="mailto:hiram.gonzalez@na.denso.com" class="contact-link">Send Email</a>
                     </div>
                 </div>
             </div>
