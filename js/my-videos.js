@@ -327,9 +327,6 @@ function navigateToMyProfile() {
     }
 }
 
-function navigateToHelp() {
-    alert('Help & Support feature coming soon!\n\nFor assistance, contact the DX Team.');
-}
 
 function goHome() {
     window.location.href = 'index.html';

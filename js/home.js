@@ -987,10 +987,6 @@ function navigateToMyProfile() {
     }
 }
 
-function navigateToHelp() {
-    // Placeholder - show alert for now
-    alert('Help & Support feature coming soon!\n\nFor assistance, contact the DX Team.');
-}
 
 function openVideoShowcase() {
     window.location.href = 'my-videos.html';
