@@ -40,6 +40,8 @@ document.addEventListener("DOMContentLoaded", () => {
         'blog': 'Blog',
         'careers': 'Careers',
         'projects': 'Our Projects',
+        'my-projects': 'My Projects',
+        'my-videos': 'My Videos',
         'default': 'Digital Transformation'
     };
 

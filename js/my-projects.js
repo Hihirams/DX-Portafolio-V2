@@ -341,7 +341,7 @@ function filterProjects(query) {
 
 function setupTheme() {
     // Check saved theme preference
-    const savedTheme = localStorage.getItem('dx-theme');
+    const savedTheme = localStorage.getItem('theme');
     if (savedTheme === 'light') {
         document.body.classList.add('light-theme');
     } else {
@@ -351,7 +351,7 @@ function setupTheme() {
 
 function toggleTheme() {
     const isLight = document.body.classList.toggle('light-theme');
-    localStorage.setItem('dx-theme', isLight ? 'light' : 'dark');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
 }
 
 // ==================== NAVIGATION ====================
