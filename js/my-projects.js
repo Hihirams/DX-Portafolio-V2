@@ -399,11 +399,14 @@ function viewProject(projectId) {
 }
 
 function editProject(projectId) {
-    window.location.href = `portfolio-editor.html?projectId=${projectId}`;
+    localStorage.setItem('editorMode', 'edit');
+    localStorage.setItem('editingProjectId', projectId);
+    window.location.href = 'portfolio-editor.html';
 }
 
 function createNewProject() {
-    window.location.href = 'portfolio-editor.html?new=true';
+    localStorage.setItem('editorMode', 'new');
+    window.location.href = 'portfolio-editor.html';
 }
 
 // ==================== LOGOUT ====================
