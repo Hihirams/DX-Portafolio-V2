@@ -273,8 +273,8 @@
     <!-- Scripts -->
     <script src="js/data-loader-dev.js"></script>
     <script src="js/file-manager.js"></script>
-    <script src="js/init-data.js"></script>
     <script src="js/data-manager.js"></script>
+    <script src="js/init-data.js"></script>
     <script src="js/help-modal.js"></script>
     <script src="js/upload-modal.js"></script>
     <script src="js/loader.js"></script>
@@ -325,242 +325,130 @@
 
     <script>
         // ==================== SAMPLE DATA ====================
-        const sampleVideos = {
-            innovation: [
-                {
-                    id: 'vid-001',
-                    title: 'Robot Innovation Line',
-                    thumbnail: 'https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=640&q=80',
-                    duration: '12:04',
-                    date: 'Jan 28, 2026',
-                    creator: 'M. Coronel',
-                    description: 'Deployment of the new robotic arm series for automated assembly lines.',
-                    tags: ['Robotics', 'Automation']
-                },
-                {
-                    id: 'vid-002',
-                    title: 'AI Predictive Maintenance',
-                    thumbnail: 'https://images.unsplash.com/photo-1555255707-c07966088b7b?w=640&q=80',
-                    duration: '8:32',
-                    date: 'Jan 20, 2026',
-                    creator: 'J. Smith',
-                    description: 'AI model predicting machine failures before they happen.',
-                    tags: ['AI', 'Maintenance', 'ML']
-                },
-                {
-                    id: 'vid-003',
-                    title: 'DX Hold Monitor',
-                    thumbnail: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=640&q=80',
-                    duration: '15:20',
-                    date: 'Jan 15, 2026',
-                    creator: 'A. Garcia',
-                    description: 'Real-time monitoring system for production holds.',
-                    tags: ['Monitoring', 'DX', 'Dashboard']
-                },
-                {
-                    id: 'vid-004',
-                    title: 'AR Remote Assist',
-                    thumbnail: 'https://images.unsplash.com/photo-1593508512255-86ab42a8e620?w=640&q=80',
-                    duration: '6:45',
-                    date: 'Jan 10, 2026',
-                    creator: 'T. Wilson',
-                    description: 'Augmented reality support for remote field technicians.',
-                    tags: ['AR', 'Support', 'Innovation']
-                },
-                {
-                    id: 'vid-005',
-                    title: 'Smart Warehouse System',
-                    thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=640&q=80',
-                    duration: '10:15',
-                    date: 'Dec 28, 2025',
-                    creator: 'L. Chen',
-                    description: 'Automated inventory tracking using IoT sensors.',
-                    tags: ['Warehouse', 'IoT', 'Logistics']
-                },
-                {
-                    id: 'vid-006',
-                    title: 'Digital Twin Factory',
-                    thumbnail: 'https://images.unsplash.com/photo-1565514020179-026b92b84bb6?w=640&q=80',
-                    duration: '9:30',
-                    date: 'Dec 15, 2025',
-                    creator: 'S. Patel',
-                    description: 'Full digital replica of the manufacturing plant.',
-                    tags: ['Digital Twin', 'Simulation', '3D']
-                },
-                {
-                    id: 'vid-007',
-                    title: 'IoT Sensor Network',
-                    thumbnail: 'https://images.unsplash.com/photo-1518770660439-4636190af475?w=640&q=80',
-                    duration: '11:22',
-                    date: 'Nov 30, 2025',
-                    creator: 'R. Davis',
-                    description: 'Network of 500+ sensors monitoring environmental conditions.',
-                    tags: ['IoT', 'Sensors', 'Environment']
-                },
-                {
-                    id: 'vid-008',
-                    title: 'Machine Learning QC',
-                    thumbnail: 'https://images.unsplash.com/photo-1677442136019-21780ecad995?w=640&q=80',
-                    duration: '7:18',
-                    date: 'Nov 12, 2025',
-                    creator: 'K. Lee',
-                    description: 'Visual inspection system powered by deep learning.',
-                    tags: ['ML', 'Quality', 'Vision']
-                }
-            ],
-            ranked: [
-                { id: 'dept-001', title: 'Engineering', thumbnail: 'https://images.unsplash.com/photo-1581092921461-eab62e97a780?w=400&q=80', duration: '12:30', date: 'Jan 25, 2026', creator: 'Eng. Dept', description: 'Latest engineering breakthroughs and methodologies.', tags: ['Engineering', 'Design'] },
-                { id: 'dept-002', title: 'Supply Chain', thumbnail: 'https://images.unsplash.com/photo-1553413077-190dd305871c?w=400&q=80', duration: '08:45', date: 'Jan 22, 2026', creator: 'SCM Team', description: 'Optimizing the supply chain for maximum efficiency.', tags: ['Supply Chain', 'Logistics'] },
-                { id: 'dept-003', title: 'HR & Safety', thumbnail: 'https://images.unsplash.com/photo-1521737711867-e3b97375f902?w=400&q=80', duration: '15:10', date: 'Jan 20, 2026', creator: 'HR Dept', description: 'Safety protocols and human resource updates.', tags: ['HR', 'Safety'] },
-                { id: 'dept-004', title: 'IT Infrastructure', thumbnail: 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=400&q=80', duration: '10:20', date: 'Jan 18, 2026', creator: 'IT Support', description: 'Review of current IT infrastructure and future plans.', tags: ['IT', 'Infra'] },
-                { id: 'dept-005', title: 'Quality Control', thumbnail: 'https://images.unsplash.com/photo-1581091226033-d5c48150dbaa?w=400&q=80', duration: '09:15', date: 'Jan 15, 2026', creator: 'QC Team', description: 'Ensuring product quality standards are met.', tags: ['Quality', 'Standards'] },
-                { id: 'dept-006', title: 'Manufacturing', thumbnail: 'https://images.unsplash.com/photo-1565193566173-7a0ee3dbe261?w=400&q=80', duration: '14:00', date: 'Jan 12, 2026', creator: 'Mfg Ops', description: 'Insights into the manufacturing process and assembly.', tags: ['Manufacturing', 'Production'] },
-                { id: 'dept-007', title: 'R&D Innovation', thumbnail: 'https://images.unsplash.com/photo-1532094349884-543bc11b234d?w=400&q=80', duration: '11:45', date: 'Jan 10, 2026', creator: 'R&D Lab', description: 'Exploring new technologies and innovative solutions.', tags: ['R&D', 'Innovation'] },
-                { id: 'dept-008', title: 'Maintenance', thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=400&q=80', duration: '07:30', date: 'Jan 08, 2026', creator: 'Maint. Crew', description: 'Best practices for equipment maintenance.', tags: ['Maintenance', 'Repair'] },
-                { id: 'dept-009', title: 'Logistics', thumbnail: 'https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=400&q=80', duration: '13:20', date: 'Jan 05, 2026', creator: 'Logistics', description: 'Strategies for effective logistics management.', tags: ['Logistics', 'Transport'] },
-                { id: 'dept-010', title: 'Finance & Ops', thumbnail: 'https://images.unsplash.com/photo-1554224155-6726b3ff858f?w=400&q=80', duration: '09:50', date: 'Jan 02, 2026', creator: 'Finance', description: 'Financial overview and operational metrics.', tags: ['Finance', 'Operations'] }
-            ],
-            success: [
-                {
-                    id: 'success-001',
-                    title: 'Global Logistics Sync',
-                    description: 'How we achieved 99.9% accuracy in inventory tracking across 14 sites.',
-                    thumbnail: 'https://images.unsplash.com/photo-1566576912321-d58ddd7a6088?w=640&q=80',
-                    duration: '3m 20s',
-                    date: 'Oct 05, 2025',
-                    creator: 'Logistics Team',
-                    tags: ['Logistics', 'Global']
-                },
-                {
-                    id: 'success-002',
-                    title: 'Paperless Floor',
-                    description: 'The complete transition to digital worksheets saved 4M sheets annually.',
-                    thumbnail: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=640&q=80',
-                    duration: '5m 12s',
-                    date: 'Sep 12, 2025',
-                    creator: 'Green Ops',
-                    tags: ['Sustainability', 'Digital']
-                },
-                {
-                    id: 'success-003',
-                    title: 'Virtual Training VR',
-                    description: 'Reducing onboarding time by 40% using immersive VR headsets.',
-                    thumbnail: 'https://images.unsplash.com/photo-1622979135225-d2ba269cf1ac?w=640&q=80',
-                    duration: '4m 05s',
-                    date: 'Aug 30, 2025',
-                    creator: 'HR Training',
-                    tags: ['VR', 'Training']
-                },
-                {
-                    id: 'success-004',
-                    title: 'Zero Defect Vision',
-                    description: 'AI-powered visual inspection achieving 99.97% defect detection rate.',
-                    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=640&q=80',
-                    duration: '6m 45s',
-                    date: 'Aug 15, 2025',
-                    creator: 'QC Dept',
-                    tags: ['QC', 'AI', 'Zero Defect']
-                },
-                {
-                    id: 'success-005',
-                    title: 'Energy Optimization',
-                    description: 'Reduced energy consumption by 32% through smart monitoring systems.',
-                    thumbnail: 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?w=640&q=80',
-                    duration: '4m 30s',
-                    date: 'Jul 22, 2025',
-                    creator: 'Facility Mgmt',
-                    tags: ['Energy', 'IoT']
-                },
-                {
-                    id: 'success-006',
-                    title: 'Predictive Maintenance',
-                    description: 'Prevented $2.5M in unplanned downtime with ML-based predictions.',
-                    thumbnail: 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=640&q=80',
-                    duration: '5m 55s',
-                    date: 'Jun 10, 2025',
-                    creator: 'Maint. Team',
-                    tags: ['Maintenance', 'ML', 'Savings']
-                }
-            ]
-        };
+        // Los videos ahora se cargan desde dataManager
+        let currentShowcaseVideos = [];
+
+        function loadShowcaseData() {
+            if (window.dataManager) {
+                currentShowcaseVideos = dataManager.getShowcaseVideos();
+                console.log('🎬 Showcase videos loaded:', currentShowcaseVideos.length);
+            }
+        }
 
         // ==================== RENDER FUNCTIONS ====================
 
         function renderInnovationCarousel() {
             const container = document.getElementById('innovationCarousel');
-            container.innerHTML = sampleVideos.innovation.map(video => `
-                <div class="video-card" onclick="playVideo('${video.id}')">
-                    <div class="video-card-thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}">
-                        <span class="video-card-duration">${video.duration}</span>
-                        
-                        <div class="video-card-overlay">
-                            <div class="video-card-hover-actions">
-                                <button class="video-card-hover-btn primary">
-                                    <span class="icon material-icons">play_arrow</span>
-                                </button>
-                                <button class="video-card-hover-btn secondary" onclick="event.stopPropagation(); openVideoInfo('${video.id}')">
-                                    <span class="icon material-icons">info_outline</span>
-                                </button>
+            const videos = dataManager.getShowcaseVideos();
+
+            if (videos.length === 0) {
+                container.innerHTML = '<p class="no-videos">No innovation videos uploaded yet.</p>';
+                return;
+            }
+
+            container.innerHTML = videos.map(video => {
+                const fallbackStyle = 'background: linear-gradient(135deg, #1a1a1a 0%, #333 100%);';
+
+                return `
+                    <div class="video-card" onclick="playVideo('${video.id}')">
+                        <div class="video-card-thumbnail" style="${fallbackStyle}">
+                            <img src="${video.thumbnail || ''}" 
+                                 alt="${video.title}" 
+                                 class="video-card-thumb-img" 
+                                 style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                                 onerror="this.style.display='none'">
+                                 
+                            <span class="video-card-duration">${video.duration}</span>
+                            
+                            <div class="video-card-overlay">
+                                <div class="video-card-hover-actions">
+                                    <button class="video-card-hover-btn primary">
+                                        <span class="icon material-icons">play_arrow</span>
+                                    </button>
+                                    <button class="video-card-hover-btn secondary" onclick="event.stopPropagation(); openVideoInfo('${video.id}')">
+                                        <span class="icon material-icons">info_outline</span>
+                                    </button>
+                                </div>
+                                <div class="video-card-hover-title">${video.title}</div>
                             </div>
-                            <div class="video-card-hover-title">${video.title}</div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function renderRankedCarousel() {
             const container = document.getElementById('rankedCarousel');
-            container.innerHTML = sampleVideos.ranked.map((item, index) => `
-                <div class="ranked-item${index >= 9 ? ' ranked-item-double' : ''}" onclick="openVideoInfo('${item.id}')">
-                    <div class="ranked-item-inner">
-                        <svg class="ranked-number" viewBox="0 0 ${index >= 9 ? 140 : 70} 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; width: auto; position: absolute; left: 0; bottom: 0; z-index: 0;">
-                            <text x="0" y="140" fill="black" stroke="#555" stroke-width="4" font-family="Inter" font-size="160" font-weight="900">${index + 1}</text>
-                        </svg>
-                        <div class="ranked-poster">
-                            <img src="${item.thumbnail}" alt="${item.title}">
-                            <div class="ranked-overlay">
-                                <div class="ranked-title">${item.title}</div>
+            const videos = dataManager.getShowcaseVideos();
+
+            if (videos.length === 0) {
+                container.innerHTML = '<p class="no-videos">No departmental showcases uploaded yet.</p>';
+                return;
+            }
+
+            container.innerHTML = videos.map((item, index) => {
+                const fallbackStyle = 'background: linear-gradient(135deg, #1a1a1a 0%, #444 100%);';
+
+                return `
+                    <div class="ranked-item${index >= 9 ? ' ranked-item-double' : ''}" onclick="openVideoInfo('${item.id}')">
+                        <div class="ranked-item-inner">
+                            <svg class="ranked-number" viewBox="0 0 ${index >= 9 ? 140 : 70} 150" fill="none" xmlns="http://www.w3.org/2000/svg" style="height: 100%; width: auto; position: absolute; left: 0; bottom: 0; z-index: 0;">
+                                <text x="0" y="140" fill="black" stroke="#555" stroke-width="4" font-family="Inter" font-size="160" font-weight="900">${index + 1}</text>
+                            </svg>
+                            <div class="ranked-poster" style="${fallbackStyle}">
+                                <img src="${item.thumbnail || ''}" 
+                                     alt="${item.title}" 
+                                     style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;"
+                                     onerror="this.style.display='none'">
+                                     
+                                <div class="ranked-overlay" style="z-index: 2; position: relative;">
+                                    <div class="ranked-title">${item.title}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         function renderSuccessCarousel() {
             const container = document.getElementById('successCarousel');
-            // Change class to video-carousel to match styling if needed, or keep success-carousel and ensure styles match
-            // The user wanted "same styles", so best to use the video-card class.
-            // Note: If we change the container class to video-carousel, we need to update CSS or ensure logic works.
-            // But the container is `#successCarousel` which has `success-carousel` class. 
-            // `video-carousel` class has flex styling. `success-carousel` also has flex styling but cards were wider.
-            // Let's change the inner HTML to generate .video-card elements.
+            const videos = dataManager.getShowcaseVideos();
 
-            // Also replace success-carousel class with video-carousel in HTML for consistency? 
-            // No, purely changing innerHTML key elements.
+            if (videos.length === 0) {
+                container.innerHTML = '<p class="no-videos">No videos available.</p>';
+                return;
+            }
 
-            container.innerHTML = sampleVideos.success.map(video => `
-                <div class="video-card" onclick="playVideo('${video.id}')">
-                    <div class="video-card-thumbnail">
-                        <img src="${video.thumbnail}" alt="${video.title}">
-                        <span class="video-card-duration">${video.duration}</span>
-                        
-                        <div class="video-card-overlay">
-                            <div class="video-card-hover-actions">
-                                <button class="video-card-hover-btn primary">
-                                    <span class="icon material-icons">play_arrow</span>
-                                </button>
-                                <button class="video-card-hover-btn secondary" onclick="event.stopPropagation(); openVideoInfo('${video.id}')">
-                                    <span class="icon material-icons">info_outline</span>
-                                </button>
+            container.innerHTML = videos.map(video => {
+                const fallbackStyle = 'background: linear-gradient(135deg, #1a1a1a 0%, #222 100%);';
+
+                return `
+                    <div class="video-card" onclick="playVideo('${video.id}')">
+                        <div class="video-card-thumbnail" style="${fallbackStyle}">
+                            <img src="${video.thumbnail || ''}" 
+                                 alt="${video.title}" 
+                                 class="video-card-thumb-img" 
+                                 style="width: 100%; height: 100%; object-fit: cover; display: block;"
+                                 onerror="this.style.display='none'">
+
+                            <span class="video-card-duration">${video.duration}</span>
+                            
+                            <div class="video-card-overlay">
+                                <div class="video-card-hover-actions">
+                                    <button class="video-card-hover-btn primary">
+                                        <span class="icon material-icons">play_arrow</span>
+                                    </button>
+                                    <button class="video-card-hover-btn secondary" onclick="event.stopPropagation(); openVideoInfo('${video.id}')">
+                                        <span class="icon material-icons">info_outline</span>
+                                    </button>
+                                </div>
+                                <div class="video-card-hover-title">${video.title}</div>
                             </div>
-                            <div class="video-card-hover-title">${video.title}</div>
                         </div>
                     </div>
-                </div>
-            `).join('');
+                `;
+            }).join('');
         }
 
         // ==================== CAROUSEL CONTROLS ====================
@@ -651,15 +539,23 @@
 
         // ==================== VIDEO PLAYER ====================
 
-        function playVideo(videoId) {
+        async function playVideo(videoId) {
             const modal = document.getElementById('videoModal');
             const player = document.getElementById('videoPlayer');
 
-            // In a real implementation, this would load the actual video
-            // player.src = `users/user2/ai-videos/videos/${videoId}.mp4`;
-
-            modal.classList.add('active');
-            // player.play();
+            // Cargar datos del video real
+            const videoData = dataManager.getVideoById(videoId);
+            if (videoData && videoData.videoUrl) {
+                // Si es una ruta local de Electron, podría necesitar prefijo o tratamiento
+                // Pero saveMedia guarda rutas relativas que el web server de Electron debería servir
+                player.src = videoData.videoUrl;
+                modal.classList.add('active');
+                player.play().catch(e => console.error('Error auto-playing:', e));
+            } else {
+                console.warn('Video URL not found for:', videoId);
+                // Fallback para demo si no hay URL real
+                modal.classList.add('active');
+            }
         }
 
         function closeVideoModal() {
@@ -690,30 +586,31 @@
             let videoData = null;
 
             if (videoId === 'featured') {
-                videoData = {
-                    title: 'Quality Clinic Unity 2.0',
-                    description: 'A unified workspace visualizing real-time KPIs within the plant\'s 3D environment. Experience the seamless integration of detection and IoT QueryLink linking.',
-                    thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80',
-                    duration: '05:12',
-                    match: 98,
-                    year: '2026',
-                    quality: 'HD',
-                    creator: 'M. Coronel',
-                    tags: ['Unity', 'IoT', 'Digital Twin']
-                };
-            } else {
-                // Search in sampleVideos
-                const allVideos = [...sampleVideos.innovation, ...sampleVideos.success, ...sampleVideos.ranked];
-                videoData = allVideos.find(v => v.id === videoId);
+                // FEATURED VIDEO (Poder elegir uno random o los últimos)
+                const videos = dataManager.getShowcaseVideos();
+                videoData = videos.length > 0 ? videos[0] : null;
 
-                // Add default fields if missing from sample data
+                if (!videoData) {
+                    videoData = {
+                        title: 'Quality Clinic Unity 2.0',
+                        description: 'A unified workspace visualizing real-time KPIs within the plant\'s 3D environment. Experience the seamless integration of detection and IoT QueryLink linking.',
+                        thumbnail: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1920&q=80',
+                        duration: '05:12',
+                        match: 98,
+                        year: '2026',
+                        quality: 'HD',
+                        creator: 'M. Coronel',
+                        tags: ['Unity', 'IoT', 'Digital Twin']
+                    };
+                }
+            } else {
+                // Search in dataManager
+                videoData = dataManager.getVideoById(videoId);
+
+                // Add default fields if missing
                 if (videoData) {
-                    if (!videoData.creator) videoData.creator = 'DX Team';
-                    if (!videoData.date) videoData.date = 'Jan 28, 2026';
-                    if (!videoData.tags) videoData.tags = ['Innovation', 'Process'];
-                    if (!videoData.description) videoData.description = 'General innovation video from DX department.';
-                    // Ensure high res image for backdrop
-                    videoData.backdrop = videoData.thumbnail.replace('w=640', 'w=1280');
+                    if (!videoData.creator) videoData.creator = videoData.ownerName || 'DX Team';
+                    if (!videoData.date) videoData.date = new Date(videoData.uploadDate).toLocaleDateString();
                 }
             }
 
@@ -785,24 +682,80 @@
 
         // ==================== INITIALIZE ====================
 
-        document.addEventListener('DOMContentLoaded', () => {
-            renderInnovationCarousel();
-            renderRankedCarousel();
-            renderSuccessCarousel();
-            setupCarouselControls();
+        // Mantener rastro de si el UI base ya se configuró
+        let uiInitialized = false;
 
-            // Wait for dataManager to be ready (if using callbacks)
-            // or just call it if it initializes synchronously from localStorage
-            if (window.dataManager) {
-                updateUserSection();
+        document.addEventListener('DOMContentLoaded', () => {
+            setupUI();
+
+            // Si DataManager ya tiene datos (poco probable en el primer load)
+            if (window.dataManager && dataManager.videos && dataManager.videos.length > 0) {
+                renderShowcase();
             }
         });
 
-        // Listen for data loaded event (from init-data.js)
+        // Este evento se dispara desde init-data.js cuando termina de cargar todo
         document.addEventListener('dataLoaded', () => {
-            console.log('📦 Datos cargados en Video Showcase');
-            updateUserSection();
+            console.log('📦 Datos recibidos en Video Showcase - Renderizando...');
+            renderShowcase();
         });
+
+        function setupUI() {
+            if (uiInitialized) return;
+
+            setupCarouselControls();
+            updateUserSection();
+
+            uiInitialized = true;
+            console.log('🏗️ UI Base de Showcase configurada');
+        }
+
+        function renderShowcase() {
+            loadShowcaseData();
+            updateHeroSection();
+            renderInnovationCarousel();
+            renderRankedCarousel();
+            renderSuccessCarousel();
+            updateUserSection();
+        }
+
+        function updateHeroSection() {
+            if (!currentShowcaseVideos || currentShowcaseVideos.length === 0) return;
+
+            // Tomar el primer video (o uno marcado como destacado si implementamos ese campo)
+            // Por ahora, el más reciente
+            const featured = currentShowcaseVideos[0];
+
+            const heroTitle = document.getElementById('heroTitle');
+            const heroDescription = document.getElementById('heroDescription');
+            const heroImage = document.getElementById('heroImage');
+            const heroMeta = document.getElementById('heroMeta');
+
+            if (heroTitle) heroTitle.innerHTML = `${featured.title.split(' ').join('<br>')}`;
+            if (heroDescription) heroDescription.textContent = featured.description;
+            if (heroImage && featured.thumbnail) {
+                heroImage.src = featured.thumbnail;
+                heroImage.onerror = () => {
+                    heroImage.src = 'assets/video-placeholder.jpg';
+                    heroImage.style.opacity = '0.5';
+                };
+            }
+
+            if (heroMeta) {
+                const date = new Date(featured.uploadDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                heroMeta.innerHTML = `
+                    <span class="match">${featured.duration}</span>
+                    <span>${date}</span>
+                    <span>${featured.ownerName || 'DX Team'}</span>
+                `;
+            }
+
+            // Cambiar la acción del botón play del Hero
+            const playBtn = document.querySelector('.hero-video-actions .btn-play');
+            if (playBtn) {
+                playBtn.onclick = () => playVideo(featured.id);
+            }
+        }
 
         // ==================== USER AUTHENTICATION ====================
 

@@ -5,13 +5,13 @@ async function initializeData() {
     try {
         // CRÍTICO: Esperar a que el filesystem esté listo
         await new Promise(resolve => setTimeout(resolve, 100));
-        
+
         console.log('🔍 VERIFICANDO: data/users.json...');
-        
+
         // 1. Verificar si users.json existe
         const usersExist = await window.electronAPI.fileExists('data/users.json');
         console.log('📁 users.json existe?', usersExist.exists);
-        
+
         if (!usersExist.exists) {
             console.log('⚠️ users.json NO existe, creando estructura inicial...');
             await createInitialStructure();
@@ -20,16 +20,16 @@ async function initializeData() {
         }
 
         console.log('🔍 VERIFICANDO: data/projects.json...');
-        
+
         // 2. Intentar cargar proyectos desde data/projects.json
         const projectsExist = await window.electronAPI.fileExists('data/projects.json');
         console.log('📁 projects.json existe?', projectsExist.exists);
-        
+
         if (projectsExist.exists) {
             // Verificar si el archivo tiene proyectos
             const projectsData = await window.electronAPI.readJSON('data/projects.json');
             console.log('📊 Contenido de projects.json:', projectsData);
-            
+
             if (projectsData.success && projectsData.data && projectsData.data.projects && projectsData.data.projects.length > 0) {
                 console.log(`✅ Usando ${projectsData.data.projects.length} proyectos de data/projects.json`);
             } else {
@@ -41,20 +41,79 @@ async function initializeData() {
             await loadProjectsFromUserFolders();
         }
 
+        console.log('🔍 VERIFICANDO: data/videos.json...');
+
+        // 3. Verificar si videos.json existe (índice global de showcase)
+        const videosExist = await window.electronAPI.fileExists('data/videos.json');
+        console.log('🎬 videos.json existe?', videosExist.exists);
+
+        if (!videosExist.exists) {
+            console.log('⚠️ videos.json NO existe, escaneando carpetas de usuarios...');
+            await loadVideosFromUserFolders();
+        } else {
+            console.log('✅ videos.json ya existe');
+        }
+
         console.log('✅ Estructura de datos inicializada correctamente');
-        
-        // 3. Recargar datos en dataManager
+
+        // 4. Recargar datos en dataManager
         console.log('🔄 Recargando datos en dataManager...');
         await dataManager.loadAllData();
 
-        // 🔔 Notificar que ya hay datos listos (Home, Viewer, Editor escuchan esto)
-document.dispatchEvent(new Event('dataLoaded'));
+        // 🔔 Notificar que ya hay datos listos
+        document.dispatchEvent(new Event('dataLoaded'));
 
-        
         return true;
     } catch (error) {
         console.error('❌ Error inicializando datos:', error);
         return false;
+    }
+}
+
+async function loadVideosFromUserFolders() {
+    try {
+        const allVideos = [];
+        const usersExist = await window.electronAPI.fileExists('users');
+        if (!usersExist.exists) return;
+
+        const usersResult = await window.electronAPI.listDir('users');
+        if (!usersResult.success || !usersResult.files) return;
+
+        for (const userId of usersResult.files) {
+            if (userId.startsWith('.') || userId.includes('.')) continue;
+
+            const showcasePath = `users/${userId}/showcase-videos`;
+            const showcaseExist = await window.electronAPI.fileExists(showcasePath);
+            if (!showcaseExist.exists) continue;
+
+            const videosResult = await window.electronAPI.listDir(showcasePath);
+            if (!videosResult.success || !videosResult.files) continue;
+
+            for (const videoId of videosResult.files) {
+                if (videoId.startsWith('.')) continue;
+
+                try {
+                    const metaPath = `${showcasePath}/${videoId}/metadata.json`;
+                    const metaData = await window.electronAPI.readJSON(metaPath);
+                    if (metaData.success && metaData.data) {
+                        allVideos.push(metaData.data);
+                        console.log(`    🎞️ Video descubierto: ${metaData.data.title} (${userId})`);
+                    }
+                } catch (e) {
+                    console.warn(`    ⚠️ No se pudo leer metadatos de video ${videoId}`);
+                }
+            }
+        }
+
+        // Guardar índice global
+        await window.electronAPI.writeJSON('data/videos.json', {
+            videos: allVideos,
+            lastUpdated: new Date().toISOString()
+        });
+        console.log(`✅ Índice de showcase recreado con ${allVideos.length} videos`);
+
+    } catch (error) {
+        console.error('❌ Error escaneando videos:', error);
     }
 }
 
@@ -114,7 +173,7 @@ async function createInitialStructure() {
 
     // Crear config.json SOLO si no existe
     const configExists = await window.electronAPI.fileExists('config.json');
-    
+
     if (!configExists.exists) {
         const initialConfig = {
             appName: "Portafolio DX",
@@ -210,10 +269,10 @@ async function createInitialStructure() {
 async function loadProjectsFromUserFolders() {
     try {
         const allProjects = [];
-        
+
         // Verificar si existe la carpeta users/
         const usersExist = await window.electronAPI.fileExists('users');
-        
+
         if (!usersExist.exists) {
             console.log('No existe carpeta users/, NO se creará projects.json vacío');
             // NO sobrescribir si ya existe projects.json
@@ -222,7 +281,7 @@ async function loadProjectsFromUserFolders() {
 
         // Listar directorios de usuarios
         const usersResult = await window.electronAPI.listDir('users');
-        
+
         if (!usersResult.success || !usersResult.files || usersResult.files.length === 0) {
             console.log('Carpeta users/ esta vacia');
             // NO sobrescribir si ya existe projects.json
@@ -241,7 +300,7 @@ async function loadProjectsFromUserFolders() {
             // Verificar si tiene carpeta projects/
             const projectsFolderPath = `users/${userId}/projects`;
             const projectsExist = await window.electronAPI.fileExists(projectsFolderPath);
-            
+
             if (!projectsExist.exists) {
                 console.log(`  Usuario ${userId} no tiene carpeta projects/`);
                 continue;
@@ -249,7 +308,7 @@ async function loadProjectsFromUserFolders() {
 
             // Listar proyectos del usuario
             const projectsResult = await window.electronAPI.listDir(projectsFolderPath);
-            
+
             if (!projectsResult.success || !projectsResult.files || projectsResult.files.length === 0) {
                 console.log(`  Usuario ${userId} no tiene proyectos`);
                 continue;

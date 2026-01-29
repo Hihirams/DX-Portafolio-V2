@@ -63,6 +63,15 @@ const uploadModalHTML = `
                     </div>
 
                     <div class="upload-actions">
+                        <button class="btn-delete-video" id="deleteVideoBtn" onclick="deleteCurrentVideo()" style="display: none;">
+                            <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="margin-right: 8px;">
+                                <polyline points="3 6 5 6 21 6"></polyline>
+                                <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                <line x1="10" y1="11" x2="10" y2="17"></line>
+                                <line x1="14" y1="11" x2="14" y2="17"></line>
+                            </svg>
+                            Delete
+                        </button>
                         <button class="btn-cancel" onclick="closeUploadModal()">Cancel</button>
                         <button class="btn-upload-submit" onclick="submitVideoUpload()">
                             <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="margin-right: 8px;">
@@ -138,6 +147,12 @@ function openUploadVideoModal(videoData = null) {
         `;
         submitBtn.onclick = () => saveVideoChanges();
 
+        // Show Delete Button in Edit Mode
+        const deleteBtn = document.getElementById('deleteVideoBtn');
+        if (deleteBtn) {
+            deleteBtn.style.display = 'flex';
+        }
+
     } else {
         // UPLOAD MODE
         currentEditingId = null;
@@ -154,6 +169,12 @@ function openUploadVideoModal(videoData = null) {
             Upload Video
         `;
         submitBtn.onclick = () => submitVideoUpload();
+
+        // Hide Delete Button in Upload Mode
+        const deleteBtn = document.getElementById('deleteVideoBtn');
+        if (deleteBtn) {
+            deleteBtn.style.display = 'none';
+        }
     }
 
     modal.classList.add('active');
@@ -316,33 +337,124 @@ function resetUploadForm() {
     removeVideoFile();
 }
 
-function submitVideoUpload() {
-    // Mock submission - existing "backend" logic would go here
-    const title = document.getElementById('videoTitle').value;
+async function submitVideoUpload() {
+    const title = document.getElementById('videoTitle').value.trim();
+    const description = document.getElementById('videoDescription').value.trim();
     const fileInput = document.getElementById('videoFileInput');
+    const file = fileInput.files[0];
 
-    if (!fileInput.files[0] || !title) {
+    if (!file || !title) {
         alert('Please select a video and provide a title.');
         return;
     }
 
-    // Simulate upload delay
+    // Preparar UI
     const btn = document.querySelector('.btn-upload-submit');
     const originalText = btn.innerHTML;
-    btn.innerHTML = 'Uploading...';
+    btn.innerHTML = `
+        <span class="spinner-small" style="display:inline-block; width:12px; height:12px; border:2px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 1s linear infinite; margin-right:8px;"></span>
+        Uploading...
+    `;
     btn.disabled = true;
 
-    setTimeout(() => {
-        alert('Video uploaded successfully!');
-        closeUploadModal();
+    try {
+        // 1. Leer archivo como Base64
+        const videoDataPromise = new Promise((resolve) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.readAsDataURL(file);
+        });
+
+        const videoBase64 = await videoDataPromise;
+
+        // 2. Generar miniatura (Thumbnail)
+        // En una implementación real, dispararíamos un canvas para capturar un frame del video
+        // Por ahora, usaremos el mismo video o un placeholder (el sistema espera thumbnailData)
+        const thumbnailData = await captureVideoFrame(videoBase64);
+
+        // 3. Obtener duración del video
+        const duration = await getVideoDuration(videoBase64);
+
+        // 4. Preparar datos para DataManager
+        const videoData = {
+            title: title,
+            description: description,
+            tags: currentTags,
+            duration: duration,
+            videoData: videoBase64,
+            thumbnailData: thumbnailData
+        };
+
+        // 5. Enviar a DataManager
+        const result = await dataManager.addVideo(videoData);
+
+        if (result) {
+            alert('Video uploaded successfully!');
+            closeUploadModal();
+
+            // Recargar datos en la página actual
+            if (window.location.href.includes('video-showcase.html')) {
+                // Si estamos en Showcase, recargar carruseles
+                if (typeof renderInnovationCarousel === 'function') {
+                    // Esperar un momento para asegurar que el FS se actualizó
+                    setTimeout(() => window.location.reload(), 500);
+                }
+            } else if (window.location.href.includes('my-videos.html')) {
+                window.location.reload();
+            }
+        } else {
+            throw new Error('Failed to save video');
+        }
+
+    } catch (error) {
+        console.error('❌ Upload error:', error);
+        alert('Error uploading video: ' + error.message);
+    } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
+    }
+}
 
-        // Here you would typically trigger a refresh of the video grid
-        if (window.location.href.includes('my-videos.html')) {
-            window.location.reload(); // Simple refresh for mock
-        }
-    }, 1500);
+// Helpers para multimedia
+async function captureVideoFrame(videoSrc) {
+    return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.src = videoSrc;
+        video.muted = true;
+        video.preload = 'auto'; // Asegurar carga
+        video.currentTime = 1; // Capturar en el segundo 1
+
+        video.onloadeddata = () => {
+            const canvas = document.createElement('canvas');
+            canvas.width = video.videoWidth;
+            canvas.height = video.videoHeight;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            console.log('📸 Thumbnail captured successfully');
+            resolve(canvas.toDataURL('image/jpeg', 0.8));
+        };
+
+        video.onerror = () => {
+            console.warn('⚠️ No se pudo capturar frame del video');
+            resolve('');
+        };
+
+        // Timeout de seguridad
+        setTimeout(() => resolve(''), 3000);
+    });
+}
+
+async function getVideoDuration(videoSrc) {
+    return new Promise((resolve) => {
+        const video = document.createElement('video');
+        video.src = videoSrc;
+        video.onloadedmetadata = () => {
+            const minutes = Math.floor(video.duration / 60);
+            const seconds = Math.floor(video.duration % 60);
+            resolve(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+        };
+        video.onerror = () => resolve('0:00');
+    });
 }
 
 function saveVideoChanges() {
@@ -378,3 +490,51 @@ document.addEventListener('click', function (event) {
         closeUploadModal();
     }
 });
+
+// Delete current video
+async function deleteCurrentVideo() {
+    if (!currentEditingId) {
+        console.error('No video ID to delete');
+        return;
+    }
+
+    // Confirm deletion
+    const confirmDelete = confirm('Are you sure you want to delete this video? This action cannot be undone.');
+    if (!confirmDelete) return;
+
+    const btn = document.getElementById('deleteVideoBtn');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = `
+        <span class="spinner-small" style="display:inline-block; width:12px; height:12px; border:2px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 1s linear infinite; margin-right:8px;"></span>
+        Deleting...
+    `;
+    btn.disabled = true;
+
+    try {
+        const result = await dataManager.deleteVideo(currentEditingId);
+
+        if (result) {
+            alert('Video deleted successfully!');
+            closeUploadModal();
+
+            // Refresh the page to show updated list
+            if (window.location.href.includes('my-videos.html')) {
+                window.location.reload();
+            } else if (window.location.href.includes('video-showcase.html')) {
+                window.location.reload();
+            }
+        } else {
+            alert('Error deleting video. Please try again.');
+            btn.innerHTML = originalText;
+            btn.disabled = false;
+        }
+    } catch (error) {
+        console.error('Error deleting video:', error);
+        alert('Error deleting video: ' + error.message);
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    }
+}
+
+// Make deleteCurrentVideo globally available
+window.deleteCurrentVideo = deleteCurrentVideo;

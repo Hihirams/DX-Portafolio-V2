@@ -251,11 +251,17 @@ body.light-theme .glass-panel:hover {
     aspect-ratio: 16/9;
 }
 
-.bento-card__video-player {
+.bento-card__video-player,
+.bento-card__thumb-img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.5s ease;
+}
+
+.bento-card:hover .bento-card__thumb-img {
+    transform: scale(1.05);
 }
 
 .bento-card__play-overlay {
@@ -324,6 +330,7 @@ body.light-theme .bento-card__title {
     margin: 0;
     /* Limit to 2 lines */
     display: -webkit-box;
+    line-clamp: 2;
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;

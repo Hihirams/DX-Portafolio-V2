@@ -2,46 +2,13 @@
 // MY-VIDEOS.JS - My Videos Dashboard Logic
 // ============================================
 
-// ==================== MOCK DATA ====================
-// Temporary data until backend structure is ready
-const MOCK_VIDEOS = [
-    {
-        id: 'v1',
-        title: 'Industrial Automation Demo',
-        description: 'Demonstration of the new robotic arm integration in the assembly line.',
-        uploadDate: '2026-01-25',
-        duration: '3:45',
-        thumbnail: 'assets/video-thumb-1.jpg', // Placeholder, handles error gracefully
-        videoUrl: '#'
-    },
-    {
-        id: 'v2',
-        title: 'AI Vision System Test',
-        description: 'Testing the new computer vision capabilities for defect detection.',
-        uploadDate: '2026-01-22',
-        duration: '1:20',
-        thumbnail: 'assets/video-thumb-2.jpg',
-        videoUrl: '#'
-    },
-    {
-        id: 'v3',
-        title: 'Q1 Progress Report',
-        description: 'Video summary of the first quarter achievements and milestones.',
-        uploadDate: '2026-01-15',
-        duration: '5:00',
-        thumbnail: 'assets/video-thumb-3.jpg',
-        videoUrl: '#'
-    },
-    {
-        id: 'v4',
-        title: 'Safety Training',
-        description: 'Mandatory safety protocol updates for all plant personnel.',
-        uploadDate: '2026-01-10',
-        duration: '12:30',
-        thumbnail: 'assets/video-thumb-4.jpg',
-        videoUrl: '#'
+// La data ahora se obtiene de DataManager
+function getMyVideos() {
+    if (window.dataManager) {
+        return dataManager.getMyVideos();
     }
-];
+    return [];
+}
 
 // ==================== INIT ====================
 
@@ -169,8 +136,7 @@ function renderVideoStats() {
 // ==================== VIDEOS GRID ====================
 
 function getMyVideos() {
-    // In the future this should come from dataManager
-    return MOCK_VIDEOS;
+    return dataManager.getMyVideos();
 }
 
 function renderMyVideosGrid() {
@@ -214,12 +180,16 @@ function renderMyVideosGrid() {
 function createVideoCard(video) {
     // Create a unique gradient for placeholder if no thumbnail
     const gradients = [
-        'linear-gradient(135deg, #FF6B6B, #556270)',
-        'linear-gradient(135deg, #4ECDC4, #556270)',
-        'linear-gradient(135deg, #C7F464, #556270)',
-        'linear-gradient(135deg, #2C3E50, #FD746C)'
+        'linear-gradient(135deg, #4573a5, #1c1c1e)',
+        'linear-gradient(135deg, #b0955d, #1c1c1e)',
+        'linear-gradient(135deg, #1d1d1f, #4573a5)',
+        'linear-gradient(135deg, #1c1c1e, #b0955d)'
     ];
     const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
+
+    // Si el video tiene thumbnail real, no mostramos el fondo de degradado
+    const hasThumb = video.thumbnail && video.thumbnail !== '' && video.thumbnail !== '#';
+    const previewStyle = hasThumb ? 'background: #000;' : `background: ${randomGradient};`;
 
     return `
         <div class="glass-panel bento-card bento-card--small" onclick="viewVideo('${video.id}')">
@@ -231,8 +201,8 @@ function createVideoCard(video) {
                 </svg>
             </button>
             
-            <div class="bento-card__video-preview" style="background: ${randomGradient};">
-                <!-- If we had a real URL we would put a video tag here or an img -->
+            <div class="bento-card__video-preview" style="${previewStyle}">
+                <img src="${video.thumbnailBase64 || video.thumbnail || ''}" alt="" class="bento-card__thumb-img" onerror="this.style.display='none'">
                 <div class="bento-card__play-overlay">
                     <div class="bento-card__play-icon">
                         <svg viewBox="0 0 24 24">
@@ -256,12 +226,8 @@ function createVideoCard(video) {
 }
 
 function editVideo(videoId) {
-    const video = MOCK_VIDEOS.find(v => v.id === videoId);
+    const video = dataManager.getVideoById(videoId);
     if (video) {
-        // Add some mock tags if they don't exist for better demo
-        if (!video.tags) {
-            video.tags = ['Industrial', 'Demo'];
-        }
         openUploadVideoModal(video);
     } else {
         console.error('Video not found:', videoId);
@@ -351,8 +317,112 @@ function openProjectManager() {
 // ==================== VIDEO ACTIONS ====================
 
 function viewVideo(videoId) {
-    // In a real app this would open a video modal or page
-    alert(`Play video: ${videoId}\n(Video player integration coming soon)`);
+    const video = dataManager.getVideoById(videoId);
+    if (video && video.videoUrl) {
+        openVideoPlayer(video.videoUrl);
+    } else {
+        alert(`Video not found or URL missing for: ${videoId}`);
+    }
+}
+
+function openVideoPlayer(url) {
+    let modal = document.getElementById('videoModal');
+    if (!modal) {
+        injectVideoModal();
+        modal = document.getElementById('videoModal');
+    }
+
+    const player = document.getElementById('videoPlayer');
+    player.src = url;
+    modal.classList.add('active');
+    player.play().catch(e => console.error('Error playing video:', e));
+}
+
+function injectVideoModal() {
+    // Usar la misma estructura que video-showcase.html para consistencia
+    const modalHtml = `
+        <div class="video-modal" id="videoModal">
+            <button class="modal-close-netflix" onclick="closeVideoModal()">
+                <span class="material-icons">close</span>
+            </button>
+            <div class="video-player-container">
+                <video id="videoPlayer" controls autoplay></video>
+            </div>
+        </div>
+    `;
+    document.body.insertAdjacentHTML('beforeend', modalHtml);
+
+    // Inyectar estilos para el modal tipo "Netflix"
+    if (!document.getElementById('video-modal-styles')) {
+        const style = document.createElement('style');
+        style.id = 'video-modal-styles';
+        style.textContent = `
+            .video-modal {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                width: 100%;
+                height: 100%;
+                background: rgba(0, 0, 0, 0.9);
+                z-index: 3000;
+                justify-content: center;
+                align-items: center;
+                backdrop-filter: blur(10px);
+            }
+            .video-modal.active { display: flex; }
+            .video-player-container {
+                width: 90%;
+                max-width: 1200px;
+                aspect-ratio: 16/9;
+                background: #000;
+                border-radius: 12px;
+                overflow: hidden;
+                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            }
+            .video-player-container video {
+                width: 100%;
+                height: 100%;
+                display: block;
+            }
+            .modal-close-netflix {
+                position: absolute;
+                top: 30px;
+                right: 30px;
+                background: none;
+                border: none;
+                color: #fff;
+                cursor: pointer;
+                z-index: 3001;
+                padding: 10px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: transform 0.3s ease;
+            }
+            .modal-close-netflix:hover { transform: scale(1.2); }
+            .modal-close-netflix .material-icons { font-size: 36px; }
+        `;
+        document.head.appendChild(style);
+    }
+
+    // Asegurar que Material Icons esté disponible
+    if (!document.querySelector('link[href*="Material+Icons"]')) {
+        const link = document.createElement('link');
+        link.href = 'https://fonts.googleapis.com/icon?family=Material+Icons';
+        link.rel = 'stylesheet';
+        document.head.appendChild(link);
+    }
+}
+
+window.closeVideoModal = function () {
+    const modal = document.getElementById('videoModal');
+    const player = document.getElementById('videoPlayer');
+    if (modal) modal.classList.remove('active');
+    if (player) {
+        player.pause();
+        player.src = '';
+    }
 }
 
 function uploadNewVideo() {

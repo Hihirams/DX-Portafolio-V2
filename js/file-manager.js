@@ -691,6 +691,118 @@ class FileManager {
         }
     }
 
+    // ==================== VIDEOS SHOWCASE OPERATIONS (NEW) ====================
+
+    async loadAllVideos() {
+        try {
+            // Asegurar que el archivo de índice existe
+            const exist = await this.api.fileExists('data/videos.json');
+            if (!exist.exists) {
+                await this.api.writeJSON('data/videos.json', { videos: [], lastUpdated: new Date().toISOString() });
+            }
+
+            console.log('🎬 Cargando videos de showcase desde data/videos.json...');
+            const result = await this.api.readJSON('data/videos.json');
+            if (result.success) {
+                return result.data.videos || [];
+            }
+            return [];
+        } catch (error) {
+            console.error('❌ Error cargando videos de showcase:', error);
+            return [];
+        }
+    }
+
+    async saveVideosIndex(indexData) {
+        if (!this.isElectron) return false;
+        try {
+            const result = await this.api.writeJSON('data/videos.json', indexData);
+            return result.success;
+        } catch (error) {
+            console.error('❌ Error guardando índice de videos:', error);
+            return false;
+        }
+    }
+
+    async saveShowcaseVideo(userId, videoData) {
+        if (!this.isElectron) return false;
+
+        const videoId = videoData.id;
+        const baseDir = `users/${userId}/showcase-videos/${videoId}`;
+
+        console.log(`🎬 Guardando video de showcase ${videoId} para usuario ${userId}`);
+
+        try {
+            // 1. Guardar Metadatos (JSON)
+            const metaPath = `${baseDir}/metadata.json`;
+            await this.api.writeJSON(metaPath, videoData);
+
+            // 2. Guardar Video si es base64
+            if (videoData.videoData && videoData.videoData.startsWith('data:')) {
+                const videoPath = `${baseDir}/video.mp4`; // Por defecto mp4, se podría detectar
+                const vResult = await this.api.saveMedia(videoPath, videoData.videoData);
+                if (vResult.success) {
+                    videoData.videoUrl = videoPath;
+                    // Limpiar data para no inflar el JSON global
+                    delete videoData.videoData;
+                }
+            }
+
+            // 3. Guardar Thumbnail si es base64
+            if (videoData.thumbnailData && videoData.thumbnailData.startsWith('data:')) {
+                const thumbPath = `${baseDir}/thumbnail.jpg`;
+                const tResult = await this.api.saveMedia(thumbPath, videoData.thumbnailData);
+                if (tResult.success) {
+                    videoData.thumbnail = thumbPath;
+                    delete videoData.thumbnailData;
+                }
+            }
+
+            // Actualizar el archivo de metadatos con las rutas finales si cambiaron
+            await this.api.writeJSON(metaPath, videoData);
+
+            return true;
+        } catch (error) {
+            console.error('❌ Error en saveShowcaseVideo:', error);
+            return false;
+        }
+    }
+
+    async deleteShowcaseVideo(userId, videoId) {
+        if (!this.isElectron) return false;
+
+        const baseDir = `users/${userId}/showcase-videos/${videoId}`;
+        console.log(`🗑️ Eliminando video de showcase ${videoId}...`);
+
+        try {
+            // Eliminar el directorio completo del video
+            const result = await this.api.deleteDir(baseDir);
+
+            if (result && result.success) {
+                console.log(`✅ Video ${videoId} eliminado del sistema de archivos`);
+                return true;
+            } else {
+                // Intentar eliminar archivos individualmente si deleteDir no existe
+                console.log('⚠️ deleteDir no disponible, intentando eliminar archivos individualmente...');
+
+                try {
+                    await this.api.deleteFile(`${baseDir}/video.mp4`);
+                    await this.api.deleteFile(`${baseDir}/thumbnail.jpg`);
+                    await this.api.deleteFile(`${baseDir}/metadata.json`);
+                    console.log(`✅ Archivos del video ${videoId} eliminados`);
+                    return true;
+                } catch (fileError) {
+                    console.error('❌ Error eliminando archivos individuales:', fileError);
+                    // Aún así retornar true si los archivos no existían
+                    return true;
+                }
+            }
+        } catch (error) {
+            console.error('❌ Error en deleteShowcaseVideo:', error);
+            return false;
+        }
+    }
+
     async loadProjectsIndex() {
         if (!this.isElectron) {
             console.error('ÃƒÂ¢Ã‚ÂÃ…â€™ Electron API no disponible');

@@ -12,6 +12,7 @@ class DataManager {
     constructor() {
         this.users = [];
         this.projects = [];
+        this.videos = []; // ✅ AGREGADO: Almacén de videos de showcase
         this.config = {};
         this.currentUser = null;
 
@@ -107,6 +108,7 @@ class DataManager {
             await Promise.all([
                 this.loadUsers(),
                 this.loadProjects(),
+                this.loadVideos(), // ✅ AGREGADO: Cargar videos
                 this.loadConfig()
             ]);
 
@@ -210,6 +212,77 @@ class DataManager {
             this.projects = [];
             return [];
         }
+    }
+
+    async loadVideos() {
+        try {
+            const fm = typeof window !== 'undefined' ? window.fileManager : null;
+            if (fm && fm.isElectron) {
+                const videos = await fm.loadAllVideos();
+                this.videos = videos;
+                console.log(`✅ ${this.videos.length} videos de showcase cargados`);
+
+                // Pre-cargar thumbnails como Base64
+                await this.loadVideoThumbnails();
+
+                return this.videos;
+            } else {
+                console.log('🎬 Usando fallback - cargando videos desde data/ (no-Electron)');
+                return await this.loadVideosFromFiles();
+            }
+        } catch (error) {
+            console.error('❌ Error cargando videos:', error);
+            try {
+                return await this.loadVideosFromFiles();
+            } catch (fallbackError) {
+                console.error('❌ Fallback de videos también falló:', fallbackError);
+                this.videos = [];
+                return [];
+            }
+        }
+    }
+
+    async loadVideosFromFiles() {
+        try {
+            const response = await fetch('data/videos.json');
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
+            const data = await response.json();
+            this.videos = data.videos || [];
+            console.log(`✅ ${this.videos.length} videos cargados desde archivos`);
+            return this.videos;
+        } catch (error) {
+            console.warn('⚠️ No se pudo cargar videos.json:', error);
+            this.videos = [];
+            return [];
+        }
+    }
+
+    // Pre-cargar thumbnails de videos como Base64 (igual que imágenes de proyectos)
+    async loadVideoThumbnails() {
+        const fm = typeof window !== 'undefined' ? window.fileManager : null;
+        if (!fm || !fm.isElectron || !fm.api) {
+            console.log('⚠️ No se pueden pre-cargar thumbnails (no Electron)');
+            return;
+        }
+
+        console.log('🖼️ Pre-cargando thumbnails de videos...');
+        let loaded = 0;
+
+        for (let video of this.videos) {
+            if (video.thumbnail && video.thumbnail.startsWith('users/')) {
+                try {
+                    const result = await fm.api.readMedia(video.thumbnail);
+                    if (result.success && result.data) {
+                        video.thumbnailBase64 = result.data;
+                        loaded++;
+                    }
+                } catch (err) {
+                    console.warn(`⚠️ No se pudo cargar thumbnail de ${video.id}:`, err.message);
+                }
+            }
+        }
+
+        console.log(`✅ ${loaded}/${this.videos.length} thumbnails de videos cargados`);
     }
 
     async loadConfig() {
@@ -609,6 +682,115 @@ class DataManager {
 
     getProjectsByUser(userId) {
         return this.projects.filter(p => p.ownerId === userId);
+    }
+
+    // ==================== VIDEO MANAGEMENT (NEW) ====================
+
+    async addVideo(videoData) {
+        if (!this.currentUser) {
+            console.error('❌ No hay usuario loggeado');
+            return null;
+        }
+
+        const newVideo = {
+            id: `vid_${Date.now()}`,
+            ownerId: this.currentUser.id,
+            ownerName: this.currentUser.name,
+            title: videoData.title || 'Untitled Video',
+            description: videoData.description || '',
+            tags: videoData.tags || [],
+            uploadDate: new Date().toISOString(),
+            duration: videoData.duration || '0:00',
+            thumbnail: videoData.thumbnail || '',
+            videoUrl: videoData.videoUrl || '#',
+            views: 0,
+            featured: false,
+            createdAt: new Date().toISOString(),
+            // ✅ AGREGADO: Pasar datos crudos para que FileManager los guarde
+            videoData: videoData.videoData,
+            thumbnailData: videoData.thumbnailData
+        };
+
+        // Guardar video físicamente (a través de FileManager)
+        const saved = await fileManager.saveShowcaseVideo(this.currentUser.id, newVideo);
+
+        if (saved) {
+            // Limpiar datos pesados antes de agregar al array en memoria y al índice JSON
+            delete newVideo.videoData;
+            delete newVideo.thumbnailData;
+
+            this.videos.push(newVideo);
+            await this.updateVideosIndex();
+            console.log(`✅ Video ${newVideo.id} agregado al showcase`);
+            return newVideo;
+        }
+
+        console.error('❌ Error guardando video físicamente');
+        return null;
+    }
+
+    async updateVideosIndex() {
+        const indexData = {
+            videos: this.videos,
+            lastUpdated: new Date().toISOString()
+        };
+        await fileManager.saveVideosIndex(indexData);
+    }
+
+    getShowcaseVideos(count = null) {
+        // Clonar y barajar (randomize)
+        let shuffled = [...this.videos].sort(() => 0.5 - Math.random());
+        return count ? shuffled.slice(0, count) : shuffled;
+    }
+
+    getMyVideos(userId) {
+        const uid = userId || this.currentUser?.id;
+        if (!uid) return [];
+        return this.videos.filter(v => v.ownerId === uid);
+    }
+
+    getVideoById(videoId) {
+        return this.videos.find(v => v.id === videoId);
+    }
+
+    async deleteVideo(videoId) {
+        const videoIndex = this.videos.findIndex(v => v.id === videoId);
+
+        if (videoIndex === -1) {
+            console.error('❌ Video no encontrado:', videoId);
+            return false;
+        }
+
+        const video = this.videos[videoIndex];
+
+        // Verificar permisos
+        if (this.currentUser && video.ownerId !== this.currentUser.id) {
+            console.error('❌ Sin permisos para eliminar este video');
+            return false;
+        }
+
+        try {
+            // Eliminar archivos físicos del video
+            const deleted = await fileManager.deleteShowcaseVideo(video.ownerId, videoId);
+
+            if (deleted) {
+                // Remover del array en memoria
+                this.videos.splice(videoIndex, 1);
+                // Actualizar el índice
+                await this.updateVideosIndex();
+                console.log(`✅ Video ${videoId} eliminado`);
+                return true;
+            }
+        } catch (error) {
+            console.error('❌ Error eliminando video:', error);
+        }
+
+        return false;
+    }
+
+    // Lista lo que antes era Success Stories (ahora All Videos)
+    getAllVideos() {
+        return this.getShowcaseVideos(); // Siempre random por requisito
     }
 
     // Lista los proyectos del usuario actual (o de un userId explícito)

@@ -1161,6 +1161,45 @@ body.light-theme .btn-cancel:hover {
     box-shadow: none;
 }
 
+/* Delete Video Button */
+.btn-delete-video {
+    padding: 12px 24px;
+    border-radius: 99px;
+    background: rgba(255, 59, 48, 0.15);
+    color: #ff453a;
+    border: 1px solid rgba(255, 59, 48, 0.3);
+    font-size: 15px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    margin-right: auto;
+}
+
+.btn-delete-video:hover {
+    background: rgba(255, 59, 48, 0.25);
+    border-color: rgba(255, 59, 48, 0.5);
+    transform: translateY(-1px);
+}
+
+.btn-delete-video:disabled {
+    background: rgba(255, 59, 48, 0.1);
+    cursor: not-allowed;
+    transform: none;
+    opacity: 0.6;
+}
+
+body.light-theme .btn-delete-video {
+    background: rgba(255, 59, 48, 0.1);
+    color: #ff3b30;
+    border-color: rgba(255, 59, 48, 0.2);
+}
+
+body.light-theme .btn-delete-video:hover {
+    background: rgba(255, 59, 48, 0.2);
+}
+
 @media (max-width: 900px) {
     .upload-container {
         flex-direction: column;

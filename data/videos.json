@@ -1,0 +1,23 @@
+{
+  "videos": [
+    {
+      "id": "vid_1769702625308",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
+      "title": "TETS",
+      "description": "TETSTTT",
+      "tags": [
+        "TEST213TETS",
+        "TETST2"
+      ],
+      "uploadDate": "2026-01-29T16:03:45.308Z",
+      "duration": "0:38",
+      "thumbnail": "users/user1/showcase-videos/vid_1769702625308/thumbnail.jpg",
+      "videoUrl": "users/user1/showcase-videos/vid_1769702625308/video.mp4",
+      "views": 0,
+      "featured": false,
+      "createdAt": "2026-01-29T16:03:45.308Z"
+    }
+  ],
+  "lastUpdated": "2026-01-29T16:03:46.240Z"
+}
