@@ -368,7 +368,8 @@ function navigateToMyProjects() {
 function navigateToMyProfile() {
     const currentUser = dataManager.getCurrentUser();
     if (currentUser) {
-        window.location.href = `portfolio-viewer.html?userId=${currentUser.id}`;
+        localStorage.setItem('viewingUserId', currentUser.id);
+        window.location.href = 'portfolio-viewer.html';
     }
 }
 

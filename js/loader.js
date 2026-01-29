@@ -197,19 +197,37 @@ document.addEventListener("DOMContentLoaded", () => {
     // ==========================================
     // FINALIZAR CARGA
     // ==========================================
-    const loaderDuration = 1500; // Duración total del loader
+    const minDuration = 900;
+    const maxDuration = 12000;
+    const startTime = Date.now();
+    let finished = false;
 
-    setTimeout(() => {
-        clearInterval(textInterval);
-        statusText.innerText = 'Ready';
+    const finalizeLoader = (reason = 'ready') => {
+        if (finished) return;
+        finished = true;
 
-        // Añadir clase para desvanecer
-        loader.classList.add('loader-hidden');
+        const elapsed = Date.now() - startTime;
+        const delay = Math.max(0, minDuration - elapsed);
 
-        // Eliminar el loader del DOM después de la animación
         setTimeout(() => {
-            loader.remove();
-        }, 800); // Matching CSS transition duration
+            clearInterval(textInterval);
+            statusText.innerText = reason === 'timeout' ? 'Ready' : 'Ready';
 
-    }, loaderDuration);
+            loader.classList.add('loader-hidden');
+
+            setTimeout(() => {
+                loader.remove();
+            }, 800);
+        }, delay);
+    };
+
+    const pagesRequiringPageReady = ['portfolio-viewer'];
+    if (pagesRequiringPageReady.includes(currentPage)) {
+        document.addEventListener('pageReady', () => finalizeLoader('pageReady'), { once: true });
+    } else {
+        document.addEventListener('dataLoaded', () => finalizeLoader('dataLoaded'), { once: true });
+    }
+
+    // Fallback por si algo falla
+    setTimeout(() => finalizeLoader('timeout'), maxDuration);
 });

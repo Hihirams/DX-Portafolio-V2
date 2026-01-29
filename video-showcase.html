@@ -210,6 +210,13 @@
                     <source src="" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
+                <div class="video-loading-overlay" id="videoLoadingOverlay">
+                    <img class="video-loading-backdrop" id="videoLoadingBackdrop" src="" alt="">
+                    <div class="video-loading-glass">
+                        <div class="video-loading-spinner"></div>
+                        <div class="video-loading-text">Loading video...</div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -560,13 +567,29 @@
         async function playVideo(videoId) {
             const modal = document.getElementById('videoModal');
             const player = document.getElementById('videoPlayer');
+            const loadingOverlay = document.getElementById('videoLoadingOverlay');
+            const loadingBackdrop = document.getElementById('videoLoadingBackdrop');
 
             // Cargar datos del video real
             const videoData = dataManager.getVideoById(videoId);
             if (videoData && videoData.videoUrl) {
+                const coverSrc = videoData.thumbnailBase64 || videoData.thumbnail || 'assets/video-placeholder.jpg';
+                if (loadingBackdrop) loadingBackdrop.src = coverSrc;
+                if (loadingOverlay) loadingOverlay.classList.add('is-active');
+                modal.classList.add('active');
+
                 const playableSrc = await resolveMediaSrc(videoData.videoUrl);
                 player.src = playableSrc;
                 player.load();
+
+                const hideLoading = () => {
+                    if (loadingOverlay) loadingOverlay.classList.remove('is-active');
+                };
+
+                player.addEventListener('canplay', hideLoading, { once: true });
+                player.addEventListener('loadeddata', hideLoading, { once: true });
+                player.addEventListener('error', hideLoading, { once: true });
+
                 modal.classList.add('active');
                 player.play().catch(e => console.error('Error auto-playing:', e));
             } else {
@@ -594,8 +617,10 @@
         function closeVideoModal() {
             const modal = document.getElementById('videoModal');
             const player = document.getElementById('videoPlayer');
+            const loadingOverlay = document.getElementById('videoLoadingOverlay');
 
             modal.classList.remove('active');
+            if (loadingOverlay) loadingOverlay.classList.remove('is-active');
             player.pause();
             player.currentTime = 0;
         }

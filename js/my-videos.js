@@ -307,7 +307,8 @@ function navigateToMyProjects() {
 function navigateToMyProfile() {
     const currentUser = dataManager.getCurrentUser();
     if (currentUser) {
-        window.location.href = `portfolio-viewer.html?userId=${currentUser.id}`;
+        localStorage.setItem('viewingUserId', currentUser.id);
+        window.location.href = 'portfolio-viewer.html';
     }
 }
 
@@ -329,13 +330,14 @@ function openProjectManager() {
 async function viewVideo(videoId) {
     const video = dataManager.getVideoById(videoId);
     if (video && video.videoUrl) {
-        await openVideoPlayer(video.videoUrl);
+        const coverSrc = video.thumbnailBase64 || video.thumbnail || 'assets/video-placeholder.jpg';
+        await openVideoPlayer(video.videoUrl, coverSrc);
     } else {
         alert(`Video not found or URL missing for: ${videoId}`);
     }
 }
 
-async function openVideoPlayer(url) {
+async function openVideoPlayer(url, coverSrc) {
     let modal = document.getElementById('videoModal');
     if (!modal) {
         injectVideoModal();
@@ -343,10 +345,25 @@ async function openVideoPlayer(url) {
     }
 
     const player = document.getElementById('videoPlayer');
+    const loadingOverlay = document.getElementById('videoLoadingOverlay');
+    const loadingBackdrop = document.getElementById('videoLoadingBackdrop');
+
+    if (loadingBackdrop) loadingBackdrop.src = coverSrc || 'assets/video-placeholder.jpg';
+    if (loadingOverlay) loadingOverlay.classList.add('is-active');
+    modal.classList.add('active');
+
     const playableSrc = await resolveMediaSrc(url);
     player.src = playableSrc;
     player.load();
-    modal.classList.add('active');
+
+    const hideLoading = () => {
+        if (loadingOverlay) loadingOverlay.classList.remove('is-active');
+    };
+
+    player.addEventListener('canplay', hideLoading, { once: true });
+    player.addEventListener('loadeddata', hideLoading, { once: true });
+    player.addEventListener('error', hideLoading, { once: true });
+
     player.play().catch(e => console.error('Error playing video:', e));
 }
 
@@ -374,6 +391,13 @@ function injectVideoModal() {
             </button>
             <div class="video-player-container">
                 <video id="videoPlayer" controls autoplay></video>
+                <div class="video-loading-overlay" id="videoLoadingOverlay">
+                    <img class="video-loading-backdrop" id="videoLoadingBackdrop" src="" alt="">
+                    <div class="video-loading-glass">
+                        <div class="video-loading-spinner"></div>
+                        <div class="video-loading-text">Loading video...</div>
+                    </div>
+                </div>
             </div>
         </div>
     `;
@@ -387,25 +411,28 @@ function injectVideoModal() {
             .video-modal {
                 display: none;
                 position: fixed;
-                top: 0;
-                left: 0;
-                width: 100%;
-                height: 100%;
-                background: rgba(0, 0, 0, 0.9);
-                z-index: 3000;
-                justify-content: center;
+                inset: 0;
+                z-index: 10000;
+                background: rgba(0, 0, 0, 0.95);
+                backdrop-filter: blur(20px);
                 align-items: center;
-                backdrop-filter: blur(10px);
+                justify-content: center;
+                padding: 40px;
+                opacity: 0;
+                transition: opacity 0.3s ease;
             }
-            .video-modal.active { display: flex; }
+            .video-modal.active {
+                display: flex;
+                opacity: 1;
+            }
             .video-player-container {
-                width: 90%;
+                width: 100%;
                 max-width: 1200px;
                 aspect-ratio: 16/9;
-                background: #000;
+                background: #0a0a0a;
                 border-radius: 12px;
                 overflow: hidden;
-                box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+                box-shadow: 0 25px 100px rgba(0, 0, 0, 0.8);
             }
             .video-player-container video {
                 width: 100%;
@@ -445,7 +472,9 @@ function injectVideoModal() {
 window.closeVideoModal = function () {
     const modal = document.getElementById('videoModal');
     const player = document.getElementById('videoPlayer');
+    const loadingOverlay = document.getElementById('videoLoadingOverlay');
     if (modal) modal.classList.remove('active');
+    if (loadingOverlay) loadingOverlay.classList.remove('is-active');
     if (player) {
         player.pause();
         player.src = '';

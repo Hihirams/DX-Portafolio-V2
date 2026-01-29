@@ -171,6 +171,9 @@ function generateSlides() {
   updateSlides();
 
   console.log(`✓ ${totalSlides} slides generadas`);
+  requestAnimationFrame(() => {
+    document.dispatchEvent(new Event('pageReady'));
+  });
 }
 
 // ==================== COVER SLIDE ====================
