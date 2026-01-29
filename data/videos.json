@@ -1,4 +1,22 @@
 {
-  "videos": [],
-  "lastUpdated": "2026-01-29T16:46:37.407Z"
+  "videos": [
+    {
+      "id": "vid_1769706975917",
+      "ownerId": "user1",
+      "ownerName": "Hiram González",
+      "title": "Recording 2026-01-27 121626",
+      "description": "asdasasda",
+      "tags": [
+        "tiasi"
+      ],
+      "uploadDate": "2026-01-29T17:16:15.917Z",
+      "duration": "0:38",
+      "thumbnail": "users/user1/showcase-videos/vid_1769706975917/thumbnail.jpg",
+      "videoUrl": "users/user1/showcase-videos/vid_1769706975917/video.mp4",
+      "views": 0,
+      "featured": false,
+      "createdAt": "2026-01-29T17:16:15.917Z"
+    }
+  ],
+  "lastUpdated": "2026-01-29T17:16:16.806Z"
 }

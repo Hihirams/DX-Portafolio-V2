@@ -564,9 +564,9 @@
             // Cargar datos del video real
             const videoData = dataManager.getVideoById(videoId);
             if (videoData && videoData.videoUrl) {
-                // Si es una ruta local de Electron, podría necesitar prefijo o tratamiento
-                // Pero saveMedia guarda rutas relativas que el web server de Electron debería servir
-                player.src = videoData.videoUrl;
+                const playableSrc = await resolveMediaSrc(videoData.videoUrl);
+                player.src = playableSrc;
+                player.load();
                 modal.classList.add('active');
                 player.play().catch(e => console.error('Error auto-playing:', e));
             } else {
@@ -574,6 +574,21 @@
                 // Fallback para demo si no hay URL real
                 modal.classList.add('active');
             }
+        }
+
+        async function resolveMediaSrc(src) {
+            try {
+                if (typeof src === 'string' && src.startsWith('users/')) {
+                    const api = window.electronAPI || window.fileManager?.api;
+                    if (api?.readMedia) {
+                        const res = await api.readMedia(src);
+                        if (res?.success && res?.data) return res.data;
+                    }
+                }
+            } catch (e) {
+                console.warn('resolveMediaSrc fallo:', e?.message);
+            }
+            return src || '';
         }
 
         function closeVideoModal() {
@@ -635,7 +650,8 @@
             if (!videoData) return;
 
             // Populate Modal
-            document.getElementById('infoModalBackdrop').src = videoData.backdrop || videoData.thumbnail;
+            const infoBackdrop = videoData.thumbnailBase64 || videoData.backdrop || videoData.thumbnail || 'assets/video-placeholder.jpg';
+            document.getElementById('infoModalBackdrop').src = infoBackdrop;
             document.getElementById('infoModalTitle').textContent = videoData.title;
             // Updated to show Duration instead of Match Score, and Date instead of Year
             document.getElementById('infoModalDurationDisplay').textContent = videoData.duration;
@@ -730,19 +746,24 @@
 
         function renderShowcase() {
             loadShowcaseData();
-            updateHeroSection();
+            startHeroRotation();
             renderInnovationCarousel();
             renderRankedCarousel();
             renderSuccessCarousel();
             updateUserSection();
         }
 
-        function updateHeroSection() {
+        let heroRotationIndex = 0;
+        let heroRotationTimer = null;
+        const heroRotationIntervalMs = 8000;
+
+        function updateHeroSection(indexOverride = null) {
             if (!currentShowcaseVideos || currentShowcaseVideos.length === 0) return;
 
-            // Tomar el primer video (o uno marcado como destacado si implementamos ese campo)
-            // Por ahora, el más reciente
-            const featured = currentShowcaseVideos[0];
+            const index = typeof indexOverride === 'number'
+                ? indexOverride
+                : heroRotationIndex % currentShowcaseVideos.length;
+            const featured = currentShowcaseVideos[index];
 
             const heroTitle = document.getElementById('heroTitle');
             const heroDescription = document.getElementById('heroDescription');
@@ -751,8 +772,9 @@
 
             if (heroTitle) heroTitle.innerHTML = `${featured.title.split(' ').join('<br>')}`;
             if (heroDescription) heroDescription.textContent = featured.description;
-            if (heroImage && featured.thumbnail) {
-                heroImage.src = featured.thumbnail;
+            if (heroImage) {
+                const heroThumb = featured.thumbnailBase64 || featured.thumbnail || 'assets/video-placeholder.jpg';
+                heroImage.src = heroThumb;
                 heroImage.onerror = () => {
                     heroImage.src = 'assets/video-placeholder.jpg';
                     heroImage.style.opacity = '0.5';
@@ -773,6 +795,25 @@
             if (playBtn) {
                 playBtn.onclick = () => playVideo(featured.id);
             }
+        }
+
+        function startHeroRotation() {
+            if (heroRotationTimer) {
+                clearInterval(heroRotationTimer);
+                heroRotationTimer = null;
+            }
+
+            if (!currentShowcaseVideos || currentShowcaseVideos.length === 0) return;
+
+            heroRotationIndex = 0;
+            updateHeroSection(heroRotationIndex);
+
+            if (currentShowcaseVideos.length < 2) return;
+
+            heroRotationTimer = setInterval(() => {
+                heroRotationIndex = (heroRotationIndex + 1) % currentShowcaseVideos.length;
+                updateHeroSection(heroRotationIndex);
+            }, heroRotationIntervalMs);
         }
 
         // ==================== USER AUTHENTICATION ====================

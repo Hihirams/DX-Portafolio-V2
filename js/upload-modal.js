@@ -140,7 +140,10 @@ function openUploadVideoModal(videoData = null) {
             previewContainer.style.display = 'block';
 
             if (videoData.videoUrl && videoData.videoUrl !== '#') {
-                videoPlayer.src = videoData.videoUrl;
+                resolveMediaSrc(videoData.videoUrl).then((resolved) => {
+                    videoPlayer.src = resolved;
+                    videoPlayer.load();
+                });
             } else if (videoData.thumbnail) {
                 videoPlayer.poster = videoData.thumbnail;
             }
@@ -630,6 +633,21 @@ async function getVideoDuration(videoSrc) {
         };
         video.onerror = () => resolve('0:00');
     });
+}
+
+async function resolveMediaSrc(src) {
+    try {
+        if (typeof src === 'string' && src.startsWith('users/')) {
+            const api = window.electronAPI || window.fileManager?.api;
+            if (api?.readMedia) {
+                const res = await api.readMedia(src);
+                if (res?.success && res?.data) return res.data;
+            }
+        }
+    } catch (e) {
+        console.warn('resolveMediaSrc fallo:', e?.message);
+    }
+    return src || '';
 }
 
 function saveVideoChanges() {

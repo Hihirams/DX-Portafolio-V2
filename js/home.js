@@ -21,11 +21,6 @@ function initHome() {
     setupFilters();
     setupAllProjectsCarousel(); // Configurar carrusel de todos los proyectos
     setupHeroScroll(); // Auto-scroll en hero section
-
-    // Si esta loggeado, mostrar "Mis Proyectos"
-    if (dataManager.isLoggedIn()) {
-        showMyProjects();
-    }
 }
 
 // ==================== HERO AUTO-SCROLL ====================
@@ -245,37 +240,6 @@ function renderStatsOverview() {
     </div>
   `;
 }
-
-// ==================== MY PROJECTS ====================
-
-function showMyProjects() {
-    const section = document.getElementById('myProjectsSection');
-    const grid = document.getElementById('myProjectsGrid');
-
-    section.style.display = 'block';
-
-    const myProjects = (typeof dataManager.getMyProjects === 'function')
-        ? dataManager.getMyProjects()
-        : (dataManager.getProjectsByUser
-            ? dataManager.getProjectsByUser(dataManager.getCurrentUser()?.id)
-            : []);
-
-    if (myProjects.length === 0) {
-        grid.innerHTML = `
-            <div class="empty-state">
-                <div class="empty-state-icon">📂</div>
-                <div class="empty-state-title">No tienes proyectos aun</div>
-                <div class="empty-state-description">
-                    Crea tu primer proyecto para empezar
-                </div>
-            </div>
-        `;
-        return;
-    }
-
-    grid.innerHTML = myProjects.map(project => createProjectCard(project, true)).join('');
-}
-
 
 // ==================== ALL PROJECTS CAROUSEL ====================
 
@@ -1132,7 +1096,6 @@ async function handleLogin(event) {
             console.log('✅ Login exitoso');
             closeLoginModal();
             updateUserSection();
-            showMyProjects();
             errorDiv.style.display = 'none';
 
             // Mostrar mensaje de bienvenida
@@ -1162,7 +1125,6 @@ function handleLogout() {
 
         // Actualizar la UI
         updateUserSection();
-        document.getElementById('myProjectsSection').style.display = 'none';
 
         // Re-renderizar proyectos destacados para ocultar botones de edicion
         renderFeaturedProjects(currentFilter);

@@ -326,16 +326,16 @@ function openProjectManager() {
 
 // ==================== VIDEO ACTIONS ====================
 
-function viewVideo(videoId) {
+async function viewVideo(videoId) {
     const video = dataManager.getVideoById(videoId);
     if (video && video.videoUrl) {
-        openVideoPlayer(video.videoUrl);
+        await openVideoPlayer(video.videoUrl);
     } else {
         alert(`Video not found or URL missing for: ${videoId}`);
     }
 }
 
-function openVideoPlayer(url) {
+async function openVideoPlayer(url) {
     let modal = document.getElementById('videoModal');
     if (!modal) {
         injectVideoModal();
@@ -343,9 +343,26 @@ function openVideoPlayer(url) {
     }
 
     const player = document.getElementById('videoPlayer');
-    player.src = url;
+    const playableSrc = await resolveMediaSrc(url);
+    player.src = playableSrc;
+    player.load();
     modal.classList.add('active');
     player.play().catch(e => console.error('Error playing video:', e));
+}
+
+async function resolveMediaSrc(src) {
+    try {
+        if (typeof src === 'string' && src.startsWith('users/')) {
+            const api = window.electronAPI || window.fileManager?.api;
+            if (api?.readMedia) {
+                const res = await api.readMedia(src);
+                if (res?.success && res?.data) return res.data;
+            }
+        }
+    } catch (e) {
+        console.warn('resolveMediaSrc fallo:', e?.message);
+    }
+    return src || '';
 }
 
 function injectVideoModal() {
