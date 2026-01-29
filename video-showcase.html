@@ -420,9 +420,6 @@
                                      style="width: 100%; height: 100%; object-fit: cover; position: absolute; top: 0; left: 0; z-index: 1;"
                                      onerror="this.style.display='none'">
                                      
-                                <div class="ranked-overlay" style="z-index: 2; position: relative;">
-                                    <div class="ranked-title">${item.title}</div>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -570,6 +567,8 @@
             const loadingOverlay = document.getElementById('videoLoadingOverlay');
             const loadingBackdrop = document.getElementById('videoLoadingBackdrop');
 
+            const requestId = ++currentVideoLoadId;
+
             // Cargar datos del video real
             const videoData = dataManager.getVideoById(videoId);
             if (videoData && videoData.videoUrl) {
@@ -579,10 +578,12 @@
                 modal.classList.add('active');
 
                 const playableSrc = await resolveMediaSrc(videoData.videoUrl);
+                if (requestId !== currentVideoLoadId) return;
                 player.src = playableSrc;
                 player.load();
 
                 const hideLoading = () => {
+                    if (requestId !== currentVideoLoadId) return;
                     if (loadingOverlay) loadingOverlay.classList.remove('is-active');
                 };
 
@@ -619,6 +620,7 @@
             const player = document.getElementById('videoPlayer');
             const loadingOverlay = document.getElementById('videoLoadingOverlay');
 
+            currentVideoLoadId++;
             modal.classList.remove('active');
             if (loadingOverlay) loadingOverlay.classList.remove('is-active');
             player.pause();
@@ -780,6 +782,8 @@
 
         let heroRotationIndex = 0;
         let heroRotationTimer = null;
+        let heroIsTransitioning = false;
+        let currentVideoLoadId = 0;
         const heroRotationIntervalMs = 8000;
 
         function updateHeroSection(indexOverride = null) {
@@ -790,35 +794,56 @@
                 : heroRotationIndex % currentShowcaseVideos.length;
             const featured = currentShowcaseVideos[index];
 
+            const heroSection = document.querySelector('.hero-video-section');
             const heroTitle = document.getElementById('heroTitle');
             const heroDescription = document.getElementById('heroDescription');
             const heroImage = document.getElementById('heroImage');
             const heroMeta = document.getElementById('heroMeta');
 
-            if (heroTitle) heroTitle.innerHTML = `${featured.title.split(' ').join('<br>')}`;
-            if (heroDescription) heroDescription.textContent = featured.description;
-            if (heroImage) {
-                const heroThumb = featured.thumbnailBase64 || featured.thumbnail || 'assets/video-placeholder.jpg';
-                heroImage.src = heroThumb;
-                heroImage.onerror = () => {
-                    heroImage.src = 'assets/video-placeholder.jpg';
-                    heroImage.style.opacity = '0.5';
-                };
+            if (heroSection && !heroIsTransitioning) {
+                heroIsTransitioning = true;
+                heroSection.classList.add('is-transitioning');
             }
 
-            if (heroMeta) {
-                const date = new Date(featured.uploadDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
-                heroMeta.innerHTML = `
-                    <span class="match">${featured.duration}</span>
-                    <span>${date}</span>
-                    <span>${featured.ownerName || 'DX Team'}</span>
-                `;
-            }
+            const applyContent = () => {
+                if (heroTitle) heroTitle.innerHTML = `${featured.title.split(' ').join('<br>')}`;
+                if (heroDescription) heroDescription.textContent = featured.description;
+                if (heroImage) {
+                    const heroThumb = featured.thumbnailBase64 || featured.thumbnail || 'assets/video-placeholder.jpg';
+                    heroImage.style.opacity = '';
+                    heroImage.src = heroThumb;
+                    heroImage.onerror = () => {
+                        heroImage.src = 'assets/video-placeholder.jpg';
+                        heroImage.style.opacity = '0.5';
+                    };
+                }
 
-            // Cambiar la acción del botón play del Hero
-            const playBtn = document.querySelector('.hero-video-actions .btn-play');
-            if (playBtn) {
-                playBtn.onclick = () => playVideo(featured.id);
+                if (heroMeta) {
+                    const date = new Date(featured.uploadDate).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+                    heroMeta.innerHTML = `
+                        <span class="match">${featured.duration}</span>
+                        <span>${date}</span>
+                        <span>${featured.ownerName || 'DX Team'}</span>
+                    `;
+                }
+
+                const playBtn = document.querySelector('.hero-video-actions .btn-play');
+                if (playBtn) {
+                    playBtn.onclick = () => playVideo(featured.id);
+                }
+
+                if (heroSection) {
+                    requestAnimationFrame(() => {
+                        heroSection.classList.remove('is-transitioning');
+                        heroIsTransitioning = false;
+                    });
+                }
+            };
+
+            if (heroSection) {
+                setTimeout(applyContent, 220);
+            } else {
+                applyContent();
             }
         }
 

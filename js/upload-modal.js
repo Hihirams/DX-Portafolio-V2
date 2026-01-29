@@ -45,21 +45,21 @@ const uploadModalHTML = `
                 <div class="upload-right-panel">
                     <div class="form-group">
                         <label for="videoTitle">Video Title</label>
-                        <input type="text" id="videoTitle" class="glass-input" placeholder="e.g. Robot Innovation Line">
+                        <input type="text" id="videoTitle" class="glass-input" placeholder="e.g. Robot Innovation" maxlength="25">
                     </div>
 
                     <div class="form-group">
                         <label for="videoDescription">Description</label>
-                        <textarea id="videoDescription" class="glass-input glass-textarea" placeholder="Describe the video content..."></textarea>
+                        <textarea id="videoDescription" class="glass-input glass-textarea" placeholder="Describe the video content..." maxlength="120"></textarea>
                     </div>
 
                     <div class="form-group">
                         <label for="videoTags">Tags</label>
                         <div class="tags-input-container class-input">
                             <div class="tags-list" id="tagsList"></div>
-                            <input type="text" id="videoTagsInput" class="glass-input-transparent" placeholder="Add tags (Enter to add)">
+                            <input type="text" id="videoTagsInput" class="glass-input-transparent" placeholder="Add tags (Enter to add)" maxlength="12">
                         </div>
-                        <p class="input-hint">Press Enter to add tags like 'Innovation', 'IoT', 'Process'</p>
+                        <p class="input-hint">Up to 5 tags, max 12 chars each.</p>
                     </div>
 
                     <div class="form-group">
@@ -314,18 +314,12 @@ function showVideoPreview(file) {
     const placeholder = document.getElementById('uploadPlaceholder');
     const previewContainer = document.getElementById('videoPreviewContainer');
     const videoPlayer = document.getElementById('videoPreviewPlayer');
-    const titleInput = document.getElementById('videoTitle');
 
     placeholder.style.display = 'none';
     previewContainer.style.display = 'block';
 
     const objectURL = URL.createObjectURL(file);
     videoPlayer.src = objectURL;
-
-    // Auto-fill title with filename without extension if empty
-    if (!titleInput.value) {
-        titleInput.value = file.name.replace(/\.[^/.]+$/, "");
-    }
 }
 
 function removeVideoFile() {
@@ -354,10 +348,21 @@ function clearThumbnailSelection() {
 
 // Tag Management
 let currentTags = [];
+const maxTags = 5;
+const maxTagLength = 12;
 
 function addTag(tag) {
-    if (currentTags.includes(tag)) return;
-    currentTags.push(tag);
+    let normalized = tag.trim();
+    if (!normalized) return;
+    if (normalized.length > maxTagLength) {
+        normalized = normalized.substring(0, maxTagLength);
+    }
+    if (currentTags.includes(normalized)) return;
+    if (currentTags.length >= maxTags) {
+        alert(`Maximum ${maxTags} tags allowed.`);
+        return;
+    }
+    currentTags.push(normalized);
     renderTags();
 }
 
@@ -396,6 +401,16 @@ async function submitVideoUpload() {
 
     if (!file || !title) {
         alert('Please select a video and provide a title.');
+        return;
+    }
+
+    if (title.length > 25) {
+        alert('Video title must be 25 characters or less.');
+        return;
+    }
+
+    if (description.length > 120) {
+        alert('Description must be 120 characters or less.');
         return;
     }
 

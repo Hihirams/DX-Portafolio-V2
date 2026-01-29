@@ -209,10 +209,7 @@ function arrangeProjectsInBento(projects) {
     return sorted.map((project, index) => {
         let size = 'small';
 
-        if (index === 0 && projects.length > 2) {
-            // First project is large
-            size = 'large';
-        } else if (project.featured) {
+        if (project.featured) {
             size = 'wide';
         } else if (index % 5 === 2) {
             size = 'tall';
