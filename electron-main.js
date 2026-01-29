@@ -282,7 +282,11 @@ ipcMain.handle('file:readMedia', async (event, filePath) => {
         let mimeType = 'application/octet-stream';
 
         if (['.png', '.jpg', '.jpeg', '.gif', '.webp'].includes(ext)) {
-            mimeType = `image/${ext.substring(1)}`;
+            if (ext === '.jpg' || ext === '.jpeg') {
+                mimeType = 'image/jpeg';
+            } else {
+                mimeType = `image/${ext.substring(1)}`;
+            }
         } else if (['.mp4', '.webm', '.mov'].includes(ext)) {
             mimeType = `video/${ext.substring(1)}`;
         }

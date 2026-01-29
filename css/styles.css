@@ -1016,10 +1016,77 @@ body.light-theme .upload-icon {
     box-shadow: 0 0 0 3px rgba(0, 113, 227, 0.2);
 }
 
+/* Thumbnail Picker */
+.thumbnail-picker {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 12px;
+    padding: 8px 12px;
+}
+
+.thumb-file-name {
+    color: var(--text-secondary);
+    font-size: 13px;
+    opacity: 0.8;
+    flex: 1;
+    min-width: 120px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.btn-thumb-select,
+.btn-thumb-clear {
+    padding: 8px 14px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--text-primary);
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-thumb-select:hover,
+.btn-thumb-clear:hover {
+    background: rgba(255, 255, 255, 0.2);
+}
+
+.btn-thumb-clear {
+    color: #ff453a;
+    border-color: rgba(255, 69, 58, 0.4);
+    background: rgba(255, 69, 58, 0.1);
+}
+
+.btn-thumb-clear:hover {
+    background: rgba(255, 69, 58, 0.18);
+}
+
 body.light-theme .glass-input {
     background: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(0, 0, 0, 0.1);
     color: var(--text-primary);
+}
+
+body.light-theme .thumbnail-picker {
+    background: rgba(255, 255, 255, 0.85);
+    border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.light-theme .btn-thumb-select,
+body.light-theme .btn-thumb-clear {
+    background: rgba(0, 0, 0, 0.06);
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+body.light-theme .btn-thumb-select:hover,
+body.light-theme .btn-thumb-clear:hover {
+    background: rgba(0, 0, 0, 0.1);
 }
 
 body.light-theme .glass-input:focus {

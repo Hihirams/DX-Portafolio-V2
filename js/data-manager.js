@@ -265,23 +265,39 @@ class DataManager {
             return;
         }
 
-        console.log('🖼️ Pre-cargando thumbnails de videos...');
+        console.log('[DEBUG] Iniciando carga de miniaturas...');
+        console.log('[DEBUG] Total videos:', this.videos.length);
         let loaded = 0;
 
         for (let video of this.videos) {
+            console.log(`[DEBUG] Procesando: ${video.title}`);
+
             if (video.thumbnail && video.thumbnail.startsWith('users/')) {
+                console.log(`[DEBUG] Intentando leer: ${video.thumbnail}`);
                 try {
                     const result = await fm.api.readMedia(video.thumbnail);
+                    console.log('[DEBUG] Resultado readMedia:', {
+                        success: result.success,
+                        hasData: !!result.data,
+                        dataLength: result.data?.length || 0,
+                        error: result.error
+                    });
                     if (result.success && result.data) {
                         video.thumbnailBase64 = result.data;
+                        console.log(`[DEBUG] ✓ Miniatura cargada para ${video.title}`);
                         loaded++;
+                    } else {
+                        console.error('[DEBUG] ✗ Error cargando miniatura:', result.error);
                     }
                 } catch (err) {
                     console.warn(`⚠️ No se pudo cargar thumbnail de ${video.id}:`, err.message);
                 }
+            } else {
+                console.log('[DEBUG] Miniatura no valida o no existe');
             }
         }
 
+        console.log('[DEBUG] Carga de miniaturas completada');
         console.log(`✅ ${loaded}/${this.videos.length} thumbnails de videos cargados`);
     }
 

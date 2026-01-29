@@ -62,6 +62,17 @@ const uploadModalHTML = `
                         <p class="input-hint">Press Enter to add tags like 'Innovation', 'IoT', 'Process'</p>
                     </div>
 
+                    <div class="form-group">
+                        <label for="thumbnailFileInput">Cover image</label>
+                        <div class="thumbnail-picker">
+                            <input type="file" id="thumbnailFileInput" accept="image/*" hidden>
+                            <button type="button" class="btn-thumb-select" onclick="document.getElementById('thumbnailFileInput').click()">Choose thumbnail</button>
+                            <span class="thumb-file-name" id="thumbnailFileName">No file selected</span>
+                            <button type="button" class="btn-thumb-clear" id="thumbnailClearBtn" onclick="clearThumbnailSelection()" style="display:none;">Remove</button>
+                        </div>
+                        <p class="input-hint">Select a cover image for your video.</p>
+                    </div>
+
                     <div class="upload-actions">
                         <button class="btn-delete-video" id="deleteVideoBtn" onclick="deleteCurrentVideo()" style="display: none;">
                             <svg viewBox="0 0 24 24" width="18" height="18" stroke="currentColor" stroke-width="2" fill="none" style="margin-right: 8px;">
@@ -133,6 +144,11 @@ function openUploadVideoModal(videoData = null) {
             } else if (videoData.thumbnail) {
                 videoPlayer.poster = videoData.thumbnail;
             }
+        }
+
+        const thumbNameEl = document.getElementById('thumbnailFileName');
+        if (thumbNameEl) {
+            thumbNameEl.textContent = videoData.thumbnail ? 'Existing thumbnail' : 'No file selected';
         }
 
         // Update Button Text
@@ -214,6 +230,7 @@ function setupUploadListeners() {
     const dropZone = document.getElementById('dropZone');
     const fileInput = document.getElementById('videoFileInput');
     const tagsInput = document.getElementById('videoTagsInput');
+    const thumbnailInput = document.getElementById('thumbnailFileInput');
 
     // Drag & Drop
     ['dragenter', 'dragover', 'dragleave', 'drop'].forEach(eventName => {
@@ -243,6 +260,9 @@ function setupUploadListeners() {
 
     dropZone.addEventListener('drop', handleDrop, false);
     fileInput.addEventListener('change', handleFiles, false);
+    if (thumbnailInput) {
+        thumbnailInput.addEventListener('change', handleThumbnailSelection, false);
+    }
 
     // Tags Input
     tagsInput.addEventListener('keydown', function (e) {
@@ -255,6 +275,21 @@ function setupUploadListeners() {
             }
         }
     });
+}
+
+function handleThumbnailSelection(e) {
+    const file = e.target.files[0];
+    const fileNameEl = document.getElementById('thumbnailFileName');
+    const clearBtn = document.getElementById('thumbnailClearBtn');
+
+    if (!file) {
+        if (fileNameEl) fileNameEl.textContent = 'No file selected';
+        if (clearBtn) clearBtn.style.display = 'none';
+        return;
+    }
+
+    if (fileNameEl) fileNameEl.textContent = file.name;
+    if (clearBtn) clearBtn.style.display = 'inline-flex';
 }
 
 function handleDrop(e) {
@@ -304,6 +339,16 @@ function removeVideoFile() {
     placeholder.style.display = 'flex';
 }
 
+function clearThumbnailSelection() {
+    const thumbnailInput = document.getElementById('thumbnailFileInput');
+    const fileNameEl = document.getElementById('thumbnailFileName');
+    const clearBtn = document.getElementById('thumbnailClearBtn');
+
+    if (thumbnailInput) thumbnailInput.value = '';
+    if (fileNameEl) fileNameEl.textContent = 'No file selected';
+    if (clearBtn) clearBtn.style.display = 'none';
+}
+
 // Tag Management
 let currentTags = [];
 
@@ -332,6 +377,7 @@ function resetUploadForm() {
     document.getElementById('videoTitle').value = '';
     document.getElementById('videoDescription').value = '';
     document.getElementById('videoTagsInput').value = '';
+    clearThumbnailSelection();
     currentTags = [];
     renderTags();
     removeVideoFile();
@@ -342,9 +388,16 @@ async function submitVideoUpload() {
     const description = document.getElementById('videoDescription').value.trim();
     const fileInput = document.getElementById('videoFileInput');
     const file = fileInput.files[0];
+    const thumbnailInput = document.getElementById('thumbnailFileInput');
+    const thumbnailFile = thumbnailInput?.files?.[0] || null;
 
     if (!file || !title) {
         alert('Please select a video and provide a title.');
+        return;
+    }
+
+    if (!thumbnailFile) {
+        alert('Please select a thumbnail image.');
         return;
     }
 
@@ -368,9 +421,11 @@ async function submitVideoUpload() {
         const videoBase64 = await videoDataPromise;
 
         // 2. Generar miniatura (Thumbnail)
-        // En una implementación real, dispararíamos un canvas para capturar un frame del video
-        // Por ahora, usaremos el mismo video o un placeholder (el sistema espera thumbnailData)
-        const thumbnailData = await captureVideoFrame(videoBase64);
+        const thumbReader = new FileReader();
+        const thumbnailData = await new Promise((resolve) => {
+            thumbReader.onload = (e) => resolve(e.target.result);
+            thumbReader.readAsDataURL(thumbnailFile);
+        });
 
         // 3. Obtener duración del video
         const duration = await getVideoDuration(videoBase64);
@@ -416,31 +471,151 @@ async function submitVideoUpload() {
 }
 
 // Helpers para multimedia
-async function captureVideoFrame(videoSrc) {
+async function captureVideoFrame(file, fallbackSrc) {
     return new Promise((resolve) => {
         const video = document.createElement('video');
-        video.src = videoSrc;
-        video.muted = true;
-        video.preload = 'auto'; // Asegurar carga
-        video.currentTime = 1; // Capturar en el segundo 1
+        let resolved = false;
+        let objectUrl = null;
+        let triedFallback = false;
+        let captureTimes = [];
+        let captureIndex = 0;
 
-        video.onloadeddata = () => {
+        const finalize = (data) => {
+            if (resolved) return;
+            resolved = true;
+            if (objectUrl) URL.revokeObjectURL(objectUrl);
+            resolve(data || '');
+        };
+
+        const isLikelyBlackFrame = (ctx, width, height) => {
+            const sampleSize = 40;
+            const stepX = Math.max(1, Math.floor(width / sampleSize));
+            const stepY = Math.max(1, Math.floor(height / sampleSize));
+            let total = 0;
+            let count = 0;
+            let sumSq = 0;
+
+            for (let y = 0; y < height; y += stepY) {
+                for (let x = 0; x < width; x += stepX) {
+                    const pixel = ctx.getImageData(x, y, 1, 1).data;
+                    const brightness = (pixel[0] + pixel[1] + pixel[2]) / 3;
+                    total += brightness;
+                    sumSq += brightness * brightness;
+                    count++;
+                }
+            }
+
+            const avg = total / count;
+            const variance = sumSq / count - avg * avg;
+            return avg < 8 && variance < 20;
+        };
+
+        const captureFrame = () => {
+            if (!video.videoWidth || !video.videoHeight) return false;
             const canvas = document.createElement('canvas');
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+            if (isLikelyBlackFrame(ctx, canvas.width, canvas.height)) {
+                console.warn('⚠️ Frame capturado es negro, intentando otro tiempo');
+                return false;
+            }
             console.log('📸 Thumbnail captured successfully');
-            resolve(canvas.toDataURL('image/jpeg', 0.8));
+            finalize(canvas.toDataURL('image/jpeg', 0.8));
+            return true;
         };
 
-        video.onerror = () => {
+        const tryFallbackSrc = () => {
+            if (triedFallback || !fallbackSrc) {
+                finalize('');
+                return;
+            }
+            triedFallback = true;
+            if (objectUrl) {
+                URL.revokeObjectURL(objectUrl);
+                objectUrl = null;
+            }
+            video.src = fallbackSrc;
+            video.load();
+        };
+
+        const handleError = () => {
             console.warn('⚠️ No se pudo capturar frame del video');
-            resolve('');
+            tryFallbackSrc();
         };
 
-        // Timeout de seguridad
-        setTimeout(() => resolve(''), 3000);
+        const tryNextCaptureTime = () => {
+            if (captureIndex >= captureTimes.length) {
+                handleError();
+                return;
+            }
+            const nextTime = captureTimes[captureIndex++];
+            try {
+                video.currentTime = nextTime;
+            } catch (e) {
+                handleError();
+            }
+        };
+
+        const handleSeeked = () => {
+            if (video.requestVideoFrameCallback) {
+                video.requestVideoFrameCallback(() => {
+                    if (!captureFrame()) {
+                        tryNextCaptureTime();
+                    }
+                });
+                return;
+            }
+
+            if (!captureFrame()) {
+                requestAnimationFrame(() => {
+                    if (!captureFrame()) tryNextCaptureTime();
+                });
+            }
+        };
+
+        video.addEventListener('loadedmetadata', () => {
+            const duration = Number.isFinite(video.duration) ? video.duration : 0;
+            const t1 = duration > 0 ? Math.min(1, duration * 0.1) : 0;
+            const t2 = duration > 0 ? Math.min(3, duration * 0.25) : 0;
+            const t3 = duration > 0 ? Math.min(5, duration * 0.5) : 0;
+            captureTimes = [t1, t2, t3].filter((t, idx, arr) => t >= 0 && arr.indexOf(t) === idx);
+            captureIndex = 0;
+            tryNextCaptureTime();
+        });
+
+        video.addEventListener('loadeddata', () => {
+            if (video.readyState >= 2) {
+                if (!captureFrame()) {
+                    requestAnimationFrame(() => {
+                        if (!captureFrame()) tryNextCaptureTime();
+                    });
+                }
+            }
+        });
+
+        video.addEventListener('seeked', handleSeeked);
+        video.addEventListener('error', handleError);
+
+        video.muted = true;
+        video.preload = 'auto';
+        video.playsInline = true;
+
+        if (file instanceof File) {
+            objectUrl = URL.createObjectURL(file);
+            video.src = objectUrl;
+        } else {
+            video.src = fallbackSrc || '';
+        }
+
+        video.load();
+        setTimeout(() => {
+            if (!resolved) {
+                console.warn('⚠️ Timeout capturando thumbnail, probando fallback');
+                tryFallbackSrc();
+            }
+        }, 5000);
     });
 }
 

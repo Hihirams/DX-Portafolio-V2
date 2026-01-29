@@ -178,6 +178,10 @@ function renderMyVideosGrid() {
 }
 
 function createVideoCard(video) {
+    console.log(`[RENDER] Creando card para: ${video.title}`);
+    console.log('[RENDER] thumbnailBase64 existe:', !!video.thumbnailBase64);
+    console.log('[RENDER] thumbnail path:', video.thumbnail);
+
     // Create a unique gradient for placeholder if no thumbnail
     const gradients = [
         'linear-gradient(135deg, #4573a5, #1c1c1e)',
@@ -188,7 +192,13 @@ function createVideoCard(video) {
     const randomGradient = gradients[Math.floor(Math.random() * gradients.length)];
 
     // Si el video tiene thumbnail real, no mostramos el fondo de degradado
-    const hasThumb = video.thumbnail && video.thumbnail !== '' && video.thumbnail !== '#';
+    const thumbSrc = video.thumbnailBase64 || video.thumbnail || '';
+    if (thumbSrc) {
+        console.log('[RENDER] thumbSrc a usar:', `${thumbSrc.substring(0, 50)}...`);
+    } else {
+        console.log('[RENDER] thumbSrc a usar: (vacio)');
+    }
+    const hasThumb = thumbSrc && thumbSrc !== '#';
     const previewStyle = hasThumb ? 'background: #000;' : `background: ${randomGradient};`;
 
     return `
@@ -202,7 +212,7 @@ function createVideoCard(video) {
             </button>
             
             <div class="bento-card__video-preview" style="${previewStyle}">
-                <img src="${video.thumbnailBase64 || video.thumbnail || ''}" alt="" class="bento-card__thumb-img" onerror="this.style.display='none'">
+                <img src="${thumbSrc}" alt="" class="bento-card__thumb-img" onerror="this.style.display='none'">
                 <div class="bento-card__play-overlay">
                     <div class="bento-card__play-icon">
                         <svg viewBox="0 0 24 24">
