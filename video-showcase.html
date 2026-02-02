@@ -397,7 +397,7 @@
 
         function renderRankedCarousel() {
             const container = document.getElementById('rankedCarousel');
-            const videos = dataManager.getShowcaseVideos();
+            const videos = dataManager.getShowcaseVideos().slice(0, 10);
 
             console.log('[CAROUSEL] Ranked videos:', videos.length);
 

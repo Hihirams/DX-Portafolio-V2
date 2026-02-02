@@ -390,7 +390,8 @@ function openVideoShowcase() {
 // ==================== PROJECT ACTIONS ====================
 
 function viewProject(projectId) {
-    window.location.href = `project-manager.html?projectId=${projectId}`;
+    localStorage.setItem('viewingProjectId', projectId);
+    window.location.href = 'portfolio-viewer.html';
 }
 
 function editProject(projectId) {

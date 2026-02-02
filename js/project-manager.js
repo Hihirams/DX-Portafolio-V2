@@ -1408,7 +1408,9 @@ function renderProjects() {
         return `
         <tr>
             <td class="col-name">
-                <div class="project-name">${project.name}</div>
+                <button class="project-name project-name-link" type="button" onclick="openProjectViewer('${project.id}')">
+                    ${project.name}
+                </button>
             </td>
             <td class="col-concept">
                 <div class="project-concept">${project._original?.concept || 'No defined concept'}</div>
@@ -2652,6 +2654,11 @@ function togglePresentationMode() {
 }
 
 // ==================== NAVIGATION ====================
+
+function openProjectViewer(projectId) {
+    localStorage.setItem('viewingProjectId', projectId);
+    window.location.href = 'portfolio-viewer.html';
+}
 
 function goToHome() {
     // Navegar al home
