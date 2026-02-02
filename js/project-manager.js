@@ -57,6 +57,157 @@ const crossFilterConfig = {
     // progressOverview and deliveryTimeline charts can also trigger project filters
 };
 
+// ==================== POWER BI-STYLE ANALYTICS FILTER STATE ====================
+// Los filtros afectan DATOS, no gráficas. Las gráficas reaccionan a filtros, no entre sí.
+
+const AnalyticsFilterState = {
+    // Filtros activos: Map<fieldName, Set<values>>
+    filters: new Map(),
+
+    // Definición de campos disponibles para filtrado
+    fieldDefinitions: {
+        status: {
+            label: 'Status',
+            values: ['discovery', 'decision', 'develop', 'pilot', 'yokotenkai', 'released'],
+            getColor: (value) => {
+                const colors = {
+                    discovery: 'rgba(157, 0, 255, 0.85)',
+                    decision: 'rgba(255, 214, 0, 0.85)',
+                    develop: 'rgba(0, 217, 255, 0.85)',
+                    pilot: 'rgba(255, 107, 0, 0.85)',
+                    yokotenkai: 'rgba(0, 191, 255, 0.85)',
+                    released: 'rgba(0, 255, 133, 0.85)'
+                };
+                return colors[value] || 'rgba(128, 128, 128, 0.85)';
+            }
+        },
+        responsible: {
+            label: 'Responsible',
+            values: null, // Dinámico, se calcula de los datos
+            getColor: () => 'rgba(102, 126, 234, 0.85)'
+        },
+        blocked: {
+            label: 'Blocked',
+            values: [true, false],
+            getColor: (value) => value ? 'rgba(255, 69, 58, 0.85)' : 'rgba(52, 199, 89, 0.85)'
+        }
+    },
+
+    /**
+     * Toggle un filtro: si ya existe con ese valor, lo elimina; si no, lo agrega
+     */
+    toggleFilter(field, value) {
+        console.log(`🔄 Toggle filter: ${field} = ${value}`);
+
+        if (!this.filters.has(field)) {
+            // Campo no existe, crear nuevo Set con el valor
+            this.filters.set(field, new Set([value]));
+        } else {
+            const values = this.filters.get(field);
+            if (values.has(value)) {
+                // Valor existe, eliminarlo
+                values.delete(value);
+                if (values.size === 0) {
+                    this.filters.delete(field);
+                }
+            } else {
+                // Valor no existe, limpiarlo y agregar nuevo (single-select)
+                values.clear();
+                values.add(value);
+            }
+        }
+
+        console.log('📊 Active filters:', this.getActiveFiltersAsObject());
+        this.notifyChange();
+    },
+
+    /**
+     * Verifica si un filtro específico está activo
+     */
+    isFilterActive(field, value) {
+        if (!this.filters.has(field)) return false;
+        return this.filters.get(field).has(value);
+    },
+
+    /**
+     * Limpiar todos los filtros
+     */
+    clearAll() {
+        console.log('🗑️ Clearing all filters');
+        this.filters.clear();
+        this.notifyChange();
+    },
+
+    /**
+     * Limpiar filtro de un campo específico
+     */
+    clearField(field) {
+        console.log(`🗑️ Clearing filter for field: ${field}`);
+        this.filters.delete(field);
+        this.notifyChange();
+    },
+
+    /**
+     * Obtener datos filtrados aplicando todos los filtros activos con lógica AND
+     */
+    getFilteredData(sourceData) {
+        if (this.filters.size === 0) return [...sourceData];
+
+        return sourceData.filter(item => {
+            for (const [field, values] of this.filters) {
+                const itemValue = this.getFieldValue(item, field);
+                if (!values.has(itemValue)) {
+                    return false; // Item no cumple con este filtro
+                }
+            }
+            return true; // Item cumple con todos los filtros
+        });
+    },
+
+    /**
+     * Obtener el valor de un campo de un item (normalizado)
+     */
+    getFieldValue(item, field) {
+        switch (field) {
+            case 'blocked':
+                return item.blocked === true;
+            case 'responsible':
+                return item.responsible || 'Unassigned';
+            case 'status':
+                return item.status;
+            default:
+                return item[field];
+        }
+    },
+
+    /**
+     * Obtener filtros activos como objeto simple para debugging/UI
+     */
+    getActiveFiltersAsObject() {
+        const obj = {};
+        for (const [field, values] of this.filters) {
+            obj[field] = Array.from(values);
+        }
+        return obj;
+    },
+
+    /**
+     * Verificar si hay algún filtro activo
+     */
+    hasActiveFilters() {
+        return this.filters.size > 0;
+    },
+
+    /**
+     * Notificar cambio - actualizar todas las visualizaciones
+     */
+    notifyChange() {
+        if (typeof refreshAllChartsFromFilterState === 'function') {
+            refreshAllChartsFromFilterState();
+        }
+    }
+};
+
 // Status Mapping
 const statusMap = {
     'discovery': { label: 'Discovery', class: 'status-discovery' },
@@ -1537,22 +1688,14 @@ function openAnalytics() {
     modal.classList.add('active');
     document.body.style.overflow = 'hidden';
 
-    // Reset ALL analytics filters including cross-filters
-    activeAnalyticsFilters = {
-        responsible: null,
-        status: null,
-        blocked: null,
-        projectId: null,
-        crossFilters: {
-            responsible: null,
-            status: null,
-            blocked: null,
-            projectId: null
-        }
-    };
+    // Reset ALL analytics filters using the new Power BI-style system
+    AnalyticsFilterState.filters.clear();
 
-    // Generate dynamic team filters
+    // Generate dynamic team filters (UI chips)
     generateAnalyticsFilters();
+
+    // Update UI to show no active filters
+    updateAnalyticsFilterChipsUI();
 
     setTimeout(() => {
         initializeCharts();
@@ -1570,24 +1713,357 @@ function closeAnalytics() {
         if (chart) chart.destroy();
     });
     charts = {};
+
+    // Clear filters when closing
+    AnalyticsFilterState.filters.clear();
 }
 
-function getFilteredAnalyticsProjects() {
-    return projects.filter(project => {
-        if (activeAnalyticsFilters.responsible && project.responsible !== activeAnalyticsFilters.responsible) {
-            return false;
+// ==================== POWER BI-STYLE REFRESH SYSTEM ====================
+
+/**
+ * Función principal que refresca TODAS las visualizaciones basándose en el estado de filtros.
+ * Sigue el modelo Power BI: los filtros afectan datos, las gráficas consumen datos filtrados.
+ */
+function refreshAllChartsFromFilterState() {
+    console.log('🔄 Refreshing all charts from filter state...');
+
+    // 1. Obtener datos filtrados usando el estado global de filtros
+    const filteredData = AnalyticsFilterState.getFilteredData(projects);
+
+    console.log(`📊 Filtered data: ${filteredData.length} of ${projects.length} projects`);
+
+    // 2. Actualizar KPIs
+    updateKPIsFromFilteredData(filteredData);
+
+    // 3. Actualizar cada gráfico con los datos filtrados
+    updatePortfolioStatusChartFromData(filteredData);
+    updateTeamWorkloadChartFromData(filteredData);
+    updateProgressOverviewChartFromData(filteredData);
+    updateBlockersChartFromData(filteredData);
+    updateDeliveryTimelineChartFromData(filteredData);
+    updateBurndownChartFromData(filteredData);
+
+    // 4. Actualizar UI de chips de filtros activos
+    updateAnalyticsFilterChipsUI();
+}
+
+/**
+ * Actualiza la UI para mostrar los filtros activos como chips
+ */
+function updateAnalyticsFilterChipsUI() {
+    const container = document.getElementById('analyticsFilters');
+    if (!container) return;
+
+    // Detect current theme
+    const isDarkMode = !document.body.classList.contains('light-mode');
+    const textColor = isDarkMode ? 'rgba(245, 245, 247, 0.9)' : 'rgba(29, 29, 31, 0.9)';
+    const chipBg = isDarkMode ? 'rgba(102, 126, 234, 0.15)' : 'rgba(102, 126, 234, 0.12)';
+    const chipBorder = isDarkMode ? 'rgba(102, 126, 234, 0.3)' : 'rgba(102, 126, 234, 0.4)';
+    const clearBg = isDarkMode ? 'rgba(255, 69, 58, 0.15)' : 'rgba(255, 69, 58, 0.1)';
+    const clearBorder = isDarkMode ? 'rgba(255, 69, 58, 0.3)' : 'rgba(255, 69, 58, 0.4)';
+
+    // Eliminar chips de filtros previos
+    container.querySelectorAll('.analytics-active-filter-chip').forEach(chip => chip.remove());
+
+    // Si hay filtros activos, mostrarlos como chips
+    if (AnalyticsFilterState.hasActiveFilters()) {
+        const activeFilters = AnalyticsFilterState.getActiveFiltersAsObject();
+
+        // Crear contenedor de chips si no existe
+        let chipsContainer = container.querySelector('.analytics-filter-chips-container');
+        if (!chipsContainer) {
+            chipsContainer = document.createElement('div');
+            chipsContainer.className = 'analytics-filter-chips-container';
+            chipsContainer.style.cssText = `
+                display: flex;
+                align-items: center;
+                gap: 8px;
+                margin-left: auto;
+                padding-left: 16px;
+                flex-wrap: wrap;
+            `;
+            container.appendChild(chipsContainer);
         }
-        if (activeAnalyticsFilters.status && project.status !== activeAnalyticsFilters.status) {
-            return false;
+
+        chipsContainer.innerHTML = '';
+
+        // Agregar chip "Clear All"
+        const clearAllChip = document.createElement('button');
+        clearAllChip.className = 'analytics-active-filter-chip analytics-clear-all-chip';
+        clearAllChip.innerHTML = `
+            <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                <path d="M2 2L10 10M10 2L2 10" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+            </svg>
+            Clear All
+        `;
+        clearAllChip.style.cssText = `
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            padding: 6px 12px;
+            background: ${clearBg};
+            border: 1px solid ${clearBorder};
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 500;
+            color: rgba(255, 69, 58, 1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        `;
+        clearAllChip.onclick = () => AnalyticsFilterState.clearAll();
+        chipsContainer.appendChild(clearAllChip);
+
+        // Agregar chips por cada filtro activo
+        for (const [field, values] of Object.entries(activeFilters)) {
+            values.forEach(value => {
+                const chip = document.createElement('div');
+                chip.className = 'analytics-active-filter-chip';
+
+                let displayValue = value;
+                if (field === 'status') {
+                    displayValue = statusMap[value]?.label || value;
+                } else if (field === 'blocked') {
+                    displayValue = value ? 'Blocked' : 'Not Blocked';
+                }
+
+                const fieldDef = AnalyticsFilterState.fieldDefinitions[field];
+                const chipColor = fieldDef?.getColor(value) || 'rgba(102, 126, 234, 0.85)';
+                const closeButtonColor = isDarkMode ? 'rgba(255,255,255,0.7)' : 'rgba(0,0,0,0.6)';
+
+                chip.innerHTML = `
+                    <span style="width: 10px; height: 10px; border-radius: 50%; background: ${chipColor}; display: inline-block; flex-shrink: 0;"></span>
+                    <span style="font-weight: 500;">${fieldDef?.label || field}:</span>
+                    <span>${displayValue}</span>
+                    <button style="background: none; border: none; cursor: pointer; padding: 0 0 0 4px; color: ${closeButtonColor}; font-size: 16px; line-height: 1;" onclick="AnalyticsFilterState.clearField('${field}')">×</button>
+                `;
+                chip.style.cssText = `
+                    display: flex;
+                    align-items: center;
+                    gap: 6px;
+                    padding: 6px 12px;
+                    background: ${chipBg};
+                    border: 1px solid ${chipBorder};
+                    border-radius: 8px;
+                    font-size: 12px;
+                    color: ${textColor};
+                `;
+                chipsContainer.appendChild(chip);
+            });
         }
-        if (activeAnalyticsFilters.blocked === true && !project.blocked) {
-            return false;
+    } else {
+        // Eliminar contenedor de chips si no hay filtros
+        const chipsContainer = container.querySelector('.analytics-filter-chips-container');
+        if (chipsContainer) {
+            chipsContainer.remove();
         }
-        if (activeAnalyticsFilters.blocked === false && project.blocked) {
-            return false;
-        }
-        return true;
+    }
+}
+
+// ==================== CHART DATA HELPER FUNCTIONS ====================
+
+/**
+ * Calcula los datos para el Delivery Timeline chart
+ * Agrupa proyectos por mes de entrega
+ */
+function getDeliveryTimelineData(projectsData) {
+    const now = new Date();
+    const months = [];
+
+    // Generar próximos 6 meses
+    for (let i = 0; i < 6; i++) {
+        const date = new Date(now.getFullYear(), now.getMonth() + i, 1);
+        months.push({
+            month: date.getMonth(),
+            year: date.getFullYear(),
+            label: date.toLocaleDateString('en-US', { month: 'short', year: '2-digit' })
+        });
+    }
+
+    // Contar proyectos por mes
+    const values = months.map(monthData => {
+        return projectsData.filter(p => {
+            if (!p.deliveryDate) return false;
+            const d = new Date(p.deliveryDate);
+            return d.getMonth() === monthData.month && d.getFullYear() === monthData.year;
+        }).length;
     });
+
+    return {
+        labels: months.map(m => m.label),
+        values: values,
+        months: months
+    };
+}
+
+/**
+ * Calcula los datos para el Burndown chart
+ * Muestra progreso ideal vs actual de proyectos completados
+ */
+function getBurndownData(projectsData) {
+    const now = new Date();
+    const labels = [];
+    const ideal = [];
+    const actual = [];
+
+    // Generar últimos 6 meses
+    const totalProjects = projectsData.length;
+    const completedProjects = projectsData.filter(p => p.status === 'released').length;
+    const remainingProjects = totalProjects - completedProjects;
+
+    for (let i = 5; i >= 0; i--) {
+        const date = new Date(now.getFullYear(), now.getMonth() - i, 1);
+        labels.push(date.toLocaleDateString('en-US', { month: 'short' }));
+
+        // Ideal: reducción lineal de proyectos
+        const idealRemaining = Math.round(totalProjects * (i / 5));
+        ideal.push(idealRemaining);
+
+        // Actual: basado en proyectos completados hasta ese mes
+        // Simplificado: mostramos el estado actual en el último punto
+        if (i === 0) {
+            actual.push(remainingProjects);
+        } else {
+            // Para meses pasados, estimamos basándonos en el progreso
+            const estimatedCompleted = Math.round(completedProjects * ((5 - i) / 5));
+            actual.push(totalProjects - estimatedCompleted);
+        }
+    }
+
+    return {
+        labels: labels,
+        ideal: ideal,
+        actual: actual
+    };
+}
+
+// ==================== CHART UPDATE FUNCTIONS FROM FILTERED DATA ====================
+
+function updateKPIsFromFilteredData(filteredData) {
+    const activeProjects = filteredData.filter(p => p.status !== 'released').length;
+    const riskProjects = filteredData.filter(p => {
+        if (p.status === 'released') return false;
+        const status = getDeliveryStatus(p.deliveryDate, p);
+        return (status.class === 'urgent' || status.class === 'soon');
+    }).length;
+    const blockedProjects = filteredData.filter(p => p.blocked).length;
+    const completedProjects = filteredData.filter(p => p.status === 'released').length;
+
+    const kpiActive = document.getElementById('kpi-active');
+    const kpiRisk = document.getElementById('kpi-risk');
+    const kpiBlocked = document.getElementById('kpi-blocked');
+    const kpiCompleted = document.getElementById('kpi-completed');
+
+    if (kpiActive) kpiActive.textContent = activeProjects;
+    if (kpiRisk) kpiRisk.textContent = riskProjects;
+    if (kpiBlocked) kpiBlocked.textContent = blockedProjects;
+    if (kpiCompleted) kpiCompleted.textContent = completedProjects;
+}
+
+function updatePortfolioStatusChartFromData(filteredData) {
+    if (!charts.portfolioStatus) return;
+
+    const statusCounts = {
+        discovery: filteredData.filter(p => p.status === 'discovery').length,
+        decision: filteredData.filter(p => p.status === 'decision').length,
+        develop: filteredData.filter(p => p.status === 'develop').length,
+        pilot: filteredData.filter(p => p.status === 'pilot').length,
+        yokotenkai: filteredData.filter(p => p.status === 'yokotenkai').length,
+        released: filteredData.filter(p => p.status === 'released').length
+    };
+
+    charts.portfolioStatus.data.datasets[0].data = [
+        statusCounts.discovery, statusCounts.decision, statusCounts.develop,
+        statusCounts.pilot, statusCounts.yokotenkai, statusCounts.released
+    ];
+    charts.portfolioStatus.update('active');
+}
+
+function updateTeamWorkloadChartFromData(filteredData) {
+    if (!charts.teamWorkload) return;
+
+    const teamData = getTeamMembers().slice(0, 5);
+    const filteredTeamData = teamData.map(member => {
+        const memberProjects = filteredData.filter(p => p.responsible === member.name);
+        return {
+            name: member.name,
+            discovery: memberProjects.filter(p => p.status === 'discovery').length,
+            decision: memberProjects.filter(p => p.status === 'decision').length,
+            develop: memberProjects.filter(p => p.status === 'develop').length,
+            pilot: memberProjects.filter(p => p.status === 'pilot').length,
+            yokotenkai: memberProjects.filter(p => p.status === 'yokotenkai').length,
+            released: memberProjects.filter(p => p.status === 'released').length
+        };
+    });
+
+    // Update datasets with all 6 phases
+    charts.teamWorkload.data.datasets.forEach((dataset, index) => {
+        switch (index) {
+            case 0: dataset.data = filteredTeamData.map(m => m.discovery); break;
+            case 1: dataset.data = filteredTeamData.map(m => m.decision); break;
+            case 2: dataset.data = filteredTeamData.map(m => m.develop); break;
+            case 3: dataset.data = filteredTeamData.map(m => m.pilot); break;
+            case 4: dataset.data = filteredTeamData.map(m => m.yokotenkai); break;
+            case 5: dataset.data = filteredTeamData.map(m => m.released); break;
+        }
+    });
+    charts.teamWorkload.update('active');
+}
+
+function updateProgressOverviewChartFromData(filteredData) {
+    if (!charts.progressOverview) return;
+
+    // Si hay filtro de status, mostrar todos los proyectos con ese status
+    // Si no hay filtro, mostrar solo proyectos activos (no released)
+    const hasStatusFilter = AnalyticsFilterState.filters.has('status');
+
+    const progressProjects = filteredData
+        .filter(p => hasStatusFilter ? true : p.status !== 'released')
+        .sort((a, b) => a.progress - b.progress)
+        .slice(0, 10);
+
+    charts.progressOverview.data.labels = progressProjects.map(p => p.name);
+    charts.progressOverview.data.datasets[0].data = progressProjects.map(p => p.progress);
+    charts.progressOverview.data.datasets[0].backgroundColor = progressProjects.map(p => {
+        if (p.progress >= 80) return 'rgba(48, 209, 88, 0.85)';
+        if (p.progress >= 50) return 'rgba(102, 126, 234, 0.85)';
+        if (p.progress >= 30) return 'rgba(255, 159, 10, 0.85)';
+        return 'rgba(255, 69, 58, 0.85)';
+    });
+    charts.progressOverview.update('active');
+}
+
+function updateBlockersChartFromData(filteredData) {
+    if (!charts.blockers) return;
+
+    const blockedCount = filteredData.filter(p => p.blocked).length;
+    const unblockedCount = filteredData.filter(p => !p.blocked).length;
+
+    charts.blockers.data.datasets[0].data = [unblockedCount, blockedCount];
+    charts.blockers.update('active');
+}
+
+function updateDeliveryTimelineChartFromData(filteredData) {
+    if (!charts.deliveryTimeline) return;
+
+    const deliveryData = getDeliveryTimelineData(filteredData);
+    charts.deliveryTimeline.data.labels = deliveryData.labels;
+    charts.deliveryTimeline.data.datasets[0].data = deliveryData.values;
+    charts.deliveryTimeline.update('active');
+}
+
+function updateBurndownChartFromData(filteredData) {
+    if (!charts.burndown) return;
+
+    const burndownData = getBurndownData(filteredData);
+    charts.burndown.data.labels = burndownData.labels;
+    charts.burndown.data.datasets[0].data = burndownData.ideal;
+    charts.burndown.data.datasets[1].data = burndownData.actual;
+    charts.burndown.update('active');
+}
+
+// Uses the new AnalyticsFilterState to get filtered projects
+function getFilteredAnalyticsProjects() {
+    return AnalyticsFilterState.getFilteredData(projects);
 }
 
 // ======================= CROSS-FILTERING SYSTEM =======================
@@ -1756,8 +2232,17 @@ function updateAllChartsWithCrossFilters(crossFilteredProjects) {
 
     // Progress Overview Chart - Filter to active projects in cross-filtered data
     if (charts.progressOverview) {
+        // Only exclude 'released' if no status filter is active
+        const statusFilter = activeAnalyticsFilters.crossFilters.status;
         const progressProjects = crossFilteredProjects
-            .filter(p => p.status !== 'released')
+            .filter(p => {
+                // If filtering by a specific status, show all projects with that status
+                if (statusFilter) {
+                    return true; // Already filtered by getCrossFilteredProjects()
+                }
+                // Otherwise, exclude released for normal view
+                return p.status !== 'released';
+            })
             .sort((a, b) => a.progress - b.progress)
             .slice(0, 10);
 
@@ -2035,13 +2520,32 @@ function generateAnalyticsFilters() {
     container.innerHTML = html;
 }
 
+/**
+ * Handler for Interactive Filter button clicks
+ * Connects the UI filter buttons to the new AnalyticsFilterState system
+ */
+function updateAnalyticsFilter(filterType, filterValue) {
+    console.log(`🎛️ Interactive Filter clicked: ${filterType} = ${filterValue}`);
+
+    // Toggle the filter using the new Power BI-style system
+    AnalyticsFilterState.toggleFilter(filterType, filterValue);
+
+    // Update the visual state of filter buttons
+    updateFilterChips();
+}
+
 function updateFilterChips() {
     document.querySelectorAll('.filter-chip').forEach(btn => {
         const filterType = btn.getAttribute('data-filter-type');
-        const filterValue = btn.getAttribute('data-filter-value');
+        let filterValue = btn.getAttribute('data-filter-value');
 
-        if (activeAnalyticsFilters[filterType] === filterValue ||
-            (filterType === 'blocked' && activeAnalyticsFilters[filterType] === (filterValue === 'true'))) {
+        // Handle boolean conversion for 'blocked' filter
+        if (filterType === 'blocked') {
+            filterValue = filterValue === 'true';
+        }
+
+        // Use the new AnalyticsFilterState to check if filter is active
+        if (AnalyticsFilterState.isFilterActive(filterType, filterValue)) {
             btn.classList.add('active');
         } else {
             btn.classList.remove('active');
@@ -2127,23 +2631,28 @@ function initializeCharts() {
                 onClick: (event, elements) => {
                     if (elements.length > 0) {
                         const index = elements[0].index;
-                        applyCrossFilter('portfolioStatus', { index });
+                        const statusValues = ['discovery', 'decision', 'develop', 'pilot', 'yokotenkai', 'released'];
+                        const selectedStatus = statusValues[index];
+                        console.log(`📊 Portfolio Status clicked: ${selectedStatus}`);
+                        AnalyticsFilterState.toggleFilter('status', selectedStatus);
                     }
                 }
             }
         });
     }
 
-    // Team Workload Chart
+    // Team Workload Chart - All 6 phases matching Portfolio Status
     const teamData = getTeamMembers().slice(0, 5);
     const filteredTeamData = teamData.map(member => {
         const memberProjects = filteredProjects.filter(p => p.responsible === member.name);
         return {
             name: member.name,
-            progress: memberProjects.filter(p => p.status === 'develop').length,
-            hold: memberProjects.filter(p => p.status === 'pilot').length,
             discovery: memberProjects.filter(p => p.status === 'discovery').length,
-            completed: memberProjects.filter(p => p.status === 'released').length
+            decision: memberProjects.filter(p => p.status === 'decision').length,
+            develop: memberProjects.filter(p => p.status === 'develop').length,
+            pilot: memberProjects.filter(p => p.status === 'pilot').length,
+            yokotenkai: memberProjects.filter(p => p.status === 'yokotenkai').length,
+            released: memberProjects.filter(p => p.status === 'released').length
         };
     });
 
@@ -2155,28 +2664,40 @@ function initializeCharts() {
                 labels: filteredTeamData.map(m => m.name.split(' ')[0]),
                 datasets: [
                     {
-                        label: 'In Progress',
-                        data: filteredTeamData.map(m => m.progress),
-                        backgroundColor: 'rgba(52, 199, 89, 0.85)',
-                        borderRadius: 8
-                    },
-                    {
-                        label: 'On Hold',
-                        data: filteredTeamData.map(m => m.hold),
-                        backgroundColor: 'rgba(255, 159, 10, 0.85)',
-                        borderRadius: 8
-                    },
-                    {
                         label: 'Discovery',
                         data: filteredTeamData.map(m => m.discovery),
-                        backgroundColor: 'rgba(191, 90, 242, 0.85)',
-                        borderRadius: 8
+                        backgroundColor: 'rgba(157, 0, 255, 0.85)', // Same as Portfolio Status
+                        borderRadius: 6
                     },
                     {
-                        label: 'Completed',
-                        data: filteredTeamData.map(m => m.completed),
-                        backgroundColor: 'rgba(48, 209, 88, 0.85)',
-                        borderRadius: 8
+                        label: 'Decision',
+                        data: filteredTeamData.map(m => m.decision),
+                        backgroundColor: 'rgba(255, 214, 0, 0.85)',
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Develop',
+                        data: filteredTeamData.map(m => m.develop),
+                        backgroundColor: 'rgba(0, 217, 255, 0.85)',
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Pilot',
+                        data: filteredTeamData.map(m => m.pilot),
+                        backgroundColor: 'rgba(255, 107, 0, 0.85)',
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Yokotenkai',
+                        data: filteredTeamData.map(m => m.yokotenkai),
+                        backgroundColor: 'rgba(0, 191, 255, 0.85)',
+                        borderRadius: 6
+                    },
+                    {
+                        label: 'Released',
+                        data: filteredTeamData.map(m => m.released),
+                        backgroundColor: 'rgba(0, 255, 133, 0.85)',
+                        borderRadius: 6
                     }
                 ]
             },
@@ -2195,8 +2716,19 @@ function initializeCharts() {
                 },
                 onClick: (event, elements) => {
                     if (elements.length > 0) {
-                        const index = elements[0].index;
-                        applyCrossFilter('teamWorkload', { index });
+                        const index = elements[0].index; // Person index
+                        const datasetIndex = elements[0].datasetIndex; // Status phase index
+                        const teamMembers = getTeamMembers().slice(0, 5);
+                        const selectedMember = teamMembers[index]?.name;
+                        const statusValues = ['discovery', 'decision', 'develop', 'pilot', 'yokotenkai', 'released'];
+                        const selectedStatus = statusValues[datasetIndex];
+
+                        if (selectedMember && selectedStatus) {
+                            console.log(`👤 Team Workload clicked: ${selectedMember} - ${selectedStatus}`);
+                            // Apply BOTH filters: person and status
+                            AnalyticsFilterState.toggleFilter('responsible', selectedMember);
+                            AnalyticsFilterState.toggleFilter('status', selectedStatus);
+                        }
                     }
                 }
             }
@@ -2204,8 +2736,13 @@ function initializeCharts() {
     }
 
     // Progress Overview Chart
+    // Only exclude 'released' if no status filter is active (use new AnalyticsFilterState)
+    const hasStatusFilter = AnalyticsFilterState.filters.has('status');
     const progressProjects = filteredProjects
-        .filter(p => p.status !== 'released')
+        .filter(p => {
+            if (hasStatusFilter) return true;
+            return p.status !== 'released';
+        })
         .sort((a, b) => a.progress - b.progress)
         .slice(0, 10);
 
@@ -2241,23 +2778,11 @@ function initializeCharts() {
                     }
                 },
                 onClick: (event, elements) => {
+                    // Progress Overview: solo muestra info, no genera filtros
                     if (elements.length > 0) {
                         const projectIndex = elements[0].index;
-                        const clickedProject = progressProjects[projectIndex];
-                        if (clickedProject) {
-                            const currentProjectId = activeAnalyticsFilters.crossFilters.projectId;
-                            if (currentProjectId === clickedProject.id) {
-                                activeAnalyticsFilters.crossFilters.projectId = null;
-                            } else {
-                                activeAnalyticsFilters.crossFilters.projectId = clickedProject.id;
-                            }
-                            activeAnalyticsFilters.projectId = activeAnalyticsFilters.crossFilters.projectId;
-                            updateCrossFilterIndicators();
-                            updateFilterChips();
-                            updateCrossFilterChips();
-                            refreshAllChartsWithCrossFilters();
-                            console.log(`🎯 Project filtered: ${clickedProject.name}`);
-                        }
+                        console.log(`📋 Progress Overview clicked: project index ${projectIndex}`);
+                        // Podría abrirse un modal de detalle del proyecto aquí
                     }
                 }
             }
@@ -2291,7 +2816,9 @@ function initializeCharts() {
                     if (elements.length > 0) {
                         const index = elements[0].index;
                         // Index 0 = Unblocked (false), Index 1 = Blocked (true)
-                        applyCrossFilter('blockers', { index });
+                        const blockedValue = index === 1;
+                        console.log(`🚧 Blockers clicked: ${blockedValue ? 'Blocked' : 'Not Blocked'}`);
+                        AnalyticsFilterState.toggleFilter('blocked', blockedValue);
                     }
                 }
             }
