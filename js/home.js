@@ -811,6 +811,20 @@ function setupSearch() {
         return;
     }
 
+    const positionSearchResults = () => {
+        const anchor = searchInput.closest('.glass-island-search') || searchInput;
+        const rect = anchor.getBoundingClientRect();
+        const padding = 12;
+        const width = Math.min(rect.width, window.innerWidth - padding * 2);
+        const maxLeft = window.innerWidth - width - padding;
+        const left = Math.min(Math.max(rect.left, padding), maxLeft);
+        const top = rect.bottom + 10;
+
+        searchResults.style.left = `${Math.round(left)}px`;
+        searchResults.style.top = `${Math.round(top)}px`;
+        searchResults.style.width = `${Math.round(width)}px`;
+    };
+
     searchInput.addEventListener('input', (e) => {
         const query = e.target.value.trim();
 
@@ -818,6 +832,8 @@ function setupSearch() {
             searchResults.style.display = 'none';
             return;
         }
+
+        positionSearchResults();
 
         const projects = dataManager.searchProjects(query);
         const users = dataManager.users.filter(user =>
@@ -863,6 +879,12 @@ function setupSearch() {
 
         searchResults.innerHTML = html;
         searchResults.style.display = 'block';
+    });
+
+    window.addEventListener('resize', () => {
+        if (searchResults.style.display === 'block') {
+            positionSearchResults();
+        }
     });
 
     // Cerrar resultados al hacer clic fuera
