@@ -745,6 +745,58 @@ class DataManager {
         return null;
     }
 
+    async updateVideo(videoId, updates) {
+        const videoIndex = this.videos.findIndex(v => v.id === videoId);
+
+        if (videoIndex === -1) {
+            console.error('❌ Video no encontrado:', videoId);
+            return null;
+        }
+
+        const video = this.videos[videoIndex];
+
+        if (this.currentUser && video.ownerId !== this.currentUser.id) {
+            console.error('❌ Sin permisos para editar este video');
+            return null;
+        }
+
+        const safeUpdates = {
+            title: typeof updates.title === 'string' ? updates.title : video.title,
+            description: typeof updates.description === 'string' ? updates.description : video.description,
+            tags: Array.isArray(updates.tags) ? updates.tags : video.tags
+        };
+
+        if (typeof updates.thumbnailData === 'string' && updates.thumbnailData.startsWith('data:')) {
+            safeUpdates.thumbnailData = updates.thumbnailData;
+        }
+
+        try {
+            const saved = await fileManager.updateShowcaseVideo(video.ownerId, videoId, safeUpdates);
+
+            if (!saved?.success) {
+                console.error('❌ No se pudo actualizar el video físicamente');
+                return null;
+            }
+
+            const updatedVideo = {
+                ...video,
+                ...safeUpdates,
+                thumbnail: saved.data?.thumbnail || video.thumbnail,
+                updatedAt: new Date().toISOString()
+            };
+
+            delete updatedVideo.thumbnailData;
+
+            this.videos[videoIndex] = updatedVideo;
+            await this.updateVideosIndex();
+            console.log(`✅ Video ${videoId} actualizado`);
+            return updatedVideo;
+        } catch (error) {
+            console.error('❌ Error actualizando video:', error);
+            return null;
+        }
+    }
+
     async updateVideosIndex() {
         const indexData = {
             videos: this.videos,

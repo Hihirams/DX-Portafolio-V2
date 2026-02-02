@@ -768,6 +768,51 @@ class FileManager {
         }
     }
 
+    async updateShowcaseVideo(userId, videoId, updates) {
+        if (!this.isElectron) return { success: false };
+
+        const baseDir = `users/${userId}/showcase-videos/${videoId}`;
+        const metaPath = `${baseDir}/metadata.json`;
+
+        try {
+            const metaResult = await this.api.readJSON(metaPath);
+            if (!metaResult.success || !metaResult.data) {
+                console.error('❌ No se pudo leer metadata del video');
+                return { success: false };
+            }
+
+            const meta = metaResult.data;
+
+            if (typeof updates.title === 'string') {
+                meta.title = updates.title;
+            }
+            if (typeof updates.description === 'string') {
+                meta.description = updates.description;
+            }
+            if (Array.isArray(updates.tags)) {
+                meta.tags = updates.tags;
+            }
+
+            if (updates.thumbnailData && updates.thumbnailData.startsWith('data:')) {
+                const thumbPath = `${baseDir}/thumbnail.jpg`;
+                const tResult = await this.api.saveMedia(thumbPath, updates.thumbnailData);
+                if (tResult.success) {
+                    meta.thumbnail = thumbPath;
+                } else {
+                    console.error('❌ Error actualizando thumbnail:', tResult.error);
+                }
+            }
+
+            meta.updatedAt = new Date().toISOString();
+
+            await this.api.writeJSON(metaPath, meta);
+            return { success: true, data: meta };
+        } catch (error) {
+            console.error('❌ Error en updateShowcaseVideo:', error);
+            return { success: false, error: error.message };
+        }
+    }
+
     async deleteShowcaseVideo(userId, videoId) {
         if (!this.isElectron) return false;
 

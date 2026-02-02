@@ -665,30 +665,80 @@ async function resolveMediaSrc(src) {
     return src || '';
 }
 
-function saveVideoChanges() {
-    const title = document.getElementById('videoTitle').value;
+async function saveVideoChanges() {
+    if (!currentEditingId) {
+        console.error('No video ID to update');
+        return;
+    }
+
+    const title = document.getElementById('videoTitle').value.trim();
+    const description = document.getElementById('videoDescription').value.trim();
+    const thumbnailInput = document.getElementById('thumbnailFileInput');
+    const thumbnailFile = thumbnailInput?.files?.[0] || null;
+
     if (!title) {
         alert('Please provide a video title.');
         return;
     }
 
-    // Simulate save delay
+    if (title.length > 25) {
+        alert('Video title must be 25 characters or less.');
+        return;
+    }
+
+    if (description.length > 120) {
+        alert('Description must be 120 characters or less.');
+        return;
+    }
+
     const btn = document.querySelector('.btn-upload-submit');
     const originalText = btn.innerHTML;
-    btn.innerHTML = 'Saving...';
+    btn.innerHTML = `
+        <span class="spinner-small" style="display:inline-block; width:12px; height:12px; border:2px solid rgba(255,255,255,0.3); border-top-color:#fff; border-radius:50%; animation:spin 1s linear infinite; margin-right:8px;"></span>
+        Saving...
+    `;
     btn.disabled = true;
 
-    setTimeout(() => {
-        alert(`Changes saved for video ID: ${currentEditingId}`);
-        closeUploadModal();
+    try {
+        let thumbnailData = null;
+
+        if (thumbnailFile) {
+            const thumbReader = new FileReader();
+            thumbnailData = await new Promise((resolve) => {
+                thumbReader.onload = (e) => resolve(e.target.result);
+                thumbReader.readAsDataURL(thumbnailFile);
+            });
+        }
+
+        const updates = {
+            title,
+            description,
+            tags: currentTags
+        };
+
+        if (thumbnailData) {
+            updates.thumbnailData = thumbnailData;
+        }
+
+        const result = await dataManager.updateVideo(currentEditingId, updates);
+
+        if (result) {
+            alert('Changes saved successfully!');
+            closeUploadModal();
+
+            if (window.location.href.includes('my-videos.html') || window.location.href.includes('video-showcase.html')) {
+                window.location.reload();
+            }
+        } else {
+            throw new Error('Failed to save video changes');
+        }
+    } catch (error) {
+        console.error('Error saving video changes:', error);
+        alert('Error saving changes: ' + error.message);
+    } finally {
         btn.innerHTML = originalText;
         btn.disabled = false;
-
-        // Here you would typically refresh the grid
-        if (window.location.href.includes('my-videos.html')) {
-            window.location.reload(); // Simple refresh for mock
-        }
-    }, 1000);
+    }
 }
 
 // Close on outside click
