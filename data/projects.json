@@ -37,24 +37,24 @@
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj001/images/image_1767973081923_0.png",
+          "src": "users/user1/projects/proj001/images/image_1770240382538_0.png",
           "title": "Vista inicial Planeta"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1767973081991_1.png",
+          "src": "users/user1/projects/proj001/images/image_1770240382541_1.png",
           "title": "Vista libre MTS"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1767973082093_2.png",
+          "src": "users/user1/projects/proj001/images/image_1770240382547_2.png",
           "title": "Vista Cenital"
         },
         {
-          "src": "users/user1/projects/proj001/images/image_1767973082198_3.png",
+          "src": "users/user1/projects/proj001/images/image_1770240382550_3.png",
           "title": "Infografia_1.png"
         }
       ],
       "createdAt": "2025-08-01",
-      "updatedAt": "2026-01-09T15:38:01.698Z",
+      "updatedAt": "2026-02-04T21:26:22.530Z",
       "ganttImagePath": "users/user1/projects/proj001/gantt/gantt_1767646592170.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -167,59 +167,64 @@
       "ownerId": "user1",
       "title": "AI Camera",
       "icon": "🎥",
-      "status": "discovery",
+      "status": "develop",
       "featured": true,
       "priority": "medium",
-      "progress": 45,
+      "progress": 50,
       "targetDate": "2026-10-30",
-      "currentPhase": "Development of motion detection prototype and recognition models",
+      "currentPhase": "Development of a scalable and efficient code architecture, improving system stability and maintainability, along with an initial dashboard proposal for visualizing AI Camera incidents through a new API provider.",
       "achievements": {
-        "2025-10": "System foundations and editor developed",
-        "2025-10-15": "Motion detection prototype in ROIs completed"
+        "2026-01": "Designed and implemented a dashboard integrated with a custom API to visualize AI system incidents, enabling efficient monitoring, accurate timelines, and improved data accessibility."
       },
       "blockers": {
         "type": "success",
         "message": ""
       },
       "nextSteps": {
-        "2025-11": "Integrate detection of people, hands, and faces",
-        "2025-12": "Unified control and visualization interface",
-        "2026-01": "Optimization for multiple cameras"
+        "2026-01": "Modeling and testing of a functional dashboard using a custom API provider developed for the AI Cameras module."
       },
       "videos": [
         {
-          "src": "users/user1/projects/proj003/videos/Demo_v1.1.2_AICAMERA.mp4",
-          "title": "Detección de Movimiento"
+          "src": "users/user1/projects/proj003/videos/video_1769537815396_0.mp4",
+          "title": "TEST DASHBOARD LIVE"
         }
       ],
       "images": [
         {
-          "src": "users/user1/projects/proj003/images/image_1767646627661_0.png",
+          "src": "users/user1/projects/proj003/images/image_1769537814308_0.png",
           "title": "Interfaz de programa"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1767646627732_1.png",
+          "src": "users/user1/projects/proj003/images/image_1769537814379_1.png",
           "title": "Multi Visión"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1767646627795_2.png",
+          "src": "users/user1/projects/proj003/images/image_1769537814472_2.png",
           "title": "Interfaz de Operador"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1767646627870_3.png",
+          "src": "users/user1/projects/proj003/images/image_1769537814563_3.png",
           "title": "Editor de RIO"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1767646627960_4.png",
+          "src": "users/user1/projects/proj003/images/image_1769537814746_4.png",
           "title": "Detección en vivo"
         },
         {
-          "src": "users/user1/projects/proj003/images/image_1767646628059_5.png",
+          "src": "users/user1/projects/proj003/images/image_1769537814866_5.png",
           "title": "Alerta y detección de objeto"
+        },
+        {
+          "src": "users/user1/projects/proj003/images/image_1769537815172_6.png",
+          "title": "CLIP VIEWER"
+        },
+        {
+          "src": "users/user1/projects/proj003/images/image_1769537815306_7.png",
+          "title": "DASHBOARD PROPOSAL"
         }
       ],
       "createdAt": "2025-10-01",
-      "updatedAt": "2026-01-05T20:57:07.377Z",
+      "updatedAt": "2026-01-27T18:16:54.098Z",
       "ganttImagePath": "users/user1/projects/proj003/gantt/gantt_1767646627609.png",
       "extraFiles": [],
       "ownerName": "Hiram González",
@@ -738,38 +743,36 @@
       "ownerId": "user2",
       "title": "RoBot Innovation Zone",
       "status": "develop",
-      "progress": 30,
+      "progress": 50,
       "icon": "🧰",
-      "currentPhase": "The robot’s structure is now fully complete. The next step is to acquire the components needed for mobility, including motors, microcontrollers, and additional electronic parts. Once these materials are in place, functional testing will begin.",
-      "updatedAt": "2026-01-05T20:59:58.290Z",
-      "priority": "medium",
+      "currentPhase": "The Nova voice build has been stabilized and made portable, enabling personalized responses and bilingual output (Spanish and English) with a consistent tone. It can be easily deployed and executed on any compatible device. The required components to begin building the first stage of Nova’s mobility—specifically an arm—are ready; however, progress is pending the arrival of the Arduino, which serves as the core controller of the system.",
+      "updatedAt": "2026-01-27T16:31:28.648Z",
+      "priority": "high",
       "achievements": {
-        "2025-11": "The wrapping process for all robot components has been completed. A scanner was developed that detects the user’s badge, identifies their name, and sends a personalized greeting."
+        "2026-01": "Successfully stabilized and implemented Nova’s voice system, enabling personalized, bilingual (Spanish and English) responses with a consistent tone and high portability across different devices."
       },
       "blockers": {
-        "type": "warning",
-        "message": "The component quotes required to begin the movement phase have an estimated delivery time of 4 to 6 weeks."
+        "type": "success",
+        "message": ""
       },
-      "nextSteps": {},
-      "targetDate": "2025-11-10",
+      "nextSteps": {
+        "2026-02": "Awaiting the arrival of the Arduino to begin developing and testing the arm movement system, as potential limitations related to the arm’s weight are anticipated."
+      },
+      "targetDate": "2026-08-10",
       "ganttImagePath": "users/user2/projects/proj1762787721514/gantt/gantt_1767646798409.png",
       "videos": [],
       "images": [
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1767646798478_0.png",
-          "title": "RB1.png"
+          "src": "users/user2/projects/proj1762787721514/images/image_1769531489814_0.png",
+          "title": "NOVA"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1767646798582_1.png",
-          "title": "RB2.png"
+          "src": "users/user2/projects/proj1762787721514/images/image_1769531490354_1.png",
+          "title": "SYSTEM"
         },
         {
-          "src": "users/user2/projects/proj1762787721514/images/image_1767646798655_2.png",
-          "title": "imagen 1.png"
-        },
-        {
-          "src": "users/user2/projects/proj1762787721514/images/image_1767646798723_3.png",
-          "title": "Slide1.JPG"
+          "src": "users/user2/projects/proj1762787721514/images/image_1769531491030_2.png",
+          "title": "SYSTEM BUILD"
         }
       ],
       "extraFiles": [],
@@ -1560,12 +1563,12 @@
       "title": "IMDS Automation Workflow",
       "status": "pilot",
       "priority": "high",
-      "progress": 85,
+      "progress": 90,
       "icon": "📋",
       "currentPhase": "This project is currently in the Pilot phase. Together with the IMDS team, I am conducting tests to verify that the results are indeed as expected.",
       "achievements": {
         "2025/12": "Certain inconsistencies were identified in the data export generated by the iPoint Compliance Agent portal. This finding proved significant, as it allowed us to understand that the issue was not so much with the macro used, but rather with the way the portal performs the data export.",
-        "2026-01": "The macro was successfully updated to capture the COMPONENT PART NUMBER and COMPONENT PENDING NAME associated with the “The hidden substance…” warning. Further work is in progress to fine-tune the remaining details.",
+        "2026-01": "I made some changes based on the end user's feedback. I am currently awaiting their review.",
         "2026/01": "I have finished correcting and adding what was necessary for the Macro to work. I'm currently waiting for feedback.\n"
       },
       "blockers": {
@@ -1584,16 +1587,16 @@
       ],
       "images": [
         {
-          "src": "users/user4/projects/proj1764601398436/images/image_1768508472864_0.png",
+          "src": "users/user4/projects/proj1764601398436/images/image_1769174406704_0.png",
           "title": "Macro actual.png"
         },
         {
-          "src": "users/user4/projects/proj1764601398436/images/image_1768508472908_1.png",
+          "src": "users/user4/projects/proj1764601398436/images/image_1769174407167_1.png",
           "title": "Sumario.png"
         }
       ],
       "createdAt": "2025-12-01T15:03:18.436Z",
-      "updatedAt": "2026-01-15T20:21:12.805Z",
+      "updatedAt": "2026-01-23T13:20:06.093Z",
       "extraFiles": [
         {
           "src": "users/user4/projects/proj1764601398436/extra-files/IMDS_infographic_1768407305101.jpg",
@@ -1655,12 +1658,13 @@
       "title": "QA PMS",
       "status": "develop",
       "priority": "high",
-      "progress": 45,
+      "progress": 70,
       "icon": "📊",
       "currentPhase": "The project is in development, currently is in the phase of design and link the automate to the power apps/automate.",
       "achievements": {
         "2025-12": "Design of the first Three main screens.",
-        "2026-01": "Functions like: Connections to SharePoint, and main design."
+        "2026-01": "CheckList form now update the info.",
+        "2026-02": "Functional App, with the sharepoint listed and updated info about the projects."
       },
       "blockers": {
         "type": "success",
@@ -1670,41 +1674,37 @@
         "2025-12": "Increase the design making it more attractive, change the colors, change the shapes design, etc.",
         "2026-01": "Develop a flow on power automate to automatically create a Sharepoint List called \"New Products CheckList\"."
       },
-      "targetDate": "2026-02-01",
+      "targetDate": "2026-02-13",
       "videos": [
         {
-          "src": "users/user5/projects/proj1764623073513/videos/video_1768312097808_0.mp4",
-          "title": "App Functionality 0.30.0.mp4"
+          "src": "users/user5/projects/proj1764623073513/videos/video_1769548756356_0.mp4",
+          "title": "Funcionality"
         }
       ],
       "images": [
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1768830343197_0.png",
+          "src": "users/user5/projects/proj1764623073513/images/image_1770220028501_0.png",
           "title": "Main Menu"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1768830343243_1.png",
-          "title": "New Projects Screen 1"
+          "src": "users/user5/projects/proj1764623073513/images/image_1770220028551_1.png",
+          "title": "Project Registration"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1768830343275_2.png",
-          "title": "New Projects Screen 2"
+          "src": "users/user5/projects/proj1764623073513/images/image_1770220028589_2.png",
+          "title": "All Reports"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1768830343311_3.png",
-          "title": "New Projects Screen 3"
+          "src": "users/user5/projects/proj1764623073513/images/image_1770220028630_3.png",
+          "title": "Project information"
         },
         {
-          "src": "users/user5/projects/proj1764623073513/images/image_1768830343347_4.png",
-          "title": "New Projects Screen 4"
-        },
-        {
-          "src": "users/user5/projects/proj1764623073513/images/image_1768830343387_5.png",
-          "title": "All Projects Screen"
+          "src": "users/user5/projects/proj1764623073513/images/image_1770220028669_4.png",
+          "title": "Check List"
         }
       ],
       "createdAt": "2025-12-01T21:04:33.513Z",
-      "updatedAt": "2026-01-19T13:45:43.158Z",
+      "updatedAt": "2026-02-04T15:47:08.475Z",
       "extraFiles": [
         {
           "src": "users/user5/projects/proj1764623073513/extra-files/QA_NPCC_Digitalization_Proposa_1764623349973.pptx",
@@ -1733,7 +1733,7 @@
       ],
       "ownerName": "Angel Alvarez",
       "concept": "This system is designed to digitize the NPCC and Project Transfer process, enabling each quality analyst to standardize formats, automate due dates and status report and develop department skills, used throughout the workflow and providing an interactive GUI where every user has a defined access level to view and manage the available data.",
-      "ganttImagePath": "users/user5/projects/proj1764623073513/gantt/gantt_1767968359847.png",
+      "ganttImagePath": "users/user5/projects/proj1764623073513/gantt/gantt_1769180663513.png",
       "priorityNumber": 27,
       "kpis": {
         "totalHoursEstimated": 0,
@@ -1766,11 +1766,12 @@
       "title": "Scorecard data automation",
       "status": "discovery",
       "priority": "medium",
-      "progress": 10,
+      "progress": 15,
       "icon": "📋",
-      "currentPhase": "Currently, this project is in the Discovery phase.\n",
+      "currentPhase": "Currently in the Discovery phase, focused on understanding user needs and defining objectives.",
       "achievements": {
-        "2026/01": "The cells were successfully linked across several sheets in the Excel workbook so that the summary fills in automatically."
+        "2026/01": "The cells were successfully linked across several sheets in the Excel workbook so that the summary fills in automatically.",
+        "2026-01": "I found a way to link cells across multiple workbooks that depend on the summary; however, the idea is to look for a better option."
       },
       "blockers": {
         "type": "info",
@@ -1779,17 +1780,22 @@
       "nextSteps": {
         "2026/01": "I'll enter the second phase of this project, which consists of finding the best way to link different Excel files."
       },
-      "targetDate": "2026-01-16",
+      "targetDate": "2026-02-10",
       "ganttImage": "",
-      "videos": [],
+      "videos": [
+        {
+          "src": "users/user4/projects/proj1767880589770/videos/video_1769179301745_0.mp4",
+          "title": "Funcionamiento.mp4"
+        }
+      ],
       "images": [
         {
-          "src": "users/user4/projects/proj1767880589770/images/image_1768576016843_0.png",
+          "src": "users/user4/projects/proj1767880589770/images/image_1769179301525_0.png",
           "title": "Summary.png"
         }
       ],
       "createdAt": "2026-01-08T13:56:29.770Z",
-      "updatedAt": "2026-01-16T15:06:56.774Z",
+      "updatedAt": "2026-01-23T14:41:40.881Z",
       "extraFiles": [
         {
           "src": "users/user4/projects/proj1767880589770/extra-files/scorecard_process__phase_1__1768576016892.png",
@@ -1902,6 +1908,136 @@
       "ownerName": "Ivanna Rodríguez",
       "priorityNumber": 29,
       "concept": "In this project, a proposal for a scene for the Driving Experience was developed.",
+      "kpis": {
+        "totalHoursEstimated": 0,
+        "hoursSpent": 0,
+        "fteSaved": 0,
+        "completion": 0,
+        "timeline": {
+          "startDate": "",
+          "targetEnd": "",
+          "currentPhase": ""
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 0,
+          "milestonesOnTime": 0,
+          "totalMilestones": 0,
+          "resourceUtilization": 0
+        }
+      }
+    },
+    {
+      "id": "proj1769530610870",
+      "ownerId": "user1",
+      "title": "RoadMap",
+      "status": "discovery",
+      "priority": "medium",
+      "progress": 10,
+      "icon": "📋",
+      "currentPhase": "The project is currently presenting ideas and scalability, and in its latest visualized proposal it successfully met all the required criteria.",
+      "achievements": {
+        "2026-01": "Two proposals with long-term scalability were developed; however, from a visual perspective, we are inclined toward the second proposal presented."
+      },
+      "blockers": {
+        "type": "success",
+        "message": ""
+      },
+      "nextSteps": {
+        "2026-02": "We will proceed with preparing the development of the second, more appealing proposal, which aims to better convey the intended concept and support the decision-making process."
+      },
+      "targetDate": "2026-10-30",
+      "ganttImage": "",
+      "videos": [
+        {
+          "src": "users/user1/projects/proj1769530610870/videos/video_1769530613886_0.mp4",
+          "title": "PROPOSAL 2"
+        },
+        {
+          "src": "users/user1/projects/proj1769530610870/videos/video_1769530614597_1.mp4",
+          "title": "PROPOSAL 1"
+        }
+      ],
+      "images": [
+        {
+          "src": "users/user1/projects/proj1769530610870/images/image_1769530635502_0.png",
+          "title": "PROPOSAL 1"
+        },
+        {
+          "src": "users/user1/projects/proj1769530610870/images/image_1769530635928_1.png",
+          "title": "PROPOSAL 1.1"
+        },
+        {
+          "src": "users/user1/projects/proj1769530610870/images/image_1769530636132_2.png",
+          "title": "PROPOSAL 1.2"
+        },
+        {
+          "src": "users/user1/projects/proj1769530610870/images/image_1769530636532_3.png",
+          "title": "PROPOSAL 2"
+        }
+      ],
+      "createdAt": "2026-01-27T16:16:50.870Z",
+      "updatedAt": "2026-01-27T16:17:14.991Z",
+      "extraFiles": [],
+      "ownerName": "Hiram González",
+      "priorityNumber": 30,
+      "concept": "",
+      "kpis": {
+        "totalHoursEstimated": 0,
+        "hoursSpent": 0,
+        "fteSaved": 0,
+        "completion": 0,
+        "timeline": {
+          "startDate": "",
+          "targetEnd": "",
+          "currentPhase": ""
+        },
+        "resources": {
+          "softwareEngineerHours": 0,
+          "testingQAHours": 0,
+          "projectManagementHours": 0,
+          "remainingHours": 0
+        },
+        "metrics": {
+          "tasksCompleted": 0,
+          "totalTasks": 0,
+          "milestonesOnTime": 0,
+          "totalMilestones": 0,
+          "resourceUtilization": 0
+        }
+      }
+    },
+    {
+      "id": "proj1769549293215",
+      "ownerId": "user4",
+      "title": "MRM Project",
+      "status": "discovery",
+      "priority": "high",
+      "progress": 5,
+      "icon": "📋",
+      "currentPhase": "This project is currently in the discovery phase.",
+      "achievements": {},
+      "blockers": {
+        "type": "info",
+        "message": ""
+      },
+      "nextSteps": {},
+      "targetDate": "2026-01-27",
+      "videos": [],
+      "images": [],
+      "createdAt": "2026-01-27T21:28:13.215Z",
+      "updatedAt": "2026-01-27T21:28:34.230Z",
+      "ganttImagePath": "users/user4/projects/proj1769549293215/gantt/gantt_1769549314292.png",
+      "extraFiles": [],
+      "ownerName": "Ivanna Rodríguez",
+      "priorityNumber": 31,
+      "concept": "",
       "kpis": {
         "totalHoursEstimated": 0,
         "hoursSpent": 0,

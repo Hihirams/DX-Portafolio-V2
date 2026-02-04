@@ -161,7 +161,22 @@ class FileManager {
                 console.log('\n❌ No hay archivos extras para guardar');
             }
 
-            // 5. Guardar JSON del proyecto (ligero, sin base64)
+            // ✅ 6. NUEVO: Limpiar archivos multimedia huérfanos
+            console.log('\n🧹 Limpiando archivos multimedia huérfanos...');
+            try {
+                // Limpiar imágenes huérfanas
+                await this.cleanupOrphanedImages(userId, projectId, projectData.images || []);
+
+                // Limpiar videos huérfanos
+                await this.cleanupOrphanedVideos(userId, projectId, projectData.videos || []);
+
+                console.log('✅ Limpieza de archivos huérfanos completada');
+            } catch (cleanupError) {
+                console.warn('⚠️ Error durante limpieza de huérfanos:', cleanupError.message);
+                // Continuar aunque falle la limpieza
+            }
+
+            // 7. Guardar JSON del proyecto (ligero, sin base64)
             console.log('\n💾 Guardando JSON del proyecto...');
             console.log('  Ã°Å¸â€œÅ  Resumen del JSON:');
             console.log('    - ID:', projectData.id);
@@ -538,6 +553,132 @@ class FileManager {
         }
 
         return loadedVideos;
+    }
+
+    // ==================== CLEANUP ORPHANED FILES ====================
+
+    /**
+     * Limpia archivos de imágenes huérfanas que ya no están referenciados en el proyecto
+     * @param {string} userId - ID del usuario
+     * @param {string} projectId - ID del proyecto
+     * @param {Array} currentImages - Array de imágenes actuales en el proyecto
+     */
+    async cleanupOrphanedImages(userId, projectId, currentImages) {
+        if (!this.isElectron) return;
+
+        const imagesDir = `users/${userId}/projects/${projectId}/images`;
+
+        try {
+            console.log('\n🧹 [cleanupOrphanedImages] Iniciando limpieza de imágenes huérfanas...');
+
+            // 1. Listar todos los archivos en la carpeta de imágenes
+            const result = await this.api.listDir(imagesDir);
+            if (!result.success || !result.files) {
+                console.log('  ℹ️ No hay carpeta de imágenes o está vacía');
+                return;
+            }
+
+            const filesInDisk = result.files.filter(f =>
+                !f.startsWith('.') && f !== 'Thumbs.db' // Ignorar archivos ocultos y thumbs
+            );
+
+            // 2. Obtener nombres de archivos referenciados en el JSON
+            const referencedFiles = new Set();
+            for (const img of currentImages) {
+                if (img.src && img.src.includes('/images/')) {
+                    const fileName = img.src.split('/').pop();
+                    referencedFiles.add(fileName);
+                }
+            }
+
+            console.log(`  📁 Archivos en disco: ${filesInDisk.length}`);
+            console.log(`  📋 Archivos referenciados: ${referencedFiles.size}`);
+
+            // 3. Encontrar y eliminar archivos huérfanos
+            let deletedCount = 0;
+            for (const file of filesInDisk) {
+                if (!referencedFiles.has(file)) {
+                    const filePath = `${imagesDir}/${file}`;
+                    try {
+                        const deleteResult = await this.api.deleteFile(filePath);
+                        if (deleteResult.success) {
+                            console.log(`  🗑️ Eliminado: ${file}`);
+                            deletedCount++;
+                        } else {
+                            console.warn(`  ⚠️ No se pudo eliminar: ${file}`);
+                        }
+                    } catch (e) {
+                        console.error(`  ❌ Error eliminando ${file}:`, e.message);
+                    }
+                }
+            }
+
+            console.log(`  ✅ [cleanupOrphanedImages] ${deletedCount} archivos huérfanos eliminados\n`);
+        } catch (error) {
+            console.error('  ❌ Error en cleanupOrphanedImages:', error.message);
+        }
+    }
+
+    /**
+     * Limpia archivos de videos huérfanos que ya no están referenciados en el proyecto
+     * @param {string} userId - ID del usuario
+     * @param {string} projectId - ID del proyecto
+     * @param {Array} currentVideos - Array de videos actuales en el proyecto
+     */
+    async cleanupOrphanedVideos(userId, projectId, currentVideos) {
+        if (!this.isElectron) return;
+
+        const videosDir = `users/${userId}/projects/${projectId}/videos`;
+
+        try {
+            console.log('\n🧹 [cleanupOrphanedVideos] Iniciando limpieza de videos huérfanos...');
+
+            // 1. Listar todos los archivos en la carpeta de videos
+            const result = await this.api.listDir(videosDir);
+            if (!result.success || !result.files) {
+                console.log('  ℹ️ No hay carpeta de videos o está vacía');
+                return;
+            }
+
+            const filesInDisk = result.files.filter(f =>
+                !f.startsWith('.') && f !== 'Thumbs.db'
+            );
+
+            // 2. Obtener nombres de archivos referenciados en el JSON
+            const referencedFiles = new Set();
+            for (const vid of currentVideos) {
+                if (vid.src && vid.src.includes('/videos/')) {
+                    const fileName = vid.src.split('/').pop();
+                    referencedFiles.add(fileName);
+                }
+            }
+
+            console.log(`  📁 Archivos en disco: ${filesInDisk.length}`);
+            console.log(`  📋 Archivos referenciados: ${referencedFiles.size}`);
+
+            // 3. Encontrar y eliminar archivos huérfanos
+            let deletedCount = 0;
+            for (const file of filesInDisk) {
+                if (!referencedFiles.has(file)) {
+                    const filePath = `${videosDir}/${file}`;
+                    try {
+                        const deleteResult = await this.api.deleteFile(filePath);
+                        if (deleteResult.success) {
+                            console.log(`  🗑️ Eliminado: ${file}`);
+                            deletedCount++;
+                        } else {
+                            console.warn(`  ⚠️ No se pudo eliminar: ${file}`);
+                        }
+                    } catch (e) {
+                        console.error(`  ❌ Error eliminando ${file}:`, e.message);
+                    }
+                }
+            }
+
+            console.log(`  ✅ [cleanupOrphanedVideos] ${deletedCount} archivos huérfanos eliminados\n`);
+        } catch (error) {
+            console.error('  ❌ Error en cleanupOrphanedVideos:', error.message);
+        }
     }
 
     // ==================== HELPERS ====================
